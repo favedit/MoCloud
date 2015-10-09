@@ -48,8 +48,11 @@ public class FDataPersonUserSigningLogic
    // 字段签到时间的定义。
    public final static SLogicFieldInfo SINGN_DATE = new SLogicFieldInfo("SINGN_DATE");
 
-   // 字段签到地址的定义。
-   public final static SLogicFieldInfo SINGN_ADDRESS = new SLogicFieldInfo("SINGN_ADDRESS");
+   // 字段位置经度的定义。
+   public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
+
+   // 字段位置纬度的定义。
+   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -67,7 +70,7 @@ public class FDataPersonUserSigningLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`SINGN_DATE`,`SINGN_ADDRESS`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`SINGN_DATE`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户签到表逻辑单元。</T>
@@ -665,7 +668,8 @@ public class FDataPersonUserSigningLogic
       cmd.append(",`GUID`");
       cmd.append(",`USER_ID`");
       cmd.append(",`SINGN_DATE`");
-      cmd.append(",`SINGN_ADDRESS`");
+      cmd.append(",`LOCATION_LONGITUDE`");
+      cmd.append(",`LOCATION_LATITUDE`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -704,14 +708,9 @@ public class FDataPersonUserSigningLogic
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      String singnAddress = unit.singnAddress();
-      if(RString.isEmpty(singnAddress)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(singnAddress));
-         cmd.append('\'');
-      }
+      cmd.append(unit.locationLongitude());
+      cmd.append(',');
+      cmd.append(unit.locationLatitude());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -817,16 +816,13 @@ public class FDataPersonUserSigningLogic
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isSingnAddressChanged()){
-         cmd.append(",`SINGN_ADDRESS`=");
-         String singnAddress = unit.singnAddress();
-         if(RString.isEmpty(singnAddress)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(singnAddress));
-            cmd.append('\'');
-         }
+      if(unit.isLocationLongitudeChanged()){
+         cmd.append(",`LOCATION_LONGITUDE`=");
+         cmd.append(unit.locationLongitude());
+      }
+      if(unit.isLocationLatitudeChanged()){
+         cmd.append(",`LOCATION_LATITUDE`=");
+         cmd.append(unit.locationLatitude());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

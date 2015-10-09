@@ -6,6 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
@@ -49,11 +50,17 @@ public class FDataPersonUserSigningUnit
    // 字段签到时间的定义。
    protected TDateTime _singnDate = new TDateTime();
 
-   // 存储字段签到地址的定义。
-   private String __singnAddress;
+   // 存储字段位置经度的定义。
+   private double __locationLongitude;
 
-   // 字段签到地址的定义。
-   protected String _singnAddress;
+   // 字段位置经度的定义。
+   protected double _locationLongitude;
+
+   // 存储字段位置纬度的定义。
+   private double __locationLatitude;
+
+   // 字段位置纬度的定义。
+   protected double _locationLatitude;
 
    // 存储字段备注的定义。
    private String __note;
@@ -238,30 +245,57 @@ public class FDataPersonUserSigningUnit
    }
 
    //============================================================
-   // <T>判断签到地址的数据是否改变。</T>
+   // <T>判断位置经度的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isSingnAddressChanged(){
-      return !RString.equals(__singnAddress, _singnAddress);
+   public boolean isLocationLongitudeChanged(){
+      return __locationLongitude != _locationLongitude;
    }
 
    //============================================================
-   // <T>获得签到地址的数据内容。</T>
+   // <T>获得位置经度的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String singnAddress(){
-      return _singnAddress;
+   public double locationLongitude(){
+      return _locationLongitude;
    }
 
    //============================================================
-   // <T>设置签到地址的数据内容。</T>
+   // <T>设置位置经度的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setSingnAddress(String value){
-      _singnAddress = value;
+   public void setLocationLongitude(double value){
+      _locationLongitude = value;
+   }
+
+   //============================================================
+   // <T>判断位置纬度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLatitudeChanged(){
+      return __locationLatitude != _locationLatitude;
+   }
+
+   //============================================================
+   // <T>获得位置纬度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLatitude(){
+      return _locationLatitude;
+   }
+
+   //============================================================
+   // <T>设置位置纬度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLatitude(double value){
+      _locationLatitude = value;
    }
 
    //============================================================
@@ -418,8 +452,10 @@ public class FDataPersonUserSigningUnit
             return Long.toString(_userId);
          case "singn_date":
             return _singnDate.toString();
-         case "singn_address":
-            return _singnAddress;
+         case "location_longitude":
+            return RDouble.toString(_locationLongitude);
+         case "location_latitude":
+            return RDouble.toString(_locationLatitude);
          case "note":
             return _note;
          case "create_user_id":
@@ -459,8 +495,11 @@ public class FDataPersonUserSigningUnit
          case "singn_date":
             _singnDate.parse(value);
             break;
-         case "singn_address":
-            _singnAddress = value;
+         case "location_longitude":
+            _locationLongitude = RDouble.parse(value);
+            break;
+         case "location_latitude":
+            _locationLatitude = RDouble.parse(value);
             break;
          case "note":
             _note = value;
@@ -512,9 +551,13 @@ public class FDataPersonUserSigningUnit
                __singnDate.parse(value);
                _singnDate.assign(__singnDate);
                break;
-            case "singn_address":
-               __singnAddress = value;
-               _singnAddress = __singnAddress;
+            case "location_longitude":
+               __locationLongitude = RDouble.parse(value);
+               _locationLongitude = __locationLongitude;
+               break;
+            case "location_latitude":
+               __locationLatitude = RDouble.parse(value);
+               _locationLatitude = __locationLatitude;
                break;
             case "note":
                __note = value;
@@ -553,7 +596,8 @@ public class FDataPersonUserSigningUnit
       row.set("guid", _guid);
       row.set("userId", _userId);
       row.set("singnDate", _singnDate);
-      row.set("singnAddress", _singnAddress);
+      row.set("locationLongitude", _locationLongitude);
+      row.set("locationLatitude", _locationLatitude);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -574,7 +618,8 @@ public class FDataPersonUserSigningUnit
       map.put("guid", _guid);
       map.put("userId", RLong.toString(_userId));
       map.put("singnDate", _singnDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("singnAddress", _singnAddress);
+      map.put("locationLongitude", RDouble.toString(_locationLongitude));
+      map.put("locationLatitude", RDouble.toString(_locationLatitude));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -595,7 +640,6 @@ public class FDataPersonUserSigningUnit
       _guid = input.readString();
       _userId = input.readInt64();
       _singnDate.set(input.readInt64());
-      _singnAddress = input.readString();
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -616,7 +660,6 @@ public class FDataPersonUserSigningUnit
       output.writeString(_guid);
       output.writeInt64(_userId);
       output.writeInt64(_singnDate.get());
-      output.writeString(_singnAddress);
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
