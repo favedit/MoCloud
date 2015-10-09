@@ -81,6 +81,7 @@
                <ul class="sub-menu">
                   <jh:equals source="product.user.logger" value="&basePage.menuString"><li><a href="/product/logger/user/Access.wa" target="right">用户日志</a></li></jh:equals>
                   <jh:equals source="manage.product.user.whitelists" value="&basePage.menuString"><li><a href="/manage/product/user/whitelists/Access.wa" target="right">白名单</a></li></jh:equals>
+                  <jh:equals source="manage.product.user.signing" value="&basePage.menuString"><li><a href="/manage/product/user/signing/Signing.wa" target="right">用户签到</a></li></jh:equals>
                </ul>
             </li>
             

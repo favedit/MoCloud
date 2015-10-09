@@ -135,7 +135,7 @@ public class FHeaderAction implements IHeaderAction {
          menuStrings
                .append(
                      "manage.user.module|manage.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|product.financial.product|manage.user|product.financial.department|product.financial.lnews|product.financial.customer|manage.product.common.configration|")
-               .append("manage.product.common.configration.rule|manage.product.examine.news|product.system.application|product.system.version|product.financial.marketer|product.device|product.user.logger|manage.product.user.whitelists");
+               .append("manage.product.common.configration.rule|manage.product.examine.news|product.system.application|product.system.version|product.financial.marketer|product.device|product.user.logger|manage.product.user.whitelists|manage.product.user.signing");
          basePage.setMenuString(menuStrings.toString());
       } else {
          long roleId = basePage.roleId();

@@ -92,7 +92,6 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    public void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit) {
       FileInputStream fi;
       FileOutputStream fo;
-      _logger.debug(this, "Construct,_applicationName=====================" + _applicationName, "Construct begin. (userId={1})", 111);
       try {
          String contentType = file.contentType();
          int ind = file.fileName().indexOf(".");
