@@ -29,10 +29,7 @@ import org.mo.web.protocol.context.IWebContext;
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public class FNewsAction
-      implements
-         INewsAction
-{
+public class FNewsAction implements INewsAction {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FNewsAction.class);
 
@@ -50,11 +47,9 @@ public class FNewsAction
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context,
-                           ILogicContext logicContext,
-                           FBasePage basePage){
+   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       return "/manage/product/financial/news/NewsList";
@@ -69,25 +64,22 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context,
-                        ILogicContext logicContext,
-                        FNewsPage page,
-                        FBasePage basePage){
+   public String select(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      if(null != context.parameter("page")){
+      if (null != context.parameter("page")) {
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      }else{
+      } else {
          page.setPageCurrent(0);
       }
       FDataLogicNewsUnit unit = new FDataLogicNewsUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if(null != StrPageSize){
+      if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataNewsInfo> unitList = _newsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
@@ -105,12 +97,9 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context,
-                              ILogicContext logicContext,
-                              FNewsPage Page,
-                              FBasePage basePage){
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       return "/manage/product/financial/news/InsertNews";
@@ -125,18 +114,15 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context,
-                        ILogicContext logicContext,
-                        FNewsPage page,
-                        FBasePage basePage){
+   public String insert(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNewsUnit unit = _newsConsole.doPrepare(logicContext);
       setLogicNews(context, logicContext, unit);
       EResult result = _newsConsole.doInsert(logicContext, unit);
-      if(!result.equals(EResult.Success)){
+      if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
          return "/manage/product/financial/news/InsertNews";
       }
@@ -153,12 +139,9 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context,
-                              ILogicContext logicContext,
-                              FNewsPage page,
-                              FBasePage basePage){
+   public String updateBefore(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
@@ -168,29 +151,29 @@ public class FNewsAction
       info.setContent(unit.content());
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
-      if(RString.equals(EGcResourceStatus.Unknown, unit.statusCd())){
+      if (RString.equals(EGcResourceStatus.Unknown, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.UnknownLabel);
       }
-      if(RString.equals(EGcResourceStatus.Apply, unit.statusCd())){
+      if (RString.equals(EGcResourceStatus.Apply, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
       }
-      if(RString.equals(EGcResourceStatus.Publish, unit.statusCd())){
+      if (RString.equals(EGcResourceStatus.Publish, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.PublishLabel);
       }
-      if(RString.equals(EGcResourceStatus.CheckFail, unit.statusCd())){
+      if (RString.equals(EGcResourceStatus.CheckFail, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
       }
-      if(RString.equals(EGcDisplay.Unknown, unit.displayCd())){
+      if (RString.equals(EGcDisplay.Unknown, unit.displayCd())) {
          info.setDisplayCdStr(EGcDisplay.UnknownLabel);
       }
-      if(RString.equals(EGcDisplay.Disable, unit.displayCd())){
+      if (RString.equals(EGcDisplay.Disable, unit.displayCd())) {
          info.setDisplayCdStr(EGcDisplay.DisableLabel);
       }
-      if(RString.equals(EGcDisplay.Enabled, unit.displayCd())){
+      if (RString.equals(EGcDisplay.Enabled, unit.displayCd())) {
          info.setDisplayCdStr(EGcDisplay.EnabledLabel);
       }
       info.setLabel(unit.label());
-      if(!RString.isEmpty(unit.iconUrl())){
+      if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
          int na = unit.iconUrl().indexOf("images");
          info.setImageName("/manage/images/" + unit.iconUrl().substring(na + 7, unit.iconUrl().length()));
@@ -209,11 +192,8 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context,
-                        ILogicContext logicContext,
-                        FNewsPage Page,
-                        FBasePage basePage){
-      if(!basePage.userExists()){
+   public String update(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
@@ -233,23 +213,20 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context,
-                        ILogicContext logicContext,
-                        FNewsPage Page,
-                        FBasePage basePage){
+   public String delete(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
-      if(unit == null){
+      if (unit == null) {
          throw new FFatalError("id not exists.");
       }
       EResult result = _newsConsole.doDelete(logicContext, unit);
-      if(!result.equals(EResult.Success)){
+      if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
-      }else{
+      } else {
          return "/manage/product/financial/news/NewsList";
       }
    }
@@ -261,41 +238,44 @@ public class FNewsAction
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context,
-                            ILogicContext logicContext,
-                            FDataLogicNewsUnit unit){
+   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicNewsUnit unit) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
       String scd = context.parameter("displayCdStr");
-      if(!RString.isEmpty(scd)){
+      if (!RString.isEmpty(scd)) {
          unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));
       }
       String scc = context.parameter("statusCdStr");
-      if(!RString.isEmpty(scc)){
+      if (!RString.isEmpty(scc)) {
          unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
+      }
+      String path = System.getProperty("user.dir");
+      if (!RString.isEmpty(path)) {
+         path = path.substring(0, path.length() - 6);
       }
       unit.setLabel(context.parameter("label"));
       FWebUploadFile file = context.files().first();
-      if(null == file){
+      if (null == file) {
          unit.setIconUrl(context.parameter("iconUrl"));
-      }else{
-         try{
+      } else {
+         try {// "D:\\Microbject\\MoCloud\\mp-eai-manage\\webroot\\manage\\images\\"
             FileInputStream fi = new FileInputStream(context.files().first().uploadName());
-            FileOutputStream fo = new FileOutputStream("D:\\Microbject\\MoCloud\\mp-eai-manage\\webroot\\manage\\images\\" + context.files().first().fileName());
+            FileOutputStream fo = new FileOutputStream(path + "\\mp-eai-manage\\webroot\\manage\\images\\" + context.files().first().fileName());
+            int len = 0;
             byte[] buffer = new byte[1024];
-            while((fi.read(buffer)) != -1){
-               fo.write(buffer);
+            while ((len = fi.read(buffer)) != -1) {
+               fo.write(buffer, 0, len);
             }
             fo.close();
             fi.close();
-         }catch(FileNotFoundException e){
+         } catch (FileNotFoundException e) {
             e.printStackTrace();
-         }catch(IOException e){
+         } catch (IOException e) {
             e.printStackTrace();
          }
-         unit.setIconUrl("D:\\Microbject\\MoCloud\\mp-eai-manage\\webroot\\manage\\images\\" + context.files().first().fileName());// 文件上传的绝对路径
+         unit.setIconUrl(path + "\\mp-eai-manage\\webroot\\manage\\images\\" + context.files().first().fileName());// 文件上传的绝对路径
       }
    }
 
