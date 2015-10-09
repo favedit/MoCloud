@@ -47,4 +47,17 @@
          face  = 'org.mo.content.service.info.logic.version.IVersionService'
          class = 'org.mo.content.service.info.logic.version.FVersionService'
          scope = 'global'/>
+         
+         
+         <!-- ============================================================ -->
+   <!-- 版本更新服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'eai.mobile.logic.attendance'
+         face  = 'org.mo.content.service.info.logic.version.IVersionService'/>
+
+   <Component
+         face  = 'org.mo.content.service.info.logic.version.IVersionService'
+         class = 'org.mo.content.service.info.logic.version.FVersionService'
+         scope = 'global'/>
 </Config>

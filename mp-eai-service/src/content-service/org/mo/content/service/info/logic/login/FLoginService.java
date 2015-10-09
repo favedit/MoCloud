@@ -76,6 +76,8 @@ public class FLoginService
       FXmlNode sessionId = output.config().createNode("session_id");
       FXmlNode status_cd = output.config().createNode("status_cd");
       FXmlNode user_id = output.config().createNode("user_id");
+      //      FXmlNode user_icon = output.config().createNode("user_icon");
+      //      FXmlNode company_info = output.config().createNode("company_info");
       FXmlNode passportNodeOut = output.config().createNode("label");
       String passport = RString.trimRight(passportNode.text());
       String password = RString.trimRight(passwordNode.text());
@@ -110,6 +112,17 @@ public class FLoginService
          status_cd.setText(user.statusCd());
          return EResult.Failure;
       }
+   }
+
+   @Override
+   public EResult autoLogin(IWebContext context,
+                            IWebInput input,
+                            IWebOutput output,
+                            ILogicContext logicContext,
+                            IWebSession sessionContext){
+      FXmlNode inputNode = input.config();
+      FXmlNode mo_session_id = inputNode.findNode("mo_session_id");
+      return null;
    }
 
    //============================================================

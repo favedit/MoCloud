@@ -62,4 +62,10 @@ public interface ILoginService
                            IWebOutput output,
                            ILogicContext logicContext,
                            IWebSession sessionContext);
+
+   public EResult autoLogin(IWebContext context,
+                            IWebInput input,
+                            IWebOutput output,
+                            ILogicContext logicContext,
+                            IWebSession sessionContext);
 }

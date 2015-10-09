@@ -110,27 +110,27 @@ public class FNewsService
             if(newsUnit.guid() != null && (!"".equals(newsUnit.guid()))){
                xruntime.createNode("guid").setText(newsUnit.guid());
             }else{
-               xruntime.createNode("guid").setText("null");
+               xruntime.createNode("guid").setText("0");
             }
             if(newsUnit.label() != null && (!"".equals(newsUnit.label()))){
                xruntime.createNode("label").setText(newsUnit.label());
             }else{
-               xruntime.createNode("label").setText("null");
+               xruntime.createNode("label").setText("0");
             }
-            if(newsUnit.content() != null && (!"".equals(newsUnit.content()))){
-               xruntime.createNode("content").setText(newsUnit.content());
+            if(newsUnit.description() != null && (!"".equals(newsUnit.description()))){
+               xruntime.createNode("description").setText(newsUnit.description());
             }else{
-               xruntime.createNode("content").setText("null");
+               xruntime.createNode("description").setText("0");
             }
             if(newsUnit.iconUrl() != null && (!"".equals(newsUnit.iconUrl()))){
                xruntime.createNode("icon_url").setText(newsUnit.iconUrl());
             }else{
-               xruntime.createNode("icon_url").setText("null");
+               xruntime.createNode("icon_url").setText("0");
             }
             if(newsUnit.updateDate() + "" != null && (!"".equals(newsUnit.updateDate() + ""))){
                xruntime.createNode("update_date").setText(newsUnit.updateDate() + "");
             }else{
-               xruntime.createNode("update_date").setText("null");
+               xruntime.createNode("update_date").setText("0");
             }
             xruntime.createNode("info_url").setText("http://10.13.0.100:8020/Index.wa?guid=" + newsUnit.guid());
          }
