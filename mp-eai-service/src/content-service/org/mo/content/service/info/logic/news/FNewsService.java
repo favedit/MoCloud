@@ -101,8 +101,7 @@ public class FNewsService
       FLogicDataset<FDataLogicNewsUnit> newsUnits = _newsConsole.select(pageNum, pageSize, logicContext);
       output.config().createNode("page_number").setText(pageNumStr);
       FXmlNode list = output.config().createNode("news_list");
-      if(newsUnits == null || newsUnits.count() < 1){
-      }else{
+      if(newsUnits != null && newsUnits.count() > 0){
          for(Iterator<FDataLogicNewsUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
             FDataLogicNewsUnit newsUnit = iterator.next();
             FXmlNode xruntime = list.createNode("news_info");
@@ -134,6 +133,7 @@ public class FNewsService
             }
             xruntime.createNode("info_url").setText("http://10.13.0.250:8020/Index.wa?guid=" + newsUnit.guid());
          }
+
       }
       return EResult.Success;
    }

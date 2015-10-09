@@ -2,6 +2,8 @@ package org.mo.content.core.logic.news;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.define.enums.common.EGcDisplay;
+import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -50,13 +52,20 @@ public class FNewsConsole
    public FLogicDataset<FDataLogicNewsUnit> select(int pageNum,
                                                    int pageSize,
                                                    ILogicContext logicContext){
-      if(pageNum < 0){
-         pageNum = 0;
+      if(pageNum <= 0){
+         pageNum = 1;
       }
+      FSql whereSql = new FSql();
+      whereSql.append(FDataLogicNewsLogic.STATUS_CD);
+      whereSql.append("=");
+      whereSql.append(EGcResourceStatus.Publish);
+      whereSql.append(" AND ");
+      whereSql.append(FDataLogicNewsLogic.DISPLAY_CD);
+      whereSql.append("=");
+      whereSql.append(EGcDisplay.Enabled);
       String orderBy = String.format("%s %s", FDataLogicNewsLogic.LABEL, "DESC");
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
-      FSql sql = new FSql();
-      FLogicDataset<FDataLogicNewsUnit> moduleList = logic.fetch(sql.toString(), orderBy, pageSize, pageNum);
+      FLogicDataset<FDataLogicNewsUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
       return moduleList;
    }
 

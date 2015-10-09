@@ -2,6 +2,9 @@ package org.mo.content.service.info.logic.login;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
+import org.mo.cloud.core.web.FGcWebSession;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -34,7 +37,11 @@ public class FLoginService
 
    //session会话控制台
    @ALink
-   protected IWebSessionConsole _sessionConsole;
+   protected IGcSessionConsole _sessionConsole;
+
+   //session会话控制台
+   @ALink
+   protected IWebSessionConsole _webSessionConsole;
 
    //============================================================
    // <T>默认逻辑。</T>
@@ -73,9 +80,12 @@ public class FLoginService
       FXmlNode inputNode = input.config();
       FXmlNode passportNode = inputNode.findNode("passport");
       FXmlNode passwordNode = inputNode.findNode("password");
-      FXmlNode sessionId = output.config().createNode("session_id");
+      /*FXmlNode sessionNode = inputNode.findNode("mo-session-id");
+      String sessionStr = sessionNode.text();*/
+      String sessionStr = context.head("mo-session-id");
+      FXmlNode sessionId = output.config().createNode("session_code");
       FXmlNode status_cd = output.config().createNode("status_cd");
-      FXmlNode user_id = output.config().createNode("user_id");
+      //      FXmlNode user_id = output.config().createNode("user_id");
       //      FXmlNode user_icon = output.config().createNode("user_icon");
       //      FXmlNode company_info = output.config().createNode("company_info");
       FXmlNode passportNodeOut = output.config().createNode("label");
@@ -96,17 +106,21 @@ public class FLoginService
       //如果OA登录成功  oa那边接口返回的是0
       if(user.statusCd() == EGcAuthorityResult.OaSuccess){
          //如果登录成功,,返回一个sessionId
-         sessionId.setText("er45hgjh768909jh546567pklh");
          status_cd.setText(user.statusCd());
-         user_id.setText(user.guid());
+         //         user_id.setText(user.guid());
          //         xruntime.set("gender_cd", "psn_user没有性别字段");
          passportNodeOut.setText(user.passport());
-         // 会话管理
-         /*FGcWebSession session = (FGcWebSession)sessionContext;
-         session.setUserId(user.ouid());
-         _logger.debug(this, "session_id*****************------>", "session_id={1},user_id={2},_sessionConsole={3}", session.id(), user.ouid(), _sessionConsole);
-         EResult sessionResult = _sessionConsole.open(session);
-         _logger.debug(this, "session_id*****************------>", "sessionResult={1}", sessionResult);*/
+         // 登录成功创建session
+         if(!("".equals(sessionStr))){
+            FGcWebSession session = (FGcWebSession)sessionContext;
+            session.setId(sessionStr);
+            session.setUserId(user.ouid());
+            session.setFromCode("mobile_android");
+            _logger.debug(this, "session_id*****************------>", "session_id={1},user_id={2},_sessionConsole={3}", session.id(), user.ouid(), _sessionConsole);
+            EResult sessionResult = _webSessionConsole.open(session);
+            sessionId.setText(session.id());
+            _logger.debug(this, "session_id*****************------>", "sessionResult={1}", sessionResult);
+         }
          return EResult.Success;
       }else{
          status_cd.setText(user.statusCd());
@@ -114,6 +128,15 @@ public class FLoginService
       }
    }
 
+   //============================================================
+   // @自动登录接口
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // @logicContext 逻辑上下文
+   // @sessionContext session上下文
+   //============================================================
    @Override
    public EResult autoLogin(IWebContext context,
                             IWebInput input,
@@ -121,8 +144,33 @@ public class FLoginService
                             ILogicContext logicContext,
                             IWebSession sessionContext){
       FXmlNode inputNode = input.config();
-      FXmlNode mo_session_id = inputNode.findNode("mo_session_id");
-      return null;
+      /*FXmlNode mo_session_id = inputNode.findNode("mo-session-id");
+      String sessionCode = mo_session_id.text();*/
+      String sessionCode = context.head("mo-session-id");
+      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
+      _logger.debug(this, "autoLogin*****************mo_session_id---->", "mo_session_id={1}", sessionCode);
+      if(sessionInfo == null){
+         //session已经失效
+         output.config().createNode("session_status").setText(0);
+         return EResult.Success;
+      }
+      // 打开会话
+      //      FXmlNode sessionCodeNode = output.config().createNode("session_code");
+      //      FXmlNode status_cd = output.config().createNode("status_cd");
+      //      FXmlNode user_id = output.config().createNode("user_id");
+      /* //通过用户id去找用户
+       FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
+       FSql whereSql = new FSql();
+       whereSql.append(FDataPersonUserLogic.OUID);
+       whereSql.append("=");
+       whereSql.append(sessionInfo.userId());
+       userLogic.fetch(whereSql);*/
+      FXmlNode passportNodeOut = output.config().createNode("label");
+      //      sessionCodeNode.setText(sessionInfo.sessionCode());
+      //      status_cd.setText(EGcAuthorityResult.OaSuccess);
+      //      user_id.setText(sessionInfo.userId());
+      passportNodeOut.setText(sessionInfo.userLabel());
+      return EResult.Success;
    }
 
    //============================================================
@@ -140,22 +188,13 @@ public class FLoginService
                          IWebOutput output,
                          ILogicContext logicContext,
                          IWebSession sessionContext){
-      _logger.debug(this, "logout", "logout begin. ");
       // 获得参数
-      FXmlNode inputNode = input.config();
-      FXmlNode userNode = inputNode.findNode("SessionCode");
-      String sessionCode = userNode.text();
-      FXmlNode xruntime = output.config();
-      FDataPersonUserUnit user = _loginConsole.logout(context, sessionCode, logicContext, sessionContext);
-      //如果返回-1意味着根据guid没有找到用户
-      if(user.statusCd() == -1){
-         //         xruntime.set("status_cd", user.statusCd());
-         xruntime.set("info", "没有找到对应的用户!");
-         return EResult.Failure;
-      }else{
-         //         xruntime.set("status_cd", user.statusCd());
-         return EResult.Success;
-      }
+      String sessionCode = context.head("mo-session-id");
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      //      session.setId(sessionCode);
+      _logger.debug(this, "------------------------------------>logout", "sessionCode={1}", sessionCode);
+      _webSessionConsole.close(session);
+      return EResult.Success;
    }
 
    //============================================================

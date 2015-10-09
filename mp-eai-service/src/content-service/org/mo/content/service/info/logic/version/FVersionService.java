@@ -3,6 +3,8 @@ package org.mo.content.service.info.logic.version;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import java.util.HashMap;
 import org.mo.cloud.core.web.FGcWebSession;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -35,6 +37,9 @@ public class FVersionService
    //会话控制台
    @ALink
    protected IWebSessionConsole _sessionConsole;
+
+   @ALink
+   protected IGcSessionConsole _gcSessionConsole;
 
    //============================================================
    // <T>默认逻辑。</T>
@@ -69,11 +74,12 @@ public class FVersionService
       // 获得应用程序id和与之对应的版本编号
       FXmlNode inputNode = input.config();
       FXmlNode inputApplicationNode = inputNode.findNode("appos");
+      String sessionStr = context.head("mo-session-id");
+      /*FXmlNode sessionNode = inputNode.findNode("mo-session-id");
+      String sessionStr = sessionNode.text();*/
       String applicationStr = inputApplicationNode.text();
-      _logger.debug(this, "****************************---------------->show parameters", "appos={1}", applicationStr);
+      _logger.debug(this, "****************************------------------------------------->show parameters", "appos={1},sessionCode={2}", applicationStr, sessionStr);
       String versionStr = "";
-      // 会话管理
-      FGcWebSession session = (FGcWebSession)sessionContext;
       System.out.println("****************************---------------->" + sessionContext.getClass().getName());
       //输出信息
       HashMap<String, Object> hashMap = _versionConsole.connect(context, versionStr, applicationStr, logicContext, sessionContext);
@@ -94,6 +100,23 @@ public class FVersionService
          //         outputVersionNode.set("upgrade_size", lastVersionUnit.downloadSize());
       }
       //      outputApplicationNode.setText(applicationStr);
+      if("".equals(sessionStr)){
+         FXmlNode sessionCode = output.config().createNode("session_code");
+         FGcWebSession session = (FGcWebSession)sessionContext;
+         sessionCode.setText(session.id());
+      }else{
+         //如果有值,验证session是否有效
+         FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionStr);
+         //如果session无效
+         if(sessionInfo == null){
+            FXmlNode sessionCode = output.config().createNode("session_code");
+            FGcWebSession session = (FGcWebSession)sessionContext;
+            sessionCode.setText(session.id());
+         }else{
+            FXmlNode sessionCode = output.config().createNode("session_code");
+            sessionCode.setText(sessionStr);
+         }
+      }
       return EResult.Success;
    }
 

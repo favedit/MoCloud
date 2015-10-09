@@ -146,6 +146,7 @@ public class FLoginConsole
          FDataPersonUserUnit unit = new FDataPersonUserUnit();
          unit.setStatusCd(statusCd);
          unit.setPassport(passport);
+         unit.setPassword(password);
          unit.setNote(message);
          backUser = synchronizeData(logicContext, unit, from, changePass);
       }
@@ -215,11 +216,11 @@ public class FLoginConsole
       //创建一个零时用户
       FDataPersonUserUnit tempUserUnit = new FDataPersonUserUnit();
       tempUserUnit.setStatusCd(backUser.statusCd());
-      tempUserUnit.setPassport(backUser.passport());
+      tempUserUnit.setPassport(changePass);
       tempUserUnit.setPassword(backUser.password());
       tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
       //      tempUserUnit.setOuid(21);
-      tempUserUnit.setLabel(changePass);
+      tempUserUnit.setLabel(backUser.passport());
       //      userUnit.setLabel(value);
       FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       FDataPersonUserUnit findUserByGuid = userLogic.findByGuid(tempUserUnit.guid());
