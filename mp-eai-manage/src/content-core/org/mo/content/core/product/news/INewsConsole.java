@@ -21,5 +21,5 @@ public interface INewsConsole extends IAbstractLogicUnitConsole<FDataLogicNewsUn
    // <T>保存图片地址</T>
    // @return void
    // ============================================================
-   void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit);
+   void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit, String flag);
 }

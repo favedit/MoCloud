@@ -28,16 +28,6 @@
     	$("#getHtml").click();
         $("#logicNews").submit();
     }
-    var uploadFile = function(){
-       var path = $('#iconUrl').val();
-       var len = path.length;
-       if(len>=200){
-          alert("文件地址过长，请重新上传！");
-          return;
-       }
-       $("#oriIcon").attr("src",path);
-       alert("上传成功！");
-    }
     var removeFile = function(){
        $('#iconUrl').val("");
        $('#iconUrl').show();
@@ -127,11 +117,9 @@
     
     <tr>
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
-     <td style="width:380px;"><div align="left">
-       <input type="file" name="iconUrl" id="iconUrl" style="display:none;" multiple="multiple"/>
-       <input id="oiconUr" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>"/>
-       <a id="uploadFile" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="uploadFile()"  style="display:none;">上传</a>
-       <a id="removeFile" href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" onclick="removeFile()">删除</a>
+     <td  colspan="2"><div align="left">
+       <input type="file" name="iconUrl" id="iconUrl" style="display:none;"/>
+       <input id="oiconUr" style="width:290px;" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" onclick="removeFile()"/>
       </div></td>
     </tr>
     <tr>

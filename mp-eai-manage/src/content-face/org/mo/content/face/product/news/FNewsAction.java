@@ -116,7 +116,7 @@ public class FNewsAction implements INewsAction {
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNewsUnit unit = _newsConsole.doPrepare(logicContext);
-      setLogicNews(context, logicContext, unit);
+      setLogicNews(context, logicContext, unit, "0");
       EResult result = _newsConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
@@ -194,7 +194,8 @@ public class FNewsAction implements INewsAction {
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
-      setLogicNews(context, logicContext, unit);
+
+      setLogicNews(context, logicContext, unit, "1");
       _newsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/product/financial/news/NewsList";
@@ -234,7 +235,7 @@ public class FNewsAction implements INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicNewsUnit unit) {
+   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicNewsUnit unit, String flag) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
@@ -252,7 +253,7 @@ public class FNewsAction implements INewsAction {
       if (null == file) {
          unit.setIconUrl(context.parameter("iconUrl"));
       } else {
-         _newsConsole.saveImage(file, unit);
+         _newsConsole.saveImage(file, unit, flag);
       }
    }
 }

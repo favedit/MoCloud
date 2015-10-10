@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -89,16 +90,27 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    }
 
    @Override
-   public void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit) {
+   public void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit, String flag) {
       FileInputStream fi;
       FileOutputStream fo;
       try {
+         if ("1".equals(flag)) {
+            if (!RString.isEmpty(unit.iconUrl())) {
+               int ind = unit.iconUrl().indexOf("newsImages/");
+               String fileName = unit.iconUrl().substring(ind + 11, unit.iconUrl().length());
+               System.out.println("11111++++" + _applicationName + "/webroot/manage/images/newsImages/" + fileName);
+               File f = new File(_applicationName + "/webroot/manage/images/newsImages/" + fileName);
+               if (f.exists()) {
+                  f.delete();
+               }
+            }
+         }
          String contentType = file.contentType();
          int ind = file.fileName().indexOf(".");
          String fileName = file.fileName().substring(0, ind) + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
          String uploadName = file.uploadName();
          fi = new FileInputStream(uploadName);
-         fo = new FileOutputStream(_applicationName + "\\webroot\\manage\\images\\newsImages\\" + fileName);
+         fo = new FileOutputStream(_applicationName + "/webroot/manage/images/newsImages/" + fileName);
          int len = 0;
          byte[] buffer = new byte[1024];
          while ((len = fi.read(buffer)) != -1) {
