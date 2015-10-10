@@ -92,14 +92,14 @@
                   <jh:equals source="manage.product.financial.department" value="&basePage.menuString">
                      <li><a href="/manage/product/financial/department/Department.wa" target="right">部门信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.financial.marketer" value="&basePage.menuString">
-                     <li><a href="/product/financial/marketer/Marketer.wa" target="right">理财师信息</a></li>
+                  <jh:equals source="manage.product.financial.marketer" value="&basePage.menuString">
+                     <li><a href="/manage/product/financial/marketer/Marketer.wa" target="right">理财师信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.financial.customer" value="&basePage.menuString">
-                     <li><a href="/product/financial/customer/Customer.wa" target="right">客户信息</a></li>
+                  <jh:equals source="manage.product.financial.customer" value="&basePage.menuString">
+                     <li><a href="/manage/product/financial/customer/Customer.wa" target="right">客户信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.financial.product" value="&basePage.menuString">
-                     <li><a href="/product/financial/product/Product.wa" target="right">产品信息</a></li>
+                  <jh:equals source="manage.product.financial.product" value="&basePage.menuString">
+                     <li><a href="/manage/product/financial/product/Product.wa" target="right">产品信息</a></li>
                   </jh:equals>
                </ul>
          </li>
@@ -113,10 +113,10 @@
                   </jh:equals>
                </ul>
          </li>
-         <li id="six" class="common"> <a href="#six">新闻管理</a>
+         <li id="six" class="common"> <a href="#six">业务管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="product.financial.lnews" value="&basePage.menuString">
-                     <li><a href="/product/news/News.wa" target="right">业务资讯信息</a></li>
+                  <jh:equals source="manage.product.business.news.news" value="&basePage.menuString">
+                     <li><a href="/manage/product/business/news/News.wa" target="right">新闻信息</a></li>
                   </jh:equals>
                </ul>
          </li>

@@ -37,7 +37,7 @@
                   <a id="product" class="btn1" href="/manage/home/Header.wa?do=productLeft" target="left">产品管理</a>
                </li>
                <li class="tb_02">
-                  <a class="btn2" href="/manage/home/Header.wa?do=manageLeft" target="left">后台管理</a>
+                  <a class="btn2" href="/manage/home/Header.wa?do=manageLeft" target="left">系统管理</a>
                </li>
 <!--
                <li class="tb_03">

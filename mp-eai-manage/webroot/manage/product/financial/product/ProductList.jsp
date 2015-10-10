@@ -20,11 +20,11 @@
 
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/financial/product/Product.wa?do=select&date="
+        var url = "/manage/product/financial/product/Product.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         if (page != null) {
-            url = "/product/financial/product/Product.wa?do=select&page="
+            url = "/manage/product/financial/product/Product.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "page" : page,
@@ -66,7 +66,7 @@
                     //                        });
                     //                     }
                     //                  });
-                    location.href = "/product/financial/product/Product.wa?do=delete&id="
+                    location.href = "/manage/product/financial/product/Product.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
     }
@@ -74,7 +74,7 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/financial/product/Product.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/financial/product/Product.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
 
     }
@@ -89,12 +89,12 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/financial/product/Product.wa?do=insertBefore"
+    <a href="/manage/product/financial/product/Product.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">
     <input id="name" name="name" type="text"
-     onfocus="if(this.value=='学历'){this.value='';}this.style.color='#000000';"
+     onfocus="if(this.value=='名称'){this.value='';}this.style.color='#000000';"
      onblur="if(this.value=='') {this.value='名称';this.style.color='#ccc';}"
      style="color: #ccc" value="名称"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>

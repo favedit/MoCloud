@@ -6,9 +6,9 @@ import com.cyou.gccloud.define.enums.core.EGcPersonUserRole;
 import org.mo.cloud.core.version.IGcVersionConsole;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.module.IModuleConsole;
-import org.mo.content.core.manage.role.IRoleModuleConsole;
-import org.mo.content.core.manage.user.IUserConsole;
+import org.mo.content.core.manage.system.user.IUserConsole;
+import org.mo.content.core.manage.system.user.module.IModuleConsole;
+import org.mo.content.core.manage.system.user.role.IRoleModuleConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -134,8 +134,9 @@ public class FHeaderAction implements IHeaderAction {
       if (roleCd == EGcPersonUserRole.Admin) {
          menuStrings
                .append(
-                     "manage.user.module|manage.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|product.financial.product|manage.user|manage.product.financial.department|product.financial.lnews|product.financial.customer|manage.product.common.configration|")
-               .append("manage.product.common.configration.rule|manage.product.examine.news|product.system.application|product.system.version|product.financial.marketer|manage.product.device|manage.product.user.logger|manage.product.user.whitelists|manage.product.user.signing");
+                     "manage.system.user.module|manage.system.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|manage.product.financial.product|manage.system.user|manage.product.financial.department|manage.product.business.news.news|manage.product.financial.customer|manage.product.common.configration|")
+               .append(
+                     "manage.product.common.configration.rule|manage.product.examine.news|product.system.application|product.system.version|manage.product.financial.marketer|manage.product.device|manage.product.user.logger|manage.product.user.whitelists|manage.product.user.signing");
          basePage.setMenuString(menuStrings.toString());
       } else {
          long roleId = basePage.roleId();

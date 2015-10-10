@@ -20,13 +20,17 @@
 
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/financial/customer/Customer.wa?do=select&date="
+        var url = "/manage/product/financial/customer/Customer.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
+        var highestEducation = $.trim($('#highestEducation').val()).replaceAll("'", "");
+        if (highestEducation == "学历")
+        	highestEducation = null;
         if (page != null) {
-            url = "/product/financial/customer/Customer.wa?do=select&page="
+            url = "/manage/product/financial/customer/Customer.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
+                "highestEducation" : highestEducation,
                 "page" : page,
                 "pageSize" : pageSize
             };
@@ -66,7 +70,7 @@
                     //                        });
                     //                     }
                     //                  });
-                    location.href = "/product/financial/customer/Customer.wa?do=delete&id="
+                    location.href = "/manage/product/financial/customer/Customer.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
     }
@@ -74,7 +78,7 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/financial/customer/Customer.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/financial/customer/Customer.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
 
     }
@@ -112,7 +116,7 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/financial/customer/Customer.wa?do=insertBefore"
+    <a href="/manage/product/financial/customer/Customer.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">
