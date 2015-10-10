@@ -2,6 +2,7 @@ package org.mo.content.face.product.news;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
+import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -162,6 +163,16 @@ public class FNewsAction implements INewsAction {
       if (RString.equals(EGcDisplay.Enabled, unit.displayCd())) {
          info.setDisplayCdStr(EGcDisplay.EnabledLabel);
       }
+      if (RString.equals(EGcLink.Unknown, unit.linkCd())) {
+         info.setLinkCdStr(EGcLink.UnknownLabel);
+      }
+      if (RString.equals(EGcLink.Content, unit.linkCd())) {
+         info.setLinkCdStr(EGcLink.ContentLabel);
+      }
+      if (RString.equals(EGcLink.Link, unit.linkCd())) {
+         info.setLinkCdStr(EGcLink.LinkLabel);
+      }
+      info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
@@ -242,7 +253,12 @@ public class FNewsAction implements INewsAction {
       if (!RString.isEmpty(scc)) {
          unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
       }
+      String lcs = context.parameter("linkCdStr");
+      if (!RString.isEmpty(lcs)) {
+         unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
+      }
       unit.setLabel(context.parameter("label"));
+      unit.setLinkUrl(context.parameter("linkUrl"));
       FWebUploadFile file = context.files().first();
       if (null == file) {
          unit.setIconUrl(context.parameter("iconUrl"));

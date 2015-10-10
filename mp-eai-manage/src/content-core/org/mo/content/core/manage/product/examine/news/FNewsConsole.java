@@ -3,6 +3,7 @@ package org.mo.content.core.manage.product.examine.news;
 import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
+import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
@@ -62,6 +63,15 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          }
          if (RString.equals(EGcDisplay.Enabled, info.displayCd())) {
             info.setDisplayCdStr(EGcDisplay.EnabledLabel);
+         }
+         if (RString.equals(EGcLink.Unknown, info.linkCd())) {
+            info.setLinkCdStr(EGcLink.UnknownLabel);
+         }
+         if (RString.equals(EGcLink.Content, info.linkCd())) {
+            info.setLinkCdStr(EGcLink.ContentLabel);
+         }
+         if (RString.equals(EGcLink.Link, info.linkCd())) {
+            info.setLinkCdStr(EGcLink.LinkLabel);
          }
       }
       return moduleList;

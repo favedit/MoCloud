@@ -82,6 +82,20 @@ KindEditor.ready(function(K) {
       </div></td>
     </tr>
     <tr>
+     <td height="38"><div align="left">外链状态:</div></td>
+     <td><div align="left">
+       <input id="linkCdStr" class="easyui-combobox" name="linkCdStr" data-options="valueField:'value',textField:'text',
+       data:[{'value':'0','text':'未知'},{'value':'1','text':'内容'},{'value':'2','text':'外链'}]"/>  
+      </div></td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">外链地址:</div></td>
+     <td><div align="left">
+         <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox" value="申请"
+        style="width:280px;height:20px" data-options="validType:'length[0,800]'"/>
+     </div></td>
+    </tr>
+    <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td><div align="left">
      	<input id="description" name="description" class="easyui-textbox"

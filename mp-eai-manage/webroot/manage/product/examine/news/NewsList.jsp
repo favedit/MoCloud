@@ -106,6 +106,12 @@
      <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
      width="160px">图片</th>
+     <th
+     data-options="field:'linkCdStr',halign:'center',align:'left',sortable:true"
+     width="60px">外链状态</th>
+     <th
+     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
+     width="160px">外链地址</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
      width="160px">描述</th>
