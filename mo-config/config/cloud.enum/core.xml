@@ -130,4 +130,9 @@
     <Item _uuid="f8b0f01f-9ebb-42b7-8f57-07ade7fb3559" name="Income" label="月收入" is_valid="Y" note="M#" />
     <Item _uuid="75ba98a9-2da8-44ef-b461-fcbf8c8ec5ea" name="Age" label="年龄" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="10ae9c40-264d-4cfa-b17b-ae774e779774" name="GcLink" label="是否是外链新闻" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="b865e2ae-9521-460c-870e-cfdef94c75c3" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="79ac4de1-a376-49af-957d-dcd1816e1054" name="Content" label="内容" is_valid="Y" note="M#" />
+    <Item _uuid="26fd1a4b-4ed8-4935-b5f5-3f56c11311ed" name="Link" label="外链" is_valid="Y" note="M#" />
+  </Enum>
 </Group>

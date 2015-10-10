@@ -538,6 +538,7 @@ ALTER TABLE DT_CTL_RULE
    ADD CONSTRAINT DT_CTL_RUL_UK_GID UNIQUE ( GUID ); 
 -- ------------------------------------------------------------
 -- Create table [Data.Logic.News]
+-- sunhr  20151010
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_LGC_NEWS`;
 CREATE TABLE `DT_LGC_NEWS` 
@@ -549,9 +550,11 @@ CREATE TABLE `DT_LGC_NEWS`
    `ICON_URL`                      VARCHAR(200), 
    `STATUS_CD`                     INTEGER, 
    `DISPLAY_CD`                    INTEGER, 
+   `LINK_CD`                       INTEGER, 
    `DISPLAY_ORDER`                 INTEGER, 
    `RECORD_DATE`                   DATETIME, 
    `KEYWORDS`                      VARCHAR(800), 
+   `LINK_URL`                      VARCHAR(800), 
    `DESCRIPTION`                   VARCHAR(2000), 
    `CONTENT`                       TEXT, 
    `VIEW_COUNT`                    INTEGER, 
@@ -559,7 +562,7 @@ CREATE TABLE `DT_LGC_NEWS`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_LGC_NEWS 
    ADD CONSTRAINT DT_LGC_NEW_UK_GID UNIQUE ( GUID ); 

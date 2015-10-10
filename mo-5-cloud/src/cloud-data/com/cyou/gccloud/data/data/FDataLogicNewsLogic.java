@@ -54,6 +54,9 @@ public class FDataLogicNewsLogic
    // 字段是否显示的定义。
    public final static SLogicFieldInfo DISPLAY_CD = new SLogicFieldInfo("DISPLAY_CD");
 
+   // 字段外链状态的定义。
+   public final static SLogicFieldInfo LINK_CD = new SLogicFieldInfo("LINK_CD");
+
    // 字段排序值的定义。
    public final static SLogicFieldInfo DISPLAY_ORDER = new SLogicFieldInfo("DISPLAY_ORDER");
 
@@ -62,6 +65,9 @@ public class FDataLogicNewsLogic
 
    // 字段关键字的定义。
    public final static SLogicFieldInfo KEYWORDS = new SLogicFieldInfo("KEYWORDS");
+
+   // 字段外链地址的定义。
+   public final static SLogicFieldInfo LINK_URL = new SLogicFieldInfo("LINK_URL");
 
    // 字段描述的定义。
    public final static SLogicFieldInfo DESCRIPTION = new SLogicFieldInfo("DESCRIPTION");
@@ -85,7 +91,7 @@ public class FDataLogicNewsLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LABEL`,`ICON_URL`,`STATUS_CD`,`DISPLAY_CD`,`DISPLAY_ORDER`,`RECORD_DATE`,`KEYWORDS`,`DESCRIPTION`,`CONTENT`,`VIEW_COUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LABEL`,`ICON_URL`,`STATUS_CD`,`DISPLAY_CD`,`LINK_CD`,`DISPLAY_ORDER`,`RECORD_DATE`,`KEYWORDS`,`LINK_URL`,`DESCRIPTION`,`CONTENT`,`VIEW_COUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造业务资讯表逻辑单元。</T>
@@ -685,9 +691,11 @@ public class FDataLogicNewsLogic
       cmd.append(",`ICON_URL`");
       cmd.append(",`STATUS_CD`");
       cmd.append(",`DISPLAY_CD`");
+      cmd.append(",`LINK_CD`");
       cmd.append(",`DISPLAY_ORDER`");
       cmd.append(",`RECORD_DATE`");
       cmd.append(",`KEYWORDS`");
+      cmd.append(",`LINK_URL`");
       cmd.append(",`DESCRIPTION`");
       cmd.append(",`CONTENT`");
       cmd.append(",`VIEW_COUNT`");
@@ -732,6 +740,8 @@ public class FDataLogicNewsLogic
       cmd.append(',');
       cmd.append(unit.displayCd());
       cmd.append(',');
+      cmd.append(unit.linkCd());
+      cmd.append(',');
       cmd.append(unit.displayOrder());
       cmd.append(',');
       TDateTime recordDate = unit.recordDate();
@@ -751,6 +761,15 @@ public class FDataLogicNewsLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(keywords));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String linkUrl = unit.linkUrl();
+      if(RString.isEmpty(linkUrl)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(linkUrl));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -877,6 +896,10 @@ public class FDataLogicNewsLogic
          cmd.append(",`DISPLAY_CD`=");
          cmd.append(unit.displayCd());
       }
+      if(unit.isLinkCdChanged()){
+         cmd.append(",`LINK_CD`=");
+         cmd.append(unit.linkCd());
+      }
       if(unit.isDisplayOrderChanged()){
          cmd.append(",`DISPLAY_ORDER`=");
          cmd.append(unit.displayOrder());
@@ -902,6 +925,17 @@ public class FDataLogicNewsLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(keywords));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isLinkUrlChanged()){
+         cmd.append(",`LINK_URL`=");
+         String linkUrl = unit.linkUrl();
+         if(RString.isEmpty(linkUrl)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(linkUrl));
             cmd.append('\'');
          }
       }

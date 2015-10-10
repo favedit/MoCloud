@@ -62,6 +62,12 @@ public class FDataLogicNewsUnit
    // 字段是否显示的定义。
    protected int _displayCd;
 
+   // 存储字段外链状态的定义。
+   private int __linkCd;
+
+   // 字段外链状态的定义。
+   protected int _linkCd;
+
    // 存储字段排序值的定义。
    private int __displayOrder;
 
@@ -79,6 +85,12 @@ public class FDataLogicNewsUnit
 
    // 字段关键字的定义。
    protected String _keywords;
+
+   // 存储字段外链地址的定义。
+   private String __linkUrl;
+
+   // 字段外链地址的定义。
+   protected String _linkUrl;
 
    // 存储字段描述的定义。
    private String __description;
@@ -318,6 +330,33 @@ public class FDataLogicNewsUnit
    }
 
    //============================================================
+   // <T>判断外链状态的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkCdChanged(){
+      return __linkCd != _linkCd;
+   }
+
+   //============================================================
+   // <T>获得外链状态的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int linkCd(){
+      return _linkCd;
+   }
+
+   //============================================================
+   // <T>设置外链状态的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkCd(int value){
+      _linkCd = value;
+   }
+
+   //============================================================
    // <T>判断排序值的数据是否改变。</T>
    //
    // @return 数据内容
@@ -396,6 +435,33 @@ public class FDataLogicNewsUnit
    //============================================================
    public void setKeywords(String value){
       _keywords = value;
+   }
+
+   //============================================================
+   // <T>判断外链地址的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLinkUrlChanged(){
+      return !RString.equals(__linkUrl, _linkUrl);
+   }
+
+   //============================================================
+   // <T>获得外链地址的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String linkUrl(){
+      return _linkUrl;
+   }
+
+   //============================================================
+   // <T>设置外链地址的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLinkUrl(String value){
+      _linkUrl = value;
    }
 
    //============================================================
@@ -610,12 +676,16 @@ public class FDataLogicNewsUnit
             return RInteger.toString(_statusCd);
          case "display_cd":
             return RInteger.toString(_displayCd);
+         case "link_cd":
+            return RInteger.toString(_linkCd);
          case "display_order":
             return RInteger.toString(_displayOrder);
          case "record_date":
             return _recordDate.toString();
          case "keywords":
             return _keywords;
+         case "link_url":
+            return _linkUrl;
          case "description":
             return _description;
          case "content":
@@ -665,6 +735,9 @@ public class FDataLogicNewsUnit
          case "display_cd":
             _displayCd = RInteger.parse(value);
             break;
+         case "link_cd":
+            _linkCd = RInteger.parse(value);
+            break;
          case "display_order":
             _displayOrder = RInteger.parse(value);
             break;
@@ -673,6 +746,9 @@ public class FDataLogicNewsUnit
             break;
          case "keywords":
             _keywords = value;
+            break;
+         case "link_url":
+            _linkUrl = value;
             break;
          case "description":
             _description = value;
@@ -738,6 +814,10 @@ public class FDataLogicNewsUnit
                __displayCd = RInteger.parse(value);
                _displayCd = __displayCd;
                break;
+            case "link_cd":
+               __linkCd = RInteger.parse(value);
+               _linkCd = __linkCd;
+               break;
             case "display_order":
                __displayOrder = RInteger.parse(value);
                _displayOrder = __displayOrder;
@@ -749,6 +829,10 @@ public class FDataLogicNewsUnit
             case "keywords":
                __keywords = value;
                _keywords = __keywords;
+               break;
+            case "link_url":
+               __linkUrl = value;
+               _linkUrl = __linkUrl;
                break;
             case "description":
                __description = value;
@@ -797,9 +881,11 @@ public class FDataLogicNewsUnit
       row.set("iconUrl", _iconUrl);
       row.set("statusCd", _statusCd);
       row.set("displayCd", _displayCd);
+      row.set("linkCd", _linkCd);
       row.set("displayOrder", _displayOrder);
       row.set("recordDate", _recordDate);
       row.set("keywords", _keywords);
+      row.set("linkUrl", _linkUrl);
       row.set("description", _description);
       row.set("content", _content);
       row.set("viewCount", _viewCount);
@@ -824,9 +910,11 @@ public class FDataLogicNewsUnit
       map.put("iconUrl", _iconUrl);
       map.put("statusCd", RInteger.toString(_statusCd));
       map.put("displayCd", RInteger.toString(_displayCd));
+      map.put("linkCd", RInteger.toString(_linkCd));
       map.put("displayOrder", RInteger.toString(_displayOrder));
       map.put("recordDate", _recordDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("keywords", _keywords);
+      map.put("linkUrl", _linkUrl);
       map.put("description", _description);
       map.put("content", _content);
       map.put("viewCount", RInteger.toString(_viewCount));
@@ -851,9 +939,11 @@ public class FDataLogicNewsUnit
       _iconUrl = input.readString();
       _statusCd = input.readInt32();
       _displayCd = input.readInt32();
+      _linkCd = input.readInt32();
       _displayOrder = input.readInt32();
       _recordDate.set(input.readInt64());
       _keywords = input.readString();
+      _linkUrl = input.readString();
       _description = input.readString();
       _content = input.readString();
       _viewCount = input.readInt32();
@@ -878,9 +968,11 @@ public class FDataLogicNewsUnit
       output.writeString(_iconUrl);
       output.writeInt32(_statusCd);
       output.writeInt32(_displayCd);
+      output.writeInt32(_linkCd);
       output.writeInt32(_displayOrder);
       output.writeInt64(_recordDate.get());
       output.writeString(_keywords);
+      output.writeString(_linkUrl);
       output.writeString(_description);
       output.writeString(_content);
       output.writeInt32(_viewCount);
