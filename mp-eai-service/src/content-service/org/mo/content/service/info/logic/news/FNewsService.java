@@ -31,6 +31,8 @@ public class FNewsService
    @ALink
    protected INewsConsole _newsConsole;
 
+   protected String _newsServiceHost = "http://eai.ezubo.com:8089/";
+
    //============================================================
    // <T>默认逻辑。</T>
    //
@@ -137,7 +139,7 @@ public class FNewsService
                xruntime.createNode("info_url").setText(newsUnit.linkUrl());
             }
             if(newsUnit.linkCd() == EGcLink.Content){
-               xruntime.createNode("info_url").setText("http://10.13.0.250:8020/Index.wa?guid=" + newsUnit.guid());
+               xruntime.createNode("info_url").setText(_newsServiceHost + "Index.wa?guid=" + newsUnit.guid());
             }
             //如果不是
          }

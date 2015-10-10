@@ -92,11 +92,16 @@ public class FVersionService
       FXmlNode upgrade_log = output.config().createNode("upgrade_log");
 
       if(lastVersionUnit != null){
-         versionCode.setText(lastVersionUnit.code());
-         version_num.setText(lastVersionUnit.number() + "");
-         upgrade_cd.setText(lastVersionUnit.forceCd());
-         upgrade_url.setText(lastVersionUnit.downloadUrl());
-         upgrade_log.setText(lastVersionUnit.note());
+         String code = lastVersionUnit.code();
+         float number = lastVersionUnit.number();
+         int forceCd = lastVersionUnit.forceCd();
+         String downloadUrl = lastVersionUnit.downloadUrl();
+         String note = lastVersionUnit.note();
+         versionCode.setText(code);
+         version_num.setText(number + "");
+         upgrade_cd.setText(forceCd);
+         upgrade_url.setText(downloadUrl);
+         upgrade_log.setText(note);
          //         outputVersionNode.set("upgrade_size", lastVersionUnit.downloadSize());
       }
       //      outputApplicationNode.setText(applicationStr);

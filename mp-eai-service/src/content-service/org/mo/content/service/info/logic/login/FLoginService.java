@@ -124,7 +124,13 @@ public class FLoginService
 
          //返回上一次的打卡时间和用户的个人信息
          FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(user.ouid(), logicContext);
-         last_sign_date.setText(userInfo.last_sign_date());
+         if(userInfo != null){
+            if(userInfo.last_sign_date() != null && (!"".equals(userInfo.last_sign_date()))){
+               last_sign_date.setText(userInfo.last_sign_date());
+            }else{
+               last_sign_date.setText("-1");
+            }
+         }
          return EResult.Success;
       }else{
          status_cd.setText(user.statusCd());
@@ -149,6 +155,7 @@ public class FLoginService
                             IWebSession sessionContext){
       FXmlNode inputNode = input.config();
       String sessionCode = context.head("mo-session-id");
+      clearSessionCode(sessionCode, sessionContext, logicContext);
       FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
       _logger.debug(this, "autoLogin*****************mo_session_id---->", "mo_session_id={1}", sessionCode);
       if(sessionInfo == null){
@@ -199,6 +206,21 @@ public class FLoginService
       _logger.debug(this, "------------------------------------>logout", "sessionCode={1},session.recordId={2}", session.id(), session.recordId());
       _webSessionConsole.close(session);
       return EResult.Success;
+   }
+
+   public void clearSessionCode(String sessionCode,
+                                IWebSession sessionContext,
+                                ILogicContext logicContext){
+      // 获得参数
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      session.setId(sessionCode);
+      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
+      if(sessionInfo != null){
+         session.loadInfo(sessionInfo);
+         _logger.debug(this, "------------------------------------>logout", "sessionCode={1},session.recordId={2}", session.id(), session.recordId());
+         _webSessionConsole.close(session);
+      }
+
    }
 
    //============================================================

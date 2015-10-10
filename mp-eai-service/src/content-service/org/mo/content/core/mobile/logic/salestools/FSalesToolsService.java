@@ -30,6 +30,8 @@ public class FSalesToolsService
    @ALink
    protected ISalesToolsConsole _salesToolsConsole;
 
+   protected String _salesServiceHost = "http://eai.ezubo.com:8089/";
+
    //============================================================
    // <T>默认逻辑。</T>
    //
@@ -133,7 +135,7 @@ public class FSalesToolsService
                xruntime.createNode("info_url").setText(salesToolsUnit.linkUrl());
             }
             if(salesToolsUnit.linkCd() == EGcLink.Content){
-               xruntime.createNode("info_url").setText("http://10.13.0.250:8020/mobile/logic/salestools/SalesTools.wa?do=getInfo&guid=" + salesToolsUnit.guid());
+               xruntime.createNode("info_url").setText(_salesServiceHost + "mobile/logic/salestools/SalesTools.wa?do=getInfo&guid=" + salesToolsUnit.guid());
             }
             //如果不是
          }
