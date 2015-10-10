@@ -98,7 +98,6 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
             if (!RString.isEmpty(unit.iconUrl())) {
                int ind = unit.iconUrl().indexOf("newsImages/");
                String fileName = unit.iconUrl().substring(ind + 11, unit.iconUrl().length());
-               System.out.println("11111++++" + _applicationName + "/webroot/manage/images/newsImages/" + fileName);
                File f = new File(_applicationName + "/webroot/manage/images/newsImages/" + fileName);
                if (f.exists()) {
                   f.delete();
