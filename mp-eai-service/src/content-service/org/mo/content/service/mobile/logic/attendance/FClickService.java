@@ -1,6 +1,7 @@
 package org.mo.content.service.mobile.logic.attendance;
 
 import com.cyou.gccloud.data.data.FDataPersonUserSigningUnit;
+import java.util.Date;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
@@ -58,16 +59,16 @@ public class FClickService
                         ILogicContext logicContext){
       FXmlNode inputNode = input.config();
       /* FXmlNode userGuidNode = inputNode.findNode("mo-session-id");*/
-      FXmlNode dateTimeNode = inputNode.findNode("datetime");
+      //      FXmlNode dateTimeNode = inputNode.findNode("datetime");
       FXmlNode locationLongitudeNode = inputNode.findNode("locationlongitude");
       FXmlNode locationLatitudeNode = inputNode.findNode("locationlatitude");
       String sessionCode = context.head("mo-session-id");
-      String dateTime = dateTimeNode.text();
+      //      String dateTime = dateTimeNode.text();
       String locationLongitude = locationLongitudeNode.text();
       String locationLatitude = locationLatitudeNode.text();
-      _logger.debug(this, "click--------------------------------->", "userguid={1},datetime={2},locationlongitude={3},locationlatitude={4}", sessionCode, dateTime, locationLongitude, locationLatitude);
+      _logger.debug(this, "click--------------------------------->", "userguid={1},locationlongitude={3},locationlatitude={4}", sessionCode, locationLongitude, locationLatitude);
       //所有的参数不能为空
-      if("".equals(sessionCode) || "".equals(dateTime) || "".equals(locationLongitude) || "".equals(locationLatitude)){
+      if("".equals(sessionCode) || "".equals(locationLongitude) || "".equals(locationLatitude)){
          return EResult.Failure;
       }
       //经纬度只能是正数(小数或整数)
@@ -87,10 +88,7 @@ public class FClickService
       }
       singUser.setUserId(userId);
       //日期十四位
-      String pattern2 = "[0-9]{14}";
-      if(dateTime.matches(pattern2)){
-         singUser.setSingnDate(new TDateTime(dateTime));
-      }
+      singUser.setSingnDate(new TDateTime(new Date()));
       singUser.setLocationLongitude(locationLongitudeD);
       singUser.setLocationLatitude(locationLatitudeD);
       EResult result = _clickConsole.click(context, logicContext, sessionContext, singUser);

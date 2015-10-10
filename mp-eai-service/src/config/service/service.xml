@@ -24,6 +24,20 @@
          face  = 'org.mo.content.service.info.logic.news.INewsService'
          class = 'org.mo.content.service.info.logic.news.FNewsService'
          scope = 'global'/>
+         
+            <!-- ============================================================ -->
+   <!-- 销售工具相关处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name  = 'eai.mobile.logic.salestools'
+         face  = 'org.mo.content.core.mobile.logic.salestools.ISalesToolsService'/>
+
+   <Component
+         face  = 'org.mo.content.core.mobile.logic.salestools.ISalesToolsService'
+         class = 'org.mo.content.core.mobile.logic.salestools.FSalesToolsService'
+         scope = 'global'/>
+         
+         
    <!-- ============================================================ -->
    <!-- 登录处理服务                                             -->
    <!-- ============================================================ -->

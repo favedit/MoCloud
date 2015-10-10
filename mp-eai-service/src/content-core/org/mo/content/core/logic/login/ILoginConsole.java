@@ -55,4 +55,7 @@ public interface ILoginConsole
                                      FDataPersonUserUnit unit,
                                      ILogicContext logicContext,
                                      IWebSession sessionContext);
+
+   public FDataPersonUserInfo getUserInfo(long user_id,
+                                          ILogicContext logicContext);
 }

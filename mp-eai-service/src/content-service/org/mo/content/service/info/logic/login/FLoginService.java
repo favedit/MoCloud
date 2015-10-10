@@ -11,6 +11,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.logic.login.FDataPersonUserInfo;
 import org.mo.content.core.logic.login.ILoginConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -80,14 +81,9 @@ public class FLoginService
       FXmlNode inputNode = input.config();
       FXmlNode passportNode = inputNode.findNode("passport");
       FXmlNode passwordNode = inputNode.findNode("password");
-      /*FXmlNode sessionNode = inputNode.findNode("mo-session-id");
-      String sessionStr = sessionNode.text();*/
       String sessionStr = context.head("mo-session-id");
       FXmlNode sessionId = output.config().createNode("session_code");
       FXmlNode status_cd = output.config().createNode("status_cd");
-      //      FXmlNode user_id = output.config().createNode("user_id");
-      //      FXmlNode user_icon = output.config().createNode("user_icon");
-      //      FXmlNode company_info = output.config().createNode("company_info");
       FXmlNode passportNodeOut = output.config().createNode("label");
       String passport = RString.trimRight(passportNode.text());
       String password = RString.trimRight(passwordNode.text());
@@ -99,7 +95,6 @@ public class FLoginService
          status_cd.setText(EGcAuthorityResult.PasswordIllegal);
          return EResult.Failure;
       }
-      //      String cookie = context.parameter("saveCookie");
       _logger.debug(this, "login_user*****************", "username={1},password={2}", passport, password);
       FDataPersonUserUnit user = _loginConsole.login(context, passport, password, logicContext, sessionContext);
       _logger.debug(this, "login_*****************------>status_cd", "status_cd={1}", user.statusCd());
@@ -112,11 +107,8 @@ public class FLoginService
          FXmlNode last_sign_date = output.config().createNode("last_sign_date");
          FXmlNode company = output.config().createNode("company");
          company.setText("智慧企业推进中心");
-         last_sign_date.setText("20150910102023");
-         //如果登录成功,,返回一个sessionId
+         //         last_sign_date.setText("20150910102023");
          status_cd.setText(user.statusCd());
-         //         user_id.setText(user.guid());
-         //         xruntime.set("gender_cd", "psn_user没有性别字段");
          passportNodeOut.setText(user.passport());
          // 登录成功创建session
          if(!("".equals(sessionStr))){
@@ -129,6 +121,10 @@ public class FLoginService
             sessionId.setText(session.id());
             _logger.debug(this, "session_id*****************------>", "sessionResult={1}", sessionResult);
          }
+
+         //返回上一次的打卡时间和用户的个人信息
+         FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(user.ouid(), logicContext);
+         last_sign_date.setText(userInfo.last_sign_date());
          return EResult.Success;
       }else{
          status_cd.setText(user.statusCd());
@@ -152,8 +148,6 @@ public class FLoginService
                             ILogicContext logicContext,
                             IWebSession sessionContext){
       FXmlNode inputNode = input.config();
-      /*FXmlNode mo_session_id = inputNode.findNode("mo-session-id");
-      String sessionCode = mo_session_id.text();*/
       String sessionCode = context.head("mo-session-id");
       FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
       _logger.debug(this, "autoLogin*****************mo_session_id---->", "mo_session_id={1}", sessionCode);
@@ -162,38 +156,18 @@ public class FLoginService
          output.config().createNode("session_status").setText(0);
          return EResult.Success;
       }
-      // 打开会话
-      //      FXmlNode sessionCodeNode = output.config().createNode("session_code");
-      //      FXmlNode status_cd = output.config().createNode("status_cd");
-      //      FXmlNode user_id = output.config().createNode("user_id");
-      /* //通过用户id去找用户
-       FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
-       FSql whereSql = new FSql();
-       whereSql.append(FDataPersonUserLogic.OUID);
-       whereSql.append("=");
-       whereSql.append(sessionInfo.userId());
-       userLogic.fetch(whereSql);*/
       FXmlNode passportNodeOut = output.config().createNode("label");
       FXmlNode icon_url = output.config().createNode("user_icon");
       FXmlNode last_sign_date = output.config().createNode("last_sign_date");
-      last_sign_date.setText("20150910102023");
       FXmlNode company = output.config().createNode("company");
       company.setText("智慧企业推进中心");
-      last_sign_date.setText("20150910102023");
-      //返回上一次的打卡时间
-
-      /*long user_id = sessionInfo.userId();
-      FDataPersonUserSigningLogic signingLogic = logicContext.findLogic(FDataPersonUserSigningLogic.class);
-      FSql whereFSql = new FSql();
-      whereFSql.append(FDataPersonUserSigningLogic.USER_ID);
-      whereFSql.append(data);*/
-      //      _loginConsole.getLastSingnDate(user_id);
+      //      last_sign_date.setText("20150910102023");
+      //返回上一次的打卡时间和用户的个人信息
+      FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(sessionInfo.userId(), logicContext);
+      last_sign_date.setText(userInfo.last_sign_date());
       FXmlNode modules = output.config().createNode("modules");
       modules.setText("eai.department.marketer|eai.marketer.customer|eai.marketer.manage|eai.marketer.marketer|eai.performence.marketer|eai.statistics.marketer");
       icon_url.setText("http://eai.ezubo.com:8080/mb/images/re.png");
-      //      sessionCodeNode.setText(sessionInfo.sessionCode());
-      //      status_cd.setText(EGcAuthorityResult.OaSuccess);
-      //      user_id.setText(sessionInfo.userId());
       passportNodeOut.setText(sessionInfo.userLabel());
       return EResult.Success;
    }
@@ -217,7 +191,12 @@ public class FLoginService
       String sessionCode = context.head("mo-session-id");
       FGcWebSession session = (FGcWebSession)sessionContext;
       session.setId(sessionCode);
-      _logger.debug(this, "------------------------------------>logout", "sessionCode={1}", session.id());
+      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
+      if(sessionInfo == null){
+         return EResult.Failure;
+      }
+      session.loadInfo(sessionInfo);
+      _logger.debug(this, "------------------------------------>logout", "sessionCode={1},session.recordId={2}", session.id(), session.recordId());
       _webSessionConsole.close(session);
       return EResult.Success;
    }

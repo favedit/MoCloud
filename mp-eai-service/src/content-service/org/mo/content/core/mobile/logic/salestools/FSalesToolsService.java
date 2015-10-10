@@ -1,6 +1,6 @@
-package org.mo.content.service.info.logic.news;
+package org.mo.content.core.mobile.logic.salestools;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import java.util.Iterator;
 import org.mo.com.lang.EResult;
@@ -8,7 +8,6 @@ import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.logic.news.INewsConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -19,17 +18,17 @@ import org.mo.web.protocol.context.IWebOutput;
 //============================================================
 // <T>新闻服务。</T>
 //============================================================
-public class FNewsService
+public class FSalesToolsService
       extends FObject
       implements
-         INewsService
+         ISalesToolsService
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FNewsService.class);
+   private static ILogger _logger = RLogger.find(FSalesToolsService.class);
 
    //新闻逻辑控制台
    @ALink
-   protected INewsConsole _newsConsole;
+   protected ISalesToolsConsole _salesToolsConsole;
 
    //============================================================
    // <T>默认逻辑。</T>
@@ -61,7 +60,7 @@ public class FNewsService
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
       FXmlNode news_info = output.config().createNode("news_info");
-      FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
+      FDataLogicSalestoolsUnit newsUnit = _salesToolsConsole.getNewsByGuid(guid, logicContext);
       if(newsUnit == null){
          news_info.set("guid", guid);
       }else{
@@ -86,10 +85,7 @@ public class FNewsService
                          IWebInput input,
                          IWebOutput output,
                          ILogicContext logicContext){
-      _logger.debug(this, "FNewsService_select", "FNewsService_select begin. ");
-
-      FXmlNode inputNode = input.config();
-      //      System.out.println("***************************************************---->" + );
+      _logger.debug(this, "FSalesToolsService_select", "FSalesToolsService_select begin. ");
       int pageNum = 0, pageSize = 10;
       String pageSizeStr = input.config().findNode("pagesize").text();
       String pageNumStr = input.config().findNode("pagenumber").text();
@@ -99,45 +95,45 @@ public class FNewsService
       if(pageNumStr != null && (!"".equals(pageNumStr))){
          pageNum = Integer.parseInt(pageNumStr);
       }
-      FLogicDataset<FDataLogicNewsUnit> newsUnits = _newsConsole.select(pageNum, pageSize, logicContext);
+      FLogicDataset<FDataLogicSalestoolsUnit> salesToolsUnits = _salesToolsConsole.select(pageNum, pageSize, logicContext);
       output.config().createNode("page_number").setText(pageNumStr);
-      FXmlNode list = output.config().createNode("news_list");
-      if(newsUnits != null && newsUnits.count() > 0){
-         for(Iterator<FDataLogicNewsUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
-            FDataLogicNewsUnit newsUnit = iterator.next();
-            FXmlNode xruntime = list.createNode("news_info");
+      FXmlNode list = output.config().createNode("sales_list");
+      if(salesToolsUnits != null && salesToolsUnits.count() > 0){
+         for(Iterator<FDataLogicSalestoolsUnit> iterator = salesToolsUnits.iterator(); iterator.hasNext();){
+            FDataLogicSalestoolsUnit salesToolsUnit = iterator.next();
+            FXmlNode xruntime = list.createNode("sales_info");
             //            xruntime.createNode("ouid").setText(newsUnit.ouid());
-            if(newsUnit.guid() != null && (!"".equals(newsUnit.guid()))){
-               xruntime.createNode("guid").setText(newsUnit.guid());
+            if(salesToolsUnit.guid() != null && (!"".equals(salesToolsUnit.guid()))){
+               xruntime.createNode("guid").setText(salesToolsUnit.guid());
             }else{
                xruntime.createNode("guid").setText("0");
             }
-            if(newsUnit.label() != null && (!"".equals(newsUnit.label()))){
-               xruntime.createNode("label").setText(newsUnit.label());
+            if(salesToolsUnit.label() != null && (!"".equals(salesToolsUnit.label()))){
+               xruntime.createNode("label").setText(salesToolsUnit.label());
             }else{
                xruntime.createNode("label").setText("0");
             }
-            if(newsUnit.description() != null && (!"".equals(newsUnit.description()))){
-               xruntime.createNode("description").setText(newsUnit.description());
+            if(salesToolsUnit.description() != null && (!"".equals(salesToolsUnit.description()))){
+               xruntime.createNode("description").setText(salesToolsUnit.description());
             }else{
                xruntime.createNode("description").setText("0");
             }
-            if(newsUnit.iconUrl() != null && (!"".equals(newsUnit.iconUrl()))){
-               xruntime.createNode("icon_url").setText(newsUnit.iconUrl());
+            if(salesToolsUnit.iconUrl() != null && (!"".equals(salesToolsUnit.iconUrl()))){
+               xruntime.createNode("icon_url").setText(salesToolsUnit.iconUrl());
             }else{
                xruntime.createNode("icon_url").setText("0");
             }
-            if(newsUnit.updateDate() + "" != null && (!"".equals(newsUnit.updateDate() + ""))){
-               xruntime.createNode("update_date").setText(newsUnit.updateDate() + "");
+            if(salesToolsUnit.updateDate() + "" != null && (!"".equals(salesToolsUnit.updateDate() + ""))){
+               xruntime.createNode("update_date").setText(salesToolsUnit.updateDate() + "");
             }else{
                xruntime.createNode("update_date").setText("0");
             }
-            //如果是外链新闻
-            if(newsUnit.linkCd() == EGcLink.Link){
-               xruntime.createNode("info_url").setText(newsUnit.linkUrl());
+            //如果是外链销售工具
+            if(salesToolsUnit.linkCd() == EGcLink.Link){
+               xruntime.createNode("info_url").setText(salesToolsUnit.linkUrl());
             }
-            if(newsUnit.linkCd() == EGcLink.Content){
-               xruntime.createNode("info_url").setText("http://10.13.0.250:8020/Index.wa?guid=" + newsUnit.guid());
+            if(salesToolsUnit.linkCd() == EGcLink.Content){
+               xruntime.createNode("info_url").setText("http://10.13.0.250:8020/mobile/logic/salestools/SalesTools.wa?do=getInfo&guid=" + salesToolsUnit.guid());
             }
             //如果不是
          }

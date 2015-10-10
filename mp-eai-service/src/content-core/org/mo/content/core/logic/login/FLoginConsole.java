@@ -3,12 +3,14 @@ package org.mo.content.core.logic.login;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
+import com.cyou.gccloud.data.data.FDataPersonUserSigningLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.ycjt.ead.ThreeDes;
 import java.net.URLEncoder;
 import java.util.Date;
+import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
 import org.mo.com.encoding.RMd5;
 import org.mo.com.lang.FObject;
@@ -331,5 +333,30 @@ public class FLoginConsole
          userLogic.doUpdate(findUserByGuid);
          return findUserByGuid;
       }
+   }
+
+   //获取个人用户的信息
+   @Override
+   public FDataPersonUserInfo getUserInfo(long user_id,
+                                          ILogicContext logicContext){
+      FDataPersonUserInfo userInfo = new FDataPersonUserInfo();
+      FDataPersonUserSigningLogic signingLogic = logicContext.findLogic(FDataPersonUserSigningLogic.class);
+      FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
+      FSql userFSql = new FSql();
+      userFSql.append(FDataPersonUserLogic.OUID);
+      userFSql.append("=");
+      userFSql.append(user_id);
+      FLogicDataset<FDataPersonUserInfo> userInfos = userLogic.fetchClass(FDataPersonUserInfo.class, userFSql);
+      if(userInfos != null && userInfos.count() > 0){
+         userInfo = userInfos.first();
+      }
+
+      //%Y-%m-%d %T
+      String sql = "SELECT DATE_FORMAT(MAX(SINGN_DATE) ,'%Y-%m-%d %H:%i:%s') AS LAST_SIGN_DATE FROM DT_PSN_USER_SIGNING WHERE `USER_ID`=" + user_id;
+      FRow rowData = signingLogic.connection().find(sql);
+      String Last_sign_date = rowData.get("last_sign_date");
+      _logger.debug(this, "getUserInfo", "----------------------------*****>Last_sign_date={1}", Last_sign_date);
+      userInfo.setLast_sign_date(Last_sign_date);
+      return userInfo;
    }
 }
