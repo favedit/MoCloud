@@ -1,7 +1,7 @@
-package org.mo.content.core.manage.product.business.news;
+package org.mo.content.core.manage.product.business;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataLogicSalestoolsLogic;
+import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
@@ -24,16 +24,16 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.common.FWebUploadFile;
 
 //============================================================
-//<P>新闻控制台</P>
-//@class FNewsConsole
+//<P>销售工具控制台</P>
+//@class FSalestoolsConsole
 //@author XIAOHUI ZHANG
-//@Date 2015.09.21 
+//@Date 2015.10.10
 //@version 1.0.0
 //============================================================
-public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic, FDataLogicNewsUnit>implements INewsConsole {
+public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSalestoolsLogic, FDataLogicSalestoolsUnit>implements ISalestoolsConsole {
 
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FNewsConsole.class);
+   private static ILogger _logger = RLogger.find(FSalestoolsConsole.class);
    // 每页条数
    static final int _pageSize = 20;
    // 应用名称
@@ -43,17 +43,17 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    @AProperty
    protected String _servers;
    // 图片保存的位置
-   private final static String folderPath = "/webroot/manage/images/newsImages/";
+   private final static String folderPath = "/webroot/manage/images/salestoolsImages/";
    // 页面图片引用的路径
-   private final static String imageFolderPath = "/manage/images/newsImages/";
+   private final static String imageFolderPath = "/manage/images/salestoolsImages/";
    // http协议头
    private final static String serverHeader = "http://";
 
    // ============================================================
    // <T>构造新闻控制台。</T>
    // ============================================================
-   public FNewsConsole() {
-      super(FDataLogicNewsLogic.class, FDataLogicNewsUnit.class);
+   public FSalestoolsConsole() {
+      super(FDataLogicSalestoolsLogic.class, FDataLogicSalestoolsUnit.class);
    }
 
    // ============================================================
@@ -64,19 +64,19 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataNewsInfo> select(ILogicContext logicContext, FDataLogicNewsUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataSalestoolsInfo> select(ILogicContext logicContext, FDataLogicSalestoolsUnit unit, int pageNum, int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
       FSql whereSql = new FSql();
       if (!RString.isEmpty(unit.label())) {
-         whereSql.append(FDataLogicNewsLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.append(FDataLogicSalestoolsLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
-      FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
-      FLogicDataset<FDataNewsInfo> moduleList = logic.fetchClass(FDataNewsInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
-      for (Iterator<FDataNewsInfo> ite = moduleList.iterator(); ite.hasNext();) {
-         FDataNewsInfo info = ite.next();
+      FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
+      FLogicDataset<FDataSalestoolsInfo> moduleList = logic.fetchClass(FDataSalestoolsInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      for (Iterator<FDataSalestoolsInfo> ite = moduleList.iterator(); ite.hasNext();) {
+         FDataSalestoolsInfo info = ite.next();
          if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
             info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
          }
@@ -106,14 +106,14 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    }
 
    @Override
-   public void saveImage(FWebUploadFile file, FDataLogicNewsUnit unit, String flag) {
+   public void saveImage(FWebUploadFile file, FDataLogicSalestoolsUnit unit, String flag) {
       FileInputStream fi;
       FileOutputStream fo;
       try {
          if ("1".equals(flag)) {
             if (!RString.isEmpty(unit.iconUrl())) {
-               int ind = unit.iconUrl().indexOf("newsImages/");
-               String fileName = unit.iconUrl().substring(ind + 11, unit.iconUrl().length());
+               int ind = unit.iconUrl().indexOf("salestoolsImages/");
+               String fileName = unit.iconUrl().substring(ind + 17, unit.iconUrl().length());
                File f = new File(_applicationName + folderPath + fileName);
                if (f.exists()) {
                   f.delete();

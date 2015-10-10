@@ -55,7 +55,20 @@ public class FDeviceAction implements IDeviceAction {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext);
+      if (null != context.parameter("page")) {
+         String num = context.parameter("page");
+         devicePage.setPageCurrent(Integer.parseInt(num));
+      } else {
+         devicePage.setPageCurrent(0);
+      }
+      FDataInfoDeviceBrowserUnit unit = new FDataInfoDeviceBrowserUnit();
+      unit.setAgentCode(context.parameter("agentCode"));
+      String StrPageSize = context.parameter("pageSize");
+      int pageSize = 20;
+      if (null != StrPageSize) {
+         pageSize = Integer.parseInt(StrPageSize);
+      }
+      FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext, unit, devicePage.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
       return "/manage/common/ajax";
    }

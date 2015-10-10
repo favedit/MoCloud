@@ -49,6 +49,16 @@
       <Property name='servers'>127.0.0.1:8040</Property>
       <Property name='applicationName'>${application}/${application.name}</Property>
    </Component>
+   <!-- ==================================================== -->
+   <!-- FSalestoolsConsole:图片存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.content.core.manage.product.business.ISalestoolsConsole'
+         class = 'org.mo.content.core.manage.product.business.FSalestoolsConsole'
+         scope = 'global'>
+      <Property name='servers'>127.0.0.1:8040</Property>
+      <Property name='applicationName'>${application}/${application.name}</Property>
+   </Component>
    <!-- ============================================================ -->
    <!-- 内存缓冲控制台                                               -->
    <!-- ============================================================ -->

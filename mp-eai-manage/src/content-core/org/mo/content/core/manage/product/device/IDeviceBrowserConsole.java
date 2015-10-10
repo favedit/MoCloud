@@ -9,19 +9,24 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>设备控制台接口。</T>
 //============================================================
-public interface IDeviceBrowserConsole
-      extends
-         IAbstractLogicUnitConsole<FDataInfoDeviceBrowserUnit>
-{
-   //============================================================
+public interface IDeviceBrowserConsole extends IAbstractLogicUnitConsole<FDataInfoDeviceBrowserUnit> {
+   // ============================================================
    // <T>插入设备信息。</T>
    //
    // @param logicContext 逻辑环境
    // @param deviceBrowserInfo 设备信息
    // @return 插入结果
-   //============================================================
-   EResult insert(ILogicContext logicContext,
-                  FDataInfoDeviceBrowserUnit deviceBrowserInfo);
+   // ============================================================
+   EResult insert(ILogicContext logicContext, FDataInfoDeviceBrowserUnit deviceBrowserInfo);
 
    FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext);
+
+   // ============================================================
+   // <T>获得分页数据列表bySomerow</T>
+   // @param logicContext 链接对象
+   // @param moduleUnit 查询条件
+   // @param pageNum 页码
+   // @return 数据集合
+   // ============================================================
+   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext, FDataInfoDeviceBrowserUnit unit, int pageNum, int pageSize);
 }

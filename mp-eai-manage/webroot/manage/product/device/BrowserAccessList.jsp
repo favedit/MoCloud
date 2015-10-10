@@ -22,13 +22,13 @@
         var url = "/manage/product/device/Device.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
-        var label = $.trim($('#label').val()).replaceAll("'", "");
-        if (label == "资讯标题") label = null;
+        var agentCode = $.trim($('#agentCode').val()).replaceAll("'", "");
+        if (agentCode == "头信息") agentCode = null;
         if (page != null) {
             url = "/manage/product/device/Device.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
-                "label" : label,
+                "agentCode" : agentCode,
                 "page" : page,
                 "pageSize" : pageSize
             };
