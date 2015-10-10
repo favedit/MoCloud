@@ -128,6 +128,9 @@
                   <jh:equals source="manage.product.examine.news" value="&basePage.menuString">
                      <li><a href="/manage/product/examine/news/News.wa" target="right">业务资讯审核</a></li>
                   </jh:equals>
+                  <jh:equals source="manage.product.examine.business" value="&basePage.menuString">
+                     <li><a href="/manage/product/examine/business/Salestools.wa" target="right">销售工具审核</a></li>
+                  </jh:equals>
                </ul>
          </li>
          </ul>
