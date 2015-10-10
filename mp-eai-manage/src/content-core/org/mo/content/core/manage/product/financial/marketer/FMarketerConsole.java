@@ -1,4 +1,4 @@
-package org.mo.content.core.product.financial.marketer;
+package org.mo.content.core.manage.product.financial.marketer;
 
 import com.cyou.gccloud.data.data.FDataFinancialMarketerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;

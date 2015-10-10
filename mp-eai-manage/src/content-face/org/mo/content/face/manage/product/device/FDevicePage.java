@@ -1,4 +1,4 @@
-package org.mo.content.face.product.device;
+package org.mo.content.face.manage.product.device;
 
 import com.cyou.gccloud.data.data.FDataInfoDeviceBrowserUnit;
 import org.mo.com.lang.FObjectId;

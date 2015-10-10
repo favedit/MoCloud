@@ -147,9 +147,6 @@ public class FNewsAction implements INewsAction {
       info.setContent(unit.content());
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
-      if (RString.equals(EGcResourceStatus.Unknown, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.UnknownLabel);
-      }
       if (RString.equals(EGcResourceStatus.Apply, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
       }
@@ -158,9 +155,6 @@ public class FNewsAction implements INewsAction {
       }
       if (RString.equals(EGcResourceStatus.CheckFail, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
-      }
-      if (RString.equals(EGcDisplay.Unknown, unit.displayCd())) {
-         info.setDisplayCdStr(EGcDisplay.UnknownLabel);
       }
       if (RString.equals(EGcDisplay.Disable, unit.displayCd())) {
          info.setDisplayCdStr(EGcDisplay.DisableLabel);

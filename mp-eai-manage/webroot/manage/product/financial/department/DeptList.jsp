@@ -20,14 +20,14 @@
 
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/financial/department/Department.wa?do=select&date="
+        var url = "/manage/product/financial/department/Department.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var code = $.trim($('#code').val()).replaceAll("'", "");
         if (code == "代码")
             code = null;
         if (page != null) {
-            url = "/product/financial/department/Department.wa?do=select&page="
+            url = "/manage/product/financial/department/Department.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "code" : code,
@@ -70,7 +70,7 @@
                     //                        });
                     //                     }
                     //                  });
-                    location.href = "/product/financial/department/Department.wa?do=delete&id="
+                    location.href = "/manage/product/financial/department/Department.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
     }
@@ -78,7 +78,7 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/financial/department/Department.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/financial/department/Department.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
 
     }
@@ -93,7 +93,7 @@
   <div class="btn_bar">
    <div class="nav_btn">
     <a
-     href="/product/financial/department/Department.wa?do=insertBefore"
+     href="/manage/product/financial/department/Department.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">

@@ -96,7 +96,7 @@
      <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
        <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"
+       data:[{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"
        value="<jh:write source='&unit.statusCdStr'/>"/>  
      </div></td>
     </tr>
@@ -104,7 +104,7 @@
      <td height="38"><div align="left">是否显示:</div></td>
      <td><div align="left">
        <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"
+       data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"
        value="<jh:write source='&unit.displayCdStr'/>"/>   
       </div></td>
     </tr>

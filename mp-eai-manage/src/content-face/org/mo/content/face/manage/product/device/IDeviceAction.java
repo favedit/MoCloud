@@ -1,4 +1,4 @@
-package org.mo.content.face.product.device;
+package org.mo.content.face.manage.product.device;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

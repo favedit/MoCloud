@@ -1,4 +1,4 @@
-package org.mo.content.face.product.financial.marketer;
+package org.mo.content.face.manage.product.financial.marketer;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

@@ -41,6 +41,12 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    // 服务器地址
    @AProperty
    protected String _servers;
+   // 图片保存的位置
+   private final static String folderPath = "/webroot/manage/images/newsImages/";
+   // 页面图片引用的路径
+   private final static String imageFolderPath = "/manage/images/newsImages/";
+   // http协议头
+   private final static String serverHeader = "http://";
 
    // ============================================================
    // <T>构造新闻控制台。</T>
@@ -98,7 +104,7 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
             if (!RString.isEmpty(unit.iconUrl())) {
                int ind = unit.iconUrl().indexOf("newsImages/");
                String fileName = unit.iconUrl().substring(ind + 11, unit.iconUrl().length());
-               File f = new File(_applicationName + "/webroot/manage/images/newsImages/" + fileName);
+               File f = new File(_applicationName + folderPath + fileName);
                if (f.exists()) {
                   f.delete();
                }
@@ -109,7 +115,7 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          String fileName = file.fileName().substring(0, ind) + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
          String uploadName = file.uploadName();
          fi = new FileInputStream(uploadName);
-         fo = new FileOutputStream(_applicationName + "/webroot/manage/images/newsImages/" + fileName);
+         fo = new FileOutputStream(_applicationName + folderPath + fileName);
          int len = 0;
          byte[] buffer = new byte[1024];
          while ((len = fi.read(buffer)) != -1) {
@@ -117,7 +123,7 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          }
          fo.close();
          fi.close();
-         unit.setIconUrl("http://" + _servers + "/manage/images/newsImages/" + fileName);//
+         unit.setIconUrl(serverHeader + _servers + imageFolderPath + fileName);//
       } catch (FileNotFoundException e) {
          e.printStackTrace();
       } catch (IOException e) {

@@ -1,20 +1,20 @@
-package org.mo.content.core.product.financial.marketer;
+package org.mo.content.core.manage.product.financial.department;
 
-import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
-//<P>理财师信息控制台接口</P>
-//@interface IMarketerConsole
+//<P>部门信息控制台接口</P>
+//@interface IDepartmentConsole
 //@author AnjoyTian
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
-public interface IMarketerConsole
+public interface IDepartmentConsole
       extends
-         IAbstractLogicUnitConsole<FDataFinancialMarketerUnit>
+         IAbstractLogicUnitConsole<FDataFinancialDepartmentUnit>
 {
 
    // ============================================================
@@ -25,10 +25,10 @@ public interface IMarketerConsole
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataFinancialMarketerUnit> select(ILogicContext logicContext,
-                                                    FDataFinancialMarketerUnit unit,
-                                                    int pageNum,
-                                                    int pageSize);
+   FLogicDataset<FDataFinancialDepartmentUnit> select(ILogicContext logicContext,
+                                                      FDataFinancialDepartmentUnit unit,
+                                                      int pageNum,
+                                                      int pageSize);
 
    // ============================================================
    // <T>根据区号获取对象</T>
@@ -36,6 +36,6 @@ public interface IMarketerConsole
    // @param code 区号
    // @return 数据对象
    // ============================================================
-   FDataFinancialMarketerUnit findByCode(ILogicContext logicContext,
-                                         String code);
+   FDataFinancialDepartmentUnit findByCode(ILogicContext logicContext,
+                                           String code);
 }

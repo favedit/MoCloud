@@ -20,12 +20,12 @@
 
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/product/financial/marketer/Marketer.wa?do=select&date="
+        var url = "/manage/product/financial/marketer/Marketer.wa?do=select&date="
                 + new Date().valueOf();
         var name = $.trim($('#serachName').val()).replaceAll("'", "");
         var data = null;
         if (page != null) {
-            url = "/product/financial/marketer/Marketer.wa?do=select&page="
+            url = "/manage/product/financial/marketer/Marketer.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "page" : page,
@@ -68,7 +68,7 @@
                     //                        });
                     //                     }
                     //                  });
-                    location.href = "/product/financial/marketer/Marketer.wa?do=delete&id="
+                    location.href = "/manage/product/financial/marketer/Marketer.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
     }
@@ -76,7 +76,7 @@
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/product/financial/marketer/Marketer.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/financial/marketer/Marketer.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
 
     }
@@ -90,7 +90,7 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/product/financial/marketer/Marketer.wa?do=insertBefore"
+    <a href="/manage/product/financial/marketer/Marketer.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">

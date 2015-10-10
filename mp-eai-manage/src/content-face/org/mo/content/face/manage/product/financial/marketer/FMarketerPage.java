@@ -1,4 +1,4 @@
-package org.mo.content.face.product.financial.marketer;
+package org.mo.content.face.manage.product.financial.marketer;
 
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.com.lang.FObjectId;

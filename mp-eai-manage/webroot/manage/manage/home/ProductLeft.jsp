@@ -70,25 +70,27 @@
                   </jh:equals>
                </ul>
             </li>
-            <li id="two" class="common"> <a href="#two">设备管理</a>
-               <ul class="sub-menu">
-                  <jh:equals source="product.device" value="&basePage.menuString">
-                     <li><a href="/product/device/Device.wa" target="right">设备信息</a></li>
-                  </jh:equals>
-               </ul>
-            </li>
             <li id="three" class="classify"> <a href="#three">用户管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="manage.product.user.logger" value="&basePage.menuString"><li><a href="/manage/product/user/logger/Access.wa" target="right">用户日志</a></li></jh:equals>
-                  <jh:equals source="manage.product.user.whitelists" value="&basePage.menuString"><li><a href="/manage/product/user/whitelists/Access.wa" target="right">白名单</a></li></jh:equals>
-                  <jh:equals source="manage.product.user.signing" value="&basePage.menuString"><li><a href="/manage/product/user/signing/Signing.wa" target="right">用户签到</a></li></jh:equals>
+                  <jh:equals source="manage.product.user.logger" value="&basePage.menuString">
+                     <li><a href="/manage/product/user/logger/Access.wa" target="right">用户日志</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.product.user.whitelists" value="&basePage.menuString">
+                     <li><a href="/manage/product/user/whitelists/Access.wa" target="right">白名单</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.product.user.signing" value="&basePage.menuString">
+                     <li><a href="/manage/product/user/signing/Signing.wa" target="right">用户签到</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.product.device" value="&basePage.menuString">
+                     <li><a href="/manage/product/device/Device.wa" target="right">设备信息</a></li>
+                  </jh:equals>
                </ul>
             </li>
             
             <li id="four" class="common"> <a href="#four">金融管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="product.financial.department" value="&basePage.menuString">
-                     <li><a href="/product/financial/department/Department.wa" target="right">部门信息</a></li>
+                  <jh:equals source="manage.product.financial.department" value="&basePage.menuString">
+                     <li><a href="/manage/product/financial/department/Department.wa" target="right">部门信息</a></li>
                   </jh:equals>
                   <jh:equals source="product.financial.marketer" value="&basePage.menuString">
                      <li><a href="/product/financial/marketer/Marketer.wa" target="right">理财师信息</a></li>
