@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="d03d4303-df34-4e25-8ccb-084932bba2a0" name="data.logic.salestools" label="M#12cn14销售工具" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.Salestools" data_name="DT_LGC_SALESTOOLS" data_alias="DT_LGC_SAL" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldString _uuid="e4fbd92d-7a6f-4df7-846a-e5245b2afaa0" name="label" label="M#12cn12标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
+  <FieldString _uuid="8e133f3d-fb95-4207-9aef-c30c93c71dde" name="icon_url" label="M#12cn12图标" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldInteger _uuid="5361a92c-5b94-4cca-90f9-12a47eebef55" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldInteger _uuid="74415138-57ba-4374-a1a3-4429e16805d6" name="display_cd" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
+  <FieldInteger _uuid="54821f1c-cdad-4e3c-907d-0f9be6e11332" name="link_cd" label="M#12cn14外链状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
+  <FieldInteger _uuid="f838cc01-abce-45d4-ab5d-163c4699004c" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />
+  <FieldDateTime _uuid="80d85908-6583-4909-8d24-ac5db0d3eb23" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECORD_DATE" />
+  <FieldString _uuid="97127692-e9c7-48c6-8205-44ebcaab7a94" name="keywords" label="M#12cn13关键字" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="KEYWORDS" data_size="800" />
+  <FieldString _uuid="acbba147-88b3-4d5b-913d-9a6a1b00f451" name="link_url" label="M#12cn14外链地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_URL" data_size="800" />
+  <FieldString _uuid="9550ae9c-f83f-49ad-907f-dfa84689e508" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="2000" />
+  <FieldContent _uuid="c3ca1f54-6488-4ae7-9c14-d1e1eca0f202" name="content" label="M#12cn12内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" />
+  <FieldInteger _uuid="231aa71e-92ce-470f-8c1b-024b9fde027c" name="view_count" label="M#12cn14浏览次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VIEW_COUNT" />
+  <FieldTemplate _uuid="ac696dca-4238-4aa7-968e-cff47db2889f" name="track" label="M#12cn14跟踪模版" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
