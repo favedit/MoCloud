@@ -105,6 +105,14 @@ public class FLoginService
       _logger.debug(this, "login_*****************------>status_cd", "status_cd={1}", user.statusCd());
       //如果OA登录成功  oa那边接口返回的是0
       if(user.statusCd() == EGcAuthorityResult.OaSuccess){
+         FXmlNode icon_url = output.config().createNode("user_icon");
+         FXmlNode modules = output.config().createNode("modules");
+         modules.setText("eai.department.marketer|eai.marketer.customer|eai.marketer.manage|eai.marketer.marketer|eai.performence.marketer|eai.statistics.marketer");
+         icon_url.setText("http://eai.ezubo.com:8080/mb/images/re.png");
+         FXmlNode last_sign_date = output.config().createNode("last_sign_date");
+         FXmlNode company = output.config().createNode("company");
+         company.setText("智慧企业推进中心");
+         last_sign_date.setText("20150910102023");
          //如果登录成功,,返回一个sessionId
          status_cd.setText(user.statusCd());
          //         user_id.setText(user.guid());
@@ -166,6 +174,23 @@ public class FLoginService
        whereSql.append(sessionInfo.userId());
        userLogic.fetch(whereSql);*/
       FXmlNode passportNodeOut = output.config().createNode("label");
+      FXmlNode icon_url = output.config().createNode("user_icon");
+      FXmlNode last_sign_date = output.config().createNode("last_sign_date");
+      last_sign_date.setText("20150910102023");
+      FXmlNode company = output.config().createNode("company");
+      company.setText("智慧企业推进中心");
+      last_sign_date.setText("20150910102023");
+      //返回上一次的打卡时间
+
+      /*long user_id = sessionInfo.userId();
+      FDataPersonUserSigningLogic signingLogic = logicContext.findLogic(FDataPersonUserSigningLogic.class);
+      FSql whereFSql = new FSql();
+      whereFSql.append(FDataPersonUserSigningLogic.USER_ID);
+      whereFSql.append(data);*/
+      //      _loginConsole.getLastSingnDate(user_id);
+      FXmlNode modules = output.config().createNode("modules");
+      modules.setText("eai.department.marketer|eai.marketer.customer|eai.marketer.manage|eai.marketer.marketer|eai.performence.marketer|eai.statistics.marketer");
+      icon_url.setText("http://eai.ezubo.com:8080/mb/images/re.png");
       //      sessionCodeNode.setText(sessionInfo.sessionCode());
       //      status_cd.setText(EGcAuthorityResult.OaSuccess);
       //      user_id.setText(sessionInfo.userId());
@@ -191,8 +216,8 @@ public class FLoginService
       // 获得参数
       String sessionCode = context.head("mo-session-id");
       FGcWebSession session = (FGcWebSession)sessionContext;
-      //      session.setId(sessionCode);
-      _logger.debug(this, "------------------------------------>logout", "sessionCode={1}", sessionCode);
+      session.setId(sessionCode);
+      _logger.debug(this, "------------------------------------>logout", "sessionCode={1}", session.id());
       _webSessionConsole.close(session);
       return EResult.Success;
    }
