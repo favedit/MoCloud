@@ -1,7 +1,7 @@
-package org.mo.content.face.product.logger.user;
+package org.mo.content.face.manage.product.user.logger;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
-import org.mo.content.core.manage.logger.user.IAccessConsole;
+import org.mo.content.core.manage.product.user.logger.IAccessConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -14,36 +14,28 @@ import org.mo.web.protocol.context.IWebContext;
 // @author sunhr
 // @version 150328
 //============================================================
-public class FAccessAction
-      implements
-         IAccessAction
-{
-   //用户控制台
+public class FAccessAction implements IAccessAction {
+   // 用户控制台
    @ALink
    protected IAccessConsole _accessConsole;
 
    @Override
-   public String construct(IWebContext context,
-                           ILogicContext logicContext,
-                           FBasePage basePage){
-      if(!basePage.userExists()){
+   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/logger/AccessList";
+      return "/manage/product/user/logger/AccessList";
    }
 
    @Override
-   public String select(IWebContext context,
-                        ILogicContext logicContext,
-                        FAccessPage accessPage,
-                        FBasePage basePage){
-      if(!basePage.userExists()){
+   public String select(IWebContext context, ILogicContext logicContext, FAccessPage accessPage, FBasePage basePage) {
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      if(null != context.parameter("page")){
+      if (null != context.parameter("page")) {
          String num = context.parameter("page");
          accessPage.setPageCurrent(Integer.parseInt(num));
-      }else{
+      } else {
          accessPage.setPageCurrent(0);
       }
       FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = _accessConsole.select(logicContext, accessPage.pageCurrent() - 1);

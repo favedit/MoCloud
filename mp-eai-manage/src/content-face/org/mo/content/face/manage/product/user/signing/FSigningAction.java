@@ -43,7 +43,7 @@ public class FSigningAction implements ISigningAction {
    // ============================================================
    @Override
    public String select(IWebContext context, ILogicContext logicContext, FSigningPage page, FBasePage basePage) {
-      _logger.debug(this, "Select===========================-", "Select begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -60,10 +60,8 @@ public class FSigningAction implements ISigningAction {
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      _logger.debug(this, "1Select=================================" + unit.userId(), "Select finish. (unitListCount={1})", 1);
       FLogicDataset<FDataPersonUserSigningUnit> unitList = _signingConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitList.toJsonListString());
-      _logger.debug(this, "2Select=================================" + unit.userId(), "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
    }
 

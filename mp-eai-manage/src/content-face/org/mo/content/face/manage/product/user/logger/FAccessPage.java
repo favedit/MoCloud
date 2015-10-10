@@ -1,4 +1,4 @@
-package org.mo.content.face.product.logger.user;
+package org.mo.content.face.manage.product.user.logger;
 
 import org.mo.com.lang.FObjectId;
 

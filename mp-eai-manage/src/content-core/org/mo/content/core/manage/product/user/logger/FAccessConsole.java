@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.logger.user;
+package org.mo.content.core.manage.product.user.logger;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessLogic;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;

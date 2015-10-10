@@ -22,13 +22,13 @@
             var url = null;
             var data = null;
             if (page != null) {
-               url = "/product/logger/user/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+               url = "/manage/product/user/logger/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
                   "label": $('#label').val(),
                   "page": page
                };
             } else {
-               url = "/product/logger/user/Access.wa?do=select&date=" + new Date().valueOf();
+               url = "/manage/product/user/logger/Access.wa?do=select&date=" + new Date().valueOf();
             }
             $.ajax({
                type: "POST",
