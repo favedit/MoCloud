@@ -16,7 +16,7 @@ import org.mo.core.aop.RAop;
 //============================================================
 // <T>触摸处理。</T>
 //============================================================
-@ServerEndpoint(value = "/touch", encoders = {FLoggerEncoder.class})
+@ServerEndpoint(value = "/touch", encoders = {FTouchEncoder.class})
 public class FTouchServlet
       extends FObject
 {

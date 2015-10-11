@@ -1,18 +1,18 @@
-package org.ahyc.eai.demo.service.touch;
+package org.ahyc.eai.demo.service.sphere;
 
 //============================================================
 // <T>日志消息。</T>
 //============================================================
-public class FLoggerMessage
+public class FSphereMessage
 {
    protected String msginfo;
 
    protected int onlinecount;
 
-   public FLoggerMessage(){
+   public FSphereMessage(){
    }
 
-   public FLoggerMessage(String msginfo,
+   public FSphereMessage(String msginfo,
                          int onlinecount){
       super();
       this.msginfo = msginfo;

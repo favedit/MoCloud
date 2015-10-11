@@ -17,7 +17,7 @@ import org.mo.core.aop.RAop;
 //============================================================
 // <T>日志处理。</T>
 //============================================================
-@ServerEndpoint(value = "/earth", encoders = {FLoggerEncoder.class})
+@ServerEndpoint(value = "/earth", encoders = {FEarthEncoder.class})
 public class FEarthServlet
       extends FObject
 {

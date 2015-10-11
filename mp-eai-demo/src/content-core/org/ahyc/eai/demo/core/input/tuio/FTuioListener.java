@@ -81,7 +81,7 @@ public abstract class FTuioListener
       FTuioCursor cursor = findCursorBySessionId(sessionId);
       if(cursor != null){
          cursor.set(value);
-         _logger.debug(this, "updateTuioCursor", "Update tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
+         //_logger.debug(this, "updateTuioCursor", "Update tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
          update();
       }
    }

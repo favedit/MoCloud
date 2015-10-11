@@ -3,16 +3,16 @@ package org.ahyc.eai.demo.service.earth;
 //============================================================
 // <T>日志消息。</T>
 //============================================================
-public class FLoggerMessage
+public class FEarthMessage
 {
    protected String msginfo;
 
    protected int onlinecount;
 
-   public FLoggerMessage(){
+   public FEarthMessage(){
    }
 
-   public FLoggerMessage(String msginfo,
+   public FEarthMessage(String msginfo,
                          int onlinecount){
       super();
       this.msginfo = msginfo;

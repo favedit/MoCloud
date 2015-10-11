@@ -70,7 +70,7 @@ public class FWebSocketConsole
          FWebSockets sockets = findSockets(groupName);
          if(sockets != null){
             sockets.sendMessage(message);
-            _logger.debug(this, "sendMessage", "Send message. (group_name={1}, count={2}, message={3})", groupName, sockets.count(), message);
+            // _logger.debug(this, "sendMessage", "Send message. (group_name={1}, count={2}, message={3})", groupName, sockets.count(), message);
          }
       }
    }

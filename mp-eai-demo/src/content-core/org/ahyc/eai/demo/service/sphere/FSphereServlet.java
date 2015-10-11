@@ -19,7 +19,7 @@ import org.mo.core.aop.RAop;
 //============================================================
 // <T>日志处理。</T>
 //============================================================
-@ServerEndpoint(value = "/sphere", encoders = {FLoggerEncoder.class})
+@ServerEndpoint(value = "/sphere", encoders = {FSphereEncoder.class})
 public class FSphereServlet
       extends FObject
 {

@@ -7,16 +7,16 @@ import javax.websocket.EndpointConfig;
 //============================================================
 // <T>日志编码。</T>
 //============================================================
-public class FLoggerDecoder
+public class FSphereDecoder
       implements
-         Text<FLoggerMessage>
+         Text<FSphereMessage>
 {
    @Override
    public void init(EndpointConfig arg0){
    }
 
    @Override
-   public String encode(FLoggerMessage message) throws EncodeException{
+   public String encode(FSphereMessage message) throws EncodeException{
       if(message != null){
          return "{\"msginfo\":\"" + message.getMsginfo() + "\",\"onlinecount\":" + message.getOnlinecount() + "}";
       }
