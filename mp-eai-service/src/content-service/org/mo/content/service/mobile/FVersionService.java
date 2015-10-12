@@ -1,5 +1,7 @@
 package org.mo.content.service.mobile;
 
+import org.mo.content.core.mobile.IVersionConsole;
+
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcVersionForce;
 import java.util.HashMap;
@@ -11,7 +13,6 @@ import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.mobile.IVersionConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
@@ -150,10 +151,10 @@ public class FVersionService
                              IWebOutput output,
                              ILogicContext logicContext){
       //获取会话id
-      /*FXmlNode inputNode = input.config();
+      FXmlNode inputNode = input.config();
       FXmlNode inputSessionCodeNode = inputNode.findNode("SessionCode");
       String sessionCodeNodeStr = inputSessionCodeNode.text();
-      _versionConsole.disconnect(context, sessionCodeNodeStr, logicContext, sessionContext, _sessionConsole);*/
+      _versionConsole.disconnect(context, sessionCodeNodeStr, logicContext, sessionContext, _sessionConsole);
       return EResult.Success;
    }
 }
