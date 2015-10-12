@@ -77,7 +77,7 @@ public class FEaiInputListener
       FByteStream stream = new FByteStream();
       stream.writeString(typeCode);
       // 获得有效数量
-      int count = _cursors.count();
+      int count = 0;
       for(FTuioCursor cursor : _cursors){
          if(cursor.isValid()){
             count++;
