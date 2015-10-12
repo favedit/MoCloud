@@ -122,6 +122,7 @@
     <Item _uuid="e903a1ac-a16a-48de-aec0-46f3cc89e08e" name="Optional" label="可选" is_valid="Y" note="M#" />
     <Item _uuid="231a1b6b-2757-4fcb-8ee0-b5c9fda868d0" name="Force" label="强制" is_valid="Y" note="M#" />
     <Item _uuid="cdc03e72-c052-4c61-97c4-0c88bebbad0f" name="Auto" label="自动" is_valid="Y" note="M#" />
+    <Item _uuid="0a584e47-d012-4268-a466-9aff08d940fe" name="NoUpdate" label="不更新" is_valid="Y" note="M#" />
   </Enum>
   <Enum _uuid="c4eeb9ae-2aa0-48b8-9ef2-043c4c624368" name="GcRule" label="数据挖掘规则类型" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
     <Item _uuid="7a584989-dc9b-4ef5-95a1-b89a149bd412" name="Unknown" label="未知" is_valid="Y" note="M#" />

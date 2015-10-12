@@ -51,6 +51,15 @@ public class EGcVersionForce
    // 自动标签
    public final static String AutoLabel = "自动";
 
+   // 不更新
+   public final static int NoUpdate = 4;
+
+   // 不更新字符串
+   public final static String NoUpdateString = "NoUpdate";
+
+   // 不更新标签
+   public final static String NoUpdateLabel = "不更新";
+
    //============================================================
    // <T>是否含有指定内容</T>
    //
@@ -89,6 +98,8 @@ public class EGcVersionForce
             return ForceString;
          case Auto:
             return AutoString;
+         case NoUpdate:
+            return NoUpdateString;
          default:
             return "Unknown";
       }
@@ -110,6 +121,8 @@ public class EGcVersionForce
             return ForceLabel;
          case Auto:
             return AutoLabel;
+         case NoUpdate:
+            return NoUpdateLabel;
          default:
             return "Unknown";
       }
@@ -131,6 +144,8 @@ public class EGcVersionForce
             return Force;
          case AutoString:
             return Auto;
+         case NoUpdateString:
+            return NoUpdate;
          default:
             return 0;
       }
