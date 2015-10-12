@@ -30,10 +30,10 @@ public class FTuioBase
    // @return 是否有效
    //============================================================
    public boolean isValid(){
-      if(_position.x == Float.NaN){
+      if(Float.isNaN(_position.x)){
          return false;
       }
-      if(_position.y == Float.NaN){
+      if(Float.isNaN(_position.y)){
          return false;
       }
       return true;
