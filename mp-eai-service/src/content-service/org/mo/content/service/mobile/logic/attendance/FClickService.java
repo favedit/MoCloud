@@ -10,6 +10,7 @@ import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.mobile.logic.attendance.IClickConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
@@ -52,16 +53,17 @@ public class FClickService
    }
 
    @Override
-   public EResult click(IWebContext context,
-                        IWebSession sessionContext,
-                        IWebInput input,
-                        IWebOutput output,
-                        ILogicContext logicContext){
+   public EResult sign(IWebContext context,
+                       IWebSession sessionContext,
+                       IWebInput input,
+                       IWebOutput output,
+                       ILogicContext logicContext){
       FXmlNode inputNode = input.config();
       /* FXmlNode userGuidNode = inputNode.findNode("mo-session-id");*/
       //      FXmlNode dateTimeNode = inputNode.findNode("datetime");
       FXmlNode locationLongitudeNode = inputNode.findNode("locationlongitude");
       FXmlNode locationLatitudeNode = inputNode.findNode("locationlatitude");
+      FXmlNode last_sign_date = output.config().createNode("last_sign_date");
       String sessionCode = context.head("mo-session-id");
       //      String dateTime = dateTimeNode.text();
       String locationLongitude = locationLongitudeNode.text();
@@ -88,10 +90,12 @@ public class FClickService
       }
       singUser.setUserId(userId);
       //日期十四位
-      singUser.setSingnDate(new TDateTime(new Date()));
+      TDateTime dateTime = new TDateTime(new Date());
+      singUser.setSingnDate(dateTime);
       singUser.setLocationLongitude(locationLongitudeD);
       singUser.setLocationLatitude(locationLatitudeD);
-      EResult result = _clickConsole.click(context, logicContext, sessionContext, singUser);
+      _clickConsole.click(context, logicContext, sessionContext, singUser);
+      last_sign_date.setText(dateTime.format("yyyy-mm-dd hh:mi:ss"));
       return EResult.Success;
    }
 }

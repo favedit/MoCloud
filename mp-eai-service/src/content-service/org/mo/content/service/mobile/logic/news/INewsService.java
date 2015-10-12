@@ -1,8 +1,7 @@
-package org.mo.content.service.mobile.logic.attendance;
+package org.mo.content.service.mobile.logic.news;
 
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -10,7 +9,7 @@ import org.mo.web.protocol.context.IWebOutput;
 //============================================================
 // <T>新闻信息管理接口。</T>
 //============================================================
-public interface IClickService
+public interface INewsService
 {
    //============================================================
    // <T>默认逻辑。</T>
@@ -24,9 +23,23 @@ public interface IClickService
                    IWebInput input,
                    IWebOutput output);
 
-   EResult sign(IWebContext context,
-                IWebSession sessionContext,
-                IWebInput input,
-                IWebOutput output,
-                ILogicContext logicContext);
+   //============================================================
+   // <T>根据guid获取新闻相关信息。</T>
+   //
+   // @param guid 
+   //============================================================
+   EResult query(IWebContext context,
+                 IWebInput input,
+                 IWebOutput output,
+                 ILogicContext logicContext);
+
+   //============================================================
+   // <T>分页获取新闻相关信息。</T>
+   //
+   // @param pageNum 页数
+   // @param pageSize 每页的行数
+   EResult select(IWebContext context,
+                  IWebInput input,
+                  IWebOutput output,
+                  ILogicContext logicContext);
 }

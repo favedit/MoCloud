@@ -1,12 +1,9 @@
 package org.mo.content.face.mobile.logic.salestools;
 
-import org.mo.content.core.mobile.logic.salestools.ISalesToolsConsole;
-
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
+import org.mo.content.core.mobile.logic.salestools.ISalesToolsConsole;
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.service.info.logic.news.INewsService;
+import org.mo.content.service.mobile.logic.news.INewsService;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
@@ -23,7 +20,7 @@ public class FSalesToolsAction
          ISalesToolsAction
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FSalesToolsAction.class);
+   //   private static ILogger _logger = RLogger.find(FSalesToolsAction.class);
 
    @ALink
    protected INewsService _newsService;
@@ -44,7 +41,7 @@ public class FSalesToolsAction
                            FSalesToolsPage page,
                            FBasePage basePage){
 
-      return "/service/news/NewsInfo";
+      return "";
    }
 
    //============================================================
@@ -80,6 +77,6 @@ public class FSalesToolsAction
          //      System.out.println("**********************************************" + guid + newsUnit.content());
       }
 
-      return "/service/sales/SalesInfo";
+      return "/manage/mobile/logic/sales/SalesInfo";
    }
 }

@@ -1,6 +1,6 @@
 package org.mo.content.face;
 
-import org.mo.content.face.service.news.FNewsPage;
+import org.mo.content.face.mobile.logic.news.FNewsPage;
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -25,7 +25,7 @@ public class FIndexAction
                            FIndexPage areaPage,
                            IWebContext webContext){
       //      System.out.println("*******************----------------->webContext.parameter" + webContext.parameter("guid"));
-      return "/service/news/News.wa?do=getNewInfo";
+      return "/mobile/logic/news/News.wa?do=getNewInfo";
    }
 
    @Override
@@ -35,6 +35,6 @@ public class FIndexAction
 
       page.setResult(webContext.parameter("guid"));
       System.out.println(page.result() + "--------------------------");
-      return "/service/news/News.wa?do=getNewInfo";
+      return "/mobile/logic/news/News.wa?do=getNewInfo";
    }
 }

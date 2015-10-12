@@ -1,6 +1,7 @@
 package org.mo.content.face;
 
-import org.mo.content.face.service.news.FNewsPage;
+import org.mo.content.face.mobile.logic.news.FNewsPage;
+
 import org.mo.eng.data.common.ISqlContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
