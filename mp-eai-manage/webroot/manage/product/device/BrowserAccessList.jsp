@@ -78,10 +78,6 @@
    <span>设备信息</span>
   </div>
   <div class="btn_bar">
-   <div class="nav_btn">
-    <a href="/manage/product/device/Device.wa?do=insertBefore"
-     class="add_btn"></a>
-   </div>
    <div class="nav_search">
     <input id="agentCode" name="agentCode" type="text"
      onfocus="if(this.value=='头信息'){this.value='';}this.style.color='#000000';"

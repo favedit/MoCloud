@@ -194,12 +194,11 @@ public class FNewsAction implements INewsAction {
    // ============================================================
    @Override
    public String update(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
-
       setLogicNews(context, logicContext, unit, "1");
       _newsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
@@ -246,22 +245,54 @@ public class FNewsAction implements INewsAction {
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
       String scd = context.parameter("displayCdStr");
-      if (!RString.isEmpty(scd)) {
+      if (!RString.isEmpty(scd) && scd.length() < 2) {
          unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));
+      } else if (!RString.isEmpty(scd) && scd.length() > 1) {
+         if (RString.equals(EGcDisplay.DisableLabel, scd)) {
+            unit.setDisplayCd(EGcDisplay.Disable);
+         }
+         if (RString.equals(EGcDisplay.EnabledLabel, scd)) {
+            unit.setDisplayCd(EGcDisplay.Enabled);
+         }
       }
       String scc = context.parameter("statusCdStr");
-      if (!RString.isEmpty(scc)) {
+      if (!RString.isEmpty(scc) && scc.length() < 2) {
          unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
+      } else if (!RString.isEmpty(scc) && scc.length() > 1) {
+         if (RString.equals(EGcResourceStatus.ApplyLabel, unit.statusCd())) {
+            unit.setStatusCd(EGcResourceStatus.Apply);
+         }
+         if (RString.equals(EGcResourceStatus.ApplyLabel, unit.statusCd())) {
+            unit.setStatusCd(EGcResourceStatus.Publish);
+         }
+         if (RString.equals(EGcResourceStatus.ApplyLabel, unit.statusCd())) {
+            unit.setStatusCd(EGcResourceStatus.CheckFail);
+         }
       }
       String lcs = context.parameter("linkCdStr");
-      if (!RString.isEmpty(lcs)) {
+      if (!RString.isEmpty(lcs) && lcs.length() < 2) {
          unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
+      } else if (!RString.isEmpty(lcs) && lcs.length() > 1) {
+         if (RString.equals(EGcLink.UnknownLabel, unit.linkCd())) {
+            unit.setLinkCd(EGcLink.Unknown);
+         }
+         if (RString.equals(EGcLink.ContentLabel, unit.linkCd())) {
+            unit.setLinkCd(EGcLink.Content);
+         }
+         if (RString.equals(EGcLink.LinkLabel, unit.linkCd())) {
+            unit.setLinkCd(EGcLink.Link);
+         }
       }
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
       FWebUploadFile file = context.files().first();
       if (null == file) {
-         unit.setIconUrl(context.parameter("iconUrl"));
+         String oiconUr = context.parameter("oiconUr");
+         if (!RString.isEmpty(oiconUr)) {
+            unit.setIconUrl(oiconUr);
+         } else {
+            unit.setIconUrl(context.parameter("iconUrl"));
+         }
       } else {
          _newsConsole.saveImage(file, unit, flag);
       }

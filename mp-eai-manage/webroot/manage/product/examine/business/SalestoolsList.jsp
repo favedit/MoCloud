@@ -85,7 +85,7 @@
  </div>
  <table id="logicNews" class="easyui-datagrid" fit='true'
    style="align: true"
-   data-options="toolbar:'#cy_right',pagination:true,rownumbers:true,collapsible:true,remoteSort:false,multiSort:false,striped: true">
+   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,remoteSort:false,multiSort:false,striped: true">
   <thead>
    <tr>
     <th data-options="field:'ck',checkbox:true">全选</th>

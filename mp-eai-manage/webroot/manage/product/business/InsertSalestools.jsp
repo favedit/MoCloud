@@ -58,15 +58,19 @@ KindEditor.ready(function(K) {
     <tr>
      <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
-         <input id="statusCdStr" name="statusCdStr" class="easyui-validatebox textbox" value="申请"
+         <input id="statusCdStr" name="statusCdStr" class="easyui-validatebox textbox" value="申请" readonly="readonly"
         style="width:280px;height:20px"/>
      </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否显示:</div></td>
      <td><div align="left">
-       <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>  
+       <!-- <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
+       data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>   -->
+       <select id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
+             <option value="1">展示</option>
+             <option value="2">未展示</option>
+        <select>
       </div></td>
     </tr>
     <tr>
@@ -84,8 +88,11 @@ KindEditor.ready(function(K) {
     <tr>
      <td height="38"><div align="left">外链状态:</div></td>
      <td><div align="left">
-       <input id="linkCdStr" class="easyui-combobox" name="linkCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'内容'},{'value':'2','text':'外链'}]"/>  
+        <select id="linkCdStr" class="easyui-combobox" name="linkCdStr" style="width:200px;">
+             <option value="1">内容</option>
+             <option value="0">未知</option>
+             <option value="2">外链</option>
+        <select>
       </div></td>
     </tr>
     <tr>

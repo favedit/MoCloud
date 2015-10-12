@@ -85,7 +85,7 @@
  </div>
  <table id="logicNews" class="easyui-datagrid" fit='true'
    style="align: true"
-   data-options="toolbar:'#cy_right',pagination:true,rownumbers:true,collapsible:true,remoteSort:false,multiSort:false,striped: true">
+   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,remoteSort:false,multiSort:false,striped: true">
   <thead>
    <tr>
     <th data-options="field:'ck',checkbox:true">全选</th>
@@ -121,9 +121,6 @@
      <th 
      data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新日期</th>    
-    <th
-     data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
-     width="140px">操作</th>
    </tr>
   </thead>
  </table>

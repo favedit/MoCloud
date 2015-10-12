@@ -53,15 +53,24 @@
     <tr>
      <td height="30"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td colspan="3"><div align="left">
-       <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"/>  
+       <select id="statusCdStr" class="easyui-combobox" name="statusCdStr" style="width:200px;">
+             <option value="1">申请</option>
+             <option value="0">未知</option>
+             <option value="2">发布</option>
+             <option value="3">审核未通过</option>
+        <select>
      </div></td>
     </tr>
     <tr>
      <td height="30"><div align="left">版本更新状态:</div></td>
      <td colspan="3"><div align="left">
-       <input id="forceCdStr" class="easyui-combobox" name="forceCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'}]"/>  
+       <select id="forceCdStr" class="easyui-combobox" name="forceCdStr" style="width:200px;">
+             <option value="1">可选</option>
+             <option value="0">未知</option>
+             <option value="2">强制</option>
+             <option value="3">自动</option>
+             <option value="4">不更新</option>
+        <select>
       </div></td>
     </tr>
     <tr>
