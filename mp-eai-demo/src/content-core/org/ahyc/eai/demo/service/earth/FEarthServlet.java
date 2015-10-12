@@ -9,6 +9,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import org.ahyc.eai.demo.core.socket.IWebSocketConsole;
+import org.ahyc.eai.demo.service.sphere.FSphereServlet;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -54,7 +55,7 @@ public class FEarthServlet
    @OnMessage
    public void onMessage(String message,
                          Session session){
-      System.out.println("earth > " + message);
+      _console.sendMessage(FSphereServlet.GROUP_NAME, message);
    }
 
    //============================================================

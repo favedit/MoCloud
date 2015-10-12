@@ -27,7 +27,7 @@ public class FSphereServlet
    private static ILogger _logger = RLogger.find(FSphereServlet.class);
 
    // 日志输出接口
-   private static String GROUP_NAME = "sphere";
+   public static String GROUP_NAME = "sphere";
 
    // 演示控制台
    protected IWebSocketConsole _console;
