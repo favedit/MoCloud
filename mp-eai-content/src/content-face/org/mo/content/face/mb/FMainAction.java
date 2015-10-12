@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -36,6 +37,9 @@ public class FMainAction
 
    @ALink
    protected IWebSessionConsole _sessionConsole;
+
+   @ALink
+   protected IGcSessionConsole _gcSessionConsole;
 
    @ALink
    protected ILogicServiceInfoConsole _loggerServiceInfoConsole;
@@ -123,13 +127,13 @@ public class FMainAction
                                 ILogicContext logicContext,
                                 FMainPage page){
       String code = "ChartMarketerCustomer";
-      String test = context.session().id();
       ///pc/Main.wa?do=customer
       String sessionCode = context.head("mo-session-id");
+      String appOS = context.parameter("appOS");
       if("".equals(sessionCode) || sessionCode == null){
          throw new FFatalError("sessionCode is null.");
       }
-      FGcSessionInfo sessionInfo = _sessionConsole.find(test);
+      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_" + appOS, sessionCode);
       if(sessionInfo == null){
          throw new FFatalError("sessionInfo is null.");
       }
