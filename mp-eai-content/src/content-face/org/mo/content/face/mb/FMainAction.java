@@ -129,7 +129,7 @@ public class FMainAction
       String code = "ChartMarketerCustomer";
       ///pc/Main.wa?do=customer
       String sessionCode = context.head("mo-session-id");
-      String appOS = context.parameter("appOS");
+      String appOS = context.parameter("app_os");
       if("".equals(sessionCode) || sessionCode == null){
          throw new FFatalError("sessionCode is null.");
       }
