@@ -76,10 +76,18 @@ public class FEaiInputListener
    public void sendCursor(String typeCode){
       FByteStream stream = new FByteStream();
       stream.writeString(typeCode);
-      //message.append(typeCode);
-      stream.writeInt32(_cursors.count());
+      // 获得有效数量
+      int count = _cursors.count();
       for(FTuioCursor cursor : _cursors){
-         cursor.position().serialize(stream);
+         if(cursor.isValid()){
+            count++;
+         }
+      }
+      stream.writeInt32(count);
+      for(FTuioCursor cursor : _cursors){
+         if(cursor.isValid()){
+            cursor.position().serialize(stream);
+         }
       }
       _console.sendMessage(FTouchServlet.GROUP_NAME, stream.memory(), 0, stream.length());
    }

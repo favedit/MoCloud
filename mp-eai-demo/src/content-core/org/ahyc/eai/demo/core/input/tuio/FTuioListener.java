@@ -66,9 +66,7 @@ public abstract class FTuioListener
          FTuioCursor cursor = createCursor(value);
          _cursors.push(cursor);
          _logger.debug(this, "addTuioCursor", "Add tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
-         if(cursor.isValid()){
-            update();
-         }
+         update();
       }
    }
 
@@ -84,9 +82,7 @@ public abstract class FTuioListener
       if(cursor != null){
          cursor.set(value);
          //_logger.debug(this, "updateTuioCursor", "Update tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
-         if(cursor.isValid()){
-            update();
-         }
+         update();
       }
    }
 
@@ -102,9 +98,7 @@ public abstract class FTuioListener
       if(cursor != null){
          _cursors.remove(cursor);
          _logger.debug(this, "removeTuioCursor", "Remove tuio cursor. (session_id={1}, cursor_id={2}, position={3})", sessionId, cursor.id(), cursor.position());
-         if(cursor.isValid()){
-            update();
-         }
+         update();
       }
    }
 
