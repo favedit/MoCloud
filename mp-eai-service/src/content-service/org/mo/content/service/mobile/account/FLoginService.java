@@ -120,7 +120,12 @@ public class FLoginService
             sessionId.setText(session.id());
             FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", session.id());
             if(sessionInfo != null){
-               modules.setText(sessionInfo.roleModules());
+               String roleModules = sessionInfo.roleModules();
+               if(roleModules != null && (!"".equals(roleModules))){
+                  modules.setText(roleModules);
+               }else{
+                  modules.setText("-1");
+               }
             }
             _logger.debug(this, "session_id*****************------>", "sessionResult={1}", sessionResult);
          }
