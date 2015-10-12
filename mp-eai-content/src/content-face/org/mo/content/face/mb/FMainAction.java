@@ -137,6 +137,7 @@ public class FMainAction
       if(sessionInfo == null){
          throw new FFatalError("sessionInfo is null.");
       }
+      //      System.out.println(sessionInfo.ouid());
       //保存日志
       saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;

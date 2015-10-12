@@ -178,7 +178,12 @@ public class FLoginService
       //      last_sign_date.setText("20150910102023");
       //返回上一次的打卡时间和用户的个人信息
       FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(sessionInfo.userId(), logicContext);
-      last_sign_date.setText(userInfo.last_sign_date());
+      String last_sign_date2 = userInfo.last_sign_date();
+      if(last_sign_date2 != null && (!"".equals(last_sign_date2))){
+         last_sign_date.setText(last_sign_date2);
+      }else{
+         last_sign_date.setText("-1");
+      }
       FXmlNode modules = output.config().createNode("modules");
       if(sessionInfo != null){
          String roleModules = sessionInfo.roleModules();
