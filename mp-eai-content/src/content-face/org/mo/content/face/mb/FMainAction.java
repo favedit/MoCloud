@@ -5,6 +5,8 @@ import com.cyou.gccloud.data.logger.FLoggerPersonUserModuleUnit;
 import java.util.HashMap;
 import java.util.Map;
 import org.mo.cloud.core.web.FGcWebSession;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.common.EChartPage;
@@ -102,6 +104,35 @@ public class FMainAction
                           ILogicContext logicContext,
                           FMainPage page){
       String code = "ChartMarketerCustomer";
+      //保存日志
+      saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
+      return EChartPage.Scene;
+   }
+
+   //============================================================
+   // <T>客户级。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话环境
+   // @param logicContext 逻辑环境
+   // @param page 页面
+   //============================================================
+   @Override
+   public String mobileCustomer(IWebContext context,
+                                IWebSession sessionContext,
+                                ILogicContext logicContext,
+                                FMainPage page){
+      String code = "ChartMarketerCustomer";
+      String test = context.session().id();
+      ///pc/Main.wa?do=customer
+      String sessionCode = context.head("mo-session-id");
+      if("".equals(sessionCode) || sessionCode == null){
+         throw new FFatalError("sessionCode is null.");
+      }
+      FGcSessionInfo sessionInfo = _sessionConsole.find(test);
+      if(sessionInfo == null){
+         throw new FFatalError("sessionInfo is null.");
+      }
       //保存日志
       saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;
