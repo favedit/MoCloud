@@ -1,4 +1,5 @@
  document.ready = function (callback) {
+ 
    ///兼容FF,Google
    if (document.addEventListener) {
        document.addEventListener('DOMContentLoaded', function () {
@@ -20,6 +21,21 @@
    }
 }
 document.ready(function () {
+    var states = null;
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+      states = false;
+    } else {
+      states = true;
+    }
    var objDiv=document.createElement("div"); 
    var objDivReturn=document.createElement("div");
    var objA = document.createElement("a");
@@ -28,7 +44,9 @@ document.ready(function () {
    objDivReturn.condition= "true";
    objA.href="/pc/Main.wa";
    var $body = document.getElementsByTagName("body")[0];
-   $body.appendChild(objDiv);
+   if(states){
+    $body.appendChild(objDiv);
+   }
    var $maskTransparent = document.getElementById("mask_transparent");
     $maskTransparent.appendChild(objDivReturn);
    var $returnTransparent = document.getElementById("return_transparent");
@@ -75,4 +93,5 @@ document.ready(function () {
    }
    $returnTransparent.onmouseleave = function(){
    }
+  
 });
