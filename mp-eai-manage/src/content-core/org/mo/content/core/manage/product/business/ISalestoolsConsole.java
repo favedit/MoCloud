@@ -6,7 +6,10 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.common.FWebUploadFile;
 
-public interface ISalestoolsConsole extends IAbstractLogicUnitConsole<FDataLogicSalestoolsUnit> {
+public interface ISalestoolsConsole
+      extends
+         IAbstractLogicUnitConsole<FDataLogicSalestoolsUnit>
+{
 
    // ============================================================
    // <T>获得分页数据列表</T>
@@ -15,11 +18,16 @@ public interface ISalestoolsConsole extends IAbstractLogicUnitConsole<FDataLogic
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataSalestoolsInfo> select(ILogicContext logicContext, FDataLogicSalestoolsUnit unit, int pageNum, int pageSize);
+   FLogicDataset<FDataSalestoolsInfo> select(ILogicContext logicContext,
+                                             FDataLogicSalestoolsUnit unit,
+                                             int pageNum,
+                                             int pageSize);
 
    // ============================================================
    // <T>保存图片地址</T>
    // @return void
    // ============================================================
-   void saveImage(FWebUploadFile file, FDataLogicSalestoolsUnit unit, String flag);
+   void saveImage(FWebUploadFile file,
+                  FDataLogicSalestoolsUnit unit,
+                  String flag);
 }
