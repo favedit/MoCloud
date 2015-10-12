@@ -97,7 +97,7 @@
      <td><div align="left">
        <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"
-       value="<jh:write source='&unit.statusCdStr'/>"/>  
+       value="<jh:write source='&unit.statusCdStr'/>"/>
      </div></td>
     </tr>
     <tr>
@@ -111,7 +111,7 @@
     <tr>
       <td height="38"><div align="left">关键字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
-        style="width:280px;height:20px"
+        style="width:380px;height:20px"
         data-options="validType:'length[0,800]'"   value="<jh:write source='&unit.keywords'/>"/></td>
     </tr>
     
@@ -119,7 +119,7 @@
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;"/>
-       <input id="oiconUr" style="width:290px;" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" onclick="removeFile()"/>
+       <input id="oiconUr" style="width:380px;" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" onclick="removeFile()"/>
       </div></td>
     </tr>
     <tr>
@@ -133,7 +133,7 @@
      <td height="38"><div align="left">外链地址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
-        style="width:280px;height:20px" data-options="validType:'length[0,800]'" value="<jh:write source='&unit.linkUrl'/>"/>
+        style="width:380px;height:20px" data-options="validType:'length[0,800]'" value="<jh:write source='&unit.linkUrl'/>"/>
      </div></td>
     </tr>
     <tr>
@@ -141,13 +141,13 @@
      <td colspan="2"><div align="left">
       <input id="description" name="description" class="easyui-textbox"
         data-options="multiline:true" value="<jh:write source='&unit.description'/>" 
-        style="height:100px;width:590px" />
+        style="height:100px;width:700px" />
       </div></td>
     </tr>
     <tr>
      <td><div align="left">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容:</div></td>
      <td align="left"  colspan="2">
-        <textarea id="kindeditor_view" name="kindeditor_view" style="width:670px;height:300px" ></textarea>
+        <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px" ></textarea>
           <input style="display:none" id="content" name="content" />
           <input type="button" style="display:none" id="getHtml" value="取得HTML" />
      </td>

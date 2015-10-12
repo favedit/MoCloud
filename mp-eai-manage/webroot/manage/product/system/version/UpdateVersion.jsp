@@ -9,7 +9,6 @@
 </HEAD>
 <script>
     function submitForm() {
-
         if (!isValid())
             return;
         progress();
@@ -25,6 +24,7 @@
             "beginDate" : $('#beginDate').val(),
             "endDate" : $('#endDate').val(),
             "note" : $('#note').val(),
+            "number" : $('#number').val(),
             "ouid" : $('#ouid').val()
         };
         $.ajax({
@@ -69,7 +69,7 @@
      <td width="30" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
      <td colspan="3"><div align="left">
        <input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
+        style="width:380px;height:20px;"
         data-options="validType:'length[0,80]'" readonly="readonly"
         value="<jh:write source='&unit.label'/>" />
         <input id="adminId" name="adminId" style="display:none"
@@ -81,9 +81,16 @@
     <tr>
      <td width="30" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
      <td colspan="3"><div align="left">
-       <input id="code" name="code" class="easyui-validatebox textbox"
-        style="width:280px;height:18px;" value="<jh:write source='&unit.code'/>"
-        data-options="validType:'length[0,40]'" /> 
+       <input id="code" name="code" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:18px;" value="<jh:write source='&unit.code'/>"
+        data-options="required:true,validType:'length[0,40]'" /> 
+      </div></td>
+    </tr>
+    <tr>
+     <td width="30" height="33"><div align="left">版本号:</div></td>
+     <td colspan="3"><div align="left">
+       <input id="number" name="number" class="easyui-validatebox textbox notnull" data-options="required:true"
+        style="width:380px;height:18px;" value="<jh:write source='&unit.number'/>"/> 
       </div></td>
     </tr>
     <tr>
@@ -107,9 +114,9 @@
     <tr>
      <td width="30" height="33"><div align="left">应&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用:</div></td>
      <td colspan="3"><div align="left">
-       <input id="applicationLabel" name="applicationLabel" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;" value="<jh:write source='&unit.applicationLabel'/>"
-        data-options="validType:'length[0,80]'" /> 
+       <input id="applicationLabel" name="applicationLabel" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px;" value="<jh:write source='&unit.applicationLabel'/>"
+        data-options="required:true,validType:'length[0,80]'" /> 
       </div></td>
     </tr>
     <tr>
@@ -118,7 +125,7 @@
        <input id="beginDate" name="beginDate" class="easyui-datebox" value="<jh:write source='&unit.beginDate'/>"></input>
       </div></td>
      <td width="30" height="33"><div align="left">结束时间:</div></td>
-     <td width="78"><div align="left">
+     <td width="98"><div align="left">
        <input id="endDate" name="endDate" class="easyui-datebox" value="<jh:write source='&unit.endDate'/>"></input>
       </div></td>
     </tr>
@@ -126,7 +133,7 @@
       <td width="30" height="30" align="left">备注</td>
       <td height="30" align="left" colspan="3">
          <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" 
-            value="<jh:write source='&unit.note'/>" style="height:100px;width:400px" />
+            value="<jh:write source='&unit.note'/>" style="height:100px;width:700px" />
       </td>
    </tr>
    </table>

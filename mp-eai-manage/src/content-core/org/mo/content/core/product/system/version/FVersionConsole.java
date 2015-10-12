@@ -70,6 +70,34 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    }
 
    // ============================================================
+   // <T>根据标签获取对象</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public boolean isExsitsAppIdandNumber(ILogicContext logicContext, Long applicationId, Float number) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(applicationId + "") && !RString.isEmpty(number + "")) {
+         whereSql.append(FDataSystemVersionLogic.APPLICATION_ID);
+         whereSql.append(" = ");
+         whereSql.append("{applicationId}");
+         whereSql.bind("applicationId", RString.parse(applicationId));
+         whereSql.append(" and ");
+         whereSql.append(FDataSystemVersionLogic.NUMBER);
+         whereSql.append(" = ");
+         whereSql.append("{number}");
+         whereSql.bind("number", RString.parse(number));
+      }
+      FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
+      FLogicDataset<FDataSystemVersionUnit> verList = logic.fetch(whereSql.toString());
+      if (verList.count() > 1) {
+         return true;
+      }
+      return false;
+   }
+
+   // ============================================================
    // <T>抽取数据库字段枚举赋值的公共方法</T>
    // @param context 网络环境
    // @param logicContext 逻辑环境

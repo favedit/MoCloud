@@ -93,6 +93,9 @@
      data-options="field:'code',halign:'center',align:'left',sortable:true"
      width="90px">代码</th>
      <th
+     data-options="field:'number',halign:'center',align:'left',sortable:true"
+     width="190px">版本号</th>
+     <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
      width="100px">状态</th>
      <th

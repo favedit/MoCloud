@@ -109,6 +109,15 @@ public class FVersionAction implements IVersionAction {
       }
       FDataSystemVersionUnit unit = _versionConsole.doPrepare(logicContext);
       setLogicVersion(context, logicContext, unit);
+      if (_versionConsole.isExsitsAppIdandNumber(logicContext, unit.applicationId(), unit.number())) {
+         page.setResult("版本号重复！");
+         return "/manage/product/system/version/InsertVersion";
+      }
+      _logger.debug(this, "Insert-----------------------------------------", "InsertBefore begin. (userId={1})", unit.applicationId());
+      if (unit.applicationId() < 1) {
+         page.setResult("没有此应用！");
+         return "/manage/product/system/version/InsertVersion";
+      }
       EResult result = _versionConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
@@ -142,6 +151,7 @@ public class FVersionAction implements IVersionAction {
       info.setLabel(unit.label());
       info.setNote(unit.note());
       info.setApplicationLabel(unit.application().label());
+      info.setNumber(unit.number());
       setUnitVersionLabel(info, unit);
       page.setUnit(info);
       _logger.debug(this, "ouid", "updateBefore finish. (Result={1})", "SUCCESS");
@@ -158,12 +168,20 @@ public class FVersionAction implements IVersionAction {
    // ============================================================
    @Override
    public String update(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataSystemVersionUnit unit = _versionConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setLogicVersion(context, logicContext, unit);
+      if (_versionConsole.isExsitsAppIdandNumber(logicContext, unit.applicationId(), unit.number())) {
+         page.setResult("版本号重复！");
+         return "/manage/product/system/version/UpdateVersion";
+      }
+      if (unit.applicationId() < 1) {
+         page.setResult("没有此应用！");
+         return "/manage/product/system/version/UpdateVersion";
+      }
       _versionConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/common/ajax";
@@ -186,6 +204,7 @@ public class FVersionAction implements IVersionAction {
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
       unit.setNote(context.parameter("note"));
+      unit.setNumber(context.parameterAsFloat("number"));
       String scd = context.parameter("forceCdStr");
       if (!RString.isEmpty(scd)) {
          unit.setForceCd(context.parameterAsInteger("forceCdStr"));

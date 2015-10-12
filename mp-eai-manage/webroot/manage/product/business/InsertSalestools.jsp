@@ -52,14 +52,14 @@ KindEditor.ready(function(K) {
     <tr>
       <td width="74"><div align="left">标题:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:280px;height:20px"
+        style="width:380px;height:20px"
         data-options="validType:'length[0,200]'" /></td>
     </tr>
     <tr>
      <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
          <input id="statusCdStr" name="statusCdStr" class="easyui-validatebox textbox" value="申请" readonly="readonly"
-        style="width:280px;height:20px"/>
+        style="width:380px;height:20px"/>
      </div></td>
     </tr>
     <tr>
@@ -76,7 +76,7 @@ KindEditor.ready(function(K) {
     <tr>
       <td  height="38" width="74"><div align="left">关键字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
-        style="width:280px;height:20px"
+        style="width:380px;height:20px"
         data-options="validType:'length[0,800]'" /></td>
     </tr>
     <tr>
@@ -99,20 +99,20 @@ KindEditor.ready(function(K) {
      <td height="38"><div align="left">外链地址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
-        style="width:280px;height:20px" data-options="validType:'length[0,800]'"/>
+        style="width:380px;height:20px" data-options="validType:'length[0,800]'"/>
      </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td><div align="left">
      	<input id="description" name="description" class="easyui-textbox"
-        data-options="multiline:true" style="height:100px;width:500px" />
+        data-options="multiline:true" style="height:100px;width:700px" />
       </div></td>
     </tr>
     <tr>
      <td><div align="left">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容:</div></td>
      <td align="left">
-        <textarea id="kindeditor_view" name="kindeditor_view" style="width:670px;height:300px"></textarea>
+        <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px"></textarea>
             <input style="display:none" id="content" name="content"/>
             <input type="button" style="display:none" id="getHtml" value="取得HTML" />
      </td>

@@ -9,7 +9,6 @@
 </HEAD>
 <script>
     function submitForm() {
-
         if (!isValid())
             return;
         progress();
@@ -64,7 +63,7 @@
      <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
      <td><div align="left">
        <input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
+        style="width:380px;height:20px;"
         data-options="validType:'length[0,80]'" readonly="readonly"
         value="<jh:write source='&unit.label'/>" />
         <input id="adminId" name="adminId" style="display:none"
@@ -76,16 +75,16 @@
     <tr>
      <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
      <td><div align="left">
-       <input id="code" name="code" class="easyui-validatebox textbox"
-        style="width:280px;height:18px;"
-        data-options="validType:'length[0,80]'" value="<jh:write source='&unit.code'/>"/> 
+       <input id="code" name="code" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:18px;"
+        data-options="required:true,validType:'length[0,80]'" value="<jh:write source='&unit.code'/>"/> 
       </div></td>
     </tr>
     <tr>
       <td width="78" height="30" align="left">备注</td>
       <td height="30" align="left">
          <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" 
-         value="<jh:write source='&unit.note'/>" style="height:100px;width:400px" />
+         value="<jh:write source='&unit.note'/>" style="height:100px;width:700px" />
       </td>
    </tr>
    </table>
