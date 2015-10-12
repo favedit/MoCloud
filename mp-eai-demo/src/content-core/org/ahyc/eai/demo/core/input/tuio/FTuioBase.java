@@ -25,6 +25,21 @@ public class FTuioBase
    }
 
    //============================================================
+   // <T>检查是否有效。</T>
+   //
+   // @return 是否有效
+   //============================================================
+   public boolean isValid(){
+      if(_position.x == Float.NaN){
+         return false;
+      }
+      if(_position.y == Float.NaN){
+         return false;
+      }
+      return true;
+   }
+
+   //============================================================
    // <T>获得会话编号。</T>
    //
    // @return 会话编号
