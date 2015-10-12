@@ -120,7 +120,12 @@ public class FLoginService
             sessionId.setText(session.id());
             FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", session.id());
             if(sessionInfo != null){
-               modules.setText(sessionInfo.roleModules());
+               String roleModules = sessionInfo.roleModules();
+               if(roleModules != null && (!"".equals(roleModules))){
+                  modules.setText(roleModules);
+               }else{
+                  modules.setText("-1");
+               }
             }
             _logger.debug(this, "session_id*****************------>", "sessionResult={1}", sessionResult);
          }
@@ -175,7 +180,14 @@ public class FLoginService
       FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(sessionInfo.userId(), logicContext);
       last_sign_date.setText(userInfo.last_sign_date());
       FXmlNode modules = output.config().createNode("modules");
-      modules.setText(sessionInfo.roleModules());
+      if(sessionInfo != null){
+         String roleModules = sessionInfo.roleModules();
+         if(roleModules != null && (!"".equals(roleModules))){
+            modules.setText(roleModules);
+         }else{
+            modules.setText("-1");
+         }
+      }
       icon_url.setText("http://eai.ezubo.com:8080/mb/images/re.png");
       passportNodeOut.setText(sessionInfo.userLabel());
       return EResult.Success;
