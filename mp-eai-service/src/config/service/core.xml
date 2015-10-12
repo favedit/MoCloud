@@ -47,7 +47,7 @@
          class = 'org.mo.content.core.mobile.account.FLoginConsole'
          scope = 'global'>
       <Property name='oaLoginEnable'>Y</Property>
-      <Property name='oaLoginUrl'>http://10.13.0.141:6666/ycjt/auth/auth.jsp</Property>
-      <!-- <Property name='oaLoginUrl'>http://115.182.232.150:8181/oauser</Property> -->
+      <!-- <Property name='oaLoginUrl'>http://10.13.0.141:6666/ycjt/auth/auth.jsp</Property> -->
+       <Property name='oaLoginUrl'>http://115.182.232.150:8181/oauser</Property>
    </Component>
 </Config>
