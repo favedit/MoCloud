@@ -108,4 +108,6 @@ public interface IGcSessionConsole
    //   //============================================================
    //   void close(ILogicContext context,
    //              long userId);
+   public FGcSessionInfo findBySessionCode(ILogicContext context,
+                                           String sessionCode);
 }

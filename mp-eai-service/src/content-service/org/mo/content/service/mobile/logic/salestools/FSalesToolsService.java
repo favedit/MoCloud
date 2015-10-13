@@ -63,21 +63,40 @@ public class FSalesToolsService
                         IWebOutput output,
                         ILogicContext logicContext){
       _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
+
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
-      FXmlNode news_info = output.config().createNode("news_info");
       FDataLogicSalestoolsUnit newsUnit = _salesToolsConsole.getNewsByGuid(guid, logicContext);
-      if(newsUnit == null){
-         news_info.set("guid", guid);
-      }else{
-         //         news_info.createNode("ouid").setText(newsUnit.ouid());
-         news_info.createNode("guid").setText(newsUnit.guid());
-         news_info.createNode("label").setText(newsUnit.label());
-         news_info.createNode("content").setText(newsUnit.content());
-         news_info.createNode("update_date").setText(newsUnit.updateDate() + "");
+      if(newsUnit != null){
+         FXmlNode news_info = output.config().createNode("sales_info");
+         String guidStr = newsUnit.guid();
+         String newsLabel = newsUnit.label();
+         String newsContent = newsUnit.content();
+         String newsUpdate = newsUnit.updateDate() + "";
+         if(guidStr != null && (!"".equals(guidStr))){
+            news_info.createNode("guid").setText(guidStr);
+         }else{
+            news_info.createNode("guid").setText("0");
+         }
+         if(newsLabel != null && (!"".equals(newsLabel))){
+            news_info.createNode("label").setText(newsLabel);
+         }else{
+            news_info.createNode("label").setText("0");
+         }
+         if(newsContent != null && (!"".equals(newsContent))){
+            news_info.createNode("content").setText(newsContent);
+         }else{
+            news_info.createNode("content").setText("0");
+         }
+         if(newsUpdate != null && (!"".equals(newsUpdate))){
+            news_info.createNode("update_date").setText(newsUpdate);
+         }else{
+            news_info.createNode("update_date").setText("0");
+         }
          return EResult.Success;
       }
       return EResult.Failure;
+
    }
 
    //============================================================
@@ -103,17 +122,25 @@ public class FSalesToolsService
       }
       FLogicDataset<FDataLogicSalestoolsUnit> salesToolsUnits = _salesToolsConsole.select(pageNum, pageSize, logicContext);
       output.config().createNode("page_number").setText(pageNumStr);
-      FXmlNode list = output.config().createNode("sales_list");
       if(salesToolsUnits != null && salesToolsUnits.count() > 0){
+         FXmlNode list = output.config().createNode("sales_list");
          for(Iterator<FDataLogicSalestoolsUnit> iterator = salesToolsUnits.iterator(); iterator.hasNext();){
             FDataLogicSalestoolsUnit salesToolsUnit = iterator.next();
             FXmlNode xruntime = list.createNode("sales_info");
             //            xruntime.createNode("ouid").setText(newsUnit.ouid());
             if(salesToolsUnit.guid() != null && (!"".equals(salesToolsUnit.guid()))){
                xruntime.createNode("guid").setText(salesToolsUnit.guid());
+               if(salesToolsUnit.linkCd() == EGcLink.Content){
+                  xruntime.createNode("info_url").setText(_salesServiceHost + "mobile/logic/salestools/SalesTools.wa?do=getInfo&guid=" + salesToolsUnit.guid());
+               }
             }else{
                xruntime.createNode("guid").setText("0");
             }
+            //如果是外链销售工具
+            if(salesToolsUnit.linkCd() == EGcLink.Link){
+               xruntime.createNode("info_url").setText(salesToolsUnit.linkUrl());
+            }
+
             if(salesToolsUnit.label() != null && (!"".equals(salesToolsUnit.label()))){
                xruntime.createNode("label").setText(salesToolsUnit.label());
             }else{
@@ -129,18 +156,14 @@ public class FSalesToolsService
             }else{
                xruntime.createNode("icon_url").setText("0");
             }
-            if(salesToolsUnit.updateDate() + "" != null && (!"".equals(salesToolsUnit.updateDate() + ""))){
-               xruntime.createNode("update_date").setText(salesToolsUnit.updateDate() + "");
+
+            String updateDate = salesToolsUnit.updateDate() + "";
+            if(updateDate != null && (!"".equals(updateDate))){
+               xruntime.createNode("update_date").setText(updateDate);
             }else{
                xruntime.createNode("update_date").setText("0");
             }
-            //如果是外链销售工具
-            if(salesToolsUnit.linkCd() == EGcLink.Link){
-               xruntime.createNode("info_url").setText(salesToolsUnit.linkUrl());
-            }
-            if(salesToolsUnit.linkCd() == EGcLink.Content){
-               xruntime.createNode("info_url").setText(_salesServiceHost + "mobile/logic/salestools/SalesTools.wa?do=getInfo&guid=" + salesToolsUnit.guid());
-            }
+
             //如果不是
          }
 

@@ -86,6 +86,7 @@ public class FEaiSessionConsole
          sessionInfo.setUserId(userId);
          sessionInfo.setUserLabel(userLabel);
          sessionInfo.setRoleId(roleId);
+         sessionInfo.setApplicationId(session.applicationId());
          sessionInfo.setRoleCode(roleCode);
          sessionInfo.setLocationLongitude(session.locationLongitude());
          sessionInfo.setLocationLatitude(session.locationLatitude());

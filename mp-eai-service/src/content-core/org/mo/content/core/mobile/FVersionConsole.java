@@ -56,7 +56,7 @@ public class FVersionConsole
       FDataSystemApplicationLogic applicationLogic = logicContext.findLogic(FDataSystemApplicationLogic.class);
       //根据applicationStr找见对应应用的id
       FSql whereSql4 = new FSql();
-      whereSql4.append(FDataSystemApplicationLogic.CODE);
+      whereSql4.append(FDataSystemApplicationLogic.GUID);
       whereSql4.append("='");
       whereSql4.append(applicationStr);
       whereSql4.append("'");
@@ -64,6 +64,7 @@ public class FVersionConsole
       long applicationOuid = -1;
       if(applications != null && applications.count() > 0){
          applicationOuid = applications.first().ouid();
+         map.put("app_os", applications.first().code());
       }
       FDataSystemVersionLogic versionLogic = logicContext.findLogic(FDataSystemVersionLogic.class);
       double lastVersionCode = versionLogic.connection().executeDouble("SELECT MAX(NUMBER) AS LASTVERSION FROM `DT_SYS_VERSION` WHERE `APPLICATION_ID`=" + applicationOuid);

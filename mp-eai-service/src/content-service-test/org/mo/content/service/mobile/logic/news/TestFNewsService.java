@@ -1,10 +1,10 @@
-package org.mo.content.service.mobile;
+package org.mo.content.service.mobile.logic.news;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
+import org.apache.http.ParseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -14,21 +14,18 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
-public class TestFVersionService
+public class TestFNewsService
 {
    @Test
-   public void testConnect() throws ClientProtocolException, IOException{
+   public void testSelect() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.100:8020/eai.mobile.wsp";
+      String url = "http://10.13.0.100:8020/eai.mobile.logic.news.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("version_number", "4"));
-      listPram.add(new BasicNameValuePair("app_key", "0E144A4C9CA64FAB854FF2DE8B589312"));
-      // listPram.add(new BasicNameValuePair("mo-session-id",
-      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-      post.setHeader("mo-session-id", "59F0328E44D3FCE4BEFEEC709E337629");
-      listPram.add(new BasicNameValuePair("action", "connect"));
+      listPram.add(new BasicNameValuePair("page_size", "9"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
+      listPram.add(new BasicNameValuePair("page_number", "1"));
+      listPram.add(new BasicNameValuePair("action", "select"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();
@@ -37,22 +34,17 @@ public class TestFVersionService
          String result = new String(responseContent.getBytes("utf-8"));
          System.out.println(result);
       }
-
    }
 
    @Test
-   public void testDisconnect() throws ClientProtocolException, IOException{
+   public void testQuery() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.100:8020/eai.mobile.wsp";
+      String url = "http://10.13.0.100:8020/eai.mobile.logic.news.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("version_number", "4"));
-      listPram.add(new BasicNameValuePair("app_os", "android"));
-      // listPram.add(new BasicNameValuePair("mo-session-id",
-      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-      post.setHeader("mo-session-id", "4649AD3AF9BFBBAE690C5DF6C0AF202C");
-      listPram.add(new BasicNameValuePair("action", "disconnect"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
+      listPram.add(new BasicNameValuePair("guid", "7C4E37BC77E8439E89EB7EFABCE72449"));
+      listPram.add(new BasicNameValuePair("action", "query"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();
@@ -61,7 +53,6 @@ public class TestFVersionService
          String result = new String(responseContent.getBytes("utf-8"));
          System.out.println(result);
       }
-
    }
 
 }

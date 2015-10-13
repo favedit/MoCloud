@@ -34,6 +34,9 @@ public class FGcWebSession
    // 用户登录y坐标
    protected double _locationLatitude;
 
+   // 应用id
+   protected long _applicationId;
+
    //============================================================
    // <T>登录x坐标。</T>
    //
@@ -41,6 +44,14 @@ public class FGcWebSession
    //============================================================
    public double locationLongitude(){
       return _locationLongitude;
+   }
+
+   public long applicationId(){
+      return _applicationId;
+   }
+
+   public void setApplicationId(long _applicationId){
+      this._applicationId = _applicationId;
    }
 
    //============================================================
@@ -147,6 +158,7 @@ public class FGcWebSession
       _userLabel = info.userLabel();
       _locationLongitude = info.locationLongitude();
       _locationLatitude = info.locationLatitude();
+      _applicationId = info.applicationId();
       // 设置会话
       _sessionInfo = info;
    }
@@ -161,5 +173,6 @@ public class FGcWebSession
       info.setFromCode(_fromCode);
       info.setUserId(_userId);
       info.setUserLabel(_userLabel);
+      info.setApplicationId(_applicationId);
    }
 }

@@ -61,6 +61,19 @@ public class FGcSessionConsole
       return sessionInfo;
    }
 
+   @Override
+   public FGcSessionInfo findBySessionCode(ILogicContext context,
+                                           String sessionCode){
+      FSql whereSql = new FSql();
+      whereSql.append(FCacheSystemSessionLogic.SESSION_CODE);
+      whereSql.append("='");
+      whereSql.append(sessionCode);
+      whereSql.append("'");
+      FCacheSystemSessionLogic logic = findLogic(context);
+      FGcSessionInfo sessionInfo = logic.search(FGcSessionInfo.class, whereSql);
+      return sessionInfo;
+   }
+
    //============================================================
    // <T>根据用户编号查找会话集合。</T>
    //

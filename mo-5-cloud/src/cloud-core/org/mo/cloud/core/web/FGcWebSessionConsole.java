@@ -85,6 +85,7 @@ public class FGcWebSessionConsole
       // 获得编号
       String fromCode = session.fromCode();
       String sessionCode = session.id();
+      long applicationId = session.applicationId();
       // 打开会话
       try(FLogicContext logicContext = new FLogicContext(_databaseConsole)){
          // 查找信息
@@ -109,6 +110,7 @@ public class FGcWebSessionConsole
          sessionInfo.setSessionCode(sessionCode);
          sessionInfo.setUserId(session.userId());
          sessionInfo.setUserLabel(userLabel);
+         sessionInfo.setApplicationId(applicationId);
          if(!exists){
             _sessionConsole.doInsert(logicContext, sessionInfo);
          }else{

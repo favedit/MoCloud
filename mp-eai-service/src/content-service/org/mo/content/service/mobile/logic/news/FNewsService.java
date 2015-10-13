@@ -65,16 +65,33 @@ public class FNewsService
       _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
-      FXmlNode news_info = output.config().createNode("news_info");
       FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
-      if(newsUnit == null){
-         news_info.set("guid", guid);
-      }else{
-         //         news_info.createNode("ouid").setText(newsUnit.ouid());
-         news_info.createNode("guid").setText(newsUnit.guid());
-         news_info.createNode("label").setText(newsUnit.label());
-         news_info.createNode("content").setText(newsUnit.content());
-         news_info.createNode("update_date").setText(newsUnit.updateDate() + "");
+      if(newsUnit != null){
+         FXmlNode news_info = output.config().createNode("news_info");
+         String guidStr = newsUnit.guid();
+         String newsLabel = newsUnit.label();
+         String newsContent = newsUnit.content();
+         String newsUpdate = newsUnit.updateDate() + "";
+         if(guidStr != null && (!"".equals(guidStr))){
+            news_info.createNode("guid").setText(guidStr);
+         }else{
+            news_info.createNode("guid").setText("0");
+         }
+         if(newsLabel != null && (!"".equals(newsLabel))){
+            news_info.createNode("label").setText(newsLabel);
+         }else{
+            news_info.createNode("label").setText("0");
+         }
+         if(newsContent != null && (!"".equals(newsContent))){
+            news_info.createNode("content").setText(newsContent);
+         }else{
+            news_info.createNode("content").setText("0");
+         }
+         if(newsUpdate != null && (!"".equals(newsUpdate))){
+            news_info.createNode("update_date").setText(newsUpdate);
+         }else{
+            news_info.createNode("update_date").setText("0");
+         }
          return EResult.Success;
       }
       return EResult.Failure;
@@ -112,18 +129,34 @@ public class FNewsService
             FDataLogicNewsUnit newsUnit = iterator.next();
             FXmlNode xruntime = list.createNode("news_info");
             //            xruntime.createNode("ouid").setText(newsUnit.ouid());
-            if(newsUnit.guid() != null && (!"".equals(newsUnit.guid()))){
-               xruntime.createNode("guid").setText(newsUnit.guid());
+            String guidStr = newsUnit.guid();
+            if(guidStr != null && (!"".equals(guidStr))){
+               xruntime.createNode("guid").setText(guidStr);
+               if(newsUnit.linkCd() == EGcLink.Content){
+                  xruntime.createNode("info_url").setText(_newsServiceHost + "Index.wa?guid=" + newsUnit.guid());
+               }
             }else{
                xruntime.createNode("guid").setText("0");
             }
-            if(newsUnit.label() != null && (!"".equals(newsUnit.label()))){
-               xruntime.createNode("label").setText(newsUnit.label());
+
+            //如果是外链新闻
+            if(newsUnit.linkCd() == EGcLink.Link){
+               String newsLinkUrl = newsUnit.linkUrl();
+               if(newsLinkUrl != null && (!"".equals(newsLinkUrl))){
+                  xruntime.createNode("info_url").setText(newsUnit.linkUrl());
+               }else{
+                  xruntime.createNode("info_url").setText("0");
+               }
+            }
+            String newsLabel = newsUnit.label();
+            if(newsLabel != null && (!"".equals(newsLabel))){
+               xruntime.createNode("label").setText(newsLabel);
             }else{
                xruntime.createNode("label").setText("0");
             }
-            if(newsUnit.description() != null && (!"".equals(newsUnit.description()))){
-               xruntime.createNode("description").setText(newsUnit.description());
+            String newsDescription = newsUnit.description();
+            if(newsDescription != null && (!"".equals(newsDescription))){
+               xruntime.createNode("description").setText(newsDescription);
             }else{
                xruntime.createNode("description").setText("0");
             }
@@ -132,18 +165,13 @@ public class FNewsService
             }else{
                xruntime.createNode("icon_url").setText("0");
             }
-            if(newsUnit.updateDate() + "" != null && (!"".equals(newsUnit.updateDate() + ""))){
-               xruntime.createNode("update_date").setText(newsUnit.updateDate() + "");
+            String updateDate = newsUnit.updateDate() + "";
+            if(updateDate != null && (!"".equals(updateDate))){
+               xruntime.createNode("update_date").setText(updateDate);
             }else{
                xruntime.createNode("update_date").setText("0");
             }
-            //如果是外链新闻
-            if(newsUnit.linkCd() == EGcLink.Link){
-               xruntime.createNode("info_url").setText(newsUnit.linkUrl());
-            }
-            if(newsUnit.linkCd() == EGcLink.Content){
-               xruntime.createNode("info_url").setText(_newsServiceHost + "Index.wa?guid=" + newsUnit.guid());
-            }
+
             //如果不是
          }
 

@@ -5,6 +5,8 @@ import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserSigningLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.data.data.FDataSystemApplicationLogic;
+import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.ycjt.ead.ThreeDes;
@@ -359,4 +361,13 @@ public class FLoginConsole
       userInfo.setLast_sign_date(Last_sign_date);
       return userInfo;
    }
+
+   //
+   @Override
+   public FDataSystemApplicationUnit getApplicationUnitByGuid(ILogicContext logicContext,
+                                                              String applicationGuid){
+      FDataSystemApplicationLogic applicationLogic = logicContext.findLogic(FDataSystemApplicationLogic.class);
+      return applicationLogic.findByGuid(applicationGuid);
+   }
+
 }

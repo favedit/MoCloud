@@ -59,13 +59,9 @@ public class FClickService
                        IWebOutput output,
                        ILogicContext logicContext){
       FXmlNode inputNode = input.config();
-      /* FXmlNode userGuidNode = inputNode.findNode("mo-session-id");*/
-      //      FXmlNode dateTimeNode = inputNode.findNode("datetime");
       FXmlNode locationLongitudeNode = inputNode.findNode("locationlongitude");
       FXmlNode locationLatitudeNode = inputNode.findNode("locationlatitude");
-      FXmlNode last_sign_date = output.config().createNode("last_sign_date");
       String sessionCode = context.head("mo-session-id");
-      //      String dateTime = dateTimeNode.text();
       String locationLongitude = locationLongitudeNode.text();
       String locationLatitude = locationLatitudeNode.text();
       _logger.debug(this, "click--------------------------------->", "userguid={1},locationlongitude={3},locationlatitude={4}", sessionCode, locationLongitude, locationLatitude);
@@ -84,18 +80,23 @@ public class FClickService
       double locationLatitudeD = Double.parseDouble(locationLatitude);
       FDataPersonUserSigningUnit singUser = new FDataPersonUserSigningUnit();
       FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
-      long userId = 0;
+      long userId = -1;
       if(sessionInfo != null){
+         FXmlNode last_sign_date = output.config().createNode("last_sign_date");
          userId = sessionInfo.userId();
+         singUser.setUserId(userId);
+         //日期十四位
+         TDateTime dateTime = new TDateTime(new Date());
+         singUser.setSingnDate(dateTime);
+         singUser.setLocationLongitude(locationLongitudeD);
+         singUser.setLocationLatitude(locationLatitudeD);
+         _clickConsole.click(context, logicContext, sessionContext, singUser);
+         String dateTimeStr = dateTime.format("yyyy-mm-dd hh:mi:ss");
+         last_sign_date.setText(dateTimeStr);
+         return EResult.Success;
+      }else{
+         //没有找到当前的用户
+         return EResult.Failure;
       }
-      singUser.setUserId(userId);
-      //日期十四位
-      TDateTime dateTime = new TDateTime(new Date());
-      singUser.setSingnDate(dateTime);
-      singUser.setLocationLongitude(locationLongitudeD);
-      singUser.setLocationLatitude(locationLatitudeD);
-      _clickConsole.click(context, logicContext, sessionContext, singUser);
-      last_sign_date.setText(dateTime.format("yyyy-mm-dd hh:mi:ss"));
-      return EResult.Success;
    }
 }

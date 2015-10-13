@@ -1,6 +1,7 @@
 package org.mo.content.core.mobile.account;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
@@ -58,4 +59,7 @@ public interface ILoginConsole
 
    public FDataPersonUserInfo getUserInfo(long user_id,
                                           ILogicContext logicContext);
+
+   public FDataSystemApplicationUnit getApplicationUnitByGuid(ILogicContext logicContext,
+                                                              String applicationGuid);
 }
