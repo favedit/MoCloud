@@ -8,6 +8,7 @@ import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.common.EChartPage;
@@ -127,17 +128,17 @@ public class FMainAction
                                 ILogicContext logicContext,
                                 FMainPage page){
       String code = "ChartMarketerCustomer";
-      ///pc/Main.wa?do=customer
       String sessionCode = context.head("mo-session-id");
       String appOS = context.parameter("app_os");
-      if("".equals(sessionCode) || sessionCode == null){
+      if(RString.isEmpty(sessionCode)){
          throw new FFatalError("sessionCode is null.");
       }
       FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_" + appOS, sessionCode);
       if(sessionInfo == null){
          throw new FFatalError("sessionInfo is null.");
       }
-      //      System.out.println(sessionInfo.ouid());
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      session.loadInfo(sessionInfo);
       //保存日志
       saveLogger(context, sessionContext, logicContext, page, code, MODULE_CODE.get(code));
       return EChartPage.Scene;

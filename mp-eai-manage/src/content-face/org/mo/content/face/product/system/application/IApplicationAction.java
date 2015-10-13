@@ -12,7 +12,8 @@ import org.mo.web.protocol.context.IWebContext;
 //@Date 2015.09.29 
 //@version 1.0.0
 //============================================================
-public interface IApplicationAction {
+public interface IApplicationAction
+{
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -101,4 +102,16 @@ public interface IApplicationAction {
                  ILogicContext logicContext,
                  @AContainer(name = "page") FApplicationPage page,
                  @AContainer(name = "basePage") FBasePage basePage);
+
+   //============================================================
+   // <T>全查</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+   String selectAll(IWebContext context,
+                    ILogicContext logicContext,
+                    @AContainer(name = "basePage") FBasePage basePage);
 }
