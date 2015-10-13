@@ -4,19 +4,22 @@ import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import com.cyou.gccloud.define.enums.core.EGcVersionForce;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
-public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersionLogic, FDataSystemVersionUnit>implements IVersionConsole {
+public class FVersionConsole
+      extends FAbstractLogicUnitConsole<FDataSystemVersionLogic, FDataSystemVersionUnit>
+      implements
+         IVersionConsole
+{
 
    // 每页条数
    static final int _pageSize = 20;
 
-   public FVersionConsole() {
+   public FVersionConsole(){
       super(FDataSystemVersionLogic.class, FDataSystemVersionUnit.class);
    }
 
@@ -29,21 +32,24 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataVersionInfo> select(ILogicContext logicContext, FDataSystemVersionUnit unit, int pageNum, int pageSize) {
-      if (pageNum < 0) {
+   public FLogicDataset<FDataVersionInfo> select(ILogicContext logicContext,
+                                                 FDataSystemVersionUnit unit,
+                                                 int pageNum,
+                                                 int pageSize){
+      if(pageNum < 0){
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if (!RString.isEmpty(unit.label())) {
+      if(!RString.isEmpty(unit.label())){
          whereSql.append(FDataSystemVersionLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", unit.label());
       }
       FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
       FLogicDataset<FDataVersionInfo> moduleList = logic.fetchClass(FDataVersionInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
-      for (Iterator<FDataVersionInfo> iter = moduleList.iterator(); iter.hasNext();) {
-         FDataVersionInfo info = iter.next();
-         info.setApplicationLabel(info.application().label());
-         setInfoVersionLabel(info);
+      for(FDataVersionInfo info : moduleList){
+         info.setApplicationLabel(info.application().code());
+         info.setForceCdStr(EGcVersionForce.formatLabel(info.forceCd()));
+         info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
       }
       return moduleList;
    }
@@ -55,9 +61,10 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    // @return 数据对象
    // ============================================================
    @Override
-   public FDataSystemVersionUnit findByLable(ILogicContext logicContext, String label) {
+   public FDataSystemVersionUnit findByLable(ILogicContext logicContext,
+                                             String label){
       FSql whereSql = new FSql();
-      if (!RString.isEmpty(label)) {
+      if(!RString.isEmpty(label)){
          whereSql.append(FDataSystemVersionLogic.LABEL);
          whereSql.append(" like '%");
          whereSql.append("{label}");
@@ -76,9 +83,11 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    // @return 数据对象
    // ============================================================
    @Override
-   public boolean isExsitsAppIdandNumber(ILogicContext logicContext, Long applicationId, Float number) {
+   public boolean isExsitsAppIdandNumber(ILogicContext logicContext,
+                                         Long applicationId,
+                                         Float number){
       FSql whereSql = new FSql();
-      if (!RString.isEmpty(applicationId + "") && !RString.isEmpty(number + "")) {
+      if(!RString.isEmpty(applicationId + "") && !RString.isEmpty(number + "")){
          whereSql.append(FDataSystemVersionLogic.APPLICATION_ID);
          whereSql.append(" = ");
          whereSql.append("{applicationId}");
@@ -91,7 +100,7 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
       }
       FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
       FLogicDataset<FDataSystemVersionUnit> verList = logic.fetch(whereSql.toString());
-      if (verList.count() > 0) {
+      if(verList.count() > 0){
          return true;
       }
       return false;
@@ -104,32 +113,32 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    // @param page 容器
    // @return void
    // ============================================================
-   public void setInfoVersionLabel(FDataVersionInfo info) {
-      if (RString.equals(EGcResourceStatus.Unknown, info.statusCd())) {
+   public void setInfoVersionLabel(FDataVersionInfo info){
+      if(RString.equals(EGcResourceStatus.Unknown, info.statusCd())){
          info.setStatusCdStr(EGcResourceStatus.UnknownLabel);
       }
-      if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
+      if(RString.equals(EGcResourceStatus.Apply, info.statusCd())){
          info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
       }
-      if (RString.equals(EGcResourceStatus.Publish, info.statusCd())) {
+      if(RString.equals(EGcResourceStatus.Publish, info.statusCd())){
          info.setStatusCdStr(EGcResourceStatus.PublishLabel);
       }
-      if (RString.equals(EGcResourceStatus.CheckFail, info.statusCd())) {
+      if(RString.equals(EGcResourceStatus.CheckFail, info.statusCd())){
          info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
       }
-      if (RString.equals(EGcVersionForce.Unknown, info.statusCd())) {
+      if(RString.equals(EGcVersionForce.Unknown, info.statusCd())){
          info.setForceCdStr(EGcVersionForce.UnknownLabel);
       }
-      if (RString.equals(EGcVersionForce.Optional, info.statusCd())) {
+      if(RString.equals(EGcVersionForce.Optional, info.statusCd())){
          info.setForceCdStr(EGcVersionForce.OptionalLabel);
       }
-      if (RString.equals(EGcVersionForce.Auto, info.statusCd())) {
+      if(RString.equals(EGcVersionForce.Auto, info.statusCd())){
          info.setForceCdStr(EGcVersionForce.AutoLabel);
       }
-      if (RString.equals(EGcVersionForce.Force, info.statusCd())) {
+      if(RString.equals(EGcVersionForce.Force, info.statusCd())){
          info.setForceCdStr(EGcVersionForce.ForceLabel);
       }
-      if (RString.equals(EGcVersionForce.NoUpdate, info.statusCd())) {
+      if(RString.equals(EGcVersionForce.NoUpdate, info.statusCd())){
          info.setForceCdStr(EGcVersionForce.NoUpdateLabel);
       }
    }

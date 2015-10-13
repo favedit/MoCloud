@@ -17,6 +17,8 @@
             success: function(msg) {
                var result = toJsonObject(msg);
                $('#application').combobox('loadData', result);
+               
+               $('#application').combobox("select",$('#oldAppId').val());
             },
             fail: function() {
                alert("error");
@@ -28,13 +30,15 @@
          if (!isValid())
             return;
          progress();
+         var forceCd = $("#forceCdStr").combobox("getValue");
+         var applicationId = $('#application').combobox("getValue");
          var url = "/product/system/version/Version.wa?do=update&date=" + new Date().valueOf();
          var data = {
             "label": $('#label').val(),
             "adminId": $('#adminId').val(),
             "code": $('#code').val(),
-            "forceCdStr": $("#forceCdStr").combobox("getValue"),
-            "applicationId": $('#application').combobox("getValue"),
+            "forceCdStr": forceCd,
+            "applicationId": applicationId,
             "beginDate": $('#beginDate').val(),
             "downloadUrl": $('#downloadUrl').val(),
             "endDate": $('#endDate').val(),
@@ -82,7 +86,8 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <input class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false" value="<jh:write source='&unit.applicationLabel'/>" />
+                        <input type="hidden" id="oldAppId" value="<jh:write source='&unit.applicationId'/>" >
+                        <select class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false" />
                         <input name="applicationId" id="applicationId" type="hidden">
                      </div>
                   </td>
@@ -137,7 +142,7 @@
                   <td colspan="3">
                      <div align="left">
                         <input id="forceCdStr" class="easyui-combobox" style="width:200px;"  name="forceCdStr" data-options="valueField:'value',textField:'text', 
-       data:[{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'},{'value':'4','text':'不更新'}]" value="<jh:write source='&unit.forceCdStr'/>" />
+       data:[{'value':'0','text':'未知'},{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'},{'value':'4','text':'不更新'}]" value="<jh:write source='&unit.forceCd'/>" />
                      </div>
                   </td>
                </tr>               
