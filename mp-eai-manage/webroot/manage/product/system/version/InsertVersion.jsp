@@ -22,6 +22,7 @@
             success: function(msg) {
                var result = toJsonObject(msg);
                $('#application').combobox('loadData', result);
+               $('#application').combobox('select', result[0].ouid);
             },
             fail: function() {
                alert("error");
@@ -107,11 +108,10 @@
                            <option value="1">可选</option>
                            <option value="2">强制</option>
                            <option value="3">自动</option>
-                           <option value="4">不更新</option>
                            <select>
                      </div>
                   </td>
-               </tr>
+               </tr>               
                <tr>
                   <td width="30" height="33">
                      <div align="left">开始时间</div>

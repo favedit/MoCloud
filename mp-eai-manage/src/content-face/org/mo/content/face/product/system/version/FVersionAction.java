@@ -123,6 +123,7 @@ public class FVersionAction
       }
 
       FDataSystemVersionUnit unit = _versionConsole.doPrepare(logicContext);
+
       setLogicVersion(context, logicContext, unit);
       if(_versionConsole.isExsitsAppIdandNumber(logicContext, unit.applicationId(), unit.number())){
          page.setResult("版本号重复！");
@@ -230,10 +231,12 @@ public class FVersionAction
       if(!RString.isEmpty(scd)){
          unit.setForceCd(context.parameterAsInteger("forceCdStr"));
       }
-      String scc = context.parameter("statusCdStr");
-      if(!RString.isEmpty(scc)){
-         unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
-      }
+      //      String scc = context.parameter("statusCdStr");
+      //      if(!RString.isEmpty(scc)){
+      //         unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
+      //      }
+      //默认为申请
+      unit.setStatusCd(EGcResourceStatus.Apply);
       unit.setApplicationId(context.parameterAsLong("applicationId"));
       unit.setDownloadUrl(context.parameter("downloadUrl"));
       String beginDateStr = context.parameter("beginDate");
