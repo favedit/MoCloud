@@ -1,7 +1,6 @@
 package org.ahyc.eai.demo.face;
 
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -20,6 +19,5 @@ public interface ITestAction
    // @param page 页面
    //============================================================
    String construct(IWebContext context,
-                    ILogicContext logicContext,
-                    @AContainer(name = "page") FTestPage page);
+                    ILogicContext logicContext);
 }

@@ -32,8 +32,7 @@ public class FTestAction
    //============================================================
    @Override
    public String construct(IWebContext context,
-                           ILogicContext logicContext,
-                           FTestPage page){
+                           ILogicContext logicContext){
       String selectTag = RString.nvl(context.parameter("tag"));
       String rotate = RString.nvl(context.parameter("rotate"));
       String message = "";
