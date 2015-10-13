@@ -21,10 +21,7 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public interface IProvinceConsole
-      extends
-         IAbstractLogicUnitConsole<FDataCommonProvinceUnit>
-{
+public interface IProvinceConsole extends IAbstractLogicUnitConsole<FDataCommonProvinceUnit> {
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
@@ -34,10 +31,7 @@ public interface IProvinceConsole
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataProvinceInfo> select(ILogicContext logicContext,
-                                           FDataCommonProvinceUnit unit,
-                                           int pageNum,
-                                           int pageSize);
+   FLogicDataset<FDataProvinceInfo> select(ILogicContext logicContext, FDataCommonProvinceUnit unit, int pageNum, int pageSize);
 
    // ============================================================
    // <T>根据区号获取对象</T>
@@ -45,12 +39,11 @@ public interface IProvinceConsole
    // @param code 区号
    // @return 数据对象
    // ============================================================
-   FDataCommonProvinceUnit findByCode(ILogicContext logicContext,
-                                      String code);
+   FDataCommonProvinceUnit findByCode(ILogicContext logicContext, String code);
 
-   FDataCommonProvinceUnit findByLabel(FLogicContext logicContext,
-                                       String provinceLabel);
+   FDataCommonProvinceUnit findByLabel(FLogicContext logicContext, String provinceLabel);
 
-   public FDataCommonProvinceUnit findByProvinceLabel(ILogicContext logicContext,
-                                                      String label);
+   public FDataCommonProvinceUnit findByProvinceLabel(ILogicContext logicContext, String label);
+
+   public boolean isExistsByLabelandAreaIdandCountryId(ILogicContext logicContext, String proviceLabel, Long areaId, Long countryId);
 }

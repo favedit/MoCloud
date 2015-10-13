@@ -23,19 +23,15 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public class FCountryConsole
-      extends FAbstractLogicUnitConsole<FDataCommonCountryLogic, FDataCommonCountryUnit>
-      implements
-         ICountryConsole
-{
+public class FCountryConsole extends FAbstractLogicUnitConsole<FDataCommonCountryLogic, FDataCommonCountryUnit>implements ICountryConsole {
 
    // 每页条数
    static final int _pageSize = 20;
 
-   //============================================================
+   // ============================================================
    // <T>构造国家控制台。</T>
-   //============================================================
-   public FCountryConsole(){
+   // ============================================================
+   public FCountryConsole() {
       super(FDataCommonCountryLogic.class, FDataCommonCountryUnit.class);
    }
 
@@ -48,22 +44,17 @@ public class FCountryConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataCommonCountryUnit> select(ILogicContext logicContext,
-                                                       FDataCommonCountryUnit unit,
-                                                       int pageNum,
-                                                       int pageSize){
-      if(pageNum < 0){
+   public FLogicDataset<FDataCommonCountryUnit> select(ILogicContext logicContext, FDataCommonCountryUnit unit, int pageNum, int pageSize) {
+      if (pageNum < 0) {
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(unit.name())){
-         whereSql.append(FDataCommonCountryLogic.NAME);
-         whereSql.append(" LIKE '%");
-         whereSql.append(unit.name() + "%'");
+      if (!RString.isEmpty(unit.name())) {
+         whereSql.append(FDataCommonCountryLogic.NAME + " LIKE '%{name}%'");
+         whereSql.bind("name", RString.parse(unit.name()));
       }
-      String orderBy = String.format("%s %s", FDataCommonCountryLogic.OUID, "ASC");
       FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
-      FLogicDataset<FDataCommonCountryUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
+      FLogicDataset<FDataCommonCountryUnit> moduleList = logic.fetchClass(FDataCommonCountryUnit.class, null, whereSql.toString(), null, pageSize, pageNum);
       return moduleList;
    }
 
@@ -74,13 +65,11 @@ public class FCountryConsole
    // @return 数据对象
    // ============================================================
    @Override
-   public FDataCommonCountryUnit findByCode(ILogicContext logicContext,
-                                            String code){
+   public FDataCommonCountryUnit findByCode(ILogicContext logicContext, String code) {
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(code)){
-         whereSql.append(FDataCommonCountryLogic.CODE);
-         whereSql.append("='");
-         whereSql.append(code + "'");
+      if (!RString.isEmpty(code)) {
+         whereSql.append(FDataCommonCountryLogic.CODE + " = {code}");
+         whereSql.bind("code", RString.parse(code));
       }
       FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
       FLogicDataset<FDataCommonCountryUnit> roleList = logic.fetch(whereSql.toString());
@@ -94,18 +83,15 @@ public class FCountryConsole
    // @return 数据对象
    // ============================================================
    @Override
-   public FDataCommonCountryUnit findByLable(ILogicContext logicContext,
-                                             String label){
+   public FDataCommonCountryUnit findByName(ILogicContext logicContext, String name) {
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(label)){
-         whereSql.append(FDataCommonCountryLogic.NAME);
-         whereSql.append(" like '%");
-         whereSql.append("{label}");
-         whereSql.bind("label", label);
-         whereSql.append("%'");
+      if (!RString.isEmpty(name)) {
+         whereSql.append(FDataCommonCountryLogic.NAME + " LIKE '%{name}%'");
+         whereSql.bind("name", RString.parse(name));
       }
       FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
       FLogicDataset<FDataCommonCountryUnit> roleList = logic.fetch(whereSql.toString());
       return roleList.first();
    }
+
 }

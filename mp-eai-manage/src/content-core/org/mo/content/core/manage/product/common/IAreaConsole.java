@@ -12,10 +12,7 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public interface IAreaConsole
-      extends
-         IAbstractLogicUnitConsole<FDataCommonAreaUnit>
-{
+public interface IAreaConsole extends IAbstractLogicUnitConsole<FDataCommonAreaUnit> {
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
    //
@@ -24,11 +21,10 @@ public interface IAreaConsole
    // @param pageNum 页码
    // @param pageSize 每页显示的行数
    // @return 数据集合
-   FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext,
-                                       FDataCommonAreaUnit unit,
-                                       int pageNum,
-                                       int pageSize);
+   FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext, FDataCommonAreaUnit unit, int pageNum, int pageSize);
 
-   public FDataCommonAreaUnit findByLable(ILogicContext logicContext,
-                                          String label);
+   public FDataCommonAreaUnit findByLable(ILogicContext logicContext, String label);
+
+   public boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, String areaLabel, Long countryId);
+
 }

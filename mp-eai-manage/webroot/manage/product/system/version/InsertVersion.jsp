@@ -87,6 +87,9 @@
        <input id="applicationLabel" name="applicationLabel" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
         data-options="required:true,validType:'length[0,80]'" /> 
+        <input id="applicationLabel" name="applicationLabel" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,80]'" /> 
       </div></td>
     </tr>
     <tr>

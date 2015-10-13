@@ -58,8 +58,9 @@ KindEditor.ready(function(K) {
     <tr>
      <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
-         <input id="statusCdStr" name="statusCdStr" class="easyui-validatebox textbox" value="申请" readonly="readonly"
-        style="width:380px;height:20px"/>
+        <select  style="width:380px;height:20px" id="statusCdStr" class="easyui-combobox" name="statusCdStr" style="width:200px;">
+             <option value="1">申请</option>
+        <select>
      </div></td>
     </tr>
     <tr>
@@ -67,17 +68,21 @@ KindEditor.ready(function(K) {
      <td><div align="left">
        <!-- <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>   -->
-      <select id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
+      <select  style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
              <option value="1">展示</option>
              <option value="2">未展示</option>
         <select>
       </div></td>
     </tr>
     <tr>
-      <td  height="38" width="74"><div align="left">关键字:</div></td>
-      <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
-        style="width:380px;height:20px"
-        data-options="validType:'length[0,800]'" /></td>
+     <td height="38"><div align="left">外链状态:</div></td>
+     <td><div align="left">
+       <select  style="width:380px;height:20px" id="linkCdStr" class="easyui-combobox" name="linkCdStr" style="width:200px;">
+             <option value="1">内容</option>
+             <option value="0">未未知</option>
+             <option value="2">外链</option>
+        <select>
+      </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
@@ -86,14 +91,10 @@ KindEditor.ready(function(K) {
       </div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">外链状态:</div></td>
-     <td><div align="left">
-       <select id="linkCdStr" class="easyui-combobox" name="linkCdStr" style="width:200px;">
-             <option value="1">内容</option>
-             <option value="0">未未知</option>
-             <option value="2">外链</option>
-        <select>
-      </div></td>
+      <td  height="38" width="74"><div align="left">关键字:</div></td>
+      <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
+        style="width:380px;height:20px"
+        data-options="validType:'length[0,800]'" /></td>
     </tr>
     <tr>
      <td height="38"><div align="left">外链地址:</div></td>

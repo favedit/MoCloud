@@ -36,7 +36,7 @@
        $('#imgdiv').hide();
        $("#oriIcon").attr("src","");
        $("#removeFile").hide();
-       //$('#uploadFile').show();
+       $('#butto1').hide();
     }
     var editor;
     KindEditor.ready(function(K) {
@@ -78,7 +78,7 @@
     <tr>
       <td width="54" height="38"><div align="left">标题:</div></td>
       <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:380px;height:20px" readonly="readonly"
+        style="width:380px;height:20px"
         value="<jh:write source='&unit.label'/>" />
         <input id="adminId" name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
@@ -94,18 +94,33 @@
     </tr>
     <tr>
      <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
-     <td><div align="left">
-       <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]"
-       value="<jh:write source='&unit.statusCdStr'/>"/>
+     <td style="width:380px;"><div align="left">
+       <select  style="width:380px;height:20px" id="statusCdStr" class="easyui-combobox" name="statusCdStr" style="width:200px;">
+             <option value="1">申请</option>
+        <select>
      </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否显示:</div></td>
-     <td><div align="left">
-       <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
+     <td style="width:380px;"><div align="left">
+       <input style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"
        value="<jh:write source='&unit.displayCdStr'/>"/>   
+      </div></td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">外链状态:</div></td>
+     <td><div align="left">
+       <input style="width:380px;height:20px" id="linkCdStr" class="easyui-combobox" name="linkCdStr" data-options="valueField:'value',textField:'text',
+       data:[{'value':'0','text':'未知'},{'value':'1','text':'内容'},{'value':'2','text':'外链'}]" value="<jh:write source='&unit.linkCdStr'/>"/>  
+      </div></td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td  colspan="2"><div align="left">
+       <input type="file" name="iconUrl" id="iconUrl" style="display:none;"/>
+       <input style="display:none;" id="oiconUr" style="width:380px;" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" />
+       <input type="button" id="butto1" onclick="removeFile()" value="上传"/>
       </div></td>
     </tr>
     <tr>
@@ -113,21 +128,6 @@
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         data-options="validType:'length[0,800]'"   value="<jh:write source='&unit.keywords'/>"/></td>
-    </tr>
-    
-    <tr>
-     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
-     <td  colspan="2"><div align="left">
-       <input type="file" name="iconUrl" id="iconUrl" style="display:none;"/>
-       <input id="oiconUr" style="width:380px;" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" onclick="removeFile()"/>
-      </div></td>
-    </tr>
-    <tr>
-     <td height="38"><div align="left">外链状态:</div></td>
-     <td><div align="left">
-       <input id="linkCdStr" class="easyui-combobox" name="linkCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'内容'},{'value':'2','text':'外链'}]" value="<jh:write source='&unit.linkCdStr'/>"/>  
-      </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">外链地址:</div></td>
@@ -145,7 +145,7 @@
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">内&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;容:</div></td>
+     <td><div align="left">内容:</div></td>
      <td align="left"  colspan="2">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px" ></textarea>
           <input style="display:none" id="content" name="content" />

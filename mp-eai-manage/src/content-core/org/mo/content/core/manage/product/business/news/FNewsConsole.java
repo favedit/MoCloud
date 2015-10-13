@@ -16,8 +16,6 @@ import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -32,8 +30,6 @@ import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic, FDataLogicNewsUnit>implements INewsConsole {
 
-   // 日志输出接口
-   private static ILogger _logger = RLogger.find(FNewsConsole.class);
    // 每页条数
    static final int _pageSize = 20;
    // 应用名称

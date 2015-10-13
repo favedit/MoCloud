@@ -26,20 +26,17 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public class FAreaConsole
-      extends FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>
-      implements
-         IAreaConsole
-         
-{
-    //国家控制台
-    @ALink
-    protected ICountryConsole _countryConsole;
+public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>implements IAreaConsole
 
-   //============================================================
+{
+   // 国家控制台
+   @ALink
+   protected ICountryConsole _countryConsole;
+
+   // ============================================================
    // <T>构造区域控制台。</T>
-   //============================================================
-   public FAreaConsole(){
+   // ============================================================
+   public FAreaConsole() {
       super(FDataCommonAreaLogic.class, FDataCommonAreaUnit.class);
    }
 
@@ -52,31 +49,30 @@ public class FAreaConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext,
-                                              FDataCommonAreaUnit unit,
-                                              int pageNum,
-                                              int pageSize){
-      if(pageNum < 0){
+   public FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext, FDataCommonAreaUnit unit, int pageNum, int pageSize) {
+      if (pageNum < 0) {
          pageNum = 0;
       }
-      FSql where = new FSql();
-      if(!RString.isEmpty(unit.label())){
-         where.append(FDataCommonAreaLogic.LABEL);
-         where.append(" LIKE '%");
-         where.append(unit.label() + "%'");
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(unit.label())) {
+         whereSql.append(FDataCommonAreaLogic.LABEL);
+         whereSql.append(" like ");
+         whereSql.append(" '%{label}%'");
+         whereSql.bind("label", unit.label());
       }
-      //      String orderBy = String.format("%s %s", FDataCommonAreaLogic.LABEL, "ASC");
+      // String orderBy = String.format("%s %s", FDataCommonAreaLogic.LABEL,
+      // "ASC");
       FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
-      FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, where.toString(), null, pageSize, pageNum);
-      for(Iterator<FDataAreaInfo> iterator = userInfoList.iterator(); iterator.hasNext();){
-          FDataAreaInfo tempUnit = iterator.next();
-          //         String _areaLabel = "";
-          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
-          if(unit2 != null){
-             String _countryLabel = unit2.name();
-             tempUnit.setCountryLabel(_countryLabel);
-          }
-       }
+      FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      for (Iterator<FDataAreaInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
+         FDataAreaInfo tempUnit = iterator.next();
+         // String _areaLabel = "";
+         FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
+         if (unit2 != null) {
+            String _countryLabel = unit2.name();
+            tempUnit.setCountryLabel(_countryLabel);
+         }
+      }
       return userInfoList;
    }
 
@@ -87,18 +83,44 @@ public class FAreaConsole
    // @return 数据对象
    // ============================================================
    @Override
-   public FDataCommonAreaUnit findByLable(ILogicContext logicContext,
-                                          String label){
+   public FDataCommonAreaUnit findByLable(ILogicContext logicContext, String label) {
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(label)){
+      if (!RString.isEmpty(label)) {
          whereSql.append(FDataCommonAreaLogic.LABEL);
-         whereSql.append(" like '%");
-         whereSql.append("{label}");
+         whereSql.append(" like ");
+         whereSql.append(" '%{label}%'");
          whereSql.bind("label", label);
-         whereSql.append("%'");
       }
       FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
       FLogicDataset<FDataCommonAreaUnit> roleList = logic.fetch(whereSql.toString());
       return roleList.first();
+   }
+
+   // ============================================================
+   // <T>根据区域标签和国家id，判断是否存在</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, String areaLabel, Long countryId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(areaLabel) && !RString.isEmpty(countryId + "")) {
+         whereSql.append(FDataCommonAreaLogic.LABEL);
+         whereSql.append(" like ");
+         whereSql.append(" '%{label}%'");
+         whereSql.bind("label", areaLabel);
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonAreaLogic.COUNTRY_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {countryId}");
+         whereSql.bind("countryId", RString.parse(countryId));
+         FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
+         FLogicDataset<FDataCommonAreaUnit> areaList = logic.fetch(whereSql.toString());
+         if (areaList.count() > 0) {
+            return true;
+         }
+      }
+      return false;
    }
 }

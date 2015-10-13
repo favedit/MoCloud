@@ -12,10 +12,7 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public interface ICountryConsole
-      extends
-         IAbstractLogicUnitConsole<FDataCommonCountryUnit>
-{
+public interface ICountryConsole extends IAbstractLogicUnitConsole<FDataCommonCountryUnit> {
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
@@ -25,10 +22,7 @@ public interface ICountryConsole
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataCommonCountryUnit> select(ILogicContext logicContext,
-                                                FDataCommonCountryUnit unit,
-                                                int pageNum,
-                                                int pageSize);
+   FLogicDataset<FDataCommonCountryUnit> select(ILogicContext logicContext, FDataCommonCountryUnit unit, int pageNum, int pageSize);
 
    // ============================================================
    // <T>根据代码获取对象</T>
@@ -36,8 +30,7 @@ public interface ICountryConsole
    // @param code 代码
    // @return 数据对象
    // ============================================================
-   FDataCommonCountryUnit findByCode(ILogicContext logicContext,
-                                     String code);
+   FDataCommonCountryUnit findByCode(ILogicContext logicContext, String code);
 
    // ============================================================
    // <T>根据标签获取对象</T>
@@ -45,6 +38,5 @@ public interface ICountryConsole
    // @param label 标签
    // @return 数据对象
    // ============================================================
-   public FDataCommonCountryUnit findByLable(ILogicContext logicContext,
-                                             String label);
+   public FDataCommonCountryUnit findByName(ILogicContext logicContext, String name);
 }
