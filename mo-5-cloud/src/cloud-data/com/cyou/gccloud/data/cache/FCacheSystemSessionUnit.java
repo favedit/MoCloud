@@ -111,6 +111,12 @@ public class FCacheSystemSessionUnit
    // 字段项目编号的定义。
    protected long _projectId;
 
+   // 存储字段应用编号的定义。
+   private long __applicationId;
+
+   // 字段应用编号的定义。
+   protected long _applicationId;
+
    // 存储字段参数集合的定义。
    private String __parameters;
 
@@ -553,6 +559,33 @@ public class FCacheSystemSessionUnit
    }
 
    //============================================================
+   // <T>判断应用编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isApplicationIdChanged(){
+      return __applicationId != _applicationId;
+   }
+
+   //============================================================
+   // <T>获得应用编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long applicationId(){
+      return _applicationId;
+   }
+
+   //============================================================
+   // <T>设置应用编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setApplicationId(long value){
+      _applicationId = value;
+   }
+
+   //============================================================
    // <T>判断参数集合的数据是否改变。</T>
    //
    // @return 数据内容
@@ -726,6 +759,8 @@ public class FCacheSystemSessionUnit
             return RDouble.toString(_locationLatitude);
          case "project_id":
             return Long.toString(_projectId);
+         case "application_id":
+            return Long.toString(_applicationId);
          case "parameters":
             return _parameters;
          case "create_user_id":
@@ -794,6 +829,9 @@ public class FCacheSystemSessionUnit
             break;
          case "project_id":
             _projectId = RLong.parse(value);
+            break;
+         case "application_id":
+            _applicationId = RLong.parse(value);
             break;
          case "parameters":
             _parameters = value;
@@ -885,6 +923,10 @@ public class FCacheSystemSessionUnit
                __projectId = RLong.parse(value);
                _projectId = __projectId;
                break;
+            case "application_id":
+               __applicationId = RLong.parse(value);
+               _applicationId = __applicationId;
+               break;
             case "parameters":
                __parameters = value;
                _parameters = __parameters;
@@ -932,6 +974,7 @@ public class FCacheSystemSessionUnit
       row.set("locationLongitude", _locationLongitude);
       row.set("locationLatitude", _locationLatitude);
       row.set("projectId", _projectId);
+      row.set("applicationId", _applicationId);
       row.set("parameters", _parameters);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -962,6 +1005,7 @@ public class FCacheSystemSessionUnit
       map.put("locationLongitude", RDouble.toString(_locationLongitude));
       map.put("locationLatitude", RDouble.toString(_locationLatitude));
       map.put("projectId", RLong.toString(_projectId));
+      map.put("applicationId", RLong.toString(_applicationId));
       map.put("parameters", _parameters);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -990,6 +1034,7 @@ public class FCacheSystemSessionUnit
       _roleCode = input.readString();
       _roleModules = input.readString();
       _projectId = input.readInt64();
+      _applicationId = input.readInt64();
       _parameters = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -1018,6 +1063,7 @@ public class FCacheSystemSessionUnit
       output.writeString(_roleCode);
       output.writeString(_roleModules);
       output.writeInt64(_projectId);
+      output.writeInt64(_applicationId);
       output.writeString(_parameters);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

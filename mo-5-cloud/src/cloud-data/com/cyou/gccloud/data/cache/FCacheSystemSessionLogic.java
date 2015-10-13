@@ -77,6 +77,9 @@ public class FCacheSystemSessionLogic
    // 字段项目编号的定义。
    public final static SLogicFieldInfo PROJECT_ID = new SLogicFieldInfo("PROJECT_ID");
 
+   // 字段应用编号的定义。
+   public final static SLogicFieldInfo APPLICATION_ID = new SLogicFieldInfo("APPLICATION_ID");
+
    // 字段参数集合的定义。
    public final static SLogicFieldInfo PARAMETERS = new SLogicFieldInfo("PARAMETERS");
 
@@ -93,7 +96,7 @@ public class FCacheSystemSessionLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LOGIC_CODE`,`FROM_CD`,`FROM_CODE`,`SESSION_CODE`,`USER_ID`,`USER_LABEL`,`ROLE_ID`,`ROLE_CODE`,`ROLE_MODULES`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`PROJECT_ID`,`PARAMETERS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LOGIC_CODE`,`FROM_CD`,`FROM_CODE`,`SESSION_CODE`,`USER_ID`,`USER_LABEL`,`ROLE_ID`,`ROLE_CODE`,`ROLE_MODULES`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`PROJECT_ID`,`APPLICATION_ID`,`PARAMETERS`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造系统会话表逻辑单元。</T>
@@ -701,6 +704,7 @@ public class FCacheSystemSessionLogic
       cmd.append(",`LOCATION_LONGITUDE`");
       cmd.append(",`LOCATION_LATITUDE`");
       cmd.append(",`PROJECT_ID`");
+      cmd.append(",`APPLICATION_ID`");
       cmd.append(",`PARAMETERS`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -800,6 +804,13 @@ public class FCacheSystemSessionLogic
          cmd.append("NULL");
       }else{
          cmd.append(projectId);
+      }
+      cmd.append(',');
+      long applicationId = unit.applicationId();
+      if(applicationId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(applicationId);
       }
       cmd.append(',');
       String parameters = unit.parameters();
@@ -987,6 +998,15 @@ public class FCacheSystemSessionLogic
             cmd.append("NULL");
          }else{
             cmd.append(projectId);
+         }
+      }
+      if(unit.isApplicationIdChanged()){
+         cmd.append(",`APPLICATION_ID`=");
+         long applicationId = unit.applicationId();
+         if(applicationId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(applicationId);
          }
       }
       if(unit.isParametersChanged()){

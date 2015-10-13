@@ -19,6 +19,7 @@ CREATE TABLE `CC_SYS_SESSION`
    `LOCATION_LONGITUDE`            DOUBLE, 
    `LOCATION_LATITUDE`             DOUBLE, 
    `PROJECT_ID`                    BIGINT, 
+   `APPLICATION_ID`                BIGINT, 
    `PARAMETERS`                    VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
@@ -30,7 +31,7 @@ ALTER TABLE CC_SYS_SESSION
    ADD CONSTRAINT CC_SYS_SES_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE CC_SYS_SESSION 
-   ADD CONSTRAINT CC_SYS_SES_UK_SCD UNIQUE ( LOGIC_CODE, FROM_CODE, SESSION_CODE ); 
+   ADD CONSTRAINT CC_SYS_SES_UK_SCD UNIQUE ( LOGIC_CODE, FROM_CODE, SESSION_CODE );
 
 -- ------------------------------------------------------------
 -- Create table [Cache.System.Validation]
