@@ -29,8 +29,8 @@
             }
          });
       })
-      
    </script>
+
    <body bgcolor="#198bc9">
       <div id="cy_right" style="width:100%">
          <div class="right_title" style="width:100%">
@@ -88,16 +88,7 @@
                      </div>
                   </td>
                </tr>
-               <tr>
-                  <td width="69" height="33" colspan="1">
-                     <div align="left">下载地址</div>
-                  </td>
-                  <td colspan="3">
-                     <div align="left">
-                        <input id="downloadUrl" name="downloadUrl" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true" />
-                     </div>
-                  </td>
-               </tr>
+
                <tr>
                   <td height="30">
                      <div align="left">更新状态</div>
@@ -111,14 +102,15 @@
                            <select>
                      </div>
                   </td>
-               </tr>               
+               </tr>
+
                <tr>
                   <td width="30" height="33">
                      <div align="left">开始时间</div>
                   </td>
                   <td width="98">
                      <div align="left">
-                        <input id="beginDate"style="width:200px;height:18px;" name="beginDate" class="easyui-datebox" />
+                        <input id="beginDate" style="width:200px" name="beginDate" class="easyui-datebox" />
                      </div>
                   </td>
                   <td width="30" height="33">
@@ -126,7 +118,17 @@
                   </td>
                   <td width="98">
                      <div align="left">
-                        <input id="endDate"style="width:200px;height:18px;" name="endDate" class="easyui-datebox" />
+                        <input id="endDate" style="width:200px" name="endDate" class="easyui-datebox" />
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td width="69" height="33" colspan="1">
+                     <div align="left">下载地址</div>
+                  </td>
+                  <td colspan="3">
+                     <div align="left">
+                        <input id="downloadUrl" name="downloadUrl" class="easyui-validatebox textbox notnull" style="width:500px;height:18px;" data-options="required:true" />
                      </div>
                   </td>
                </tr>

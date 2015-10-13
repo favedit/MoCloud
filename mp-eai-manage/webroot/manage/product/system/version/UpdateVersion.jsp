@@ -17,8 +17,8 @@
             success: function(msg) {
                var result = toJsonObject(msg);
                $('#application').combobox('loadData', result);
-               
-               $('#application').combobox("select",$('#oldAppId').val());
+
+               $('#application').combobox("select", $('#oldAppId').val());
             },
             fail: function() {
                alert("error");
@@ -86,13 +86,13 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <input type="hidden" id="oldAppId" value="<jh:write source='&unit.applicationId'/>" >
+                        <input type="hidden" id="oldAppId" value="<jh:write source='&unit.applicationId'/>">
                         <select class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false" />
                         <input name="applicationId" id="applicationId" type="hidden">
                      </div>
                   </td>
                </tr>
-               
+
                <tr>
                   <td width="70" height="33">
                      <div align="left">版本标题</div>
@@ -125,34 +125,26 @@
                      </div>
                   </td>
                </tr>
-               <tr>
-                  <td width="70" height="33" colspan="1">
-                     <div align="left">下载地址</div>
-                  </td>
-                  <td colspan="3">
-                     <div align="left">
-                        <input id="downloadUrl" name="downloadUrl" class="easyui-validatebox textbox notnull" style="width:200px;" data-options="required:true" value="<jh:write source='&unit.downloadUrl'/>" />
-                     </div>
-                  </td>
-               </tr>
+
                <tr>
                   <td height="30">
                      <div align="left">更新状态</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <input id="forceCdStr" class="easyui-combobox" style="width:200px;"  name="forceCdStr" data-options="valueField:'value',textField:'text', 
+                        <input id="forceCdStr" class="easyui-combobox" style="width:200px;" name="forceCdStr" data-options="valueField:'value',textField:'text', 
        data:[{'value':'0','text':'未知'},{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'}]" value="<jh:write source='&unit.forceCd'/>" />
                      </div>
                   </td>
-               </tr>               
+               </tr>
+
                <tr>
                   <td width="70" height="33">
                      <div align="left">开始时间</div>
                   </td>
                   <td width="230">
                      <div align="left">
-                        <input id="beginDate" name="beginDate"style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.beginDate'/>"></input>
+                        <input id="beginDate" name="beginDate" style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.beginDate'/>"></input>
                      </div>
                   </td>
                   <td width="70" height="33">
@@ -160,7 +152,17 @@
                   </td>
                   <td width="208">
                      <div align="left">
-                        <input id="endDate" name="endDate"style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.endDate'/>"></input>
+                        <input id="endDate" name="endDate" style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.endDate'/>"></input>
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td width="70" height="33" colspan="1">
+                     <div align="left">下载地址</div>
+                  </td>
+                  <td colspan="3">
+                     <div align="left">
+                        <input id="downloadUrl" name="downloadUrl" class="easyui-validatebox textbox notnull" style="width:500px;" data-options="required:true" value="<jh:write source='&unit.downloadUrl'/>" />
                      </div>
                   </td>
                </tr>

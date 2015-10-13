@@ -131,9 +131,12 @@ function insert_admin_editButton(value, row, index) {
       //      return del;
    }
    return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;|&nbsp;" + del;
-
-
 }
+
+function downloadButton(value, row, index){
+      var down = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="downloadmanage(\'' + row.downloadUrl + '\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-save l-btn-icon-left">保存</span></span></a>';
+      return down;
+   }
 //在教程里获取应用列表
 function getApplicationJson(page) {
    var url = null;
