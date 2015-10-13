@@ -142,4 +142,28 @@ public class FVersionConsole
          info.setForceCdStr(EGcVersionForce.NoUpdateLabel);
       }
    }
+
+   @Override
+   public FLogicDataset<FDataVersionInfo> selectExamine(ILogicContext logicContext,
+                                                        FDataSystemVersionUnit unit,
+                                                        int pageNum,
+                                                        int pageSize){
+      if(pageNum < 0){
+         pageNum = 0;
+      }
+      FSql whereSql = new FSql();
+      whereSql.append(FDataSystemVersionLogic.STATUS_CD, " = " + EGcResourceStatus.Apply + " ");// 只查询状态为申请
+      if(!RString.isEmpty(unit.label())){
+         whereSql.append(FDataSystemVersionLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.bind("label", unit.label());
+      }
+      FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
+      FLogicDataset<FDataVersionInfo> moduleList = logic.fetchClass(FDataVersionInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      for(FDataVersionInfo info : moduleList){
+         info.setApplicationLabel(info.application().code());
+         info.setForceCdStr(EGcVersionForce.formatLabel(info.forceCd()));
+         info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
+      }
+      return moduleList;
+   }
 }
