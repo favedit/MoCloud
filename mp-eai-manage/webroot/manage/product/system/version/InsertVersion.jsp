@@ -9,7 +9,7 @@
       function submitForm() {
          if (!isValid()) return;
          var version = $("#version");
-         $("#application_id").val($('#application').combobox("getValue"));
+         $("#applicationId").val($('#application').combobox("getValue"));
          version.submit();
       }
       $(function() {
@@ -52,8 +52,8 @@
                      <div align="left">应用</div>
                   </td>
                   <td colspan="3">
-                     <input class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false"/>
-                     <input name="application_id" id="application_id" >
+                     <input class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false" />
+                     <input name="applicationId" id="applicationId" type="hidden">
                   </td>
                </tr>
                <tr>
@@ -77,7 +77,6 @@
                      </div>
                   </td>
                </tr>
-               
                <tr>
                   <td width="30" height="33" colspan="1">
                      <div align="left">版本号</div>
@@ -85,6 +84,16 @@
                   <td colspan="3">
                      <div align="left">
                         <input id="number" name="number" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true" />
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td width="30" height="33" colspan="1">
+                     <div align="left">下载地址</div>
+                  </td>
+                  <td colspan="3">
+                     <div align="left">
+                        <input id="downloadUrl" name="downloadUrl" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true" />
                      </div>
                   </td>
                </tr>

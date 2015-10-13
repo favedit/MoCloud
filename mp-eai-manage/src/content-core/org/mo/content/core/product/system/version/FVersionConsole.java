@@ -91,7 +91,7 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
       }
       FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
       FLogicDataset<FDataSystemVersionUnit> verList = logic.fetch(whereSql.toString());
-      if (verList.count() > 1) {
+      if (verList.count() > 0) {
          return true;
       }
       return false;

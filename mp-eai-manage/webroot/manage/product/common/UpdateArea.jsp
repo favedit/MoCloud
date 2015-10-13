@@ -9,7 +9,6 @@
 </HEAD>
 <script>
     function submitForm() {
-
         if (!isValid())
             return;
         progress();
@@ -38,6 +37,21 @@
             }
         });
     }
+    function onCountrySelect(){alert(1111);
+         $('#countryLabel').combobox('clear');
+         $('#countryLabel').combobox('loadData',"");
+         var url = "/manage/product/common/Area.wa?do=selectCountry&date="+new Date().valueOf();
+         $.ajax({
+            type:"POST",
+            url:url,
+            success:function(msg){
+             $('#countryLabel').combobox('loadData', toJsonObject(msg));
+            },
+            fail:function(){
+                alert("error");
+            }
+         });
+      }
 </script>
 
 <body bgcolor="#198bc9">
@@ -59,14 +73,14 @@
    action="/manage/product/common/Area.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-    <table width="550" border="0" align="left"
+    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
      <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
      <td><div align="left">
-       <input id="label" name="label" class="easyui-validatebox textbox"  value="<jh:write source='&unit.label'/>"  readonly="readonly" 
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,80]'" />  <input id="adminId"
+       <input id="label" name="label" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.label'/>" 
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,80]'" />  <input id="adminId"
         name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
           <input id="ouid"
@@ -79,21 +93,21 @@
      <td><div align="left">
        <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox" value="<jh:write source='&unit.countryLabel'/>"
         style="width:280px;height:20px;"
-        data-options="validType:'length[0,70]'" /> 
+        data-options="validType:'length[0,70]'" />
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
      <td><div align="left">
-       <input id="code" name="code" class="easyui-validatebox textbox" value="<jh:write source='&unit.code'/>"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,18]'" /> 
+       <input id="code" name="code" class="easyui-validatebox textbox notnull" value="<jh:write source='&unit.code'/>"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,18]'" /> 
       </div></td>
     </tr>
     <tr>
       <td width="78" height="30" align="left">备注</td>
       <td height="30" align="left">
-         <input id="note" name="note"  value="<jh:write source='&unit.note'/>" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:400px" />
+         <input id="note" name="note"  value="<jh:write source='&unit.note'/>" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:600px" />
       </td>
    </tr>
    </table>

@@ -8,7 +8,9 @@
 </HEAD>
 <script>
     function submitForm() {
-        $("#config").submit();
+       if (!isValid())
+           return;
+       $("#config").submit();
     }
 </script>
 <body bgcolor="#198bc9">
@@ -30,46 +32,44 @@
    action="/manage/product/common/Country.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-   <table width="550" border="0" align="left"
+   <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
      <td width="78" height="33"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
      <td><div align="left">
-       <input id="name" name="name" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,70]'" /> <input id="adminId"
+       <input id="name" name="name" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,70]'" /> <input id="adminId"
         name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
-     <td><div align="left">
-       <input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,70]'" /> 
+     <td width="30" height="33" colspan="1"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td colspan="3"><div align="left">
+       <input id="label" name="label" style="width:380px;height:20px;"
+        class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,80]'" /> 
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</div></td>
      <td><div align="left">
-       <input id="phoneCode" name="phoneCode" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,7]'" /> 
+       <input id="phoneCode" name="phoneCode" style="width:380px;height:20px;" 
+        class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,7]'" /> 
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
      <td><div align="left">
-       <input id="code" name="code" class="easyui-validatebox textbox"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,80]'" /> 
+       <input id="code" name="code" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,80]'" /> 
       </div></td>
     </tr>
     <tr>
       <td width="78" height="30" align="left">备注</td>
       <td height="30" align="left">
-         <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:400px" />
+         <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:600px" />
       </td>
    </tr>
    </table>

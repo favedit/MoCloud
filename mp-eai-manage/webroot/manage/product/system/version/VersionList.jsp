@@ -96,8 +96,8 @@
      data-options="field:'number',halign:'center',align:'left',sortable:true"
      width="190px">版本号</th>
      <th
-     data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="100px">状态</th>
+     data-options="field:'downloadUrl',halign:'center',align:'left',sortable:true"
+     width="290px">下载地址</th>
      <th
      data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true"
      width="90px">版本更新状态</th>

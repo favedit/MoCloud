@@ -8,6 +8,22 @@
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 </HEAD>
 <script>
+   $(function() {
+       var url = "/product/system/application/Application.wa?do=selectAll&date=" + new Date().valueOf();
+       var data = null;
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+             var result = toJsonObject(msg);
+             $('#application').combobox('loadData', result);
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
+    })
     function submitForm() {
         if (!isValid())
             return;
@@ -18,10 +34,10 @@
             "label" : $('#label').val(),
             "adminId" : $('#adminId').val(),
             "code" : $('#code').val(),
-            "statusCdStr" : $("#statusCdStr").combobox("getValue"),
             "forceCdStr" : $("#forceCdStr").combobox("getValue"),
-            "applicationLabel" : $('#applicationLabel').val(),
+            "applicationId" : $('#application').combobox("getValue"),
             "beginDate" : $('#beginDate').val(),
+            "downloadUrl" : $('#downloadUrl').val(),
             "endDate" : $('#endDate').val(),
             "note" : $('#note').val(),
             "number" : $('#number').val(),
@@ -33,7 +49,6 @@
             data : data,
             success : function(msg) {
                 closeProgress();
-                var result = toJsonObject(msg);
                 location.href = "/product/system/version/Version.wa";
             },
             fail : function() {
@@ -94,13 +109,11 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
-     <td colspan="3"><div align="left">
-       <input id="statusCdStr" class="easyui-combobox" name="statusCdStr" 
-       data-options="valueField:'value',textField:'text', 
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'申请'},{'value':'2','text':'发布'},{'value':'3','text':'审核未通过'}]" 
-       value="<jh:write source='&unit.statusCdStr'/>"/>  
-     </div></td>
+       <td width="30" height="33" colspan="1"><div align="left">下载地址</div></td>
+       <td colspan="3"><div align="left">
+             <input id="downloadUrl" name="downloadUrl" class="easyui-validatebox textbox notnull" 
+             style="width:200px;height:18px;" data-options="required:true" value="<jh:write source='&unit.downloadUrl'/>"/>
+          </div></td>
     </tr>
     <tr>
      <td height="30"><div align="left">版本更新状态:</div></td>
@@ -114,9 +127,8 @@
     <tr>
      <td width="30" height="33"><div align="left">应&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用:</div></td>
      <td colspan="3"><div align="left">
-       <input id="applicationLabel" name="applicationLabel" class="easyui-validatebox textbox notnull"
-        style="width:380px;height:20px;" value="<jh:write source='&unit.applicationLabel'/>"
-        data-options="required:true,validType:'length[0,80]'" /> 
+        <input class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false"  value="<jh:write source='&unit.applicationLabel'/>"/>
+        <input name="applicationId" id="applicationId" type="hidden">
       </div></td>
     </tr>
     <tr>
