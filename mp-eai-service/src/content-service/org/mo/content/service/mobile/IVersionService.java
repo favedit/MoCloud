@@ -8,7 +8,7 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>版本更新接口。</T>
+// <T>版本更新服务</T>
 //============================================================
 public interface IVersionService
 {

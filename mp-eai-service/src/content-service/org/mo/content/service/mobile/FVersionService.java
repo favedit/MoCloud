@@ -35,10 +35,11 @@ public class FVersionService
    @ALink
    protected IVersionConsole _versionConsole;
 
-   //会话控制台
+   //WebSession会话控制台
    @ALink
    protected IWebSessionConsole _sessionConsole;
 
+   //GcSession会话控制台
    @ALink
    protected IGcSessionConsole _gcSessionConsole;
 

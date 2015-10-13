@@ -24,7 +24,7 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>新闻服务。</T>
+// <T>登录服务。</T>
 //============================================================
 public class FLoginService
       extends FObject
@@ -38,17 +38,16 @@ public class FLoginService
    @ALink
    protected ILoginConsole _loginConsole;
 
-   //session会话控制台
+   //GcSession会话控制台
    @ALink
    protected IGcSessionConsole _sessionConsole;
 
-   //session会话控制台
+   //WebSession会话控制台
    @ALink
    protected IWebSessionConsole _webSessionConsole;
 
    //============================================================
    // <T>默认逻辑。</T>
-   //
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -63,7 +62,7 @@ public class FLoginService
    }
 
    //============================================================
-   //
+   // @登录
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -164,7 +163,7 @@ public class FLoginService
    }
 
    //============================================================
-   // @自动登录接口
+   // @已经登录的用户自动登录
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -356,6 +355,15 @@ public class FLoginService
       }
    }
 
+   //============================================================
+   // @用户反馈
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // @logicContext 逻辑上下文
+   // @sessionContext session上下文
+   //============================================================
    @Override
    public EResult feedback(IWebContext context,
                            IWebInput input,

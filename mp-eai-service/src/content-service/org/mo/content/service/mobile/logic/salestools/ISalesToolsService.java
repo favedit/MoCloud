@@ -24,9 +24,11 @@ public interface ISalesToolsService
                    IWebOutput output);
 
    //============================================================
-   // <T>根据guid获取新闻相关信息。</T>
-   //
-   // @param guid 
+   // <T>根据guid获取销售工具相关信息。</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
    //============================================================
    EResult query(IWebContext context,
                  IWebInput input,
@@ -34,10 +36,12 @@ public interface ISalesToolsService
                  ILogicContext logicContext);
 
    //============================================================
-   // <T>分页获取新闻相关信息。</T>
-   //
-   // @param pageNum 页数
-   // @param pageSize 每页的行数
+   // <T>分页获取销售工具相关信息。</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   //============================================================
    EResult select(IWebContext context,
                   IWebInput input,
                   IWebOutput output,

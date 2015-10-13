@@ -12,11 +12,10 @@ import org.mo.web.protocol.context.IWebContext;
 public interface ILoginConsole
 {
    //============================================================
-   //
+   // @登录逻辑处理
    // @param context 页面环境
    // @param passport 用户名
    // @param password 密码
-   // @return 处理结果
    // @logicContext 逻辑上下文
    // @sessionContext session上下文
    //============================================================
@@ -37,29 +36,67 @@ public interface ILoginConsole
    public String oaLogin(String passport,
                          String password);
 
+   //============================================================
+   // @同步oa用户到数据库中
+   // @param logicContext 逻辑上下文
+   // @param backUser oa接口返回的用户
+   // @param from 是通过什么身份登录的系统
+   // @param changePass  以何种身份登录的用户名
+   //============================================================
    public FDataPersonUserUnit synchronizeData(ILogicContext logicContext,
                                               FDataPersonUserUnit backUser,
                                               int from,
                                               String changePass);
 
+   //============================================================
+   // @注销
+   // @param context 页面环境
+   // @param sessionId sessionCode
+   // @param logicContext 逻辑上下文
+   // @param sessionContext session上下文
+   //============================================================
    public FDataPersonUserUnit logout(IWebContext context,
                                      String sessionId,
                                      ILogicContext logicContext,
                                      IWebSession sessionContext);
 
+   //============================================================
+   // @根据guid查询用户
+   // @param context 页面环境
+   // @param userGuid 用户guid
+   // @param logicContext 逻辑上下文
+   // @param sessionContext session上下文
+   //============================================================
    public FDataPersonUserUnit query(IWebContext context,
                                     String userGuid,
                                     ILogicContext logicContext,
                                     IWebSession sessionContext);
 
+   //============================================================
+   // @更新用户
+   // @param context 页面环境
+   // @param unit 用户
+   // @param logicContext 逻辑上下文
+   // @param sessionContext session上下文
+   //============================================================
    public FDataPersonUserUnit update(IWebContext context,
                                      FDataPersonUserUnit unit,
                                      ILogicContext logicContext,
                                      IWebSession sessionContext);
 
+   //============================================================
+   // @获取已经登录的用户信息
+   // @param user_id 用户id
+   // @param logicContext 逻辑上下文
+   //============================================================
    public FDataPersonUserInfo getUserInfo(long user_id,
                                           ILogicContext logicContext);
 
+   //============================================================
+   // @根据app_key获取应用
+   // @param applicationGuid 应用的guid
+   // @param logicContext 逻辑上下文
+   //============================================================
    public FDataSystemApplicationUnit getApplicationUnitByGuid(ILogicContext logicContext,
                                                               String applicationGuid);
 }

@@ -11,8 +11,8 @@ public interface INewsConsole
 {
    //============================================================
    // <T>根据guid获取新闻相关信息。</T>
-   //
    // @param guid 
+   // @param logicContext  逻辑上下文
    //============================================================
    FDataLogicNewsUnit getNewsByGuid(String guid,
                                     ILogicContext logicContext);
@@ -21,6 +21,7 @@ public interface INewsConsole
    // <T>分页获取新闻相关信息。</T>
    // @param pageNum 页数
    // @param pageSize 每页的行数
+   // @param logicContext  逻辑上下文
    //============================================================
    FLogicDataset<FDataLogicNewsUnit> select(int pageNum,
                                             int pageSize,

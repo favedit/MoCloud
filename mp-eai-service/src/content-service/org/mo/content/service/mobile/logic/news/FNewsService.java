@@ -33,12 +33,12 @@ public class FNewsService
    protected INewsConsole _newsConsole;
 
    //   protected String _newsServiceHost = "http://eai.ezubo.com:8089/";
+   //配置文件注入属性
    @AProperty
    protected String _newsServiceHost;
 
    //============================================================
    // <T>默认逻辑。</T>
-   //
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -54,8 +54,10 @@ public class FNewsService
 
    //============================================================
    // <T>根据guid获取新闻相关信息。</T>
-   //
-   // @param guid 
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
    //============================================================
    @Override
    public EResult query(IWebContext context,
@@ -99,9 +101,10 @@ public class FNewsService
 
    //============================================================
    // <T>分页获取新闻相关信息。</T>
-   //
-   // @param pageNum 页数
-   // @param pageSize 每页的行数
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
    //============================================================
    @Override
    public EResult select(IWebContext context,

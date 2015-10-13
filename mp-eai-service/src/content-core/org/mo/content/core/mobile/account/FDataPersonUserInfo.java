@@ -1,6 +1,9 @@
 package org.mo.content.core.mobile.account;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+//============================================================
+//<T>登录用户信息</T>
+//============================================================
 
 public class FDataPersonUserInfo
       extends FDataPersonUserUnit

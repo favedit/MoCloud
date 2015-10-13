@@ -8,13 +8,12 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>新闻信息管理接口。</T>
+// <T>打卡接口。</T>
 //============================================================
 public interface IClickService
 {
    //============================================================
    // <T>默认逻辑。</T>
-   //
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -24,6 +23,13 @@ public interface IClickService
                    IWebInput input,
                    IWebOutput output);
 
+   //============================================================
+   // <T>打卡服务接口。</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   //============================================================
    EResult sign(IWebContext context,
                 IWebSession sessionContext,
                 IWebInput input,

@@ -45,11 +45,11 @@ public class FLoginConsole
    @ALink
    protected ILoggerPersonUserAccessConsole _loggerPersonUserAccessConsole;
 
-   //用户访问控制台
-
+   //从src/config/service/core.xml配置文件注入属性
    @AProperty
    protected boolean _oaLoginEnable;
 
+   //从src/config/service/core.xml配置文件注入属性
    @AProperty
    protected String _oaLoginUrl;
 
@@ -61,11 +61,10 @@ public class FLoginConsole
    }
 
    //============================================================
-   //
+   // @登录逻辑处理
    // @param context 页面环境
    // @param passport 用户名
    // @param password 密码
-   // @return 处理结果
    // @logicContext 逻辑上下文
    // @sessionContext session上下文
    //============================================================
@@ -173,7 +172,6 @@ public class FLoginConsole
 
    //============================================================
    // <T>请求OA登录接口</T>
-   //
    // @param url 接口链接
    // @param passport 用户名
    // @param password 密码
@@ -206,7 +204,7 @@ public class FLoginConsole
    }
 
    //============================================================
-   //
+   // @同步oa用户到数据库中
    // @param logicContext 逻辑上下文
    // @param backUser oa接口返回的用户
    // @param from 是通过什么身份登录的系统
@@ -266,13 +264,11 @@ public class FLoginConsole
    }
 
    //============================================================
-   //注销
+   // @注销
    // @param context 页面环境
-   // @param passport 用户名
-   // @param password 密码
-   // @return 处理结果
-   // @logicContext 逻辑上下文
-   // @sessionContext session上下文
+   // @param sessionId sessionCode
+   // @param logicContext 逻辑上下文
+   // @param sessionContext session上下文
    //============================================================
    @Override
    public FDataPersonUserUnit logout(IWebContext context,
@@ -285,13 +281,11 @@ public class FLoginConsole
    }
 
    //============================================================
-   //根据guid查询用户
+   // @根据guid查询用户
    // @param context 页面环境
-   // @param passport 用户名
-   // @param password 密码
-   // @return 处理结果
-   // @logicContext 逻辑上下文
-   // @sessionContext session上下文
+   // @param userGuid 用户guid
+   // @param logicContext 逻辑上下文
+   // @param sessionContext session上下文
    //============================================================
    @Override
    public FDataPersonUserUnit query(IWebContext context,
@@ -310,13 +304,11 @@ public class FLoginConsole
    }
 
    //============================================================
-   // 更新用户
+   // @更新用户
    // @param context 页面环境
-   // @param passport 用户名
-   // @param password 密码
-   // @return 处理结果
-   // @logicContext 逻辑上下文
-   // @sessionContext session上下文
+   // @param unit 用户
+   // @param logicContext 逻辑上下文
+   // @param sessionContext session上下文
    //============================================================
    @Override
    public FDataPersonUserUnit update(IWebContext context,
@@ -337,7 +329,11 @@ public class FLoginConsole
       }
    }
 
-   //获取个人用户的信息
+   //============================================================
+   // @获取已经登录的用户信息
+   // @param user_id 用户id
+   // @param logicContext 逻辑上下文
+   //============================================================
    @Override
    public FDataPersonUserInfo getUserInfo(long user_id,
                                           ILogicContext logicContext){
@@ -362,7 +358,11 @@ public class FLoginConsole
       return userInfo;
    }
 
-   //
+   //============================================================
+   // @根据app_key获取应用
+   // @param applicationGuid 应用的guid
+   // @param logicContext 逻辑上下文
+   //============================================================
    @Override
    public FDataSystemApplicationUnit getApplicationUnitByGuid(ILogicContext logicContext,
                                                               String applicationGuid){

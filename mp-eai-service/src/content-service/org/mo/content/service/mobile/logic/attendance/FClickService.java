@@ -19,7 +19,7 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>新闻服务。</T>
+// <T>打卡服务。</T>
 //============================================================
 public class FClickService
       extends FObject
@@ -29,16 +29,16 @@ public class FClickService
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FClickService.class);
 
-   //新闻逻辑控制台
+   //打卡逻辑控制台
    @ALink
    protected IClickConsole _clickConsole;
 
+   //GcSession会话控制台
    @ALink
    protected IGcSessionConsole _gcSessionConsole;
 
    //============================================================
    // <T>默认逻辑。</T>
-   //
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -52,6 +52,13 @@ public class FClickService
       return EResult.Success;
    }
 
+   //============================================================
+   // <T>打卡服务接口。</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   //============================================================
    @Override
    public EResult sign(IWebContext context,
                        IWebSession sessionContext,

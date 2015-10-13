@@ -31,9 +31,9 @@ public class FSalesToolsConsole
    }
 
    //============================================================
-   // <T>根据guid获取新闻相关信息。</T>
-   //
+   // <T>根据guid获取销售工具相关信息。</T>
    // @param guid 
+   // @param logicContext  逻辑上下文
    //============================================================
    @Override
    public FDataLogicSalestoolsUnit getNewsByGuid(String guid,
@@ -44,10 +44,10 @@ public class FSalesToolsConsole
    }
 
    //============================================================
-   // <T>分页获取新闻相关信息。</T>
-   //
+   // <T>分页获取销售工具相关信息。</T>
    // @param pageNum 页数
    // @param pageSize 每页的行数
+   //============================================================
    @Override
    public FLogicDataset<FDataLogicSalestoolsUnit> select(int pageNum,
                                                          int pageSize,

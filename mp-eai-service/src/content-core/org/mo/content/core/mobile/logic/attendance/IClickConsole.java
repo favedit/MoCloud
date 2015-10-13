@@ -12,10 +12,9 @@ import org.mo.web.protocol.context.IWebContext;
 public interface IClickConsole
 {
    //============================================================
-   // @连接服务器获得新版本
+   // @打卡
    // @param context 页面环境
-   // @param versionStr 版本号
-   // @param applicationStr 应用程序id
+   // @param unit 打卡记录
    // @return 处理结果
    // @logicContext 逻辑上下文
    // @sessionContext session上下文

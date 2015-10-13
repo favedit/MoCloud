@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataSystemApplicationLogic;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
+import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import java.util.HashMap;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.data.FSql;
@@ -67,7 +68,7 @@ public class FVersionConsole
          map.put("app_os", applications.first().code());
       }
       FDataSystemVersionLogic versionLogic = logicContext.findLogic(FDataSystemVersionLogic.class);
-      double lastVersionCode = versionLogic.connection().executeDouble("SELECT MAX(NUMBER) AS LASTVERSION FROM `DT_SYS_VERSION` WHERE `APPLICATION_ID`=" + applicationOuid);
+      double lastVersionCode = versionLogic.connection().executeDouble("SELECT MAX(NUMBER) AS LASTVERSION FROM `DT_SYS_VERSION` WHERE `APPLICATION_ID`=" + applicationOuid + " AND `STATUS_CD`=" + EGcResourceStatus.Publish);
       //如果是0,,意味着没有找到对应的app
       if(lastVersionCode != 0){
          //拿出来最新的version

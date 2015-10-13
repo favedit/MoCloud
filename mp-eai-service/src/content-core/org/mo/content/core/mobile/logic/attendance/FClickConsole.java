@@ -9,7 +9,7 @@ import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>版本更新控制台。</T>
+// <T>打卡控制台。</T>
 //============================================================
 public class FClickConsole
       extends FObject
@@ -25,6 +25,14 @@ public class FClickConsole
 
    }
 
+   //============================================================
+   // @打卡
+   // @param context 页面环境
+   // @param unit 打卡记录
+   // @return 处理结果
+   // @logicContext 逻辑上下文
+   // @sessionContext session上下文
+   //============================================================
    @Override
    public EResult click(IWebContext context,
                         ILogicContext logicContext,
