@@ -48,16 +48,16 @@
             <font style="color:red;"><jh:write source='&page.result' /></font>
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
                <tr>
-                  <td width="30" height="33" colspan="1">
+                  <td width="69" height="33" colspan="1">
                      <div align="left">应用</div>
                   </td>
-                  <td colspan="3">
+                  <td width="214" colspan="3">
                      <input class="easyui-combobox" style="width:200px;" id="application" name="application" data-options="valueField:'ouid',textField:'label',editable:false" />
                      <input name="applicationId" id="applicationId" type="hidden">
                   </td>
                </tr>
                <tr>
-                  <td width="30" height="33" colspan="1">
+                  <td width="69" height="33" colspan="1">
                      <div align="left">版本名称</div>
                   </td>
                   <td colspan="3">
@@ -67,7 +67,7 @@
                   </td>
                </tr>
                <tr>
-                  <td width="30" height="33" colspan="1">
+                  <td width="69" height="33" colspan="1">
                      <div align="left">版本标题</div>
                   </td>
                   <td colspan="3">
@@ -78,7 +78,7 @@
                   </td>
                </tr>
                <tr>
-                  <td width="30" height="33" colspan="1">
+                  <td width="69" height="33" colspan="1">
                      <div align="left">版本号</div>
                   </td>
                   <td colspan="3">
@@ -88,7 +88,7 @@
                   </td>
                </tr>
                <tr>
-                  <td width="30" height="33" colspan="1">
+                  <td width="69" height="33" colspan="1">
                      <div align="left">下载地址</div>
                   </td>
                   <td colspan="3">
@@ -99,7 +99,7 @@
                </tr>
                <tr>
                   <td height="30">
-                     <div align="left">版本更新状态</div>
+                     <div align="left">更新状态</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -114,7 +114,7 @@
                </tr>
                <tr>
                   <td width="30" height="33">
-                     <div align="left">开始时间:</div>
+                     <div align="left">开始时间</div>
                   </td>
                   <td width="98">
                      <div align="left">
@@ -122,7 +122,7 @@
                      </div>
                   </td>
                   <td width="30" height="33">
-                     <div align="left">结束时间:</div>
+                     <div align="left">结束时间</div>
                   </td>
                   <td width="98">
                      <div align="left">
@@ -131,7 +131,7 @@
                   </td>
                </tr>
                <tr>
-                  <td width="30" height="30" align="left" colspan="1">备注</td>
+                  <td width="30" height="30" align="left" colspan="1">更新内容</td>
                   <td height="30" align="left" colspan="3">
                      <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:500px" />
                   </td>
