@@ -198,7 +198,6 @@ public class FVersionAction
       // page.setResult("版本号重复！");
       // return "/manage/product/system/version/UpdateVersion";
       // }
-
       _versionConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/common/ajax";
@@ -225,7 +224,9 @@ public class FVersionAction
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
-      unit.setNote(context.parameter("note"));
+      String note = context.parameter("note");
+      note = note.replaceAll("<br>", "\r\n");
+      unit.setNote(note);
       unit.setNumber(context.parameterAsFloat("number"));
       unit.setForceCd(context.parameterAsInteger("forceCd"));
       //默认为申请

@@ -132,6 +132,7 @@ public class FMainAction
       if(RString.isEmpty(sessionCode)){
          throw new FFatalError("sessionCode is null.");
       }
+      _logger.debug(this, "mobileCustomer", "mobileCustomer begin.(sessionId={1})", sessionCode);
       FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
       if(sessionInfo == null){
          throw new FFatalError("sessionInfo is null.");

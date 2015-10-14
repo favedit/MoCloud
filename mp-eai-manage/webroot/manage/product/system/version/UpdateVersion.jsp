@@ -169,7 +169,7 @@
                <tr>
                   <td width="70" height="30" align="left">更新内容</td>
                   <td height="30" align="left" colspan="3">
-                     <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" value="<jh:write source='&unit.note'/>" style="height:100px;width:500px" />
+                     <textarea id="note" name="note" class="border_change" style="width:500px;height:100px"><jh:write source='&unit.note' format='text'/></textarea>            
                   </td>
                </tr>
             </table>
