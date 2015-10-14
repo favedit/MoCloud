@@ -63,6 +63,17 @@
       <Property name='servers'>eai.ezubo.com:8087/</Property>
       <Property name='applicationName'>${application}/${application.name}</Property>
    </Component>
+    <!-- ==================================================== -->
+   <!-- FSalestoolsConsole:图片存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.content.core.manage.product.business.ISalestoolsConsole'
+         class = 'org.mo.content.core.manage.product.business.FSalestoolsConsole'
+         scope = 'global'>
+      <Property name='servers'>eai.ezubo.com:8087</Property>
+      <Property name='applicationName'>${application}/${application.name}</Property>
+   </Component>
+   
    <!-- ============================================================ -->
    <!-- 数据控制台                                                   -->
    <!-- ============================================================ -->
