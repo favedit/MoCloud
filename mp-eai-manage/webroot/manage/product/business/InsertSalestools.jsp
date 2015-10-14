@@ -63,7 +63,7 @@
         data-options="validType:'length[0,200]'" /></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">是否显示:</div></td>
+     <td height="38"><div align="left">是否展示:</div></td>
      <td><div align="left">
       <select  style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
              <option value="1">展示</option>
@@ -85,7 +85,7 @@
      <td style="width:380px;"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox">
-       <input type="button" value="选择上传文件" onclick="but()"> <span>&nbsp;&nbsp;选择小于20k的等比例图片</span>
+       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
       </div></td>
     </tr>
     <tr>

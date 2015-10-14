@@ -93,7 +93,7 @@
        <img width="140" height="140" id="oriIcon"></div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">是否显示:</div></td>
+     <td height="38"><div align="left">是否展示:</div></td>
      <td style="width:380px;"><div align="left">
        <input style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
        data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"
@@ -112,7 +112,7 @@
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
-       <input type="button" value="选择上传文件" onclick="but()"> <span>&nbsp;&nbsp;选择小于20k的等比例图片</span>
+       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
       </div></td>
     </tr>
     <tr>

@@ -265,13 +265,13 @@ public class FNewsAction implements INewsAction {
       if (!RString.isEmpty(lcs) && lcs.length() < 2) {
          unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
       } else if (!RString.isEmpty(lcs) && lcs.length() > 1) {
-         if (RString.equals(EGcLink.UnknownLabel, unit.linkCd())) {
+         if (RString.equals(EGcLink.UnknownLabel, lcs)) {
             unit.setLinkCd(EGcLink.Unknown);
          }
-         if (RString.equals(EGcLink.ContentLabel, unit.linkCd())) {
+         if (RString.equals(EGcLink.ContentLabel, lcs)) {
             unit.setLinkCd(EGcLink.Content);
          }
-         if (RString.equals(EGcLink.LinkLabel, unit.linkCd())) {
+         if (RString.equals(EGcLink.LinkLabel, lcs)) {
             unit.setLinkCd(EGcLink.Link);
          }
       }

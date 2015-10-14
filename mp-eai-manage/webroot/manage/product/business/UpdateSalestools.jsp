@@ -114,7 +114,7 @@
      <td height="38"><div align="left">外链状态:</div></td>
      <td><div align="left">
        <input style="width:380px;height:20px" id="linkCdStr" class="easyui-combobox" name="linkCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'内容'},{'value':'2','text':'外链'}]" value="<jh:write source='&unit.linkCdStr'/>"/>  
+       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}]" value="<jh:write source='&unit.linkCdStr'/>"/>  
       </div></td>
     </tr>
     <tr>
@@ -122,7 +122,7 @@
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
-       <input type="button" value="选择上传文件" onclick="but()"> <span>&nbsp;&nbsp;选择小于20k的等比例图片</span>
+       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
       </div></td>
     </tr>
     <tr>
