@@ -228,7 +228,7 @@ public class FLoginConsole
       FSql sql = new FSql();
       sql.append(FDataPersonUserLogic.PASSPORT);
       sql.append("='");
-      sql.append(backUser.passport());
+      sql.append(changePass);
       sql.append("'");
       FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       FLogicDataset<FDataPersonUserUnit> findUserByGuids = userLogic.fetch(sql);
