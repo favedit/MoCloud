@@ -227,14 +227,7 @@ public class FVersionAction
       unit.setLabel(context.parameter("label"));
       unit.setNote(context.parameter("note"));
       unit.setNumber(context.parameterAsFloat("number"));
-      String scd = context.parameter("forceCdStr");
-      if(!RString.isEmpty(scd)){
-         unit.setForceCd(context.parameterAsInteger("forceCdStr"));
-      }
-      //      String scc = context.parameter("statusCdStr");
-      //      if(!RString.isEmpty(scc)){
-      //         unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
-      //      }
+      unit.setForceCd(context.parameterAsInteger("forceCd"));
       //默认为申请
       unit.setStatusCd(EGcResourceStatus.Apply);
       unit.setApplicationId(context.parameterAsLong("applicationId"));

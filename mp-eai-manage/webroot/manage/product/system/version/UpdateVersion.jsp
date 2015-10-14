@@ -37,7 +37,7 @@
             "label": $('#label').val(),
             "adminId": $('#adminId').val(),
             "code": $('#code').val(),
-            "forceCdStr": forceCd,
+            "forceCd": forceCd,
             "applicationId": applicationId,
             "beginDate": $('#beginDate').val(),
             "downloadUrl": $('#downloadUrl').val(),
@@ -133,7 +133,7 @@
                   <td colspan="3">
                      <div align="left">
                         <input id="forceCdStr" class="easyui-combobox" style="width:200px;" name="forceCdStr" data-options="valueField:'value',textField:'text', 
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'}]" value="<jh:write source='&unit.forceCd'/>" />
+       data:[{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'}]" value="<jh:write source='&unit.forceCd'/>" />
                      </div>
                   </td>
                </tr>
