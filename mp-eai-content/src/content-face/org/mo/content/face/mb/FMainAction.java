@@ -129,11 +129,10 @@ public class FMainAction
                                 FMainPage page){
       String code = "ChartMarketerCustomer";
       String sessionCode = context.head("mo-session-id");
-      String appOS = context.parameter("app_os");
       if(RString.isEmpty(sessionCode)){
          throw new FFatalError("sessionCode is null.");
       }
-      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_" + appOS, sessionCode);
+      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
       if(sessionInfo == null){
          throw new FFatalError("sessionInfo is null.");
       }
