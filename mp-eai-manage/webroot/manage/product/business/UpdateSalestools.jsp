@@ -53,6 +53,16 @@
          $("#phoneShow").html(editor.html());
       });
    });
+    function but(){
+        $("#iconUrl").click();
+     }
+     function changfile(obj){
+        $('#imgdiv').hide();
+        $("#oriIcon").attr("src","");
+        $('#oiconUr').val("");
+        var a = obj.lastIndexOf("\\");
+        $("#fileid").val(obj.substr(a+1,obj.length));
+     }
 </script>
 
 <body bgcolor="#198bc9">
@@ -118,9 +128,9 @@
     <tr>
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td  colspan="2"><div align="left">
-       <input type="file" name="iconUrl" id="iconUrl" style="display:none;"/>
-       <input style="display:none;" id="oiconUr" style="width:380px;" name="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" />
-       <input type="button" id="butto1" onclick="removeFile()" value="上传"/>
+       <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
+       <input name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
+       <input type="button" value="选择上传文件" onclick="but()"> 
       </div></td>
     </tr>
     <tr>

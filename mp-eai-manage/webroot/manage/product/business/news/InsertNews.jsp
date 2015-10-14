@@ -13,7 +13,7 @@
         $("#config").submit();
     }
    var editor;
-KindEditor.ready(function(K) {
+   KindEditor.ready(function(K) {
              editor=K.create('#kindeditor_view', {
                uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
                items : kindeditor_items,
@@ -26,7 +26,14 @@ KindEditor.ready(function(K) {
                 $("#phoneShow").window("open");
                 $("#phoneShow").html(editor.html());
               });
-});
+    });
+   function but(){
+      $("#iconUrl").click();
+   }
+   function changfile(obj){
+      var a = obj.lastIndexOf("\\");
+      $("#fileid").val(obj.substr(a+1,obj.length));
+   }
 </script>
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
@@ -66,8 +73,6 @@ KindEditor.ready(function(K) {
     <tr>
      <td height="38"><div align="left">是否显示:</div></td>
      <td><div align="left">
-       <!-- <input id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"/>   -->
       <select  style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
              <option value="1">展示</option>
              <option value="2">未展示</option>
@@ -87,8 +92,10 @@ KindEditor.ready(function(K) {
     <tr>
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td style="width:380px;"><div align="left">
-       <input type="file" name="iconUrl" id="iconUrl"/>
-      </div></td>
+     <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
+     <input name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox">
+     <input type="button" value="选择上传文件" onclick="but()"> 
+     </div></td>
     </tr>
     <tr>
       <td  height="38" width="74"><div align="left">关键字:</div></td>

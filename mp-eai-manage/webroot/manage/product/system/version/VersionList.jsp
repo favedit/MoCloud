@@ -23,7 +23,7 @@
             var url = "/product/system/version/Version.wa?do=select&date=" + new Date().valueOf();
             var data = null;
             var label = $.trim($('#label').val()).replaceAll("'", "");
-            if (label == "标签") label = null;
+            if (label == "版本标题") label = null;
             if (page != null) {
                url = "/product/system/version/Version.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
@@ -68,7 +68,7 @@
                <a href="/product/system/version/Version.wa?do=insertBefore" class="add_btn"></a>
             </div>
             <div class="nav_search">
-               <input id="label" name="label" type="text" onfocus="if(this.value=='标签'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='标签';this.style.color='#ccc';}" style="color: #ccc" value="标签">
+               <input id="label" name="label" type="text" onfocus="if(this.value=='版本标题'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='版本标题';this.style.color='#ccc';}" style="color: #ccc" value="版本标题">
                <a onClick="doSubmit(0)" href="#" class="sear_btn"></a>
             </div>
          </div>
@@ -80,7 +80,7 @@
                <th data-options="field:'applicationLabel',halign:'center',align:'left',sortable:true" width="120px">应用</th>
                <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">版本标题</th>
                <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="120px">版本名称</th>
-               <th data-options="field:'number',halign:'center',align:'left',sortable:true" width="60px">版本号</th>
+               <th data-options="field:'numberStr',halign:'center',align:'left',sortable:true" width="90px">版本号</th>
                <th data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true" width="80px">更新状态</th>
                <th data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true" width="80px">版本状态</th>
                <th data-options="field:'downloadUrl',halign:'center',align:'left',sortable:true" width="400px">下载地址</th>               
