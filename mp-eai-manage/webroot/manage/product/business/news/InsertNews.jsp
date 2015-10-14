@@ -32,7 +32,7 @@
    }
    function changfile(obj){
       var a = obj.lastIndexOf("\\");
-      $("#fileid").val(obj.substr(a+1,obj.length));
+      $("#oiconUr").val(obj.substr(a+1,obj.length));
    }
 </script>
 <body bgcolor="#198bc9">
@@ -84,7 +84,7 @@
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td style="width:380px;"><div align="left">
      <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
-     <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox">
+     <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox">
      <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
      </div></td>
     </tr>
