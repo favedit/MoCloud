@@ -218,7 +218,7 @@ public class FLoginConsole
       //创建一个零时用户
       FDataPersonUserUnit tempUserUnit = new FDataPersonUserUnit();
       tempUserUnit.setStatusCd(backUser.statusCd());
-      tempUserUnit.setPassport(backUser.passport());
+      tempUserUnit.setPassport(changePass);
       tempUserUnit.setOvld(true);
       tempUserUnit.setPassword(backUser.password());
       //      tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
@@ -246,7 +246,7 @@ public class FLoginConsole
          userEntryLogic.doInsert(userEntryUnit);
       }else{
          FDataPersonUserUnit findUserByGuid = findUserByGuids.first();
-         findUserByGuid.setPassport(tempUserUnit.passport());
+         findUserByGuid.setPassport(changePass);
          findUserByGuid.setPassword(tempUserUnit.password());
          findUserByGuid.setLabel(tempUserUnit.label());
          findUserByGuid.setStatusCd(tempUserUnit.statusCd());
