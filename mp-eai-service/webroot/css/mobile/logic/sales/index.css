@@ -1,0 +1,360 @@
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  font-family: sans-serif;
+  font-size: 62.5%;
+}
+body {
+  background: #e3e3e3;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: auto;
+  color: #404040;
+  font-size: 1.2rem;
+  font-family: DroidSans, "Droid Sans Fallback", "Hiragino Sans GB W3", "Hiragino Sans GB W6";
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+form {
+  margin: 0;
+}
+i,
+em {
+  font-style: normal;
+  vertical-align: middle;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+img {
+  border: 0;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+}
+ul,
+li,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none outside none;
+}
+a,
+a:link {
+  color: #666666;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hide {
+  display: none;
+}
+.clear {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+.pr {
+  position: relative;
+}
+.pa {
+  position: absolute;
+}
+.pf {
+  position: fixed;
+}
+.money {
+  color: #f43737;
+}
+.border-tbl {
+  border-top: 1px solid #969494;
+  border-left: 1px solid #969494;
+  border-bottom: 1px solid #969494;
+}
+.nul {
+  height: 110px;
+  background: #e3e3e3;
+}
+.calculate-container {
+  top: 0px;
+  left: 0px;
+  padding: 0px 3%;
+  width: 94%;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+  animation-duration: 500ms;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  background: #e3e3e3;
+  z-index: 999;
+}
+.calculate-container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.calculate-container ul {
+  margin-top: 10px;
+  padding: 0px 100px 12px 0px;
+  position: relative;
+}
+.calculate-container ul li:first-child input {
+  height: 43px;
+  width: 100%;
+  background: #f7fbfa;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #969494;
+  padding-left: 2%;
+}
+.calculate-container ul li:last-of-type {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100px;
+  height: 76px;
+}
+.calculate-container ul li:last-of-type .btn {
+  position: relative;
+  top: -8px;
+  display: block;
+  width: 100px;
+  height: 106px;
+  border: none;
+  background: none;
+  background-image: url(../../../../images/mobile/logic/sales/btn.png);
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+  -ms-tap-highlight-color: rgba(255, 0, 0, 0);
+  -o-tap-highlight-color: rgba(255, 0, 0, 0);
+  -moz-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+.bank {
+  padding: 8px 3%;
+  background: #fdf9f9;
+  border-bottom: 2px solid #dfdddd;
+  display: none;
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+  -webkit-animation-duration: 500ms;
+  -moz-animation-duration: 500ms;
+  -o-animation-duration: 500ms;
+  animation-duration: 500ms;
+  font-size: 14px;
+}
+.product ul {
+  border-bottom: 2px solid #dfdddd;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+  -ms-tap-highlight-color: rgba(255, 0, 0, 0);
+  -o-tap-highlight-color: rgba(255, 0, 0, 0);
+  -moz-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+.product ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.product ul li {
+  display: block;
+  float: left;
+}
+.product ul li input {
+  background: #fff;
+}
+.product ul li:first-child {
+  width: 80%;
+  display: block;
+}
+.product ul li:first-child input {
+  height: 30px;
+  width: 98%;
+  display: block;
+  padding-left: 2%;
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+.product ul li:last-of-type {
+  width: 20%;
+  height: 60px;
+  background: url(../../../../images/mobile/logic/sales/icon-t.png) no-repeat center right;
+}
+.main .product[data=on] ul li:last-of-type {
+  background: url(../../../../images/mobile/logic/sales/icon-b.png) no-repeat center right;
+}
+.product ul li:last-of-type input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: rgba(0, 0, 0, 0);
+}
+.main .product h2 {
+  font-size: 18px;
+  color: #3e3e3e;
+  line-height: 30px;
+}
+.main .product p {
+  font-size: 12px;
+  line-height: 20px;
+}
+.main .product p span {
+  color: #f43737;
+}
+.main .product ul {
+  padding: 5px 3% 0px 3%;
+  background: #fdf9f9;
+}
+.main .product[data=on] .details {
+  display: block;
+}
+.main .product.on .details {
+  display: block;
+}
+.main .details {
+  -moz-box-shadow: 0px 3px 5px #BEBEBE inset;
+  -webkit-box-shadow: 0px 3px 5px #BEBEBE inset;
+  box-shadow: 0px 3px 5px #BEBEBE inset;
+  padding: 10px 3%;
+  background: #e3e3e3;
+  line-height: 30px;
+  display: none;
+}
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@-webkit-keyframes bounce {
+  from,
+  20%,
+  53%,
+  80%,
+  100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    -webkit-transform: translate3d(0, -15px, 0);
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, -4px, 0);
+    transform: translate3d(0, -4px, 0);
+  }
+}
+@keyframes bounce {
+  from,
+  20%,
+  53%,
+  80%,
+  100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    -webkit-transform: translate3d(0, -15px, 0);
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    -webkit-transform: translate3d(0, -4px, 0);
+    transform: translate3d(0, -4px, 0);
+  }
+}
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+@keyframes bounceIn {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}

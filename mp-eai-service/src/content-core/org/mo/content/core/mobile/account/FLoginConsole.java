@@ -219,6 +219,7 @@ public class FLoginConsole
       FDataPersonUserUnit tempUserUnit = new FDataPersonUserUnit();
       tempUserUnit.setStatusCd(backUser.statusCd());
       tempUserUnit.setPassport(changePass);
+      tempUserUnit.setOvld(true);
       tempUserUnit.setPassword(backUser.password());
       tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
       //      tempUserUnit.setOuid(21);
