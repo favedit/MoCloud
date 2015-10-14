@@ -125,8 +125,6 @@ public class FVersionService
             upgrade_log.setText("-1");
          }
          //         outputVersionNode.set("upgrade_size", lastVersionUnit.downloadSize());
-      }else if(lastVersionUnit == null){
-         upgrade_cd.setText("app_key is error!");
       }else{
          upgrade_cd.setText(EGcVersionForce.NoUpdate);
       }
