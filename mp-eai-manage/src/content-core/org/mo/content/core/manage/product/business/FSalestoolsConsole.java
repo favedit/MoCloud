@@ -73,30 +73,9 @@ public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSale
       FLogicDataset<FDataSalestoolsInfo> moduleList = logic.fetchClass(FDataSalestoolsInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
       for (Iterator<FDataSalestoolsInfo> ite = moduleList.iterator(); ite.hasNext();) {
          FDataSalestoolsInfo info = ite.next();
-         if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
-            info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
-         }
-         if (RString.equals(EGcResourceStatus.Publish, info.statusCd())) {
-            info.setStatusCdStr(EGcResourceStatus.PublishLabel);
-         }
-         if (RString.equals(EGcResourceStatus.CheckFail, info.statusCd())) {
-            info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
-         }
-         if (RString.equals(EGcDisplay.Disable, info.displayCd())) {
-            info.setDisplayCdStr(EGcDisplay.DisableLabel);
-         }
-         if (RString.equals(EGcDisplay.Enabled, info.displayCd())) {
-            info.setDisplayCdStr(EGcDisplay.EnabledLabel);
-         }
-         if (RString.equals(EGcLink.Unknown, info.linkCd())) {
-            info.setLinkCdStr(EGcLink.UnknownLabel);
-         }
-         if (RString.equals(EGcLink.Content, info.linkCd())) {
-            info.setLinkCdStr(EGcLink.ContentLabel);
-         }
-         if (RString.equals(EGcLink.Link, info.linkCd())) {
-            info.setLinkCdStr(EGcLink.LinkLabel);
-         }
+         info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
+         info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
+         info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
       }
       return moduleList;
    }

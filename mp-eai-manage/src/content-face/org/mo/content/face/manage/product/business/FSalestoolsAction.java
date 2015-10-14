@@ -95,11 +95,12 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FSalestoolsPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
+      page.setResult("");
       return "/manage/product/business/InsertSalestools";
    }
 
@@ -118,6 +119,19 @@ public class FSalestoolsAction implements ISalestoolsAction {
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.doPrepare(logicContext);
+      FWebUploadFile file = context.files().first();
+      if (null != file) {
+         Integer len = file.length() / 1024;
+         if (len > 20) {
+            page.setResult("请上传小于20k的图片!");
+            return "/manage/product/business/news/InsertNews";
+         }
+         String type = file.contentType();
+         if (!type.contains("image")) {
+            page.setResult("请上传图片!");
+            return "/manage/product/business/news/InsertNews";
+         }
+      }
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _salestoolsConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
@@ -149,30 +163,9 @@ public class FSalestoolsAction implements ISalestoolsAction {
       info.setContent(unit.content());
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
-      if (RString.equals(EGcResourceStatus.Apply, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
-      }
-      if (RString.equals(EGcResourceStatus.Publish, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.PublishLabel);
-      }
-      if (RString.equals(EGcResourceStatus.CheckFail, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
-      }
-      if (RString.equals(EGcDisplay.Disable, unit.displayCd())) {
-         info.setDisplayCdStr(EGcDisplay.DisableLabel);
-      }
-      if (RString.equals(EGcDisplay.Enabled, unit.displayCd())) {
-         info.setDisplayCdStr(EGcDisplay.EnabledLabel);
-      }
-      if (RString.equals(EGcLink.Unknown, unit.linkCd())) {
-         info.setLinkCdStr(EGcLink.UnknownLabel);
-      }
-      if (RString.equals(EGcLink.Content, unit.linkCd())) {
-         info.setLinkCdStr(EGcLink.ContentLabel);
-      }
-      if (RString.equals(EGcLink.Link, unit.linkCd())) {
-         info.setLinkCdStr(EGcLink.LinkLabel);
-      }
+      info.setStatusCdStr(EGcResourceStatus.formatLabel(unit.statusCd()));
+      info.setDisplayCdStr(EGcDisplay.formatLabel(unit.displayCd()));
+      info.setLinkCdStr(EGcLink.formatLabel(unit.linkCd()));
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       if (!RString.isEmpty(unit.iconUrl())) {
@@ -181,6 +174,7 @@ public class FSalestoolsAction implements ISalestoolsAction {
          info.setImageName("/manage/images/salestoolsImages/" + unit.iconUrl().substring(na + 17, unit.iconUrl().length()));
       }
       page.setUnit(info);
+      page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
       return "/manage/product/business/UpdateSalestools";
    }
@@ -194,13 +188,25 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FSalestoolsPage Page, FBasePage basePage) {
+   public String update(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
-
+      FWebUploadFile file = context.files().first();
+      if (null != file) {
+         Integer len = file.length() / 1024;
+         if (len > 20) {
+            page.setResult("请上传小于20k的图片!");
+            return "/manage/product/business/news/UpdateNews";
+         }
+         String type = file.contentType();
+         if (!type.contains("image")) {
+            page.setResult("请上传图片!");
+            return "/manage/product/business/news/UpdateNews";
+         }
+      }
       setLogicNews(context, logicContext, unit, "1");
       _salestoolsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
@@ -257,31 +263,18 @@ public class FSalestoolsAction implements ISalestoolsAction {
             unit.setDisplayCd(EGcDisplay.Enabled);
          }
       }
-      String scc = context.parameter("statusCdStr");
-      if (!RString.isEmpty(scc) && scc.length() < 2) {
-         unit.setStatusCd(context.parameterAsInteger("statusCdStr"));
-      } else if (!RString.isEmpty(scc) && scc.length() > 1) {
-         if (RString.equals(EGcResourceStatus.ApplyLabel, unit.statusCd())) {
-            unit.setStatusCd(EGcResourceStatus.Apply);
-         }
-         if (RString.equals(EGcResourceStatus.ApplyLabel, unit.statusCd())) {
-            unit.setStatusCd(EGcResourceStatus.Publish);
-         }
-         if (RString.equals(EGcResourceStatus.ApplyLabel, unit.statusCd())) {
-            unit.setStatusCd(EGcResourceStatus.CheckFail);
-         }
-      }
+      unit.setStatusCd(EGcResourceStatus.Apply);
       String lcs = context.parameter("linkCdStr");
       if (!RString.isEmpty(lcs) && lcs.length() < 2) {
          unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
       } else if (!RString.isEmpty(lcs) && lcs.length() > 1) {
-         if (RString.equals(EGcLink.UnknownLabel, unit.linkCd())) {
+         if (RString.equals(EGcLink.UnknownLabel, lcs)) {
             unit.setLinkCd(EGcLink.Unknown);
          }
-         if (RString.equals(EGcLink.ContentLabel, unit.linkCd())) {
+         if (RString.equals(EGcLink.ContentLabel, lcs)) {
             unit.setLinkCd(EGcLink.Content);
          }
-         if (RString.equals(EGcLink.LinkLabel, unit.linkCd())) {
+         if (RString.equals(EGcLink.LinkLabel, lcs)) {
             unit.setLinkCd(EGcLink.Link);
          }
       }

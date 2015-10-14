@@ -99,16 +99,8 @@
         <input id="conte" name="conte" style="display:none"
         value="<jh:write source='&unit.content'/>" />
       </td>
-      <td rowspan="4" style="width:140px;" ><div align="left" id="imgdiv">
+      <td rowspan="3" style="width:140px;" ><div align="left" id="imgdiv">
        <img width="140" height="140" id="oriIcon"></div></td>
-    </tr>
-    <tr>
-     <td height="38"><div align="left">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</div></td>
-     <td style="width:380px;"><div align="left">
-       <select  style="width:380px;height:20px" id="statusCdStr" class="easyui-combobox" name="statusCdStr" style="width:200px;">
-             <option value="1">申请</option>
-        <select>
-     </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否显示:</div></td>
@@ -129,8 +121,8 @@
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
-       <input name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
-       <input type="button" value="选择上传文件" onclick="but()"> 
+       <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
+       <input type="button" value="选择上传文件" onclick="but()"> <span>&nbsp;&nbsp;选择小于20k的等比例图片</span>
       </div></td>
     </tr>
     <tr>
