@@ -218,19 +218,24 @@ public class FLoginConsole
       //创建一个零时用户
       FDataPersonUserUnit tempUserUnit = new FDataPersonUserUnit();
       tempUserUnit.setStatusCd(backUser.statusCd());
-      tempUserUnit.setPassport(changePass);
+      tempUserUnit.setPassport(backUser.passport());
       tempUserUnit.setOvld(true);
       tempUserUnit.setPassword(backUser.password());
-      tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
+      //      tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
       //      tempUserUnit.setOuid(21);
       tempUserUnit.setLabel(backUser.passport());
       //      userUnit.setLabel(value);
+      FSql sql = new FSql();
+      sql.append(FDataPersonUserLogic.PASSPORT);
+      sql.append("='");
+      sql.append(backUser.passport());
+      sql.append("'");
       FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
-      FDataPersonUserUnit findUserByGuid = userLogic.findByGuid(tempUserUnit.guid());
+      FLogicDataset<FDataPersonUserUnit> findUserByGuids = userLogic.fetch(sql);
 
       FDataPersonUserEntryLogic userEntryLogic = logicContext.findLogic(FDataPersonUserEntryLogic.class);
 
-      if(findUserByGuid == null){
+      if(findUserByGuids == null || findUserByGuids.count() < 1){
          userLogic.doInsert(tempUserUnit);
          //同步用户状态
          FDataPersonUserEntryUnit userEntryUnit = new FDataPersonUserEntryUnit();
@@ -240,6 +245,7 @@ public class FLoginConsole
          userEntryUnit.setFromCd(from);
          userEntryLogic.doInsert(userEntryUnit);
       }else{
+         FDataPersonUserUnit findUserByGuid = findUserByGuids.first();
          findUserByGuid.setPassport(tempUserUnit.passport());
          findUserByGuid.setPassword(tempUserUnit.password());
          findUserByGuid.setLabel(tempUserUnit.label());
