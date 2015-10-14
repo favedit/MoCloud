@@ -63,7 +63,7 @@ public class FSalesToolsConsole
       whereSql.append(FDataLogicSalestoolsLogic.DISPLAY_CD);
       whereSql.append("=");
       whereSql.append(EGcDisplay.Enabled);
-      String orderBy = String.format("%s %s", FDataLogicSalestoolsLogic.LABEL, "DESC");
+      String orderBy = String.format("%s %s %s %s", FDataLogicSalestoolsLogic.DISPLAY_ORDER, "DESC,", FDataLogicSalestoolsLogic.CREATE_DATE, "DESC");
       FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
       FLogicDataset<FDataLogicSalestoolsUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
       return moduleList;

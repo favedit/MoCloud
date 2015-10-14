@@ -22,7 +22,7 @@ public class TestFVersionService
       String url = "http://10.13.0.100:8020/eai.mobile.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("version_number", "4"));
+      listPram.add(new BasicNameValuePair("version_number", "2"));
       listPram.add(new BasicNameValuePair("app_key", "0E144A4C9CA64FAB854FF2DE8B589312"));
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
@@ -30,6 +30,7 @@ public class TestFVersionService
       listPram.add(new BasicNameValuePair("action", "connect"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      System.out.println(EntityUtils.toString(post.getEntity()));
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();
       if(entity != null){

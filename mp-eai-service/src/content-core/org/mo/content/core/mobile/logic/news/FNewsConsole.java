@@ -64,10 +64,9 @@ public class FNewsConsole
       whereSql.append(FDataLogicNewsLogic.DISPLAY_CD);
       whereSql.append("=");
       whereSql.append(EGcDisplay.Enabled);
-      String orderBy = String.format("%s %s", FDataLogicNewsLogic.LABEL, "DESC");
+      String orderBy = String.format("%s %s %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC,", FDataLogicNewsLogic.CREATE_DATE, "DESC");
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
       FLogicDataset<FDataLogicNewsUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
       return moduleList;
    }
-
 }

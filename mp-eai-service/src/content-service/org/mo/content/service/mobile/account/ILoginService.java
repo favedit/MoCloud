@@ -114,4 +114,17 @@ public interface ILoginService
                             IWebOutput output,
                             ILogicContext logicContext,
                             IWebSession sessionContext);
+
+   //============================================================
+   // @通过sessionCode清空session
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // @logicContext 逻辑上下文
+   // @sessionContext session上下文
+   //============================================================
+   public void clearSessionCode(String sessionCode,
+                                IWebSession sessionContext,
+                                ILogicContext logicContext);
 }

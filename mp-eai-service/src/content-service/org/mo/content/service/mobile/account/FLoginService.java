@@ -263,13 +263,23 @@ public class FLoginService
       return EResult.Success;
    }
 
+   //============================================================
+   // @通过sessionCode清空session
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // @logicContext 逻辑上下文
+   // @sessionContext session上下文
+   //============================================================
+   @Override
    public void clearSessionCode(String sessionCode,
                                 IWebSession sessionContext,
                                 ILogicContext logicContext){
       // 获得参数
       FGcWebSession session = (FGcWebSession)sessionContext;
       session.setId(sessionCode);
-      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
+      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
       if(sessionInfo != null){
          session.loadInfo(sessionInfo);
          _logger.debug(this, "------------------------------------>logout", "sessionCode={1},session.recordId={2}", session.id(), session.recordId());

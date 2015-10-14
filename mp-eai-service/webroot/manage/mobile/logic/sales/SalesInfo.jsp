@@ -1,128 +1,168 @@
 <%@ include file='/apl/public.inc'%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <jh:define source="&page.unit" alias="unit"></jh:define>
 <!DOCTYPE >
 <html>
 <head>
-   <title></title>
+<base href="<%=basePath%>">
    <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-   <link rel="stylesheet" type="text/css" href="/css/mobile/logic/sales/index.css">
-   <script type="text/javascript" src="/js/mobile/logic/sales/js.js"></script>
+   <link rel="stylesheet" type="text/css" href="<%=basePath%>css/mobile/logic/sales/index.css">
+   <script type="text/javascript" src="<%=basePath%>js/mobile/logic/sales/js.js"></script>
 </head>
 <body>
-   <div class="box">
-      <header class="header">
-         <h4>e租宝 计算器</h4>
-      </header>
-      <div class="main">
-         <div class="product" id="product" earnings="12" min="40" period = "1" t="40" total="365">
-            <h2>e租财富</h2>
-            <p>12.00%   预期年化收益率</p>
-            <p>40-365天 投资期限</p>
-            <div class="container">
-               <ul>
-                  <li class="inputs">
-                     <input type="text" value="" placeholder="输入金额">
-                     <input type="text" total="365"  placeholder="投资天数">
-                     <input class="total" type="text" disabled  placeholder="预期收益">
-                  </li><li>
-                     <input type="button" value="计算" >
-                  </li>
-               </ul>
-               
-          </div>
-         </div>
-         <div class="product" id="product1" earnings="9" min="2" period = "1" t="2" total="365">
-            <h2>e租稳盈</h2>
-            <p>9.00%   预期年化收益率</p>
-            <p>2-365天 投资期限</p>
-            <div class="container">
-               <ul>
-                  <li class="inputs">
-                     <input type="text" value="" placeholder="输入金额">
-                     <input type="text"   placeholder="投资天数">
-                     <input class="total" type="text" disabled placeholder="预期收益">
-                  </li>
-                  <li>
-                     <input type="button" value="计算" >
-                  </li>
-               </ul>
-          </div>
-         </div>
-
-      <div class="product" id="product2" earnings="14.60" min="0" period = "1" t="0" total="365">
-         <h2>e租年享</h2>
-            <p>14.60%   预期年化收益率</p>
-            <p>12个月 投资期限</p>
-            <div class="container">
-               <ul>
-                  <li class="inputs">
-                     <input type="text" value="" placeholder="输入金额">
-                     <input type="text" total="365"  placeholder="投资天数">
-                     <input class="total" type="text" disabled placeholder="预期收益">
-                  </li>
-                  <li>
-                     <input type="button" value="计算" >
-                  </li>
-               </ul>
-               
-          </div>
-         </div>
-
-         <div class="product" id="product3" earnings="14.20" min="0" period = "1" t="0" total="365">
-         <h2>e租年丰</h2>
-            <p>14.20%   预期年化收益率</p>
-            <p>12个月 投资期限</p>
-            <div class="container">
-               <ul>
-                  <li class="inputs">
-                     <input type="text" value="" placeholder="输入金额">
-                     <input type="text" total="365"  placeholder="投资天数">
-                     <input class="total" type="text" disabled placeholder="预期收益">
-                  </li>
-                  <li>
-                     <input type="button" value="计算" >
-                  </li>
-               </ul>
-               
-          </div>
-         </div>
-
-         <div class="product" id="product4" earnings="13.8" min="0" period = "1" t="0" total="180">
-         <h2>e租富盈</h2>
-            <p>13.80%   预期年化收益率</p>
-            <p>6个月 投资期限</p>
-            <div class="container">
-               <ul>
-                  <li class="inputs">
-                     <input type="text" value="" placeholder="输入金额">
-                     <input type="text" placeholder="投资天数">
-                     <input class="total" type="text" disabled placeholder="预期收益">
-                  </li>
-                  <li>
-                     <input type="button" value="计算" >
-                  </li>
-               </ul>
-          </div>
-         </div>
-         <div class="product" id="product5" earnings="13.4" min="0" period = "0.25" t="0" total="90">
-            <h2>e租富享</h2>
-            <p>13.40%   预期年化收益率</p>
-            <p>3个月 投资期限</p>
-            <div class="container">
-               <ul>
-                  <li class="inputs">
-                     <input type="text" value="" placeholder="输入金额">
-                     <input type="text" total="365"  placeholder="投资天数">
-                     <input class="total" disabled type="text" placeholder="预期收益">
-                  </li>
-                  <li>
-                     <input type="button" value="计算" >
-                  </li>
-               </ul>
-               
-          </div>
-         </div>
+   <div class="box" >
+      <div class="pf calculate-container">
+         <ul id="calculate-container" >
+            <li class="inputs border-tbl">
+               <input type="text" value="" placeholder="输入金额">
+               <input type="text" style="border:none;height: 42px;"  placeholder="投资天数(最多365)">
+            </li>
+            <li class="">
+               <!-- <img src="images/btn.png"> -->
+               <!-- <input type="button" value="" > -->
+               <span class="btn"></span>
+            </li>
+         </ul>
+         <ol class="hide" id="percentage">
+            <input type="hidden" earnings="3.00" min="0" t="" period="" total="365" >
+            <input type="hidden" earnings="12.00" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="9.00" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="14.60" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="14.20" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="13.80" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="13.40" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="14.60" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="14.60" min="40" t="" period="" total="365" >
+         </ol>
+         
       </div>
+      <div class="nul"></div>
+      <div class="main" id="product">
+         <p class="bank">银行收益：<span class="money"></span>元</p>
+         <div class="product" data="" id="products0">
+            <ul>
+               <li class="inputs">
+                  <h2>e租财富(12.00%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>40-365天 投资期限<p>
+               <p>起投金额：1元 / 付息方式：按月 / 赎回方式：T+10，投资满30天即可申请赎回，赎回期内同等计息</p>
+            </div>
+         </div>
+         <div class="product" data="" id="products1">
+            <ul>
+               <li class="inputs">
+                  <h2>e租稳盈(9.00%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>2-365天 投资期限<p>
+               <p>起投金额：1元 / 付息方式：按月 / 赎回方式：T+2，投资后可随时申请赎回</p>
+            </div>
+         </div>
+
+         <div class="product" data="" id="products2">
+            <ul>
+               <li class="inputs">
+                  <h2>e租年享(14.60%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>12个月 投资期限<p>
+               <p>起投金额：1元 / 付息方式：每三个月 / 赎回方式：T+10，可提前赎回，提前赎回收部分手续费</p>
+            </div>
+         </div>
+         <div class="product" data="" id="products3">
+            <ul>
+               <li class="inputs">
+                  <h2>e租年丰(14.20%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>12个月 投资期限<p>
+               <p>起投金额：1元 / 付息方式：按月 / 赎回方式：T+10，可提前赎回，提前赎回收部分手续费</p>
+            </div>
+         </div>
+
+         <div class="product" data="" id="products3">
+            <ul>
+               <li class="inputs">
+                  <h2>e租富盈(13.80%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>6个月 投资期限<p>
+               <p>起投金额：1元 / 付息方式：按月 / 赎回方式：T+10 ，可提前赎回，提前赎回收部分手续费</p>
+            </div>
+         </div>
+
+
+         <div class="product" data="" id="products3">
+            <ul>
+               <li class="inputs">
+                  <h2>e租富享(13.40%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>3个月 投资期限<p>
+               <p>起投金额：1元 / 付息方式：按月 / 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
+            </div>
+         </div>
+
+         <div class="product" data="" id="products3">
+            <ul>
+               <li class="inputs">
+                  <h2>缪斯珍品(14.60%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>12个月 投资期限<p>
+               <p>起投金额：1元 / 付息方式：每三个月付息 / 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
+            </div>
+         </div>
+
+         <div class="product" data="" id="products3">
+            <ul>
+               <li class="inputs">
+                  <h2>缪斯影视(14.60%)</h2>
+                  <p>预期收益率：<span class="money">0</span>元</p>
+               </li>
+               <li>
+               </li>
+            </ul>
+            <div class="details">
+               <p>12个月 投资期限<p>
+               <p>起投金额：1元 / 付息方式：每三个月付息 / 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
+            </div>
+         </div>
+
+      </div>
+   
    </div>
 </body>
 </html>

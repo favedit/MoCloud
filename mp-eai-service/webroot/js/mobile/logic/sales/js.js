@@ -1,18 +1,38 @@
 function Earnings(dir) {
 	this.earnings = 0;
-	this.calculate = function(picId, numId, cls) {
+	that = this,
+	// this.deom = this.$(dir);
+	this.setClick = function(picId, fun){
+		var product = this.$(picId);
+		var lists = product.getElementsByTagName("div");
+		var listsL= lists.length;
+			for (var i = 0; i < listsL; i++ ){
+				if(lists[i].className == "product" ){
+					lists[i].onclick = function(){
+						if(this.getAttribute("data") === "on"){
+							this.setAttribute("data","");
+						}else{
+							for(var j=0; j < listsL; j++ ){
+								lists[j].setAttribute("data","");
+							}
+							this.setAttribute("data","on");
+						}
+					}
+				}
+			}
+	};
+	this.calculate = function(picId, picId2,numId, cls) {
 		var product = this.$(picId),
 			inputs = product.getElementsByTagName("input"),
-			earnings = Number(product.getAttribute('earnings')),
-			min = parseInt(product.getAttribute('min')),
-			t = parseInt(product.getAttribute('t')),
-			period = parseInt(product.getAttribute('period')),
-			total = parseInt(product.getAttribute('total')),
-			that = this,
-		    inputV0 = null,
+			moneys = document.getElementsByClassName("money"),
+			btn = product.getElementsByClassName("btn"),
+			percentage = this.$(picId2),
+			percentages = percentage.getElementsByTagName("input"),
+			percentageLe = percentages.length,
+			bank = document.getElementsByClassName("bank"),
+			earnings= 0;
+		    inputV0 = null;
 		    inputV1 = null;
-			earnings = earnings / 100;
-
 			function setCalculate() {
 				inputV0 = inputs[0].value;
 				inputV1 = inputs[1].value;
@@ -24,58 +44,37 @@ function Earnings(dir) {
 						inputs[1].value = "请输入投资天数";
 						return false;
 					}
-					if (inputV1 < min) {
-						inputs[1].value = "最少输入"+ t +"天";
+					if (inputV1 < 2) {
+						inputs[1].value = "最少输入"+ 2 +"天";
 						return false;
 					}
-					console.log(inputV0 +"--("+earnings +"----"+ total+")-----"+ inputV1);
-					// this.earnings = inputV0 * ( earnings / total ) * inputV1;
-					this.earnings = earnings / 365 * inputV1 * inputV0;
-					inputs[2].value = this.earnings.toFixed(2);
-				}else{
-					// alert("请输入数字");
+					for(var i = 0; i< percentageLe; i++ ){
+						// console.log(percentages[i].getAttribute("earnings") / 100+"..."+inputV1+inputV0);
+						bank[0].style.display = "block";
+						this.earnings = (percentages[i].getAttribute("earnings") / 100 ) / 365 * inputV1 * inputV0;
+						moneys[i].innerHTML = this.earnings.toFixed(2);
+					}
 				}
 			}
-		// wrap=pic.parentNode;
-		inputs[3].onclick = setCalculate;
+		btn[0].onclick = setCalculate;
 		inputs[0].onfocus = function(){
-			console.log(0)
 			this.value = "";
 		}
 		inputs[1].onfocus =function(){
-			console.log(1)
 			this.value = "";
 		}
 		inputs[1].onkeyup = function(){
-			var totals = parseInt(this.parentNode.parentNode.parentNode.parentNode.getAttribute('total'));
-			if( this.value > totals){
-				this.value = totals;
+			if( this.value > 365){
+				this.value = 365;
 			}
 		}
-
 	}
-	
 }
 Earnings.prototype.$ = function(id) {
 	return typeof id === 'string' ? document.getElementById(id) : id;
 }
 window.onload = function() {
 	var product = new Earnings();
-	product.calculate('product');
-
-	var product1 = new Earnings();
-	product1.calculate('product1');
-
-	var product2 = new Earnings();
-	product2.calculate('product2');
-
-	var product3 = new Earnings();
-	product3.calculate('product3');
-
-	var product4 = new Earnings();
-	product4.calculate('product4');
-
-	var product5 = new Earnings();
-	product5.calculate('product5');
-
+	product.setClick('product');
+	product.calculate('calculate-container',"percentage");
 }
