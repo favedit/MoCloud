@@ -21,10 +21,7 @@ import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 //<P>理财师信息控制器</P>
-//@class FMarketerAction
-//@author AnjoyTian
-//@Date 2015.09.21  
-//@version 1.0.0
+//@class FNewsAction
 //============================================================
 public class FNewsAction implements INewsAction {
    // 日志输出接口
@@ -166,6 +163,7 @@ public class FNewsAction implements INewsAction {
       info.setLinkCdStr(EGcLink.formatLabel(unit.linkCd()));
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
+      info.setDisplayOrder(unit.displayOrder());
       if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
          int na = unit.iconUrl().indexOf("newsImages");
@@ -250,6 +248,7 @@ public class FNewsAction implements INewsAction {
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
+      unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
       String scd = context.parameter("displayCdStr");
       if (!RString.isEmpty(scd) && scd.length() < 2) {
          unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));

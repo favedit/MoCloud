@@ -22,9 +22,6 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>销售工具控制器</P>
 //@class FSalestoolsAction
-//@author zhangxiaohui
-//@Date 2015.10.10
-//@version 1.0.0
 //============================================================
 public class FSalestoolsAction implements ISalestoolsAction {
 
@@ -163,11 +160,11 @@ public class FSalestoolsAction implements ISalestoolsAction {
       info.setContent(unit.content());
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
-      info.setStatusCdStr(EGcResourceStatus.formatLabel(unit.statusCd()));
       info.setDisplayCdStr(EGcDisplay.formatLabel(unit.displayCd()));
       info.setLinkCdStr(EGcLink.formatLabel(unit.linkCd()));
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
+      info.setDisplayOrder(unit.displayOrder());
       if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
          int na = unit.iconUrl().indexOf("salestoolsImages");
@@ -252,6 +249,7 @@ public class FSalestoolsAction implements ISalestoolsAction {
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
+      unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
       String scd = context.parameter("displayCdStr");
       if (!RString.isEmpty(scd) && scd.length() < 2) {
          unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));

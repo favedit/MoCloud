@@ -89,6 +89,12 @@
      </div></td>
     </tr>
     <tr>
+      <td  height="38" width="74"><div align="left">排序:</div></td>
+      <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox"
+        style="width:380px;height:20px"
+        data-options="validType:'length[0,11]'" /></td>
+    </tr>
+    <tr>
       <td  height="38" width="74"><div align="left">关键字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"

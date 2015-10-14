@@ -1,5 +1,6 @@
 package org.mo.content.core.manage.product.business;
 
+import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsLogic;
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
@@ -69,8 +70,9 @@ public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSale
          whereSql.append(FDataLogicSalestoolsLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
+      String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.CREATE_DATE, "DESC", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC");
       FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
-      FLogicDataset<FDataSalestoolsInfo> moduleList = logic.fetchClass(FDataSalestoolsInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataSalestoolsInfo> moduleList = logic.fetchClass(FDataSalestoolsInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (Iterator<FDataSalestoolsInfo> ite = moduleList.iterator(); ite.hasNext();) {
          FDataSalestoolsInfo info = ite.next();
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));

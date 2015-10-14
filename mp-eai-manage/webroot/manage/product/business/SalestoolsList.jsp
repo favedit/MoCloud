@@ -117,7 +117,13 @@
      width="260px">内容</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新日期</th>    
+     width="140px">更新日期</th>
+     <th 
+     data-options="field:'createDate',halign:'center',align:'left'"
+     width="140px">创建日期</th>    
+     <th 
+     data-options="field:'displayOrder',halign:'center',align:'left'"
+     width="40px">排序</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
      width="140px">操作</th>
