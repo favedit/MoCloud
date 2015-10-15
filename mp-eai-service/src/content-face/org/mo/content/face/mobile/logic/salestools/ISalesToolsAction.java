@@ -27,7 +27,7 @@ public interface ISalesToolsAction
 
    //============================================================
    // <T>查询</T>
-   //
+   // @计算器
    // @param context 网络环境
    // @param logicContext 逻辑环境
    // @param page 容器
@@ -40,9 +40,25 @@ public interface ISalesToolsAction
 
    //============================================================
    // <T>增加之前</T>
-   //
+   // @内容
    // @param context 网络环境
    // @param logicContext 逻辑环境
    // @param page 容器
    // @return 页面
+   public String getContent(IWebContext context,
+                            ILogicContext logicContext,
+                            @AContainer(name = "page") FSalesToolsPage page,
+                            @AContainer(name = "basePage") FBasePage basePage);
+
+   //============================================================
+   // <T>销售工具中集团简介模板</T>
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+   public String getGroupInfo(IWebContext context,
+                              ILogicContext logicContext,
+                              @AContainer(name = "page") FSalesToolsPage page,
+                              @AContainer(name = "basePage") FBasePage basePage);
 }

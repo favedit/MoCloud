@@ -27,7 +27,7 @@ public class TestFClickService
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       listPram.add(new BasicNameValuePair("action", "sign"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
-      post.setHeader("mo-session-id", "40217202B33EF5B99AA1D93C105AAE20");
+      post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421083");
       listPram.add(new BasicNameValuePair("date_time", "20151023123043"));
       // 经度
       listPram.add(new BasicNameValuePair("location_longitude", "116.366899"));

@@ -63,7 +63,7 @@ public class FNewsAction
          //      System.out.println("**********************************************" + guid + newsUnit.content());
       }
 
-      return "/manage/mobile/logic/news/NewsInfo";
+      return "/manage/mobile/newslist/NewsInfo";
    }
 
    //============================================================
@@ -97,8 +97,11 @@ public class FNewsAction
          page.setUserLabel(userLabel);
          page.setUnit(newsUnit);
          //      System.out.println("**********************************************" + guid + newsUnit.content());
+      }else{
+         page.setUnit(new FDataLogicNewsUnit());
+         page.setUserLabel("");
       }
 
-      return "/manage/mobile/logic/news/NewsInfo";
+      return "/manage/mobile/newslist/NewsInfo";
    }
 }

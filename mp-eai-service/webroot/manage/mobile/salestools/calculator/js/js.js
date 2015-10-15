@@ -69,13 +69,20 @@ function Earnings(dir) {
 				}
 			}
 		btn[0].onclick = setCalculate;
-		inputs[0].onfocus = function(){
-			this.value = "";
+		
+		inputs[0].onkeyup = function  () {
+			if(!Number(this.value)){
+				this.value = "";
+			}
 		}
 		inputs[1].onfocus =function(){
 			this.value = "";
 		}
 		inputs[1].onkeyup = function(){
+			if(!Number(this.value)){
+				this.value = "";
+			}
+			
 			if( this.value > 365){
 				this.value = 365;
 			}

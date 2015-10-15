@@ -9,7 +9,6 @@ html {
   /*10 ÷ 16 × 100% = 62.5%*/
 }
 body {
- 
   table-layout: fixed;
   word-break: break-all;
   margin: 0;
@@ -56,16 +55,15 @@ a:link {
   padding: 0px 15px;
 }
 .header h4 {
-	text-align:center;
+  text-align: center;
   font-size: 24px;
   color: #000;
-  padding-top: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .header p {
   font-size: 18px;
-  padding-top: 15px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #698090;
 }
 .header p span {
   color: #001e98;
@@ -73,12 +71,15 @@ a:link {
 .header p i {
   padding-left: 30px;
 }
+.main {
+  border-top: 1px solid #698090;
+}
 .main img {
   width: 100%;
 }
 .main p {
+  text-indent: 2em;
   color: #4e4c4d;
   padding: 10px 0px;
   line-height: 20px;
-  font-size: 14px;
 }

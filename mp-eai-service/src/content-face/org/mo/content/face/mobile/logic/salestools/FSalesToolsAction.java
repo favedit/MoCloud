@@ -1,10 +1,14 @@
 package org.mo.content.face.mobile.logic.salestools;
 
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserLogic;
+import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import org.mo.com.data.FSql;
 import org.mo.content.core.mobile.logic.salestools.ISalesToolsConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.content.service.mobile.logic.news.INewsService;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -46,7 +50,7 @@ public class FSalesToolsAction
 
    //============================================================
    // <T>查询</T>
-   //
+   // @销售工具中的计算器模板
    // @param context 网络环境
    // @param logicContext 逻辑环境
    // @param page 容器
@@ -58,25 +62,62 @@ public class FSalesToolsAction
                          FSalesToolsPage page,
                          FBasePage basePage){
       System.out.println(page.result + "-----------------------------page.result" + page.result);
+      return "/manage/mobile/salestools/calculator/SalesInfo";
+   }
+
+   //============================================================
+   // <T>查询</T>
+   // @销售工具中内容模板
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+   @Override
+   public String getContent(IWebContext context,
+                            ILogicContext logicContext,
+                            FSalesToolsPage page,
+                            FBasePage basePage){
+      System.out.println(page.result + "-----------------------------page.result" + page.result);
       String guid = context.parameter("guid");
       FDataLogicSalestoolsUnit salesUnit = _salesToolsConsole.getNewsByGuid(guid, logicContext);
       System.out.println("**********************************************newsUnit" + salesUnit + guid);
 
       if(salesUnit != null){
-         /* FSql whereFSql = new FSql();
-          whereFSql.append(FDataPersonUserLogic.OUID);
-          whereFSql.append("=");
-          whereFSql.append(salesUnit.createUserId());
-          FLogicDataset<FDataPersonUserUnit> fetch = logicContext.findLogic(FDataPersonUserLogic.class).fetch(whereFSql);
-          String userLabel = "";
-          if(fetch != null && fetch.count() > 0){
-             userLabel = fetch.first().label();
-          }
-          page.setUserLabel(userLabel);*/
+         FSql whereFSql = new FSql();
+         whereFSql.append(FDataPersonUserLogic.OUID);
+         whereFSql.append("=");
+         whereFSql.append(salesUnit.createUserId());
+         FLogicDataset<FDataPersonUserUnit> fetch = logicContext.findLogic(FDataPersonUserLogic.class).fetch(whereFSql);
+         String userLabel = "";
+         if(fetch != null && fetch.count() > 0){
+            userLabel = fetch.first().label();
+         }
+         page.setUserLabel(userLabel);
          page.setUnit(salesUnit);
          //      System.out.println("**********************************************" + guid + newsUnit.content());
+      }else{
+         page.setUnit(new FDataLogicSalestoolsUnit());
+         page.setUserLabel("");
       }
 
-      return "/manage/mobile/logic/sales/SalesInfo";
+      return "/manage/mobile/salestools/contentlist/Content";
+   }
+
+   //============================================================
+   // <T>销售工具中集团简介模板</T>
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   //============================================================
+
+   @Override
+   public String getGroupInfo(IWebContext context,
+                              ILogicContext logicContext,
+                              FSalesToolsPage page,
+                              FBasePage basePage){
+      System.out.println(page.result + "-----------------------------page.result" + page.result);
+      return "/manage/mobile/salestools/groupinfo/GroupInfo";
    }
 }

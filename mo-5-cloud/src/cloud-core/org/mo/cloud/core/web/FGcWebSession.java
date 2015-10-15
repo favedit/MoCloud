@@ -37,6 +37,38 @@ public class FGcWebSession
    // 应用id
    protected long _applicationId;
 
+   //逻辑码
+   protected String _logicCode;
+
+   //
+   //============================================================
+   // <T>登录逻辑码</T>
+   //
+   // @return 登录逻辑码
+   //============================================================
+   public String logicCode(){
+      return _logicCode;
+   }
+
+   public void setLogicCode(String _logicCode){
+      this._logicCode = _logicCode;
+   }
+
+   //
+   //============================================================
+   // <T>登录应用id</T>
+   //
+   // @return 登录x坐标
+   //============================================================
+   public long applicationId(){
+      return _applicationId;
+   }
+
+   public void setApplicationId(long _applicationId){
+      this._applicationId = _applicationId;
+   }
+
+   //
    //============================================================
    // <T>登录x坐标。</T>
    //
@@ -44,14 +76,6 @@ public class FGcWebSession
    //============================================================
    public double locationLongitude(){
       return _locationLongitude;
-   }
-
-   public long applicationId(){
-      return _applicationId;
-   }
-
-   public void setApplicationId(long _applicationId){
-      this._applicationId = _applicationId;
    }
 
    //============================================================

@@ -20,7 +20,7 @@
          scope = 'global' >
       <Property name='valid'>Y</Property>
       <Property name='sessionClassName'>org.mo.eai.console.web.FEaiSession</Property>
-      <Property name='logic_code'>eai</Property>
+      <Property name='logic_code'>eai.mobile</Property>
       <Property name='server_code'>eai.service</Property>
       <Property name='interval'>600000</Property>
       <Property name='memoryTimeout'>604800000</Property>

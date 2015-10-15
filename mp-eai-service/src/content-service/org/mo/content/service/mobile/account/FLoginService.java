@@ -128,12 +128,12 @@ public class FLoginService
          FGcWebSession session = (FGcWebSession)sessionContext;
          session.setId(sessionStr);
          session.setUserId(user.ouid());
-         session.setFromCode("mobile_" + applicationUnit.code());
+         session.setFromCode("0");
          session.setApplicationId(applicationUnit.ouid());
          EResult sessionResult = _webSessionConsole.open(session);
          _logger.debug(this, "session_id*****************------>", "session_id={1},user_id={2},applicationUnit.ouid()={3}", session.id(), user.ouid(), applicationUnit.ouid());
          sessionId.setText(session.id());
-         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai", "mobile_" + applicationUnit.code(), session.id());
+         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, "eai.mobile", "0", session.id());
          if(sessionInfo != null){
             FXmlNode modules = output.config().createNode("modules");
             String roleModules = sessionInfo.roleModules();

@@ -93,7 +93,7 @@ public class FVersionService
       //输出信息
       HashMap<String, Object> hashMap = _versionConsole.connect(context, versionStr, applicationStr, logicContext, sessionContext);
       FDataSystemVersionUnit lastVersionUnit = (FDataSystemVersionUnit)hashMap.get("lastVersion");
-      String app_os = (String)hashMap.get("app_os");
+      //      String app_os = (String)hashMap.get("app_os");
       FXmlNode upgrade_cd = output.config().createNode("upgrade_cd");
       if(lastVersionUnit != null && lastVersionUnit.number() > numberFloat){
          FXmlNode version_num = output.config().createNode("version_number");
@@ -135,7 +135,7 @@ public class FVersionService
          sessionCode.setText(session.id());
       }else{
          //如果有值,验证session是否有效
-         FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_" + app_os, sessionStr);
+         FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai.mobile", "0", sessionStr);
          //如果session无效
          if(sessionInfo == null){
             FXmlNode sessionCode = output.config().createNode("session_code");

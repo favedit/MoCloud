@@ -134,14 +134,18 @@ public class FSalesToolsService
             if(salesToolsUnit.guid() != null && (!"".equals(salesToolsUnit.guid()))){
                xruntime.createNode("guid").setText(salesToolsUnit.guid());
                if(salesToolsUnit.linkCd() == EGcLink.Content){
-                  xruntime.createNode("info_url").setText(_salesServiceHost + "mobile/logic/salestools/SalesTools.wa?do=getInfo&guid=" + salesToolsUnit.guid());
+                  xruntime.createNode("info_url").setText(_salesServiceHost + "mobile/logic/salestools/SalesTools.wa?do=getContent&guid=" + salesToolsUnit.guid());
                }
             }else{
                xruntime.createNode("guid").setText("0");
             }
             //如果是外链销售工具
             if(salesToolsUnit.linkCd() == EGcLink.Link){
-               xruntime.createNode("info_url").setText(salesToolsUnit.linkUrl());
+               if(salesToolsUnit.linkUrl() != null && (!"".equals(salesToolsUnit.linkUrl()))){
+                  xruntime.createNode("info_url").setText(salesToolsUnit.linkUrl());
+               }else{
+                  xruntime.createNode("info_url").setText("0");
+               }
             }
 
             if(salesToolsUnit.label() != null && (!"".equals(salesToolsUnit.label()))){

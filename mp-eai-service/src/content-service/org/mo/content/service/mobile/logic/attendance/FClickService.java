@@ -86,7 +86,7 @@ public class FClickService
       double locationLongitudeD = Double.parseDouble(locationLongitude);
       double locationLatitudeD = Double.parseDouble(locationLatitude);
       FDataPersonUserSigningUnit singUser = new FDataPersonUserSigningUnit();
-      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
+      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai.mobile", "0", sessionCode);
       long userId = -1;
       if(sessionInfo != null){
          FXmlNode last_sign_date = output.config().createNode("last_sign_date");

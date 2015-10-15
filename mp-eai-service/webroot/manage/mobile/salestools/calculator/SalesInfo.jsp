@@ -1,14 +1,14 @@
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"manage/mobile/";
 %>
 <!DOCTYPE >
 <html>
 <head>
 <base href="<%=basePath%>">
    <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-   <link rel="stylesheet" type="text/css" href="<%=basePath%>css/mobile/logic/sales/index.css">
-   <script type="text/javascript" src="<%=basePath%>js/mobile/logic/sales/js.js"></script>
+   <link rel="stylesheet" type="text/css" href="<%=basePath%>salestools/calculator/css/index.css">
+   <script type="text/javascript" src="<%=basePath%>salestools/calculator/js/js.js"></script>
 </head>
 <body>
    <div class="box" >

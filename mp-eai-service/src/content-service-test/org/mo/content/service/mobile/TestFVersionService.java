@@ -26,7 +26,7 @@ public class TestFVersionService
       listPram.add(new BasicNameValuePair("app_key", "0E144A4C9CA64FAB854FF2DE8B589312"));
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-      post.setHeader("mo-session-id", "59F0328E44D3FCE4BEFEEC709E337629");
+      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
       listPram.add(new BasicNameValuePair("action", "connect"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求

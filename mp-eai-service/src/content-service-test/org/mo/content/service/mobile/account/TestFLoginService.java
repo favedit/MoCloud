@@ -29,7 +29,7 @@ public class TestFLoginService
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
       listPram.add(new BasicNameValuePair("app_key", "58BEFC782B9E4CE5A65B34B8C1E89141"));
-      post.setHeader("mo-session-id", "58BEFC782B9E4CE5A65B34B8C1E89141");
+      post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421083");
 
       listPram.add(new BasicNameValuePair("action", "login"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
@@ -51,7 +51,7 @@ public class TestFLoginService
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-      post.setHeader("mo-session-id", "A221343E12647E1131028D7AEDCC9176");
+      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
       listPram.add(new BasicNameValuePair("action", "logout"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
@@ -78,7 +78,7 @@ public class TestFLoginService
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-      post.setHeader("mo-session-id", "A16B0B443DC9F80F2FD66BD2F046D618");
+      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();
