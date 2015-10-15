@@ -10,6 +10,8 @@
   <FieldString _uuid="11c6a669-ce08-40ae-a5db-896548e1e595" name="card_birth" label="M#12cn14卡片生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_BIRTH" data_size="8" />
   <FieldInteger _uuid="66c071ed-6f3b-45a7-9505-9304b976d07c" name="card_gender" label="M#12cn14卡片性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_GENDER" />
   <FieldString _uuid="63aec0a7-3718-4131-a739-2eda0cc5cd4a" name="phone" label="M#12cn14电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
+  <FieldRecordId _uuid="5dcef3d2-b3a9-4f48-aa03-80d17d296bc1" name="phone_city_id" label="M#12cn16电话城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CITY_ID" />
+  <FieldString _uuid="2fa8960b-99f5-4043-860f-bf8b6aeb78ed" name="phone_city_code" label="M#12cn16电话城市代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CITY_CODE" data_size="40" />
   <FieldDateTime _uuid="33749ce1-366c-40e7-a477-4d82bac080bb" name="register_date" label="M#12cn14注册时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REGISTER_DATE" />
   <FieldDateTime _uuid="998100fb-a58f-4e35-a7a2-6b8850ffbaa9" name="investment_first_date" label="M#12cn16首次投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_FIRST_DATE" />
   <FieldDateTime _uuid="ffa25869-2520-44cb-aa3c-5912ba4719bc" name="investment_last_date" label="M#12cn16投资最后日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_LAST_DATE" />

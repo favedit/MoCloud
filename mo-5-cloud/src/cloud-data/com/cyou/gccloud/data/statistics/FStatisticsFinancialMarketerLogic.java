@@ -132,6 +132,12 @@ public class FStatisticsFinancialMarketerLogic
    // 字段电话的定义。
    public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
 
+   // 字段电话城市编号的定义。
+   public final static SLogicFieldInfo PHONE_CITY_ID = new SLogicFieldInfo("PHONE_CITY_ID");
+
+   // 字段电话城市代码的定义。
+   public final static SLogicFieldInfo PHONE_CITY_CODE = new SLogicFieldInfo("PHONE_CITY_CODE");
+
    // 字段级别标签的定义。
    public final static SLogicFieldInfo RANK_LABEL = new SLogicFieldInfo("RANK_LABEL");
 
@@ -172,7 +178,7 @@ public class FStatisticsFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师统计表逻辑单元。</T>
@@ -798,6 +804,8 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(",`CARD_BIRTH`");
       cmd.append(",`CARD_GENDER`");
       cmd.append(",`PHONE`");
+      cmd.append(",`PHONE_CITY_ID`");
+      cmd.append(",`PHONE_CITY_CODE`");
       cmd.append(",`RANK_LABEL`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
@@ -1052,6 +1060,22 @@ public class FStatisticsFinancialMarketerLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(phone));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long phoneCityId = unit.phoneCityId();
+      if(phoneCityId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(phoneCityId);
+      }
+      cmd.append(',');
+      String phoneCityCode = unit.phoneCityCode();
+      if(RString.isEmpty(phoneCityCode)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(phoneCityCode));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -1466,6 +1490,26 @@ public class FStatisticsFinancialMarketerLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(phone));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isPhoneCityIdChanged()){
+         cmd.append(",`PHONE_CITY_ID`=");
+         long phoneCityId = unit.phoneCityId();
+         if(phoneCityId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(phoneCityId);
+         }
+      }
+      if(unit.isPhoneCityCodeChanged()){
+         cmd.append(",`PHONE_CITY_CODE`=");
+         String phoneCityCode = unit.phoneCityCode();
+         if(RString.isEmpty(phoneCityCode)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(phoneCityCode));
             cmd.append('\'');
          }
       }

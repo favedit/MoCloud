@@ -99,6 +99,18 @@ public class FStatisticsFinancialCustomerUnit
    // 字段电话号码的定义。
    protected String _phone;
 
+   // 存储字段电话城市编号的定义。
+   private long __phoneCityId;
+
+   // 字段电话城市编号的定义。
+   protected long _phoneCityId;
+
+   // 存储字段电话城市代码的定义。
+   private String __phoneCityCode;
+
+   // 字段电话城市代码的定义。
+   protected String _phoneCityCode;
+
    // 存储字段注册时间的定义。
    private TDateTime __registerDate = new TDateTime();
 
@@ -568,6 +580,60 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setPhone(String value){
       _phone = value;
+   }
+
+   //============================================================
+   // <T>判断电话城市编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneCityIdChanged(){
+      return __phoneCityId != _phoneCityId;
+   }
+
+   //============================================================
+   // <T>获得电话城市编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long phoneCityId(){
+      return _phoneCityId;
+   }
+
+   //============================================================
+   // <T>设置电话城市编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhoneCityId(long value){
+      _phoneCityId = value;
+   }
+
+   //============================================================
+   // <T>判断电话城市代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneCityCodeChanged(){
+      return !RString.equals(__phoneCityCode, _phoneCityCode);
+   }
+
+   //============================================================
+   // <T>获得电话城市代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phoneCityCode(){
+      return _phoneCityCode;
+   }
+
+   //============================================================
+   // <T>设置电话城市代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhoneCityCode(String value){
+      _phoneCityCode = value;
    }
 
    //============================================================
@@ -1118,6 +1184,10 @@ public class FStatisticsFinancialCustomerUnit
             return RInteger.toString(_cardGender);
          case "phone":
             return _phone;
+         case "phone_city_id":
+            return Long.toString(_phoneCityId);
+         case "phone_city_code":
+            return _phoneCityCode;
          case "register_date":
             return _registerDate.toString();
          case "investment_first_date":
@@ -1208,6 +1278,12 @@ public class FStatisticsFinancialCustomerUnit
             break;
          case "phone":
             _phone = value;
+            break;
+         case "phone_city_id":
+            _phoneCityId = RLong.parse(value);
+            break;
+         case "phone_city_code":
+            _phoneCityCode = value;
             break;
          case "register_date":
             _registerDate.parse(value);
@@ -1333,6 +1409,14 @@ public class FStatisticsFinancialCustomerUnit
                __phone = value;
                _phone = __phone;
                break;
+            case "phone_city_id":
+               __phoneCityId = RLong.parse(value);
+               _phoneCityId = __phoneCityId;
+               break;
+            case "phone_city_code":
+               __phoneCityCode = value;
+               _phoneCityCode = __phoneCityCode;
+               break;
             case "register_date":
                __registerDate.parse(value);
                _registerDate.assign(__registerDate);
@@ -1434,6 +1518,8 @@ public class FStatisticsFinancialCustomerUnit
       row.set("cardBirth", _cardBirth);
       row.set("cardGender", _cardGender);
       row.set("phone", _phone);
+      row.set("phoneCityId", _phoneCityId);
+      row.set("phoneCityCode", _phoneCityCode);
       row.set("registerDate", _registerDate);
       row.set("investmentFirstDate", _investmentFirstDate);
       row.set("investmentLastDate", _investmentLastDate);
@@ -1476,6 +1562,8 @@ public class FStatisticsFinancialCustomerUnit
       map.put("cardBirth", _cardBirth);
       map.put("cardGender", RInteger.toString(_cardGender));
       map.put("phone", _phone);
+      map.put("phoneCityId", RLong.toString(_phoneCityId));
+      map.put("phoneCityCode", _phoneCityCode);
       map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentFirstDate", _investmentFirstDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentLastDate", _investmentLastDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1518,6 +1606,8 @@ public class FStatisticsFinancialCustomerUnit
       _cardBirth = input.readString();
       _cardGender = input.readInt32();
       _phone = input.readString();
+      _phoneCityId = input.readInt64();
+      _phoneCityCode = input.readString();
       _registerDate.set(input.readInt64());
       _investmentFirstDate.set(input.readInt64());
       _investmentLastDate.set(input.readInt64());
@@ -1555,6 +1645,8 @@ public class FStatisticsFinancialCustomerUnit
       output.writeString(_cardBirth);
       output.writeInt32(_cardGender);
       output.writeString(_phone);
+      output.writeInt64(_phoneCityId);
+      output.writeString(_phoneCityCode);
       output.writeInt64(_registerDate.get());
       output.writeInt64(_investmentFirstDate.get());
       output.writeInt64(_investmentLastDate.get());

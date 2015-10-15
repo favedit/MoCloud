@@ -30,6 +30,8 @@
   <FieldString _uuid="c40b672e-8d46-4fb5-a047-1b1a3f1a854e" name="card_birth" label="M#12cn14卡片生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_BIRTH" data_size="8" />
   <FieldInteger _uuid="71248052-cfda-4ee9-ac67-336d0b0fdb81" name="card_gender" label="M#12cn14卡片性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_GENDER" />
   <FieldString _uuid="55679bf3-db3a-4466-a35e-e4988ceaa4f2" name="phone" label="M#12cn12电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
+  <FieldRecordId _uuid="c20316b9-dfb7-4a80-a4ec-923f66c09a19" name="phone_city_id" label="M#12cn16电话城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CITY_ID" />
+  <FieldString _uuid="9dd303e1-e64b-4cec-ae7e-db3b073c0990" name="phone_city_code" label="M#12cn16电话城市代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CITY_CODE" data_size="40" />
   <FieldString _uuid="a9c96924-c852-4f9c-b927-884ed40fc343" name="rank_label" label="M#12cn14级别标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RANK_LABEL" data_size="80" />
   <FieldDouble _uuid="3cf2b910-df44-4da6-bb76-6f9f8344fd89" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldDouble _uuid="8c94a745-193b-4d40-8c22-b9e8bb546a72" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />

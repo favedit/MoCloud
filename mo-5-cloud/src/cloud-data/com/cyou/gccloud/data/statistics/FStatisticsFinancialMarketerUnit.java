@@ -219,6 +219,18 @@ public class FStatisticsFinancialMarketerUnit
    // 字段电话的定义。
    protected String _phone;
 
+   // 存储字段电话城市编号的定义。
+   private long __phoneCityId;
+
+   // 字段电话城市编号的定义。
+   protected long _phoneCityId;
+
+   // 存储字段电话城市代码的定义。
+   private String __phoneCityCode;
+
+   // 字段电话城市代码的定义。
+   protected String _phoneCityCode;
+
    // 存储字段级别标签的定义。
    private String __rankLabel;
 
@@ -1195,6 +1207,60 @@ public class FStatisticsFinancialMarketerUnit
    }
 
    //============================================================
+   // <T>判断电话城市编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneCityIdChanged(){
+      return __phoneCityId != _phoneCityId;
+   }
+
+   //============================================================
+   // <T>获得电话城市编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long phoneCityId(){
+      return _phoneCityId;
+   }
+
+   //============================================================
+   // <T>设置电话城市编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhoneCityId(long value){
+      _phoneCityId = value;
+   }
+
+   //============================================================
+   // <T>判断电话城市代码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneCityCodeChanged(){
+      return !RString.equals(__phoneCityCode, _phoneCityCode);
+   }
+
+   //============================================================
+   // <T>获得电话城市代码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phoneCityCode(){
+      return _phoneCityCode;
+   }
+
+   //============================================================
+   // <T>设置电话城市代码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhoneCityCode(String value){
+      _phoneCityCode = value;
+   }
+
+   //============================================================
    // <T>判断级别标签的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1620,6 +1686,10 @@ public class FStatisticsFinancialMarketerUnit
             return RInteger.toString(_cardGender);
          case "phone":
             return _phone;
+         case "phone_city_id":
+            return Long.toString(_phoneCityId);
+         case "phone_city_code":
+            return _phoneCityCode;
          case "rank_label":
             return _rankLabel;
          case "investment_total":
@@ -1758,6 +1828,12 @@ public class FStatisticsFinancialMarketerUnit
             break;
          case "phone":
             _phone = value;
+            break;
+         case "phone_city_id":
+            _phoneCityId = RLong.parse(value);
+            break;
+         case "phone_city_code":
+            _phoneCityCode = value;
             break;
          case "rank_label":
             _rankLabel = value;
@@ -1945,6 +2021,14 @@ public class FStatisticsFinancialMarketerUnit
                __phone = value;
                _phone = __phone;
                break;
+            case "phone_city_id":
+               __phoneCityId = RLong.parse(value);
+               _phoneCityId = __phoneCityId;
+               break;
+            case "phone_city_code":
+               __phoneCityCode = value;
+               _phoneCityCode = __phoneCityCode;
+               break;
             case "rank_label":
                __rankLabel = value;
                _rankLabel = __rankLabel;
@@ -2042,6 +2126,8 @@ public class FStatisticsFinancialMarketerUnit
       row.set("cardBirth", _cardBirth);
       row.set("cardGender", _cardGender);
       row.set("phone", _phone);
+      row.set("phoneCityId", _phoneCityId);
+      row.set("phoneCityCode", _phoneCityCode);
       row.set("rankLabel", _rankLabel);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
@@ -2098,6 +2184,8 @@ public class FStatisticsFinancialMarketerUnit
       map.put("cardBirth", _cardBirth);
       map.put("cardGender", RInteger.toString(_cardGender));
       map.put("phone", _phone);
+      map.put("phoneCityId", RLong.toString(_phoneCityId));
+      map.put("phoneCityCode", _phoneCityCode);
       map.put("rankLabel", _rankLabel);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
@@ -2154,6 +2242,8 @@ public class FStatisticsFinancialMarketerUnit
       _cardBirth = input.readString();
       _cardGender = input.readInt32();
       _phone = input.readString();
+      _phoneCityId = input.readInt64();
+      _phoneCityCode = input.readString();
       _rankLabel = input.readString();
       _registerDate.set(input.readInt64());
       _enterDate.set(input.readInt64());
@@ -2205,6 +2295,8 @@ public class FStatisticsFinancialMarketerUnit
       output.writeString(_cardBirth);
       output.writeInt32(_cardGender);
       output.writeString(_phone);
+      output.writeInt64(_phoneCityId);
+      output.writeString(_phoneCityCode);
       output.writeString(_rankLabel);
       output.writeInt64(_registerDate.get());
       output.writeInt64(_enterDate.get());
