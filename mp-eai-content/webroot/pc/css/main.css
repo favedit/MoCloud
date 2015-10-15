@@ -6,7 +6,7 @@ html,body
 body{ 
 	background: #edeef0;
 	font-family:'Microsoft YaHei','Hiragino Sans GB',Helvetica,Arial,'Lucida Grande',sans-serif;
-	min-width: 1024px;
+	min-width: 1200px;
 	background: url(../images/main/new3.png);
 	background-position: center top;
 	background-repeat: no-repeat;
@@ -182,12 +182,13 @@ body{
 /*切换帐号*/
 .switch{
 	position: absolute;
-	top: 30px;
+	top: 36px;
 	right: 30px;
 	cursor: pointer;
 	color: #25e2ff;
 	font-size: 20px;
 	font-weight: bold;
+	width: 100px;
 }
 .switch a{
 	color: #25e2ff;
