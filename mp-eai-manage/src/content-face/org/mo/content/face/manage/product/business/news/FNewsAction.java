@@ -1,8 +1,6 @@
 package org.mo.content.face.manage.product.business.news;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
-import com.cyou.gccloud.define.enums.common.EGcDisplay;
-import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -159,8 +157,8 @@ public class FNewsAction implements INewsAction {
       info.setContent(unit.content());
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
-      info.setDisplayCdStr(EGcDisplay.formatLabel(unit.displayCd()));
-      info.setLinkCdStr(EGcLink.formatLabel(unit.linkCd()));
+      info.setDisplayCd(unit.displayCd());
+      info.setLinkCd(unit.linkCd());
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
@@ -249,34 +247,11 @@ public class FNewsAction implements INewsAction {
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
       unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
-      String scd = context.parameter("displayCdStr");
-      if (!RString.isEmpty(scd) && scd.length() < 2) {
-         unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));
-      } else if (!RString.isEmpty(scd) && scd.length() > 1) {
-         if (RString.equals(EGcDisplay.DisableLabel, scd)) {
-            unit.setDisplayCd(EGcDisplay.Disable);
-         }
-         if (RString.equals(EGcDisplay.EnabledLabel, scd)) {
-            unit.setDisplayCd(EGcDisplay.Enabled);
-         }
-      }
-      unit.setStatusCd(EGcResourceStatus.Apply);
-      String lcs = context.parameter("linkCdStr");
-      if (!RString.isEmpty(lcs) && lcs.length() < 2) {
-         unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
-      } else if (!RString.isEmpty(lcs) && lcs.length() > 1) {
-         if (RString.equals(EGcLink.UnknownLabel, lcs)) {
-            unit.setLinkCd(EGcLink.Unknown);
-         }
-         if (RString.equals(EGcLink.ContentLabel, lcs)) {
-            unit.setLinkCd(EGcLink.Content);
-         }
-         if (RString.equals(EGcLink.LinkLabel, lcs)) {
-            unit.setLinkCd(EGcLink.Link);
-         }
-      }
+      unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));
+      unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
+      unit.setStatusCd(EGcResourceStatus.Apply);
       FWebUploadFile file = context.files().first();
       if (null == file) {
          String oiconUr = context.parameter("oiconUr");

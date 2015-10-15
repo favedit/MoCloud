@@ -93,22 +93,22 @@
      width="200px">标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="90px">状态</th>
+     width="60px">状态</th>
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
-     <th
-     data-options="field:'keywords',halign:'center',align:'left',sortable:true"
-     width="60px">关键字</th>
-     <th
-     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
-     width="160px">图片</th>
      <th
      data-options="field:'linkCdStr',halign:'center',align:'left',sortable:true"
      width="60px">外链状态</th>
      <th
      data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
      width="160px">外链地址</th>
+     <th
+     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
+     width="160px">图片</th>
+     <th
+     data-options="field:'keywords',halign:'center',align:'left',sortable:true"
+     width="60px">关键字</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
      width="160px">描述</th>

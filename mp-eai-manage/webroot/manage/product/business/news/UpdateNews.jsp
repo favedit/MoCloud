@@ -21,6 +21,8 @@
     $(function(){
        var image = $("#image").val();
        $("#oriIcon").attr("src",image);
+       $('#displayCdStr').combobox("select", $('#oldDisplayCd').val());
+       $('#linkCdStr').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
        $("#kindeditor_view").val(conte);
     });
@@ -95,16 +97,17 @@
     <tr>
      <td height="38"><div align="left">是否展示:</div></td>
      <td style="width:380px;"><div align="left">
+       <input type="hidden" id="oldDisplayCd" value="<jh:write source='&unit.displayCd'/>">
        <input style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'展示'},{'value':'2','text':'未展示'}]"
-       value="<jh:write source='&unit.displayCdStr'/>"/>   
+       data:[{'value':'1','text':'展示'},{'value':'2','text':'非展示'}]"/>
       </div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">外链状态:</div></td>
      <td><div align="left">
+       <input type="hidden" id="oldLinkCd" value="<jh:write source='&unit.linkCd'/>">
        <input style="width:380px;height:20px" id="linkCdStr" class="easyui-combobox" name="linkCdStr" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}]" value="<jh:write source='&unit.linkCdStr'/>"/>  
+       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}]"/>  
       </div></td>
     </tr>
     <tr>

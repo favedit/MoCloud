@@ -67,7 +67,7 @@
      <td><div align="left">
       <select  style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
              <option value="1">展示</option>
-             <option value="2">未展示</option>
+             <option value="2">非展示</option>
         <select>
       </div></td>
     </tr>
