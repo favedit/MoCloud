@@ -37,7 +37,7 @@
   <Enum _uuid="4cbe97c2-bd1d-4d33-8183-522a9a66fb67" name="GcDisplay" label="显示" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
     <Item _uuid="48604ca3-88e1-489c-84ce-a9e417d19695" name="Unknown" label="未知" is_valid="Y" note="M#" />
     <Item _uuid="6d779033-cd39-4050-851c-14724caf0b6d" name="Enabled" label="展示" is_valid="Y" note="M#" />
-    <Item _uuid="e3826c7a-0739-4d3e-ac8d-d7af392371f6" name="Disable" label="未展示" is_valid="Y" note="M#" />
+    <Item _uuid="e3826c7a-0739-4d3e-ac8d-d7af392371f6" name="Disable" label="非展示" is_valid="Y" note="M#" />
   </Enum>
   <Enum _uuid="WEUAXxONeYYoHX9awmUqpQ" name="GcResult" label="结果" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint8" is_set="N" set_data_type_cd="Uint32" is_code="N">
     <Item _uuid="pEODNsTTtoQhlmsgGBnWpg" name="Unknown" label="未知" is_valid="Y" note="M#" value="0" />

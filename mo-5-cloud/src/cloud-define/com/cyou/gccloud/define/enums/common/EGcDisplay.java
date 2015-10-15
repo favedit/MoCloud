@@ -33,14 +33,14 @@ public class EGcDisplay
    // 展示标签
    public final static String EnabledLabel = "展示";
 
-   // 未展示
+   // 非展示
    public final static int Disable = 2;
 
-   // 未展示字符串
+   // 非展示字符串
    public final static String DisableString = "Disable";
 
-   // 未展示标签
-   public final static String DisableLabel = "未展示";
+   // 非展示标签
+   public final static String DisableLabel = "非展示";
 
    //============================================================
    // <T>是否含有指定内容</T>
