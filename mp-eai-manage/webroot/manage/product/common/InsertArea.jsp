@@ -10,8 +10,25 @@
     function submitForm() {
         if (!isValid())
             return;
+        $("#countryId").val($('#country').combobox("getValue"));
         $("#config").submit();
     }
+    $(function() {
+        var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
+        var data = null;
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: data,
+           success: function(msg) {
+              var result = toJsonObject(msg);
+              $('#country').combobox('loadData', result);
+           },
+           fail: function() {
+              alert("error");
+           }
+        });
+     })
 </script>
 
 <body bgcolor="#198bc9">
@@ -47,9 +64,8 @@
     <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-       <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,70]'" /> 
+        <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false" />
+        <input name="countryId" id="countryId" type="hidden">
       </div></td>
     </tr>
     <tr>

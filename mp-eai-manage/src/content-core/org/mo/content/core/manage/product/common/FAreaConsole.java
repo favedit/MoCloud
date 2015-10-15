@@ -60,13 +60,10 @@ public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic
          whereSql.append(" '%{label}%'");
          whereSql.bind("label", unit.label());
       }
-      // String orderBy = String.format("%s %s", FDataCommonAreaLogic.LABEL,
-      // "ASC");
       FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
       FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
       for (Iterator<FDataAreaInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
          FDataAreaInfo tempUnit = iterator.next();
-         // String _areaLabel = "";
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
          if (unit2 != null) {
             String _countryLabel = unit2.name();
@@ -122,5 +119,26 @@ public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic
          }
       }
       return false;
+   }
+
+   // ============================================================
+   // <T>根据标签获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, Long countryId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(countryId + "") && countryId > 0) {
+         whereSql.append(FDataCommonAreaLogic.COUNTRY_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {countryId}");
+         whereSql.bind("countryId", RString.parse(countryId));
+         FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
+         return logic.fetch(whereSql.toString());
+      }
+      FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
+      return logic.fetchAll();
    }
 }

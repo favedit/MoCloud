@@ -27,4 +27,5 @@ public interface IAreaConsole extends IAbstractLogicUnitConsole<FDataCommonAreaU
 
    public boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, String areaLabel, Long countryId);
 
+   public FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, Long countryId);
 }

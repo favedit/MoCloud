@@ -212,4 +212,19 @@ public class FCountryAction implements ICountryAction {
       unit.setNote(context.parameter("note"));
       unit.setPhoneCode(context.parameter("phoneCode"));
    }
+
+   // ============================================================
+   // <T>全查</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String selectAll(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+      FLogicDataset<FDataCommonCountryUnit> countryList = _countryConsole.selectAll(logicContext);
+      basePage.setJson(countryList.toJsonString());
+      return "/manage/common/ajax";
+   }
 }

@@ -8,6 +8,23 @@
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 </HEAD>
 <script>
+   $(function() {
+       var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
+       var data = null;
+       $.ajax({
+          type: "POST",
+         url: url,
+          data: data,
+          success: function(msg) {
+             var result = toJsonObject(msg);
+             $('#country').combobox('loadData', result);
+             $('#country').combobox("select",$('#countryId').val());
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
+    })
     function submitForm() {
         if (!isValid())
             return;
@@ -17,7 +34,7 @@
         var data = {
             "label" : $('#label').val(),
             "adminId" : $('#adminId').val(),
-            "countryLabel" : $('#countryLabel').val(),
+            "countryId":$('#country').combobox("getValue"),
             "code" : $('#code').val(),
             "note" : $('#note').val(),
             "ouid" : $('#ouid').val()
@@ -28,7 +45,7 @@
             data : data,
             success : function(msg) {
                 closeProgress();
-                var result = toJsonObject(msg);
+               // var result = toJsonObject(msg);
                 location.href = "/manage/product/common/Area.wa";
             },
             fail : function() {
@@ -37,21 +54,6 @@
             }
         });
     }
-    function onCountrySelect(){alert(1111);
-         $('#countryLabel').combobox('clear');
-         $('#countryLabel').combobox('loadData',"");
-         var url = "/manage/product/common/Area.wa?do=selectCountry&date="+new Date().valueOf();
-         $.ajax({
-            type:"POST",
-            url:url,
-            success:function(msg){
-             $('#countryLabel').combobox('loadData', toJsonObject(msg));
-            },
-            fail:function(){
-                alert("error");
-            }
-         });
-      }
 </script>
 
 <body bgcolor="#198bc9">
@@ -83,17 +85,15 @@
         data-options="required:true,validType:'length[0,80]'" />  <input id="adminId"
         name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
-          <input id="ouid"
-        name=""ouid"" style="display:none"
+          <input id="ouid" name="ouid" style="display:none;"
         value="<jh:write source='&unit.ouid'/>" />
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-       <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox" value="<jh:write source='&unit.countryLabel'/>"
-        style="width:280px;height:20px;"
-        data-options="validType:'length[0,70]'" />
+        <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
+        <input name="countryId" id="countryId" type="hidden" value="<jh:write source='&unit.countryId'/>">
       </div></td>
     </tr>
     <tr>

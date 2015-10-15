@@ -94,4 +94,17 @@ public class FCountryConsole extends FAbstractLogicUnitConsole<FDataCommonCountr
       return roleList.first();
    }
 
+   // ============================================================
+   // <T>根据标签获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonCountryUnit> selectAll(ILogicContext logicContext) {
+      FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
+      FLogicDataset<FDataCommonCountryUnit> list = logic.fetchAll();
+      return list;
+   }
+
 }

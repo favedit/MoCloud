@@ -159,13 +159,7 @@ public class FAreaAction implements IAreaAction {
       }
       long id = context.parameterAsLong("id");
       FDataCommonAreaUnit unit = _areaConsole.find(logicContext, id);
-      FDataAreaInfo info = new FDataAreaInfo();
-      info.setOuid(unit.ouid());
-      info.setCode(unit.code());
-      info.setCountryLabel(unit.country().name());
-      info.setLabel(unit.label());
-      info.setNote(unit.note());
-      page.setUnit(info);
+      page.setUnit(unit);
       return "/manage/product/common/UpdateArea";
    }
 
@@ -229,9 +223,30 @@ public class FAreaAction implements IAreaAction {
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
       unit.setNote(context.parameter("note"));
-      FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("countryLabel"));
-      if (null != unitc) {
-         unit.setCountryId(unitc.ouid());
+      Long countryId = context.parameterAsLong("countryId");// 获取国家id
+      String country = context.parameter("countryId");// 获取国家名称
+      if (!RString.isEmpty(countryId + "")) {
+         unit.setCountryId(countryId);
+      } else if (!RString.isEmpty(country + "")) {
+         FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("countryId"));
+         if (null != unitc) {
+            unit.setCountryId(unitc.ouid());
+         }
       }
+   }
+
+   // ============================================================
+   // <T>全查</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String selectAll(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+      FLogicDataset<FDataCommonAreaUnit> countryList = _areaConsole.selectAll(logicContext, context.parameterAsLong("countryId"));
+      basePage.setJson(countryList.toJsonString());
+      return "/manage/common/ajax";
    }
 }

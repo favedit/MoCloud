@@ -39,4 +39,6 @@ public interface ICountryConsole extends IAbstractLogicUnitConsole<FDataCommonCo
    // @return 数据对象
    // ============================================================
    public FDataCommonCountryUnit findByName(ILogicContext logicContext, String name);
+
+   public FLogicDataset<FDataCommonCountryUnit> selectAll(ILogicContext logicContext);
 }
