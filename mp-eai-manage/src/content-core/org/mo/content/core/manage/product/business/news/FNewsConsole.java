@@ -69,7 +69,7 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          whereSql.append(FDataLogicNewsLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
-      String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.CREATE_DATE, "DESC", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC");
+      String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC", FDataLogicNewsLogic.CREATE_DATE, "DESC");
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
       FLogicDataset<FDataNewsInfo> moduleList = logic.fetchClass(FDataNewsInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (Iterator<FDataNewsInfo> ite = moduleList.iterator(); ite.hasNext();) {

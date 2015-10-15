@@ -65,7 +65,7 @@
     <tr>
      <td height="38"><div align="left">是否展示:</div></td>
      <td><div align="left">
-      <select  style="width:380px;height:20px" id="displayCdStr" class="easyui-combobox" name="displayCdStr" style="width:200px;">
+      <select  style="width:380px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" style="width:200px;">
              <option value="1">展示</option>
              <option value="2">非展示</option>
         <select>
@@ -74,7 +74,7 @@
     <tr>
      <td height="38"><div align="left">外链状态:</div></td>
      <td><div align="left">
-       <select  style="width:380px;height:20px" id="linkCdStr" class="easyui-combobox" name="linkCdStr" style="width:200px;">
+       <select  style="width:380px;height:20px" id="linkCd" class="easyui-combobox" name="linkCd" style="width:200px;">
              <option value="1">内容</option>
              <option value="2">外链</option>
         <select>

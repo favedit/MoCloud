@@ -247,8 +247,8 @@ public class FNewsAction implements INewsAction {
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
       unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
-      unit.setDisplayCd(context.parameterAsInteger("displayCdStr"));
-      unit.setLinkCd(context.parameterAsInteger("linkCdStr"));
+      unit.setDisplayCd(context.parameterAsInteger("displayCd"));
+      unit.setLinkCd(context.parameterAsInteger("linkCd"));
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
       unit.setStatusCd(EGcResourceStatus.Apply);
