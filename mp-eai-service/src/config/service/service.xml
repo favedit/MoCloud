@@ -19,7 +19,7 @@
 	<Component face='org.mo.content.service.mobile.logic.news.INewsService'
 		class='org.mo.content.service.mobile.logic.news.FNewsService' scope='global'>
 		<!-- <Property name='newsServiceHost'>http://10.13.0.100:8020/</Property> -->
-		 <Property name='newsServiceHost'>http://eai.ezubo.com:8089/</Property>
+		 <Property name='newsServiceHost'>http://service.eai.ezubo.com/</Property>
 	</Component>
 
 	<!-- ============================================================ -->
@@ -33,7 +33,8 @@
 		class='org.mo.content.service.mobile.logic.salestools.FSalesToolsService'
 		scope='global'>
 		 <!-- <Property name='salesServiceHost'>http://10.13.0.100:8020/</Property> -->
-		<Property name='salesServiceHost'>http://eai.ezubo.com:8089/</Property>
+		<!--<Property name='salesServiceHost'>http://eai.ezubo.com:8089/</Property>-->
+		<Property name='salesServiceHost'>http://service.eai.ezubo.com/</Property>
 	</Component>
 
 
