@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.examine.version;
+package org.mo.content.face.manage.product.examine.business;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import org.mo.com.lang.FObjectId;
@@ -11,7 +11,7 @@ import org.mo.com.lang.FObjectId;
 //@version 1.0.0
 //============================================================
 
-public class FVersionPage extends FObjectId {
+public class FNewsPage extends FObjectId {
    // 当前页
    protected int _pageCurrent;
 

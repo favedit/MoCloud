@@ -96,7 +96,7 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <select id="forceCdStr" class="easyui-combobox" name="forceCdStr" style="width:200px;">
+                        <select id="forceCd" class="easyui-combobox" name="forceCd" style="width:200px;">
                            <option value="1">可选</option>
                            <option value="2">强制</option>
                            <option value="3">自动</option>

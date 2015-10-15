@@ -134,8 +134,8 @@ public class FHeaderAction implements IHeaderAction {
       if (roleCd == EGcPersonUserRole.Admin) {
          menuStrings
                   .append("manage.system.user.module|manage.system.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|manage.product.financial.product|manage.system.user|manage.product.financial.department|manage.product.business.news|manage.product.financial.customer|manage.product.common.configration|")
-                  .append("manage.product.common.configration.rule|manage.product.business.salestools|manage.product.examine.business|manage.product.examine.news|manage.product.system.application|manage.product.system.version|manage.product.financial.marketer|manage.product.device|manage.product.user.logger|manage.product.user.whitelists|manage.product.user.signing|");
-         menuStrings.append("manage.product.examine.version");
+                  .append("manage.product.common.configration.rule|manage.product.business.salestools|manage.product.examine.business|manage.product.examine.business.news|manage.product.system.application|manage.product.system.version|manage.product.financial.marketer|manage.product.device|manage.product.user.logger|manage.product.user.whitelists|manage.product.user.signing|");
+         menuStrings.append("manage.product.examine.system.version|manage.product.examine.business.salestools");
          basePage.setMenuString(menuStrings.toString());
       } else {
          long roleId = basePage.roleId();

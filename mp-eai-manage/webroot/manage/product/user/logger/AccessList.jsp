@@ -57,6 +57,7 @@
             <span>用户日志</span>
          </div>
          <div class="btn_bar">
+         <div class="nav_btn">
          <form id="logerdat" action="/manage/product/user/logger/Access.wa?do=selectByDate" method="post" align="center">
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
                <tr>

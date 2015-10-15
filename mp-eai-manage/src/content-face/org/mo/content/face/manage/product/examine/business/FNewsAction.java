@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.examine.news;
+package org.mo.content.face.manage.product.examine.business;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
@@ -13,8 +13,8 @@ import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.examine.news.FDataNewsInfo;
-import org.mo.content.core.manage.product.examine.news.INewsConsole;
+import org.mo.content.core.manage.product.examine.business.FDataNewsInfo;
+import org.mo.content.core.manage.product.examine.business.INewsConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -53,7 +53,7 @@ public class FNewsAction implements INewsAction {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/examine/news/NewsList";
+      return "/manage/product/examine/business/NewsList";
    }
 
    // ============================================================
@@ -106,7 +106,7 @@ public class FNewsAction implements INewsAction {
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, context.parameterAsLong("ouid"));
       page.setUnit(unit);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
-      return "/manage/product/examine/news/DataInfoForContent";
+      return "/manage/product/examine/business/NewsDataInfoForContent";
    }
 
    // ============================================================
@@ -145,7 +145,7 @@ public class FNewsAction implements INewsAction {
          }
       }
       _logger.debug(this, "checking", "checking finish. (userId={1})", "SUCCESS");
-      return "/manage/product/examine/news/NewsList";
+      return "/manage/product/examine/business/NewsList";
    }
 
    // ============================================================

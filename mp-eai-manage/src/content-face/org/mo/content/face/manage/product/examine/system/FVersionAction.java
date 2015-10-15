@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.examine.version;
+package org.mo.content.face.manage.product.examine.system;
 
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
@@ -41,7 +41,7 @@ public class FVersionAction implements IVersionAction {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/examine/version/VersionList";
+      return "/manage/product/examine/system/VersionList";
    }
 
    // ============================================================
@@ -100,6 +100,6 @@ public class FVersionAction implements IVersionAction {
          EResult result = _versionConsole.doUpdate(logicContext, version);
          _logger.debug(this, "Checking", "Checking " + result + ". (newsId={1}, flag={2})", versionIds[i], flag);
       }
-      return "/manage/product/examine/version/VersionList";
+      return "/manage/product/examine/system/VersionList";
    }
 }

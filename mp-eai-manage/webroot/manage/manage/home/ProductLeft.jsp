@@ -125,14 +125,14 @@
          </li>
          <li id="seven" class="common"><a href="#seven">审核管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="manage.product.examine.news" value="&basePage.menuString">
-                     <li><a href="/manage/product/examine/news/News.wa" target="right">业务资讯</a></li>
+                  <jh:equals source="manage.product.examine.business.news" value="&basePage.menuString">
+                     <li><a href="/manage/product/examine/business/News.wa" target="right">业务资讯</a></li>
                   </jh:equals>
-                  <jh:equals source="manage.product.examine.business" value="&basePage.menuString">
+                  <jh:equals source="manage.product.examine.business.salestools" value="&basePage.menuString">
                      <li><a href="/manage/product/examine/business/Salestools.wa" target="right">销售工具</a></li>
                   </jh:equals>
-                  <jh:equals source="manage.product.examine.version" value="&basePage.menuString">
-                     <li><a href="/manage/product/examine/version/Version.wa" target="right">版本发布</a></li>
+                  <jh:equals source="manage.product.examine.system.version" value="&basePage.menuString">
+                     <li><a href="/manage/product/examine/system/Version.wa" target="right">版本发布</a></li>
                   </jh:equals>
                </ul>
          </li>

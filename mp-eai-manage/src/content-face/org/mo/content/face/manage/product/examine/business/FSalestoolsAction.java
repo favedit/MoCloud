@@ -104,7 +104,7 @@ public class FSalestoolsAction implements ISalestoolsAction {
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, context.parameterAsLong("ouid"));
       page.setUnit(unit);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
-      return "/manage/product/examine/business/DataInfoForContent";
+      return "/manage/product/examine/business/SalestoolsDataInfoForContent";
    }
 
    // ============================================================

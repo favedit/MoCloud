@@ -20,12 +20,12 @@
 
          function doSubmit(page, pageSize) {
             progress();
-            var url = "/manage/product/examine/version/Version.wa?do=select&date=" + new Date().valueOf();
+            var url = "/manage/product/examine/system/Version.wa?do=select&date=" + new Date().valueOf();
             var data = null;
             var label = $.trim($('#label').val()).replaceAll("'", "");
             if (label == "资讯标题") label = null;
             if (page != null) {
-               url = "/manage/product/examine/version/Version.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+               url = "/manage/product/examine/system/Version.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
                   "label": label,
                   "page": page,
@@ -55,7 +55,7 @@
                   var row = rows[i];
                   ids.push(row.ouid);
                }
-               location.href = "/manage/product/examine/version/Version.wa?do=checking&versionIds=" + ids + "&flag=" + flag;
+               location.href = "/manage/product/examine/system/Version.wa?do=checking&versionIds=" + ids + "&flag=" + flag;
             }
          }
 

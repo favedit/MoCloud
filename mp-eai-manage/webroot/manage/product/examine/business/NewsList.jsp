@@ -19,13 +19,13 @@
     });
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/manage/product/examine/news/News.wa?do=select&date="
+        var url = "/manage/product/examine/business/News.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var label = $.trim($('#label').val()).replaceAll("'", "");
         if (label == "资讯标题") label = null;
         if (page != null) {
-            url = "/manage/product/examine/news/News.wa?do=select&page="
+            url = "/manage/product/examine/business/News.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "label" : label,
@@ -48,7 +48,7 @@
         });
     }
     function phoneInfo(ouid){
-        window.showModalDialog("/manage/product/examine/news/News.wa?do=getDescription&ouid="+ouid,null,"dialogWidth=360px;dialogHeight=640px");
+        window.showModalDialog("/manage/product/examine/business/News.wa?do=getDescription&ouid="+ouid,null,"dialogWidth=360px;dialogHeight=640px");
     }
     function checkTask(flag){
         var ss = [];
@@ -58,7 +58,7 @@
               var row = rows[i];
               ss.push(row.ouid);
            }
-           location.href= "/manage/product/examine/news/News.wa?do=checking&newsIds="+ss+"&flag="+flag;
+           location.href= "/manage/product/examine/business/News.wa?do=checking&newsIds="+ss+"&flag="+flag;
         }
   }
 </script>

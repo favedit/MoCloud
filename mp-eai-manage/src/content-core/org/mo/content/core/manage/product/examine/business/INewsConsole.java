@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.product.examine.news;
+package org.mo.content.core.manage.product.examine.business;
 
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;

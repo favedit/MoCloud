@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.product.examine.news;
+package org.mo.content.core.manage.product.examine.business;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;

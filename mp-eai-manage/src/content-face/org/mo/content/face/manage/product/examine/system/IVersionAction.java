@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.examine.version;
+package org.mo.content.face.manage.product.examine.system;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
