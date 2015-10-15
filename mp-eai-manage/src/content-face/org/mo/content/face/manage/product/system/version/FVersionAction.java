@@ -1,4 +1,4 @@
-package org.mo.content.face.product.system.version;
+package org.mo.content.face.manage.product.system.version;
 
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
@@ -8,9 +8,9 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.product.system.application.IApplicationConsole;
-import org.mo.content.core.product.system.version.FDataVersionInfo;
-import org.mo.content.core.product.system.version.IVersionConsole;
+import org.mo.content.core.manage.product.system.application.IApplicationConsole;
+import org.mo.content.core.manage.product.system.version.FDataVersionInfo;
+import org.mo.content.core.manage.product.system.version.IVersionConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;

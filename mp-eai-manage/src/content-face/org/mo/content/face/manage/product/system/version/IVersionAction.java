@@ -1,4 +1,4 @@
-package org.mo.content.face.product.system.application;
+package org.mo.content.face.manage.product.system.version;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
@@ -12,9 +12,7 @@ import org.mo.web.protocol.context.IWebContext;
 //@Date 2015.09.29 
 //@version 1.0.0
 //============================================================
-public interface IApplicationAction
-{
-
+public interface IVersionAction {
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -35,7 +33,7 @@ public interface IApplicationAction
    //============================================================
    String select(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FApplicationPage page,
+                 @AContainer(name = "page") FVersionPage page,
                  @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -48,7 +46,7 @@ public interface IApplicationAction
    //============================================================
    String insertBefore(IWebContext context,
                        ILogicContext logicContext,
-                       @AContainer(name = "page") FApplicationPage page,
+                       @AContainer(name = "page") FVersionPage page,
                        @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -61,7 +59,7 @@ public interface IApplicationAction
    //============================================================
    String insert(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FApplicationPage page,
+                 @AContainer(name = "page") FVersionPage page,
                  @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -74,7 +72,7 @@ public interface IApplicationAction
    //============================================================
    String updateBefore(IWebContext context,
                        ILogicContext logicContext,
-                       @AContainer(name = "page") FApplicationPage page,
+                       @AContainer(name = "page") FVersionPage page,
                        @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -87,7 +85,7 @@ public interface IApplicationAction
    //============================================================
    String update(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FApplicationPage page,
+                 @AContainer(name = "page") FVersionPage page,
                  @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
@@ -100,18 +98,6 @@ public interface IApplicationAction
    //============================================================
    String delete(IWebContext context,
                  ILogicContext logicContext,
-                 @AContainer(name = "page") FApplicationPage page,
+                 @AContainer(name = "page") FVersionPage page,
                  @AContainer(name = "basePage") FBasePage basePage);
-
-   //============================================================
-   // <T>全查</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   //============================================================
-   String selectAll(IWebContext context,
-                    ILogicContext logicContext,
-                    @AContainer(name = "basePage") FBasePage basePage);
 }

@@ -20,12 +20,12 @@
 
          function doSubmit(page, pageSize) {
             progress();
-            var url = "/product/system/version/Version.wa?do=select&date=" + new Date().valueOf();
+            var url = "/manage/product/system/version/Version.wa?do=select&date=" + new Date().valueOf();
             var data = null;
             var label = $.trim($('#label').val()).replaceAll("'", "");
             if (label == "版本标题") label = null;
             if (page != null) {
-               url = "/product/system/version/Version.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+               url = "/manage/product/system/version/Version.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
                data = {
                   "label": label,
                   "page": page,
@@ -53,7 +53,7 @@
          //更新配置信息-AnjoyTian
          function edit(id) {
             console.info(id);
-            window.location.href = "/product/system/version/Version.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
+            window.location.href = "/manage/product/system/version/Version.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
          }
       </script>
    </HEAD>
@@ -65,7 +65,7 @@
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
-               <a href="/product/system/version/Version.wa?do=insertBefore" class="add_btn"></a>
+               <a href="/manage/product/system/version/Version.wa?do=insertBefore" class="add_btn"></a>
             </div>
             <div class="nav_search">
                <input id="label" name="label" type="text" onfocus="if(this.value=='版本标题'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='版本标题';this.style.color='#ccc';}" style="color: #ccc" value="版本标题">

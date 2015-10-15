@@ -13,7 +13,7 @@
          version.submit();
       }
       $(function() {
-         var url = "/product/system/application/Application.wa?do=selectAll&date=" + new Date().valueOf();
+         var url = "/manage/product/system/application/Application.wa?do=selectAll&date=" + new Date().valueOf();
          var data = null;
          $.ajax({
             type: "POST",
@@ -39,13 +39,13 @@
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="#" onClick="submitForm()" class="add_btn"></a>
-               <a href="/product/system/version/Version.wa" class="back_btn"></a>
+               <a href="/manage/product/system/version/Version.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>
       </div>
       <div class="easyui-panel" fit='true' data-options="border:false">
-         <form id="version" action="/product/system/version/Version.wa?do=insert" method="post" align="center">
+         <form id="version" action="/manage/product/system/version/Version.wa?do=insert" method="post" align="center">
             <font style="color:red;"><jh:write source='&page.result' /></font>
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
                <tr>

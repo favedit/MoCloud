@@ -12,7 +12,7 @@
         if (!isValid())
             return;
         progress();
-        var url = "/product/system/application/Application.wa?do=update&date="
+        var url = "/manage/product/system/application/Application.wa?do=update&date="
                 + new Date().valueOf();
         var data = {
             "label" : $('#label').val(),
@@ -28,7 +28,7 @@
             success : function(msg) {
                 closeProgress();
                 var result = toJsonObject(msg);
-                location.href = "/product/system/application/Application.wa";
+                location.href = "/manage/product/system/application/Application.wa";
             },
             fail : function() {
                 closeProgress();
@@ -46,7 +46,7 @@
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="sub_btn"></a> <a
-     href="/product/system/application/Application.wa" class="back_btn"></a>
+     href="/manage/product/system/application/Application.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
@@ -54,7 +54,7 @@
  <div class="easyui-panel" fit='true' data-options="border:false">
 
   <form id="config"
-   action="/product/system/application/Application.wa?do=update"
+   action="/manage/product/system/application/Application.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
     <table width="550" border="0" align="left"

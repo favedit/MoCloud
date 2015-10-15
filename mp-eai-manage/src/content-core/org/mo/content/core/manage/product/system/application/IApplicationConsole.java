@@ -1,4 +1,4 @@
-package org.mo.content.core.product.system.application;
+package org.mo.content.core.manage.product.system.application;
 
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;

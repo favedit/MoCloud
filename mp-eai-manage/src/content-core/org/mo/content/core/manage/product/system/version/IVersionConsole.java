@@ -1,4 +1,4 @@
-package org.mo.content.core.product.system.version;
+package org.mo.content.core.manage.product.system.version;
 
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;

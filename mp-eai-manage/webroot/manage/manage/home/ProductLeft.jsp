@@ -105,17 +105,17 @@
          </li>
          <li id="five" class="common"> <a href="#five">系统管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="product.system.application" value="&basePage.menuString">
-                     <li><a href="/product/system/application/Application.wa" target="right">应用信息</a></li>
+                  <jh:equals source="manage.product.system.application" value="&basePage.menuString">
+                     <li><a href="/manage/product/system/application/Application.wa" target="right">应用信息</a></li>
                   </jh:equals>
-                  <jh:equals source="product.system.version" value="&basePage.menuString">
-                     <li><a href="/product/system/version/Version.wa" target="right">版本信息</a></li>
+                  <jh:equals source="manage.product.system.version" value="&basePage.menuString">
+                     <li><a href="/manage/product/system/version/Version.wa" target="right">版本信息</a></li>
                   </jh:equals>
                </ul>
          </li>
          <li id="six" class="common"> <a href="#six">业务管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="manage.product.business.news.news" value="&basePage.menuString">
+                  <jh:equals source="manage.product.business.news" value="&basePage.menuString">
                      <li><a href="/manage/product/business/news/News.wa" target="right">资讯信息</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.business.salestools" value="&basePage.menuString">

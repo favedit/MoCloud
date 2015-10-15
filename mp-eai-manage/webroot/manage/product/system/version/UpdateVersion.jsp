@@ -8,7 +8,7 @@
    </HEAD>
    <script>
       $(function() {
-         var url = "/product/system/application/Application.wa?do=selectAll&date=" + new Date().valueOf();
+         var url = "/manage/product/system/application/Application.wa?do=selectAll&date=" + new Date().valueOf();
          var data = null;
          $.ajax({
             type: "POST",
@@ -32,7 +32,7 @@
          progress();
          var forceCd = $("#forceCdStr").combobox("getValue");
          var applicationId = $('#application').combobox("getValue");
-         var url = "/product/system/version/Version.wa?do=update&date=" + new Date().valueOf();
+         var url = "/manage/product/system/version/Version.wa?do=update&date=" + new Date().valueOf();
          var data = {
             "label": $('#label').val(),
             "adminId": $('#adminId').val(),
@@ -59,7 +59,7 @@
                    $('#overid').text("版本号只支持数字和英文小数点!");
                 }
                if(msg.indexOf("success")>-1){
-                   location.href = "/product/system/version/Version.wa";
+                   location.href = "/manage/product/system/version/Version.wa";
                 }
             },
             fail: function() {
@@ -78,14 +78,14 @@
          <div class="btn_bar">
             <div class="nav_btn">
                <a href="#" onClick="submitForm()" class="sub_btn"></a>
-               <a href="/product/system/version/Version.wa" class="back_btn"></a>
+               <a href="/manage/product/system/version/Version.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>
          </div>
       </div>
       <div class="easyui-panel" fit='true' data-options="border:false">
 
-         <form id="config" action="/product/system/version/Version.wa?do=update" method="post" align="center">
+         <form id="config" action="/manage/product/system/version/Version.wa?do=update" method="post" align="center">
             <font style="color:red;"><jh:write source='&page.result' /></font>
             <font style="color:red;"><div id="overid"></div></font>
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">

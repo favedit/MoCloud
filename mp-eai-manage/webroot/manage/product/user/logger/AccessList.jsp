@@ -44,6 +44,10 @@
                }
             });
          }
+         function submitForm(){
+           if (!isValid()) return;
+           $("#logerdat").submit();
+         }
       </script>
    </HEAD>
 
@@ -53,7 +57,29 @@
             <span>用户日志</span>
          </div>
          <div class="btn_bar">
-            <div class="nav_btn"></div>
+         <form id="logerdat" action="/manage/product/user/logger/Access.wa?do=selectByDate" method="post" align="center">
+            <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
+               <tr>
+                  <td width="60" height="33">
+                     <div align="left">开始时间</div>
+                  </td>
+                  <td width="158">
+                     <div align="left">
+                        <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox notnull" data-options="required:true"/>
+                     </div>
+                  </td>
+                  <td width="60" height="33">
+                     <div align="left">结束时间</div>
+                  </td>
+                  <td width="158">
+                     <div align="left">
+                        <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox notnull" data-options="required:true"/>
+                     </div>
+                  </td>
+                  <td width="30" height="33"><a href="javascript:void(0);" class="sub_btn" onclick="submitForm()"></a></td>
+               </tr>
+            </table>
+            </form>
             <div class="nav_search"></div>
          </div>
       </div>

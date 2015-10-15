@@ -1,33 +1,30 @@
-package org.mo.content.face.product.system.version;
+package org.mo.content.face.manage.product.system.application;
 
 import org.mo.com.lang.FObjectId;
 
-import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
+import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 //============================================================
-//<P>版本容器</P>
+//<P>应用容器</P>
 //@class FDepartmentPage
 //@author AnjoyTian
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public class FVersionPage 
-               extends 
-                  FObjectId 
-{
+public class FApplicationPage extends FObjectId {
    // 当前页
    protected int _pageCurrent;
 
    //页面信息处理结果
    protected String result;
    
-   //版本数据单元
-   protected FDataSystemVersionUnit unit;
+   //业务资讯数据单元
+   protected FDataSystemApplicationUnit unit;
 
-   public FDataSystemVersionUnit getUnit() {
+   public FDataSystemApplicationUnit getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataSystemVersionUnit unit) {
+   public void setUnit(FDataSystemApplicationUnit unit) {
       this.unit = unit;
    }
 
