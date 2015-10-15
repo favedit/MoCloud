@@ -1,5 +1,4 @@
  document.ready = function (callback) {
- 
    ///兼容FF,Google
    if (document.addEventListener) {
        document.addEventListener('DOMContentLoaded', function () {
@@ -61,17 +60,19 @@ document.ready(function () {
          index=0;
          timer2 = setInterval(function(t){
             index -= Math.ceil((returnHeight)/10);
+             console.log(index)
             if( index <= -returnHeight  ){
                clearInterval(timer2);
                index = returnHeight;
             }else{
-               $returnTransparent.style.marginTop = index +'px';
+               $returnTransparent.style.marginTop = (index-10)+'px';
             }
          }, 80)
       }else{
          index = returnHeight;
          timer = setInterval( function(t){
             index -= Math.ceil((returnHeight)/10);
+
             if( index <= 0  ){
                clearInterval(timer);
                index = 0; 
