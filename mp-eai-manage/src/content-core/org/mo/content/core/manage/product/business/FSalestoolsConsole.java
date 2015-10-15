@@ -102,8 +102,7 @@ public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSale
             fil.mkdir();
          }
          String contentType = file.contentType();
-         int ind = file.fileName().indexOf(".");
-         String fileName = file.fileName().substring(0, ind) + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
+         String fileName = "salestoolsImageShow" + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
          String uploadName = file.uploadName();
          fi = new FileInputStream(uploadName);
          fo = new FileOutputStream(_applicationName + folderPath + fileName);

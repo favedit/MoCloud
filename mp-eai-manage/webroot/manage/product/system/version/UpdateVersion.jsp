@@ -121,6 +121,7 @@
                   <td colspan="3">
                      <div align="left">
                         <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" value="<jh:write source='&unit.code'/>" data-options="required:true,validType:'length[0,40]'" />
+                        <span style="color:red;">&nbsp;&nbsp;建议版本名称少于15个字符</span>
                      </div>
                   </td>
                </tr>

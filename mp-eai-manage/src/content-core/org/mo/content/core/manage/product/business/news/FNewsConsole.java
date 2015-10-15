@@ -101,8 +101,7 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
             fil.mkdir();
          }
          String contentType = file.contentType();
-         int ind = file.fileName().indexOf(".");
-         String fileName = file.fileName().substring(0, ind) + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
+         String fileName = "newImageShow" + new TDateTime(new Date()).format() + "." + contentType.substring(6, contentType.length());
          String uploadName = file.uploadName();
          fi = new FileInputStream(uploadName);
          fo = new FileOutputStream(_applicationName + folderPath + fileName);
@@ -113,7 +112,7 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
          }
          fo.close();
          fi.close();
-         unit.setIconUrl(serverHeader + _servers + imageFolderPath + fileName);//
+         unit.setIconUrl(serverHeader + _servers + imageFolderPath + fileName);
       } catch (FileNotFoundException e) {
          e.printStackTrace();
       } catch (IOException e) {
