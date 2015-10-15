@@ -58,18 +58,24 @@ function Earnings(dir) {
 						}
 						day = percentages[i].getAttribute("total");
 						mostDay[i].style.display = "none";
-						if( Number(inputs[1].value) <= day ){
-							moneys[i].innerHTML = ((percentages[i].getAttribute("earnings") / 100 ) / 365 * inputV1 * inputV0).toFixed(2);
-						}else{
-							moneys[i].innerHTML = 0;
+						if( Number(inputs[1].value) < percentages[i].getAttribute("min")){
 							mostDay[i].style.display = "inline-block";
+						}else{
+							if( Number(inputs[1].value) <= day ){
+								moneys[i].innerHTML = ((percentages[i].getAttribute("earnings") / 100 ) / 365 * inputV1 * inputV0).toFixed(2);
+							}else{
+								moneys[i].innerHTML = 0;
+								mostDay[i].style.display = "inline-block";
+							}
 						}
 					
 					}
 				}
 			}
 		btn[0].onclick = setCalculate;
-		
+		inputs[0].onfocus =function(){
+			this.value = "";
+		}
 		inputs[0].onkeyup = function  () {
 			if(!Number(this.value)){
 				this.value = "";
@@ -82,7 +88,6 @@ function Earnings(dir) {
 			if(!Number(this.value)){
 				this.value = "";
 			}
-			
 			if( this.value > 365){
 				this.value = 365;
 			}

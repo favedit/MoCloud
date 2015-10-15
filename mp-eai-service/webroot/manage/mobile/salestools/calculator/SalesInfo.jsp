@@ -27,13 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <ol class="hide" id="percentage">
             <input type="hidden" earnings="3.00" min="0" t="" period="" total="365" >
             <input type="hidden" earnings="12.00" min="40" t="" period="" total="365" >
-            <input type="hidden" earnings="9.00" min="40" t="" period="" total="365" >
-            <input type="hidden" earnings="14.60" min="40" t="" period="" total="365" >
-            <input type="hidden" earnings="14.20" min="40" t="" period="" total="365" >
-            <input type="hidden" earnings="13.80" min="40" t="" period="" total="180" >
-            <input type="hidden" earnings="13.40" min="40" t="" period="" total="90" >
-            <input type="hidden" earnings="14.60" min="40" t="" period="" total="365" >
-            <input type="hidden" earnings="14.60" min="40" t="" period="" total="365" >
+            <input type="hidden" earnings="9.00" min="2" t="" period="" total="365" >
+            <input type="hidden" earnings="14.60" min="0" t="" period="" total="365" >
+            <input type="hidden" earnings="14.20" min="0" t="" period="" total="365" >
+            <input type="hidden" earnings="13.80" min="0" t="" period="" total="180" >
+            <input type="hidden" earnings="13.40" min="0" t="" period="" total="90" >
+            <input type="hidden" earnings="14.60" min="0" t="" period="" total="365" >
+            <input type="hidden" earnings="14.60" min="0" t="" period="" total="365" >
          </ol>
          
       </div>
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>e租财富(12.00%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元  <i>投资期限最多365天</i></p>
+                  <p>预期收益：<span class="money">0</span>元  <i>投资期限最少40天</i></p>
                </li>
                <li>
                </li>
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>e租稳盈(9.00%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最少2天</i></p>
                </li>
                <li>
                </li>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>e租年享(14.60%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
                </li>
                <li>
                </li>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>e租年丰(14.20%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
                </li>
                <li>
                </li>
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>e租富盈(13.80%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多180天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最多180天</i></p>
                </li>
                <li>
                </li>
@@ -117,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>e租富享(13.40%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多90天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最多90天</i></p>
                </li>
                <li>
                </li>
@@ -132,14 +132,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>缪斯珍品(14.60%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
                </li>
                <li>
                </li>
             </ul>
             <div class="details">
                <p>12个月 投资期限<p>
-               <p>起投金额：1元 / 付息方式：每三个月付息 / 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
+               <p>起投金额：1元 / 付息方式：每三个月付息，到期返本/ 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
             </div>
          </div>
 
@@ -147,14 +147,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul>
                <li class="inputs">
                   <h2>缪斯影视(14.60%)</h2>
-                  <p>预期收益率：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
+                  <p>预期收益：<span class="money">0</span>元 <i>投资期限最多365天</i></p>
                </li>
                <li>
                </li>
             </ul>
             <div class="details">
                <p>12个月 投资期限<p>
-               <p>起投金额：1元 / 付息方式：每三个月付息 / 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
+               <p>起投金额：1元 / 付息方式：每三个月付息，到期返本/ 赎回方式：T+10 ， 可提前赎回，提前赎回收部分手续费</p>
             </div>
          </div>
 
