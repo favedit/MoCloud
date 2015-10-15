@@ -54,9 +54,9 @@
          float angle = clamp(acos(angleCos) * vc_const.w, 0.0, 1.0);
          // 计算投影方向
          vec2 flatDirection = normalize(modelPosition.xy);
-         vec2 flatCoord = flatDirection * angle;
-         //gl_Position = vec4(flatCoord.xy, position.z * 0.1 + 0.5, 1.0);
-         gl_Position = position;
+         vec2 flatCoord = flatDirection * angle * 1.001;
+         gl_Position = vec4(flatCoord.xy * vc_const.xy, position.z * 0.1 + 0.5, 1.0);
+         // gl_Position = position;
          // 设置位置
          v_position = flatCoord.xy;
          // 设置纹理
@@ -69,8 +69,10 @@
    <Source name='fragment'><![CDATA[
       // 声明环境
       #ifdef GL_ES
+      //precision mediump float;
       precision highp float;
       #endif
+      //#extension GL_EXT_draw_buffers : require
       //..........................................................
       // 常量定义
       uniform vec4 fc_const;
@@ -86,12 +88,16 @@
       // 处理
       void main(void){
          // 检查范围
-         if(length(v_position) > 1.0){
-            discard;
-         }
+         //if(length(v_position) > 1.0){
+            //discard;
+         //}
          // 获得颜色
          vec4 color = texture2D(fs_diffuse, v_coord);
          gl_FragColor = color;
+         //gl_FragColor[0] = color.r;
+         //gl_FragColor[1] = color.g;
+         //gl_FragColor[2] = color.b;
+         //gl_FragColor[3] = color.a;
          //gl_FragColor = v_color;
       }
    ]]></Source>

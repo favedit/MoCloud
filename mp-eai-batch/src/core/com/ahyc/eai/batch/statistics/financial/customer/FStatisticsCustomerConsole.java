@@ -137,8 +137,11 @@ public class FStatisticsCustomerConsole
       unit.setLinkId(linkId);
       unit.linkDate().assign(memberUnit.updateDate());
       unit.setLabel(memberUnit.label());
-      unit.setPhone(memberUnit.phone());
       unit.setCard(memberUnit.card());
+      unit.setCardArea(memberUnit.cardArea());
+      unit.setCardBirth(memberUnit.cardBirth());
+      unit.setCardGender(memberUnit.cardGender());
+      unit.setPhone(memberUnit.phone());
       unit.registerDate().assign(memberUnit.registerDate());
       logic.doInsert(unit);
       //............................................................
@@ -171,8 +174,11 @@ public class FStatisticsCustomerConsole
       FStatisticsFinancialCustomerUnit unit = logic.search("LINK_ID=" + linkId);
       if(unit != null){
          unit.setLabel(memberUnit.label());
-         unit.setPhone(memberUnit.phone());
          unit.setCard(memberUnit.card());
+         unit.setCardArea(memberUnit.cardArea());
+         unit.setCardBirth(memberUnit.cardBirth());
+         unit.setCardGender(memberUnit.cardGender());
+         unit.setPhone(memberUnit.phone());
          logic.doUpdate(unit);
       }
       return unit;

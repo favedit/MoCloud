@@ -140,6 +140,9 @@ public class FStatisticsRedemptionCalculater
                dynamicUnit.setCustomerLabel(customerInfo.label());
                dynamicUnit.setCustomerPhone(customerInfo.phone());
                dynamicUnit.setCustomerCard(customerInfo.card());
+               dynamicUnit.setCustomerArea(customerInfo.cardArea());
+               dynamicUnit.setCustomerBirth(customerInfo.cardBirth());
+               dynamicUnit.setCustomerGender(customerInfo.cardGender());
             }
             dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Redemption);
             dynamicUnit.customerActionDate().parse(actionDate);

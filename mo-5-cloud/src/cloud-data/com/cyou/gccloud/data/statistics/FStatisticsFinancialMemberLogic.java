@@ -75,6 +75,15 @@ public class FStatisticsFinancialMemberLogic
    // 字段身份证的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
 
+   // 字段卡片地区的定义。
+   public final static SLogicFieldInfo CARD_AREA = new SLogicFieldInfo("CARD_AREA");
+
+   // 字段卡片生日的定义。
+   public final static SLogicFieldInfo CARD_BIRTH = new SLogicFieldInfo("CARD_BIRTH");
+
+   // 字段卡片性别的定义。
+   public final static SLogicFieldInfo CARD_GENDER = new SLogicFieldInfo("CARD_GENDER");
+
    // 字段电话的定义。
    public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
 
@@ -169,7 +178,7 @@ public class FStatisticsFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`DEPARTMENT_ID`,`PASSPORT`,`LABEL`,`CARD`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`REDEMPTION_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`DEPARTMENT_ID`,`PASSPORT`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`REDEMPTION_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户统计表逻辑单元。</T>
@@ -776,6 +785,9 @@ public class FStatisticsFinancialMemberLogic
       cmd.append(",`PASSPORT`");
       cmd.append(",`LABEL`");
       cmd.append(",`CARD`");
+      cmd.append(",`CARD_AREA`");
+      cmd.append(",`CARD_BIRTH`");
+      cmd.append(",`CARD_GENDER`");
       cmd.append(",`PHONE`");
       cmd.append(",`PHONE_CITY_ID`");
       cmd.append(",`PHONE_CITY_CODE`");
@@ -898,6 +910,26 @@ public class FStatisticsFinancialMemberLogic
          cmd.append(RSql.formatValue(card));
          cmd.append('\'');
       }
+      cmd.append(',');
+      String cardArea = unit.cardArea();
+      if(RString.isEmpty(cardArea)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(cardArea));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String cardBirth = unit.cardBirth();
+      if(RString.isEmpty(cardBirth)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(cardBirth));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.cardGender());
       cmd.append(',');
       String phone = unit.phone();
       if(RString.isEmpty(phone)){
@@ -1255,6 +1287,32 @@ public class FStatisticsFinancialMemberLogic
             cmd.append(RSql.formatValue(card));
             cmd.append('\'');
          }
+      }
+      if(unit.isCardAreaChanged()){
+         cmd.append(",`CARD_AREA`=");
+         String cardArea = unit.cardArea();
+         if(RString.isEmpty(cardArea)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(cardArea));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCardBirthChanged()){
+         cmd.append(",`CARD_BIRTH`=");
+         String cardBirth = unit.cardBirth();
+         if(RString.isEmpty(cardBirth)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(cardBirth));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCardGenderChanged()){
+         cmd.append(",`CARD_GENDER`=");
+         cmd.append(unit.cardGender());
       }
       if(unit.isPhoneChanged()){
          cmd.append(",`PHONE`=");

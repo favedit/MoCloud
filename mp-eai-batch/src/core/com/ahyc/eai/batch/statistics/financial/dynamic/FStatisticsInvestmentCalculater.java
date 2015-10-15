@@ -13,7 +13,6 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
-import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerGender;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
@@ -157,31 +156,9 @@ public class FStatisticsInvestmentCalculater
                dynamicUnit.setCustomerLabel(customerInfo.label());
                dynamicUnit.setCustomerPhone(customerInfo.phone());
                dynamicUnit.setCustomerCard(customerInfo.card());
-            }
-            String customerCard = dynamicUnit.customerCard();
-            if(!RString.isEmpty(customerCard)){
-               dynamicUnit.setCustomerCard(customerCard);
-               if(customerCard.length() == 18){
-                  dynamicUnit.setCustomerArea(customerCard.substring(0, 6));
-                  dynamicUnit.setCustomerBirth(customerCard.substring(6, 14));
-                  int customerGender = customerCard.charAt(16) - '0';
-                  dynamicUnit.setCustomerGender(customerGender);
-                  if(customerGender % 2 == 0){
-                     dynamicUnit.setCustomerGender(EGcFinancialCustomerGender.Female);
-                  }else{
-                     dynamicUnit.setCustomerGender(EGcFinancialCustomerGender.Male);
-                  }
-               }else if(customerCard.length() == 15){
-                  dynamicUnit.setCustomerArea(customerCard.substring(0, 6));
-                  dynamicUnit.setCustomerBirth("19" + customerCard.substring(6, 12));
-                  int customerGender = customerCard.charAt(14) - '0';
-                  dynamicUnit.setCustomerGender(customerGender);
-                  if(customerGender % 2 == 0){
-                     dynamicUnit.setCustomerGender(EGcFinancialCustomerGender.Female);
-                  }else{
-                     dynamicUnit.setCustomerGender(EGcFinancialCustomerGender.Male);
-                  }
-               }
+               dynamicUnit.setCustomerArea(customerInfo.cardArea());
+               dynamicUnit.setCustomerBirth(customerInfo.cardBirth());
+               dynamicUnit.setCustomerGender(customerInfo.cardGender());
             }
             dynamicUnit.setCustomerActionCd(EGcFinancialCustomerAction.Investment);
             dynamicUnit.customerActionDate().parse(actionDate);

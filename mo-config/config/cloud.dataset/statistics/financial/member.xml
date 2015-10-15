@@ -11,6 +11,9 @@
   <FieldString _uuid="48e530fe-ab83-4fcd-a7b3-b8267f836eb8" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
   <FieldString _uuid="f04e3302-dc48-4055-a196-7f1c99bb2bda" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="60" />
   <FieldString _uuid="c0d8d097-2813-4548-93ee-96f54ebb0690" name="card" label="M#12cn13身份证" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
+  <FieldString _uuid="5d411e29-1222-4164-81b9-6eac80d755e2" name="card_area" label="M#12cn14卡片地区" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_AREA" data_size="6" />
+  <FieldString _uuid="050beb40-ffcc-421a-8016-ae7bb9222a95" name="card_birth" label="M#12cn14卡片生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_BIRTH" data_size="8" />
+  <FieldInteger _uuid="dec9be6f-b394-4849-a454-fab666332502" name="card_gender" label="M#12cn14卡片性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_GENDER" />
   <FieldString _uuid="6f3c96f1-27fb-424f-97c3-113feff130f4" name="phone" label="M#12cn12电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
   <FieldRecordId _uuid="03744abf-4255-4fed-8707-6f463136f0d8" name="phone_city_id" label="M#12cn16电话城市编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CITY_ID" />
   <FieldString _uuid="92deea16-2012-458d-ba32-b3b8e5d21a46" name="phone_city_code" label="M#12cn16电话城市代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE_CITY_CODE" data_size="40" />

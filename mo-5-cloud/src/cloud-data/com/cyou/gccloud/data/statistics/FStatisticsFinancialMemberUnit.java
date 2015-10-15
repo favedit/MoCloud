@@ -104,6 +104,24 @@ public class FStatisticsFinancialMemberUnit
    // 字段身份证的定义。
    protected String _card;
 
+   // 存储字段卡片地区的定义。
+   private String __cardArea;
+
+   // 字段卡片地区的定义。
+   protected String _cardArea;
+
+   // 存储字段卡片生日的定义。
+   private String __cardBirth;
+
+   // 字段卡片生日的定义。
+   protected String _cardBirth;
+
+   // 存储字段卡片性别的定义。
+   private int __cardGender;
+
+   // 字段卡片性别的定义。
+   protected int _cardGender;
+
    // 存储字段电话的定义。
    private String __phone;
 
@@ -672,6 +690,87 @@ public class FStatisticsFinancialMemberUnit
    //============================================================
    public void setCard(String value){
       _card = value;
+   }
+
+   //============================================================
+   // <T>判断卡片地区的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardAreaChanged(){
+      return !RString.equals(__cardArea, _cardArea);
+   }
+
+   //============================================================
+   // <T>获得卡片地区的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String cardArea(){
+      return _cardArea;
+   }
+
+   //============================================================
+   // <T>设置卡片地区的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCardArea(String value){
+      _cardArea = value;
+   }
+
+   //============================================================
+   // <T>判断卡片生日的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardBirthChanged(){
+      return !RString.equals(__cardBirth, _cardBirth);
+   }
+
+   //============================================================
+   // <T>获得卡片生日的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String cardBirth(){
+      return _cardBirth;
+   }
+
+   //============================================================
+   // <T>设置卡片生日的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCardBirth(String value){
+      _cardBirth = value;
+   }
+
+   //============================================================
+   // <T>判断卡片性别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardGenderChanged(){
+      return __cardGender != _cardGender;
+   }
+
+   //============================================================
+   // <T>获得卡片性别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int cardGender(){
+      return _cardGender;
+   }
+
+   //============================================================
+   // <T>设置卡片性别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCardGender(int value){
+      _cardGender = value;
    }
 
    //============================================================
@@ -1548,6 +1647,12 @@ public class FStatisticsFinancialMemberUnit
             return _label;
          case "card":
             return _card;
+         case "card_area":
+            return _cardArea;
+         case "card_birth":
+            return _cardBirth;
+         case "card_gender":
+            return RInteger.toString(_cardGender);
          case "phone":
             return _phone;
          case "phone_city_id":
@@ -1665,6 +1770,15 @@ public class FStatisticsFinancialMemberUnit
             break;
          case "card":
             _card = value;
+            break;
+         case "card_area":
+            _cardArea = value;
+            break;
+         case "card_birth":
+            _cardBirth = value;
+            break;
+         case "card_gender":
+            _cardGender = RInteger.parse(value);
             break;
          case "phone":
             _phone = value;
@@ -1830,6 +1944,18 @@ public class FStatisticsFinancialMemberUnit
                __card = value;
                _card = __card;
                break;
+            case "card_area":
+               __cardArea = value;
+               _cardArea = __cardArea;
+               break;
+            case "card_birth":
+               __cardBirth = value;
+               _cardBirth = __cardBirth;
+               break;
+            case "card_gender":
+               __cardGender = RInteger.parse(value);
+               _cardGender = __cardGender;
+               break;
             case "phone":
                __phone = value;
                _phone = __phone;
@@ -1980,6 +2106,9 @@ public class FStatisticsFinancialMemberUnit
       row.set("passport", _passport);
       row.set("label", _label);
       row.set("card", _card);
+      row.set("cardArea", _cardArea);
+      row.set("cardBirth", _cardBirth);
+      row.set("cardGender", _cardGender);
       row.set("phone", _phone);
       row.set("phoneCityId", _phoneCityId);
       row.set("phoneCityCode", _phoneCityCode);
@@ -2035,6 +2164,9 @@ public class FStatisticsFinancialMemberUnit
       map.put("passport", _passport);
       map.put("label", _label);
       map.put("card", _card);
+      map.put("cardArea", _cardArea);
+      map.put("cardBirth", _cardBirth);
+      map.put("cardGender", RInteger.toString(_cardGender));
       map.put("phone", _phone);
       map.put("phoneCityId", RLong.toString(_phoneCityId));
       map.put("phoneCityCode", _phoneCityCode);
@@ -2090,6 +2222,9 @@ public class FStatisticsFinancialMemberUnit
       _passport = input.readString();
       _label = input.readString();
       _card = input.readString();
+      _cardArea = input.readString();
+      _cardBirth = input.readString();
+      _cardGender = input.readInt32();
       _phone = input.readString();
       _phoneCityId = input.readInt64();
       _phoneCityCode = input.readString();
@@ -2145,6 +2280,9 @@ public class FStatisticsFinancialMemberUnit
       output.writeString(_passport);
       output.writeString(_label);
       output.writeString(_card);
+      output.writeString(_cardArea);
+      output.writeString(_cardBirth);
+      output.writeInt32(_cardGender);
       output.writeString(_phone);
       output.writeInt64(_phoneCityId);
       output.writeString(_phoneCityCode);

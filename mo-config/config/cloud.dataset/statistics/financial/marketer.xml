@@ -25,8 +25,11 @@
   <FieldString _uuid="e1659535-59a6-4396-a5dc-d4cf7ab7895b" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
   <FieldString _uuid="b4cb5b6c-6fb2-40e3-ad3b-ee581d876316" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
   <FieldInteger _uuid="18430fb6-6832-40b3-a776-118eeebfe5c7" name="status_cd" label="M#12cn14状态类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
-  <FieldString _uuid="55679bf3-db3a-4466-a35e-e4988ceaa4f2" name="phone" label="M#12cn12电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
   <FieldString _uuid="6d66e8df-c8a2-43c8-8c86-87a280d16ade" name="card" label="M#12cn12卡片" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
+  <FieldString _uuid="29c652b0-b19f-469b-9b57-6ffd564e9e35" name="card_area" label="M#12cn14卡片地区" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_AREA" data_size="6" />
+  <FieldString _uuid="c40b672e-8d46-4fb5-a047-1b1a3f1a854e" name="card_birth" label="M#12cn14卡片生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_BIRTH" data_size="8" />
+  <FieldInteger _uuid="71248052-cfda-4ee9-ac67-336d0b0fdb81" name="card_gender" label="M#12cn14卡片性别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_GENDER" />
+  <FieldString _uuid="55679bf3-db3a-4466-a35e-e4988ceaa4f2" name="phone" label="M#12cn12电话" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
   <FieldString _uuid="a9c96924-c852-4f9c-b927-884ed40fc343" name="rank_label" label="M#12cn14级别标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RANK_LABEL" data_size="80" />
   <FieldDouble _uuid="3cf2b910-df44-4da6-bb76-6f9f8344fd89" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldDouble _uuid="8c94a745-193b-4d40-8c22-b9e8bb546a72" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />

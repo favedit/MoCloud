@@ -1,11 +1,13 @@
 package com.ahyc.eai.batch.statistics.financial.member;
 
 import com.ahyc.eai.batch.common.FStatisticsPoolConsole;
+import com.ahyc.eai.batch.data.financial.common.RCustomerCard;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
+import org.mo.com.lang.RString;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
 import org.mo.data.logic.FLogicContext;
@@ -76,8 +78,14 @@ public class FStatisticsMemberConsole
       unit.registerDate().parse(row.get("register_date"));
       unit.lastLoginDate().parse(row.get("last_login_date"));
       if(infoRow != null){
+         String card = infoRow.get("idcard");
          unit.setLabel(infoRow.get("real_name"));
-         unit.setCard(infoRow.get("idcard"));
+         unit.setCard(card);
+         if(!RString.isEmpty(card)){
+            unit.setCardArea(RCustomerCard.calculateArea(card));
+            unit.setCardBirth(RCustomerCard.calculateBirth(card));
+            unit.setCardGender(RCustomerCard.calculateGender(card));
+         }
          unit.setGenderCode(infoRow.get("sex"));
          unit.setMarryCode(infoRow.get("marry"));
          unit.setEducationCode(infoRow.get("education"));
@@ -124,8 +132,13 @@ public class FStatisticsMemberConsole
       infoSql.bindLong("id", linkId);
       FRow infoRow = connection.find(infoSql);
       if(infoRow != null){
+         String card = infoRow.get("idcard");
          unit.setLabel(infoRow.get("real_name"));
-         unit.setCard(infoRow.get("idcard"));
+         if(!RString.isEmpty(card)){
+            unit.setCardArea(RCustomerCard.calculateArea(card));
+            unit.setCardBirth(RCustomerCard.calculateBirth(card));
+            unit.setCardGender(RCustomerCard.calculateGender(card));
+         }
          unit.setGenderCode(infoRow.get("sex"));
          unit.setMarryCode(infoRow.get("marry"));
          unit.setEducationCode(infoRow.get("education"));

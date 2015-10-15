@@ -69,17 +69,35 @@ public class FStatisticsFinancialCustomerUnit
    // 字段标签的定义。
    protected String _label;
 
-   // 存储字段电话号码的定义。
-   private String __phone;
-
-   // 字段电话号码的定义。
-   protected String _phone;
-
    // 存储字段身份证号的定义。
    private String __card;
 
    // 字段身份证号的定义。
    protected String _card;
+
+   // 存储字段卡片地区的定义。
+   private String __cardArea;
+
+   // 字段卡片地区的定义。
+   protected String _cardArea;
+
+   // 存储字段卡片生日的定义。
+   private String __cardBirth;
+
+   // 字段卡片生日的定义。
+   protected String _cardBirth;
+
+   // 存储字段卡片性别的定义。
+   private int __cardGender;
+
+   // 字段卡片性别的定义。
+   protected int _cardGender;
+
+   // 存储字段电话号码的定义。
+   private String __phone;
+
+   // 字段电话号码的定义。
+   protected String _phone;
 
    // 存储字段注册时间的定义。
    private TDateTime __registerDate = new TDateTime();
@@ -418,33 +436,6 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
-   // <T>判断电话号码的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isPhoneChanged(){
-      return !RString.equals(__phone, _phone);
-   }
-
-   //============================================================
-   // <T>获得电话号码的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String phone(){
-      return _phone;
-   }
-
-   //============================================================
-   // <T>设置电话号码的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setPhone(String value){
-      _phone = value;
-   }
-
-   //============================================================
    // <T>判断身份证号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -469,6 +460,114 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setCard(String value){
       _card = value;
+   }
+
+   //============================================================
+   // <T>判断卡片地区的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardAreaChanged(){
+      return !RString.equals(__cardArea, _cardArea);
+   }
+
+   //============================================================
+   // <T>获得卡片地区的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String cardArea(){
+      return _cardArea;
+   }
+
+   //============================================================
+   // <T>设置卡片地区的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCardArea(String value){
+      _cardArea = value;
+   }
+
+   //============================================================
+   // <T>判断卡片生日的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardBirthChanged(){
+      return !RString.equals(__cardBirth, _cardBirth);
+   }
+
+   //============================================================
+   // <T>获得卡片生日的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String cardBirth(){
+      return _cardBirth;
+   }
+
+   //============================================================
+   // <T>设置卡片生日的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCardBirth(String value){
+      _cardBirth = value;
+   }
+
+   //============================================================
+   // <T>判断卡片性别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCardGenderChanged(){
+      return __cardGender != _cardGender;
+   }
+
+   //============================================================
+   // <T>获得卡片性别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int cardGender(){
+      return _cardGender;
+   }
+
+   //============================================================
+   // <T>设置卡片性别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCardGender(int value){
+      _cardGender = value;
+   }
+
+   //============================================================
+   // <T>判断电话号码的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isPhoneChanged(){
+      return !RString.equals(__phone, _phone);
+   }
+
+   //============================================================
+   // <T>获得电话号码的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String phone(){
+      return _phone;
+   }
+
+   //============================================================
+   // <T>设置电话号码的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setPhone(String value){
+      _phone = value;
    }
 
    //============================================================
@@ -1009,10 +1108,16 @@ public class FStatisticsFinancialCustomerUnit
             return Long.toString(_dataId);
          case "label":
             return _label;
-         case "phone":
-            return _phone;
          case "card":
             return _card;
+         case "card_area":
+            return _cardArea;
+         case "card_birth":
+            return _cardBirth;
+         case "card_gender":
+            return RInteger.toString(_cardGender);
+         case "phone":
+            return _phone;
          case "register_date":
             return _registerDate.toString();
          case "investment_first_date":
@@ -1089,11 +1194,20 @@ public class FStatisticsFinancialCustomerUnit
          case "label":
             _label = value;
             break;
-         case "phone":
-            _phone = value;
-            break;
          case "card":
             _card = value;
+            break;
+         case "card_area":
+            _cardArea = value;
+            break;
+         case "card_birth":
+            _cardBirth = value;
+            break;
+         case "card_gender":
+            _cardGender = RInteger.parse(value);
+            break;
+         case "phone":
+            _phone = value;
             break;
          case "register_date":
             _registerDate.parse(value);
@@ -1199,13 +1313,25 @@ public class FStatisticsFinancialCustomerUnit
                __label = value;
                _label = __label;
                break;
-            case "phone":
-               __phone = value;
-               _phone = __phone;
-               break;
             case "card":
                __card = value;
                _card = __card;
+               break;
+            case "card_area":
+               __cardArea = value;
+               _cardArea = __cardArea;
+               break;
+            case "card_birth":
+               __cardBirth = value;
+               _cardBirth = __cardBirth;
+               break;
+            case "card_gender":
+               __cardGender = RInteger.parse(value);
+               _cardGender = __cardGender;
+               break;
+            case "phone":
+               __phone = value;
+               _phone = __phone;
                break;
             case "register_date":
                __registerDate.parse(value);
@@ -1303,8 +1429,11 @@ public class FStatisticsFinancialCustomerUnit
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("label", _label);
-      row.set("phone", _phone);
       row.set("card", _card);
+      row.set("cardArea", _cardArea);
+      row.set("cardBirth", _cardBirth);
+      row.set("cardGender", _cardGender);
+      row.set("phone", _phone);
       row.set("registerDate", _registerDate);
       row.set("investmentFirstDate", _investmentFirstDate);
       row.set("investmentLastDate", _investmentLastDate);
@@ -1342,8 +1471,11 @@ public class FStatisticsFinancialCustomerUnit
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("label", _label);
-      map.put("phone", _phone);
       map.put("card", _card);
+      map.put("cardArea", _cardArea);
+      map.put("cardBirth", _cardBirth);
+      map.put("cardGender", RInteger.toString(_cardGender));
+      map.put("phone", _phone);
       map.put("registerDate", _registerDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentFirstDate", _investmentFirstDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentLastDate", _investmentLastDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1381,8 +1513,11 @@ public class FStatisticsFinancialCustomerUnit
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _label = input.readString();
-      _phone = input.readString();
       _card = input.readString();
+      _cardArea = input.readString();
+      _cardBirth = input.readString();
+      _cardGender = input.readInt32();
+      _phone = input.readString();
       _registerDate.set(input.readInt64());
       _investmentFirstDate.set(input.readInt64());
       _investmentLastDate.set(input.readInt64());
@@ -1415,8 +1550,11 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeString(_label);
-      output.writeString(_phone);
       output.writeString(_card);
+      output.writeString(_cardArea);
+      output.writeString(_cardBirth);
+      output.writeInt32(_cardGender);
+      output.writeString(_phone);
       output.writeInt64(_registerDate.get());
       output.writeInt64(_investmentFirstDate.get());
       output.writeInt64(_investmentLastDate.get());

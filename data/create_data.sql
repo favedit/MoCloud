@@ -402,7 +402,7 @@ ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY
 
 ALTER TABLE DT_PSN_USER_ACCESS_AUTHORITY ADD CONSTRAINT DT_PSN_USR_ACS_AUT_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
-	  
+
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.Signing]
 -- sunhr 20151009 
@@ -429,7 +429,6 @@ ALTER TABLE DT_PSN_USER_SIGNING
 
 ALTER TABLE DT_PSN_USER_SIGNING ADD CONSTRAINT DT_PSN_USR_SIG_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
-
 	  
 -- ------------------------------------------------------------
 -- Create table [Data.Control.Module]
@@ -536,6 +535,7 @@ CREATE TABLE `DT_CTL_RULE`
 
 ALTER TABLE DT_CTL_RULE 
    ADD CONSTRAINT DT_CTL_RUL_UK_GID UNIQUE ( GUID ); 
+
 -- ------------------------------------------------------------
 -- Create table [Data.Logic.News]
 -- sunhr  20151010

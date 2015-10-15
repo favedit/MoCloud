@@ -117,11 +117,20 @@ public class FStatisticsFinancialMarketerLogic
    // 字段状态类型的定义。
    public final static SLogicFieldInfo STATUS_CD = new SLogicFieldInfo("STATUS_CD");
 
-   // 字段电话的定义。
-   public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
-
    // 字段卡片的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
+
+   // 字段卡片地区的定义。
+   public final static SLogicFieldInfo CARD_AREA = new SLogicFieldInfo("CARD_AREA");
+
+   // 字段卡片生日的定义。
+   public final static SLogicFieldInfo CARD_BIRTH = new SLogicFieldInfo("CARD_BIRTH");
+
+   // 字段卡片性别的定义。
+   public final static SLogicFieldInfo CARD_GENDER = new SLogicFieldInfo("CARD_GENDER");
+
+   // 字段电话的定义。
+   public final static SLogicFieldInfo PHONE = new SLogicFieldInfo("PHONE");
 
    // 字段级别标签的定义。
    public final static SLogicFieldInfo RANK_LABEL = new SLogicFieldInfo("RANK_LABEL");
@@ -163,7 +172,7 @@ public class FStatisticsFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`PHONE`,`CARD`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师统计表逻辑单元。</T>
@@ -784,8 +793,11 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
       cmd.append(",`STATUS_CD`");
-      cmd.append(",`PHONE`");
       cmd.append(",`CARD`");
+      cmd.append(",`CARD_AREA`");
+      cmd.append(",`CARD_BIRTH`");
+      cmd.append(",`CARD_GENDER`");
+      cmd.append(",`PHONE`");
       cmd.append(",`RANK_LABEL`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`REDEMPTION_TOTAL`");
@@ -1005,21 +1017,41 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(',');
       cmd.append(unit.statusCd());
       cmd.append(',');
-      String phone = unit.phone();
-      if(RString.isEmpty(phone)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(phone));
-         cmd.append('\'');
-      }
-      cmd.append(',');
       String card = unit.card();
       if(RString.isEmpty(card)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(card));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String cardArea = unit.cardArea();
+      if(RString.isEmpty(cardArea)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(cardArea));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String cardBirth = unit.cardBirth();
+      if(RString.isEmpty(cardBirth)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(cardBirth));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.cardGender());
+      cmd.append(',');
+      String phone = unit.phone();
+      if(RString.isEmpty(phone)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(phone));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -1389,17 +1421,6 @@ public class FStatisticsFinancialMarketerLogic
          cmd.append(",`STATUS_CD`=");
          cmd.append(unit.statusCd());
       }
-      if(unit.isPhoneChanged()){
-         cmd.append(",`PHONE`=");
-         String phone = unit.phone();
-         if(RString.isEmpty(phone)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(phone));
-            cmd.append('\'');
-         }
-      }
       if(unit.isCardChanged()){
          cmd.append(",`CARD`=");
          String card = unit.card();
@@ -1408,6 +1429,43 @@ public class FStatisticsFinancialMarketerLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(card));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCardAreaChanged()){
+         cmd.append(",`CARD_AREA`=");
+         String cardArea = unit.cardArea();
+         if(RString.isEmpty(cardArea)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(cardArea));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCardBirthChanged()){
+         cmd.append(",`CARD_BIRTH`=");
+         String cardBirth = unit.cardBirth();
+         if(RString.isEmpty(cardBirth)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(cardBirth));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCardGenderChanged()){
+         cmd.append(",`CARD_GENDER`=");
+         cmd.append(unit.cardGender());
+      }
+      if(unit.isPhoneChanged()){
+         cmd.append(",`PHONE`=");
+         String phone = unit.phone();
+         if(RString.isEmpty(phone)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(phone));
             cmd.append('\'');
          }
       }

@@ -101,6 +101,9 @@ public class FStatisticsMarketerConsole
       unit.setRankLabel(row.get("rank"));
       unit.setPhone(memberUnit.phone());
       unit.setCard(memberUnit.card());
+      unit.setCardArea(memberUnit.cardArea());
+      unit.setCardBirth(memberUnit.cardBirth());
+      unit.setCardGender(memberUnit.cardGender());
       unit.setStatusCd(row.getInt("status"));
       unit.registerDate().assign(memberUnit.registerDate());
       unit.enterDate().parse(row.get("add_date"));
