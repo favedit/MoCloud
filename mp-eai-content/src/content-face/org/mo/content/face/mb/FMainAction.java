@@ -133,7 +133,7 @@ public class FMainAction
          throw new FFatalError("sessionCode is null.");
       }
       _logger.debug(this, "mobileCustomer", "mobileCustomer begin.(sessionId={1})", sessionCode);
-      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai", "mobile_android", sessionCode);
+      FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai.mobile", "0", sessionCode);
       if(sessionInfo == null){
          throw new FFatalError("sessionInfo is null.");
       }
