@@ -52,7 +52,15 @@
             data: data,
             success: function(msg) {
                closeProgress();
-               location.href = "/product/system/version/Version.wa";
+               if(msg.indexOf("overwrite")>-1){
+                  $('#overid').text("版本号重复!");
+               }
+               if(msg.indexOf("nonumber")>-1){
+                   $('#overid').text("版本号只支持数字和英文小数点!");
+                }
+               if(msg.indexOf("success")>-1){
+                   location.href = "/product/system/version/Version.wa";
+                }
             },
             fail: function() {
                closeProgress();
@@ -79,6 +87,7 @@
 
          <form id="config" action="/product/system/version/Version.wa?do=update" method="post" align="center">
             <font style="color:red;"><jh:write source='&page.result' /></font>
+            <font style="color:red;"><div id="overid"></div></font>
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
                <tr>
                   <td width="70" height="33">

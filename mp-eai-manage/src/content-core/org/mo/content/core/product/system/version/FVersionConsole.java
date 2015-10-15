@@ -73,10 +73,9 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    }
 
    // ============================================================
-   // <T>根据标签获取对象</T>
+   // <T>根应用id和版本号和ouid 对象</T>
    // @param logicContext 链接对象
-   // @param label 标签
-   // @return 数据对象
+   // @return 是否重复
    // ============================================================
    @Override
    public boolean isExsitsAppIdandNumber(ILogicContext logicContext, Long applicationId, Float number) {
@@ -96,6 +95,35 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
       FLogicDataset<FDataSystemVersionUnit> verList = logic.fetch(whereSql.toString());
       if (verList.count() > 0) {
          return true;
+      }
+      return false;
+   }
+
+   // ============================================================
+   // <T>根据应用id和版本号和ouid</T>
+   // @param logicContext 链接对象
+   // @return 是否重复
+   // ============================================================
+   @Override
+   public boolean isExsitsAppIdandNumberandOuid(ILogicContext logicContext, Long applicationId, Long ouid, Float number) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(applicationId + "") && !RString.isEmpty(number + "")) {
+         whereSql.append(FDataSystemVersionLogic.APPLICATION_ID);
+         whereSql.append(" = ");
+         whereSql.append("{applicationId}");
+         whereSql.bind("applicationId", RString.parse(applicationId));
+         whereSql.append(" and ");
+         whereSql.append(FDataSystemVersionLogic.NUMBER);
+         whereSql.append(" = ");
+         whereSql.append("{number}");
+         whereSql.bind("number", RString.parse(number));
+      }
+      FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
+      FLogicDataset<FDataSystemVersionUnit> verList = logic.fetch(whereSql.toString());
+      if (verList.count() > 0) {
+         if (!RString.equals(verList.first().ouid(), ouid)) {
+            return true;
+         }
       }
       return false;
    }

@@ -12,24 +12,14 @@ import org.mo.data.logic.ILogicContext;
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public interface IVersionConsole
-      extends
-         IAbstractLogicUnitConsole<FDataSystemVersionUnit>
-{
-   public FLogicDataset<FDataVersionInfo> select(ILogicContext logicContext,
-                                                 FDataSystemVersionUnit unit,
-                                                 int pageNum,
-                                                 int pageSize);
+public interface IVersionConsole extends IAbstractLogicUnitConsole<FDataSystemVersionUnit> {
+   public FLogicDataset<FDataVersionInfo> select(ILogicContext logicContext, FDataSystemVersionUnit unit, int pageNum, int pageSize);
 
-   public FDataSystemVersionUnit findByLable(ILogicContext logicContext,
-                                             String label);
+   public FDataSystemVersionUnit findByLable(ILogicContext logicContext, String label);
 
-   public boolean isExsitsAppIdandNumber(ILogicContext logicContext,
-                                         Long applicationId,
-                                         Float number);
+   public boolean isExsitsAppIdandNumber(ILogicContext logicContext, Long applicationId, Float number);
 
-   public FLogicDataset<FDataVersionInfo> selectExamine(ILogicContext logicContext,
-                                                        FDataSystemVersionUnit unit,
-                                                        int pageNum,
-                                                        int pageSize);
+   public FLogicDataset<FDataVersionInfo> selectExamine(ILogicContext logicContext, FDataSystemVersionUnit unit, int pageNum, int pageSize);
+
+   public boolean isExsitsAppIdandNumberandOuid(ILogicContext logicContext, Long applicationId, Long ouid, Float number);
 }
