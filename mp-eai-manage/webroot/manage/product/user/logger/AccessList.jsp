@@ -81,8 +81,9 @@
                </tr>
             </table>
             </form>
-            <div class="nav_search"></div>
          </div>
+         <div class="nav_search"></div>
+      </div>
       </div>
       <table id="access" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
          <thead>
