@@ -151,6 +151,7 @@ public class FLoginConsole
          unit.setPassport(passport);
          unit.setPassword(password);
          unit.setNote(message);
+         unit.setIconUrl("http://eai.ezubo.com/manage/images/userdefault.png");
          backUser = synchronizeData(logicContext, unit, from, changePass);
       }
       // 增加日志
@@ -221,6 +222,7 @@ public class FLoginConsole
       tempUserUnit.setPassport(changePass);
       tempUserUnit.setOvld(true);
       tempUserUnit.setPassword(backUser.password());
+      tempUserUnit.setIconUrl(backUser.iconUrl());
       //      tempUserUnit.setGuid("A860A0BCF8CD42EBBF696A86E7492951");
       //      tempUserUnit.setOuid(21);
       tempUserUnit.setLabel(backUser.passport());
