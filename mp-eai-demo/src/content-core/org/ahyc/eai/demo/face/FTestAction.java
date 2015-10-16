@@ -33,17 +33,23 @@ public class FTestAction
    @Override
    public String construct(IWebContext context,
                            ILogicContext logicContext){
+
       String selectTag = RString.nvl(context.parameter("tag"));
-      String rotate = RString.nvl(context.parameter("rotate"));
+      String rotate = RString.nvl(context.parameter("rotation"));
+      String command = RString.nvl(context.parameter("command"));
       String message = "";
       if(RString.isNotEmpty(selectTag)){
          message += "tag=" + selectTag;
       }
       if(RString.isNotEmpty(rotate)){
-         message += "rotate=" + rotate;
+         message += "rotation=" + rotate;
+      }
+      if(RString.isNotEmpty(command)){
+         message += "command=" + command;
       }
       _socketConsole.sendMessage(FEarthServlet.GROUP_NAME, message);
       // 非法设置
       return "Test";
+
    }
 }
