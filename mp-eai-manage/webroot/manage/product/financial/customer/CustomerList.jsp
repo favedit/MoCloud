@@ -170,8 +170,8 @@
      data-options="field:'netinvestment',halign:'center',align:'left',sortable:true"
      width="80px">净投</th>
      
-     <th data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新时间</th>    
+     <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
+     width="140px">更新时间</th>
     <th
      data-options="field:'note',halign:'center',align:'left',sortable:true"
      width="200px">备注</th>

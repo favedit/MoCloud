@@ -1,8 +1,8 @@
 package org.mo.content.face.manage.product.user.signing;
 
-import com.cyou.gccloud.data.data.FDataPersonUserSigningUnit;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.manage.product.user.signing.FDataSigningInfo;
 import org.mo.content.core.manage.product.user.signing.ISigningConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
@@ -53,14 +53,38 @@ public class FSigningAction implements ISigningAction {
       } else {
          page.setPageCurrent(0);
       }
-      FDataPersonUserSigningUnit unit = new FDataPersonUserSigningUnit();
+      FDataSigningInfo unit = new FDataSigningInfo();
       unit.setUserId(context.parameterAsLong("auserId"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataPersonUserSigningUnit> unitList = _signingConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataSigningInfo> unitList = _signingConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      basePage.setJson(unitList.toJsonListString());
+      return "/manage/common/ajax";
+   }
+
+   @Override
+   public String selectByDate(IWebContext context, ILogicContext logicContext, FSigningPage page, FBasePage basePage) {
+      _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      if (null != context.parameter("page")) {
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      } else {
+         page.setPageCurrent(0);
+      }
+      String StrPageSize = context.parameter("pageSize");
+      int pageSize = 20;
+      if (null != StrPageSize) {
+         pageSize = Integer.parseInt(StrPageSize);
+      }
+      String biginDateStr = context.parameter("beginDate");
+      String endDateStr = context.parameter("endDate");
+      FLogicDataset<FDataSigningInfo> unitList = _signingConsole.selectByDate(logicContext, biginDateStr, endDateStr, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
    }

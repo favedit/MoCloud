@@ -14,5 +14,13 @@ public interface ISigningConsole extends IAbstractLogicUnitConsole<FDataPersonUs
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataPersonUserSigningUnit> select(ILogicContext logicContext, FDataPersonUserSigningUnit unit, int pageNum, int pageSize);
+   FLogicDataset<FDataSigningInfo> select(ILogicContext logicContext, FDataSigningInfo unit, int pageNum, int pageSize);
+
+   // ============================================================
+   // <T>依据条件获得分页数据列表</T>
+   // @param sqlContext 链接对象
+   // @param pageNum 页码
+   // @return 数据集合
+   // ============================================================
+   FLogicDataset<FDataSigningInfo> selectByDate(ILogicContext logicContext, String beginDateStr, String endDateStr, int pageNum, int pageSize);
 }

@@ -95,8 +95,8 @@
      data-options="field:'note',halign:'center',align:'left',sortable:true"
      width="390px">内容</th>
      <th 
-     data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新日期</th>    
+     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
+     width="140px">更新时间</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
      width="140px">操作</th>

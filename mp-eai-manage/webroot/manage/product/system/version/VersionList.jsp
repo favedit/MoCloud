@@ -84,7 +84,7 @@
                <th data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true" width="80px">更新状态</th>
                <th data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true" width="80px">版本状态</th>
                <th data-options="field:'downloadUrl',halign:'center',align:'left',sortable:true" width="400px">下载地址</th>
-               <th data-options="field:'note',halign:'center',align:'left'" width="200px">更新内容</th>
+               <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">更新内容</th>
                <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton" width="140px">操作</th>
             </tr>
          </thead>

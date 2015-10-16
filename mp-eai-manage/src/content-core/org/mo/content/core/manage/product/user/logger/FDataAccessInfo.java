@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class FDataAccessInfo extends FLoggerPersonUserAccessUnit {
 
-   // 状态字符串
+   // 开始时间字符串
    protected String _beginDateStr;
-   // 字符串
+   // 结束时间符串
    protected String _endDateStr;
 
    public String beginDateStr() {

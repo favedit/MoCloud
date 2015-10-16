@@ -120,7 +120,7 @@
      width="260px">资讯内容</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新日期</th>    
+     width="140px">更新时间</th>
    </tr>
   </thead>
  </table>

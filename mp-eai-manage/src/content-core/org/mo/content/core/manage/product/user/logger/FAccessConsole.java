@@ -55,8 +55,9 @@ public class FAccessConsole extends FAbstractLogicUnitConsole<FLoggerPersonUserA
          whereSql.append(FLoggerPersonUserAccessLogic.CREATE_DATE + " <= '{endDateStr}'");
          whereSql.bind("endDateStr", RString.parse(endDateStr));
       }
+      String orderBy = String.format("%s %s", FLoggerPersonUserAccessLogic.UPDATE_DATE, "DESC");
       FLoggerPersonUserAccessLogic logic = new FLoggerPersonUserAccessLogic(logicContext);
-      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = logic.fetchClass(FLoggerPersonUserAccessUnit.class, whereSql.toString(), "UPDATE_DATE DESC", pageSize, pageNum);
+      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = logic.fetchClass(FLoggerPersonUserAccessUnit.class, whereSql.toString(), orderBy, pageSize, pageNum);
       return unitlist;
    }
 }

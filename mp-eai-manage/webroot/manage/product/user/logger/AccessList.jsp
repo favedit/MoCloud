@@ -23,8 +23,8 @@
          });
 
          function doSubmit(page,pageSize) {
-            $("#flag").val("");
             progress();
+            $("#flag").val("");
             var url = null;
             var data = null;
             if (page != null) {
@@ -148,8 +148,8 @@
                <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="150px">操作信息</th>
                <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">请求地址</th>
                <th data-options="field:'pageInfo',halign:'center',align:'left',sortable:true" width="450px">页面信息</th> 
-               <th data-options="field:'updateDate',halign:'center',align:'left'" width="160px">更新时间</th>
-               <th data-options="field:'createDate',halign:'center',align:'left'" width="160px">创建时间</th>
+               <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true" width="160px">更新时间</th>
+               <th data-options="field:'createDate',halign:'center',align:'left',sortable:true" width="160px">创建时间</th>
             </tr>
          </thead>
       </table>

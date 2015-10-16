@@ -99,7 +99,7 @@
     <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
      width="95px">图标地址</th>
-    <th data-options="field:'updateDate',halign:'center',align:'left'"
+    <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"

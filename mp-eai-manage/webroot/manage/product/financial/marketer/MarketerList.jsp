@@ -119,12 +119,12 @@
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="60px">标签</th>
-    <th data-options="field:'statusCd',halign:'center',align:'left'"
+    <th data-options="field:'statusCd',halign:'center',align:'left',sortable:true"
      width="40px">状态</th>
     <th
      data-options="field:'phone',halign:'center',align:'left',sortable:true"
      width="90px">电话号码</th>
-    <th data-options="field:'rankLabel',halign:'center',align:'left'"
+    <th data-options="field:'rankLabel',halign:'center',align:'left',sortable:true"
      width="40px">职务</th>
     <!-- <th data-options="field:'departmentId',halign:'center',align:'right'" width="40px">部门编号</th> -->
     <th

@@ -33,6 +33,16 @@ public interface ISigningAction {
    String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage page, @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
+   // <T>依据条件时间段查询</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   String selectByDate(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage page, @AContainer(name = "basePage") FBasePage basePage);
+
+   // ============================================================
    // <T>增加之前</T>
    //
    // @param context 网络环境

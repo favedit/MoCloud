@@ -116,13 +116,13 @@
      data-options="field:'content',halign:'center',align:'left',sortable:true"
      width="260px">内容</th>
      <th 
-     data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新日期</th>
+     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
+     width="140px">更新时间</th>
      <th 
-     data-options="field:'createDate',halign:'center',align:'left'"
-     width="140px">创建日期</th>    
+     data-options="field:'createDate',halign:'center',align:'left',sortable:true"
+     width="140px">创建时间</th>
      <th 
-     data-options="field:'displayOrder',halign:'center',align:'left'"
+     data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
      width="40px">排序</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"

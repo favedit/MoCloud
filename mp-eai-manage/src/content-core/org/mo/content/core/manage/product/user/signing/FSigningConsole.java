@@ -2,9 +2,12 @@ package org.mo.content.core.manage.product.user.signing;
 
 import com.cyou.gccloud.data.data.FDataPersonUserSigningLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserSigningUnit;
+import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessLogic;
+import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RLong;
+import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -35,7 +38,7 @@ public class FSigningConsole extends FAbstractLogicUnitConsole<FDataPersonUserSi
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataPersonUserSigningUnit> select(ILogicContext logicContext, FDataPersonUserSigningUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataSigningInfo> select(ILogicContext logicContext, FDataSigningInfo unit, int pageNum, int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -45,7 +48,44 @@ public class FSigningConsole extends FAbstractLogicUnitConsole<FDataPersonUserSi
          whereSql.bind("userId", RLong.parse(unit.userId()) + "");
       }
       FDataPersonUserSigningLogic logic = logicContext.findLogic(FDataPersonUserSigningLogic.class);
-      FLogicDataset<FDataPersonUserSigningUnit> moduleList = logic.fetchClass(FDataPersonUserSigningUnit.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataSigningInfo> moduleList = logic.fetchClass(FDataSigningInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      for (Iterator<FDataSigningInfo> iter = moduleList.iterator(); iter.hasNext();) {
+         FDataSigningInfo info = iter.next();
+         info.setUserLabel(info.user().label());
+      }
       return moduleList;
+   }
+
+   // ============================================================
+   // <T>根据搜索条件时间段查询分页数据</T>
+   // @param logicContext 链接对象
+   // @param pageNum 页码
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataSigningInfo> selectByDate(ILogicContext logicContext, String beginDateStr, String endDateStr, int pageNum, int pageSize) {
+      if (0 > pageNum) {
+         pageNum = 0;
+      }
+      FSql whereSql = new FSql();
+      whereSql.append(" 1=1 ");
+      if (!RString.isEmpty(beginDateStr)) {
+         whereSql.append(" and ");
+         whereSql.append(FDataPersonUserSigningLogic.CREATE_DATE + " >= '{beginDateStr}'");
+         whereSql.bind("beginDateStr", RString.parse(beginDateStr));
+      }
+      if (!RString.isEmpty(endDateStr)) {
+         whereSql.append(" and ");
+         whereSql.append(FDataPersonUserSigningLogic.CREATE_DATE + " <= '{endDateStr}'");
+         whereSql.bind("endDateStr", RString.parse(endDateStr));
+      }
+      String orderBy = String.format("%s %s", FLoggerPersonUserAccessLogic.UPDATE_DATE, "DESC");
+      FDataPersonUserSigningLogic logic = new FDataPersonUserSigningLogic(logicContext);
+      FLogicDataset<FDataSigningInfo> unitlist = logic.fetchClass(FDataSigningInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
+      for (Iterator<FDataSigningInfo> iter = unitlist.iterator(); iter.hasNext();) {
+         FDataSigningInfo info = iter.next();
+         info.setUserLabel(info.user().label());
+      }
+      return unitlist;
    }
 }

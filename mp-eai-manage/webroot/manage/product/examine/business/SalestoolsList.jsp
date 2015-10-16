@@ -119,8 +119,8 @@
      data-options="field:'content',halign:'center',align:'left',sortable:true"
      width="260px">内容</th>
      <th 
-     data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新日期</th>    
+     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
+     width="140px">更新日期</th>
    </tr>
   </thead>
  </table>

@@ -99,8 +99,8 @@
      data-options="field:'agentCode',halign:'center',align:'left',sortable:true"
      width="900px">头信息</th>
      <th 
-     data-options="field:'updateDate',halign:'center',align:'left'"
-     width="140px">更新日期</th>    
+     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
+     width="140px">更新日期</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:infoButton"
      width="140px">操作</th>

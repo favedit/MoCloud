@@ -142,10 +142,10 @@
      data-options="field:'detailAddress',halign:'center',align:'left',sortable:true"
      width="200px">详细地址</th>
     <th
-     data-options="field:'locationLatitude',halign:'center',align:'left'"
+     data-options="field:'locationLatitude',halign:'center',align:'left',sortable:true"
      width="100px">位置维度</th>
     <th
-     data-options="field:'locationLongitude',halign:'center',align:'left'"
+     data-options="field:'locationLongitude',halign:'center',align:'left',sortable:true"
      width="100px">位置经度</th>
     <th
      data-options="field:'departmentPhone',halign:'center',align:'left',sortable:true"
@@ -178,7 +178,7 @@
      data-options="field:'performanceTotal',halign:'center',align:'left',sortable:true"
      width="80px">业绩总额</th>
     <!-- <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">备注信息</th> -->
-    <th data-options="field:'updateDate',halign:'center',align:'left'"
+    <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
