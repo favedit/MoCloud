@@ -1,6 +1,4 @@
-package org.mo.content.service.mobile.logic.news;
-
-import org.mo.content.core.mobile.logic.news.INewsConsole;
+package org.mo.content.service.mobile.logic.truetimedata;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
@@ -10,6 +8,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.mobile.logic.news.INewsConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
@@ -19,15 +18,15 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>新闻服务。</T>
+// <T>实时数据服务。</T>
 //============================================================
-public class FNewsService
+public class FTrueTimeDataService
       extends FObject
       implements
-         INewsService
+         ITrueTimeDataService
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FNewsService.class);
+   private static ILogger _logger = RLogger.find(FTrueTimeDataService.class);
 
    //新闻逻辑控制台
    @ALink
@@ -36,7 +35,7 @@ public class FNewsService
    //   protected String _newsServiceHost = "http://eai.ezubo.com:8089/";
    //配置文件注入属性
    @AProperty
-   protected String _newsServiceHost;
+   protected String _trueTimeDataHost;
 
    //============================================================
    // <T>默认逻辑。</T>
@@ -54,7 +53,7 @@ public class FNewsService
    }
 
    //============================================================
-   // <T>根据guid获取新闻相关信息。</T>
+   // <T>根据guid获取实时数据相关信息。</T>
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -101,7 +100,7 @@ public class FNewsService
    }
 
    //============================================================
-   // <T>分页获取新闻相关信息。</T>
+   // <T>分页获取实时数据相关信息。</T>
    // @param context 页面环境
    // @param input 输入配置
    // @param output 输出配置
@@ -137,13 +136,13 @@ public class FNewsService
             if(guidStr != null && (!"".equals(guidStr))){
                xruntime.createNode("guid").setText(guidStr);
                if(newsUnit.linkCd() == EGcLink.Content){
-                  xruntime.createNode("info_url").setText(_newsServiceHost + "Index.wa?guid=" + newsUnit.guid());
+                  xruntime.createNode("info_url").setText(_trueTimeDataHost + "Index.wa?guid=" + newsUnit.guid());
                }
             }else{
                xruntime.createNode("guid").setText("0");
             }
 
-            //如果是外链新闻
+            //如果是外链实时数据
             if(newsUnit.linkCd() == EGcLink.Link){
                String newsLinkUrl = newsUnit.linkUrl();
                if(newsLinkUrl != null && (!"".equals(newsLinkUrl))){

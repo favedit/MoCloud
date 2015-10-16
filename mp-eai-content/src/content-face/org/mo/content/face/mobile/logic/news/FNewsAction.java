@@ -1,13 +1,11 @@
 package org.mo.content.face.mobile.logic.news;
 
-import org.mo.content.core.mobile.logic.news.INewsConsole;
-
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.com.data.FSql;
+import org.mo.content.core.mobile.logic.news.INewsConsole;
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.service.mobile.logic.news.INewsService;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -26,10 +24,6 @@ public class FNewsAction
 {
    // 日志输出接口
    //   private static ILogger _logger = RLogger.find(FNewsAction.class);
-
-   @ALink
-   protected INewsService _newsService;
-
    //新闻逻辑控制台
    @ALink
    protected INewsConsole _newsConsole;

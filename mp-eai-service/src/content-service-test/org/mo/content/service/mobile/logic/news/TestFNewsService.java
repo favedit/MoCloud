@@ -43,7 +43,7 @@ public class TestFNewsService
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       listPram.add(new BasicNameValuePair("format_cd", "json"));
-      listPram.add(new BasicNameValuePair("guid", "7C4E37BC77E8439E89EB7EFABCE72449"));
+      listPram.add(new BasicNameValuePair("guid", "FE3814B38EA5477BAF6900FB927324B2"));
       listPram.add(new BasicNameValuePair("action", "query"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);

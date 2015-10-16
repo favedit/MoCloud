@@ -1,4 +1,4 @@
-package org.mo.content.service.mobile.logic.salestools;
+package org.mo.content.service.mobile.logic.truetimedata;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,23 +17,24 @@ import org.junit.Test;
 //============================================================
 // <T>新闻服务。</T>
 //============================================================
-public class TestFSalesToolsService
+public class TestTrueTimeDataService
 {
    @Test
    public void testSelect() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
       //http://eai.ezubo.com:8089/eai.mobile.logic.salestools.wsp
-      String url2 = "http://10.13.0.100:8020/eai.mobile.logic.salestools.wsp";
+      String url2 = "http://10.13.0.100:8020/eai.mobile.logic.truetimedata.wsp";
       //      String url = "http://eai.ezubo.com:8089/eai.mobile.logic.salestools.wsp";
       //      String url3 = "http://10.13.0.250:8020/eai.mobile.logic.salestools.wsp";
       HttpPost post = new HttpPost(url2);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("page_size", "111"));
+      listPram.add(new BasicNameValuePair("page_size", "1"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       listPram.add(new BasicNameValuePair("page_number", "1"));
       listPram.add(new BasicNameValuePair("action", "select"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8"));
       CloseableHttpResponse response = httpclient.execute(post);
+      System.out.println(EntityUtils.toString(post.getEntity()));
       HttpEntity entity = response.getEntity();
       if(entity != null){
          String responseContent = EntityUtils.toString(entity);
