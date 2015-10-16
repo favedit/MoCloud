@@ -59,6 +59,7 @@ function Earnings(dir) {
 						day = percentages[i].getAttribute("total");
 						mostDay[i].style.display = "none";
 						if( Number(inputs[1].value) < percentages[i].getAttribute("min")){
+							moneys[i].innerHTML = 0;
 							mostDay[i].style.display = "inline-block";
 						}else{
 							if( Number(inputs[1].value) <= day ){
