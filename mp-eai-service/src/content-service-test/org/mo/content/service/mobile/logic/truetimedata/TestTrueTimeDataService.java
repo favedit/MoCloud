@@ -28,7 +28,7 @@ public class TestTrueTimeDataService
       //      String url3 = "http://10.13.0.250:8020/eai.mobile.logic.salestools.wsp";
       HttpPost post = new HttpPost(url2);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("page_size", "1"));
+      listPram.add(new BasicNameValuePair("page_size", "10"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       listPram.add(new BasicNameValuePair("page_number", "1"));
       listPram.add(new BasicNameValuePair("action", "select"));

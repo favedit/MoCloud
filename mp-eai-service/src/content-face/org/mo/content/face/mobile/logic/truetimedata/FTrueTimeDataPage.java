@@ -1,6 +1,6 @@
 package org.mo.content.face.mobile.logic.truetimedata;
 
-import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
@@ -21,13 +21,13 @@ public class FTrueTimeDataPage
    protected String result;
 
    //金融客户实体类
-   protected FDataLogicSalestoolsUnit unit;
+   protected FDataLogicTruetimeUnit unit;
 
-   public FDataLogicSalestoolsUnit unit(){
+   public FDataLogicTruetimeUnit unit(){
       return unit;
    }
 
-   public void setUnit(FDataLogicSalestoolsUnit unit){
+   public void setUnit(FDataLogicTruetimeUnit unit){
       this.unit = unit;
    }
 

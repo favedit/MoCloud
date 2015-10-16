@@ -1,19 +1,17 @@
 package org.mo.content.face.mobile.logic.truetimedata;
 
-import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
-import com.cyou.gccloud.data.data.FDataPersonUserLogic;
-import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeLogic;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import org.mo.com.data.FSql;
-import org.mo.content.core.mobile.logic.salestools.ISalesToolsConsole;
+import org.mo.content.core.mobile.logic.truetimedata.ITrueTimeDataConsole;
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.service.mobile.logic.news.INewsService;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>客户信息控制器</P>
+//<P>实时数据控制器</P>
 //@class FCustomerAction
 //@author AnjoyTian
 //@Date 2015.09.21  
@@ -26,12 +24,9 @@ public class FTrueTimeDataAction
    // 日志输出接口
    //   private static ILogger _logger = RLogger.find(FSalesToolsAction.class);
 
-   @ALink
-   protected INewsService _newsService;
-
    //新闻逻辑控制台
    @ALink
-   protected ISalesToolsConsole _salesToolsConsole;
+   protected ITrueTimeDataConsole _trueTimeDataConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -78,17 +73,17 @@ public class FTrueTimeDataAction
                             ILogicContext logicContext,
                             FTrueTimeDataPage page,
                             FBasePage basePage){
-      System.out.println(page.result + "-----------------------------page.result" + page.result);
       String guid = context.parameter("guid");
-      FDataLogicSalestoolsUnit salesUnit = _salesToolsConsole.getNewsByGuid(guid, logicContext);
+      System.out.println("********************************************context.getGuid:" + guid);
+      FDataLogicTruetimeUnit salesUnit = _trueTimeDataConsole.getNewsByGuid(guid, logicContext);
       System.out.println("**********************************************newsUnit" + salesUnit + guid);
 
       if(salesUnit != null){
          FSql whereFSql = new FSql();
-         whereFSql.append(FDataPersonUserLogic.OUID);
+         whereFSql.append(FDataLogicTruetimeLogic.OUID);
          whereFSql.append("=");
          whereFSql.append(salesUnit.createUserId());
-         FLogicDataset<FDataPersonUserUnit> fetch = logicContext.findLogic(FDataPersonUserLogic.class).fetch(whereFSql);
+         FLogicDataset<FDataLogicTruetimeUnit> fetch = logicContext.findLogic(FDataLogicTruetimeLogic.class).fetch(whereFSql);
          String userLabel = "";
          if(fetch != null && fetch.count() > 0){
             userLabel = fetch.first().label();
@@ -97,11 +92,11 @@ public class FTrueTimeDataAction
          page.setUnit(salesUnit);
          //      System.out.println("**********************************************" + guid + newsUnit.content());
       }else{
-         page.setUnit(new FDataLogicSalestoolsUnit());
+         page.setUnit(new FDataLogicTruetimeUnit());
          page.setUserLabel("");
       }
 
-      return "/manage/mobile/salestools/contentlist/Content";
+      return "/manage/mobile/truetimedata/TrueTimeData";
    }
 
    //============================================================

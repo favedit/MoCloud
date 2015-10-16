@@ -1,6 +1,6 @@
 package org.mo.content.service.mobile.logic.truetimedata;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import java.util.Iterator;
 import org.mo.com.lang.EResult;
@@ -8,7 +8,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.mobile.logic.news.INewsConsole;
+import org.mo.content.core.mobile.logic.truetimedata.ITrueTimeDataConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
@@ -28,9 +28,9 @@ public class FTrueTimeDataService
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FTrueTimeDataService.class);
 
-   //新闻逻辑控制台
+   //实时数据逻辑控制台
    @ALink
-   protected INewsConsole _newsConsole;
+   protected ITrueTimeDataConsole _trueTimeDataConsole;
 
    //   protected String _newsServiceHost = "http://eai.ezubo.com:8089/";
    //配置文件注入属性
@@ -67,7 +67,7 @@ public class FTrueTimeDataService
       _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
-      FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
+      FDataLogicTruetimeUnit newsUnit = _trueTimeDataConsole.getNewsByGuid(guid, logicContext);
       if(newsUnit != null){
          FXmlNode news_info = output.config().createNode("news_info");
          String guidStr = newsUnit.guid();
@@ -124,19 +124,19 @@ public class FTrueTimeDataService
       if(pageNumStr != null && (!"".equals(pageNumStr))){
          pageNum = Integer.parseInt(pageNumStr);
       }
-      FLogicDataset<FDataLogicNewsUnit> newsUnits = _newsConsole.select(pageNum, pageSize, logicContext);
+      FLogicDataset<FDataLogicTruetimeUnit> newsUnits = _trueTimeDataConsole.select(pageNum, pageSize, logicContext);
       output.config().createNode("page_number").setText(pageNumStr);
-      FXmlNode list = output.config().createNode("news_list");
+      FXmlNode list = output.config().createNode("truetime_list");
       if(newsUnits != null && newsUnits.count() > 0){
-         for(Iterator<FDataLogicNewsUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
-            FDataLogicNewsUnit newsUnit = iterator.next();
-            FXmlNode xruntime = list.createNode("news_info");
+         for(Iterator<FDataLogicTruetimeUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
+            FDataLogicTruetimeUnit newsUnit = iterator.next();
+            FXmlNode xruntime = list.createNode("truetime_info");
             //            xruntime.createNode("ouid").setText(newsUnit.ouid());
             String guidStr = newsUnit.guid();
             if(guidStr != null && (!"".equals(guidStr))){
                xruntime.createNode("guid").setText(guidStr);
                if(newsUnit.linkCd() == EGcLink.Content){
-                  xruntime.createNode("info_url").setText(_trueTimeDataHost + "Index.wa?guid=" + newsUnit.guid());
+                  xruntime.createNode("info_url").setText(_trueTimeDataHost + "mobile/logic/truetimedata/TrueTimeData.wa?do=getContent&guid=" + newsUnit.guid());
                }
             }else{
                xruntime.createNode("guid").setText("0");
