@@ -34,7 +34,7 @@
 		scope='global'>
 		 <!-- <Property name='salesServiceHost'>http://10.13.0.100:8020/</Property> -->
 		<!--<Property name='salesServiceHost'>http://eai.ezubo.com:8089/</Property>-->
-		<Property name='salesServiceHost'>http://service.eai.ezubo.com/</Property>
+		<Property name='salesServiceHost'>${eai.server.host}</Property>
 	</Component>
 
 

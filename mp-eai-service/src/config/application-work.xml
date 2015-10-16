@@ -16,7 +16,7 @@
    <!-- 服务设定 -->
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws</Define>
-
+   <Define name='eai.service.host'>http://127.0.0.1:8020/</Define>
    <!-- 应用设定 -->
    <Include>${application.config}/application.xml</Include>
 
