@@ -44,9 +44,9 @@
             url : url,
             data : data,
             success : function(msg) {
-                closeProgress();
                // var result = toJsonObject(msg);
                 location.href = "/manage/product/common/Area.wa";
+                closeProgress();
             },
             fail : function() {
                 closeProgress();

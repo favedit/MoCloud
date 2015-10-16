@@ -88,12 +88,13 @@ public class FCountryAction implements ICountryAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FCountryPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FCountryPage page, FBasePage basePage) {
 
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
+      page.setResult("");
       return "/manage/product/common/InsertCountry";
    }
 
@@ -145,6 +146,7 @@ public class FCountryAction implements ICountryAction {
 
       FDataCommonCountryUnit unit = _countryConsole.find(logicContext, id);
       page.setUnit(unit);
+      page.setResult("");
       return "/manage/product/common/UpdateCountry";
    }
 

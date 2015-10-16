@@ -8,7 +8,9 @@
 </HEAD>
 <script>
     function submitForm() {
+        progress();
         $("#rule").submit();
+        closeProgress();
     }
 </script>
 

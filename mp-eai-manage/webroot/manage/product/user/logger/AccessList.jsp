@@ -111,7 +111,7 @@
                   </td>
                   <td width="158">
                      <div align="left">
-                        <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox" ></input>
+                        <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox" data-options="editable:false"></input>
                         <input id="flag" type="hidden"/>
                      </div>
                   </td>
@@ -120,7 +120,7 @@
                   </td>
                   <td width="158">
                      <div align="left">
-                        <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" ></input>
+                        <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
                      </div>
                   </td>
                   <td width="100" height="33">

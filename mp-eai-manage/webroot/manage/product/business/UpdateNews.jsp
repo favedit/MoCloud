@@ -27,8 +27,10 @@
        $("#kindeditor_view").val(conte);
     });
     function submitForm() {
-    	$("#getHtml").click();
-        $("#logicNews").submit();
+       progress();
+       $("#getHtml").click();
+       $("#logicNews").submit();
+       closeProgress();
     }
     var editor;
     KindEditor.ready(function(K) {

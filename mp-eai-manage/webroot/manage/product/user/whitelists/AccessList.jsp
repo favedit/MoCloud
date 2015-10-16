@@ -55,7 +55,7 @@
             location.href = "/manage/product/user/whitelists/Access.wa?do=updateBefore&id=" + id + "&date=" + new Date().valueOf();
          }
          function formatAccess(value,row,index){
-            return (row.accessCd == '1')?"允许":"禁止";           
+            return (row.accessCd == '1')?"允许":"禁止";
          }
          function formatType(value,row,index){
             return (row.typeCd == '1')?"永久":"临时";

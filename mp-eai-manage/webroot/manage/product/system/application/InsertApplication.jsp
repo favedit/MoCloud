@@ -8,8 +8,10 @@
 </HEAD>
 <script>
     function submitForm() {
-    	if (!isValid()) return;
-        $("#application").submit();
+       if (!isValid()) return;
+       progress(); 
+       $("#application").submit();
+       closeProgress();
     }
 </script>
 

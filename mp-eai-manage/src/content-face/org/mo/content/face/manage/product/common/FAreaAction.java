@@ -106,12 +106,13 @@ public class FAreaAction implements IAreaAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FAreaPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FAreaPage page, FBasePage basePage) {
 
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
+      page.setResult("");
       return "/manage/product/common/InsertArea";
    }
 
@@ -160,6 +161,7 @@ public class FAreaAction implements IAreaAction {
       long id = context.parameterAsLong("id");
       FDataCommonAreaUnit unit = _areaConsole.find(logicContext, id);
       page.setUnit(unit);
+      page.setResult("");
       return "/manage/product/common/UpdateArea";
    }
 

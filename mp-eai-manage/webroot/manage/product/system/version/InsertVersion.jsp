@@ -8,9 +8,11 @@
    <script>
       function submitForm() {
          if (!isValid()) return;
+         progress(); 
          var version = $("#version");
          $("#applicationId").val($('#application').combobox("getValue"));
          version.submit();
+         closeProgress();
       }
       $(function() {
          var url = "/manage/product/system/application/Application.wa?do=selectAll&date=" + new Date().valueOf();
@@ -96,7 +98,7 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <select id="forceCd" class="easyui-combobox" name="forceCd" style="width:200px;">
+                        <select id="forceCd" class="easyui-combobox" name="forceCd" style="width:200px;" data-options="editable:false">
                            <option value="1">可选</option>
                            <option value="2">强制</option>
                            <option value="3">自动</option>

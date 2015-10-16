@@ -17,7 +17,6 @@
             success: function(msg) {
                var result = toJsonObject(msg);
                $('#application').combobox('loadData', result);
-
                $('#application').combobox("select", $('#oldAppId').val());
             },
             fail: function() {
@@ -143,7 +142,7 @@
                   <td colspan="3">
                      <div align="left">
                         <input id="forceCd" class="easyui-combobox" style="width:200px;" name="forceCd" data-options="valueField:'value',textField:'text', 
-       data:[{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'}]" value="<jh:write source='&unit.forceCd'/>" />
+       data:[{'value':'1','text':'可选'},{'value':'2','text':'强制'},{'value':'3','text':'自动'}],editable:false" value="<jh:write source='&unit.forceCd'/>" />
                      </div>
                   </td>
                </tr>
@@ -154,7 +153,7 @@
                   </td>
                   <td width="230">
                      <div align="left">
-                        <input id="beginDate" name="beginDate" style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.beginDate'/>"></input>
+                        <input id="beginDate" name="beginDate" style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.beginDate'/>" data-options="editable:false"></input>
                      </div>
                   </td>
                   <td width="70" height="33">
@@ -162,7 +161,7 @@
                   </td>
                   <td width="208">
                      <div align="left">
-                        <input id="endDate" name="endDate" style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.endDate'/>"></input>
+                        <input id="endDate" name="endDate" style="width:200px;" class="easyui-datebox" value="<jh:write source='&unit.endDate'/>" data-options="editable:false"></input>
                      </div>
                   </td>
                </tr>
@@ -179,7 +178,7 @@
                <tr>
                   <td width="70" height="30" align="left">更新内容</td>
                   <td height="30" align="left" colspan="3">
-                     <textarea id="note" name="note" class="border_change" style="width:500px;height:100px"><jh:write source='&unit.note' format='text'/></textarea>            
+                     <textarea id="note" name="note" class="border_change" style="width:500px;height:100px"><jh:write source='&unit.note' format='text'/></textarea>
                   </td>
                </tr>
             </table>

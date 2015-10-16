@@ -16,7 +16,9 @@
 
       function submitForm() {
          if (!isValid()) return;
+         progress(); 
          $("#module").submit();
+         closeProgress();
       }
    </script>
 

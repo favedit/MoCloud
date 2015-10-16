@@ -10,8 +10,10 @@
     function submitForm() {
         if (!isValid())
             return;
+        progress();
         $("#countryId").val($('#country').combobox("getValue"));
         $("#config").submit();
+        closeProgress();
     }
     $(function() {
         var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();

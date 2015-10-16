@@ -10,7 +10,9 @@
     function submitForm() {
        if (!isValid())
            return;
+       progress();
        $("#config").submit();
+       closeProgress();
     }
 </script>
 

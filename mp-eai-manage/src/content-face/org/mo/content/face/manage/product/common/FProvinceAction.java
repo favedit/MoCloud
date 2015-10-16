@@ -114,12 +114,13 @@ public class FProvinceAction implements IProvinceAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FProvincePage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FProvincePage page, FBasePage basePage) {
 
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
+      page.setResult("");
       return "/manage/product/common/InsertProvince";
    }
 
@@ -175,6 +176,7 @@ public class FProvinceAction implements IProvinceAction {
       info.setNote(unit.note());
       info.setOuid(unit.ouid());
       page.setUnit(info);
+      page.setResult("");
       return "/manage/product/common/UpdateProvince";
    }
 

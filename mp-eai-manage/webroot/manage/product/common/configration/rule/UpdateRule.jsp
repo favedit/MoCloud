@@ -9,7 +9,6 @@
 </HEAD>
 <script>
     function submitForm() {
-
         if (!isValid())
             return;
         progress();

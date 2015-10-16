@@ -6,6 +6,7 @@
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <script>
          function doSubmit() {
+            progress();
             var passport = $("#passport").val();
             if (passport.length > 18) {
                alert("账号不能超过18位");
@@ -16,6 +17,7 @@
                return;
             }
             form.submit();
+            closeProgress();
          }
       </script>
    </HEAD>

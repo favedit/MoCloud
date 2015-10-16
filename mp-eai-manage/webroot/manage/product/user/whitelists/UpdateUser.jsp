@@ -38,6 +38,7 @@
          }
 
          function doSubmit() {
+            progress(); 
             var passport = $("#passport").val();
             if (passport.length > 18) {
                alert("账号不能超过18位");
@@ -48,6 +49,7 @@
                return;
             }
             form.submit();
+            closeProgress();
          }
       </script>
    </HEAD>

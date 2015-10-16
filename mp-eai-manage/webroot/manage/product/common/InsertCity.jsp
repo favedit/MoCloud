@@ -9,7 +9,9 @@
     function submitForm() {
        if (!isValid())
             return;
+       progress();
        $("#config").submit();
+       closeProgress();
     }
 </script>
 <body bgcolor="#198bc9">

@@ -1,13 +1,14 @@
 <%@ include file='/apl/public.inc' %>
    <HTML>
-
    <HEAD>
       <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
       <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
    </HEAD>
    <script>
       function submitForm() {
+         progress(); 
          $("#config").submit();
+         closeProgress();
       }
    </script>
 

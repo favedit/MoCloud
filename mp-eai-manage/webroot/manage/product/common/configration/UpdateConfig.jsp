@@ -8,7 +8,6 @@
    </HEAD>
    <script>
       function submitForm() {
-       
             if (!isValid()) return;
             progress();
             var url = "/manage/product/common/configration/Configration.wa?do=update&date=" + new Date().valueOf();
@@ -27,7 +26,7 @@
                success: function(msg) {
                   closeProgress();
                   var result = toJsonObject(msg);
-                     location.href = "/manage/product/common/configration/Configration.wa";
+                  location.href = "/manage/product/common/configration/Configration.wa";
                },
                fail: function() {
                   closeProgress();

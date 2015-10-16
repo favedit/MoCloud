@@ -8,7 +8,9 @@
 </HEAD>
 <script>
     function submitForm() {
-        $("#config").submit();
+       progress(); 
+       $("#config").submit();
+       closeProgress();
     }
     //日历插件函数
     function myformatter(date) {

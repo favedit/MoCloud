@@ -95,6 +95,7 @@ public class FCityAction implements ICityAction {
       FLogicDataset<FDataCityInfo> unitList = _cityConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
+      page.setResult("");
       return "/manage/common/ajax";
    }
 
@@ -172,6 +173,7 @@ public class FCityAction implements ICityAction {
       info.setLocationLongitude(unit.locationLongitude());
       info.setNote(unit.note());
       page.setUnit(info);
+      page.setResult("");
       return "/manage/product/common/UpdateCity";
    }
 

@@ -8,9 +8,11 @@
 </HEAD>
 <script>
     function submitForm() {
+       progress();
        $("#getHtml").click();
        $("#statusCdStr").val("1");
-        $("#config").submit();
+       $("#config").submit();
+       closeProgress();
     }
    var editor;
    KindEditor.ready(function(K) {
