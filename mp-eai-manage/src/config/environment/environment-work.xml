@@ -50,6 +50,16 @@
       <Property name='applicationName'>${application}/${application.name}</Property>
    </Component>
    <!-- ==================================================== -->
+   <!-- FNewsConsole:图片存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.content.core.manage.product.business.truetime.ITruetimeConsole'
+         class = 'org.mo.content.core.manage.product.business.truetime.FTruetimeConsole'
+         scope = 'global'>
+      <Property name='servers'>127.0.0.1:8040</Property>
+      <Property name='applicationName'>${application}/${application.name}</Property>
+   </Component>
+   <!-- ==================================================== -->
    <!-- FSalestoolsConsole:图片存储控制台                        -->
    <!-- ==================================================== -->
    <Component

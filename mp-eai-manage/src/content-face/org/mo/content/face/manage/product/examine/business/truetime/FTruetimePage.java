@@ -1,27 +1,25 @@
-package org.mo.content.face.manage.product.examine.business;
+package org.mo.content.face.manage.product.examine.business.truetime;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>新闻容器</P>
+//<P>实时数据容器</P>
 //@class FNewsPage
-//@author AnjoyTian
-//@version 1.0.0
 //============================================================
+public class FTruetimePage extends FObjectId {
 
-public class FNewsPage extends FObjectId {
    // 当前页
    protected int _pageCurrent;
 
    // 业务资讯数据单元
-   protected FDataLogicNewsUnit unit;
+   protected FDataLogicTruetimeUnit unit;
 
-   public FDataLogicNewsUnit getUnit() {
+   public FDataLogicTruetimeUnit getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataLogicNewsUnit unit) {
+   public void setUnit(FDataLogicTruetimeUnit unit) {
       this.unit = unit;
    }
 
@@ -32,5 +30,4 @@ public class FNewsPage extends FObjectId {
    public void setPageCurrent(int _pageCurrent) {
       this._pageCurrent = _pageCurrent;
    }
-
 }

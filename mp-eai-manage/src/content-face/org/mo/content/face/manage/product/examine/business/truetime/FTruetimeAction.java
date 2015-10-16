@@ -1,13 +1,13 @@
-package org.mo.content.face.manage.product.examine.business;
+package org.mo.content.face.manage.product.examine.business.truetime;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.examine.business.FDataNewsInfo;
-import org.mo.content.core.manage.product.examine.business.INewsConsole;
+import org.mo.content.core.manage.product.examine.business.truetime.FDataTruetimeInfo;
+import org.mo.content.core.manage.product.examine.business.truetime.ITruetimeConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -16,16 +16,17 @@ import org.mo.web.core.upload.IWebUploadConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>新闻控制器</P>
-//@class FNewsAction
+//<P>实时数据控制器</P>
+//@class FTruetimeAction
 //============================================================
-public class FNewsAction implements INewsAction {
+public class FTruetimeAction implements ITruetimeAction {
+
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FNewsAction.class);
+   private static ILogger _logger = RLogger.find(FTruetimeAction.class);
 
    // 业务资讯控制台
    @ALink
-   protected INewsConsole _newsConsole;
+   protected ITruetimeConsole _truetimeConsole;
 
    @ALink
    protected IWebUploadConsole _webUploadConsole;
@@ -42,7 +43,7 @@ public class FNewsAction implements INewsAction {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/examine/business/NewsList";
+      return "/manage/product/examine/business/truetime/TruetimeList";
    }
 
    // ============================================================
@@ -54,7 +55,7 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String select(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -65,14 +66,14 @@ public class FNewsAction implements INewsAction {
       } else {
          page.setPageCurrent(0);
       }
-      FDataLogicNewsUnit unit = new FDataLogicNewsUnit();
+      FDataLogicTruetimeUnit unit = new FDataLogicTruetimeUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataNewsInfo> unitList = _newsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -87,15 +88,15 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String getDescription(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, context.parameterAsLong("ouid"));
+      FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, context.parameterAsLong("ouid"));
       page.setUnit(unit);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
-      return "/manage/product/examine/business/NewsDataInfoForContent";
+      return "/manage/product/examine/business/truetime/TruetimeDataInfoForContent";
    }
 
    // ============================================================
@@ -107,7 +108,7 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String checking(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String checking(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "checking", "checking begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -128,41 +129,41 @@ public class FNewsAction implements INewsAction {
       if (!RString.isEmpty(ouids)) {
          String[] ouid = ouids.split(",");
          for (String id : ouid) {
-            FDataLogicNewsUnit unit = _newsConsole.find(logicContext, RLong.parse(id));
+            FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, RLong.parse(id));
             unit.setStatusCd(statusCd);
-            _newsConsole.doUpdate(logicContext, unit);
+            _truetimeConsole.doUpdate(logicContext, unit);
          }
       }
       _logger.debug(this, "checking", "checking finish. (userId={1})", "SUCCESS");
-      return "/manage/product/examine/business/NewsList";
+      return "/manage/product/examine/business/truetime/TruetimeList";
    }
 
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String insert(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String update(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }

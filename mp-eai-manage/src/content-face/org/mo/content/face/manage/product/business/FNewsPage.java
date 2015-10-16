@@ -1,50 +1,45 @@
 package org.mo.content.face.manage.product.business;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
-
 import org.mo.com.lang.FObjectId;
+import org.mo.content.core.manage.product.business.FDataNewsInfo;
 
 //============================================================
-//<P>理财师信息容器</P>
-//@class FMarketerPage
-//@author AnjoyTian
-//@Date 2015.09.21  
+//<P>新闻容器</P>
+//@class FNewsPage
 //@version 1.0.0
 //============================================================
 
-public class FNewsPage
-      extends FObjectId
-{
+public class FNewsPage extends FObjectId {
    // 当前页
    protected int _pageCurrent;
 
-   //页面信息处理结果
+   // 页面信息处理结果
    protected String result;
-   
-   //业务资讯数据单元
-   protected FDataLogicNewsUnit unit;
 
-   public FDataLogicNewsUnit getUnit() {
+   // 业务资讯数据单元
+   protected FDataNewsInfo unit;
+
+   public FDataNewsInfo getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataLogicNewsUnit unit) {
+   public void setUnit(FDataNewsInfo unit) {
       this.unit = unit;
    }
 
-   public String result(){
+   public String result() {
       return result;
    }
 
-   public void setResult(String result){
+   public void setResult(String result) {
       this.result = result;
    }
 
-   public int pageCurrent(){
+   public int pageCurrent() {
       return _pageCurrent;
    }
 
-   public void setPageCurrent(int _pageCurrent){
+   public void setPageCurrent(int _pageCurrent) {
       this._pageCurrent = _pageCurrent;
    }
 

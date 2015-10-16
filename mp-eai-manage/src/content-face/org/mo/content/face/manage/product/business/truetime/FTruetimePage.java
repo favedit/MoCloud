@@ -1,16 +1,14 @@
-package org.mo.content.face.manage.product.business;
+package org.mo.content.face.manage.product.business.truetime;
 
 import org.mo.com.lang.FObjectId;
-import org.mo.content.core.manage.product.business.FDataSalestoolsInfo;
+import org.mo.content.core.manage.product.business.truetime.FDataTruetimeInfo;
 
 //============================================================
-//<P>销售工具信息容器</P>
-//@class FSalestoolsPage
-//@author zhangxiaohui
-//@Date 2015.10.10
+//<P>实时数据容器</P>
+//@class FTruetimePage
 //@version 1.0.0
 //============================================================
-public class FSalestoolsPage extends FObjectId {
+public class FTruetimePage extends FObjectId {
 
    // 当前页
    protected int _pageCurrent;
@@ -19,13 +17,13 @@ public class FSalestoolsPage extends FObjectId {
    protected String result;
 
    // 业务资讯数据单元
-   protected FDataSalestoolsInfo unit;
+   protected FDataTruetimeInfo unit;
 
-   public FDataSalestoolsInfo getUnit() {
+   public FDataTruetimeInfo getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataSalestoolsInfo unit) {
+   public void setUnit(FDataTruetimeInfo unit) {
       this.unit = unit;
    }
 

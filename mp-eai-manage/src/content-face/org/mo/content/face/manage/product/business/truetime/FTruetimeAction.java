@@ -1,14 +1,14 @@
-package org.mo.content.face.manage.product.business;
+package org.mo.content.face.manage.product.business.truetime;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.business.FDataNewsInfo;
-import org.mo.content.core.manage.product.business.INewsConsole;
+import org.mo.content.core.manage.product.business.truetime.FDataTruetimeInfo;
+import org.mo.content.core.manage.product.business.truetime.ITruetimeConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -18,16 +18,17 @@ import org.mo.web.protocol.common.FWebUploadFile;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>新闻控制器</P>
-//@class FNewsAction
+//<P>实时数据控制器</P>
+//@class FTruetimeAction
 //============================================================
-public class FNewsAction implements INewsAction {
+public class FTruetimeAction implements ITruetimeAction {
+
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FNewsAction.class);
+   private static ILogger _logger = RLogger.find(FTruetimeAction.class);
 
    // 业务资讯控制台
    @ALink
-   protected INewsConsole _newsConsole;
+   protected ITruetimeConsole _truetimeConsole;
 
    @ALink
    protected IWebUploadConsole _webUploadConsole;
@@ -44,7 +45,7 @@ public class FNewsAction implements INewsAction {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/business/NewsList";
+      return "/manage/product/business/truetime/TruetimeList";
    }
 
    // ============================================================
@@ -56,7 +57,7 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String select(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -67,14 +68,14 @@ public class FNewsAction implements INewsAction {
       } else {
          page.setPageCurrent(0);
       }
-      FDataLogicNewsUnit unit = new FDataLogicNewsUnit();
+      FDataLogicTruetimeUnit unit = new FDataLogicTruetimeUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataNewsInfo> unitList = _newsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -89,13 +90,13 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       page.setResult("");
-      return "/manage/product/business/InsertNews";
+      return "/manage/product/business/truetime/InsertTruetime";
    }
 
    // ============================================================
@@ -107,33 +108,33 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String insert(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      FDataLogicNewsUnit unit = _newsConsole.doPrepare(logicContext);
+      FDataLogicTruetimeUnit unit = _truetimeConsole.doPrepare(logicContext);
       FWebUploadFile file = context.files().first();
       if (null != file) {
          Integer len = file.length() / 1024;
          if (len > 20) {
             page.setResult("请上传小于20k的图片!");
-            return "/manage/product/business/InsertNews";
+            return "/manage/product/business/truetime/InsertTruetime";
          }
          String type = file.contentType();
          if (!type.contains("image")) {
             page.setResult("请上传图片!");
-            return "/manage/product/business/InsertNews";
+            return "/manage/product/business/truetime/InsertTruetime";
          }
       }
       setLogicNews(context, logicContext, unit, "0");
-      EResult result = _newsConsole.doInsert(logicContext, unit);
+      EResult result = _truetimeConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
-         return "/manage/product/business/InsertNews";
+         return "/manage/product/business/truetime/InsertTruetime";
       }
       _logger.debug(this, "Insert", "Insert finish. (RESULT={S})", "SUCCESS");
-      return "/manage/product/business/NewsList";
+      return "/manage/product/business/truetime/TruetimeList";
    }
 
    // ============================================================
@@ -145,14 +146,14 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
-      FDataNewsInfo info = new FDataNewsInfo();
+      FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, id);
+      FDataTruetimeInfo info = new FDataTruetimeInfo();
       info.setOuid(unit.ouid());
       info.setContent(unit.content());
       info.setDescription(unit.description());
@@ -164,13 +165,13 @@ public class FNewsAction implements INewsAction {
       info.setDisplayOrder(unit.displayOrder());
       if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
-         int na = unit.iconUrl().indexOf("newsImages");
-         info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
+         int na = unit.iconUrl().indexOf("truetimeImages");
+         info.setImageName("/manage/images/truetimeImages/" + unit.iconUrl().substring(na + 15, unit.iconUrl().length()));
       }
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
-      return "/manage/product/business/UpdateNews";
+      return "/manage/product/business/truetime/UpdateTruetime";
    }
 
    // ============================================================
@@ -182,29 +183,29 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String update(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
+      FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       FWebUploadFile file = context.files().first();
       if (null != file) {
          Integer len = file.length() / 1024;
          if (len > 20) {
             page.setResult("请上传小于20k的图片!");
-            return "/manage/product/business/UpdateNews";
+            return "/manage/product/business/truetime/UpdateTruetime";
          }
          String type = file.contentType();
          if (!type.contains("image")) {
             page.setResult("请上传图片!");
-            return "/manage/product/business/UpdateNews";
+            return "/manage/product/business/truetime/UpdateTruetime";
          }
       }
       setLogicNews(context, logicContext, unit, "1");
-      _newsConsole.doUpdate(logicContext, unit);
+      _truetimeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
-      return "/manage/product/business/NewsList";
+      return "/manage/product/business/truetime/TruetimeList";
    }
 
    // ============================================================
@@ -216,21 +217,21 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
+      FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, id);
       if (unit == null) {
          throw new FFatalError("id not exists.");
       }
-      EResult result = _newsConsole.doDelete(logicContext, unit);
+      EResult result = _truetimeConsole.doDelete(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
       } else {
-         return "/manage/product/business/NewsList";
+         return "/manage/product/business/truetime/TruetimeList";
       }
    }
 
@@ -241,7 +242,7 @@ public class FNewsAction implements INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicNewsUnit unit, String flag) {
+   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicTruetimeUnit unit, String flag) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
@@ -261,7 +262,7 @@ public class FNewsAction implements INewsAction {
             unit.setIconUrl(context.parameter("iconUrl"));
          }
       } else {
-         _newsConsole.saveImage(file, unit, flag);
+         _truetimeConsole.saveImage(file, unit, flag);
       }
    }
 }

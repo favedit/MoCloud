@@ -121,6 +121,9 @@
                   <jh:equals source="manage.product.business.salestools" value="&basePage.menuString">
                      <li><a href="/manage/product/business/Salestools.wa" target="right">销售工具</a></li>
                   </jh:equals>
+                  <jh:equals source="manage.product.business.truetime" value="&basePage.menuString">
+                     <li><a href="/manage/product/business/truetime/Truetime.wa" target="right">实时数据</a></li>
+                  </jh:equals>
                </ul>
          </li>
          <li id="seven" class="common"><a href="#seven">审核管理</a>
@@ -133,6 +136,9 @@
                   </jh:equals>
                   <jh:equals source="manage.product.examine.system.version" value="&basePage.menuString">
                      <li><a href="/manage/product/examine/system/Version.wa" target="right">版本发布</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.product.examine.business.truetime" value="&basePage.menuString">
+                     <li><a href="/manage/product/examine/business/truetime/Truetime.wa" target="right">实时数据</a></li>
                   </jh:equals>
                </ul>
          </li>

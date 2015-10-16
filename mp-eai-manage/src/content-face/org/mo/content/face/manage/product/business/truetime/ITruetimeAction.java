@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.business;
+package org.mo.content.face.manage.product.business.truetime;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
@@ -6,11 +6,12 @@ import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>新闻接口。</P>
-//@interface INewsAction
+//<P>实时数据接口。</P>
+//@interface ITruetimeAction
 //@version 1.0.0
 //============================================================
-public interface INewsAction {
+public interface ITruetimeAction {
+
    // ============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -27,7 +28,7 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -37,7 +38,7 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insertBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insertBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -47,7 +48,7 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insert(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insert(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新之前</T>
@@ -57,7 +58,7 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String updateBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String updateBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新</T>
@@ -67,7 +68,7 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String update(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String update(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>删除</T>
@@ -77,5 +78,5 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String delete(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String delete(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
 }
