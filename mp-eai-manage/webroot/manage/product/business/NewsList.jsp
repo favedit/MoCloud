@@ -19,13 +19,13 @@
     });
     function doSubmit(page, pageSize) {
         progress();
-        var url = "/manage/product/business/news/News.wa?do=select&date="
+        var url = "/manage/product/business/News.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
         var label = $.trim($('#label').val()).replaceAll("'", "");
         if (label == "资讯标题") label = null;
         if (page != null) {
-            url = "/manage/product/business/news/News.wa?do=select&page="
+            url = "/manage/product/business/News.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
             data = {
                 "label" : label,
@@ -50,13 +50,13 @@
     function del(id) {
     	 return confirmx('确定删除?',
                  function() {
-                     location.href = "/manage/product/business/news/News.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+                     location.href = "/manage/product/business/News.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
                  });
     }
     //更新配置信息-AnjoyTian
     function edit(id) {
         console.info(id);
-        window.location.href = "/manage/product/business/news/News.wa?do=updateBefore&id="
+        window.location.href = "/manage/product/business/News.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
     }
 </script>
@@ -69,7 +69,7 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="/manage/product/business/news/News.wa?do=insertBefore"
+    <a href="/manage/product/business/News.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
    <div class="nav_search">

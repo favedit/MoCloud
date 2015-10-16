@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.business.news;
+package org.mo.content.face.manage.product.business;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

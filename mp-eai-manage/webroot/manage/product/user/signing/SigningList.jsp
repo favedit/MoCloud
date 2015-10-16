@@ -68,10 +68,10 @@
    <span>用户签到信息</span>
   </div>
   <div class="btn_bar">
-   <!-- <div class="nav_btn">
-    <a href="/product/news/News.wa?do=insertBefore"
-     class="add_btn"></a>
-   </div> -->
+    <div class="nav_btn">
+    <!--<a href="/product/news/News.wa?do=insertBefore"
+     class="add_btn"></a>-->
+   </div> 
    <div class="nav_search">
     <input id="userId" name="userId" type="text"
      onfocus="if(this.value=='用户id'){this.value='';}this.style.color='#000000';"

@@ -116,7 +116,7 @@
          <li id="six" class="common"> <a href="#six">业务管理</a>
                <ul class="sub-menu">
                   <jh:equals source="manage.product.business.news" value="&basePage.menuString">
-                     <li><a href="/manage/product/business/news/News.wa" target="right">资讯信息</a></li>
+                     <li><a href="/manage/product/business/News.wa" target="right">资讯信息</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.business.salestools" value="&basePage.menuString">
                      <li><a href="/manage/product/business/Salestools.wa" target="right">销售工具</a></li>

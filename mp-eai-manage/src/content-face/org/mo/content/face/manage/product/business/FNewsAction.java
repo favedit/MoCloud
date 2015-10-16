@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.business.news;
+package org.mo.content.face.manage.product.business;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
@@ -7,8 +7,8 @@ import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.business.news.FDataNewsInfo;
-import org.mo.content.core.manage.product.business.news.INewsConsole;
+import org.mo.content.core.manage.product.business.FDataNewsInfo;
+import org.mo.content.core.manage.product.business.INewsConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -44,7 +44,7 @@ public class FNewsAction implements INewsAction {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/business/news/NewsList";
+      return "/manage/product/business/NewsList";
    }
 
    // ============================================================
@@ -95,7 +95,7 @@ public class FNewsAction implements INewsAction {
          return "/manage/common/ConnectTimeout";
       }
       page.setResult("");
-      return "/manage/product/business/news/InsertNews";
+      return "/manage/product/business/InsertNews";
    }
 
    // ============================================================
@@ -118,22 +118,22 @@ public class FNewsAction implements INewsAction {
          Integer len = file.length() / 1024;
          if (len > 20) {
             page.setResult("请上传小于20k的图片!");
-            return "/manage/product/business/news/InsertNews";
+            return "/manage/product/business/InsertNews";
          }
          String type = file.contentType();
          if (!type.contains("image")) {
             page.setResult("请上传图片!");
-            return "/manage/product/business/news/InsertNews";
+            return "/manage/product/business/InsertNews";
          }
       }
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _newsConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
-         return "/manage/product/business/news/InsertNews";
+         return "/manage/product/business/InsertNews";
       }
       _logger.debug(this, "Insert", "Insert finish. (RESULT={S})", "SUCCESS");
-      return "/manage/product/business/news/NewsList";
+      return "/manage/product/business/NewsList";
    }
 
    // ============================================================
@@ -170,7 +170,7 @@ public class FNewsAction implements INewsAction {
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
-      return "/manage/product/business/news/UpdateNews";
+      return "/manage/product/business/UpdateNews";
    }
 
    // ============================================================
@@ -193,18 +193,18 @@ public class FNewsAction implements INewsAction {
          Integer len = file.length() / 1024;
          if (len > 20) {
             page.setResult("请上传小于20k的图片!");
-            return "/manage/product/business/news/UpdateNews";
+            return "/manage/product/business/UpdateNews";
          }
          String type = file.contentType();
          if (!type.contains("image")) {
             page.setResult("请上传图片!");
-            return "/manage/product/business/news/UpdateNews";
+            return "/manage/product/business/UpdateNews";
          }
       }
       setLogicNews(context, logicContext, unit, "1");
       _newsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
-      return "/manage/product/business/news/NewsList";
+      return "/manage/product/business/NewsList";
    }
 
    // ============================================================
@@ -230,7 +230,7 @@ public class FNewsAction implements INewsAction {
       if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
       } else {
-         return "/manage/product/business/news/NewsList";
+         return "/manage/product/business/NewsList";
       }
    }
 

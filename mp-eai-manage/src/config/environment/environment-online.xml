@@ -58,8 +58,8 @@
    <!-- FNewsConsole:图片存储控制台                        -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.content.core.manage.product.business.news.INewsConsole'
-         class = 'org.mo.content.core.manage.product.business.news.FNewsConsole'
+         face  = 'org.mo.content.core.manage.product.business.INewsConsole'
+         class = 'org.mo.content.core.manage.product.business.FNewsConsole'
          scope = 'global'>
       <Property name='servers'>121.42.136.88:87</Property>
       <Property name='applicationName'>${application}/${application.name}</Property>
