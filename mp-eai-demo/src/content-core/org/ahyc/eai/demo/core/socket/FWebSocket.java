@@ -3,9 +3,9 @@ package org.ahyc.eai.demo.core.socket;
 import java.nio.ByteBuffer;
 import javax.websocket.RemoteEndpoint.Async;
 import javax.websocket.Session;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
-import org.mo.com.logging.ILogger;
-import org.mo.com.logging.RLogger;
+import org.mo.com.lang.RString;
 
 //============================================================
 // <T>网络端口会话。</T>
@@ -14,7 +14,7 @@ public class FWebSocket
       extends FObject
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FWebSocket.class);
+   //private static ILogger _logger = RLogger.find(FWebSocket.class);
 
    // 代码
    private String _code;
@@ -71,12 +71,13 @@ public class FWebSocket
    // @param message 消息
    //============================================================
    public void sendMessage(String message){
-      // 发送数据
-      Async async = _session.getAsyncRemote();
-      try{
-         async.sendText(message);
-      }catch(Exception exception){
-         _logger.error(this, "sendMessage", exception);
+      if(!RString.isEmpty(message)){
+         Async async = _session.getAsyncRemote();
+         try{
+            async.sendText(message);
+         }catch(Exception exception){
+            throw new FFatalError(exception, "Send string message failure. (message={1})", message);
+         }
       }
    }
 
@@ -88,14 +89,16 @@ public class FWebSocket
    public void sendMessage(byte[] data,
                            int offset,
                            int length){
-      // 获得缓冲
-      ByteBuffer buffer = ByteBuffer.wrap(data, offset, length);
-      // 发送数据
-      Async async = _session.getAsyncRemote();
-      try{
-         async.sendBinary(buffer);
-      }catch(Exception exception){
-         _logger.error(this, "sendMessage", exception);
+      if(length > 0){
+         // 获得缓冲
+         ByteBuffer buffer = ByteBuffer.wrap(data, offset, length);
+         // 发送数据
+         Async async = _session.getAsyncRemote();
+         try{
+            async.sendBinary(buffer);
+         }catch(Exception exception){
+            throw new FFatalError(exception, "Send byte message failure. (length={1})", length);
+         }
       }
    }
 }
