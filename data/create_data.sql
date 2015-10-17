@@ -280,7 +280,7 @@ CREATE TABLE `DT_SYS_VERSION`
    `APPLICATION_ID`                BIGINT NOT NULL, 
    `STATUS_CD`                     INTEGER, 
    `FORCE_CD`                      INTEGER, 
-   `NUMBER`                        FLOAT NOT NULL, 
+   `NUMBER`                        FLOAT(5,2) NOT NULL, 
    `CODE`                          VARCHAR(40) NOT NULL, 
    `LABEL`                         VARCHAR(80), 
    `BEGIN_DATE`                    DATETIME, 
