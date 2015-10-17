@@ -15,11 +15,14 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>新闻控制台</P>
 //@class FNewsConsole
-//@author XIAOHUI ZHANG
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
-public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic, FDataLogicNewsUnit>implements INewsConsole {
+public class FNewsConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataLogicNewsLogic, FDataLogicNewsUnit>
+      implements 
+         INewsConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -32,14 +35,18 @@ public class FNewsConsole extends FAbstractLogicUnitConsole<FDataLogicNewsLogic,
    }
 
    // ============================================================
-   // <T>获得分页数据列表bySomerow</T>
+   // <T>获得分页数据列表</T>
    // @param logicContext 链接对象
-   // @param moduleUnit 查询条件
+   // @param unit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataNewsInfo> select(ILogicContext logicContext, FDataLogicNewsUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataNewsInfo> select(ILogicContext logicContext, 
+                                              FDataLogicNewsUnit unit, 
+                                              int pageNum, 
+                                              int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }

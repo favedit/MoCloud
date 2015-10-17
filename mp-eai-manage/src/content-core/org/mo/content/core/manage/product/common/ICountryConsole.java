@@ -12,7 +12,10 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public interface ICountryConsole extends IAbstractLogicUnitConsole<FDataCommonCountryUnit> {
+public interface ICountryConsole 
+      extends 
+         IAbstractLogicUnitConsole<FDataCommonCountryUnit> 
+{
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
@@ -22,7 +25,10 @@ public interface ICountryConsole extends IAbstractLogicUnitConsole<FDataCommonCo
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataCommonCountryUnit> select(ILogicContext logicContext, FDataCommonCountryUnit unit, int pageNum, int pageSize);
+   FLogicDataset<FDataCommonCountryUnit> select(ILogicContext logicContext, 
+                                                FDataCommonCountryUnit unit, 
+                                                int pageNum, 
+                                                int pageSize);
 
    // ============================================================
    // <T>根据代码获取对象</T>
@@ -30,7 +36,8 @@ public interface ICountryConsole extends IAbstractLogicUnitConsole<FDataCommonCo
    // @param code 代码
    // @return 数据对象
    // ============================================================
-   FDataCommonCountryUnit findByCode(ILogicContext logicContext, String code);
+   FDataCommonCountryUnit findByCode(ILogicContext logicContext, 
+                                     String code);
 
    // ============================================================
    // <T>根据标签获取对象</T>
@@ -38,7 +45,13 @@ public interface ICountryConsole extends IAbstractLogicUnitConsole<FDataCommonCo
    // @param label 标签
    // @return 数据对象
    // ============================================================
-   public FDataCommonCountryUnit findByName(ILogicContext logicContext, String name);
+   FDataCommonCountryUnit findByName(ILogicContext logicContext, 
+                                            String name);
 
-   public FLogicDataset<FDataCommonCountryUnit> selectAll(ILogicContext logicContext);
+   // ============================================================
+   // <T>获取所有国家</T>
+   // @param logicContext 链接对象
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCommonCountryUnit> selectAll(ILogicContext logicContext);
 }

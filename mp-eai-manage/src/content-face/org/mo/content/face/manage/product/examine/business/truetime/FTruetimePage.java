@@ -7,7 +7,10 @@ import org.mo.com.lang.FObjectId;
 //<P>实时数据容器</P>
 //@class FNewsPage
 //============================================================
-public class FTruetimePage extends FObjectId {
+public class FTruetimePage 
+      extends 
+         FObjectId 
+{
 
    // 当前页
    protected int _pageCurrent;

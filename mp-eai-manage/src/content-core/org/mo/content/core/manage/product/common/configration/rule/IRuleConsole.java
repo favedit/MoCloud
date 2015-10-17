@@ -7,10 +7,7 @@ import com.cyou.gccloud.data.data.FDataControlRuleUnit;
 
 //============================================================
 //<P>规则配置信息操作接口</P>
-//
 //@class IRuleConsole
-//@author Zxh
-//@Date 2015.10.6
 //@version 1.0.0
 //============================================================
 public interface IRuleConsole extends IAbstractLogicUnitConsole<FDataControlRuleUnit> {

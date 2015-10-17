@@ -22,11 +22,13 @@ import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 // <P>接口。</P>
-//
 // @author sunhr
 // @version 150718
 //============================================================
-public class FDeviceAction implements IDeviceAction {
+public class FDeviceAction 
+            implements 
+               IDeviceAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FDeviceAction.class);
 
@@ -41,7 +43,9 @@ public class FDeviceAction implements IDeviceAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -51,7 +55,10 @@ public class FDeviceAction implements IDeviceAction {
    }
 
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FDevicePage devicePage, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FDevicePage devicePage, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -74,7 +81,9 @@ public class FDeviceAction implements IDeviceAction {
    }
 
    @Override
-   public String putMobileInfo(IWebContext context, ILogicContext logicContext, FDevicePage page) {
+   public String putMobileInfo(IWebContext context,
+                               ILogicContext logicContext, 
+                               FDevicePage page) {
       String agentCode = context.parameter("agentCode");
       if (RString.isEmpty(agentCode)) {
          throw new FFatalError("agentCode is empty.");
@@ -99,7 +108,10 @@ public class FDeviceAction implements IDeviceAction {
    }
 
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FDevicePage devicePage, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FDevicePage devicePage, 
+                              FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -111,7 +123,10 @@ public class FDeviceAction implements IDeviceAction {
 
    @SuppressWarnings("resource")
    @Override
-   public String expend(IWebContext context, ILogicContext logicContext, FDevicePage page, FBasePage basePage) {
+   public String expend(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FDevicePage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Expend", "Expend begin.");
       try {
          FLogicDataset<FDataInfoDeviceBrowserUnit> unitlist = _deviceBrowserConsole.select(logicContext);

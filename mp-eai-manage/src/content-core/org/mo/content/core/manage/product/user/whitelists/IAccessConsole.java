@@ -9,11 +9,22 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>人员账号控制台接口。</T>
 //============================================================
-public interface IAccessConsole extends IAbstractLogicUnitConsole<FDataPersonAccessAuthorityUnit> {
+public interface IAccessConsole 
+      extends 
+         IAbstractLogicUnitConsole<FDataPersonAccessAuthorityUnit> 
+{
 
    FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, int pageNum);
 
-   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, FDataPersonAccessAuthorityUnit unit, int pageNum, int pageSize);
+   // ============================================================
+   // <T>获得分页数据列表</T>
+   // @param logicContext 链接对象
+   // @param unit 查询条件
+   // @param pageNum 页码
+   // @param pageSize 页大小
+   // @return 数据集合
+   // ============================================================
+   FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, FDataPersonAccessAuthorityUnit unit, int pageNum, int pageSize);
 
    EResult hostExists(ILogicContext logicContext, String host);
 

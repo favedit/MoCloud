@@ -6,13 +6,11 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>产品信息容器</P>
 //@class FProductPage
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
 public class FProductPage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 当前页
    protected int _pageCurrent;

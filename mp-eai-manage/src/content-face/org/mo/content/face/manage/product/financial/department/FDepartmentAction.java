@@ -22,7 +22,10 @@ import org.mo.web.protocol.context.IWebContext;
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public class FDepartmentAction implements IDepartmentAction {
+public class FDepartmentAction 
+      implements 
+         IDepartmentAction
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FDepartmentAction.class);
 
@@ -37,7 +40,9 @@ public class FDepartmentAction implements IDepartmentAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -55,7 +60,10 @@ public class FDepartmentAction implements IDepartmentAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FDepartmentPage Page, FBasePage basePage) {
+   public String select(IWebContext context,
+                        ILogicContext logicContext, 
+                        FDepartmentPage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -88,7 +96,10 @@ public class FDepartmentAction implements IDepartmentAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FDepartmentPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FDepartmentPage Page, 
+                              FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -105,7 +116,10 @@ public class FDepartmentAction implements IDepartmentAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FDepartmentPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FDepartmentPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -187,7 +201,10 @@ public class FDepartmentAction implements IDepartmentAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FDepartmentPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FDepartmentPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -211,7 +228,10 @@ public class FDepartmentAction implements IDepartmentAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FDepartmentPage Page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FDepartmentPage Page, 
+                        FBasePage basePage) {
 
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -291,7 +311,10 @@ public class FDepartmentAction implements IDepartmentAction {
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FDepartmentPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FDepartmentPage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";

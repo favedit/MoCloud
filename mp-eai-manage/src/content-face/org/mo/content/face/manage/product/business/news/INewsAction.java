@@ -17,7 +17,9 @@ public interface INewsAction {
    // @param context 页面环境
    // @param page 页面
    // ============================================================
-   String construct(IWebContext context, ILogicContext logicContext, @AContainer(name = "basePage") FBasePage page);
+   String construct(IWebContext context, 
+                    ILogicContext logicContext, 
+                    @AContainer(name = "basePage") FBasePage page);
 
    // ============================================================
    // <T>查询</T>
@@ -27,7 +29,10 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String select(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FNewsPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -37,7 +42,10 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insertBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insertBefore(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FNewsPage Page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -47,7 +55,10 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insert(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insert(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FNewsPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新之前</T>
@@ -57,7 +68,10 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String updateBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String updateBefore(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FNewsPage Page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新</T>
@@ -67,7 +81,10 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String update(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String update(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FNewsPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>删除</T>
@@ -77,5 +94,8 @@ public interface INewsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String delete(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FNewsPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String delete(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FNewsPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 }

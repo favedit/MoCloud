@@ -7,12 +7,12 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>区域信息控制台接口</P>
 //@interface IAreaConsole
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
-public interface IAreaConsole extends IAbstractLogicUnitConsole<FDataCommonAreaUnit> {
+public interface IAreaConsole 
+      extends 
+         IAbstractLogicUnitConsole<FDataCommonAreaUnit>
+{
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
    //
@@ -21,11 +21,38 @@ public interface IAreaConsole extends IAbstractLogicUnitConsole<FDataCommonAreaU
    // @param pageNum 页码
    // @param pageSize 每页显示的行数
    // @return 数据集合
-   FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext, FDataCommonAreaUnit unit, int pageNum, int pageSize);
+   // ============================================================
+   FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext, 
+                                       FDataCommonAreaUnit unit, 
+                                       int pageNum, 
+                                       int pageSize);
 
-   public FDataCommonAreaUnit findByLable(ILogicContext logicContext, String label);
+   // ============================================================
+   // <T>根据标签获取区域</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据
+   // ============================================================
+   FDataCommonAreaUnit findByLable(ILogicContext logicContext, 
+                                          String label);
 
-   public boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, String areaLabel, Long countryId);
+   // ============================================================
+   // <T>根据标签，国家id判断数据重复</T>
+   // @param logicContext 链接对象
+   // @param areaLabel 标签
+   // @param countryId 国家id
+   // @return 数据
+   // ============================================================
+   boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, 
+                                                 String areaLabel, 
+                                                 Long countryId);
 
-   public FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, Long countryId);
+   // ============================================================
+   // <T>根据国家id获取区域</T>
+   // @param logicContext 链接对象
+   // @param countryId 国家id
+   // @return 数据
+   // ============================================================
+   FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, 
+                                                       Long countryId);
 }

@@ -23,7 +23,10 @@ import org.mo.web.protocol.context.IWebContext;
 //@version 1.0.0
 //============================================================
 
-public class FUserAction implements IUserAction {
+public class FUserAction 
+      implements 
+         IUserAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FUserAction.class);
 
@@ -39,8 +42,10 @@ public class FUserAction implements IUserAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String construct(IWebContext context, FUserPage userPage, FBasePage basePage) {
-      _logger.debug(this, "construct-------------------------------------", "construct begin.");
+   public String construct(IWebContext context, 
+                           FUserPage userPage, 
+                           FBasePage basePage) {
+      _logger.debug(this, "construct", "construct begin.");
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -55,7 +60,10 @@ public class FUserAction implements IUserAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FUserPage userPage, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FUserPage userPage, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "User Select. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -82,7 +90,10 @@ public class FUserAction implements IUserAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FUserPage formPage, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FUserPage formPage, 
+                              FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -99,7 +110,10 @@ public class FUserAction implements IUserAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FUserPage formPage, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FUserPage formPage, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -140,7 +154,10 @@ public class FUserAction implements IUserAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FUserPage userPage, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FUserPage userPage, 
+                              FBasePage basePage) {
       basePage.setTemp("");
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -167,7 +184,10 @@ public class FUserAction implements IUserAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FUserPage formPage, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FUserPage formPage, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -205,7 +225,10 @@ public class FUserAction implements IUserAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String del(IWebContext context, ILogicContext logicContext, FUserPage formPage, FBasePage basePage) {
+   public String del(IWebContext context, 
+                     ILogicContext logicContext, 
+                     FUserPage formPage, 
+                     FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }

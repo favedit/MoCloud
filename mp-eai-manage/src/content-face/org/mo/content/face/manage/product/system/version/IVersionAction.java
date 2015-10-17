@@ -7,12 +7,11 @@ import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 //<P>应用接口。</P>
-//@interface IMarketerAction
-//@author AnjoyTian
-//@Date 2015.09.29 
+//@interface IVersionAction
 //@version 1.0.0
 //============================================================
-public interface IVersionAction {
+public interface IVersionAction 
+{
    //============================================================
    // <T>默认逻辑处理。</T>
    //

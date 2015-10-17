@@ -2,8 +2,13 @@ package org.mo.content.core.manage.product.system.version;
 
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import java.util.Map;
-
-public class FDataVersionInfo extends FDataSystemVersionUnit {
+//============================================================
+//<T>版本信息</T>
+//============================================================
+public class FDataVersionInfo 
+      extends 
+         FDataSystemVersionUnit 
+{
    // 状态字符串
    protected String _statusCdStr;
    // 字符串

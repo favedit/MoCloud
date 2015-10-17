@@ -12,14 +12,18 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public interface ICityConsole extends IAbstractLogicUnitConsole<FDataCommonCityUnit> {
+public interface ICityConsole 
+      extends 
+         IAbstractLogicUnitConsole<FDataCommonCityUnit> 
+{
    // ============================================================
    // <T>根据区号获取对象</T>
    // @param logicContext 链接对象
    // @param code 区号
    // @return 数据对象
    // ============================================================
-   FDataCommonCityUnit findByCitycode(ILogicContext context, String code);
+   FDataCommonCityUnit findByCitycode(ILogicContext context, 
+                                      String code);
 
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
@@ -29,7 +33,24 @@ public interface ICityConsole extends IAbstractLogicUnitConsole<FDataCommonCityU
    // @param pageNum 页码
    // @param pageSize 每页显示的行数
    // @return 数据集合
-   FLogicDataset<FDataCityInfo> select(ILogicContext logicContext, FDataCommonCityUnit unit, int pageNum, int pageSize);
+   // ============================================================
+   FLogicDataset<FDataCityInfo> select(ILogicContext logicContext, 
+                                       FDataCommonCityUnit unit, 
+                                       int pageNum, 
+                                       int pageSize);
 
-   public boolean isExsitsByLabelandByCountryIdandAreaIdandProvinceId(ILogicContext logicContext, String label, Long countryId, Long areaId, Long provinceId);
+   // ============================================================
+   // <T>根据标签，国家id，区域id,省份id判断数据重复</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @param countryId 国家id
+   // @param areaId 区域id
+   // @param provinceId 省份id
+   // @return 数据集合
+   // ============================================================
+   boolean isExsitsByLabelandByCountryIdandAreaIdandProvinceId(ILogicContext logicContext, 
+                                                               String label, 
+                                                               Long countryId, 
+                                                               Long areaId, 
+                                                               Long provinceId);
 }

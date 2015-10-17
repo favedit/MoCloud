@@ -6,7 +6,7 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>用户容器</P>
 //
-//@class FProvincePage
+//@class FDynamicPage
 //@author Sunhr
 //@Date 2012.11.05  
 //@version 1.0.0

@@ -24,14 +24,14 @@
              K('input[id=getHtml]').click(function(e) {
                  $("#content").val(editor.html())
              });
-             K('input[id=showHtml]').click(function(e) {	
+             K('input[id=showHtml]').click(function(e) {
                 $("#phoneShow").window("open");
                 $("#phoneShow").html(editor.html());
               });
     });
    function but(){
       $("#iconUrl").click();
-   }
+   }   
    function changfile(obj){
       var a = obj.lastIndexOf("\\");
       $("#oiconUr").val(obj.substr(a+1,obj.length));
@@ -72,7 +72,7 @@
              <option value="2">非展示</option>
         <select>
       </div></td>
-    </tr>
+    </tr>   
     <tr>
      <td height="38"><div align="left">外链状态:</div></td>
      <td><div align="left">

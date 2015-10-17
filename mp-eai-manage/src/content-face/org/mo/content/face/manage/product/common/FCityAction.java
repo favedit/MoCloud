@@ -23,11 +23,12 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>城市信息控制器</P>
 //@class FCityAction
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public class FCityAction implements ICityAction {
+public class FCityAction 
+      implements 
+         ICityAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FCityAction.class);
 
@@ -54,7 +55,9 @@ public class FCityAction implements ICityAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -71,7 +74,10 @@ public class FCityAction implements ICityAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FCityPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCityPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -108,7 +114,10 @@ public class FCityAction implements ICityAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FCityPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FCityPage Page, 
+                              FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -125,7 +134,10 @@ public class FCityAction implements ICityAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FCityPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCityPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -153,7 +165,10 @@ public class FCityAction implements ICityAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FCityPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FCityPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -186,7 +201,10 @@ public class FCityAction implements ICityAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FCityPage Page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCityPage Page, 
+                        FBasePage basePage) {
 
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -207,7 +225,10 @@ public class FCityAction implements ICityAction {
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FCityPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCityPage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -231,7 +252,9 @@ public class FCityAction implements ICityAction {
    // @param logicContext 逻辑环境
    // @return void
    // ============================================================
-   public void setCityDat(FDataCommonCityUnit unit, IWebContext context, ILogicContext logicContext) {
+   public void setCityDat(FDataCommonCityUnit unit, 
+                          IWebContext context, 
+                          ILogicContext logicContext) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));

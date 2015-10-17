@@ -6,11 +6,12 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>销售工具信息容器</P>
 //@class FSalestoolsPage
-//@author zhangxiaohui
-//@Date 2015.10.10
 //@version 1.0.0
 //============================================================
-public class FSalestoolsPage extends FObjectId {
+public class FSalestoolsPage 
+      extends 
+         FObjectId 
+{
 
    // 当前页
    protected int _pageCurrent;

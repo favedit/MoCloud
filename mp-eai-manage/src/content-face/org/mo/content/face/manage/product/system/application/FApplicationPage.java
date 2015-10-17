@@ -5,12 +5,13 @@ import org.mo.com.lang.FObjectId;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 //============================================================
 //<P>应用容器</P>
-//@class FDepartmentPage
-//@author AnjoyTian
-//@Date 2015.09.21  
+//@class FApplicationPage
 //@version 1.0.0
 //============================================================
-public class FApplicationPage extends FObjectId {
+public class FApplicationPage 
+      extends 
+         FObjectId 
+{
    // 当前页
    protected int _pageCurrent;
 

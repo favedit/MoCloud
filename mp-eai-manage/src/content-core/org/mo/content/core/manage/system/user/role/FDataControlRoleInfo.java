@@ -7,7 +7,8 @@ import java.util.Map;
 // <T>控制角色表逻辑单元。</T>
 //============================================================
 public class FDataControlRoleInfo
-      extends FDataControlRoleUnit
+      extends 
+         FDataControlRoleUnit
 {
    // 存储角色名称。
    private String _roleModules;

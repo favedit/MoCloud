@@ -9,7 +9,10 @@ import org.mo.content.core.manage.product.business.news.FDataNewsInfo;
 //@version 1.0.0
 //============================================================
 
-public class FNewsPage extends FObjectId {
+public class FNewsPage 
+      extends 
+         FObjectId 
+{
    // 当前页
    protected int _pageCurrent;
 

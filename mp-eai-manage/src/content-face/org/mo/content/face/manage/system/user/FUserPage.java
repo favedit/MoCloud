@@ -12,7 +12,8 @@ import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.com.lang.FObjectId;
 
 public class FUserPage
-      extends FObjectId
+      extends 
+         FObjectId
 {
 
    //用户

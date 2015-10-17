@@ -23,12 +23,15 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>城市信息控制台</P>
 //@class FCityConsole
-//@author AnjoyTian
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
 
-public class FCityConsole extends FAbstractLogicUnitConsole<FDataCommonCityLogic, FDataCommonCityUnit>implements ICityConsole {
+public class FCityConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataCommonCityLogic, FDataCommonCityUnit>
+      implements 
+         ICityConsole 
+{
 
    // 国家控制台
    @ALink
@@ -56,7 +59,8 @@ public class FCityConsole extends FAbstractLogicUnitConsole<FDataCommonCityLogic
    // @return 数据对象
    // ============================================================
    @Override
-   public FDataCommonCityUnit findByCitycode(ILogicContext context, String code) {
+   public FDataCommonCityUnit findByCitycode(ILogicContext context, 
+                                             String code) {
       FSql where = new FSql();
       if (code != null) {
          where.append(FDataCommonCityLogic.CITY_CODE);
@@ -78,7 +82,10 @@ public class FCityConsole extends FAbstractLogicUnitConsole<FDataCommonCityLogic
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataCityInfo> select(ILogicContext logicContext, FDataCommonCityUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataCityInfo> select(ILogicContext logicContext, 
+                                              FDataCommonCityUnit unit, 
+                                              int pageNum, 
+                                              int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -115,13 +122,18 @@ public class FCityConsole extends FAbstractLogicUnitConsole<FDataCommonCityLogic
    // ============================================================
    // <T>根据label,countryId,areaId,provinceId,判断数据存在重复</T>
    // @param logicContext 链接对象
-   // @param unit 查询条件
-   // @param pageNum 页码
-   // @param pageSize 每页显示的行数
+   // @param label 市区标签
+   // @param countryId 国家id
+   // @param areaId 区域id
+   // @param provinceId 身份id
    // @return 数据集合
    // ============================================================
    @Override
-   public boolean isExsitsByLabelandByCountryIdandAreaIdandProvinceId(ILogicContext logicContext, String label, Long countryId, Long areaId, Long provinceId) {
+   public boolean isExsitsByLabelandByCountryIdandAreaIdandProvinceId(ILogicContext logicContext, 
+                                                                      String label, 
+                                                                      Long countryId, 
+                                                                      Long areaId, 
+                                                                      Long provinceId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(label) && !RString.isEmpty(areaId + "") && !RString.isEmpty(countryId + "") && !RString.isEmpty(provinceId + "")) {
          whereSql.append(FDataCommonCityLogic.LABEL);

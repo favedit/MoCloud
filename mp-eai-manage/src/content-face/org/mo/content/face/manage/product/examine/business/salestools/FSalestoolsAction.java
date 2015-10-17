@@ -20,7 +20,10 @@ import org.mo.web.protocol.context.IWebContext;
 //@class FSalestoolsAction
 //@version 1.0.0
 //============================================================
-public class FSalestoolsAction implements ISalestoolsAction {
+public class FSalestoolsAction 
+      implements 
+         ISalestoolsAction 
+{
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FSalestoolsAction.class);
@@ -34,12 +37,13 @@ public class FSalestoolsAction implements ISalestoolsAction {
 
    // ============================================================
    // <T>默认逻辑处理。</T>
-   //
    // @param context 页面环境
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -56,7 +60,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -89,7 +96,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String getDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FSalestoolsPage page, 
+                                FBasePage basePage) {
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -109,7 +119,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String checking(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String checking(IWebContext context, 
+                          ILogicContext logicContext, 
+                          FSalestoolsPage page, 
+                          FBasePage basePage) {
       _logger.debug(this, "checking", "checking begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -140,31 +153,46 @@ public class FSalestoolsAction implements ISalestoolsAction {
    }
 
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSalestoolsPage page, 
+                              FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSalestoolsPage page, 
+                              FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }

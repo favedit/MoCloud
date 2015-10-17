@@ -3,7 +3,11 @@ package org.mo.content.core.manage.product.common.configration.rule;
 import java.util.Map;
 
 import com.cyou.gccloud.data.data.FDataControlRuleUnit;
-
+//============================================================
+//<P>规则配置信息</P>
+//@class FDataRuleInfo
+//@version 1.0.0
+//============================================================
 public class FDataRuleInfo extends FDataControlRuleUnit {
 
    //规则状态字符串

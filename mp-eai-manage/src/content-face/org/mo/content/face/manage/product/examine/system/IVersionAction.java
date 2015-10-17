@@ -6,10 +6,8 @@ import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>理财师信息接口。</P>
-//@interface IMarketerAction
-//@author AnjoyTian
-//@Date 2015.09.21  
+//<P>版本信息接口。</P>
+//@interface IVersionAction
 //@version 1.0.0
 //============================================================
 public interface IVersionAction

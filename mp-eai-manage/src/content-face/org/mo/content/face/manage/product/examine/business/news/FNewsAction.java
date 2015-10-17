@@ -19,7 +19,10 @@ import org.mo.web.protocol.context.IWebContext;
 //<P>新闻控制器</P>
 //@class FNewsAction
 //============================================================
-public class FNewsAction implements INewsAction {
+public class FNewsAction 
+         implements 
+            INewsAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FNewsAction.class);
 
@@ -37,7 +40,9 @@ public class FNewsAction implements INewsAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -54,7 +59,10 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+public String select(IWebContext context,
+                     ILogicContext logicContext, 
+                     FNewsPage page, 
+                     FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -87,7 +95,10 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String getDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FNewsPage page, 
+                                FBasePage basePage) {
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -107,7 +118,10 @@ public class FNewsAction implements INewsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String checking(IWebContext context, ILogicContext logicContext, FNewsPage page, FBasePage basePage) {
+   public String checking(IWebContext context, 
+                          ILogicContext logicContext, 
+                          FNewsPage page, 
+                          FBasePage basePage) {
       _logger.debug(this, "checking", "checking begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -138,31 +152,46 @@ public class FNewsAction implements INewsAction {
    }
 
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FNewsPage Page, 
+                              FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FNewsPage Page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FNewsPage Page, 
+                              FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FNewsPage Page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FNewsPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FNewsPage Page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }

@@ -50,7 +50,7 @@
     function del(id) {
        return confirmx('确定删除?',
                  function() {
-                     location.href = "/manage/product/truetime/Truetime.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+                     location.href = "/manage/product/business/truetime/Truetime.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
                  });
     }
     //更新配置信息-AnjoyTian

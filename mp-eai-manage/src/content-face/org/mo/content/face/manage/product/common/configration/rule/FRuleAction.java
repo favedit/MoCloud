@@ -21,7 +21,10 @@ import org.mo.web.protocol.context.IWebContext;
 //@author sunhr
 //@version 150909
 //============================================================
-public class FRuleAction implements IRuleAction {
+public class FRuleAction 
+      implements 
+         IRuleAction 
+{
 
     // 日志输出接口
     private static ILogger _logger = RLogger.find(FRuleAction.class);
@@ -37,8 +40,10 @@ public class FRuleAction implements IRuleAction {
     // @param page 页面
     // ============================================================
     @Override
-    public String construct(IWebContext context, ILogicContext logicContext, FBasePage page) {
-        _logger.debug(this, "Construct-------------------------------------", "Construct begin. (userId={1})", page.userId());
+    public String construct(IWebContext context, 
+                            ILogicContext logicContext, 
+                            FBasePage page) {
+        _logger.debug(this, "Construct", "Construct begin. (userId={1})", page.userId());
         if (!page.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
@@ -54,7 +59,10 @@ public class FRuleAction implements IRuleAction {
     // @return 页面
     // ============================================================
     @Override
-    public String select(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
+    public String select(IWebContext context, 
+                         ILogicContext logicContext, 
+                         FRulePage page, 
+                         FBasePage basePage) {
         _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
@@ -88,7 +96,10 @@ public class FRuleAction implements IRuleAction {
     // @return 页面
     // ============================================================
     @Override
-    public String insertBefore(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
+    public String insertBefore(IWebContext context, 
+                               ILogicContext logicContext, 
+                               FRulePage page, 
+                               FBasePage basePage) {
         _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
@@ -105,7 +116,10 @@ public class FRuleAction implements IRuleAction {
     // @return 页面
     // ============================================================
     @Override
-    public String insert(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
+    public String insert(IWebContext context, 
+                         ILogicContext logicContext, 
+                         FRulePage page, 
+                         FBasePage basePage) {
         _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
@@ -131,7 +145,10 @@ public class FRuleAction implements IRuleAction {
     // @return 页面
     // ============================================================
     @Override
-    public String updateBefore(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
+    public String updateBefore(IWebContext context, 
+                               ILogicContext logicContext, 
+                               FRulePage page, 
+                               FBasePage basePage) {
         _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
@@ -177,7 +194,10 @@ public class FRuleAction implements IRuleAction {
     // @return 页面
     // ============================================================
     @Override
-    public String update(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
+    public String update(IWebContext context, 
+                         ILogicContext logicContext, 
+                         FRulePage page, 
+                         FBasePage basePage) {
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
         }
@@ -200,7 +220,10 @@ public class FRuleAction implements IRuleAction {
     // @return 页面
     // ============================================================
     @Override
-    public String delete(IWebContext context, ILogicContext logicContext, FRulePage page, FBasePage basePage) {
+    public String delete(IWebContext context, 
+                         ILogicContext logicContext, 
+                         FRulePage page, 
+                         FBasePage basePage) {
         _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
         if (!basePage.userExists()) {
             return "/manage/common/ConnectTimeout";
@@ -223,7 +246,8 @@ public class FRuleAction implements IRuleAction {
     //
     // @param context 网络环境
     // ============================================================
-    public void setRuleData(FDataControlRuleUnit unit, IWebContext context) {
+    public void setRuleData(FDataControlRuleUnit unit, 
+                            IWebContext context) {
         unit.setPercentage(context.parameterAsInteger("percentage"));
         unit.setScorePoint(context.parameterAsInteger("scorePoint"));
         unit.setParameters1(context.parameter("parameters1"));
@@ -239,7 +263,9 @@ public class FRuleAction implements IRuleAction {
     //
     // @param context 网络环境
     // ============================================================
-    public void setRuleInfo(FDataControlRuleUnit unit, IWebContext context, String cdr) {
+    public void setRuleInfo(FDataControlRuleUnit unit, 
+                            IWebContext context, 
+                            String cdr) {
         if (RString.equals(EGcRule.UnknownLabel, cdr)) {
             unit.setRuleCd(EGcRule.Unknown);
         } else if (RString.equals(EGcRule.LastLoginLabel, cdr)) {

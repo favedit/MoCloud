@@ -5,10 +5,14 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
-
+//============================================================
+//<P>新闻控制台接口</P>
+//@class INewsConsole
+//@version 1.0.0
+//============================================================
 public interface INewsConsole 
-                  extends 
-                  IAbstractLogicUnitConsole<FDataLogicNewsUnit>
+      extends 
+         IAbstractLogicUnitConsole<FDataLogicNewsUnit>
 {
 
    // ============================================================

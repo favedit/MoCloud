@@ -5,14 +5,12 @@ import org.mo.com.lang.FObjectId;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 //============================================================
 //<P>版本容器</P>
-//@class FDepartmentPage
-//@author AnjoyTian
-//@Date 2015.09.21  
+//@class FVersionPage
 //@version 1.0.0
 //============================================================
 public class FVersionPage 
-               extends 
-                  FObjectId 
+      extends 
+         FObjectId 
 {
    // 当前页
    protected int _pageCurrent;

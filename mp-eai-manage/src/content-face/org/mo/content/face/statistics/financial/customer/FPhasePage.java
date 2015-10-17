@@ -13,7 +13,8 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 
 public class FPhasePage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 当前页
    protected int _pageCurrent;

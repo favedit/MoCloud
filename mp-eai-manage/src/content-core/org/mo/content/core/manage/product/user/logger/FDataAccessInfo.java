@@ -2,8 +2,13 @@ package org.mo.content.core.manage.product.user.logger;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
 import java.util.Map;
-
-public class FDataAccessInfo extends FLoggerPersonUserAccessUnit {
+//============================================================
+//<T>用户访问信息</T>
+//============================================================
+public class FDataAccessInfo 
+      extends 
+         FLoggerPersonUserAccessUnit 
+{
 
    // 开始时间字符串
    protected String _beginDateStr;

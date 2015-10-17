@@ -27,7 +27,12 @@ import org.mo.web.protocol.common.FWebUploadFile;
 //@author XIAOHUI ZHANG
 //@version 1.0.0
 //============================================================
-public class FTruetimeConsole extends FAbstractLogicUnitConsole<FDataLogicTruetimeLogic, FDataLogicTruetimeUnit>implements ITruetimeConsole {
+public class FTruetimeConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataLogicTruetimeLogic, FDataLogicTruetimeUnit>
+      implements 
+         ITruetimeConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -80,8 +85,17 @@ public class FTruetimeConsole extends FAbstractLogicUnitConsole<FDataLogicTrueti
       return moduleList;
    }
 
+   // ============================================================
+   // <T>保存图片</T>
+   // @param logicContext 链接对象
+   // @param unit 保存的数据
+   // @param flag 标志
+   // @return void
+   // ============================================================
    @Override
-   public void saveImage(FWebUploadFile file, FDataLogicTruetimeUnit unit, String flag) {
+   public void saveImage(FWebUploadFile file, 
+                         FDataLogicTruetimeUnit unit, 
+                         String flag) {
       FileInputStream fi;
       FileOutputStream fo;
       try {

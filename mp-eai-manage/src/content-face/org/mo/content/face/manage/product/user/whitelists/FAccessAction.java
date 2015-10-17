@@ -19,7 +19,10 @@ import org.mo.web.protocol.context.IWebContext;
 // @author sunhr
 // @version 150328
 //============================================================
-public class FAccessAction implements IAccessAction {
+public class FAccessAction 
+      implements 
+         IAccessAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FFrameAction.class);
 
@@ -40,7 +43,9 @@ public class FAccessAction implements IAccessAction {
    // @return 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -48,7 +53,10 @@ public class FAccessAction implements IAccessAction {
    }
 
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FAccessPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FAccessPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "LoginUser", "LoginUser begin. (page={1})", context.parameter("page"));
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -72,7 +80,10 @@ public class FAccessAction implements IAccessAction {
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FAccessPage page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FAccessPage page, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -85,7 +96,9 @@ public class FAccessAction implements IAccessAction {
    }
 
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -93,7 +106,10 @@ public class FAccessAction implements IAccessAction {
    }
 
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FAccessPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FAccessPage page, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -143,7 +159,10 @@ public class FAccessAction implements IAccessAction {
    }
 
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FAccessPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FAccessPage page, 
+                              FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }

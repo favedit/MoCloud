@@ -2,8 +2,13 @@ package org.mo.content.core.manage.product.examine.business.salestools;
 
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import java.util.Map;
-
-public class FDataSalestoolsInfo extends FDataLogicSalestoolsUnit {
+//============================================================
+//<T>销售工具信息</T>
+//============================================================
+public class FDataSalestoolsInfo 
+      extends 
+         FDataLogicSalestoolsUnit 
+{
 
    // 状态字符串
    private String _statusCdStr;

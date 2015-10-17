@@ -6,13 +6,11 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>省会信息容器</P>
 //@class FProvincePage
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
 public class FProvincePage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 当前页
    protected int _pageCurrent;

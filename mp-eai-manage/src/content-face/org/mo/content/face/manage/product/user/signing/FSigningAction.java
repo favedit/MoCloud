@@ -10,7 +10,10 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
-public class FSigningAction implements ISigningAction {
+public class FSigningAction 
+      implements 
+         ISigningAction 
+{
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FSigningAction.class);
@@ -25,7 +28,9 @@ public class FSigningAction implements ISigningAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage page) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage page) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", page.userId());
       if (!page.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -42,7 +47,10 @@ public class FSigningAction implements ISigningAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FSigningPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSigningPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -66,7 +74,10 @@ public class FSigningAction implements ISigningAction {
    }
 
    @Override
-   public String selectByDate(IWebContext context, ILogicContext logicContext, FSigningPage page, FBasePage basePage) {
+   public String selectByDate(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSigningPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -87,36 +98,6 @@ public class FSigningAction implements ISigningAction {
       FLogicDataset<FDataSigningInfo> unitList = _signingConsole.selectByDate(logicContext, biginDateStr, endDateStr, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
-   }
-
-   @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FSigningPage Page, FBasePage basePage) {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FSigningPage Page, FBasePage basePage) {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FSigningPage Page, FBasePage basePage) {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   @Override
-   public String update(IWebContext context, ILogicContext logicContext, FSigningPage Page, FBasePage basePage) {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FSigningPage Page, FBasePage basePage) {
-      // TODO Auto-generated method stub
-      return null;
    }
 
 }

@@ -8,18 +8,19 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>国家信息接口。</P>
 //@interface ICountryAction
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public interface ICountryAction {
+public interface ICountryAction 
+{
    // ============================================================
    // <T>默认逻辑处理。</T>
    //
    // @param context 页面环境
    // @param page 页面
    // ============================================================
-   String construct(IWebContext context, ILogicContext logicContext, @AContainer(name = "basePage") FBasePage page);
+   String construct(IWebContext context, 
+                    ILogicContext logicContext, 
+                    @AContainer(name = "basePage") FBasePage page);
 
    // ============================================================
    // <T>查询</T>
@@ -29,7 +30,10 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FCountryPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String select(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FCountryPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -39,7 +43,10 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insertBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FCountryPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insertBefore(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FCountryPage Page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -49,7 +56,10 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insert(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FCountryPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insert(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FCountryPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新之前</T>
@@ -59,7 +69,10 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String updateBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FCountryPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String updateBefore(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FCountryPage Page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新</T>
@@ -69,7 +82,10 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String update(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FCountryPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String update(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FCountryPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>删除</T>
@@ -79,7 +95,10 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String delete(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FCountryPage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String delete(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FCountryPage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>全查</T>
@@ -89,5 +108,7 @@ public interface ICountryAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String selectAll(IWebContext context, ILogicContext logicContext, @AContainer(name = "basePage") FBasePage basePage);
+   String selectAll(IWebContext context, 
+                    ILogicContext logicContext, 
+                    @AContainer(name = "basePage") FBasePage basePage);
 }

@@ -22,7 +22,9 @@ import org.mo.web.protocol.context.IWebContext;
 //@version 1.0.0
 //============================================================
 
-public class FModuleAction implements IModuleAction {
+public class FModuleAction 
+      implements 
+         IModuleAction {
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FModuleAction.class);
@@ -46,7 +48,8 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -62,7 +65,10 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String selectDataByPage(IWebContext context, ILogicContext logicContext, FModulePage modulePage, FBasePage basePage) {
+   public String selectDataByPage(IWebContext context, 
+                                  ILogicContext logicContext, 
+                                  FModulePage modulePage, 
+                                  FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -90,7 +96,9 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String selectAll(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String selectAll(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -110,7 +118,9 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -142,7 +152,9 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String insertPrepare(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String insertPrepare(IWebContext context, 
+                               ILogicContext logicContext, 
+                               FBasePage basePage) {
       _logger.debug(this, "InsertPrepare", "InsertPrepare begin.");
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -161,7 +173,10 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FModulePage modulePage, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FModulePage modulePage, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "Insert insert begin.");
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -192,7 +207,10 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String updatePrepare(IWebContext context, ILogicContext logicContext, FModulePage modulePage, FBasePage basePage) {
+   public String updatePrepare(IWebContext context, 
+                               ILogicContext logicContext, 
+                               FModulePage modulePage, 
+                               FBasePage basePage) {
       _logger.debug(this, "UpdatePrepare", "UpdatePrepare begin. (moduleId={1})", context.parameter("moduleId"));
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -212,7 +230,10 @@ public class FModuleAction implements IModuleAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FModulePage modulePage, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FModulePage modulePage, 
+                        FBasePage basePage) {
       _logger.debug(this, "Update", "Update begin. (ouid={1})", context.parameterAsLong("ouid"));
       long id = context.parameterAsLong("ouid");
       String code = context.parameter("code").trim();

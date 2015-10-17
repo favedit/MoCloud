@@ -5,7 +5,8 @@ import java.util.Map;
 import org.mo.com.lang.RInteger;
 
 public class FDataControlModuleInfo
-      extends FDataControlModuleUnit
+      extends 
+         FDataControlModuleUnit
 {
    // 字段查看有效类型的定义。
    protected int _viewValidCd;

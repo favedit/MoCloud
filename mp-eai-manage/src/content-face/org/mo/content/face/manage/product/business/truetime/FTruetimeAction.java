@@ -21,7 +21,10 @@ import org.mo.web.protocol.context.IWebContext;
 //<P>实时数据控制器</P>
 //@class FTruetimeAction
 //============================================================
-public class FTruetimeAction implements ITruetimeAction {
+public class FTruetimeAction 
+      implements 
+         ITruetimeAction 
+{
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FTruetimeAction.class);
@@ -40,7 +43,9 @@ public class FTruetimeAction implements ITruetimeAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -57,7 +62,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -90,7 +98,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FTruetimePage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -108,7 +119,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -146,7 +160,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FTruetimePage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -183,7 +200,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -217,7 +237,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -242,7 +265,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicTruetimeUnit unit, String flag) {
+   public void setLogicNews(IWebContext context, 
+                            ILogicContext logicContext, 
+                            FDataLogicTruetimeUnit unit, 
+                            String flag) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));

@@ -8,7 +8,8 @@ import org.mo.com.lang.FObjectId;
 // <P>私人页面。</P>
 //============================================================
 public class FSpacePage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 用户信息
    protected FGcUserInfo _user;

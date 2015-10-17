@@ -9,7 +9,8 @@ import org.mo.core.aop.face.ASourceMachine;
 //============================================================
 @ASourceMachine
 public class FDataPersonUserInfo
-      extends FDataPersonUserUnit
+      extends 
+         FDataPersonUserUnit
 {
    // 存储角色名称。
    private String _roleLabel;

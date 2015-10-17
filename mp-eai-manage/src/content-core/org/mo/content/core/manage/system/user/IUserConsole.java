@@ -7,13 +7,11 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>用户逻辑数据库操作接口</P>
-//
 //@class IUserConsole
 //@author Sunhr
 //@Date 2012.11.05  
 //@version 1.0.0
 //============================================================
-
 public interface IUserConsole
       extends
          IAbstractLogicUnitConsole<FDataPersonUserUnit>

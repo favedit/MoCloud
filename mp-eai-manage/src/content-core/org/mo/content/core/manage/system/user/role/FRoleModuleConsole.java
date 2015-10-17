@@ -10,7 +10,8 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 public class FRoleModuleConsole
-      extends FAbstractLogicUnitConsole<FDataControlRoleModuleLogic, FDataControlRoleModuleUnit>
+      extends 
+         FAbstractLogicUnitConsole<FDataControlRoleModuleLogic, FDataControlRoleModuleUnit>
       implements
          IRoleModuleConsole
 {

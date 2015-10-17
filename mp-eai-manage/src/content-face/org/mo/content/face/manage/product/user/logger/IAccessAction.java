@@ -11,7 +11,8 @@ import org.mo.web.protocol.context.IWebContext;
 // @author sunhr
 // @version 150328
 //============================================================
-public interface IAccessAction {
+public interface IAccessAction 
+{
 
    // ============================================================
    // <T>构造器</T>
@@ -21,7 +22,9 @@ public interface IAccessAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String construct(IWebContext context, ILogicContext logicContext, @AContainer(name = "basePage") FBasePage basePage);
+   String construct(IWebContext context, 
+                    ILogicContext logicContext, 
+                    @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>查询</T>
@@ -31,7 +34,10 @@ public interface IAccessAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "accessPage") FAccessPage accessPage, @AContainer(name = "basePage") FBasePage basePage);
+   String select(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "accessPage") FAccessPage accessPage, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>根据时间段查询</T>
@@ -41,6 +47,9 @@ public interface IAccessAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String selectByDate(IWebContext context, ILogicContext logicContext, @AContainer(name = "accessPage") FAccessPage accessPage, @AContainer(name = "basePage") FBasePage basePage);
+   String selectByDate(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "accessPage") FAccessPage accessPage, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
 }

@@ -2,8 +2,13 @@ package org.mo.content.core.manage.product.examine.business.truetime;
 
 import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import java.util.Map;
-
-public class FDataTruetimeInfo extends FDataLogicTruetimeUnit {
+//============================================================
+//<T>实时数据信息</T>
+//============================================================
+public class FDataTruetimeInfo 
+      extends 
+         FDataLogicTruetimeUnit 
+{
    // 状态字符串
    private String _statusCdStr;
    // 外链状态字符串

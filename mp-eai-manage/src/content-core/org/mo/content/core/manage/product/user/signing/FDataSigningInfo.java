@@ -2,8 +2,13 @@ package org.mo.content.core.manage.product.user.signing;
 
 import com.cyou.gccloud.data.data.FDataPersonUserSigningUnit;
 import java.util.Map;
-
-public class FDataSigningInfo extends FDataPersonUserSigningUnit {
+//============================================================
+//<T>用户签到信息</T>
+//============================================================
+public class FDataSigningInfo 
+      extends 
+         FDataPersonUserSigningUnit 
+{
    // 用户标签名
    protected String _userLabel;
 

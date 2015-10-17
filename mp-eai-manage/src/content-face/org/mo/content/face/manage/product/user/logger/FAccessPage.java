@@ -5,14 +5,15 @@ import org.mo.content.core.manage.product.user.logger.FDataAccessInfo;
 
 //============================================================
 //<P>用户容器</P>
-//
 //@class FAccessPage
 //@author Sunhr
 //@Date 2012.11.05  
 //@version 1.0.0
 //============================================================
-
-public class FAccessPage extends FObjectId {
+public class FAccessPage 
+      extends 
+         FObjectId 
+{
    // 当前页
    protected int _pageCurrent;
 

@@ -19,15 +19,18 @@ import org.mo.web.protocol.context.IWebContext;
 //<P>实时数据控制器</P>
 //@class FTruetimeAction
 //============================================================
-public class FTruetimeAction implements ITruetimeAction {
+public class FTruetimeAction 
+      implements 
+         ITruetimeAction 
+{
 
-   // 日志输出接口
+   //日志输出接口
    private static ILogger _logger = RLogger.find(FTruetimeAction.class);
 
-   // 业务资讯控制台
+   //业务资讯控制台
    @ALink
    protected ITruetimeConsole _truetimeConsole;
-
+   //web控制台
    @ALink
    protected IWebUploadConsole _webUploadConsole;
 
@@ -38,7 +41,9 @@ public class FTruetimeAction implements ITruetimeAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -55,7 +60,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -88,7 +96,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String getDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FTruetimePage page, 
+                                FBasePage basePage) {
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -108,7 +119,10 @@ public class FTruetimeAction implements ITruetimeAction {
    // @return 页面
    // ============================================================
    @Override
-   public String checking(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
+   public String checking(IWebContext context, 
+                          ILogicContext logicContext, 
+                          FTruetimePage page, 
+                          FBasePage basePage) {
       _logger.debug(this, "checking", "checking begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -139,31 +153,46 @@ public class FTruetimeAction implements ITruetimeAction {
    }
 
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FTruetimePage Page, 
+                              FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage Page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FTruetimePage Page, 
+                              FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage Page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FTruetimePage Page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }

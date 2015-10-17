@@ -8,7 +8,8 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 public class FModuleConsole
-      extends FAbstractLogicUnitConsole<FDataControlModuleLogic, FDataControlModuleUnit>
+      extends 
+         FAbstractLogicUnitConsole<FDataControlModuleLogic, FDataControlModuleUnit>
       implements
          IModuleConsole
 {

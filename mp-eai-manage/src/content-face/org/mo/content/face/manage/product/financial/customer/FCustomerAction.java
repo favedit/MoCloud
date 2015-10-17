@@ -15,11 +15,12 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>客户信息控制器</P>
 //@class FCustomerAction
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public class FCustomerAction implements ICustomerAction {
+public class FCustomerAction 
+      implements 
+         ICustomerAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FCustomerAction.class);
 
@@ -34,7 +35,9 @@ public class FCustomerAction implements ICustomerAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
 
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -53,7 +56,10 @@ public class FCustomerAction implements ICustomerAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FCustomerPage Page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCustomerPage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -85,7 +91,10 @@ public class FCustomerAction implements ICustomerAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FCustomerPage Page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FCustomerPage Page, 
+                              FBasePage basePage) {
 
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -103,7 +112,10 @@ public class FCustomerAction implements ICustomerAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FCustomerPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCustomerPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -142,7 +154,10 @@ public class FCustomerAction implements ICustomerAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FCustomerPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FCustomerPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -163,7 +178,10 @@ public class FCustomerAction implements ICustomerAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FCustomerPage Page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCustomerPage Page, 
+                        FBasePage basePage) {
 
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -199,7 +217,10 @@ public class FCustomerAction implements ICustomerAction {
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FCustomerPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FCustomerPage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";

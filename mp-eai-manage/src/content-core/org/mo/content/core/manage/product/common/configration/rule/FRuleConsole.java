@@ -13,16 +13,15 @@ import com.cyou.gccloud.data.data.FDataControlRuleUnit;
 import com.cyou.gccloud.define.enums.core.EGcRule;
 //============================================================
 //<P>规则配置信息操作接口</P>
-//
 //@class FConfigrationConsole
-//@author Zxh
-//@Date 2015.10.06
 //@version 1.0.0
 //============================================================
 public class FRuleConsole 
                extends 
-               FAbstractLogicUnitConsole<FDataControlRuleLogic, FDataControlRuleUnit>
-               implements IRuleConsole {
+                  FAbstractLogicUnitConsole<FDataControlRuleLogic, FDataControlRuleUnit>
+               implements 
+                  IRuleConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -34,18 +33,17 @@ public class FRuleConsole
       super(FDataControlRuleLogic.class, FDataControlRuleUnit.class);
    }
 
-    // ============================================================
+   // ============================================================
    // <T>获得分页数据列表bySomerow</T>
-   //
    // @param logicContext 链接对象
-   // @param moduleUnit 查询条件
+   // @param unit 查询条件
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
    @Override
    public FLogicDataset<FDataRuleInfo> select(ILogicContext logicContext,
-                                                             FDataRuleInfo unit,
-                                                             int pageNum){
+                                              FDataRuleInfo unit,
+                                              int pageNum){
       if(pageNum < 0){
          pageNum = 0;
       }
@@ -74,7 +72,6 @@ public class FRuleConsole
    }
    // ============================================================
    // <T>获得分页数据列表byRuleCd</T>
-   //
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
@@ -82,8 +79,8 @@ public class FRuleConsole
    // ============================================================
    @Override
    public FLogicDataset<FDataRuleInfo> selectByRuleCd(ILogicContext logicContext,
-                                                             FDataRuleInfo unit,
-                                                             int pageNum){
+                                                      FDataRuleInfo unit,
+                                                      int pageNum){
       if(pageNum < 0){
          pageNum = 0;
       }

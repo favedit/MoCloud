@@ -3,7 +3,10 @@ package org.mo.content.face.manage.product.user.signing;
 import com.cyou.gccloud.data.data.FDataPersonUserSigningUnit;
 import org.mo.com.lang.FObjectId;
 
-public class FSigningPage extends FObjectId {
+public class FSigningPage 
+      extends 
+         FObjectId 
+{
 
    // 当前页
    protected int _pageCurrent;

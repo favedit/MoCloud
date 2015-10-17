@@ -13,12 +13,15 @@ import org.mo.data.logic.ILogicContext;
 
 //============================================================
 //<P>签到控制台</P>
-//@class FNewsConsole
-//@author XIAOHUI ZHANG
-//@Date 2015.10.09
+//@class FSigningConsole
 //@version 1.0.0
 //============================================================
-public class FSigningConsole extends FAbstractLogicUnitConsole<FDataPersonUserSigningLogic, FDataPersonUserSigningUnit>implements ISigningConsole {
+public class FSigningConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataPersonUserSigningLogic, FDataPersonUserSigningUnit>
+      implements 
+         ISigningConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -35,10 +38,14 @@ public class FSigningConsole extends FAbstractLogicUnitConsole<FDataPersonUserSi
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataSigningInfo> select(ILogicContext logicContext, FDataSigningInfo unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataSigningInfo> select(ILogicContext logicContext, 
+                                                 FDataSigningInfo unit, 
+                                                 int pageNum, 
+                                                 int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -60,10 +67,15 @@ public class FSigningConsole extends FAbstractLogicUnitConsole<FDataPersonUserSi
    // <T>根据搜索条件时间段查询分页数据</T>
    // @param logicContext 链接对象
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataSigningInfo> selectByDate(ILogicContext logicContext, String beginDateStr, String endDateStr, int pageNum, int pageSize) {
+   public FLogicDataset<FDataSigningInfo> selectByDate(ILogicContext logicContext, 
+                                                       String beginDateStr, 
+                                                       String endDateStr, 
+                                                       int pageNum, 
+                                                       int pageSize) {
       if (0 > pageNum) {
          pageNum = 0;
       }

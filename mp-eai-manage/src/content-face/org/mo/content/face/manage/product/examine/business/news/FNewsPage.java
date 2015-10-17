@@ -10,7 +10,10 @@ import org.mo.com.lang.FObjectId;
 //@version 1.0.0
 //============================================================
 
-public class FNewsPage extends FObjectId {
+public class FNewsPage 
+      extends 
+         FObjectId 
+{
    // 当前页
    protected int _pageCurrent;
 

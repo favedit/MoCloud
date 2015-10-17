@@ -7,12 +7,11 @@ import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 //<P>签到接口。</P>
-//@interface IMarketerAction
-//@author ZXH
-//@Date 2015.10.09 
+//@interface ISigningAction
 //@version 1.0.0
 //============================================================
-public interface ISigningAction {
+public interface ISigningAction 
+{
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -20,7 +19,9 @@ public interface ISigningAction {
    // @param context 页面环境
    // @param page 页面
    // ============================================================
-   String construct(IWebContext context, ILogicContext logicContext, @AContainer(name = "basePage") FBasePage page);
+   String construct(IWebContext context, 
+                    ILogicContext logicContext, 
+                    @AContainer(name = "basePage") FBasePage page);
 
    // ============================================================
    // <T>查询</T>
@@ -30,7 +31,10 @@ public interface ISigningAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage page, @AContainer(name = "basePage") FBasePage basePage);
+   String select(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FSigningPage page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>依据条件时间段查询</T>
@@ -40,55 +44,9 @@ public interface ISigningAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String selectByDate(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage page, @AContainer(name = "basePage") FBasePage basePage);
+   String selectByDate(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FSigningPage page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
-   // ============================================================
-   // <T>增加之前</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   String insertBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage Page, @AContainer(name = "basePage") FBasePage basePage);
-
-   // ============================================================
-   // <T>增加</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   String insert(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage Page, @AContainer(name = "basePage") FBasePage basePage);
-
-   // ============================================================
-   // <T>更新之前</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   String updateBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage Page, @AContainer(name = "basePage") FBasePage basePage);
-
-   // ============================================================
-   // <T>更新</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   String update(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage Page, @AContainer(name = "basePage") FBasePage basePage);
-
-   // ============================================================
-   // <T>删除</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   String delete(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FSigningPage Page, @AContainer(name = "basePage") FBasePage basePage);
 }

@@ -8,7 +8,10 @@ import org.mo.content.core.manage.product.business.truetime.FDataTruetimeInfo;
 //@class FTruetimePage
 //@version 1.0.0
 //============================================================
-public class FTruetimePage extends FObjectId {
+public class FTruetimePage 
+      extends 
+         FObjectId 
+{
 
    // 当前页
    protected int _pageCurrent;

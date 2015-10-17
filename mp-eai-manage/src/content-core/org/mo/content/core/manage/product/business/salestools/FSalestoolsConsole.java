@@ -29,7 +29,12 @@ import org.mo.web.protocol.common.FWebUploadFile;
 //@Date 2015.10.10
 //@version 1.0.0
 //============================================================
-public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSalestoolsLogic, FDataLogicSalestoolsUnit>implements ISalestoolsConsole {
+public class FSalestoolsConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataLogicSalestoolsLogic, FDataLogicSalestoolsUnit>
+      implements 
+         ISalestoolsConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -58,10 +63,14 @@ public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSale
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataSalestoolsInfo> select(ILogicContext logicContext, FDataLogicSalestoolsUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataSalestoolsInfo> select(ILogicContext logicContext, 
+                                                    FDataLogicSalestoolsUnit unit, 
+                                                    int pageNum, 
+                                                    int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -82,8 +91,17 @@ public class FSalestoolsConsole extends FAbstractLogicUnitConsole<FDataLogicSale
       return moduleList;
    }
 
+   // ============================================================
+   // <T>保存图片</T>
+   // @param logicContext 链接对象
+   // @param unit 保存的数据
+   // @param flag 标志
+   // @return void
+   // ============================================================
    @Override
-   public void saveImage(FWebUploadFile file, FDataLogicSalestoolsUnit unit, String flag) {
+   public void saveImage(FWebUploadFile file, 
+                         FDataLogicSalestoolsUnit unit, 
+                         String flag) {
       FileInputStream fi;
       FileOutputStream fo;
       try {

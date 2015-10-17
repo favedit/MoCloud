@@ -1,7 +1,5 @@
 package org.mo.content.face.manage.product.business.salestools;
 
-import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
-import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -17,11 +15,17 @@ import org.mo.web.core.upload.IWebUploadConsole;
 import org.mo.web.protocol.common.FWebUploadFile;
 import org.mo.web.protocol.context.IWebContext;
 
+import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
+import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+
 //============================================================
 //<P>销售工具控制器</P>
 //@class FSalestoolsAction
 //============================================================
-public class FSalestoolsAction implements ISalestoolsAction {
+public class FSalestoolsAction 
+      implements 
+         ISalestoolsAction 
+{
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FSalestoolsAction.class);
@@ -40,7 +44,9 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -57,7 +63,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -75,7 +84,8 @@ public class FSalestoolsAction implements ISalestoolsAction {
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit,
+            page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -90,7 +100,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSalestoolsPage page,
+                              FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -108,7 +121,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -146,7 +162,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSalestoolsPage page,
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -166,7 +185,8 @@ public class FSalestoolsAction implements ISalestoolsAction {
       if (!RString.isEmpty(unit.iconUrl())) {
          info.setIconUrl(unit.iconUrl());
          int na = unit.iconUrl().indexOf("salestoolsImages");
-         info.setImageName("/manage/images/salestoolsImages/" + unit.iconUrl().substring(na + 17, unit.iconUrl().length()));
+         info.setImageName(
+               "/manage/images/salestoolsImages/" + unit.iconUrl().substring(na + 17, unit.iconUrl().length()));
       }
       page.setUnit(info);
       page.setResult("");
@@ -183,7 +203,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FSalestoolsPage page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage page, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -217,7 +240,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FSalestoolsPage Page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FSalestoolsPage Page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -242,7 +268,10 @@ public class FSalestoolsAction implements ISalestoolsAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicSalestoolsUnit unit, String flag) {
+   public void setLogicNews(IWebContext context, 
+                            ILogicContext logicContext, 
+                            FDataLogicSalestoolsUnit unit,
+                            String flag) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));

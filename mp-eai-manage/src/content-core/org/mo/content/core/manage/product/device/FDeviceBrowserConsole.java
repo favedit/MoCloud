@@ -12,7 +12,12 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>设备控制台。</T>
 //============================================================
-public class FDeviceBrowserConsole extends FAbstractLogicUnitConsole<FDataInfoDeviceBrowserLogic, FDataInfoDeviceBrowserUnit>implements IDeviceBrowserConsole {
+public class FDeviceBrowserConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataInfoDeviceBrowserLogic, FDataInfoDeviceBrowserUnit>
+      implements 
+         IDeviceBrowserConsole 
+{
    // 每页条数
    static final int _pageSize = 20;
 
@@ -25,17 +30,22 @@ public class FDeviceBrowserConsole extends FAbstractLogicUnitConsole<FDataInfoDe
 
    // ============================================================
    // <T>插入设备信息。</T>
-   //
    // @param logicContext 逻辑环境
    // @param deviceBrowserInfo 设备信息
    // @return 插入结果
    // ============================================================
    @Override
-   public EResult insert(ILogicContext logicContext, FDataInfoDeviceBrowserUnit deviceBrowserInfo) {
+   public EResult insert(ILogicContext logicContext, 
+                         FDataInfoDeviceBrowserUnit deviceBrowserInfo) {
       EResult resultCd = doInsert(logicContext, deviceBrowserInfo);
       return resultCd;
    }
 
+   // ============================================================
+   // <T>查询</T>
+   // @param logicContext 逻辑环境
+   // @return 插入结果
+   // ============================================================
    @Override
    public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext) {
       FDataInfoDeviceBrowserLogic logic = new FDataInfoDeviceBrowserLogic(logicContext);
@@ -48,10 +58,14 @@ public class FDeviceBrowserConsole extends FAbstractLogicUnitConsole<FDataInfoDe
    // @param logicContext 链接对象
    // @param moduleUnit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext, FDataInfoDeviceBrowserUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext, 
+                                                           FDataInfoDeviceBrowserUnit unit, 
+                                                           int pageNum, 
+                                                           int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }

@@ -1,28 +1,31 @@
 package org.mo.content.face.manage.product.examine.system;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
+
 import org.mo.com.lang.FObjectId;
 
 //============================================================
-//<P>理财师信息容器</P>
-//@class FMarketerPage
-//@author AnjoyTian
-//@Date 2015.09.21  
+//<P>版本容器</P>
+//@class FVersionPage
 //@version 1.0.0
 //============================================================
 
-public class FVersionPage extends FObjectId {
+public class FVersionPage 
+      extends 
+         FObjectId 
+{
    // 当前页
    protected int _pageCurrent;
 
    // 业务资讯数据单元
-   protected FDataLogicNewsUnit unit;
+   protected FDataSystemVersionUnit unit;
 
-   public FDataLogicNewsUnit getUnit() {
+   public FDataSystemVersionUnit getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataLogicNewsUnit unit) {
+   public void setUnit(FDataSystemVersionUnit unit) {
       this.unit = unit;
    }
 

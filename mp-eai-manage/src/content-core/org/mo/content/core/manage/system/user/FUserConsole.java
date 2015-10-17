@@ -13,7 +13,12 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
-public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic, FDataPersonUserUnit>implements IUserConsole {
+public class FUserConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataPersonUserLogic, FDataPersonUserUnit>
+      implements 
+         IUserConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -40,7 +45,9 @@ public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataPersonUserInfo> selectDataByPageAndSomerow(ILogicContext logicContext, FDataPersonUserUnit userUnit, int pageNum) {
+   public FLogicDataset<FDataPersonUserInfo> selectDataByPageAndSomerow(ILogicContext logicContext, 
+                                                                        FDataPersonUserUnit userUnit, 
+                                                                        int pageNum) {
       if (0 > pageNum) {
          pageNum = 0;
       }
@@ -66,7 +73,8 @@ public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic
    }
 
    @Override
-   public FLogicDataset<FDataPersonUserUnit> loginUser(ILogicContext logicContext, FDataPersonUserUnit userUnit) {
+   public FLogicDataset<FDataPersonUserUnit> loginUser(ILogicContext logicContext, 
+                                                       FDataPersonUserUnit userUnit) {
       FDataPersonUserLogic userUnitLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
       // whereSB.append(FDataPersonUserLogic.FieldRoleCd).append(" =
@@ -84,7 +92,8 @@ public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic
    // @return 模块数据
    // ============================================================
    @Override
-   public EResult passportExists(ILogicContext logicContext, String passport) {
+   public EResult passportExists(ILogicContext logicContext, 
+                                 String passport) {
       FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
       whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
@@ -102,7 +111,8 @@ public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic
    // @return 模块数据
    // ============================================================
    @Override
-   public EResult roleExists(ILogicContext logicContext, String role) {
+   public EResult roleExists(ILogicContext logicContext, 
+                             String role) {
       FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
       whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
@@ -120,7 +130,8 @@ public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic
    // @return 数据信息
    // ============================================================
    @Override
-   public void updateByOuid(ILogicContext logicContext, FDataPersonUserUnit user) {
+   public void updateByOuid(ILogicContext logicContext, 
+                            FDataPersonUserUnit user) {
       logicContext.findLogic(FDataPersonUserLogic.class).doUpdate(user, user.ouid());
    }
 
@@ -132,7 +143,8 @@ public class FUserConsole extends FAbstractLogicUnitConsole<FDataPersonUserLogic
    // @return 数据信息
    // ============================================================
    @Override
-   public EResult delete(ILogicContext logicContext, long id) {
+   public EResult delete(ILogicContext logicContext, 
+                         long id) {
       FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       FDataPersonUserUnit user = logic.find(id);
       user.setOvld(false);

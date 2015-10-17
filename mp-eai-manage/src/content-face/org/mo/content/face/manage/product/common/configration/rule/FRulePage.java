@@ -5,13 +5,13 @@ import org.mo.content.core.manage.product.common.configration.rule.FDataRuleInfo
 
 //============================================================
 //<P>规则配置信息容器</P>
-//
 //@class FConfigrationPage
-//@author Zxh
-//@Date 2015.10.06 
 //@version 1.0.0
 //============================================================
-public class FRulePage extends FObjectId {
+public class FRulePage 
+      extends 
+         FObjectId 
+{
 
    // 当前页
    protected int _pageCurrent;

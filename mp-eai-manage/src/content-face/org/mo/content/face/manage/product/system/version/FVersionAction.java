@@ -17,16 +17,19 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
-public class FVersionAction implements IVersionAction {
+public class FVersionAction 
+      implements 
+         IVersionAction 
+{
 
-   // 日志输出接口
+   //日志输出接口
    private static ILogger _logger = RLogger.find(FVersionAction.class);
 
-   // 版本控制端
+   //版本控制端
    @ALink
    private IVersionConsole _versionConsole;
 
-   // 应用控制端
+   //应用控制端
    @ALink
    private IApplicationConsole _applicationConsole;
 
@@ -37,7 +40,9 @@ public class FVersionAction implements IVersionAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage page) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage page) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", page.userId());
       if (!page.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -53,7 +58,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FVersionPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -86,7 +94,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FVersionPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -102,7 +113,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FVersionPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -140,7 +154,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FVersionPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -162,7 +179,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FVersionPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -185,7 +205,10 @@ public class FVersionAction implements IVersionAction {
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String delete(IWebContext context,
+                        ILogicContext logicContext, 
+                        FVersionPage page, 
+                        FBasePage basePage) {
       return null;
    }
 
@@ -196,7 +219,9 @@ public class FVersionAction implements IVersionAction {
    // @param page 容器
    // @return void
    // ============================================================
-   public void setLogicVersion(IWebContext context, ILogicContext logicContext, FDataSystemVersionUnit unit) {
+   public void setLogicVersion(IWebContext context, 
+                               ILogicContext logicContext, 
+                               FDataSystemVersionUnit unit) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
@@ -208,7 +233,7 @@ public class FVersionAction implements IVersionAction {
       // 默认为申请
       unit.setStatusCd(EGcResourceStatus.Apply);
       unit.setApplicationId(context.parameterAsLong("applicationId"));
-      unit.setDownloadUrl(context.parameter("downloadUrl"));
+      unit.setDownloadUrl(context.parameter("downloadUrl")==null?"":context.parameter("downloadUrl").trim());
       String beginDateStr = context.parameter("beginDate");
       TDateTime beginDate = new TDateTime();
       beginDate.parse(beginDateStr, "YYYY-MM-DD");
@@ -226,7 +251,8 @@ public class FVersionAction implements IVersionAction {
    // @param page 容器
    // @return void
    // ============================================================
-   public void setUnitVersionLabel(FDataVersionInfo info, FDataSystemVersionUnit unit) {
+   public void setUnitVersionLabel(FDataVersionInfo info, 
+                                   FDataSystemVersionUnit unit) {
       if (RString.equals(EGcResourceStatus.Unknown, unit.statusCd())) {
          info.setStatusCdStr(EGcResourceStatus.UnknownLabel);
       }

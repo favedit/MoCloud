@@ -11,7 +11,12 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
-public class FRoleConsole extends FAbstractLogicUnitConsole<FDataControlRoleLogic, FDataControlRoleUnit>implements IRoleConsole {
+public class FRoleConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataControlRoleLogic, FDataControlRoleUnit>
+      implements 
+         IRoleConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -40,7 +45,9 @@ public class FRoleConsole extends FAbstractLogicUnitConsole<FDataControlRoleLogi
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataControlRoleInfo> selectDataByPageAndSomerow(ILogicContext logicContext, FDataControlRoleUnit roleUnit, int pageNum) {
+   public FLogicDataset<FDataControlRoleInfo> selectDataByPageAndSomerow(ILogicContext logicContext, 
+                                                                         FDataControlRoleUnit roleUnit, 
+                                                                         int pageNum) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -66,7 +73,8 @@ public class FRoleConsole extends FAbstractLogicUnitConsole<FDataControlRoleLogi
    }
 
    @Override
-   public FDataControlRoleUnit findByCode(ILogicContext logicContext, String code) {
+   public FDataControlRoleUnit findByCode(ILogicContext logicContext, 
+                                          String code) {
       StringBuffer whereSql = new StringBuffer();
       if (!RString.isEmpty(code)) {
          whereSql.append(FDataControlRoleLogic.CODE).append("='").append(code + "'");

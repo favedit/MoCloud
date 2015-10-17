@@ -10,26 +10,42 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-
-public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersionLogic, FDataSystemVersionUnit>implements IVersionConsole {
+//============================================================
+//<P>版本控制台</P>
+//@class FVersionConsole
+//@version 1.0.0
+//============================================================
+public class FVersionConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataSystemVersionLogic, FDataSystemVersionUnit>
+      implements 
+         IVersionConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
 
+   // ============================================================
+   // <T>构造版本控制台。</T>
+   // ============================================================
    public FVersionConsole() {
       super(FDataSystemVersionLogic.class, FDataSystemVersionUnit.class);
    }
 
    // ============================================================
-   // <T>获得分页数据列表bySomerow</T>
+   // <T>获得分页数据列表</T>
    //
    // @param logicContext 链接对象
-   // @param moduleUnit 查询条件
+   // @param unit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataVersionInfo> select(ILogicContext logicContext, FDataSystemVersionUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataVersionInfo> select(ILogicContext logicContext, 
+                                                 FDataSystemVersionUnit unit, 
+                                                 int pageNum, 
+                                                 int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -100,7 +116,7 @@ public class FVersionConsole extends FAbstractLogicUnitConsole<FDataSystemVersio
    }
 
    // ============================================================
-   // <T>根据应用id和版本号和ouid</T>
+   // <T>根据应用id和版本号和ouid判断是否有重复数据</T>
    // @param logicContext 链接对象
    // @return 是否重复
    // ============================================================

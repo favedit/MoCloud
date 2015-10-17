@@ -7,9 +7,7 @@ import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 //<P>应用接口。</P>
-//@interface IMarketerAction
-//@author AnjoyTian
-//@Date 2015.09.29 
+//@interface IApplicationAction
 //@version 1.0.0
 //============================================================
 public interface IApplicationAction

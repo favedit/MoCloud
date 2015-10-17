@@ -6,14 +6,12 @@ import org.mo.core.aop.face.ASourceMachine;
 //============================================================
 //<P>城市信息</P>
 //@class FDataCityInfo
-//@author AnjoyTian
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
-
 @ASourceMachine
 public class FDataCityInfo
-      extends FDataCommonCityUnit
+      extends 
+         FDataCommonCityUnit
 {
    // 存储国家名称
    private String _countryLabel;

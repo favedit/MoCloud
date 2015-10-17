@@ -6,12 +6,12 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>区域信息容器</P>
 //@class FAreaPage
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
-public class FAreaPage extends FObjectId {
+public class FAreaPage 
+      extends 
+         FObjectId 
+{
    // 当前页
    protected int _pageCurrent;
 

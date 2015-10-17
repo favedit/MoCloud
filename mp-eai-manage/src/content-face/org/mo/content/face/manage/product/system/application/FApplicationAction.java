@@ -12,13 +12,13 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>应用控制器</P>
-//@class FProductAction
-//@author AnjoyTian
-//@Date 2015.09.29  
+//@class FApplicationAction
 //@version 1.0.0
 //============================================================
-
-public class FApplicationAction implements IApplicationAction {
+public class FApplicationAction 
+      implements 
+         IApplicationAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FApplicationAction.class);
 
@@ -33,7 +33,9 @@ public class FApplicationAction implements IApplicationAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage page) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage page) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", page.userId());
       if (!page.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -50,7 +52,10 @@ public class FApplicationAction implements IApplicationAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FApplicationPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FApplicationPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -83,7 +88,10 @@ public class FApplicationAction implements IApplicationAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, ILogicContext logicContext, FApplicationPage page, FBasePage basePage) {
+   public String insertBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FApplicationPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -100,7 +108,10 @@ public class FApplicationAction implements IApplicationAction {
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, ILogicContext logicContext, FApplicationPage page, FBasePage basePage) {
+   public String insert(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FApplicationPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -125,7 +136,10 @@ public class FApplicationAction implements IApplicationAction {
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, ILogicContext logicContext, FApplicationPage page, FBasePage basePage) {
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext, 
+                              FApplicationPage page, 
+                              FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -146,7 +160,10 @@ public class FApplicationAction implements IApplicationAction {
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, ILogicContext logicContext, FApplicationPage page, FBasePage basePage) {
+   public String update(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FApplicationPage page, 
+                        FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -160,7 +177,10 @@ public class FApplicationAction implements IApplicationAction {
    }
 
    @Override
-   public String delete(IWebContext context, ILogicContext logicContext, FApplicationPage page, FBasePage basePage) {
+   public String delete(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FApplicationPage page, 
+                        FBasePage basePage) {
       // TODO Auto-generated method stub
       return null;
    }
@@ -169,10 +189,13 @@ public class FApplicationAction implements IApplicationAction {
    // <T>抽取数据库字段赋值的公共方法</T>
    // @param context 网络环境
    // @param logicContext 逻辑环境
+   // @param unit 保存数据
    // @param page 容器
    // @return void
    // ============================================================
-   public void setLogicApplication(IWebContext context, ILogicContext logicContext, FDataSystemApplicationUnit unit) {
+   public void setLogicApplication(IWebContext context, 
+                                   ILogicContext logicContext, 
+                                   FDataSystemApplicationUnit unit) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
@@ -188,7 +211,9 @@ public class FApplicationAction implements IApplicationAction {
    // @return 页面
    // ============================================================
    @Override
-   public String selectAll(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String selectAll(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       FLogicDataset<FDataSystemApplicationUnit> applicationList = _applicationConsole.selectAll(logicContext);
       basePage.setJson(applicationList.toJsonString());
       return "/manage/common/ajax";

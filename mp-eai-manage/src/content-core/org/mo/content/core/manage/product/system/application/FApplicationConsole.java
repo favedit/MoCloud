@@ -8,7 +8,11 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-
+//============================================================
+//<P>应用控制台</P>
+//@class FApplicationConsole
+//@version 1.0.0
+//============================================================
 public class FApplicationConsole
       extends FAbstractLogicUnitConsole<FDataSystemApplicationLogic, FDataSystemApplicationUnit>
       implements
@@ -18,6 +22,9 @@ public class FApplicationConsole
    // 每页条数
    static final int _pageSize = 20;
 
+   // ============================================================
+   // <T>构造应用控制台。</T>
+   // ============================================================
    public FApplicationConsole(){
       super(FDataSystemApplicationLogic.class, FDataSystemApplicationUnit.class);
    }
@@ -70,6 +77,11 @@ public class FApplicationConsole
       return roleList.first();
    }
 
+   // ============================================================
+   // <T>获得分页数据列表</T>
+   // @param logicContext 链接对象
+   // @return 数据集合
+   // ============================================================
    @Override
    public FLogicDataset<FDataSystemApplicationUnit> selectAll(ILogicContext logicContext){
       FDataSystemApplicationLogic logic = logicContext.findLogic(FDataSystemApplicationLogic.class);

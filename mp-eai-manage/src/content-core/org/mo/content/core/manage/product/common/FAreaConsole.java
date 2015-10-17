@@ -26,8 +26,11 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 
-public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>implements IAreaConsole
-
+public class FAreaConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>
+      implements 
+         IAreaConsole
 {
    // 国家控制台
    @ALink
@@ -49,7 +52,10 @@ public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext, FDataCommonAreaUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataAreaInfo> select(ILogicContext logicContext, 
+                                              FDataCommonAreaUnit unit, 
+                                              int pageNum, 
+                                              int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -80,7 +86,8 @@ public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic
    // @return 数据对象
    // ============================================================
    @Override
-   public FDataCommonAreaUnit findByLable(ILogicContext logicContext, String label) {
+   public FDataCommonAreaUnit findByLable(ILogicContext logicContext, 
+                                          String label) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(label)) {
          whereSql.append(FDataCommonAreaLogic.LABEL);
@@ -100,7 +107,9 @@ public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic
    // @return 数据对象
    // ============================================================
    @Override
-   public boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, String areaLabel, Long countryId) {
+   public boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, 
+                                                 String areaLabel, 
+                                                 Long countryId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(areaLabel) && !RString.isEmpty(countryId + "")) {
          whereSql.append(FDataCommonAreaLogic.LABEL);
@@ -128,7 +137,8 @@ public class FAreaConsole extends FAbstractLogicUnitConsole<FDataCommonAreaLogic
    // @return 数据对象
    // ============================================================
    @Override
-   public FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, Long countryId) {
+   public FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, 
+                                                       Long countryId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(countryId + "") && countryId > 0) {
          whereSql.append(FDataCommonAreaLogic.COUNTRY_ID);

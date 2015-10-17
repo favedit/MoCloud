@@ -9,7 +9,6 @@ import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
 public interface ICitycardConsole
       extends
          IAbstractLogicUnitConsole<FDataCommonCityCardUnit>

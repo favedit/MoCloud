@@ -13,7 +13,10 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>人员账号逻辑。</T>
 //============================================================
-public class FAccessAction implements IAccessAction {
+public class FAccessAction 
+      implements 
+         IAccessAction 
+{
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FAccessAction.class);
@@ -22,7 +25,9 @@ public class FAccessAction implements IAccessAction {
    protected IAccessConsole _accessConsole;
 
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -39,7 +44,10 @@ public class FAccessAction implements IAccessAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FAccessPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FAccessPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -70,7 +78,10 @@ public class FAccessAction implements IAccessAction {
    // @return 页面
    // ============================================================
    @Override
-   public String selectByDate(IWebContext context, ILogicContext logicContext, FAccessPage accessPage, FBasePage basePage) {
+   public String selectByDate(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FAccessPage accessPage, 
+                              FBasePage basePage) {
       _logger.debug(this, "selectByDate", "selectByDate begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";

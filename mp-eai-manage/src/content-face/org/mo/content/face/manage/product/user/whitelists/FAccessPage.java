@@ -6,15 +6,14 @@ import org.mo.data.logic.FLogicDataset;
 
 //============================================================
 //<P>用户容器</P>
-//
-//@class FProvincePage
+//@class FAccessPage
 //@author Sunhr
 //@Date 2012.11.05  
 //@version 1.0.0
 //============================================================
-
 public class FAccessPage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 当前页
    protected int _pageCurrent;

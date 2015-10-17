@@ -10,7 +10,8 @@ import org.mo.web.protocol.context.IWebContext;
 //@interface ITruetimeAction
 //@version 1.0.0
 //============================================================
-public interface ITruetimeAction {
+public interface ITruetimeAction 
+{
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -18,7 +19,9 @@ public interface ITruetimeAction {
    // @param context 页面环境
    // @param page 页面
    // ============================================================
-   String construct(IWebContext context, ILogicContext logicContext, @AContainer(name = "basePage") FBasePage page);
+   String construct(IWebContext context, 
+                    ILogicContext logicContext, 
+                    @AContainer(name = "basePage") FBasePage page);
 
    // ============================================================
    // <T>查询</T>
@@ -28,7 +31,10 @@ public interface ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String select(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String select(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -38,7 +44,10 @@ public interface ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insertBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insertBefore(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FTruetimePage Page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>增加之前</T>
@@ -48,7 +57,10 @@ public interface ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String insert(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String insert(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新之前</T>
@@ -58,7 +70,10 @@ public interface ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String updateBefore(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String updateBefore(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FTruetimePage Page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>更新</T>
@@ -68,7 +83,10 @@ public interface ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String update(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String update(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
    // <T>删除</T>
@@ -78,5 +96,8 @@ public interface ITruetimeAction {
    // @param page 容器
    // @return 页面
    // ============================================================
-   String delete(IWebContext context, ILogicContext logicContext, @AContainer(name = "page") FTruetimePage Page, @AContainer(name = "basePage") FBasePage basePage);
+   String delete(IWebContext context, 
+                 ILogicContext logicContext, 
+                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "basePage") FBasePage basePage);
 }

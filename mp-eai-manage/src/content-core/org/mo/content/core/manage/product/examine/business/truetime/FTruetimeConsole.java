@@ -15,10 +15,13 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>实时数据控制台</P>
 //@class FTruetimeConsole
-//@author XIAOHUI ZHANG
 //@version 1.0.0
 //============================================================
-public class FTruetimeConsole extends FAbstractLogicUnitConsole<FDataLogicTruetimeLogic, FDataLogicTruetimeUnit>implements ITruetimeConsole {
+public class FTruetimeConsole 
+      extends FAbstractLogicUnitConsole<FDataLogicTruetimeLogic, FDataLogicTruetimeUnit>
+      implements 
+         ITruetimeConsole 
+{
 
    // 每页条数
    static final int _pageSize = 20;
@@ -33,12 +36,16 @@ public class FTruetimeConsole extends FAbstractLogicUnitConsole<FDataLogicTrueti
    // ============================================================
    // <T>获得分页数据列表bySomerow</T>
    // @param logicContext 链接对象
-   // @param moduleUnit 查询条件
+   // @param unit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataTruetimeInfo> select(ILogicContext logicContext, FDataLogicTruetimeUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataTruetimeInfo> select(ILogicContext logicContext, 
+                                                  FDataLogicTruetimeUnit unit, 
+                                                  int pageNum, 
+                                                  int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }

@@ -6,13 +6,11 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>城市信息容器</P>
 //@class FCityPage
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
 public class FCityPage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 当前页
    protected int _pageCurrent;

@@ -9,16 +9,24 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>设备控制台接口。</T>
 //============================================================
-public interface IDeviceBrowserConsole extends IAbstractLogicUnitConsole<FDataInfoDeviceBrowserUnit> {
+public interface IDeviceBrowserConsole 
+      extends 
+         IAbstractLogicUnitConsole<FDataInfoDeviceBrowserUnit> 
+{
    // ============================================================
    // <T>插入设备信息。</T>
-   //
    // @param logicContext 逻辑环境
    // @param deviceBrowserInfo 设备信息
    // @return 插入结果
    // ============================================================
-   EResult insert(ILogicContext logicContext, FDataInfoDeviceBrowserUnit deviceBrowserInfo);
+   EResult insert(ILogicContext logicContext, 
+                  FDataInfoDeviceBrowserUnit deviceBrowserInfo);
 
+   // ============================================================
+   // <T>查询</T>
+   // @param logicContext 逻辑环境
+   // @return 查询
+   // ============================================================
    FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext);
 
    // ============================================================
@@ -28,5 +36,8 @@ public interface IDeviceBrowserConsole extends IAbstractLogicUnitConsole<FDataIn
    // @param pageNum 页码
    // @return 数据集合
    // ============================================================
-   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext, FDataInfoDeviceBrowserUnit unit, int pageNum, int pageSize);
+   public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext, 
+                                                           FDataInfoDeviceBrowserUnit unit, 
+                                                           int pageNum, 
+                                                           int pageSize);
 }

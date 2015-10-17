@@ -12,7 +12,12 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>人员账号控制台。</T>
 //============================================================
-public class FAccessConsole extends FAbstractLogicUnitConsole<FDataPersonAccessAuthorityLogic, FDataPersonAccessAuthorityUnit>implements IAccessConsole {
+public class FAccessConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataPersonAccessAuthorityLogic, FDataPersonAccessAuthorityUnit>
+      implements 
+         IAccessConsole 
+{
    // 每页条数
    static final int _pageSize = 20;
 
@@ -24,7 +29,8 @@ public class FAccessConsole extends FAbstractLogicUnitConsole<FDataPersonAccessA
    }
 
    @Override
-   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, int pageNum) {
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, 
+                                                               int pageNum) {
       if (0 > pageNum) {
          pageNum = 0;
       }
@@ -34,14 +40,18 @@ public class FAccessConsole extends FAbstractLogicUnitConsole<FDataPersonAccessA
    }
 
    // ============================================================
-   // <T>获得分页数据列表bySomerow</T>
+   // <T>获得分页数据列表</T>
    // @param logicContext 链接对象
-   // @param moduleUnit 查询条件
+   // @param unit 查询条件
    // @param pageNum 页码
+   // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, FDataPersonAccessAuthorityUnit unit, int pageNum, int pageSize) {
+   public FLogicDataset<FDataPersonAccessAuthorityUnit> select(ILogicContext logicContext, 
+                                                               FDataPersonAccessAuthorityUnit unit, 
+                                                               int pageNum, 
+                                                               int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }

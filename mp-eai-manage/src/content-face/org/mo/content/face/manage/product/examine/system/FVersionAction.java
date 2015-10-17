@@ -15,13 +15,14 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>理财师信息控制器</P>
+//<P>版本控制器</P>
 //@class FMarketerAction
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-public class FVersionAction implements IVersionAction {
+public class FVersionAction 
+      implements 
+         IVersionAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FVersionAction.class);
 
@@ -36,7 +37,9 @@ public class FVersionAction implements IVersionAction {
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -53,7 +56,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String select(IWebContext context, 
+                        ILogicContext logicContext, 
+                        FVersionPage page, 
+                        FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -86,7 +92,10 @@ public class FVersionAction implements IVersionAction {
    // @return 页面
    // ============================================================
    @Override
-   public String checking(IWebContext context, ILogicContext logicContext, FVersionPage page, FBasePage basePage) {
+   public String checking(IWebContext context, 
+                          ILogicContext logicContext, 
+                          FVersionPage page, 
+                          FBasePage basePage) {
       _logger.debug(this, "checking", "checking begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
