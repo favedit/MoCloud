@@ -16,6 +16,7 @@
 
    <!-- 服务设定 -->
    <Define name='eai.content.login.oa'>N</Define>
+   <Define name='eai.content.login.oa.service'>http://10.21.0.141:6666/ycjt/auth/auth.jsp</Define>
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws</Define>
 

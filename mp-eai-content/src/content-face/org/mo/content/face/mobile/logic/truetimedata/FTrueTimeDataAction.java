@@ -3,8 +3,11 @@ package org.mo.content.face.mobile.logic.truetimedata;
 import com.cyou.gccloud.data.data.FDataLogicTruetimeLogic;
 import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import org.mo.com.data.FSql;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.content.core.mobile.logic.truetimedata.ITrueTimeDataConsole;
 import org.mo.content.face.base.FBasePage;
+import org.mo.content.face.mobile.logic.salestools.FSalesToolsAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -22,7 +25,7 @@ public class FTrueTimeDataAction
          ITrueTimeDataAction
 {
    // 日志输出接口
-   //   private static ILogger _logger = RLogger.find(FSalesToolsAction.class);
+   private static ILogger _logger = RLogger.find(FSalesToolsAction.class);
 
    //新闻逻辑控制台
    @ALink
@@ -39,7 +42,6 @@ public class FTrueTimeDataAction
                            ILogicContext logicContext,
                            FTrueTimeDataPage page,
                            FBasePage basePage){
-
       return "";
    }
 
@@ -56,12 +58,11 @@ public class FTrueTimeDataAction
                             ILogicContext logicContext,
                             FTrueTimeDataPage page,
                             FBasePage basePage){
+      _logger.debug(this, "GetContent", "getContent begin.");
       String guid = context.parameter("guid");
-      System.out.println("********************************************context.getGuid:" + guid);
       FDataLogicTruetimeUnit salesUnit = _trueTimeDataConsole.getNewsByGuid(guid, logicContext);
-      System.out.println("**********************************************newsUnit" + salesUnit + guid);
-
       if(salesUnit != null){
+         _logger.debug(this, "GetContent", "getContent find unit fnish.(salesUnit={1})", salesUnit.ouid());
          FSql whereFSql = new FSql();
          whereFSql.append(FDataLogicTruetimeLogic.OUID);
          whereFSql.append("=");
@@ -73,8 +74,8 @@ public class FTrueTimeDataAction
          }
          page.setUserLabel(userLabel);
          page.setUnit(salesUnit);
-         //      System.out.println("**********************************************" + guid + newsUnit.content());
       }else{
+         _logger.debug(this, "GetContent", "getContent find unit is null.");
          page.setUnit(new FDataLogicTruetimeUnit());
          page.setUserLabel("");
       }

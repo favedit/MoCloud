@@ -16,6 +16,8 @@
 
    <!-- 服务设定 -->
    <Define name='eai.content.login.oa'>Y</Define>
+   <Define name='eai.content.login.oa.service'>http://115.182.232.150:8181/oauser</Define>
+   
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://localhost:9099/eai.logger.publish.ws</Define>
 
