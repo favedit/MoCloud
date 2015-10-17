@@ -42,7 +42,7 @@
        K('input[id=getHtml]').click(function(e) {
            $("#content").val(editor.html())
        });
-      K('input[id=showHtml]').click(function(e) {  
+      K('input[id=showHtml]').click(function(e) {	
          $("#phoneShow").window("open");
          $("#phoneShow").html(editor.html());
       });
@@ -62,25 +62,25 @@
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>修改实时数据信息</span>
+   <span>修改业务资讯信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="sub_btn"></a> <a
-     href="/manage/product/business/truetime/Truetime.wa" class="back_btn"></a>
+     href="/manage/product/business/news/News.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="logicNews" enctype=multipart/form-data
-   action="/manage/product/business/truetime/Truetime.wa?do=update"
+   action="/manage/product/business/news/News.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="810" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="54" height="38"><div align="left">实时数据标题:</div></td>
+      <td width="54" height="38"><div align="left">资讯标题:</div></td>
       <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         value="<jh:write source='&unit.label'/>" />
@@ -148,7 +148,7 @@
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">实时数据内容:</div></td>
+     <td><div align="left">资讯内容:</div></td>
      <td align="left"  colspan="2">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px" ></textarea>
           <input style="display:none" id="content" name="content" />

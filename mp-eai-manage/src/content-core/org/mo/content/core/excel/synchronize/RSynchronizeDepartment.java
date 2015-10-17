@@ -9,7 +9,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
-import org.mo.content.core.product.financial.department.IDepartmentConsole;
+import org.mo.content.core.manage.product.financial.department.IDepartmentConsole;
 import org.mo.core.aop.RAop;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
@@ -18,33 +18,36 @@ import org.mo.eng.data.IDatabaseConsole;
 //============================================================
 // <T>同步excel分公司。</T>
 //============================================================
-public class RSynchronizeDepartment
-{
+public class RSynchronizeDepartment {
 
-   //用户控制器
+   // 用户控制器
    @ALink
    protected static IDepartmentConsole _departmentConsole;
 
    @SuppressWarnings("resource")
-   public static void main(String[] args){
-      try{
-         //String modeCd = RString.trim(args[0]);
+   public static void main(String[] args) {
+      try {
+         // String modeCd = RString.trim(args[0]);
          String modeCd = "online";
-         if(!modeCd.equals("test") && !modeCd.equals("online")){
+         if (!modeCd.equals("test") && !modeCd.equals("online")) {
             throw new FFatalError("Mode type failure.");
          }
          // 设置属性
-         //         FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-         //         attributes.set("application", "/data/eai/eai.manage");
+         // FAttributes attributes =
+         // RAop.configConsole().defineCollection().attributes();
+         // attributes.set("application", "/data/eai/eai.manage");
          // 加载配置
-         //RAop.initialize("/data/eai/eai.manage/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
+         // RAop.initialize("/data/eai/eai.manage/webroot/WEB-INF/classes/application-"
+         // + modeCd + ".xml");
 
-         //String filePath = "/data/eai/eai.manage/webroot/data/ezubo_department.xls";
-         //String filePath = "D:\\Microbject\\MoScript\\data\\ezubo_department.xls";
+         // String filePath =
+         // "/data/eai/eai.manage/webroot/data/ezubo_department.xls";
+         // String filePath =
+         // "D:\\Microbject\\MoScript\\data\\ezubo_department.xls";
          String filePath = "D:/Microbject/MoCloud/mp-eai-manage/webroot/data/ezubo_department.xls";
 
          InputStream fis = new FileInputStream(filePath);
-         //设置属性
+         // 设置属性
          FAttributes attributes = RAop.configConsole().defineCollection().attributes();
          attributes.set("application", "D:/Microbject/MoCloud/");
          RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/src/config/application-work.xml");
@@ -58,13 +61,13 @@ public class RSynchronizeDepartment
          int rowLength = s.getLastRowNum() + 1;
          String department = "";
          String temp = "";
-         for(int i = 0; i < rowLength; i++){
+         for (int i = 0; i < rowLength; i++) {
             HSSFRow row = s.getRow(i + 2);
-            if(row != null){
-               //获取每一列
+            if (row != null) {
+               // 获取每一列
                HSSFCell cell0 = row.getCell(0);
                temp = String.valueOf(cell0.getStringCellValue());
-               if(temp.length() > 1){
+               if (temp.length() > 1) {
                   department = temp;
                }
                HSSFCell regionCell = row.getCell(1);
@@ -77,11 +80,11 @@ public class RSynchronizeDepartment
                HSSFCell latitudeCell = row.getCell(8);
                HSSFCell departmentPhoneCell = row.getCell(9);
                HSSFCell leaderLabelCell = row.getCell(10);
-               //生成对象增加数据库
+               // 生成对象增加数据库
                FDataFinancialDepartmentUnit unit = new FDataFinancialDepartmentUnit();
                unit.setDepartmentLabel(department);
                unit.setRegionLabel(regionCell.getStringCellValue());
-               unit.setLinkId(new Long((long)linkIdCell.getNumericCellValue()));
+               unit.setLinkId(new Long((long) linkIdCell.getNumericCellValue()));
                unit.setLabel(companCell.getStringCellValue());
                unit.setProvinceLabel(provinceCell.getStringCellValue());
                unit.setCityLabel(cityCell.getStringCellValue());
@@ -93,7 +96,7 @@ public class RSynchronizeDepartment
                console.doInsert(logicContext, unit);
             }
          }
-      }catch(Exception e){
+      } catch (Exception e) {
          e.printStackTrace();
       }
    }

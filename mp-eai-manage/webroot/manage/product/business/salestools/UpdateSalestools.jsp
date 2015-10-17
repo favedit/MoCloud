@@ -27,10 +27,20 @@
        $("#kindeditor_view").val(conte);
     });
     function submitForm() {
-       progress();
-       $("#getHtml").click();
-       $("#logicNews").submit();
-       closeProgress();
+      progress(); 
+      $("#getHtml").click();
+      $("#logicNews").submit();
+      closeProgress();
+    }
+    var removeFile = function(){
+       $('#iconUrl').val("");
+       $('#iconUrl').show();
+       $('#oiconUr').val("");
+       $('#oiconUr').hide();
+       $('#imgdiv').hide();
+       $("#oriIcon").attr("src","");
+       $("#removeFile").hide();
+       $('#butto1').hide();
     }
     var editor;
     KindEditor.ready(function(K) {
@@ -42,7 +52,7 @@
        K('input[id=getHtml]').click(function(e) {
            $("#content").val(editor.html())
        });
-      K('input[id=showHtml]').click(function(e) {  
+      K('input[id=showHtml]').click(function(e) {	
          $("#phoneShow").window("open");
          $("#phoneShow").html(editor.html());
       });
@@ -62,25 +72,25 @@
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>修改实时数据信息</span>
+   <span>修改销售工具信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="sub_btn"></a> <a
-     href="/manage/product/business/truetime/Truetime.wa" class="back_btn"></a>
+     href="/manage/product/business/salestools/Salestools.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="logicNews" enctype=multipart/form-data
-   action="/manage/product/business/truetime/Truetime.wa?do=update"
+   action="/manage/product/business/salestools/Salestools.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="810" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="54" height="38"><div align="left">实时数据标题:</div></td>
+      <td width="54" height="38"><div align="left">标题:</div></td>
       <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         value="<jh:write source='&unit.label'/>" />
@@ -101,7 +111,8 @@
      <td style="width:380px;"><div align="left">
        <input type="hidden" id="oldDisplayCd" value="<jh:write source='&unit.displayCd'/>">
        <input style="width:380px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'展示'},{'value':'2','text':'非展示'}],editable:false"/>
+       data:[{'value':'1','text':'展示'},{'value':'2','text':'非展示'}],editable:false"
+       value="<jh:write source='&unit.displayCdStr'/>"/>   
       </div></td>
     </tr>
     <tr>
@@ -109,7 +120,7 @@
      <td><div align="left">
        <input type="hidden" id="oldLinkCd" value="<jh:write source='&unit.linkCd'/>">
        <input style="width:380px;height:20px" id="linkCd" class="easyui-combobox" name="linkCd" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}],editable:false"/>  
+       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}],editable:false" value="<jh:write source='&unit.linkCdStr'/>"/>  
       </div></td>
     </tr>
     <tr>
@@ -130,7 +141,7 @@
       <td height="38"><div align="left">关键字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
-        data-options="validType:'length[0,800]'" value="<jh:write source='&unit.keywords'/>"/></td>
+        data-options="validType:'length[0,800]'"   value="<jh:write source='&unit.keywords'/>"/></td>
     </tr>
     <tr>
      <td height="38"><div align="left">外链地址:</div></td>
@@ -148,7 +159,7 @@
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">实时数据内容:</div></td>
+     <td><div align="left">内容:</div></td>
      <td align="left"  colspan="2">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px" ></textarea>
           <input style="display:none" id="content" name="content" />

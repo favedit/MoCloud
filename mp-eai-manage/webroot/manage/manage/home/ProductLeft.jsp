@@ -116,10 +116,10 @@
          <li id="six" class="common"> <a href="#six">业务管理</a>
                <ul class="sub-menu">
                   <jh:equals source="manage.product.business.news" value="&basePage.menuString">
-                     <li><a href="/manage/product/business/News.wa" target="right">资讯信息</a></li>
+                     <li><a href="/manage/product/business/news/News.wa" target="right">资讯信息</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.business.salestools" value="&basePage.menuString">
-                     <li><a href="/manage/product/business/Salestools.wa" target="right">销售工具</a></li>
+                     <li><a href="/manage/product/business/salestools/Salestools.wa" target="right">销售工具</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.business.truetime" value="&basePage.menuString">
                      <li><a href="/manage/product/business/truetime/Truetime.wa" target="right">实时数据</a></li>
@@ -129,10 +129,10 @@
          <li id="seven" class="common"><a href="#seven">审核管理</a>
                <ul class="sub-menu">
                   <jh:equals source="manage.product.examine.business.news" value="&basePage.menuString">
-                     <li><a href="/manage/product/examine/business/News.wa" target="right">业务资讯</a></li>
+                     <li><a href="/manage/product/examine/business/news/News.wa" target="right">业务资讯</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.examine.business.salestools" value="&basePage.menuString">
-                     <li><a href="/manage/product/examine/business/Salestools.wa" target="right">销售工具</a></li>
+                     <li><a href="/manage/product/examine/business/salestools/Salestools.wa" target="right">销售工具</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.examine.system.version" value="&basePage.menuString">
                      <li><a href="/manage/product/examine/system/Version.wa" target="right">版本发布</a></li>

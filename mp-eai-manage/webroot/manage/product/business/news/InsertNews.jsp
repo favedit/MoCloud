@@ -24,7 +24,7 @@
              K('input[id=getHtml]').click(function(e) {
                  $("#content").val(editor.html())
              });
-             K('input[id=showHtml]').click(function(e) { 
+             K('input[id=showHtml]').click(function(e) {	
                 $("#phoneShow").window("open");
                 $("#phoneShow").html(editor.html());
               });
@@ -40,26 +40,26 @@
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>增加实时数据信息</span>
+   <span>增加业务资讯信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="add_btn"></a> <a
-     href="/manage/product/business/truetime/Truetime.wa" class="back_btn"></a>
+     href="/manage/product/business/news/News.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="config"  enctype=multipart/form-data
-   action="/manage/product/business/truetime/Truetime.wa?do=insert"
+   action="/manage/product/business/news/News.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
 <br>
    <table width="810" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="74"><div align="left">实时数据标题:</div></td>
+      <td width="74"><div align="left">资讯标题:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         data-options="validType:'length[0,200]'" /></td>
@@ -112,12 +112,12 @@
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td><div align="left">
-      <input id="description" name="description" class="easyui-textbox"
+     	<input id="description" name="description" class="easyui-textbox"
         data-options="multiline:true" style="height:100px;width:700px" />
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">实时数据内容:</div></td>
+     <td><div align="left">资讯内容:</div></td>
      <td align="left">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px"></textarea>
             <input style="display:none" id="content" name="content"/>

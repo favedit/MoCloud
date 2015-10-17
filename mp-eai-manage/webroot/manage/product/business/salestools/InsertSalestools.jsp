@@ -24,42 +24,42 @@
              K('input[id=getHtml]').click(function(e) {
                  $("#content").val(editor.html())
              });
-             K('input[id=showHtml]').click(function(e) { 
+             K('input[id=showHtml]').click(function(e) {	
                 $("#phoneShow").window("open");
                 $("#phoneShow").html(editor.html());
               });
-    });
+   });
    function but(){
-      $("#iconUrl").click();
-   }
+         $("#iconUrl").click();
+    }
    function changfile(obj){
       var a = obj.lastIndexOf("\\");
-      $("#oiconUr").val(obj.substr(a+1,obj.length));
+      $("#fileid").val(obj.substr(a+1,obj.length));
    }
 </script>
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>增加实时数据信息</span>
+   <span>增加销售工具信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
     <a href="#" onClick="submitForm()" class="add_btn"></a> <a
-     href="/manage/product/business/truetime/Truetime.wa" class="back_btn"></a>
+     href="/manage/product/business/salestools/Salestools.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="config"  enctype=multipart/form-data
-   action="/manage/product/business/truetime/Truetime.wa?do=insert"
+   action="/manage/product/business/salestools/Salestools.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
 <br>
    <table width="810" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="74"><div align="left">实时数据标题:</div></td>
+      <td width="74"><div align="left">标题:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         data-options="validType:'length[0,200]'" /></td>
@@ -85,10 +85,10 @@
     <tr>
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td style="width:380px;"><div align="left">
-     <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
-     <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox">
-     <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
-     </div></td>
+       <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
+       <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox">
+       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
+      </div></td>
     </tr>
     <tr>
       <td  height="38" width="74"><div align="left">排序:</div></td>
@@ -117,7 +117,7 @@
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">实时数据内容:</div></td>
+     <td><div align="left">内容:</div></td>
      <td align="left">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px"></textarea>
             <input style="display:none" id="content" name="content"/>

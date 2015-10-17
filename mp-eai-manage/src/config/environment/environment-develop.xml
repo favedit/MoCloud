@@ -57,8 +57,8 @@
    <!-- FNewsConsole:图片存储控制台                        -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.content.core.manage.product.business.INewsConsole'
-         class = 'org.mo.content.core.manage.product.business.FNewsConsole'
+         face  = 'org.mo.content.core.manage.product.business.news.INewsConsole'
+         class = 'org.mo.content.core.manage.product.business.news.FNewsConsole'
          scope = 'global'>
       <Property name='servers'>127.0.0.1:8040</Property>
       <Property name='applicationName'>${application}/${application.name}</Property>
@@ -77,8 +77,8 @@
    <!-- FSalestoolsConsole:图片存储控制台                        -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.content.core.manage.product.business.ISalestoolsConsole'
-         class = 'org.mo.content.core.manage.product.business.FSalestoolsConsole'
+         face  = 'org.mo.content.core.manage.product.business.salestools.ISalestoolsConsole'
+         class = 'org.mo.content.core.manage.product.business.salestools.FSalestoolsConsole'
          scope = 'global'>
       <Property name='servers'>127.0.0.1:8040</Property>
       <Property name='applicationName'>${application}/${application.name}</Property>
