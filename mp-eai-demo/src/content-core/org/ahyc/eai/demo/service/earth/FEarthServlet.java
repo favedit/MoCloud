@@ -53,9 +53,10 @@ public class FEarthServlet
    // @param message 消息内容
    //============================================================
    @OnMessage
-   public void onMessage(String message,
-                         Session session){
+   public String onMessage(String message,
+                           Session session){
       _console.sendMessage(FSphereServlet.GROUP_NAME, message);
+      return message;
    }
 
    //============================================================
