@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Configuration>
-   <!-- 应用定义 -->
-   <Define name='application'>${application}</Define>
-   <Define name='application.name'>eai.service</Define>
-   <Define name='application.root'>${application}/${application.name}</Define>
-   <Define name='application.deploy'>${application}/deploy</Define>
-   <Define name='application.web'>${application.root}/webroot</Define>
-   <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
-   <Define name='application.space'>${application.web}/WEB-INF/config</Define>
-   <Define name='application.content'>${application.web}/WEB-INF/content</Define>
-   <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
-   <Define name='application.storage'>${application}/mt-storage</Define>
+ <!-- 应用定义 -->
+ <Define name='application'>${application}</Define>
+ <Define name='application.name'>eai.service</Define>
+ <Define name='application.root'>${application}/${application.name}</Define>
+ <Define name='application.deploy'>${application}/deploy</Define>
+ <Define name='application.web'>${application.root}/webroot</Define>
+ <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
+ <Define name='application.space'>${application.web}/WEB-INF/config</Define>
+ <Define name='application.content'>${application.web}/WEB-INF/content</Define>
+ <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
+ <Define name='application.storage'>${application}/mt-storage</Define>
 
-   <!-- 服务器设定 -->
-   <Define name='cloud.server.logger.enable'>Y</Define>
-   <Define name='cloud.server.logger.publish'>http://10.169.23.66:9099/eai.logger.publish.ws</Define>
-   <Define name='cloud.service.host'>http://service.eai.ezubo.com/</Define>
+ <!-- 服务器设定 -->
+ <Define name='cloud.server.logger.enable'>Y</Define>
+ <Define name='cloud.server.logger.publish'>http://10.169.23.66:9099/eai.logger.publish.ws
+ </Define>
+ <!--线上服主机地址 -->
+ <Define name='eai.server.host'>http://service.eai.ezubo.com/</Define>
+ <!--content项目地址 -->
+ <Define name='eai.host.content'>http://eai.ezubo.com/</Define>
+ <!--线上服OA接口地址 -->
+ <Define name='eai.oa.enable'>Y</Define>
+ <Define name='eai.oa.host'>http://115.182.232.150:8181/oauser</Define>
+ <!-- 应用设定 -->
+ <Include>${application.config}/application.xml</Include>
 
-   <!-- 应用设定 -->
-   <Include>${application.config}/application.xml</Include>
-
-   <!-- 环境设定 -->
-   <Include>${application.config}/environment/environment-online.xml</Include>
+ <!-- 环境设定 -->
+ <Include>${application.config}/environment/environment-online.xml
+ </Include>
 </Configuration>

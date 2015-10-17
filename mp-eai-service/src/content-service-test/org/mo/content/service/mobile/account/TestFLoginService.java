@@ -29,7 +29,7 @@ public class TestFLoginService
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
       listPram.add(new BasicNameValuePair("app_key", "58BEFC782B9E4CE5A65B34B8C1E89141"));
-      post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421083");
+      post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
 
       listPram.add(new BasicNameValuePair("action", "login"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求

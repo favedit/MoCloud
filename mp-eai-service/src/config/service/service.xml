@@ -1,99 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
-	<!-- ============================================================ -->
-	<!-- 手机相关处理服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.info.mobile'
-		face='org.mo.content.service.info.mobile.IMobileService' />
+ <!-- ============================================================ -->
+ <!-- 手机相关处理服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.info.mobile'
+  face='org.mo.content.service.info.mobile.IMobileService' />
 
-	<Component face='org.mo.content.service.info.mobile.IMobileService'
-		class='org.mo.content.service.info.mobile.FMobileService' scope='global' />
+ <Component face='org.mo.content.service.info.mobile.IMobileService'
+  class='org.mo.content.service.info.mobile.FMobileService' scope='global' />
 
-	<!-- ============================================================ -->
-	<!-- 新闻相关处理服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.mobile.logic.news'
-		face='org.mo.content.service.mobile.logic.news.INewsService' />
+ <!-- ============================================================ -->
+ <!-- 新闻相关处理服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.logic.news'
+  face='org.mo.content.service.mobile.logic.news.INewsService' />
 
-	<Component face='org.mo.content.service.mobile.logic.news.INewsService'
-		class='org.mo.content.service.mobile.logic.news.FNewsService' scope='global'>
-		<!-- <Property name='newsServiceHost'>http://10.13.0.100:8020/</Property> -->
-		<!-- <Property name='newsServiceHost'>http://eai.ezubo.com:8089/</Property> -->
-		<Property name='newsServiceHost'>${eai.server.host}</Property>
-	</Component>
+ <Component face='org.mo.content.service.mobile.logic.news.INewsService'
+  class='org.mo.content.service.mobile.logic.news.FNewsService' scope='global'>
+  <Property name='newsServiceHost'>${eai.host.content}</Property>
+ </Component>
 
-	<!-- ============================================================ -->
-	<!-- 销售工具相关处理服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.mobile.logic.salestools'
-		face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService' />
+ <!-- ============================================================ -->
+ <!-- 销售工具相关处理服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.logic.salestools'
+  face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService' />
 
-	<Component
-		face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService'
-		class='org.mo.content.service.mobile.logic.salestools.FSalesToolsService'
-		scope='global'>
-		<!-- <Property name='salesServiceHost'>http://10.13.0.100:8020/</Property> -->
-		<!-- <Property name='salesServiceHost'>http://eai.ezubo.com:8089/</Property> -->
-		<Property name='salesServiceHost'>${eai.server.host}</Property>
-	</Component>
+ <Component
+  face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService'
+  class='org.mo.content.service.mobile.logic.salestools.FSalesToolsService'
+  scope='global'>
+  <Property name='salesServiceHost'>${eai.host.content}</Property>
+ </Component>
 
 
-	<!-- ============================================================ -->
-	<!-- 登录处理服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.mobile.account'
-		face='org.mo.content.service.mobile.account.ILoginService' />
+ <!-- ============================================================ -->
+ <!-- 登录处理服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.account'
+  face='org.mo.content.service.mobile.account.ILoginService' />
 
-	<Component face='org.mo.content.service.mobile.account.ILoginService'
-		class='org.mo.content.service.mobile.account.FLoginService' scope='global' />
+ <Component face='org.mo.content.service.mobile.account.ILoginService'
+  class='org.mo.content.service.mobile.account.FLoginService' scope='global' />
 
-	<!-- ============================================================ -->
-	<!-- 版本更新服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.mobile'
-		face='org.mo.content.service.mobile.IVersionService' />
+ <!-- ============================================================ -->
+ <!-- 版本更新服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile'
+  face='org.mo.content.service.mobile.IVersionService' />
 
-	<Component face='org.mo.content.service.mobile.IVersionService'
-		class='org.mo.content.service.mobile.FVersionService' scope='global' />
+ <Component face='org.mo.content.service.mobile.IVersionService'
+  class='org.mo.content.service.mobile.FVersionService' scope='global' />
 
 
 
-	<!-- ============================================================ -->
-	<!-- 理财师客户服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.financial.marketer'
-		face='org.mo.content.service.financial.marketer.IMarketerCustomerService' />
+ <!-- ============================================================ -->
+ <!-- 理财师客户服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.financial.marketer'
+  face='org.mo.content.service.financial.marketer.IMarketerCustomerService' />
 
-	<Component
-		face='org.mo.content.service.financial.marketer.IMarketerCustomerService'
-		class='org.mo.content.service.financial.marketer.FMarketerCustomerService'
-		scope='global' />
+ <Component
+  face='org.mo.content.service.financial.marketer.IMarketerCustomerService'
+  class='org.mo.content.service.financial.marketer.FMarketerCustomerService'
+  scope='global' />
 
 
-	<!-- ============================================================ -->
-	<!-- 打卡服务 -->
-	<!-- ============================================================ -->
-	<WebService name='eai.mobile.logic.attendance'
-		face='org.mo.content.service.mobile.logic.attendance.IClickService' />
+ <!-- ============================================================ -->
+ <!-- 打卡服务 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.logic.attendance'
+  face='org.mo.content.service.mobile.logic.attendance.IClickService' />
 
-	<Component
-		face='org.mo.content.service.mobile.logic.attendance.IClickService'
-		class='org.mo.content.service.mobile.logic.attendance.FClickService'
-		scope='global' />
-		
-		<!-- ============================================================ -->
-   <!-- 实时数据 -->
-   <!-- ============================================================ -->
-   <WebService name='eai.mobile.logic.truetimedata'
-      face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService' />
+ <Component
+  face='org.mo.content.service.mobile.logic.attendance.IClickService'
+  class='org.mo.content.service.mobile.logic.attendance.FClickService'
+  scope='global' />
 
-   <Component
-      face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService'
-      class='org.mo.content.service.mobile.logic.truetimedata.FTrueTimeDataService'
-      scope='global' >
-      <!-- <Property name='salesServiceHost'>http://10.13.0.100:8020/</Property> -->
-      <!-- <Property name='salesServiceHost'>http://eai.ezubo.com:8089/</Property> -->
-      <Property name='trueTimeDataHost'>${eai.server.host}</Property>
-   </Component>
+ <!-- ============================================================ -->
+ <!-- 实时数据 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.logic.truetimedata'
+  face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService' />
+
+ <Component
+  face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService'
+  class='org.mo.content.service.mobile.logic.truetimedata.FTrueTimeDataService'
+  scope='global'>
+  <Property name='trueTimeDataHost'>${eai.host.content}</Property>
+ </Component>
 </Config>
