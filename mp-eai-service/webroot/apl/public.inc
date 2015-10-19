@@ -2,3 +2,4 @@
 <%@ taglib uri="/WEB-INF/tag/control.tld" prefix="jc" %>
 <%@ taglib uri="/WEB-INF/tag/system.tld" prefix="js" %>
 <%@ taglib uri="/WEB-INF/tag/cloud.tld" prefix="jg" %>
+<%@ taglib uri="/WEB-INF/tag/eai.tld" prefix="je" %>

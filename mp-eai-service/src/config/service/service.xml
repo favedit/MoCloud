@@ -56,14 +56,14 @@
 
 
  <!-- ============================================================ -->
- <!-- 理财师客户服务 -->
+ <!-- 理财师短信推送服务 -->
  <!-- ============================================================ -->
- <WebService name='eai.financial.marketer'
-  face='org.mo.content.service.financial.marketer.IMarketerCustomerService' />
+ <WebService name='eai.financial.logic.message'
+  face='org.mo.content.service.financial.logic.message.IMessagePushService' />
 
  <Component
-  face='org.mo.content.service.financial.marketer.IMarketerCustomerService'
-  class='org.mo.content.service.financial.marketer.FMarketerCustomerService'
+  face='org.mo.content.service.financial.logic.message.IMessagePushService'
+  class='org.mo.content.service.financial.logic.message.FMessagePushService'
   scope='global' />
 
 

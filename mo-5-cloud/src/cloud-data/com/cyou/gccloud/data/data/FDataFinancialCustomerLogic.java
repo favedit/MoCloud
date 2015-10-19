@@ -10,7 +10,6 @@ import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -42,12 +41,6 @@ public class FDataFinancialCustomerLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段理财师编号的定义。
-   public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
-
-   // 字段理财师关联编号的定义。
-   public final static SLogicFieldInfo MARKETER_LID = new SLogicFieldInfo("MARKETER_LID");
-
    // 字段关联编号的定义。
    public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
@@ -65,9 +58,6 @@ public class FDataFinancialCustomerLogic
 
    // 字段职业类型的定义。
    public final static SLogicFieldInfo BUSINESS_CD = new SLogicFieldInfo("BUSINESS_CD");
-
-   // 字段最后发送短信的时间的定义。
-   public final static SLogicFieldInfo LAST_MESSAGE_DATE = new SLogicFieldInfo("LAST_MESSAGE_DATE");
 
    // 字段投资总额的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
@@ -103,7 +93,7 @@ public class FDataFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`MARKETER_LID`,`LINK_ID`,`STATISTICS_ID`,`MARRY_CD`,`EDUCATION_CD`,`INCOME_CD`,`BUSINESS_CD`,`LAST_MESSAGE_DATE`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`STATISTICS_ID`,`MARRY_CD`,`EDUCATION_CD`,`INCOME_CD`,`BUSINESS_CD`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融客户信息逻辑单元。</T>
@@ -699,15 +689,12 @@ public class FDataFinancialCustomerLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`MARKETER_ID`");
-      cmd.append(",`MARKETER_LID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`STATISTICS_ID`");
       cmd.append(",`MARRY_CD`");
       cmd.append(",`EDUCATION_CD`");
       cmd.append(",`INCOME_CD`");
       cmd.append(",`BUSINESS_CD`");
-      cmd.append(",`LAST_MESSAGE_DATE`");
       cmd.append(",`INVESTMENT_TOTAL`");
       cmd.append(",`INVESTMENT_COUNT`");
       cmd.append(",`REDEMPTION_TOTAL`");
@@ -734,20 +721,6 @@ public class FDataFinancialCustomerLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      long marketerId = unit.marketerId();
-      if(marketerId == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(marketerId);
-      }
-      cmd.append(',');
-      long marketerLid = unit.marketerLid();
-      if(marketerLid == 0){
-         cmd.append("NULL");
-      }else{
-         cmd.append(marketerLid);
-      }
-      cmd.append(',');
       long linkId = unit.linkId();
       if(linkId == 0){
          cmd.append("NULL");
@@ -764,17 +737,6 @@ public class FDataFinancialCustomerLogic
       cmd.append(unit.incomeCd());
       cmd.append(',');
       cmd.append(unit.businessCd());
-      cmd.append(',');
-      TDateTime lastMessageDate = unit.lastMessageDate();
-      if(lastMessageDate == null){
-         cmd.append("NULL");
-      }else if(lastMessageDate.isEmpty()){
-         cmd.append("NULL");
-      }else{
-         cmd.append("STR_TO_DATE('");
-         cmd.append(lastMessageDate.format());
-         cmd.append("','%Y%m%d%H%i%s')");
-      }
       cmd.append(',');
       cmd.append(unit.investmentTotal());
       cmd.append(',');
@@ -870,24 +832,6 @@ public class FDataFinancialCustomerLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isMarketerIdChanged()){
-         cmd.append(",`MARKETER_ID`=");
-         long marketerId = unit.marketerId();
-         if(marketerId == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(marketerId);
-         }
-      }
-      if(unit.isMarketerLidChanged()){
-         cmd.append(",`MARKETER_LID`=");
-         long marketerLid = unit.marketerLid();
-         if(marketerLid == 0){
-            cmd.append("NULL");
-         }else{
-            cmd.append(marketerLid);
-         }
-      }
       if(unit.isLinkIdChanged()){
          cmd.append(",`LINK_ID`=");
          long linkId = unit.linkId();
@@ -916,19 +860,6 @@ public class FDataFinancialCustomerLogic
       if(unit.isBusinessCdChanged()){
          cmd.append(",`BUSINESS_CD`=");
          cmd.append(unit.businessCd());
-      }
-      if(unit.isLastMessageDateChanged()){
-         cmd.append(",`LAST_MESSAGE_DATE`=");
-         TDateTime lastMessageDate = unit.lastMessageDate();
-         if(lastMessageDate == null){
-            cmd.append("NULL");
-         }else if(lastMessageDate.isEmpty()){
-            cmd.append("NULL");
-         }else{
-            cmd.append("STR_TO_DATE('");
-            cmd.append(lastMessageDate.format());
-            cmd.append("','%Y%m%d%H%i%s')");
-         }
       }
       if(unit.isInvestmentTotalChanged()){
          cmd.append(",`INVESTMENT_TOTAL`=");
