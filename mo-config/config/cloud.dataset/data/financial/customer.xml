@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="b23d32eb-bb60-4f1d-9d15-1894cf7ef8f0" name="data.financial.customer" label="M#12cn16金融客户信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Customer" data_name="DT_FIN_CUSTOMER" data_alias="DT_FIN_CST" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
   <FieldRecordId _uuid="23133a3b-0025-492b-bb9b-f4c0f120bb8b" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" data_alias="MKT" data_refer="data.financial.marketer" />
+  <FieldRecordId _uuid="b2edb091-f333-4be3-929a-bdd62a04a958" name="marketer_lid" label="M#12cn17理财师关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_LID" />
   <FieldRecordId _uuid="cc51033a-c636-4584-a37e-e48b40a62979" name="link_id" label="M#12cn14关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
   <FieldInteger _uuid="f89c4e9e-6d23-4dec-bade-20ad56c0c767" name="statistics_id" label="M#12cn14统计编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATISTICS_ID" />
   <FieldInteger _uuid="d20c81f9-3914-45c2-b648-caddab5e1fdf" name="marry_cd" label="M#12cn14婚姻状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARRY_CD" />

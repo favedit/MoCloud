@@ -1557,6 +1557,7 @@ CREATE TABLE `DT_FIN_CUSTOMER`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `MARKETER_ID`                   BIGINT, 
+   `MARKETER_LID`                  BIGINT, 
    `LINK_ID`                       BIGINT, 
    `STATISTICS_ID`                 INTEGER, 
    `MARRY_CD`                      INTEGER, 

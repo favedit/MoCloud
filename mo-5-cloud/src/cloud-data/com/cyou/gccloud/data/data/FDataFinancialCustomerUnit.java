@@ -46,6 +46,12 @@ public class FDataFinancialCustomerUnit
    // 字段理财师编号的定义。
    protected long _marketerId;
 
+   // 存储字段理财师关联编号的定义。
+   private long __marketerLid;
+
+   // 字段理财师关联编号的定义。
+   protected long _marketerLid;
+
    // 存储字段关联编号的定义。
    private long __linkId;
 
@@ -277,6 +283,33 @@ public class FDataFinancialCustomerUnit
    //============================================================
    public void setMarketerId(long value){
       _marketerId = value;
+   }
+
+   //============================================================
+   // <T>判断理财师关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerLidChanged(){
+      return __marketerLid != _marketerLid;
+   }
+
+   //============================================================
+   // <T>获得理财师关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerLid(){
+      return _marketerLid;
+   }
+
+   //============================================================
+   // <T>设置理财师关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerLid(long value){
+      _marketerLid = value;
    }
 
    //============================================================
@@ -782,6 +815,8 @@ public class FDataFinancialCustomerUnit
             return _guid;
          case "marketer_id":
             return Long.toString(_marketerId);
+         case "marketer_lid":
+            return Long.toString(_marketerLid);
          case "link_id":
             return Long.toString(_linkId);
          case "statistics_id":
@@ -843,6 +878,9 @@ public class FDataFinancialCustomerUnit
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
+            break;
+         case "marketer_lid":
+            _marketerLid = RLong.parse(value);
             break;
          case "link_id":
             _linkId = RLong.parse(value);
@@ -928,6 +966,10 @@ public class FDataFinancialCustomerUnit
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
+               break;
+            case "marketer_lid":
+               __marketerLid = RLong.parse(value);
+               _marketerLid = __marketerLid;
                break;
             case "link_id":
                __linkId = RLong.parse(value);
@@ -1017,6 +1059,7 @@ public class FDataFinancialCustomerUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("marketerId", _marketerId);
+      row.set("marketerLid", _marketerLid);
       row.set("linkId", _linkId);
       row.set("statisticsId", _statisticsId);
       row.set("marryCd", _marryCd);
@@ -1049,6 +1092,7 @@ public class FDataFinancialCustomerUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("marketerId", RLong.toString(_marketerId));
+      map.put("marketerLid", RLong.toString(_marketerLid));
       map.put("linkId", RLong.toString(_linkId));
       map.put("statisticsId", RInteger.toString(_statisticsId));
       map.put("marryCd", RInteger.toString(_marryCd));
@@ -1081,6 +1125,7 @@ public class FDataFinancialCustomerUnit
       _ovld = input.readBoolean();
       _guid = input.readString();
       _marketerId = input.readInt64();
+      _marketerLid = input.readInt64();
       _linkId = input.readInt64();
       _statisticsId = input.readInt32();
       _marryCd = input.readInt32();
@@ -1109,6 +1154,7 @@ public class FDataFinancialCustomerUnit
       output.writeBoolean(_ovld);
       output.writeString(_guid);
       output.writeInt64(_marketerId);
+      output.writeInt64(_marketerLid);
       output.writeInt64(_linkId);
       output.writeInt32(_statisticsId);
       output.writeInt32(_marryCd);

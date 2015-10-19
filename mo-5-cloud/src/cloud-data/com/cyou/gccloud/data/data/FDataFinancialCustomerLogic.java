@@ -45,6 +45,9 @@ public class FDataFinancialCustomerLogic
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
+   // 字段理财师关联编号的定义。
+   public final static SLogicFieldInfo MARKETER_LID = new SLogicFieldInfo("MARKETER_LID");
+
    // 字段关联编号的定义。
    public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
@@ -100,7 +103,7 @@ public class FDataFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`LINK_ID`,`STATISTICS_ID`,`MARRY_CD`,`EDUCATION_CD`,`INCOME_CD`,`BUSINESS_CD`,`LAST_MESSAGE_DATE`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`MARKETER_LID`,`LINK_ID`,`STATISTICS_ID`,`MARRY_CD`,`EDUCATION_CD`,`INCOME_CD`,`BUSINESS_CD`,`LAST_MESSAGE_DATE`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融客户信息逻辑单元。</T>
@@ -697,6 +700,7 @@ public class FDataFinancialCustomerLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`MARKETER_ID`");
+      cmd.append(",`MARKETER_LID`");
       cmd.append(",`LINK_ID`");
       cmd.append(",`STATISTICS_ID`");
       cmd.append(",`MARRY_CD`");
@@ -735,6 +739,13 @@ public class FDataFinancialCustomerLogic
          cmd.append("NULL");
       }else{
          cmd.append(marketerId);
+      }
+      cmd.append(',');
+      long marketerLid = unit.marketerLid();
+      if(marketerLid == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(marketerLid);
       }
       cmd.append(',');
       long linkId = unit.linkId();
@@ -866,6 +877,15 @@ public class FDataFinancialCustomerLogic
             cmd.append("NULL");
          }else{
             cmd.append(marketerId);
+         }
+      }
+      if(unit.isMarketerLidChanged()){
+         cmd.append(",`MARKETER_LID`=");
+         long marketerLid = unit.marketerLid();
+         if(marketerLid == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(marketerLid);
          }
       }
       if(unit.isLinkIdChanged()){
