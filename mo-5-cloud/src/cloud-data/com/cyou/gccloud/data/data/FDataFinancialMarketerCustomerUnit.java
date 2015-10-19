@@ -6,8 +6,6 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RDouble;
-import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -16,10 +14,10 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>金融客户信息逻辑单元。</T>
+// <T>理财师客户信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialCustomerUnit
+public class FDataFinancialMarketerCustomerUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -46,83 +44,23 @@ public class FDataFinancialCustomerUnit
    // 字段理财师编号的定义。
    protected long _marketerId;
 
-   // 存储字段关联编号的定义。
-   private long __linkId;
+   // 存储字段客户编号的定义。
+   private long __customerId;
 
-   // 字段关联编号的定义。
-   protected long _linkId;
+   // 字段客户编号的定义。
+   protected long _customerId;
 
-   // 存储字段统计编号的定义。
-   private int __statisticsId;
+   // 存储字段短信联系类型的定义。
+   private int __smsContactCd;
 
-   // 字段统计编号的定义。
-   protected int _statisticsId;
+   // 字段短信联系类型的定义。
+   protected int _smsContactCd;
 
-   // 存储字段婚姻状态的定义。
-   private int __marryCd;
+   // 存储字段反馈类型的定义。
+   private int __activeCd;
 
-   // 字段婚姻状态的定义。
-   protected int _marryCd;
-
-   // 存储字段教育类型的定义。
-   private int __educationCd;
-
-   // 字段教育类型的定义。
-   protected int _educationCd;
-
-   // 存储字段收入类型的定义。
-   private int __incomeCd;
-
-   // 字段收入类型的定义。
-   protected int _incomeCd;
-
-   // 存储字段职业类型的定义。
-   private int __businessCd;
-
-   // 字段职业类型的定义。
-   protected int _businessCd;
-
-   // 存储字段最后发送短信的时间的定义。
-   private TDateTime __lastMessageDate = new TDateTime();
-
-   // 字段最后发送短信的时间的定义。
-   protected TDateTime _lastMessageDate = new TDateTime();
-
-   // 存储字段投资总额的定义。
-   private double __investmentTotal;
-
-   // 字段投资总额的定义。
-   protected double _investmentTotal;
-
-   // 存储字段投资次数的定义。
-   private int __investmentCount;
-
-   // 字段投资次数的定义。
-   protected int _investmentCount;
-
-   // 存储字段赎回总额的定义。
-   private float __redemptionTotal;
-
-   // 字段赎回总额的定义。
-   protected float _redemptionTotal;
-
-   // 存储字段赎回次数的定义。
-   private int __redemptionCount;
-
-   // 字段赎回次数的定义。
-   protected int _redemptionCount;
-
-   // 存储字段净投总额的定义。
-   private float __netinvestment;
-
-   // 字段净投总额的定义。
-   protected float _netinvestment;
-
-   // 存储字段利息总额的定义。
-   private float __interestTotal;
-
-   // 字段利息总额的定义。
-   protected float _interestTotal;
+   // 字段反馈类型的定义。
+   protected int _activeCd;
 
    // 存储字段备注的定义。
    private String __note;
@@ -155,9 +93,9 @@ public class FDataFinancialCustomerUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造金融客户信息逻辑单元。</T>
+   // <T>构造理财师客户信息逻辑单元。</T>
    //============================================================
-   public FDataFinancialCustomerUnit(){
+   public FDataFinancialMarketerCustomerUnit(){
    }
 
    //============================================================
@@ -280,354 +218,95 @@ public class FDataFinancialCustomerUnit
    }
 
    //============================================================
-   // <T>判断关联编号的数据是否改变。</T>
+   // <T>判断客户编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLinkIdChanged(){
-      return __linkId != _linkId;
+   public boolean isCustomerIdChanged(){
+      return __customerId != _customerId;
    }
 
    //============================================================
-   // <T>获得关联编号的数据内容。</T>
+   // <T>获得客户编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long linkId(){
-      return _linkId;
+   public long customerId(){
+      return _customerId;
    }
 
    //============================================================
-   // <T>设置关联编号的数据内容。</T>
+   // <T>获得客户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataFinancialCustomerUnit customer(){
+      FDataFinancialCustomerLogic logic = _logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FDataFinancialCustomerUnit unit = logic.find(_customerId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置客户编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLinkId(long value){
-      _linkId = value;
+   public void setCustomerId(long value){
+      _customerId = value;
    }
 
    //============================================================
-   // <T>判断统计编号的数据是否改变。</T>
+   // <T>判断短信联系类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isStatisticsIdChanged(){
-      return __statisticsId != _statisticsId;
+   public boolean isSmsContactCdChanged(){
+      return __smsContactCd != _smsContactCd;
    }
 
    //============================================================
-   // <T>获得统计编号的数据内容。</T>
+   // <T>获得短信联系类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int statisticsId(){
-      return _statisticsId;
+   public int smsContactCd(){
+      return _smsContactCd;
    }
 
    //============================================================
-   // <T>设置统计编号的数据内容。</T>
+   // <T>设置短信联系类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setStatisticsId(int value){
-      _statisticsId = value;
+   public void setSmsContactCd(int value){
+      _smsContactCd = value;
    }
 
    //============================================================
-   // <T>判断婚姻状态的数据是否改变。</T>
+   // <T>判断反馈类型的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarryCdChanged(){
-      return __marryCd != _marryCd;
+   public boolean isActiveCdChanged(){
+      return __activeCd != _activeCd;
    }
 
    //============================================================
-   // <T>获得婚姻状态的数据内容。</T>
+   // <T>获得反馈类型的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public int marryCd(){
-      return _marryCd;
+   public int activeCd(){
+      return _activeCd;
    }
 
    //============================================================
-   // <T>设置婚姻状态的数据内容。</T>
+   // <T>设置反馈类型的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setMarryCd(int value){
-      _marryCd = value;
-   }
-
-   //============================================================
-   // <T>判断教育类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isEducationCdChanged(){
-      return __educationCd != _educationCd;
-   }
-
-   //============================================================
-   // <T>获得教育类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int educationCd(){
-      return _educationCd;
-   }
-
-   //============================================================
-   // <T>设置教育类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setEducationCd(int value){
-      _educationCd = value;
-   }
-
-   //============================================================
-   // <T>判断收入类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isIncomeCdChanged(){
-      return __incomeCd != _incomeCd;
-   }
-
-   //============================================================
-   // <T>获得收入类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int incomeCd(){
-      return _incomeCd;
-   }
-
-   //============================================================
-   // <T>设置收入类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setIncomeCd(int value){
-      _incomeCd = value;
-   }
-
-   //============================================================
-   // <T>判断职业类型的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isBusinessCdChanged(){
-      return __businessCd != _businessCd;
-   }
-
-   //============================================================
-   // <T>获得职业类型的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int businessCd(){
-      return _businessCd;
-   }
-
-   //============================================================
-   // <T>设置职业类型的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setBusinessCd(int value){
-      _businessCd = value;
-   }
-
-   //============================================================
-   // <T>判断最后发送短信的时间的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLastMessageDateChanged(){
-      return !__lastMessageDate.equals(_lastMessageDate);
-   }
-
-   //============================================================
-   // <T>获得最后发送短信的时间的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public TDateTime lastMessageDate(){
-      return _lastMessageDate;
-   }
-
-   //============================================================
-   // <T>设置最后发送短信的时间的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLastMessageDate(TDateTime value){
-      _lastMessageDate = value;
-   }
-
-   //============================================================
-   // <T>判断投资总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInvestmentTotalChanged(){
-      return __investmentTotal != _investmentTotal;
-   }
-
-   //============================================================
-   // <T>获得投资总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public double investmentTotal(){
-      return _investmentTotal;
-   }
-
-   //============================================================
-   // <T>设置投资总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInvestmentTotal(double value){
-      _investmentTotal = value;
-   }
-
-   //============================================================
-   // <T>判断投资次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInvestmentCountChanged(){
-      return __investmentCount != _investmentCount;
-   }
-
-   //============================================================
-   // <T>获得投资次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int investmentCount(){
-      return _investmentCount;
-   }
-
-   //============================================================
-   // <T>设置投资次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInvestmentCount(int value){
-      _investmentCount = value;
-   }
-
-   //============================================================
-   // <T>判断赎回总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRedemptionTotalChanged(){
-      return __redemptionTotal != _redemptionTotal;
-   }
-
-   //============================================================
-   // <T>获得赎回总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public float redemptionTotal(){
-      return _redemptionTotal;
-   }
-
-   //============================================================
-   // <T>设置赎回总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRedemptionTotal(float value){
-      _redemptionTotal = value;
-   }
-
-   //============================================================
-   // <T>判断赎回次数的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isRedemptionCountChanged(){
-      return __redemptionCount != _redemptionCount;
-   }
-
-   //============================================================
-   // <T>获得赎回次数的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int redemptionCount(){
-      return _redemptionCount;
-   }
-
-   //============================================================
-   // <T>设置赎回次数的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setRedemptionCount(int value){
-      _redemptionCount = value;
-   }
-
-   //============================================================
-   // <T>判断净投总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isNetinvestmentChanged(){
-      return __netinvestment != _netinvestment;
-   }
-
-   //============================================================
-   // <T>获得净投总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public float netinvestment(){
-      return _netinvestment;
-   }
-
-   //============================================================
-   // <T>设置净投总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setNetinvestment(float value){
-      _netinvestment = value;
-   }
-
-   //============================================================
-   // <T>判断利息总额的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isInterestTotalChanged(){
-      return __interestTotal != _interestTotal;
-   }
-
-   //============================================================
-   // <T>获得利息总额的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public float interestTotal(){
-      return _interestTotal;
-   }
-
-   //============================================================
-   // <T>设置利息总额的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setInterestTotal(float value){
-      _interestTotal = value;
+   public void setActiveCd(int value){
+      _activeCd = value;
    }
 
    //============================================================
@@ -782,32 +461,12 @@ public class FDataFinancialCustomerUnit
             return _guid;
          case "marketer_id":
             return Long.toString(_marketerId);
-         case "link_id":
-            return Long.toString(_linkId);
-         case "statistics_id":
-            return RInteger.toString(_statisticsId);
-         case "marry_cd":
-            return RInteger.toString(_marryCd);
-         case "education_cd":
-            return RInteger.toString(_educationCd);
-         case "income_cd":
-            return RInteger.toString(_incomeCd);
-         case "business_cd":
-            return RInteger.toString(_businessCd);
-         case "last_message_date":
-            return _lastMessageDate.toString();
-         case "investment_total":
-            return RDouble.toString(_investmentTotal);
-         case "investment_count":
-            return RInteger.toString(_investmentCount);
-         case "redemption_total":
-            return RFloat.toString(_redemptionTotal);
-         case "redemption_count":
-            return RInteger.toString(_redemptionCount);
-         case "netinvestment":
-            return RFloat.toString(_netinvestment);
-         case "interest_total":
-            return RFloat.toString(_interestTotal);
+         case "customer_id":
+            return Long.toString(_customerId);
+         case "sms_contact_cd":
+            return RInteger.toString(_smsContactCd);
+         case "active_cd":
+            return RInteger.toString(_activeCd);
          case "note":
             return _note;
          case "create_user_id":
@@ -844,44 +503,14 @@ public class FDataFinancialCustomerUnit
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
-         case "link_id":
-            _linkId = RLong.parse(value);
+         case "customer_id":
+            _customerId = RLong.parse(value);
             break;
-         case "statistics_id":
-            _statisticsId = RInteger.parse(value);
+         case "sms_contact_cd":
+            _smsContactCd = RInteger.parse(value);
             break;
-         case "marry_cd":
-            _marryCd = RInteger.parse(value);
-            break;
-         case "education_cd":
-            _educationCd = RInteger.parse(value);
-            break;
-         case "income_cd":
-            _incomeCd = RInteger.parse(value);
-            break;
-         case "business_cd":
-            _businessCd = RInteger.parse(value);
-            break;
-         case "last_message_date":
-            _lastMessageDate.parse(value);
-            break;
-         case "investment_total":
-            _investmentTotal = RDouble.parse(value);
-            break;
-         case "investment_count":
-            _investmentCount = RInteger.parse(value);
-            break;
-         case "redemption_total":
-            _redemptionTotal = RFloat.parse(value);
-            break;
-         case "redemption_count":
-            _redemptionCount = RInteger.parse(value);
-            break;
-         case "netinvestment":
-            _netinvestment = RFloat.parse(value);
-            break;
-         case "interest_total":
-            _interestTotal = RFloat.parse(value);
+         case "active_cd":
+            _activeCd = RInteger.parse(value);
             break;
          case "note":
             _note = value;
@@ -929,57 +558,17 @@ public class FDataFinancialCustomerUnit
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
                break;
-            case "link_id":
-               __linkId = RLong.parse(value);
-               _linkId = __linkId;
+            case "customer_id":
+               __customerId = RLong.parse(value);
+               _customerId = __customerId;
                break;
-            case "statistics_id":
-               __statisticsId = RInteger.parse(value);
-               _statisticsId = __statisticsId;
+            case "sms_contact_cd":
+               __smsContactCd = RInteger.parse(value);
+               _smsContactCd = __smsContactCd;
                break;
-            case "marry_cd":
-               __marryCd = RInteger.parse(value);
-               _marryCd = __marryCd;
-               break;
-            case "education_cd":
-               __educationCd = RInteger.parse(value);
-               _educationCd = __educationCd;
-               break;
-            case "income_cd":
-               __incomeCd = RInteger.parse(value);
-               _incomeCd = __incomeCd;
-               break;
-            case "business_cd":
-               __businessCd = RInteger.parse(value);
-               _businessCd = __businessCd;
-               break;
-            case "last_message_date":
-               __lastMessageDate.parse(value);
-               _lastMessageDate.assign(__lastMessageDate);
-               break;
-            case "investment_total":
-               __investmentTotal = RDouble.parse(value);
-               _investmentTotal = __investmentTotal;
-               break;
-            case "investment_count":
-               __investmentCount = RInteger.parse(value);
-               _investmentCount = __investmentCount;
-               break;
-            case "redemption_total":
-               __redemptionTotal = RFloat.parse(value);
-               _redemptionTotal = __redemptionTotal;
-               break;
-            case "redemption_count":
-               __redemptionCount = RInteger.parse(value);
-               _redemptionCount = __redemptionCount;
-               break;
-            case "netinvestment":
-               __netinvestment = RFloat.parse(value);
-               _netinvestment = __netinvestment;
-               break;
-            case "interest_total":
-               __interestTotal = RFloat.parse(value);
-               _interestTotal = __interestTotal;
+            case "active_cd":
+               __activeCd = RInteger.parse(value);
+               _activeCd = __activeCd;
                break;
             case "note":
                __note = value;
@@ -1017,19 +606,9 @@ public class FDataFinancialCustomerUnit
       row.set("ovld", _ovld);
       row.set("guid", _guid);
       row.set("marketerId", _marketerId);
-      row.set("linkId", _linkId);
-      row.set("statisticsId", _statisticsId);
-      row.set("marryCd", _marryCd);
-      row.set("educationCd", _educationCd);
-      row.set("incomeCd", _incomeCd);
-      row.set("businessCd", _businessCd);
-      row.set("lastMessageDate", _lastMessageDate);
-      row.set("investmentTotal", _investmentTotal);
-      row.set("investmentCount", _investmentCount);
-      row.set("redemptionTotal", _redemptionTotal);
-      row.set("redemptionCount", _redemptionCount);
-      row.set("netinvestment", _netinvestment);
-      row.set("interestTotal", _interestTotal);
+      row.set("customerId", _customerId);
+      row.set("smsContactCd", _smsContactCd);
+      row.set("activeCd", _activeCd);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -1049,19 +628,9 @@ public class FDataFinancialCustomerUnit
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
       map.put("marketerId", RLong.toString(_marketerId));
-      map.put("linkId", RLong.toString(_linkId));
-      map.put("statisticsId", RInteger.toString(_statisticsId));
-      map.put("marryCd", RInteger.toString(_marryCd));
-      map.put("educationCd", RInteger.toString(_educationCd));
-      map.put("incomeCd", RInteger.toString(_incomeCd));
-      map.put("businessCd", RInteger.toString(_businessCd));
-      map.put("lastMessageDate", _lastMessageDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("investmentTotal", RDouble.toString(_investmentTotal));
-      map.put("investmentCount", RInteger.toString(_investmentCount));
-      map.put("redemptionTotal", RFloat.toString(_redemptionTotal));
-      map.put("redemptionCount", RInteger.toString(_redemptionCount));
-      map.put("netinvestment", RFloat.toString(_netinvestment));
-      map.put("interestTotal", RFloat.toString(_interestTotal));
+      map.put("customerId", RLong.toString(_customerId));
+      map.put("smsContactCd", RInteger.toString(_smsContactCd));
+      map.put("activeCd", RInteger.toString(_activeCd));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -1081,15 +650,9 @@ public class FDataFinancialCustomerUnit
       _ovld = input.readBoolean();
       _guid = input.readString();
       _marketerId = input.readInt64();
-      _linkId = input.readInt64();
-      _statisticsId = input.readInt32();
-      _marryCd = input.readInt32();
-      _educationCd = input.readInt32();
-      _incomeCd = input.readInt32();
-      _businessCd = input.readInt32();
-      _lastMessageDate.set(input.readInt64());
-      _investmentCount = input.readInt32();
-      _redemptionCount = input.readInt32();
+      _customerId = input.readInt64();
+      _smsContactCd = input.readInt32();
+      _activeCd = input.readInt32();
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -1109,15 +672,9 @@ public class FDataFinancialCustomerUnit
       output.writeBoolean(_ovld);
       output.writeString(_guid);
       output.writeInt64(_marketerId);
-      output.writeInt64(_linkId);
-      output.writeInt32(_statisticsId);
-      output.writeInt32(_marryCd);
-      output.writeInt32(_educationCd);
-      output.writeInt32(_incomeCd);
-      output.writeInt32(_businessCd);
-      output.writeInt64(_lastMessageDate.get());
-      output.writeInt32(_investmentCount);
-      output.writeInt32(_redemptionCount);
+      output.writeInt64(_customerId);
+      output.writeInt32(_smsContactCd);
+      output.writeInt32(_activeCd);
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

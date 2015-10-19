@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="fe907fcf-53ed-4995-9804-310bbfda9fdb" name="data.financial.marketer.customer" label="M#12cn17理财师客户信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Marketer.Customer" data_name="DT_FIN_MARKETER_CUSTOMER" data_alias="DT_FIN_MKT_CST" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="df74fc52-05dc-4c28-b06e-c7242aaa9ab6" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" data_alias="MKT" data_refer="data.financial.marketer" />
+  <FieldRecordId _uuid="7b752d6c-0392-4a6a-bb5a-51eab9b51065" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_alias="CST" data_refer="data.financial.customer" />
+  <FieldInteger _uuid="4d4d3850-48be-4fe6-a975-9f001847160a" name="sms_contact_cd" label="M#12cn16短信联系类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SMS_CONTACT_CD" />
+  <FieldInteger _uuid="a228a6e0-06c3-4577-8e99-f17f00fa1e58" name="active_cd" label="M#12cn14反馈类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
+  <FieldString _uuid="affbd15f-2e1b-4ff8-a68e-d91784e3afa9" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="0288b78b-3234-426f-b9c6-6d5cbcac5d6e" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

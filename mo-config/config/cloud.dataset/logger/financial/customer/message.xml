@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="515327d9-f67a-49a7-ad78-d4fc265a775a" name="logger.financial.customer.message" label="M#12cn212客户发送短信日志表   " is_valid="Y" note="M#" data_engine="MyISAM" data_group="logger" data_factory="Data.Logger.Financial.Customer.Message" data_name="LG_FIN_CUSTOMER_MESSAGE" data_alias="LG_INF_CST_MSG" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+  <FieldRecordId _uuid="91454e8e-a7c1-44c1-bfdb-4457146fab91" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
+  <FieldRecordId _uuid="afda73dd-0722-4972-90cb-23fa2da03b16" name="marketer_lid" label="M#12cn17理财师关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_LID" />
+  <FieldString _uuid="36986dda-8a97-4b39-a3a9-a3942d4b832e" name="marketer_label" label="M#12cn15理财师名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_LABEL" data_size="40" />
+  <FieldInteger _uuid="836d7561-6f48-453d-8eac-349cd6c0aa3d" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" />
+  <FieldInteger _uuid="f69633df-d3dd-4851-840a-3b55f09db778" name="customer_lid" label="M#12cn16客户关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LID" />
+  <FieldString _uuid="149f20be-06a5-4278-984e-e3d67d7bfd67" name="customer_label" label="M#12cn14客户名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LABEL" data_size="40" />
+  <FieldDateTime _uuid="de46b99f-c64a-49c4-a714-939f2e7d2d79" name="send_date" label="M#12cn14发送时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SEND_DATE" />
+  <FieldContent _uuid="7385f05c-6395-4390-acbe-1095057da16d" name="send_content" label="M#12cn14发送内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SEND_CONTENT" />
+  <FieldString _uuid="11c487fc-8b11-4cef-a59c-a058cd5a97ed" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="9589ecda-f89a-4940-a085-2c04ab22adf9" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
+</DataStore>

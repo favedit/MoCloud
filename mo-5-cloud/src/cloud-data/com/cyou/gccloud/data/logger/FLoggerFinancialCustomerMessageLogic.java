@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.data;
+package com.cyou.gccloud.data.logger;
 
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -21,17 +21,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>金融客户信息逻辑。</T>
+// <T>客户发送短信日志表   逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialCustomerLogic
+public class FLoggerFinancialCustomerMessageLogic
       extends FLogicTable
 {
-   // 金融客户信息的定义。
-   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
+   // 客户发送短信日志表   的定义。
+   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("logger");
 
-   // 金融客户信息的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.financial.customer", "DT_FIN_CUSTOMER");
+   // 客户发送短信日志表   的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("logger.financial.customer.message", "LG_FIN_CUSTOMER_MESSAGE");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -39,50 +39,32 @@ public class FDataFinancialCustomerLogic
    // 字段有效性的定义。
    public final static SLogicFieldInfo OVLD = new SLogicFieldInfo("OVLD");
 
-   // 字段对象唯一标识的定义。
+   // 字段全局唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
-   // 字段关联编号的定义。
-   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
+   // 字段理财师关联编号的定义。
+   public final static SLogicFieldInfo MARKETER_LID = new SLogicFieldInfo("MARKETER_LID");
 
-   // 字段统计编号的定义。
-   public final static SLogicFieldInfo STATISTICS_ID = new SLogicFieldInfo("STATISTICS_ID");
+   // 字段理财师名称的定义。
+   public final static SLogicFieldInfo MARKETER_LABEL = new SLogicFieldInfo("MARKETER_LABEL");
 
-   // 字段婚姻状态的定义。
-   public final static SLogicFieldInfo MARRY_CD = new SLogicFieldInfo("MARRY_CD");
+   // 字段客户编号的定义。
+   public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
 
-   // 字段教育类型的定义。
-   public final static SLogicFieldInfo EDUCATION_CD = new SLogicFieldInfo("EDUCATION_CD");
+   // 字段客户关联编号的定义。
+   public final static SLogicFieldInfo CUSTOMER_LID = new SLogicFieldInfo("CUSTOMER_LID");
 
-   // 字段收入类型的定义。
-   public final static SLogicFieldInfo INCOME_CD = new SLogicFieldInfo("INCOME_CD");
+   // 字段客户名称的定义。
+   public final static SLogicFieldInfo CUSTOMER_LABEL = new SLogicFieldInfo("CUSTOMER_LABEL");
 
-   // 字段职业类型的定义。
-   public final static SLogicFieldInfo BUSINESS_CD = new SLogicFieldInfo("BUSINESS_CD");
+   // 字段发送时间的定义。
+   public final static SLogicFieldInfo SEND_DATE = new SLogicFieldInfo("SEND_DATE");
 
-   // 字段最后发送短信的时间的定义。
-   public final static SLogicFieldInfo LAST_MESSAGE_DATE = new SLogicFieldInfo("LAST_MESSAGE_DATE");
-
-   // 字段投资总额的定义。
-   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
-
-   // 字段投资次数的定义。
-   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
-
-   // 字段赎回总额的定义。
-   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
-
-   // 字段赎回次数的定义。
-   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
-
-   // 字段净投总额的定义。
-   public final static SLogicFieldInfo NETINVESTMENT = new SLogicFieldInfo("NETINVESTMENT");
-
-   // 字段利息总额的定义。
-   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+   // 字段发送内容的定义。
+   public final static SLogicFieldInfo SEND_CONTENT = new SLogicFieldInfo("SEND_CONTENT");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -100,25 +82,25 @@ public class FDataFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`LINK_ID`,`STATISTICS_ID`,`MARRY_CD`,`EDUCATION_CD`,`INCOME_CD`,`BUSINESS_CD`,`LAST_MESSAGE_DATE`,`INVESTMENT_TOTAL`,`INVESTMENT_COUNT`,`REDEMPTION_TOTAL`,`REDEMPTION_COUNT`,`NETINVESTMENT`,`INTEREST_TOTAL`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`MARKETER_ID`,`MARKETER_LID`,`MARKETER_LABEL`,`CUSTOMER_ID`,`CUSTOMER_LID`,`CUSTOMER_LABEL`,`SEND_DATE`,`SEND_CONTENT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造金融客户信息逻辑单元。</T>
+   // <T>构造客户发送短信日志表   逻辑单元。</T>
    //============================================================
-   public FDataFinancialCustomerLogic(){
+   public FLoggerFinancialCustomerMessageLogic(){
       _name = TABLE.name();
-      _classUnit = FDataFinancialCustomerUnit.class;
+      _classUnit = FLoggerFinancialCustomerMessageUnit.class;
    }
 
    //============================================================
-   // <T>构造金融客户信息逻辑单元。</T>
+   // <T>构造客户发送短信日志表   逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
-   public FDataFinancialCustomerLogic(ILogicContext context){
+   public FLoggerFinancialCustomerMessageLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FDataFinancialCustomerUnit.class;
+      _classUnit = FLoggerFinancialCustomerMessageUnit.class;
    }
 
    //============================================================
@@ -252,7 +234,7 @@ public class FDataFinancialCustomerLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FDataFinancialCustomerUnit());
+            unit = (T)(new FLoggerFinancialCustomerMessageUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -268,8 +250,8 @@ public class FDataFinancialCustomerLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FDataFinancialCustomerUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FDataFinancialCustomerUnit.class, guid);
+   public FLoggerFinancialCustomerMessageUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FLoggerFinancialCustomerMessageUnit.class, guid);
    }
 
    //============================================================
@@ -307,8 +289,8 @@ public class FDataFinancialCustomerLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FDataFinancialCustomerUnit search(CharSequence whereSql){
-      return search(null, FDataFinancialCustomerUnit.class, whereSql);
+   public FLoggerFinancialCustomerMessageUnit search(CharSequence whereSql){
+      return search(null, FLoggerFinancialCustomerMessageUnit.class, whereSql);
    }
 
    //============================================================
@@ -345,7 +327,7 @@ public class FDataFinancialCustomerLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -356,8 +338,8 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(int pageSize,
-                                                          int page){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(int pageSize,
+                                                                   int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -369,9 +351,9 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(CharSequence whereSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(CharSequence whereSql,
+                                                                   int pageSize,
+                                                                   int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -384,8 +366,8 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(CharSequence whereSql,
-                                                          CharSequence orderSql){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(CharSequence whereSql,
+                                                                   CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -398,10 +380,10 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(CharSequence whereSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(CharSequence whereSql,
+                                                                   CharSequence orderSql,
+                                                                   int pageSize,
+                                                                   int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -415,11 +397,11 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(CharSequence fields,
-                                                          CharSequence whereSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(CharSequence fields,
+                                                                   CharSequence whereSql,
+                                                                   CharSequence orderSql,
+                                                                   int pageSize,
+                                                                   int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -433,12 +415,12 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetch(CharSequence fields,
-                                                          CharSequence whereSql,
-                                                          CharSequence groupSql,
-                                                          CharSequence orderSql,
-                                                          int pageSize,
-                                                          int page){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetch(CharSequence fields,
+                                                                   CharSequence whereSql,
+                                                                   CharSequence groupSql,
+                                                                   CharSequence orderSql,
+                                                                   int pageSize,
+                                                                   int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -579,10 +561,10 @@ public class FDataFinancialCustomerLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetchSql(CharSequence code,
-                                                             CharSequence sql,
-                                                             int pageSize,
-                                                             int page){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetchSql(CharSequence code,
+                                                                      CharSequence sql,
+                                                                      int pageSize,
+                                                                      int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -607,7 +589,7 @@ public class FDataFinancialCustomerLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FDataFinancialCustomerUnit>(FDataFinancialCustomerUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FLoggerFinancialCustomerMessageUnit>(FLoggerFinancialCustomerMessageUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -620,7 +602,7 @@ public class FDataFinancialCustomerLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialCustomerUnit> fetchAll(){
+   public FLogicDataset<FLoggerFinancialCustomerMessageUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -633,8 +615,8 @@ public class FDataFinancialCustomerLogic
    //
    // @return 数据单元
    //============================================================
-   public FDataFinancialCustomerUnit doPrepare(){
-      FDataFinancialCustomerUnit unit = new FDataFinancialCustomerUnit();
+   public FLoggerFinancialCustomerMessageUnit doPrepare(){
+      FLoggerFinancialCustomerMessageUnit unit = new FLoggerFinancialCustomerMessageUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -661,7 +643,7 @@ public class FDataFinancialCustomerLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FDataFinancialCustomerUnit unit = (FDataFinancialCustomerUnit)logicUnit;
+      FLoggerFinancialCustomerMessageUnit unit = (FLoggerFinancialCustomerMessageUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -675,7 +657,7 @@ public class FDataFinancialCustomerLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FDataFinancialCustomerUnit unit = (FDataFinancialCustomerUnit)logicUnit;
+      FLoggerFinancialCustomerMessageUnit unit = (FLoggerFinancialCustomerMessageUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
@@ -697,19 +679,13 @@ public class FDataFinancialCustomerLogic
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
       cmd.append(",`MARKETER_ID`");
-      cmd.append(",`LINK_ID`");
-      cmd.append(",`STATISTICS_ID`");
-      cmd.append(",`MARRY_CD`");
-      cmd.append(",`EDUCATION_CD`");
-      cmd.append(",`INCOME_CD`");
-      cmd.append(",`BUSINESS_CD`");
-      cmd.append(",`LAST_MESSAGE_DATE`");
-      cmd.append(",`INVESTMENT_TOTAL`");
-      cmd.append(",`INVESTMENT_COUNT`");
-      cmd.append(",`REDEMPTION_TOTAL`");
-      cmd.append(",`REDEMPTION_COUNT`");
-      cmd.append(",`NETINVESTMENT`");
-      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`MARKETER_LID`");
+      cmd.append(",`MARKETER_LABEL`");
+      cmd.append(",`CUSTOMER_ID`");
+      cmd.append(",`CUSTOMER_LID`");
+      cmd.append(",`CUSTOMER_LABEL`");
+      cmd.append(",`SEND_DATE`");
+      cmd.append(",`SEND_CONTENT`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -737,45 +713,54 @@ public class FDataFinancialCustomerLogic
          cmd.append(marketerId);
       }
       cmd.append(',');
-      long linkId = unit.linkId();
-      if(linkId == 0){
+      long marketerLid = unit.marketerLid();
+      if(marketerLid == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(linkId);
+         cmd.append(marketerLid);
       }
       cmd.append(',');
-      cmd.append(unit.statisticsId());
-      cmd.append(',');
-      cmd.append(unit.marryCd());
-      cmd.append(',');
-      cmd.append(unit.educationCd());
-      cmd.append(',');
-      cmd.append(unit.incomeCd());
-      cmd.append(',');
-      cmd.append(unit.businessCd());
-      cmd.append(',');
-      TDateTime lastMessageDate = unit.lastMessageDate();
-      if(lastMessageDate == null){
+      String marketerLabel = unit.marketerLabel();
+      if(RString.isEmpty(marketerLabel)){
          cmd.append("NULL");
-      }else if(lastMessageDate.isEmpty()){
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(marketerLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.customerId());
+      cmd.append(',');
+      cmd.append(unit.customerLid());
+      cmd.append(',');
+      String customerLabel = unit.customerLabel();
+      if(RString.isEmpty(customerLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(customerLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      TDateTime sendDate = unit.sendDate();
+      if(sendDate == null){
+         cmd.append("NULL");
+      }else if(sendDate.isEmpty()){
          cmd.append("NULL");
       }else{
          cmd.append("STR_TO_DATE('");
-         cmd.append(lastMessageDate.format());
+         cmd.append(sendDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      cmd.append(unit.investmentTotal());
-      cmd.append(',');
-      cmd.append(unit.investmentCount());
-      cmd.append(',');
-      cmd.append(unit.redemptionTotal());
-      cmd.append(',');
-      cmd.append(unit.redemptionCount());
-      cmd.append(',');
-      cmd.append(unit.netinvestment());
-      cmd.append(',');
-      cmd.append(unit.interestTotal());
+      String sendContent = unit.sendContent();
+      if(RString.isEmpty(sendContent)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(sendContent));
+         cmd.append('\'');
+      }
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -820,7 +805,7 @@ public class FDataFinancialCustomerLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FDataFinancialCustomerUnit unit = (FDataFinancialCustomerUnit)logicUnit;
+      FLoggerFinancialCustomerMessageUnit unit = (FLoggerFinancialCustomerMessageUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -839,7 +824,7 @@ public class FDataFinancialCustomerLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FDataFinancialCustomerUnit unit = (FDataFinancialCustomerUnit)logicUnit;
+      FLoggerFinancialCustomerMessageUnit unit = (FLoggerFinancialCustomerMessageUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -868,71 +853,68 @@ public class FDataFinancialCustomerLogic
             cmd.append(marketerId);
          }
       }
-      if(unit.isLinkIdChanged()){
-         cmd.append(",`LINK_ID`=");
-         long linkId = unit.linkId();
-         if(linkId == 0){
+      if(unit.isMarketerLidChanged()){
+         cmd.append(",`MARKETER_LID`=");
+         long marketerLid = unit.marketerLid();
+         if(marketerLid == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(linkId);
+            cmd.append(marketerLid);
          }
       }
-      if(unit.isStatisticsIdChanged()){
-         cmd.append(",`STATISTICS_ID`=");
-         cmd.append(unit.statisticsId());
-      }
-      if(unit.isMarryCdChanged()){
-         cmd.append(",`MARRY_CD`=");
-         cmd.append(unit.marryCd());
-      }
-      if(unit.isEducationCdChanged()){
-         cmd.append(",`EDUCATION_CD`=");
-         cmd.append(unit.educationCd());
-      }
-      if(unit.isIncomeCdChanged()){
-         cmd.append(",`INCOME_CD`=");
-         cmd.append(unit.incomeCd());
-      }
-      if(unit.isBusinessCdChanged()){
-         cmd.append(",`BUSINESS_CD`=");
-         cmd.append(unit.businessCd());
-      }
-      if(unit.isLastMessageDateChanged()){
-         cmd.append(",`LAST_MESSAGE_DATE`=");
-         TDateTime lastMessageDate = unit.lastMessageDate();
-         if(lastMessageDate == null){
+      if(unit.isMarketerLabelChanged()){
+         cmd.append(",`MARKETER_LABEL`=");
+         String marketerLabel = unit.marketerLabel();
+         if(RString.isEmpty(marketerLabel)){
             cmd.append("NULL");
-         }else if(lastMessageDate.isEmpty()){
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(marketerLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isCustomerIdChanged()){
+         cmd.append(",`CUSTOMER_ID`=");
+         cmd.append(unit.customerId());
+      }
+      if(unit.isCustomerLidChanged()){
+         cmd.append(",`CUSTOMER_LID`=");
+         cmd.append(unit.customerLid());
+      }
+      if(unit.isCustomerLabelChanged()){
+         cmd.append(",`CUSTOMER_LABEL`=");
+         String customerLabel = unit.customerLabel();
+         if(RString.isEmpty(customerLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(customerLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isSendDateChanged()){
+         cmd.append(",`SEND_DATE`=");
+         TDateTime sendDate = unit.sendDate();
+         if(sendDate == null){
+            cmd.append("NULL");
+         }else if(sendDate.isEmpty()){
             cmd.append("NULL");
          }else{
             cmd.append("STR_TO_DATE('");
-            cmd.append(lastMessageDate.format());
+            cmd.append(sendDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isInvestmentTotalChanged()){
-         cmd.append(",`INVESTMENT_TOTAL`=");
-         cmd.append(unit.investmentTotal());
-      }
-      if(unit.isInvestmentCountChanged()){
-         cmd.append(",`INVESTMENT_COUNT`=");
-         cmd.append(unit.investmentCount());
-      }
-      if(unit.isRedemptionTotalChanged()){
-         cmd.append(",`REDEMPTION_TOTAL`=");
-         cmd.append(unit.redemptionTotal());
-      }
-      if(unit.isRedemptionCountChanged()){
-         cmd.append(",`REDEMPTION_COUNT`=");
-         cmd.append(unit.redemptionCount());
-      }
-      if(unit.isNetinvestmentChanged()){
-         cmd.append(",`NETINVESTMENT`=");
-         cmd.append(unit.netinvestment());
-      }
-      if(unit.isInterestTotalChanged()){
-         cmd.append(",`INTEREST_TOTAL`=");
-         cmd.append(unit.interestTotal());
+      if(unit.isSendContentChanged()){
+         cmd.append(",`SEND_CONTENT`=");
+         String sendContent = unit.sendContent();
+         if(RString.isEmpty(sendContent)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(sendContent));
+            cmd.append('\'');
+         }
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");
@@ -965,7 +947,7 @@ public class FDataFinancialCustomerLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FDataFinancialCustomerUnit unit = (FDataFinancialCustomerUnit)logicUnit;
+      FLoggerFinancialCustomerMessageUnit unit = (FLoggerFinancialCustomerMessageUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

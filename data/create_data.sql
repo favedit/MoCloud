@@ -626,6 +626,7 @@ ALTER TABLE DT_LGC_SALESTOOLS
 -- Create table [Data.Logic.Truetime]
 -- sunhr 20151016
 -- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_LGC_TRUETIME`;
 CREATE TABLE `DT_LGC_TRUETIME` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -1555,12 +1556,14 @@ CREATE TABLE `DT_FIN_CUSTOMER`
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
+   `MARKETER_ID`                   BIGINT, 
    `LINK_ID`                       BIGINT, 
    `STATISTICS_ID`                 INTEGER, 
    `MARRY_CD`                      INTEGER, 
    `EDUCATION_CD`                  INTEGER, 
    `INCOME_CD`                     INTEGER, 
    `BUSINESS_CD`                   INTEGER, 
+   `LAST_MESSAGE_DATE`             DATETIME, 
    `INVESTMENT_TOTAL`              DOUBLE, 
    `INVESTMENT_COUNT`              INTEGER, 
    `REDEMPTION_TOTAL`              FLOAT, 
@@ -1572,10 +1575,13 @@ CREATE TABLE `DT_FIN_CUSTOMER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_CUSTOMER 
    ADD CONSTRAINT DT_FIN_CST_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_FIN_CUSTOMER ADD CONSTRAINT DT_FIN_CST_FK_MKT 
+      FOREIGN KEY (`MARKETER_ID`) REFERENCES DT_FIN_MARKETER(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Tender]
@@ -1678,3 +1684,32 @@ ALTER TABLE DT_FIN_MARKETER_MEMBER ADD CONSTRAINT DT_FIN_MKT_MEM_FK_MKT
 ALTER TABLE DT_FIN_MARKETER_MEMBER ADD CONSTRAINT DT_FIN_MKT_MEM_FK_MER 
       FOREIGN KEY (`MEMBER_ID`) REFERENCES DT_FIN_MEMBER(`OUID`); 
 
+-- ------------------------------------------------------------
+-- Create table [Data.Financial.Marketer.Customer]
+-- 20151019 sunhr
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_FIN_MARKETER_CUSTOMER`;
+CREATE TABLE `DT_FIN_MARKETER_CUSTOMER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MARKETER_ID`                   BIGINT, 
+   `CUSTOMER_ID`                   BIGINT, 
+   `SMS_CONTACT_CD`                INTEGER, 
+   `ACTIVE_CD`                     INTEGER, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_FIN_MARKETER_CUSTOMER 
+   ADD CONSTRAINT DT_FIN_MKT_CST_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_FIN_MARKETER_CUSTOMER ADD CONSTRAINT DT_FIN_MKT_CST_FK_MKT 
+      FOREIGN KEY (`MARKETER_ID`) REFERENCES DT_FIN_MARKETER(`OUID`); 
+
+ALTER TABLE DT_FIN_MARKETER_CUSTOMER ADD CONSTRAINT DT_FIN_MKT_CST_FK_CST 
+      FOREIGN KEY (`CUSTOMER_ID`) REFERENCES DT_FIN_CUSTOMER(`OUID`); 

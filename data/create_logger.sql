@@ -123,3 +123,31 @@ CREATE TABLE `LG_PSN_USER_MODULE`
 
 ALTER TABLE LG_PSN_USER_MODULE 
    ADD CONSTRAINT LG_PSN_USR_MOD_UK_GID UNIQUE ( GUID ); 
+
+-- ------------------------------------------------------------
+-- Create table [Logger.Financial.Customer]
+-- 20151019 sunhr
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `LG_FIN_CUSTOMER_MESSAGE`;
+CREATE TABLE `LG_FIN_CUSTOMER_MESSAGE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MARKETER_ID`                   BIGINT, 
+   `MARKETER_LID`                  BIGINT, 
+   `MARKETER_LABEL`                VARCHAR(40), 
+   `CUSTOMER_ID`                   INTEGER, 
+   `CUSTOMER_LID`                  INTEGER, 
+   `CUSTOMER_LABEL`                VARCHAR(40), 
+   `SEND_DATE`                     DATETIME, 
+   `SEND_CONTENT`                  TEXT, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE LG_FIN_CUSTOMER_MESSAGE 
+   ADD CONSTRAINT LG_INF_CST_MSG_UK_GID UNIQUE ( GUID ); 
