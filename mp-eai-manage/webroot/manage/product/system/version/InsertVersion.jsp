@@ -61,22 +61,12 @@
                </tr>
                <tr>
                   <td width="69" height="33" colspan="1">
-                     <div align="left">版本名称</div>
-                  </td>
-                  <td colspan="3">
-                     <div align="left">
-                        <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true,validType:'length[0,40]'" />
-                        <span style="color:red;">&nbsp;&nbsp;建议版本名称少于15个字符</span>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="69" height="33" colspan="1">
                      <div align="left">版本标题</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
                         <input id="label" name="label" class="easyui-validatebox textbox notnull" style="width:200px;height:20px;" data-options="required:true,validType:'length[0,80]'" />
+                        <span style="color:red;">&nbsp;&nbsp;建议版本标题少于15个字符</span>
                         <input id="adminId" name="adminId" style="display:none" value="<jh:write source='&basePage.userId'/>" />
                      </div>
                   </td>
@@ -94,7 +84,7 @@
 
                <tr>
                   <td height="30">
-                     <div align="left">更新状态</div>
+                     <div align="left">更新类型</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -113,7 +103,7 @@
                   </td>
                   <td width="98">
                      <div align="left">
-                        <input id="beginDate" style="width:200px" name="beginDate" class="easyui-datebox" />
+                        <input id="beginDate" style="width:200px" name="beginDate" class="easyui-datebox" data-options="editable:false"/>
                      </div>
                   </td>
                   <td width="30" height="33">
@@ -121,7 +111,7 @@
                   </td>
                   <td width="98">
                      <div align="left">
-                        <input id="endDate" style="width:200px" name="endDate" class="easyui-datebox" />
+                        <input id="endDate" style="width:200px" name="endDate" class="easyui-datebox" data-options="editable:false"/>
                      </div>
                   </td>
                </tr>

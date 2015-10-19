@@ -79,9 +79,8 @@
                <th data-options="field:'ouid',halign:'center',align:'right'" width="40px">编号</th>
                <th data-options="field:'applicationLabel',halign:'center',align:'left',sortable:true" width="120px">应用</th>
                <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">版本标题</th>
-               <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="120px">版本名称</th>
                <th data-options="field:'numberStr',halign:'center',align:'left',sortable:true" width="90px">版本号</th>
-               <th data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true" width="80px">更新状态</th>
+               <th data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true" width="80px">更新类型</th>
                <th data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true" width="80px">版本状态</th>
                <th data-options="field:'downloadUrl',halign:'center',align:'left',sortable:true" width="400px">下载地址</th>
                <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">更新内容</th>

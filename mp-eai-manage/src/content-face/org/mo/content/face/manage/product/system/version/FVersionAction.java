@@ -223,7 +223,6 @@ public class FVersionAction
                                ILogicContext logicContext, 
                                FDataSystemVersionUnit unit) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
       String note = context.parameter("note");
       note = note.replaceAll("<br>", "\r\n");

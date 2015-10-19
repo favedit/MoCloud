@@ -54,8 +54,9 @@ public class FVersionConsole
          whereSql.append(FDataSystemVersionLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", unit.label());
       }
+      String orderBy = String.format("%s %s, %s %s", FDataSystemVersionLogic.NUMBER, "DESC", FDataSystemVersionLogic.LABEL, "DESC");
       FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
-      FLogicDataset<FDataVersionInfo> moduleList = logic.fetchClass(FDataVersionInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataVersionInfo> moduleList = logic.fetchClass(FDataVersionInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (FDataVersionInfo info : moduleList) {
          info.setApplicationLabel(info.application().code());
          info.setForceCdStr(EGcVersionForce.formatLabel(info.forceCd()));

@@ -35,7 +35,6 @@
          var data = {
             "label": $('#label').val(),
             "adminId": $('#adminId').val(),
-            "code": $('#code').val(),
             "forceCd": forceCd,
             "applicationId": applicationId,
             "beginDate": $('#beginDate').val(),
@@ -107,20 +106,10 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <input id="label" name="label" class="easyui-validatebox textbox" style="width:200px;height:20px;" data-options="validType:'length[0,80]'" value="<jh:write source='&unit.label'/>" />
+                        <input id="label" name="label" class="easyui-validatebox textbox notnull" style="width:200px;height:20px;" data-options="required:true,validType:'length[0,80]'" value="<jh:write source='&unit.label'/>" />
+                        <span style="color:red;">&nbsp;&nbsp;建议版本标题少于15个字符</span>
                         <input id="adminId" name="adminId" style="display:none" value="<jh:write source='&basePage.userId'/>" />
                         <input id="ouid" name="ouid" style="display:none" value="<jh:write source='&unit.ouid'/>" />
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="70" height="33">
-                     <div align="left">版本名称</div>
-                  </td>
-                  <td colspan="3">
-                     <div align="left">
-                        <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" value="<jh:write source='&unit.code'/>" data-options="required:true,validType:'length[0,40]'" />
-                        <span style="color:red;">&nbsp;&nbsp;建议版本名称少于15个字符</span>
                      </div>
                   </td>
                </tr>
@@ -137,7 +126,7 @@
 
                <tr>
                   <td height="30">
-                     <div align="left">更新状态</div>
+                     <div align="left">更新类型</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
