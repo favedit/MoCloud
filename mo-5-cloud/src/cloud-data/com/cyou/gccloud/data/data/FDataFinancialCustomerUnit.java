@@ -40,6 +40,18 @@ public class FDataFinancialCustomerUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段理财师编号的定义。
+   private long __marketerId;
+
+   // 字段理财师编号的定义。
+   protected long _marketerId;
+
+   // 存储字段理财师关联编号的定义。
+   private long __marketerLid;
+
+   // 字段理财师关联编号的定义。
+   protected long _marketerLid;
+
    // 存储字段关联编号的定义。
    private long __linkId;
 
@@ -75,6 +87,12 @@ public class FDataFinancialCustomerUnit
 
    // 字段职业类型的定义。
    protected int _businessCd;
+
+   // 存储字段最后发送短信的时间的定义。
+   private TDateTime __lastMessageDate = new TDateTime();
+
+   // 字段最后发送短信的时间的定义。
+   protected TDateTime _lastMessageDate = new TDateTime();
 
    // 存储字段投资总额的定义。
    private double __investmentTotal;
@@ -227,6 +245,71 @@ public class FDataFinancialCustomerUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断理财师编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerIdChanged(){
+      return __marketerId != _marketerId;
+   }
+
+   //============================================================
+   // <T>获得理财师编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerId(){
+      return _marketerId;
+   }
+
+   //============================================================
+   // <T>获得理财师编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataFinancialMarketerUnit marketer(){
+      FDataFinancialMarketerLogic logic = _logicContext.findLogic(FDataFinancialMarketerLogic.class);
+      FDataFinancialMarketerUnit unit = logic.find(_marketerId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置理财师编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerId(long value){
+      _marketerId = value;
+   }
+
+   //============================================================
+   // <T>判断理财师关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerLidChanged(){
+      return __marketerLid != _marketerLid;
+   }
+
+   //============================================================
+   // <T>获得理财师关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerLid(){
+      return _marketerLid;
+   }
+
+   //============================================================
+   // <T>设置理财师关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerLid(long value){
+      _marketerLid = value;
    }
 
    //============================================================
@@ -389,6 +472,33 @@ public class FDataFinancialCustomerUnit
    //============================================================
    public void setBusinessCd(int value){
       _businessCd = value;
+   }
+
+   //============================================================
+   // <T>判断最后发送短信的时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLastMessageDateChanged(){
+      return !__lastMessageDate.equals(_lastMessageDate);
+   }
+
+   //============================================================
+   // <T>获得最后发送短信的时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime lastMessageDate(){
+      return _lastMessageDate;
+   }
+
+   //============================================================
+   // <T>设置最后发送短信的时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLastMessageDate(TDateTime value){
+      _lastMessageDate = value;
    }
 
    //============================================================
@@ -703,6 +813,10 @@ public class FDataFinancialCustomerUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "marketer_id":
+            return Long.toString(_marketerId);
+         case "marketer_lid":
+            return Long.toString(_marketerLid);
          case "link_id":
             return Long.toString(_linkId);
          case "statistics_id":
@@ -715,6 +829,8 @@ public class FDataFinancialCustomerUnit
             return RInteger.toString(_incomeCd);
          case "business_cd":
             return RInteger.toString(_businessCd);
+         case "last_message_date":
+            return _lastMessageDate.toString();
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "investment_count":
@@ -760,6 +876,12 @@ public class FDataFinancialCustomerUnit
          case "guid":
             _guid = value;
             break;
+         case "marketer_id":
+            _marketerId = RLong.parse(value);
+            break;
+         case "marketer_lid":
+            _marketerLid = RLong.parse(value);
+            break;
          case "link_id":
             _linkId = RLong.parse(value);
             break;
@@ -777,6 +899,9 @@ public class FDataFinancialCustomerUnit
             break;
          case "business_cd":
             _businessCd = RInteger.parse(value);
+            break;
+         case "last_message_date":
+            _lastMessageDate.parse(value);
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -838,6 +963,14 @@ public class FDataFinancialCustomerUnit
                __guid = value;
                _guid = __guid;
                break;
+            case "marketer_id":
+               __marketerId = RLong.parse(value);
+               _marketerId = __marketerId;
+               break;
+            case "marketer_lid":
+               __marketerLid = RLong.parse(value);
+               _marketerLid = __marketerLid;
+               break;
             case "link_id":
                __linkId = RLong.parse(value);
                _linkId = __linkId;
@@ -861,6 +994,10 @@ public class FDataFinancialCustomerUnit
             case "business_cd":
                __businessCd = RInteger.parse(value);
                _businessCd = __businessCd;
+               break;
+            case "last_message_date":
+               __lastMessageDate.parse(value);
+               _lastMessageDate.assign(__lastMessageDate);
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -921,12 +1058,15 @@ public class FDataFinancialCustomerUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("marketerId", _marketerId);
+      row.set("marketerLid", _marketerLid);
       row.set("linkId", _linkId);
       row.set("statisticsId", _statisticsId);
       row.set("marryCd", _marryCd);
       row.set("educationCd", _educationCd);
       row.set("incomeCd", _incomeCd);
       row.set("businessCd", _businessCd);
+      row.set("lastMessageDate", _lastMessageDate);
       row.set("investmentTotal", _investmentTotal);
       row.set("investmentCount", _investmentCount);
       row.set("redemptionTotal", _redemptionTotal);
@@ -951,12 +1091,15 @@ public class FDataFinancialCustomerUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("marketerId", RLong.toString(_marketerId));
+      map.put("marketerLid", RLong.toString(_marketerLid));
       map.put("linkId", RLong.toString(_linkId));
       map.put("statisticsId", RInteger.toString(_statisticsId));
       map.put("marryCd", RInteger.toString(_marryCd));
       map.put("educationCd", RInteger.toString(_educationCd));
       map.put("incomeCd", RInteger.toString(_incomeCd));
       map.put("businessCd", RInteger.toString(_businessCd));
+      map.put("lastMessageDate", _lastMessageDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("investmentCount", RInteger.toString(_investmentCount));
       map.put("redemptionTotal", RFloat.toString(_redemptionTotal));
@@ -981,12 +1124,15 @@ public class FDataFinancialCustomerUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
+      _marketerId = input.readInt64();
+      _marketerLid = input.readInt64();
       _linkId = input.readInt64();
       _statisticsId = input.readInt32();
       _marryCd = input.readInt32();
       _educationCd = input.readInt32();
       _incomeCd = input.readInt32();
       _businessCd = input.readInt32();
+      _lastMessageDate.set(input.readInt64());
       _investmentCount = input.readInt32();
       _redemptionCount = input.readInt32();
       _note = input.readString();
@@ -1007,12 +1153,15 @@ public class FDataFinancialCustomerUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
+      output.writeInt64(_marketerId);
+      output.writeInt64(_marketerLid);
       output.writeInt64(_linkId);
       output.writeInt32(_statisticsId);
       output.writeInt32(_marryCd);
       output.writeInt32(_educationCd);
       output.writeInt32(_incomeCd);
       output.writeInt32(_businessCd);
+      output.writeInt64(_lastMessageDate.get());
       output.writeInt32(_investmentCount);
       output.writeInt32(_redemptionCount);
       output.writeString(_note);
