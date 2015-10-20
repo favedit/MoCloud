@@ -9,34 +9,56 @@
 </HEAD>
 <script>
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
-        var url = "/manage/product/common/Province.wa?do=update&date="
-                + new Date().valueOf();
-        var data = {
-            "label" : $('#label').val(),
-            "adminId" : $('#adminId').val(),
-            "areaLabel" : $('#areaLabel').val(),
-            "countryLabel" : $('#countryLabel').val(),
-            "code" : $('#code').val(),
-            "note" : $('#note').val(),
-            "ouid" : $('#ouid').val()
-        };
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
+       if (!isValid())
+          return;
+      progress(); 
+      $("#areaId").val($('#area').combobox("getValue"));
+      $("#countryId").val($('#country').combobox("getValue"));
+      $("#config").submit();
+      closeProgress();
+    }
+    $(function() {
+       var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
+       var data = null;
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+             var result = toJsonObject(msg);
+             $('#country').combobox('loadData', result);
+             $('#country').combobox("select", $('#countryId').val());
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
+       getCountry(0);
+    })
+    function getCountry(flag){
+       var data = null;
+       var counId = $('#country').combobox("getValue");
+       var countId =$('#countryId').val();
+       if(counId!=null) data={"countryId":counId};
+       var url = "/manage/product/common/Area.wa?do=selectAll&date=" + new Date().valueOf();
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
                 var result = toJsonObject(msg);
-                location.href = "/manage/product/common/Province.wa";
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
+                $('#area').combobox("setValue",null);
+                $('#area').combobox('loadData', result);
+                if(flag=='0'){
+                   $('#area').combobox("select", $('#areaId').val());
+                }else{
+                   $('#area').combobox("select", null);
+                }
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
     }
 </script>
 
@@ -69,25 +91,22 @@
         data-options="required:true,validType:'length[0,80]'" />  <input id="adminId"
         name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
-          <input id="ouid"
-        name=""ouid"" style="display:none"
+        <input id="ouid" name="ouid" style="display:none"
         value="<jh:write source='&unit.ouid'/>" />
-      </div></td>
-    </tr>
-    <tr>
-     <td width="78" height="33"><div align="left">所属区域:</div></td>
-     <td><div align="left">
-       <input id="areaLabel" name="areaLabel" class="easyui-validatebox textbox" value="<jh:write source='&unit.areaLabel'/>"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,50]'" /> 
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-       <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox" value="<jh:write source='&unit.countryLabel'/>"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,70]'" /> 
+       <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
+       <input name="countryId" id="countryId" type="hidden" value="<jh:write source='&unit.countryId'/>">
+      </div></td>
+    </tr>
+    <tr>
+     <td width="78" height="33"><div align="left">所属区域:</div></td>
+     <td><div align="left">
+       <div onclick="getCountry(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <input name="areaId" id="areaId" type="hidden" value="<jh:write source='&unit.areaId'/>">
       </div></td>
     </tr>
     <tr>

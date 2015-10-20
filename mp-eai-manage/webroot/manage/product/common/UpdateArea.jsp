@@ -26,33 +26,12 @@
        });
     })
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
-        var url = "/manage/product/common/Area.wa?do=update&date="
-                + new Date().valueOf();
-        var data = {
-            "label" : $('#label').val(),
-            "adminId" : $('#adminId').val(),
-            "countryId":$('#country').combobox("getValue"),
-            "code" : $('#code').val(),
-            "note" : $('#note').val(),
-            "ouid" : $('#ouid').val()
-        };
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-               // var result = toJsonObject(msg);
-                location.href = "/manage/product/common/Area.wa";
-                closeProgress();
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
+      if (!isValid())
+         return;
+      progress(); 
+      $("#countryId").val($('#country').combobox("getValue"));
+      $("#config").submit();
+      closeProgress();
     }
 </script>
 

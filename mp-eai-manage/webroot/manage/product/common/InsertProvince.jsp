@@ -11,8 +11,54 @@
        if (!isValid())
            return;
        progress();
+       $("#countryId").val($('#country').combobox("getValue"));
+       $("#areaId").val($('#area').combobox("getValue"));
        $("#config").submit();
        closeProgress();
+    }
+    $(function() {
+       var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
+       var data = null;
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+             var result = toJsonObject(msg);
+             $('#country').combobox('loadData', result);
+             $('#country').combobox('select', result[0].ouid);
+          },
+          fail: function() {
+             alert("error");
+           }
+        });
+       getData(null);
+       
+   })
+   function getCountry(){
+      var data = null;
+      var counId = $('#country').combobox("getValue");
+      if(counId!=null) data={"countryId":counId};
+      getData(data);
+   }
+    function getData(data){
+       var url = "/manage/product/common/Area.wa?do=selectAll&date=" + new Date().valueOf();
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+                var result = toJsonObject(msg);
+                if(result.length==0){
+                }
+                $('#area').combobox("setValue",null);
+                $('#area').combobox('loadData', result);
+                $('#area').combobox('select', result[0].ouid);
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
     }
 </script>
 
@@ -47,19 +93,17 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属区域:</div></td>
+     <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-       <input id="areaLabel" name="areaLabel" class="easyui-validatebox textbox"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,50]'" /> 
+       <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
+       <input name="countryId" id="countryId" type="hidden">
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属国家:</div></td>
+     <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,70]'" /> 
+       <div onclick="getCountry()" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <input name="areaId" id="areaId" type="hidden">
       </div></td>
     </tr>
     <tr>

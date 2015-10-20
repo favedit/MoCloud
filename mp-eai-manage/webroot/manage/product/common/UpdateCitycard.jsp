@@ -9,10 +9,11 @@
 <script>
    function submitForm() {
       if (!isValid())
-          return;
+         return;
+      progress();
       $("#cityId").val($('#city').combobox("getValue"));
-      //$("#countryId").val($('#country').combobox("getValue"));
       $("#config").submit();
+      closeProgress();
    }
    $(function() {
       var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
@@ -30,11 +31,7 @@
             alert("error");
          }
       });
-      
-     // 
-     // 
       getCountry(0);
-      
       getArea(0);
       getProvince(0);
    })
@@ -52,9 +49,10 @@
                var result = toJsonObject(msg);
                $('#area').combobox("setValue",null);
                $('#area').combobox('loadData', result);
-               if(flag==0){
-               var aid = $('#areaId').val();
-                  $('#area').combobox("select", aid);
+               if(flag=='0'){
+                  $('#area').combobox("select", $('#areaId').val());
+               }else{
+                  $('#area').combobox("select", null);
                }
          },
          fail: function() {
@@ -77,8 +75,10 @@
                }
                $('#province').combobox("setValue",null);
                $('#province').combobox('loadData', result);
-               if(flag==0){
+               if(flag=='0'){
                   $('#province').combobox("select", $('#provinceId').val());
+               }else{
+                  $('#province').combobox("select", null);
                }
          },
          fail: function() {
@@ -101,8 +101,10 @@
                }
                $('#city').combobox("setValue",null);
                $('#city').combobox('loadData', result);
-               if(flag==0){
+               if(flag=='0'){
                   $('#city').combobox("select", $('#cityId').val());
+               }else{
+                  $('#city').combobox("select", null);
                }
          },
          fail: function() {
@@ -151,21 +153,21 @@
     <tr>
      <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <div onclick="getCountry(1)"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div onclick="getCountry(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="areaId" type="hidden" value="<jh:write source='&unit.areaId'/>">
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属省份:</div></td>
      <td><div align="left">
-       <div onclick="getArea(1)"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
-       <input name="areaId" id="provinceId" type="hidden" value="<jh:write source='&unit.provinceId'/>">
+       <div onclick="getArea(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <input name="provinceId" id="provinceId" type="hidden" value="<jh:write source='&unit.provinceId'/>">
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属城市:</div></td>
      <td><div align="left">
-       <div onclick="getProvince(1)"><input class="easyui-combobox" style="width:380px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div onclick="getProvince(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="cityId" id="cityId" type="hidden" value="<jh:write source='&unit.cityId'/>">
       </div></td>
     </tr>

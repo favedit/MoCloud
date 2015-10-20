@@ -1,10 +1,16 @@
 package org.mo.content.core.manage.product.common;
 
+import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
+import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 import com.cyou.gccloud.data.data.FDataCommonProvinceLogic;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
+
+import java.util.Iterator;
+
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
 //============================================================
@@ -29,6 +35,14 @@ public class FProvinceConsole
          IProvinceConsole 
 {
 
+   // 国家控制台
+   @ALink
+   protected ICountryConsole _countryConsole;
+
+   // 区域控制台
+   @ALink
+   protected IAreaConsole _areaConsole;
+   
    // 每页条数
    static final int _pageSize = 20;
 
@@ -65,6 +79,19 @@ public class FProvinceConsole
       }
       FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
       FLogicDataset<FDataProvinceInfo> userInfoList = logic.fetchClass(FDataProvinceInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      for (Iterator<FDataProvinceInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
+         FDataProvinceInfo tempUnit = iterator.next();
+         FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
+         if (unit2 != null) {
+            String _countryLabel = unit2.name();
+            tempUnit.setCountryLabel(_countryLabel);
+         }
+         FDataCommonAreaUnit unit3 = _areaConsole.find(logicContext, tempUnit.areaId());
+         if (unit3 != null) {
+            String _areaLabel = unit3.label();
+            tempUnit.setAreaLabel(_areaLabel);
+         }
+      }
       return userInfoList;
    }
 

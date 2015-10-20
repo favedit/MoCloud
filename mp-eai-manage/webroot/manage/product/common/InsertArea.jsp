@@ -25,6 +25,7 @@
            success: function(msg) {
               var result = toJsonObject(msg);
               $('#country').combobox('loadData', result);
+              $('#country').combobox('select', result[0].ouid);
            },
            fail: function() {
               alert("error");

@@ -1,9 +1,6 @@
 package org.mo.content.face.manage.product.common;
 
-import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
-import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
-import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -175,19 +172,7 @@ public class FCityAction
       }
       long id = context.parameterAsLong("id");
       FDataCommonCityUnit unit = _cityConsole.find(logicContext, id);
-      FDataCityInfo info = new FDataCityInfo();
-      info.setOuid(unit.ouid());
-      info.setAreaLabel(unit.area().label());
-      info.setCityCode(unit.cityCode());
-      info.setCode(unit.code());
-      info.setCountryLabel(unit.country().name());
-      info.setProvinceLabel(unit.province().label());
-      info.setLabel(unit.label());
-      info.setLevel(unit.level());
-      info.setLocationLatitude(info.locationLatitude());
-      info.setLocationLongitude(unit.locationLongitude());
-      info.setNote(unit.note());
-      page.setUnit(info);
+      page.setUnit(unit);
       page.setResult("");
       return "/manage/product/common/UpdateCity";
    }
@@ -213,7 +198,7 @@ public class FCityAction
       FDataCommonCityUnit unit = _cityConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setCityDat(unit, context, logicContext);
       _cityConsole.doUpdate(logicContext, unit);
-      return "/manage/common/ajax";
+      return "/manage/product/common/CityList";
    }
 
    // ============================================================
@@ -272,18 +257,9 @@ public class FCityAction
       if (!RString.isEmpty(ltd)) {
          unit.setLocationLatitude(Double.valueOf(ltd));
       }
-      FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("countryLabel"));
-      if (null != unitc) {
-         unit.setCountryId(unitc.ouid());
-      }
-      FDataCommonAreaUnit unita = _areaConsole.findByLable(logicContext, context.parameter("areaLabel"));
-      if (null != unita) {
-         unit.setAreaId(unita.ouid());
-      }
-      FDataCommonProvinceUnit unitp = _provinceConsole.findByProvinceLabel(logicContext, context.parameter("provinceLabel"));
-      if (null != unitp) {
-         unit.setProvinceId(unitp.ouid());
-      }
+      unit.setCountryId(context.parameterAsLong("countryId"));
+      unit.setAreaId(context.parameterAsLong("areaId"));
+      unit.setProvinceId(context.parameterAsLong("provinceId"));
    }
    // ============================================================
    // <T>全查</T>

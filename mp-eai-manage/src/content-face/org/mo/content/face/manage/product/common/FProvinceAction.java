@@ -1,9 +1,6 @@
 package org.mo.content.face.manage.product.common;
 
-import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
-import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
-import java.util.Iterator;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
@@ -93,19 +90,6 @@ public class FProvinceAction
          unit.setLabel(label);
       }
       FLogicDataset<FDataProvinceInfo> unitList = _proviConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for (Iterator<FDataProvinceInfo> iterator = unitList.iterator(); iterator.hasNext();) {
-         FDataProvinceInfo tempUnit = iterator.next();
-         FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
-         if (unit2 != null) {
-            String _countryLabel = unit2.name();
-            tempUnit.setCountryLabel(_countryLabel);
-         }
-         FDataCommonAreaUnit unit3 = _areaConsole.find(logicContext, tempUnit.areaId());
-         if (unit3 != null) {
-            String _areaLabel = unit3.label();
-            tempUnit.setAreaLabel(_areaLabel);
-         }
-      }
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
@@ -183,14 +167,7 @@ public class FProvinceAction
       }
       long id = context.parameterAsLong("id");
       FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, id);
-      FDataProvinceInfo info = new FDataProvinceInfo();
-      info.setAreaLabel(unit.area().label());
-      info.setCountryLabel(unit.country().name());
-      info.setCode(unit.code());
-      info.setLabel(unit.label());
-      info.setNote(unit.note());
-      info.setOuid(unit.ouid());
-      page.setUnit(info);
+      page.setUnit(unit);
       page.setResult("");
       return "/manage/product/common/UpdateProvince";
    }
@@ -215,7 +192,7 @@ public class FProvinceAction
       FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setProvinceDat(unit, context, logicContext);
       _proviConsole.doUpdate(logicContext, unit);
-      return "/manage/common/ajax";
+      return "/manage/product/common/ProvinceList";
    }
 
    // ============================================================
@@ -261,14 +238,8 @@ public class FProvinceAction
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
       unit.setNote(context.parameter("note"));
-      FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("countryLabel"));
-      if (null != unitc) {
-         unit.setCountryId(unitc.ouid());
-      }
-      FDataCommonAreaUnit unita = _areaConsole.findByLable(logicContext, context.parameter("areaLabel"));
-      if (null != unita) {
-         unit.setAreaId(unita.ouid());
-      }
+      unit.setCountryId(context.parameterAsLong("countryId"));
+      unit.setAreaId(context.parameterAsLong("areaId"));
    }
    
    // ============================================================

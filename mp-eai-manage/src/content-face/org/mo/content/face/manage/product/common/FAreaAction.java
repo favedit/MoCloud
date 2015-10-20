@@ -1,7 +1,6 @@
 package org.mo.content.face.manage.product.common;
 
 import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
-import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -250,16 +249,7 @@ public class FAreaAction
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
       unit.setNote(context.parameter("note"));
-      Long countryId = context.parameterAsLong("countryId");// 获取国家id
-      String country = context.parameter("countryId");// 获取国家名称
-      if (!RString.isEmpty(countryId + "")) {
-         unit.setCountryId(countryId);
-      } else if (!RString.isEmpty(country + "")) {
-         FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("countryId"));
-         if (null != unitc) {
-            unit.setCountryId(unitc.ouid());
-         }
-      }
+      unit.setCountryId(context.parameterAsLong("countryId"));
    }
 
    // ============================================================

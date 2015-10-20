@@ -64,6 +64,9 @@
                + id + "&date=" + new Date().valueOf();
        closeProgress();
     }
+    function showPhoto(iconUrl){
+       return "<img src="+iconUrl+" height=30px width=45px/>";
+    }
 </script>
 </HEAD>
 
@@ -94,8 +97,8 @@
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
      <th
-     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
-     width="160px">图片</th>
+     data-options="field:'iconUrl',halign:'center',align:'left',formatter:showPhoto"
+     width="60px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="200px">标题</th>

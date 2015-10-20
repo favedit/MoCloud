@@ -9,40 +9,86 @@
 </HEAD>
 <script>
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
-        var url = "/manage/product/common/City.wa?do=update&date="
-                + new Date().valueOf();
-        var data = {
-            "label" : $('#label').val(),
-            "adminId" : $('#adminId').val(),
-            "ouid" : $('#ouid').val(),
-            "level" : $('#level').val(),
-            "code" : $('#code').val(),
-            "note" : $('#note').val(),
-            "cityCode" : $('#cityCode').val(),
-            "countryLabel" : $('#countryLabel').val(),
-            "areaLabel" : $('#areaLabel').val(),
-            "provinceLabel" : $('#provinceLabel').val(),
-            "locationLongitude" : $('#locationLongitude').val(),
-            "locationLatitude" : $('#locationLatitude').val(),
-            "note" : $('#note').val()
-        };
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
+       if (!isValid())
+          return;
+       progress(); 
+      $("#areaId").val($('#area').combobox("getValue"));
+      $("#countryId").val($('#country').combobox("getValue"));
+      $("#provinceId").val($('#province').combobox("getValue"));
+      $("#config").submit();
+      closeProgress();
+    }
+    $(function() {
+       var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
+       var data = null;
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+             var result = toJsonObject(msg);
+             $('#country').combobox('loadData', result);
+             $('#country').combobox("select", $('#countryId').val());
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
+       getCountry(0);
+       
+       getArea(0);
+       getProvince(0);
+    })
+    function getCountry(flag){
+       var data = null;
+       var counId = $('#country').combobox("getValue");
+       var countId =$('#countryId').val();
+       if(counId!=null) data={"countryId":counId};
+       var url = "/manage/product/common/Area.wa?do=selectAll&date=" + new Date().valueOf();
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
                 var result = toJsonObject(msg);
-                location.href = "/manage/product/common/City.wa";
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
+                $('#area').combobox("setValue",null);
+                $('#area').combobox('loadData', result);
+                if(flag=='0'){
+                   $('#area').combobox("select", $('#areaId').val());
+                }else{
+                   $('#area').combobox("select", null);
+                }
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
+    }
+    function getArea(flag){
+       var data = null;
+       var areaId = $('#area').combobox("getValue");
+       if(areaId!=null) data={"areaId":areaId};
+       var url = "/manage/product/common/Province.wa?do=selectAll&date=" + new Date().valueOf();
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+                var result = toJsonObject(msg);
+                if(result.length==0){
+                }
+                $('#province').combobox("setValue",null);
+                $('#province').combobox('loadData', result);
+                if(flag=='0'){
+                   $('#province').combobox("select", $('#provinceId').val());
+                }else{
+                   $('#province').combobox("select", null);
+                }
+          },
+          fail: function() {
+             alert("error");
+          }
+       });
     }
 </script>
 <body bgcolor="#198bc9">
@@ -105,25 +151,22 @@
     <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-       <input id="countryLabel" name="countryLabel" class="easyui-validatebox textbox"  value="<jh:write source='&unit.countryLabel'/>"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,70]'" /> 
+       <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
+       <input name="countryId" id="countryId" type="hidden" value="<jh:write source='&unit.countryId'/>">
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <input id="areaLabel" name="areaLabel" class="easyui-validatebox textbox" value="<jh:write source='&unit.areaLabel'/>"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,80]'" /> 
+       <div onclick="getCountry(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <input name="areaId" id="areaId" type="hidden" value="<jh:write source='&unit.areaId'/>">
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属省会:</div></td>
+     <td width="78" height="33"><div align="left">所属省份:</div></td>
      <td><div align="left">
-       <input id="provinceLabel" name="provinceLabel" class="easyui-validatebox textbox" value="<jh:write source='&unit.provinceLabel'/>"
-        style="width:380px;height:20px;"
-        data-options="validType:'length[0,80]'" /> 
+       <div onclick="getArea(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <input name="provinceId" id="provinceId" type="hidden" value="<jh:write source='&unit.provinceId'/>">
       </div></td>
     </tr>
     <tr>

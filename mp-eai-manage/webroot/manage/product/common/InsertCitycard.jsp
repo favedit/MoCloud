@@ -8,10 +8,11 @@
 <script>
    function submitForm() {
       if (!isValid())
-          return;
+         return;
+      progress();
       $("#cityId").val($('#city').combobox("getValue"));
-      //$("#countryId").val($('#country').combobox("getValue"));
       $("#config").submit();
+      closeProgress();
    }
    $(function() {
        var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
@@ -23,16 +24,23 @@
           success: function(msg) {
              var result = toJsonObject(msg);
              $('#country').combobox('loadData', result);
+             $('#country').combobox('select', result[0].ouid);
           },
           fail: function() {
              alert("error");
            }
         });
+       getPData(null);
+       getAData(null);
+       getCData(null);
    })
    function getCountry(){
       var data = null;
       var counId = $('#country').combobox("getValue");
       if(counId!=null) data={"countryId":counId};
+      getCData(data);
+   }
+   function getCData(data){
       var url = "/manage/product/common/Area.wa?do=selectAll&date=" + new Date().valueOf();
       $.ajax({
          type: "POST",
@@ -44,6 +52,7 @@
                }
                $('#area').combobox("setValue",null);
                $('#area').combobox('loadData', result);
+               $('#area').combobox('select', result[0].ouid);
          },
          fail: function() {
             alert("error");
@@ -54,6 +63,9 @@
       var data = null;
       var areaId = $('#area').combobox("getValue");
       if(areaId!=null) data={"areaId":areaId};
+      getAData(data);
+   }
+   function getAData(data){
       var url = "/manage/product/common/Province.wa?do=selectAll&date=" + new Date().valueOf();
       $.ajax({
          type: "POST",
@@ -65,6 +77,7 @@
                }
                $('#province').combobox("setValue",null);
                $('#province').combobox('loadData', result);
+               $('#province').combobox('select', result[0].ouid);
          },
          fail: function() {
             alert("error");
@@ -75,6 +88,9 @@
       var data = null;
       var provinceId = $('#province').combobox("getValue");
       if(provinceId!=null) data={"provinceId":provinceId};
+      getPData(data);
+   }
+   function getPData(data){
       var url = "/manage/product/common/City.wa?do=selectAll&date=" + new Date().valueOf();
       $.ajax({
          type: "POST",
@@ -86,6 +102,7 @@
                }
                $('#city').combobox("setValue",null);
                $('#city').combobox('loadData', result);
+               $('#city').combobox('select', result[0].ouid);
          },
          fail: function() {
             alert("error");
@@ -133,21 +150,21 @@
     <tr>
      <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <div onclick="getCountry()"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div onclick="getCountry()" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="areaId" type="hidden">
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属省份:</div></td>
      <td><div align="left">
-       <div onclick="getArea()"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div onclick="getArea()" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="provinceId" type="hidden">
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属城市:</div></td>
      <td><div align="left">
-       <div onclick="getProvince()"><input class="easyui-combobox" style="width:380px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div onclick="getProvince()" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="cityId" id="cityId" type="hidden">
       </div></td>
     </tr>
