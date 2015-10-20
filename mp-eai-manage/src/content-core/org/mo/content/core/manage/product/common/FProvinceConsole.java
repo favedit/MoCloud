@@ -19,8 +19,6 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>省会控制台</P>
 //@class FProvinceConsole
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -152,5 +150,27 @@ public class FProvinceConsole
          }
       }
       return false;
+   }
+   
+   // ============================================================
+   // <T>根据区域id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonProvinceUnit> selectAll(ILogicContext logicContext, 
+                                                       Long areaId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(areaId + "") && areaId > 0) {
+         whereSql.append(FDataCommonProvinceLogic.AREA_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {areaId}");
+         whereSql.bind("areaId", RString.parse(areaId));
+         FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
+         return logic.fetch(whereSql.toString());
+      }
+      FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
+      return logic.fetchAll();
    }
 }

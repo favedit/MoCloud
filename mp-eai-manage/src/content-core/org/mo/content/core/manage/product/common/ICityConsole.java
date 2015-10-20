@@ -53,4 +53,13 @@ public interface ICityConsole
                                                                Long countryId, 
                                                                Long areaId, 
                                                                Long provinceId);
+   
+   // ============================================================
+   // <T>根据省份id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCommonCityUnit> selectAll(ILogicContext logicContext, 
+                                                Long provinceId);
 }

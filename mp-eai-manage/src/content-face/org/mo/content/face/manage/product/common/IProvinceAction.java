@@ -99,4 +99,16 @@ public interface IProvinceAction
                  ILogicContext logicContext,
                  @AContainer(name = "page") FProvincePage Page,
                  @AContainer(name = "basePage") FBasePage basePage);
+   
+   // ============================================================
+   // <T>全查</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   public String selectAll(IWebContext context, 
+                           @AContainer(name = "page") ILogicContext logicContext, 
+                           @AContainer(name = "basePage") FBasePage basePage);
 }

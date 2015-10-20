@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import com.cyou.gccloud.define.enums.core.EGcVersionForce;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
@@ -171,6 +172,32 @@ public class FVersionAction
    }
 
    // ============================================================
+   // <T>是否编辑</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String isUpdate(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FVersionPage Page, 
+                              FBasePage basePage){
+      _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataSystemVersionUnit unit = _versionConsole.find(logicContext, id);
+      if(RString.equals(unit.statusCd(),2)){
+         basePage.setJson("noUpdate");
+      }else{
+         basePage.setJson("yesUpdate");
+      }
+      return "/manage/common/ajax";
+   }
+   // ============================================================
    // <T>更新</T>
    //
    // @param context 网络环境
@@ -193,23 +220,71 @@ public class FVersionAction
          basePage.setJson("nonumber");
          return "/manage/common/ajax";
       }
+      setLogicVersion(context, logicContext, unit);
       if (_versionConsole.isExsitsAppIdandNumberandOuid(logicContext, unit.applicationId(), unit.ouid(), unit.number())) {
          basePage.setJson("overwrite");
          return "/manage/common/ajax";
       }
-      setLogicVersion(context, logicContext, unit);
       _versionConsole.doUpdate(logicContext, unit);
       basePage.setJson("success");
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/common/ajax";
    }
 
+   // ============================================================
+   // <T>删除之前</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
    @Override
-   public String delete(IWebContext context,
+   public String deleteBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FVersionPage Page, 
+                              FBasePage basePage){
+      _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataSystemVersionUnit unit = _versionConsole.find(logicContext, id);
+      if(RString.equals(unit.statusCd(),2)){
+         basePage.setJson("noDel");
+      }else{
+         basePage.setJson("yesDel");
+      }
+      return "/manage/common/ajax";
+   }
+   // ============================================================
+   // <T>删除</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String delete(IWebContext context, 
                         ILogicContext logicContext, 
-                        FVersionPage page, 
+                        FVersionPage Page, 
                         FBasePage basePage) {
-      return null;
+      _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataSystemVersionUnit unit = _versionConsole.find(logicContext, id);
+      if (unit == null) {
+         throw new FFatalError("id not exists.");
+      }
+      EResult result = _versionConsole.doDelete(logicContext, unit);
+      if (!result.equals(EResult.Success)) {
+         throw new FFatalError("Delete failure.");
+      } else {
+         return "/manage/product/system/version/VersionList";
+      }
    }
 
    // ============================================================

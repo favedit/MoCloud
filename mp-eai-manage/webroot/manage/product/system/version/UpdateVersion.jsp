@@ -75,7 +75,7 @@
          </div>
          <div class="btn_bar">
             <div class="nav_btn">
-               <a href="#" onClick="submitForm()" class="sub_btn"></a>
+               <a href="#" onClick="submitForm()" class="sub_btn"></a> 
                <a href="/manage/product/system/version/Version.wa" class="back_btn"></a>
             </div>
             <div class="nav_search"></div>

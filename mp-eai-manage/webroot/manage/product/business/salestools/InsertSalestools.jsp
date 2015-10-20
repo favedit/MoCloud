@@ -8,11 +8,37 @@
 </HEAD>
 <script>
     function submitForm() {
+       if (!isValid())
+          return;
        progress();
-       $("#getHtml").click();
-       $("#statusCdStr").val("1");
-       $("#config").submit();
-       closeProgress();
+       
+       var linkCd = $("#linkCd").combobox("getValue");
+       if(linkCd>1){
+          var linkUrl = $("#linkUrl").val();
+          if(null==linkUrl||""==linkUrl){
+             closeProgress();
+             alert("外链地址不为空!");
+             return false;
+          }
+       }
+       
+       var file = $("#iconUrl").val();
+       if(file!=""){
+          if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(file)){
+             closeProgress();
+             alert("图片类型必须是.gif|jpg|jpeg|png|gif|jpg|png中的一种!");
+             return false;
+          }
+          var fileSize = document.getElementById("iconUrl").files[0].size;
+          if(fileSize>20480){
+             closeProgress();
+             alert("请上传大小小于20k的等比例图片!");
+             return false;
+          }
+       }
+    $("#getHtml").click();
+    $("#config").submit();
+    closeProgress();
     }
    var editor;
    KindEditor.ready(function(K) {
@@ -60,9 +86,9 @@
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
       <td width="74"><div align="left">标题:</div></td>
-      <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
+      <td width="185"><input id="label" name="label" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
-        data-options="validType:'length[0,200]'" /></td>
+        data-options="required:true,validType:'length[0,200]'" /></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否展示:</div></td>
@@ -92,9 +118,9 @@
     </tr>
     <tr>
       <td  height="38" width="74"><div align="left">排序:</div></td>
-      <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox"
+      <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
-        data-options="validType:'length[0,11]'" /></td>
+        data-options="required:true,validType:'length[0,11]'" /></td>
     </tr>
     <tr>
       <td  height="38" width="74"><div align="left">关键字:</div></td>

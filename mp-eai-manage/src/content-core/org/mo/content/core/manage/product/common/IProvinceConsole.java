@@ -75,4 +75,15 @@ public interface IProvinceConsole
                                                        String proviceLabel, 
                                                        Long areaId, 
                                                        Long countryId);
+   
+   // ============================================================
+   // <T>更具区域id查询所有省份</T>
+   // @param logicContext 链接对象
+   // @param proviceLabel 省份标签
+   // @param areaId 区域id
+   // @param countryId 国家id
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCommonProvinceUnit> selectAll(ILogicContext logicContext, 
+                                                    Long areaId);
 }

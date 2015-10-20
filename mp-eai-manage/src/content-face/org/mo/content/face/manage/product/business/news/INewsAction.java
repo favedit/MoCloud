@@ -74,7 +74,7 @@ public interface INewsAction {
                        @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
-   // <T>更新</T>
+   // <T>更新 </T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -86,6 +86,19 @@ public interface INewsAction {
                  @AContainer(name = "page") FNewsPage Page, 
                  @AContainer(name = "basePage") FBasePage basePage);
 
+   // ============================================================
+   // <T>删除之前 </T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   public String deleteBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              @AContainer(name = "page") FNewsPage page, 
+                              @AContainer(name = "basePage") FBasePage basePage);
+   
    // ============================================================
    // <T>删除</T>
    //

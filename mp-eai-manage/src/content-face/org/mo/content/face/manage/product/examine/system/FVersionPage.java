@@ -1,6 +1,5 @@
 package org.mo.content.face.manage.product.examine.system;
 
-import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 
 import org.mo.com.lang.FObjectId;

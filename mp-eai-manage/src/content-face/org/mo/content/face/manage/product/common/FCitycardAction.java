@@ -1,15 +1,13 @@
 package org.mo.content.face.manage.product.common;
 
-import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
-import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
-import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
-import java.util.Iterator;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.common.FDataProvinceInfo;
+import org.mo.content.core.manage.product.common.FDataCitycardInfo;
 import org.mo.content.core.manage.product.common.IAreaConsole;
+import org.mo.content.core.manage.product.common.ICityConsole;
+import org.mo.content.core.manage.product.common.ICitycardConsole;
 import org.mo.content.core.manage.product.common.ICountryConsole;
 import org.mo.content.core.manage.product.common.IProvinceConsole;
 import org.mo.content.face.base.FBasePage;
@@ -18,26 +16,32 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
-//============================================================
-//<P>省会信息控制器</P>
-//@class FProvinceAction
-//@version 1.0.0
-//============================================================
-public class FProvinceAction 
-      implements 
-         IProvinceAction 
-{
-   // 日志输出接口
-   private static ILogger _logger = RLogger.find(FProvinceAction.class);
+import com.cyou.gccloud.data.data.FDataCommonCityCardUnit;
+import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 
-   // 省会控制台
+public class FCitycardAction 
+      implements 
+         ICitycardAction 
+{
+// 日志输出接口
+   private static ILogger _logger = RLogger.find(FCityAction.class);
+
+   // 用户控制台
    @ALink
-   protected IProvinceConsole _proviConsole;
+   protected ICityConsole _cityConsole;
 
    // 国家控制台
    @ALink
    protected ICountryConsole _countryConsole;
 
+   // 城市省份证对照控制台
+   @ALink
+   protected ICitycardConsole _citycardConsole;
+
+// 省会控制台
+   @ALink
+   protected IProvinceConsole _provinceConsole;
+   
    // 区域控制台
    @ALink
    protected IAreaConsole _areaConsole;
@@ -56,7 +60,7 @@ public class FProvinceAction
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/common/ProvinceList";
+      return "/manage/product/common/CitycardList";
    }
 
    // ============================================================
@@ -70,7 +74,7 @@ public class FProvinceAction
    @Override
    public String select(IWebContext context, 
                         ILogicContext logicContext, 
-                        FProvincePage page, 
+                        FCitycardPage page, 
                         FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -82,32 +86,17 @@ public class FProvinceAction
       } else {
          page.setPageCurrent(0);
       }
-      FDataCommonProvinceUnit unit = new FDataCommonProvinceUnit();
+      FDataCommonCityCardUnit unit = new FDataCommonCityCardUnit();
+      unit.setCardCode(context.parameterAsInteger("cardCode"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      String label = context.parameter("label");
-      if (null != label) {// 添加搜索条件
-         unit.setLabel(label);
-      }
-      FLogicDataset<FDataProvinceInfo> unitList = _proviConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for (Iterator<FDataProvinceInfo> iterator = unitList.iterator(); iterator.hasNext();) {
-         FDataProvinceInfo tempUnit = iterator.next();
-         FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
-         if (unit2 != null) {
-            String _countryLabel = unit2.name();
-            tempUnit.setCountryLabel(_countryLabel);
-         }
-         FDataCommonAreaUnit unit3 = _areaConsole.find(logicContext, tempUnit.areaId());
-         if (unit3 != null) {
-            String _areaLabel = unit3.label();
-            tempUnit.setAreaLabel(_areaLabel);
-         }
-      }
+      FLogicDataset<FDataCitycardInfo> unitList = _citycardConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
+      page.setResult("");
       return "/manage/common/ajax";
    }
 
@@ -122,15 +111,13 @@ public class FProvinceAction
    @Override
    public String insertBefore(IWebContext context, 
                               ILogicContext logicContext, 
-                              FProvincePage page, 
+                              FCitycardPage Page, 
                               FBasePage basePage) {
-
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      page.setResult("");
-      return "/manage/product/common/InsertProvince";
+      return "/manage/product/common/InsertCitycard";
    }
 
    // ============================================================
@@ -144,24 +131,24 @@ public class FProvinceAction
    @Override
    public String insert(IWebContext context, 
                         ILogicContext logicContext, 
-                        FProvincePage page, 
+                        FCitycardPage page, 
                         FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      FDataCommonProvinceUnit unit = _proviConsole.doPrepare(logicContext);
-      setProvinceDat(unit, context, logicContext);
-      if (_proviConsole.isExistsByLabelandAreaIdandCountryId(logicContext, unit.label(), unit.areaId(), unit.countryId())) {
+      FDataCommonCityCardUnit unit = _citycardConsole.doPrepare(logicContext);
+      setCitycardDat(unit, context, logicContext);
+      if (_citycardConsole.isExsitsByCardcodeandByCityId(logicContext, unit.cityId(), unit.cardCode())) {
          page.setResult("请重新增加!");
-         return "/manage/product/common/InsertProvince";
+         return "/manage/product/common/InsertCitycard";
       }
-      EResult result = _proviConsole.doInsert(logicContext, unit);
+      EResult result = _citycardConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
-         return "/manage/product/common/InsertProvince";
+         return "/manage/product/common/InsertCitycard";
       }
-      return "/manage/product/common/ProvinceList";
+      return "/manage/product/common/CitycardList";
    }
 
    // ============================================================
@@ -175,24 +162,27 @@ public class FProvinceAction
    @Override
    public String updateBefore(IWebContext context, 
                               ILogicContext logicContext, 
-                              FProvincePage page, 
+                              FCitycardPage page, 
                               FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-      FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, id);
-      FDataProvinceInfo info = new FDataProvinceInfo();
-      info.setAreaLabel(unit.area().label());
-      info.setCountryLabel(unit.country().name());
-      info.setCode(unit.code());
-      info.setLabel(unit.label());
-      info.setNote(unit.note());
+      FDataCommonCityCardUnit unit = _citycardConsole.find(logicContext, id);
+      FDataCitycardInfo info = new FDataCitycardInfo();
       info.setOuid(unit.ouid());
+      info.setCardCode(unit.cardCode());
+      FDataCommonCityUnit unitc = _cityConsole.find(logicContext, unit.cityId());
+      if(unitc!=null){
+         info.setAreaId(unitc.areaId());
+         info.setCityId(unit.cityId());
+         info.setProvinceId(unitc.provinceId());
+         info.setCountryId(unitc.countryId());
+      }
       page.setUnit(info);
       page.setResult("");
-      return "/manage/product/common/UpdateProvince";
+      return "/manage/product/common/UpdateCitycard";
    }
 
    // ============================================================
@@ -206,15 +196,17 @@ public class FProvinceAction
    @Override
    public String update(IWebContext context, 
                         ILogicContext logicContext, 
-                        FProvincePage Page, 
+                        FCitycardPage Page, 
                         FBasePage basePage) {
+
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
-      setProvinceDat(unit, context, logicContext);
-      _proviConsole.doUpdate(logicContext, unit);
+      FDataCommonCityCardUnit unit = _citycardConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
+      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      setCitycardDat(unit, context, logicContext);
+      _citycardConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }
 
@@ -229,22 +221,22 @@ public class FProvinceAction
    @Override
    public String delete(IWebContext context, 
                         ILogicContext logicContext, 
-                        FProvincePage Page, 
+                        FCitycardPage Page, 
                         FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-      FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, id);
+      FDataCommonCityUnit unit = _cityConsole.find(logicContext, id);
       if (unit == null) {
          throw new FFatalError("id not exists.");
       }
-      EResult result = _proviConsole.doDelete(logicContext, unit);
+      EResult result = _cityConsole.doDelete(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
       } else {
-         return "/manage/product/financial/customer/CustomerList";
+         return "/manage/product/common/CitycardList";
       }
    }
 
@@ -254,37 +246,11 @@ public class FProvinceAction
    // @param logicContext 逻辑环境
    // @return void
    // ============================================================
-   public void setProvinceDat(FDataCommonProvinceUnit unit, 
+   public void setCitycardDat(FDataCommonCityCardUnit unit, 
                               IWebContext context, 
                               ILogicContext logicContext) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setCode(context.parameter("code"));
-      unit.setLabel(context.parameter("label"));
-      unit.setNote(context.parameter("note"));
-      FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("countryLabel"));
-      if (null != unitc) {
-         unit.setCountryId(unitc.ouid());
-      }
-      FDataCommonAreaUnit unita = _areaConsole.findByLable(logicContext, context.parameter("areaLabel"));
-      if (null != unita) {
-         unit.setAreaId(unita.ouid());
-      }
-   }
-   
-   // ============================================================
-   // <T>全查</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   @Override
-   public String selectAll(IWebContext context, 
-                           ILogicContext logicContext, 
-                           FBasePage basePage) {
-      FLogicDataset<FDataCommonProvinceUnit> countryList = _proviConsole.selectAll(logicContext, context.parameterAsLong("areaId"));
-      basePage.setJson(countryList.toJsonString());
-      return "/manage/common/ajax";
+      unit.setCardCode(context.parameterAsInteger("cardCode"));
+      unit.setCityId(context.parameterAsLong("cityId"));
    }
 }

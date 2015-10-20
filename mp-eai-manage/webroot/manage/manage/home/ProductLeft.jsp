@@ -62,6 +62,9 @@
                   <jh:equals source="manage.product.common.city" value="&basePage.menuString">
                      <li><a href="/manage/product/common/City.wa" target="right">城市信息</a></li>
                   </jh:equals>
+                  <jh:equals source="manage.product.common.citycard" value="&basePage.menuString">
+                     <li><a href="/manage/product/common/Citycard.wa" target="right">城市身份证对照信息</a></li>
+                  </jh:equals>
                   <jh:equals source="manage.product.common.configration" value="&basePage.menuString">
                      <li><a href="/manage/product/common/configration/Configration.wa" target="right">配置信息</a></li>
                   </jh:equals>

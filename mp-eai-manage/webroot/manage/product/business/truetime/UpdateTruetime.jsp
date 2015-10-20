@@ -27,10 +27,37 @@
        $("#kindeditor_view").val(conte);
     });
     function submitForm() {
+       if (!isValid())
+          return;
        progress();
-       $("#getHtml").click();
-       $("#logicNews").submit();
-       closeProgress();
+       
+       var linkCd = $("#linkCd").combobox("getValue");
+       if(linkCd>1){
+          var linkUrl = $("#linkUrl").val();
+          if(null==linkUrl||""==linkUrl){
+             closeProgress();
+             alert("外链地址不为空!");
+             return false;
+          }
+       }
+       
+       var file = $("#iconUrl").val();
+       if(""!=file){
+          if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(file)){
+             closeProgress();
+             alert("图片类型必须是.gif|jpg|jpeg|png|gif|jpg|png中的一种!");
+             return false;
+          }
+          var fileSize = document.getElementById("iconUrl").files[0].size;
+          if(fileSize>20480){
+             closeProgress();
+             alert("请上传大小小于20k的等比例图片!");
+             return false;
+          }
+       }
+    $("#getHtml").click();
+    $("#logicNews").submit();
+    closeProgress();
     }
     var editor;
     KindEditor.ready(function(K) {
@@ -66,8 +93,8 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <a href="#" onClick="submitForm()" class="sub_btn"></a> <a
-     href="/manage/product/business/truetime/Truetime.wa" class="back_btn"></a>
+      <a href="#" onClick="submitForm()" class="sub_btn"></a> 
+      <a href="/manage/product/business/truetime/Truetime.wa" class="back_btn"></a>
    </div>
    <div class="nav_search"></div>
   </div>
@@ -81,8 +108,8 @@
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
       <td width="54" height="38"><div align="left">实时数据标题:</div></td>
-      <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:380px;height:20px"
+      <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px" data-options="required:true,validType:'length[0,200]'"
         value="<jh:write source='&unit.label'/>" />
         <input id="adminId" name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
@@ -122,9 +149,9 @@
     </tr>
     <tr>
       <td  height="38" width="74"><div align="left">排序:</div></td>
-      <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox"
+      <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
-        data-options="validType:'length[0,11]'"  value="<jh:write source='&unit.displayOrder'/>"/></td>
+        data-options="required:true,validType:'length[0,11]'"  value="<jh:write source='&unit.displayOrder'/>"/></td>
     </tr>
     <tr>
       <td height="38"><div align="left">关键字:</div></td>

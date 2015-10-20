@@ -3,7 +3,10 @@ package org.mo.content.core.manage.product.business.news;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import java.util.Map;
 
-public class FDataNewsInfo extends FDataLogicNewsUnit {
+public class FDataNewsInfo 
+      extends 
+         FDataLogicNewsUnit 
+{
    // 状态字符串
    private String _statusCdStr;
    // 外链状态字符串

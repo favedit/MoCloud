@@ -188,6 +188,12 @@ public class FSalestoolsAction
          info.setImageName(
                "/manage/images/salestoolsImages/" + unit.iconUrl().substring(na + 17, unit.iconUrl().length()));
       }
+      if(RString.equals(unit.statusCd(),2)){
+         basePage.setMenuString("manage.hide");
+      }
+      if(!RString.equals(unit.statusCd(),2)){
+         basePage.setMenuString("manage.show");
+      }
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
@@ -231,6 +237,32 @@ public class FSalestoolsAction
       return "/manage/product/business/salestools/SalestoolsList";
    }
 
+   // ============================================================
+   // <T>删除之前</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String deleteBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSalestoolsPage Page, 
+                              FBasePage basePage){
+      _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, id);
+      if(RString.equals(unit.statusCd(),2)){
+         basePage.setJson("noDel");
+      }else{
+         basePage.setJson("yesDel");
+      }
+      return "/manage/common/ajax";
+   }
    // ============================================================
    // <T>删除</T>
    //

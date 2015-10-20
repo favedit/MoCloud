@@ -184,6 +184,12 @@ public class FNewsAction
          int na = unit.iconUrl().indexOf("newsImages");
          info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
       }
+      if(RString.equals(unit.statusCd(),2)){
+         basePage.setMenuString("manage.hide");
+      }
+      if(!RString.equals(unit.statusCd(),2)){
+         basePage.setMenuString("manage.show");
+      }
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
@@ -226,7 +232,32 @@ public class FNewsAction
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/product/business/news/NewsList";
    }
-
+   // ============================================================
+   // <T>删除之前</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String deleteBefore(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FNewsPage Page, 
+                              FBasePage basePage){
+      _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
+      if(RString.equals(unit.statusCd(),2)){
+         basePage.setJson("noDel");
+      }else{
+         basePage.setJson("yesDel");
+      }
+      return "/manage/common/ajax";
+   }
    // ============================================================
    // <T>删除</T>
    //

@@ -33,7 +33,7 @@ public interface ITruetimeAction
    // ============================================================
    String select(IWebContext context, 
                  ILogicContext logicContext, 
-                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "page") FTruetimePage page, 
                  @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
@@ -46,7 +46,7 @@ public interface ITruetimeAction
    // ============================================================
    String insertBefore(IWebContext context, 
                        ILogicContext logicContext, 
-                       @AContainer(name = "page") FTruetimePage Page, 
+                       @AContainer(name = "page") FTruetimePage page, 
                        @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
@@ -59,7 +59,7 @@ public interface ITruetimeAction
    // ============================================================
    String insert(IWebContext context, 
                  ILogicContext logicContext, 
-                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "page") FTruetimePage page, 
                  @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
@@ -72,7 +72,7 @@ public interface ITruetimeAction
    // ============================================================
    String updateBefore(IWebContext context, 
                        ILogicContext logicContext, 
-                       @AContainer(name = "page") FTruetimePage Page, 
+                       @AContainer(name = "page") FTruetimePage page, 
                        @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
@@ -85,7 +85,7 @@ public interface ITruetimeAction
    // ============================================================
    String update(IWebContext context, 
                  ILogicContext logicContext, 
-                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "page") FTruetimePage page, 
                  @AContainer(name = "basePage") FBasePage basePage);
 
    // ============================================================
@@ -98,6 +98,6 @@ public interface ITruetimeAction
    // ============================================================
    String delete(IWebContext context, 
                  ILogicContext logicContext, 
-                 @AContainer(name = "page") FTruetimePage Page, 
+                 @AContainer(name = "page") FTruetimePage page, 
                  @AContainer(name = "basePage") FBasePage basePage);
 }

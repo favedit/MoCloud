@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
 import com.cyou.gccloud.data.data.FDataCommonCityLogic;
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
+import com.cyou.gccloud.data.data.FDataCommonProvinceLogic;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
@@ -162,5 +163,27 @@ public class FCityConsole
          }
       }
       return false;
+   }
+   
+   // ============================================================
+   // <T>根据省份id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonCityUnit> selectAll(ILogicContext logicContext, 
+                                                       Long provinceId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(provinceId + "") && provinceId > 0) {
+         whereSql.append(FDataCommonCityLogic.PROVINCE_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {provinceId}");
+         whereSql.bind("provinceId", RString.parse(provinceId));
+         FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
+         return logic.fetch(whereSql.toString());
+      }
+      FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
+      return logic.fetchAll();
    }
 }

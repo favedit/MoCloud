@@ -48,16 +48,21 @@
         });
     }
     function del(id) {
-    	 return confirmx('确定删除?',
-                 function() {
-                     location.href = "/manage/product/business/salestools/Salestools.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
-                 });
+       progress();
+       return confirmx('确定删除?',
+          function() {
+             closeProgress();
+             location.href = "/manage/product/business/salestools/Salestools.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+          });
+       closeProgress();
     }
     //更新配置信息-AnjoyTian
     function edit(id) {
-        console.info(id);
-        window.location.href = "/manage/product/business/salestools/Salestools.wa?do=updateBefore&id="
-                + id + "&date=" + new Date().valueOf();
+       progress();
+       console.info(id);
+       window.location.href = "/manage/product/business/salestools/Salestools.wa?do=updateBefore&id="
+               + id + "&date=" + new Date().valueOf();
+       closeProgress();
     }
 </script>
 </HEAD>
@@ -89,6 +94,9 @@
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
      <th
+     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
+     width="160px">图片</th>
+     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="200px">标题</th>
      <th
@@ -100,15 +108,15 @@
      <th
      data-options="field:'linkCdStr',halign:'center',align:'left',sortable:true"
      width="60px">外链状态</th>
-     <th
-     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
-     width="160px">外链地址</th>
-     <th
-     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
-     width="160px">图片</th>
+     <th 
+     data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
+     width="40px">排序</th>
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
      width="60px">关键字</th>
+     <th
+     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
+     width="160px">外链地址</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
      width="160px">描述</th>
@@ -121,9 +129,6 @@
      <th 
      data-options="field:'createDate',halign:'center',align:'left',sortable:true"
      width="140px">创建时间</th>
-     <th 
-     data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
-     width="40px">排序</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
      width="140px">操作</th>
