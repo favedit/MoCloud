@@ -29,6 +29,12 @@
          if (!isValid())
             return;
          progress();
+         var number=$("#number").val();
+         if(number>100){
+            alert("版本号小于100!");
+            closeProgress();
+            return false;
+         }
          var forceCd = $("#forceCd").combobox("getValue");
          var applicationId = $('#application').combobox("getValue");
          var url = "/manage/product/system/version/Version.wa?do=update&date=" + new Date().valueOf();
@@ -119,7 +125,7 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <input id="number" name="number" class="easyui-validatebox textbox notnull" data-options="required:true" style="width:200px;height:18px;" value="<jh:write source='&unit.number'/>" />
+                        <input id="number" name="number" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,5]'" style="width:200px;height:18px;" value="<jh:write source='&unit.number'/>" />
                      </div>
                   </td>
                </tr>

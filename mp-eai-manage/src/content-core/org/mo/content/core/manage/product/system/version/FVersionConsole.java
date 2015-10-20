@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import com.cyou.gccloud.define.enums.core.EGcVersionForce;
-import java.text.DecimalFormat;
 import java.util.Iterator;
 
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
@@ -63,9 +62,9 @@ public class FVersionConsole
          info.setApplicationLabel(info.application().code());
          info.setForceCdStr(EGcVersionForce.formatLabel(info.forceCd()));
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
-         DecimalFormat a = new DecimalFormat("#,##0.00");
-         String frmStr = a.format(info.number());
-         info.setNumberStr(frmStr);
+//         DecimalFormat a = new DecimalFormat("#,##0.0");
+//         String frmStr = a.format(info.number());
+//         info.setNumberStr(frmStr);
       }
       return moduleList;
    }

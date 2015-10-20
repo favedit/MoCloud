@@ -192,6 +192,12 @@ public class FNewsAction
       }
       page.setUnit(info);
       page.setResult("");
+      String flag = context.parameter("flag");
+      if(RString.equals(flag,"1")){
+         basePage.setMenuString("hide");
+      }else{
+         basePage.setMenuString("show");
+      }
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
       return "/manage/product/business/news/UpdateNews";
    }
@@ -230,6 +236,31 @@ public class FNewsAction
       setLogicNews(context, logicContext, unit, "1");
       _newsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
+      return "/manage/product/business/news/NewsList";
+   }
+   
+   // ============================================================
+   // <T>撤回</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String resetStatusCd(IWebContext context, 
+                               ILogicContext logicContext, 
+                               FNewsPage page, 
+                               FBasePage basePage){
+      _logger.debug(this, "resetStatusCd", "resetStatusCd begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
+      unit.setStatusCd(EGcResourceStatus.Apply);
+      _newsConsole.doUpdate(logicContext, unit);
+      page.setResult("");
       return "/manage/product/business/news/NewsList";
    }
    // ============================================================

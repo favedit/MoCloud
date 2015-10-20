@@ -93,11 +93,11 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
-    <jh:equals source="manage.show" value="&basePage.menuString">
+    <jh:equals source="show" value="&basePage.menuString">
       <a href="#" onClick="submitForm()" class="sub_btn"></a> 
       <a href="/manage/product/business/news/News.wa" class="back_btn"></a>
     </jh:equals>
-    <jh:equals source="manage.hide" value="&basePage.menuString">
+    <jh:equals source="hide" value="&basePage.menuString">
       <a href="/manage/product/business/news/News.wa" class="back_btn"></a>
     </jh:equals>
    </div>

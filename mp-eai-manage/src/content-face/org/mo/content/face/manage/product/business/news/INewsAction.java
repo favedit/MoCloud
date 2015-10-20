@@ -111,4 +111,18 @@ public interface INewsAction {
                  ILogicContext logicContext, 
                  @AContainer(name = "page") FNewsPage Page, 
                  @AContainer(name = "basePage") FBasePage basePage);
+   
+
+   // ============================================================
+   // <T>撤回</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   String resetStatusCd(IWebContext context, 
+                        ILogicContext logicContext, 
+                        @AContainer(name = "page") FNewsPage page, 
+                        @AContainer(name = "basePage") FBasePage basePage);
 }

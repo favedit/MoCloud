@@ -48,13 +48,10 @@
         });
     }
     function del(id) {
-       progress();
        return confirmx('确定删除?',
           function() {
-             closeProgress();
              location.href = "/manage/product/business/salestools/Salestools.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
           });
-       closeProgress();
     }
     //更新配置信息-AnjoyTian
     function edit(id) {
@@ -65,7 +62,7 @@
        closeProgress();
     }
     function showPhoto(iconUrl){
-       return "<img src="+iconUrl+" height=30px width=45px/>";
+       return "<img src="+iconUrl+" height=50px width=55px/>";
     }
 </script>
 </HEAD>

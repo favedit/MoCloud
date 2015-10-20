@@ -9,6 +9,12 @@
       function submitForm() {
          if (!isValid()) return;
          progress(); 
+         var number=$("#number").val();
+         if(number>100){
+            alert("版本号小于100!");
+            closeProgress();
+            return false;
+         }
          var version = $("#version");
          $("#applicationId").val($('#application').combobox("getValue"));
          version.submit();
@@ -77,7 +83,7 @@
                   </td>
                   <td colspan="3">
                      <div align="left">
-                        <input id="number" name="number" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true" />
+                        <input id="number" name="number" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true,validType:'length[0,5]'" />
                      </div>
                   </td>
                </tr>

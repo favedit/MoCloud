@@ -71,7 +71,7 @@
           }
       });
     }
-    //更新配置信息-AnjoyTian
+    //更新配置信息-
     function edit(id) {
         progress();
         console.info(id);
@@ -79,8 +79,35 @@
                 + id + "&date=" + new Date().valueOf();
         closeProgress();
     }
+    function show(id){
+       progress();
+       console.info(id);
+       window.location.href = "/manage/product/business/news/News.wa?do=updateBefore&id="
+               + id + "&flag=1&date=" + new Date().valueOf();
+       closeProgress();
+    }
+    function reBack(id){
+       progress();
+       console.info(id);
+       window.location.href = "/manage/product/business/news/News.wa?do=resetStatusCd&id="
+               + id + "&date=" + new Date().valueOf();
+       closeProgress();
+    }
     function showPhoto(iconUrl){
-       return "<img src="+iconUrl+" height=30px width=45px/>";
+       return "<img src="+iconUrl+" height=50px width=55px/>";
+    }
+    function tip(){
+       alert("不可删除!");
+    }
+    function buttonSet(value,row,index){
+       if(row.statusCd!='2'){
+          return "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='show("+ row.ouid + ")'><span class='l-btn-text icon-tip l-btn-icon-left'>浏览</span></span></a>&nbsp;|&nbsp;"+
+          "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='edit("+ row.ouid + ")'><span class='l-btn-text icon-edit l-btn-icon-left'>编辑</span></span></a>&nbsp;|&nbsp;"+
+          "<a href='javascript:void(0)' class='easyui-linkbutton l-btn l-btn-plain' sizset='true' onClick='del(" + row.ouid + ")' ><span class='l-btn-left' sizset='false'><span class='l-btn-text icon-cancel l-btn-icon-left'>删除</span></span></a>";
+       }else{
+          return "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='reBack("+ row.ouid + ")'><span class='l-btn-text icon-undo l-btn-icon-left'>撤回</span></span></a>&nbsp;|&nbsp;"+
+          "<a href='javascript:void(0)' class='easyui-linkbutton l-btn l-btn-plain' sizset='true' onClick='tip(" + row.ouid + ")' ><span class='l-btn-left' sizset='false'><span class='l-btn-text icon-cancel l-btn-icon-left'>删除</span></span></a>";
+       }
     }
 </script>
 </HEAD>
@@ -148,8 +175,8 @@
      data-options="field:'createDate',halign:'center',align:'left',sortable:true"
      width="140px">创建时间</th>
     <th
-     data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
-     width="140px">操作</th>
+     data-options="field:'operation',halign:'center',align:'center',formatter:buttonSet"
+     width="190px">操作</th>
    </tr>
   </thead>
  </table>
