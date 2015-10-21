@@ -103,7 +103,7 @@
                      <div class="head-right">
                         <ul class="user-l">
                            <je:authority module='eai.marketer.member.recommend'>
-                           <li><a href="/pc/marketer/recommend/Recommend.wa"></a></li>
+                           <li><a href="/pc/marketer/customer/Customer.wa"></a></li>
                            </je:authority>
                         </ul>
                         <jh:notEquals source="host" value="&page.userType">

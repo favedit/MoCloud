@@ -11,19 +11,19 @@
                            <td>姓名</td>
                            <td>手机号</td>
                            <td>最后登录时间</td>
-                           <td>客户评分</td>
-                           <td>联络周期</td>
+                           <td>年龄</td>
+                           <td>总投资</td>
                            <td width="30%">操作</td>
                      </tr>
                      
-                     <jh:loop alias="mMember" source="&page.marketerMemberList">
-                      <tr class="trs" href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id=<jh:write source="&mMember.memberGuid" />"  >
-                           <td><jh:write source="&mMember.memberLabel" /></td>
-                           <td><jh:write source="&mMember.memberPhone" /></td>
-                           <td><jh:date source="&mMember.memberLastLoginDate" format="yyyy-MM-dd hh:mm:ss" /></td>
-                           <td><jh:write source="&mMember.memberRecommendScore" /></td>
-                           <td><jh:write source="&mMember.remainingDays" /></td>
-                           <td class="pr"><a class="btn remove" data-id="<jh:write source="&mMember.memberGuid" />"  href="javascript:;" onclick="setManagement();">解除关系</a>
+                     <jh:loop alias="customer" source="&page.customerList">
+                      <tr class="trs" href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id="  >
+                           <td><jh:write source="&customer.label" /></td>
+                           <td><jh:write source="&customer.phone" /></td>
+                           <td><jh:date source="&customer.lastLogin" format="yyyy-MM-dd hh:mm:ss" /></td>
+                           <td><jh:write source="&customer.age" /></td>
+                           <td align="right"><jh:write source="&customer.investmentTotal" /></td>
+                           <td class="pr"><a class="btn remove" data-id=""  href="javascript:;" onclick="setManagement();">短信提醒</a>
                            </td>
                      </tr>
                      </jh:loop>                    

@@ -651,8 +651,35 @@ CREATE TABLE `DT_LGC_TRUETIME`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_LGC_TRUETIME 
-   ADD CONSTRAINT DT_LGC_TRM_UK_GID UNIQUE ( GUID ); 
+   ADD CONSTRAINT DT_LGC_TRM_UK_GID UNIQUE ( GUID );    
+-- ------------------------------------------------------------
+-- Create table [Data.Logic.Notice]
+-- 20151021 sunhr
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_LGC_NOTICE`; 
+CREATE TABLE `DT_LGC_NOTICE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LABEL`                         VARCHAR(200), 
+   `STATUS_CD`                     INTEGER, 
+   `DISPLAY_CD`                    INTEGER, 
+   `DISPLAY_ORDER`                 INTEGER, 
+   `LINK_CD`                       INTEGER, 
+   `LINK_URL`                      VARCHAR(800), 
+   `DESCRIPTION`                   VARCHAR(2000), 
+   `CONTENT`                       TEXT, 
+   `VIEW_COUNT`                    INTEGER, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
+ALTER TABLE DT_LGC_NOTICE 
+   ADD CONSTRAINT DT_LGC_NTC_UK_GID UNIQUE ( GUID ); 
+   
 -- ------------------------------------------------------------
 -- Create table [Data.Solution.Project]
 -- ------------------------------------------------------------

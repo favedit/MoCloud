@@ -25,5 +25,5 @@
    <Include>${application.config}/application.xml</Include>
 
    <!-- 环境设定 -->
-   <Include>${application.config}/environment/environment-work.xml</Include>
+   <Include>${application.config}/environment/environment-test.xml</Include>
 </Configuration>

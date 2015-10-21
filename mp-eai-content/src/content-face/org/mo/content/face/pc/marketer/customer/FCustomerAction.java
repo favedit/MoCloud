@@ -9,14 +9,13 @@ import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
+import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
-import org.mo.content.core.financial.marketer.member.FDataFinancialMarketerMemberInfo;
 import org.mo.content.core.financial.marketer.member.IDataMarketerMemberConsole;
 import org.mo.content.core.financial.member.IDataMemberConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
-import org.mo.content.face.pc.marketer.member.FFollowedPage;
-import org.mo.content.face.pc.marketer.member.IFollowedAction;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -32,7 +31,7 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 public class FCustomerAction
       implements
-         IFollowedAction
+         ICustomerAction
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FCustomerAction.class);
@@ -53,6 +52,10 @@ public class FCustomerAction
    @ALink
    protected IDataMarketerConsole _marketerConsole;
 
+   // 客户信息控制器
+   @ALink
+   protected ICustomerConsole _customerConsole;
+
    //理财师成员控制器
    @ALink
    protected IDataMarketerMemberConsole _marketerMemberConsole;
@@ -69,10 +72,8 @@ public class FCustomerAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FBasePage basePage,
-                           FFollowedPage page){
-      System.out.println("--------------------------------------------------");
+                           FCustomerPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
-
       _logger.debug(this, "construct", "construct default begin.(session={1})", session);
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       long marketerId = 0;
@@ -80,6 +81,11 @@ public class FCustomerAction
          FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
          marketerId = marketer.ouid();
          page.setLabel(user.label());
+      }
+      // 检查此用户是否是理财师
+      if(marketerId == 0){
+         _logger.debug(this, "construct", "construct default begin.(session={1})", session);
+         return "/apl/message/LogicFatal";
       }
       if(null != context.parameter("page")){
          String num = context.parameter("page");
@@ -98,9 +104,9 @@ public class FCustomerAction
       if(pageTotal < page.pageCurrent()){
          page.setPageCurrent(pageTotal);
       }
-      FLogicDataset<FDataFinancialMarketerMemberInfo> marketerMemberList = _marketerMemberConsole.selectFollowedByMarketerId(logicContext, marketerId, page.pageCurrent() - 1);
-      page.setMarketerMemberList(marketerMemberList);
-      _logger.debug(this, "construct", "construct Select finish. (marketerMemberList = {1})", marketerMemberList.count());
+      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.selectByMarketerId(logicContext, marketerId);
+      page.setCustomerList(customerList);
+      _logger.debug(this, "construct", "construct Select finish. (marketerMemberList = {1})", customerList);
       return "/pc/marketer/customer/CustomerList";
    }
 
@@ -118,7 +124,7 @@ public class FCustomerAction
                                 IWebSession sessionContext,
                                 ILogicContext logicContext,
                                 FBasePage basePage,
-                                FFollowedPage page){
+                                FCustomerPage page){
       String guid = context.parameter("id");
       int feedbackCd = context.parameterAsInteger("feedbackCd");
       String feedbackNote = context.parameter("feedbackNote");

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="b8c30b1e-a37e-4913-b6ca-baff597188b5" name="logger.person.user.notice" label="M#12cn16人员公告访问" is_valid="Y" note="M#" data_engine="MyISAM" data_group="logger" data_factory="Logger.Person.User.Notice" data_name="LG_PSN_USER_NOTICE" data_alias="LG_PSN_USR_NTC" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+  <FieldRecordId _uuid="694423bf-c56f-4ba3-af5f-bb283eb8d947" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
+  <FieldRecordId _uuid="c7d80e53-754b-4a31-aec8-a75906762520" name="notice_id" label="M#12cn14公告编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTICE_ID" />
+  <FieldInteger _uuid="51faa470-6834-456d-ae67-c453bb6c94c1" name="active_cd" label="M#12cn14是否激活" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
+  <FieldTemplate _uuid="fb7d074b-515d-4e42-a8b1-f6f720982319" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
+</DataStore>
