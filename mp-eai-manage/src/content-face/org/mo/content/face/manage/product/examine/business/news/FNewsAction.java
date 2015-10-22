@@ -104,7 +104,9 @@ public String select(IWebContext context,
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, context.parameterAsLong("ouid"));
-      page.setUnit(unit);
+      FDataNewsInfo info = new FDataNewsInfo();
+      info.setContent(unit.content());
+      page.setUnit(info);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/examine/business/news/NewsDataInfoForContent";
    }
@@ -151,13 +153,44 @@ public String select(IWebContext context,
       return "/manage/product/examine/business/news/NewsList";
    }
 
+// ============================================================
+   // <T>手机浏览信息</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
    @Override
-   public String insertBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FNewsPage Page, 
-                              FBasePage basePage) {
-      // TODO Auto-generated method stub
-      return null;
+   public String browserInfo(IWebContext context, 
+                             ILogicContext logicContext, 
+                             FNewsPage page, 
+                             FBasePage basePage) {
+      _logger.debug(this, "browserInfo", "browserInfo begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      long id = context.parameterAsLong("id");
+      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
+      FDataNewsInfo info = new FDataNewsInfo();
+      info.setOuid(unit.ouid());
+      info.setContent(unit.content());
+      info.setDescription(unit.description());
+      info.setKeywords(unit.keywords());
+      info.setDisplayCd(unit.displayCd());
+      info.setLinkCd(unit.linkCd());
+      info.setLinkUrl(unit.linkUrl());
+      info.setLabel(unit.label());
+      info.setDisplayOrder(unit.displayOrder());
+      if (!RString.isEmpty(unit.iconUrl())) {
+         info.setIconUrl(unit.iconUrl());
+         int na = unit.iconUrl().indexOf("newsImages");
+         info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
+      }
+      page.setUnit(info);
+      page.setResult("");
+      _logger.debug(this, "ouid", "browserInfo begin. (Result={1})", "SUCCESS");
+      return "/manage/product/examine/business/news/BrowserNews";
    }
 
    @Override

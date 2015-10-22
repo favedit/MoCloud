@@ -9,7 +9,10 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
-
+//============================================================
+//<P>用户签到控制器</P>
+//@class FSigningAction
+//============================================================
 public class FSigningAction 
       implements 
          ISigningAction 

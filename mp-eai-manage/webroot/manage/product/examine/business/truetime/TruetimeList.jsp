@@ -47,9 +47,6 @@
             }
         });
     }
-    function phoneInfo(ouid){
-        window.showModalDialog("/manage/product/examine/business/truetime/Truetime.wa?do=getDescription&ouid="+ouid,null,"dialogWidth=360px;dialogHeight=640px");
-    }
     function checkTask(flag){
         var ss = [];
         var rows = $('#logicNews').datagrid('getSelections');
@@ -60,7 +57,16 @@
            }
            location.href= "/manage/product/examine/business/truetime/Truetime.wa?do=checking&newsIds="+ss+"&flag="+flag;
         }
-  }
+   }
+   function phoneInfo(ouid){
+      $('#w').window({
+          width: 600,
+          height: 600,
+          modal: true,
+          href: "/manage/product/examine/business/truetime/Truetime.wa?do=getDescription&ouid="+ouid,
+          title: "实时数据内容"
+      });
+   }
 </script>
 </HEAD>
 
@@ -121,8 +127,13 @@
      <th 
      data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新时间</th>
+     <th
+     data-options="field:'operation',halign:'center',align:'center',formatter:insert_BrowserButton"
+     width="140px">操作</th>
    </tr>
   </thead>
  </table>
+ <div id="w" style="width:500px;height:200px;padding:5px;">
+ </div>
 </body>
 </HTML>

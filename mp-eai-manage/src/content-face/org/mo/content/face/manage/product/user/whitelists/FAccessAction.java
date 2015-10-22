@@ -14,10 +14,8 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>人员账号逻辑。</T>
-//
-// @author sunhr
-// @version 150328
+//<P>用户白名单控制器</P>
+//@class FAccessAction
 //============================================================
 public class FAccessAction 
       implements 

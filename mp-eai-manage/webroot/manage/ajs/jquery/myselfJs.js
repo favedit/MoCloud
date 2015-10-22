@@ -107,6 +107,10 @@ function insert_infoButton(value, row, index) {
    var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="rowInfo(\'' + row.ouid + '\')"><span class="l-btn-text icon-tip l-btn-icon-left">详情</span></span></a>';
    return edit;
 }
+function insert_BrowserButton(value, row, index) {
+   var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="phoneInfo(\'' + row.ouid + '\')"><span class="l-btn-text icon-tip l-btn-icon-left">手机浏览</span></span></a>';
+   return edit;
+}
 
 function insert_editAndDelButton(value, row, index) {
    var edit = '<a href="javascript:void(0)" class="easyui-linkbutton  l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="edit(\'' + row.ouid + '\')"><span class="l-btn-text icon-edit l-btn-icon-left">编辑</span></span></a>';
@@ -132,7 +136,21 @@ function insert_admin_editButton(value, row, index) {
    }
    return "&nbsp;&nbsp;&nbsp;" + edit + "&nbsp;|&nbsp;" + del;
 }
-
+function insert_browser_editAndDelAndWithdrawButton(value,row,index){
+   if(row.statusCd!='2'){
+      return "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='phoneInfo("+ row.ouid + ")'><span class='l-btn-text icon-tip l-btn-icon-left'>手机浏览</span></span></a>&nbsp;|&nbsp;"+
+      "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='edit("+ row.ouid + ")'><span class='l-btn-text icon-edit l-btn-icon-left'>编辑</span></span></a>&nbsp;|&nbsp;"+
+      "<a href='javascript:void(0)' class='easyui-linkbutton l-btn l-btn-plain' sizset='true' onClick='del(" + row.ouid + ")' ><span class='l-btn-left' sizset='false'><span class='l-btn-text icon-cancel l-btn-icon-left'>删除</span></span></a>";
+   }else{
+      return "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='reBack("+ row.ouid + ")'><span class='l-btn-text icon-undo l-btn-icon-left'>撤回</span></span></a>&nbsp;|&nbsp;"+
+      "<a href='javascript:void(0)' class='easyui-linkbutton l-btn l-btn-plain' sizset='true' onClick='tip(" + row.ouid + ")' ><span class='l-btn-left' sizset='false'><span class='l-btn-text icon-cancel l-btn-icon-left'>删除</span></span></a>";
+   }
+}
+function insert_browser_editAndDelButton(value,row,index){
+   return "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='phoneInfo("+ row.ouid + ")'><span class='l-btn-text icon-tip l-btn-icon-left'>手机浏览</span></span></a>&nbsp;|&nbsp;"+
+   "<a href='javascript:void(0)' class='easyui-linkbutton  l-btn l-btn-plain'  plain='true'><span class='l-btn-left' sizset='false' onClick='edit("+ row.ouid + ")'><span class='l-btn-text icon-edit l-btn-icon-left'>编辑</span></span></a>&nbsp;|&nbsp;"+
+   "<a href='javascript:void(0)' class='easyui-linkbutton l-btn l-btn-plain' sizset='true' onClick='del(" + row.ouid + ")' ><span class='l-btn-left' sizset='false'><span class='l-btn-text icon-cancel l-btn-icon-left'>删除</span></span></a>";
+}
 function downloadButton(value, row, index){
       var down = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain" sizset="true" onClick="downloadmanage(\'' + row.downloadUrl + '\')" ><span class="l-btn-left" sizset="false"><span class="l-btn-text icon-save l-btn-icon-left">保存</span></span></a>';
       return down;

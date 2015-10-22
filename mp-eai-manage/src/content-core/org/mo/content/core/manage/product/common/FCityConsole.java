@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
 import com.cyou.gccloud.data.data.FDataCommonCityLogic;
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
-import com.cyou.gccloud.data.data.FDataCommonProvinceLogic;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;

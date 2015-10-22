@@ -143,7 +143,7 @@
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">内容:</div></td>
+     <td><div align="left">销售工具内容:</div></td>
      <td align="left">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px"></textarea>
             <input style="display:none" id="content" name="content"/>

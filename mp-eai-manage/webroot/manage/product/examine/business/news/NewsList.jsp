@@ -5,62 +5,71 @@
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 <script>
-    //显示更新成功
-    $(function() {
-        doSubmit(null, null);
-        var pager = $('#logicNews').datagrid().datagrid('getPager');
-        pager.pagination({
-            pageSize : 20,
-            showPageList : [ 20, 30, 40 ],
-            onSelectPage : function(pageNumber, pageSize) {
-                doSubmit(pageNumber, pageSize);
-            }
-        });
-    });
-    function doSubmit(page, pageSize) {
-        progress();
-        var url = "/manage/product/examine/business/news/News.wa?do=select&date="
-                + new Date().valueOf();
-        var data = null;
-        var label = $.trim($('#label').val()).replaceAll("'", "");
-        if (label == "资讯标题") label = null;
-        if (page != null) {
-            url = "/manage/product/examine/business/news/News.wa?do=select&page="
-                    + page + "&date=" + new Date().valueOf();
-            data = {
-                "label" : label,
-                "page" : page,
-                "pageSize" : pageSize
-            };
-        }
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                $('#logicNews').datagrid('loadData', toJsonObject(msg));
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
-    }
-    function phoneInfo(ouid){
-        window.showModalDialog("/manage/product/examine/business/news/News.wa?do=getDescription&ouid="+ouid,null,"dialogWidth=360px;dialogHeight=640px");
-    }
-    function checkTask(flag){
-        var ss = [];
-        var rows = $('#logicNews').datagrid('getSelections');
-        if(rows.length != 0){
-           for(var i=0; i<rows.length; i++){
-              var row = rows[i];
-              ss.push(row.ouid);
-           }
-           location.href= "/manage/product/examine/business/news/News.wa?do=checking&newsIds="+ss+"&flag="+flag;
-        }
-  }
+   //显示更新成功
+   $(function() {
+      doSubmit(null, null);
+      var pager = $('#logicNews').datagrid().datagrid('getPager');
+      pager.pagination({
+          pageSize : 20,
+          showPageList : [ 20, 30, 40 ],
+          onSelectPage : function(pageNumber, pageSize) {
+              doSubmit(pageNumber, pageSize);
+          }
+      });
+   });
+   function doSubmit(page, pageSize) {
+      progress();
+      var url = "/manage/product/examine/business/news/News.wa?do=select&date="
+              + new Date().valueOf();
+      var data = null;
+      var label = $.trim($('#label').val()).replaceAll("'", "");
+      if (label == "资讯标题") label = null;
+      if (page != null) {
+          url = "/manage/product/examine/business/news/News.wa?do=select&page="
+                  + page + "&date=" + new Date().valueOf();
+          data = {
+              "label" : label,
+              "page" : page,
+              "pageSize" : pageSize
+          };
+      }
+      $.ajax({
+          type : "POST",
+          url : url,
+          data : data,
+          success : function(msg) {
+              closeProgress();
+              $('#logicNews').datagrid('loadData', toJsonObject(msg));
+          },
+          fail : function() {
+              closeProgress();
+              alert("error");
+          }
+      });
+   }
+   function checkTask(flag){
+      var ss = [];
+      var rows = $('#logicNews').datagrid('getSelections');
+      if(rows.length != 0){
+         for(var i=0; i<rows.length; i++){
+            var row = rows[i];
+            ss.push(row.ouid);
+         }
+         location.href= "/manage/product/examine/business/news/News.wa?do=checking&newsIds="+ss+"&flag="+flag;
+      }
+   }
+   function showPhoto(iconUrl){
+     return "<img src="+iconUrl+" height=50px width=55px/>";
+   }
+   function phoneInfo(ouid){
+      $('#w').window({
+          width: 600,
+          height: 600,
+          modal: true,
+          href: "/manage/product/examine/business/news/News.wa?do=getDescription&ouid="+ouid,
+          title: "业务咨询内容"
+      });
+   }
 </script>
 </HEAD>
 
@@ -89,29 +98,32 @@
   <thead>
    <tr>
     <th data-options="field:'ck',checkbox:true">全选</th>
-    <th data-options="field:'ouid',halign:'center',align:'right'"
+     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
+     <th
+     data-options="field:'iconUrl',halign:'center',align:'left',formatter:showPhoto"
+     width="60px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="200px">资讯标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="90px">状态</th>
+     width="30px">状态</th>
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
      <th
      data-options="field:'linkCdStr',halign:'center',align:'left',sortable:true"
      width="60px">外链状态</th>
-     <th
-     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
-     width="160px">外链地址</th>
-     <th
-     data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
-     width="160px">图片</th>
+     <th 
+     data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
+     width="40px">排序</th>
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
      width="60px">关键字</th>
+     <th
+     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
+     width="160px">外链地址</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
      width="160px">描述</th>
@@ -119,10 +131,18 @@
      data-options="field:'content',halign:'center',align:'left',sortable:true"
      width="260px">资讯内容</th>
      <th 
-     data-options="field:'updateDate',halign:'center',align:'left'"
+     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
+     <th 
+     data-options="field:'createDate',halign:'center',align:'left',sortable:true"
+     width="140px">创建时间</th>
+     <th
+     data-options="field:'operation',halign:'center',align:'center',formatter:insert_BrowserButton"
+     width="140px">操作</th>
    </tr>
   </thead>
  </table>
+ <div id="w" style="width:500px;height:200px;padding:5px;">
+ </div>
 </body>
 </HTML>

@@ -114,4 +114,30 @@ public interface ISalestoolsAction {
                  ILogicContext logicContext, 
                  @AContainer(name = "page") FSalestoolsPage page, 
                  @AContainer(name = "basePage") FBasePage basePage);
+   
+   // ============================================================
+   // <T>根据状态，是否显示，标题查询</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   String selectByData(IWebContext context, 
+                       ILogicContext logicContext, 
+                       @AContainer(name = "page") FSalestoolsPage page, 
+                       @AContainer(name = "basePage") FBasePage basePage);
+   
+   // ============================================================
+   // <T>查询内容</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   String getDescription(IWebContext context, 
+                         ILogicContext logicContext, 
+                         @AContainer(name = "page") FSalestoolsPage page, 
+                         @AContainer(name = "basePage") FBasePage basePage);
 }

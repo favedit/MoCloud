@@ -67,9 +67,9 @@ public class FNewsConsole
    // ============================================================
    @Override
    public FLogicDataset<FDataNewsInfo> select(ILogicContext logicContext, 
-                                       FDataLogicNewsUnit unit, 
-                                       int pageNum, 
-                                       int pageSize) {
+                                              FDataLogicNewsUnit unit, 
+                                              int pageNum, 
+                                              int pageSize) {
       if (pageNum < 0) {
          pageNum = 0;
       }
@@ -136,5 +136,53 @@ public class FNewsConsole
       } catch (IOException e) {
          e.printStackTrace();
       }
+   }
+   // ============================================================
+   // <T>根据状态，是否显示，标题查询数据</T>
+   // @param logicContext 链接对象
+   // @param pageNum 页码
+   // @param pageSize 页大小
+   // @param statusCd 状态
+   // @param displayCd 是否显示
+   // @param label 标题
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataNewsInfo> selectByMessage(ILogicContext logicContext, 
+                                                       Integer statusCd,
+                                                       Integer displayCd,
+                                                       String label, 
+                                                       int pageNum,
+                                                       int pageSize) {
+      if (0 > pageNum) {
+         pageNum = 0;
+      }
+      FSql whereSql = new FSql();
+      whereSql.append(" 1=1 ");
+      if (!RString.isEmpty(label)) {
+         whereSql.append(" and ");
+         whereSql.append(FDataLogicNewsLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.bind("label", RString.parse(label));
+      }
+      if (!RString.isEmpty(displayCd+"")) {
+         whereSql.append(" and ");
+         whereSql.append(FDataLogicNewsLogic.DISPLAY_CD + " = '{displayCd}'");
+         whereSql.bind("displayCd", RString.parse(displayCd));
+      }
+      if (!RString.isEmpty(statusCd+"")) {
+         whereSql.append(" and ");
+         whereSql.append(FDataLogicNewsLogic.STATUS_CD + " = '{statusCd}'");
+         whereSql.bind("statusCd", RString.parse(statusCd));
+      }
+      String orderBy = String.format("%s %s", FDataLogicNewsLogic.UPDATE_DATE, "DESC");
+      FDataLogicNewsLogic logic = new FDataLogicNewsLogic(logicContext);
+      FLogicDataset<FDataNewsInfo> unitlist = logic.fetchClass(FDataNewsInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
+      for (Iterator<FDataNewsInfo> ite = unitlist.iterator(); ite.hasNext();) {
+         FDataNewsInfo info = ite.next();
+         info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
+         info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
+         info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
+      }
+      return unitlist;
    }
 }

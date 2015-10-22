@@ -39,13 +39,18 @@
       <div id="cy_left">
          <!-- 导航 开始 -->
          <ul id="accordion" class="accordion">
-
             <li id="one" class="files">
                <a href="#">系统管理</a>
                <ul class="sub-menu">
                   <jh:equals source="manage.system.user.module" value="&basePage.menuString"><li><a href="/manage/system/user/module/Module.wa" target="right">模块管理</a></li></jh:equals>
                   <jh:equals source="manage.system.user.role" value="&basePage.menuString"><li><a href="/manage/system/user/role/Role.wa" target="right">角色管理</a></li></jh:equals>
                   <jh:equals source="manage.system.user" value="&basePage.menuString"><li><a href="/manage/system/user/User.wa" target="right">用户管理</a></li></jh:equals>
+               </ul>
+            </li>
+            <li id="two" class="files">
+               <a href="#">日志管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="manage.system.logger.user.notice" value="&basePage.menuString"><li><a href="/manage/system/logger/user/notice/Notice.wa" target="right">公告日志管理</a></li></jh:equals>
                </ul>
             </li>
 

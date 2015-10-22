@@ -1,7 +1,7 @@
 package org.mo.content.face.manage.product.examine.business.salestools;
 
-import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import org.mo.com.lang.FObjectId;
+import org.mo.content.core.manage.product.examine.business.salestools.FDataSalestoolsInfo;
 
 //============================================================
 //<P>销售工具信息容器</P>
@@ -20,13 +20,13 @@ public class FSalestoolsPage
    protected String result;
 
    // 业务资讯数据单元
-   protected FDataLogicSalestoolsUnit unit;
+   protected FDataSalestoolsInfo unit;
 
-   public FDataLogicSalestoolsUnit getUnit() {
+   public FDataSalestoolsInfo getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataLogicSalestoolsUnit unit) {
+   public void setUnit(FDataSalestoolsInfo unit) {
       this.unit = unit;
    }
 

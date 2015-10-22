@@ -64,6 +64,15 @@
     function showPhoto(iconUrl){
        return "<img src="+iconUrl+" height=50px width=55px/>";
     }
+    function phoneInfo(ouid){
+       $('#w').window({
+           width: 600,
+           height: 600,
+           modal: true,
+           href: "/manage/product/business/truetime/Truetime.wa?do=getDescription&ouid="+ouid,
+           title: "销售工具内容"
+       });
+    }
 </script>
 </HEAD>
 
@@ -101,7 +110,7 @@
      width="200px">实时数据标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="60px">状态</th>
+     width="30px">状态</th>
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
@@ -130,10 +139,12 @@
      data-options="field:'createDate',halign:'center',align:'left',sortable:true"
      width="140px">创建时间</th>
     <th
-     data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
-     width="140px">操作</th>
+     data-options="field:'operation',halign:'center',align:'center',formatter:insert_browser_editAndDelButton"
+     width="230px">操作</th>
    </tr>
   </thead>
  </table>
+ <div id="w" style="width:500px;height:200px;padding:5px;">
+ </div>
 </body>
 </HTML>

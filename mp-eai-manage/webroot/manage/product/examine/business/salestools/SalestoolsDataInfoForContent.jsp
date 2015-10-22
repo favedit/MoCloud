@@ -1,4 +1,5 @@
-<%@ include file='/cloud/apl/public.inc'%>
+<%@ include file='/apl/public.inc'%>
+<jh:define source="&page.unit" alias="unit"></jh:define>
 <HTML>
 <HEAD>
 </HEAD>

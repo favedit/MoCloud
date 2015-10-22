@@ -104,7 +104,7 @@
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
                <tr>
                   <td width="75" height="33">
-                     <div align="left">开始时间</div>
+                     <div align="left">开始时间:</div>
                   </td>
                   <td width="162">
                      <div align="left">
@@ -113,7 +113,7 @@
                      </div>
                   </td>
                   <td width="80" height="33">
-                     <div align="middle">结束时间</div>
+                     <div align="middle">结束时间:</div>
                   </td>
                   <td width="158">
                      <div align="left">

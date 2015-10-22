@@ -291,4 +291,29 @@ public class FTruetimeAction
          _truetimeConsole.saveImage(file, unit, flag);
       }
    }
+   
+   // ============================================================
+   // <T>查询内容</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String getDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FTruetimePage page, 
+                                FBasePage basePage) {
+      _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, context.parameterAsLong("ouid"));
+      FDataTruetimeInfo info = new FDataTruetimeInfo();
+      info.setContent(unit.content());
+      page.setUnit(info);
+      _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
+      return "/manage/product/business/truetime/TruetimeDataInfoForContent";
+   }
 }

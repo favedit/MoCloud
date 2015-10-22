@@ -138,4 +138,52 @@ public class FSalestoolsConsole
          e.printStackTrace();
       }
    }
+   // ============================================================
+   // <T>根据状态，是否显示，标题查询数据</T>
+   // @param logicContext 链接对象
+   // @param pageNum 页码
+   // @param pageSize 页大小
+   // @param statusCd 状态
+   // @param displayCd 是否显示
+   // @param label 标题
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataSalestoolsInfo> selectByMessage(ILogicContext logicContext, 
+                                                             Integer statusCd,
+                                                             Integer displayCd,
+                                                             String label, 
+                                                             int pageNum,
+                                                             int pageSize) {
+      if (0 > pageNum) {
+         pageNum = 0;
+      }
+      FSql whereSql = new FSql();
+      whereSql.append(" 1=1 ");
+      if (!RString.isEmpty(label)) {
+         whereSql.append(" and ");
+         whereSql.append(FDataLogicSalestoolsLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.bind("label", RString.parse(label));
+      }
+      if (!RString.isEmpty(displayCd+"")) {
+         whereSql.append(" and ");
+         whereSql.append(FDataLogicSalestoolsLogic.DISPLAY_CD + " = '{displayCd}'");
+         whereSql.bind("displayCd", RString.parse(displayCd));
+      }
+      if (!RString.isEmpty(statusCd+"")) {
+         whereSql.append(" and ");
+         whereSql.append(FDataLogicSalestoolsLogic.STATUS_CD + " = '{statusCd}'");
+         whereSql.bind("statusCd", RString.parse(statusCd));
+      }
+      String orderBy = String.format("%s %s", FDataLogicSalestoolsLogic.UPDATE_DATE, "DESC");
+      FDataLogicSalestoolsLogic logic = new FDataLogicSalestoolsLogic(logicContext);
+      FLogicDataset<FDataSalestoolsInfo> unitlist = logic.fetchClass(FDataSalestoolsInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
+      for (Iterator<FDataSalestoolsInfo> ite = unitlist.iterator(); ite.hasNext();) {
+         FDataSalestoolsInfo info = ite.next();
+         info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
+         info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
+         info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
+      }
+      return unitlist;
+   }
 }

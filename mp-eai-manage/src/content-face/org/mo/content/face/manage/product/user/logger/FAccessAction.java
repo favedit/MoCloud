@@ -11,7 +11,8 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>人员账号逻辑。</T>
+//<P>用户日志控制器</P>
+//@class FAccessAction
 //============================================================
 public class FAccessAction 
       implements 

@@ -58,8 +58,9 @@ public class FNewsConsole
          whereSql.append(FDataLogicNewsLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
+      String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC", FDataLogicNewsLogic.CREATE_DATE, "DESC");
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
-      FLogicDataset<FDataNewsInfo> moduleList = logic.fetchClass(FDataNewsInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataNewsInfo> moduleList = logic.fetchClass(FDataNewsInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (Iterator<FDataNewsInfo> ite = moduleList.iterator(); ite.hasNext();) {
          FDataNewsInfo info = ite.next();
          if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {

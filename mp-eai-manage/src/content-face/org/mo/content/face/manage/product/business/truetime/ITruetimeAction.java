@@ -100,4 +100,17 @@ public interface ITruetimeAction
                  ILogicContext logicContext, 
                  @AContainer(name = "page") FTruetimePage page, 
                  @AContainer(name = "basePage") FBasePage basePage);
+   
+   // ============================================================
+   // <T>查询内容</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   String getDescription(IWebContext context, 
+                         ILogicContext logicContext, 
+                         @AContainer(name = "page") FTruetimePage page, 
+                         @AContainer(name = "basePage") FBasePage basePage);
 }

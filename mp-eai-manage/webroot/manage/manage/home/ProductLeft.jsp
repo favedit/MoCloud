@@ -127,6 +127,9 @@
                   <jh:equals source="manage.product.business.truetime" value="&basePage.menuString">
                      <li><a href="/manage/product/business/truetime/Truetime.wa" target="right">实时数据</a></li>
                   </jh:equals>
+                  <jh:equals source="manage.product.business.notice" value="&basePage.menuString">
+                     <li><a href="/manage/product/business/notice/Notice.wa" target="right">用户公告</a></li>
+                  </jh:equals>
                </ul>
          </li>
          <li id="seven" class="common"><a href="#seven">审核管理</a>
@@ -142,6 +145,9 @@
                   </jh:equals>
                   <jh:equals source="manage.product.examine.business.truetime" value="&basePage.menuString">
                      <li><a href="/manage/product/examine/business/truetime/Truetime.wa" target="right">实时数据</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.product.examine.business.notice" value="&basePage.menuString">
+                     <li><a href="/manage/product/examine/business/notice/Notice.wa" target="right">用户公告</a></li>
                   </jh:equals>
                </ul>
          </li>

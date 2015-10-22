@@ -13,12 +13,18 @@
             pageSize : 20,
             showPageList : [ 20, 30, 40 ],
             onSelectPage : function(pageNumber, pageSize) {
-                doSubmit(pageNumber, pageSize);
+               var tip = $("#flag").val();
+               if(tip=="2"){
+                  doSubmitByCondition(pageNumber,pageSize);
+               }else{
+                 doSubmit(pageNumber,pageSize);
+               }
             }
         });
     });
     function doSubmit(page, pageSize) {
         progress();
+        $("#flag").val("");
         var url = "/manage/product/business/salestools/Salestools.wa?do=select&date="
                 + new Date().valueOf();
         var data = null;
@@ -47,6 +53,44 @@
             }
         });
     }
+    function doSubmitByCondition(page,pageSize) {
+       progress();
+       var statusCd = $("#statusCd").combobox("getValue");
+       var displayCd = $("#displayCd").combobox("getValue");
+       var label = $("#label").val();
+       var url = null;
+       var data = null;
+       if (page != null) {
+          data = {
+             "page": page,
+             "pageSize" : pageSize,
+             "statusCd" :statusCd,
+             "displayCd" :displayCd,
+             "label" :label
+          };
+          url = "/manage/product/business/salestools/Salestools.wa?do=selectByData&page=" + page + "&date=" + new Date().valueOf();
+       } else {
+          data = {
+                "statusCd" :statusCd,
+                "displayCd" :displayCd,
+                "label" :label
+           };
+          url = "/manage/product/business/salestools/Salestools.wa?do=selectByData&date=" + new Date().valueOf();
+       }
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+             closeProgress();
+             $('#logicNews').datagrid('loadData', toJsonObject(msg));
+          },
+          fail: function() {
+             closeProgress();
+             alert("error");
+          }
+       });
+    }
     function del(id) {
        return confirmx('确定删除?',
           function() {
@@ -64,6 +108,20 @@
     function showPhoto(iconUrl){
        return "<img src="+iconUrl+" height=50px width=55px/>";
     }
+    function submitForm(){
+       if (!isValid()) return;
+       doSubmitByCondition(null,null);
+       $("#flag").val("2");
+    }
+    function phoneInfo(ouid){
+       $('#w').window({
+           width: 600,
+           height: 600,
+           modal: true,
+           href: "/manage/product/business/salestools/Salestools.wa?do=getDescription&ouid="+ouid,
+           title: "销售工具内容"
+       });
+    }
 </script>
 </HEAD>
 
@@ -73,16 +131,49 @@
    <span>销售工具信息</span>
   </div>
   <div class="btn_bar">
-   <div class="nav_btn">
-    <a href="/manage/product/business/salestools/Salestools.wa?do=insertBefore"
-     class="add_btn"></a>
-   </div>
+   <div class="nav_btn" style="width:900px;">
+    <form id="logerdat" action="/manage/product/business/salestools/Salestools.wa" method="post" align="center">
+      <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
+         <tr>
+            <td width="30" height="33">
+               <div align="right">状态:</div>
+            </td>
+            <td width="158">
+               <div align="left">
+                  <select style="width:158px;height:20px" id="statusCd" class="easyui-combobox" name="statusCd" data-options="editable:false">
+                     <option value="1">申请</option>
+                     <option value="2">发布</option>
+                     <option value="3">审核未通过</option>
+                  <select>
+                  <input id="flag" type="hidden"/>
+               </div>
+            </td>
+            <td width="60" height="33">
+               <div align="right">是否显示:</div>
+            </td>
+            <td width="158">
+               <div align="left">
+                  <select  style="width:158px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="editable:false">
+                     <option value="1">展示</option>
+                     <option value="2">非展示</option>
+                  <select>
+               </div>
+            </td>
+            <td width="30" height="33">
+               <div align="right">标题:</div>
+            </td>
+            <td width="158" height="33">
+               <div align="left">
+                  <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
+               </div>
+            </td>
+            <td width="30"><a href="javascript:void(0);" class="sub_btn" onclick="submitForm()"></a></td>
+            <td><a href="/manage/product/business/salestools/Salestools.wa?do=insertBefore" class="add_btn"></a></td>
+         </tr>
+      </table>
+      </form>
+    </div>
    <div class="nav_search">
-    <input id="label" name="label" type="text"
-     onfocus="if(this.value=='标题'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='标题';this.style.color='#ccc';}"
-     style="color: #ccc" value="标题"> <a onClick="doSubmit(0)"
-     href="#" class="sear_btn"></a>
    </div>
   </div>
  </div>
@@ -101,7 +192,7 @@
      width="200px">标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="60px">状态</th>
+     width="30px">状态</th>
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
@@ -122,7 +213,7 @@
      width="160px">描述</th>
      <th
      data-options="field:'content',halign:'center',align:'left',sortable:true"
-     width="260px">内容</th>
+     width="260px">销售工具内容</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
@@ -130,10 +221,12 @@
      data-options="field:'createDate',halign:'center',align:'left',sortable:true"
      width="140px">创建时间</th>
     <th
-     data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
-     width="140px">操作</th>
+     data-options="field:'operation',halign:'center',align:'center',formatter:insert_browser_editAndDelButton"
+     width="230px">操作</th>
    </tr>
   </thead>
  </table>
+ <div id="w" style="width:500px;height:200px;padding:5px;">
+ </div>
 </body>
 </HTML>

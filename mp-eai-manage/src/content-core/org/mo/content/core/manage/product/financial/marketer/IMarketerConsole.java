@@ -38,4 +38,18 @@ public interface IMarketerConsole
    // ============================================================
    FDataFinancialMarketerUnit findByCode(ILogicContext logicContext,
                                          String code);
+   
+   // ============================================================
+   // <T>根据搜索条件时间段查询分页数据</T>
+   // @param logicContext 链接对象
+   // @param pageNum 页码
+   // @param pageSize 页大小
+   // @return 数据集合
+   // ============================================================
+   FLogicDataset<FDataFinancialMarketerUnit> selectByMessage(ILogicContext logicContext, 
+                                                             String beginDateStr, 
+                                                             String endDateStr,
+                                                             String name,
+                                                             int pageNum, 
+                                                             int pageSize);
 }

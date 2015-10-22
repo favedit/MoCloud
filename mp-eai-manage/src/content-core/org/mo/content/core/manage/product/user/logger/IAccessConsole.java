@@ -21,7 +21,9 @@ public interface IAccessConsole
    // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FLoggerPersonUserAccessUnit> select(ILogicContext logicContext, int pageNum, int pageSize);
+   FLogicDataset<FLoggerPersonUserAccessUnit> select(ILogicContext logicContext, 
+                                                     int pageNum, 
+                                                     int pageSize);
 
    // ============================================================
    // <T>根据时间段和操作信息查询数据</T>
@@ -34,5 +36,10 @@ public interface IAccessConsole
    // @param logicMessage 操作信息
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FLoggerPersonUserAccessUnit> selectByDateandMessage(ILogicContext logicContext, String beginDateStr, String endDateStr, String logicMessage, int pageNum, int pageSize);
+   FLogicDataset<FLoggerPersonUserAccessUnit> selectByDateandMessage(ILogicContext logicContext, 
+                                                                     String beginDateStr, 
+                                                                     String endDateStr, 
+                                                                     String logicMessage, 
+                                                                     int pageNum, 
+                                                                     int pageSize);
 }

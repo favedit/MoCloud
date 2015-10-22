@@ -6,8 +6,8 @@ import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>理财师信息接口。</P>
-//@interface IMarketerAction
+//<P>新闻信息接口。</P>
+//@interface INewsAction
 //@version 1.0.0
 //============================================================
 public interface INewsAction 
@@ -61,10 +61,18 @@ public interface INewsAction
                    @AContainer(name = "page") FNewsPage page, 
                    @AContainer(name = "basePage") FBasePage basePage);
 
-   String insertBefore(IWebContext context, 
-                       ILogicContext logicContext, 
-                       FNewsPage Page, 
-                       FBasePage basePage) ;
+   // ============================================================
+   // <T>手机浏览信息</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   String browserInfo(IWebContext context, 
+                      ILogicContext logicContext, 
+                      @AContainer(name = "page") FNewsPage page, 
+                      @AContainer(name = "basePage") FBasePage basePage);
 
    String insert(IWebContext context, 
                  ILogicContext logicContext, 

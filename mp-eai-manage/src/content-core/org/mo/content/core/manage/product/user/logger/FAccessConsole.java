@@ -36,7 +36,9 @@ public class FAccessConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FLoggerPersonUserAccessUnit> select(ILogicContext logicContext, int pageNum, int pageSize) {
+   public FLogicDataset<FLoggerPersonUserAccessUnit> select(ILogicContext logicContext, 
+                                                            int pageNum, 
+                                                            int pageSize) {
       if (0 > pageNum) {
          pageNum = 0;
       }
@@ -58,7 +60,12 @@ public class FAccessConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FLoggerPersonUserAccessUnit> selectByDateandMessage(ILogicContext logicContext, String beginDateStr, String endDateStr, String logicMessage, int pageNum, int pageSize) {
+   public FLogicDataset<FLoggerPersonUserAccessUnit> selectByDateandMessage(ILogicContext logicContext, 
+                                                                            String beginDateStr, 
+                                                                            String endDateStr, 
+                                                                            String logicMessage, 
+                                                                            int pageNum, 
+                                                                            int pageSize) {
       if (0 > pageNum) {
          pageNum = 0;
       }

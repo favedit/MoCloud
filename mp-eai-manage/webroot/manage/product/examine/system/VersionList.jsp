@@ -76,13 +76,6 @@
                <a href="javascript:checkTask('3');" class="bty_btn"></a>
             </div>
             <div class="nav_search">
-               <!--
-         <input id="label" name="label" type="text"
-           onfocus="if(this.value=='资讯标题'){this.value='';}this.style.color='#000000';"
-           onblur="if(this.value=='') {this.value='资讯标题';this.style.color='#ccc';}"
-           style="color: #ccc" value="资讯标题"> <a onClick="doSubmit(0)"
-           href="#" class="sear_btn"></a>
--->
             </div>
          </div>
       </div>

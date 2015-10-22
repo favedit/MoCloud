@@ -74,16 +74,29 @@
          $("#phoneShow").html(editor.html());
       });
    });
-    function but(){
-        $("#iconUrl").click();
-     }
-     function changfile(obj){
-        $('#imgdiv').hide();
-        $("#oriIcon").attr("src","");
-        $('#oiconUr').val("");
-        var a = obj.lastIndexOf("\\");
-        $("#oiconUr").val(obj.substr(a+1,obj.length));
-     }
+   function but(){
+      $("#iconUrl").click();
+   }
+   function changfile(obj){
+      $('#imgdiv').hide();
+      $("#oriIcon").attr("src","");
+      $('#oiconUr').val("");
+      var a = obj.lastIndexOf("\\");
+      $("#oiconUr").val(obj.substr(a+1,obj.length));
+   }
+   function phoneInfo(){
+      $("#getHtml").click();
+      var content = $("#content").val();
+      $("#w").html(content);
+      $('#w').show(); 
+      $('#w').dialog({ 
+         modal:true,
+         collapsible: true, 
+         minimizable: true, 
+         maximizable: true
+      });
+   }
+
 </script>
 
 <body bgcolor="#198bc9">
@@ -109,7 +122,7 @@
    action="/manage/product/business/news/News.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-   <table width="810" height="346" border="0" align="left"
+   <table width="870" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
       <td width="54" height="38"><div align="left">资讯标题:</div></td>
@@ -186,9 +199,12 @@
           <input style="display:none" id="content" name="content" />
           <input type="button" style="display:none" id="getHtml" value="取得HTML" />
      </td>
+     <td style="vertical-align:top;" ><input type="button" value="手机浏览" onclick="phoneInfo()"></td>
     </tr>
    </table>
   </form>
+ </div>
+ <div id="w" style="width:600px;height:600px;padding:5px;display:none;" title="资讯内容">
  </div>
 </body>
 </HTML>

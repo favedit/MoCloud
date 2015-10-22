@@ -188,12 +188,6 @@ public class FSalestoolsAction
          info.setImageName(
                "/manage/images/salestoolsImages/" + unit.iconUrl().substring(na + 17, unit.iconUrl().length()));
       }
-      if(RString.equals(unit.statusCd(),2)){
-         basePage.setMenuString("manage.hide");
-      }
-      if(!RString.equals(unit.statusCd(),2)){
-         basePage.setMenuString("manage.show");
-      }
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
@@ -325,5 +319,66 @@ public class FSalestoolsAction
       } else {
          _salestoolsConsole.saveImage(file, unit, flag);
       }
+   }
+   
+   // ============================================================
+   // <T>根据状态，是否显示，标题查询</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String selectByData(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FSalestoolsPage page, 
+                              FBasePage basePage) {
+      _logger.debug(this, "selectByData", "selectByData begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      if (null != context.parameter("page")) {
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      } else {
+         page.setPageCurrent(0);
+      }
+      String StrPageSize = context.parameter("pageSize");
+      int pageSize = 20;
+      if (null != StrPageSize) {
+         pageSize = Integer.parseInt(StrPageSize);
+      }
+      Integer statusCd = context.parameterAsInteger("statusCd");
+      Integer displayCd = context.parameterAsInteger("displayCd");
+      String label = context.parameter("label");
+      FLogicDataset<FDataSalestoolsInfo> unitlist = _salestoolsConsole.selectByMessage(logicContext, statusCd, displayCd, label, page.pageCurrent() - 1, pageSize);
+      basePage.setJson(unitlist.toJsonListString());
+      _logger.debug(this, "selectByData", "selectByData finish. (unitListCount={1})", unitlist.count());
+      return "/manage/common/ajax";
+   }
+   // ============================================================
+   // <T>查询内容</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String getDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FSalestoolsPage page, 
+                                FBasePage basePage) {
+      _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, context.parameterAsLong("ouid"));
+      FDataSalestoolsInfo info = new FDataSalestoolsInfo();
+      info.setContent(unit.content());
+      page.setUnit(info);
+      _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
+      return "/manage/product/business/salestools/SalestoolsDataInfoForContent";
    }
 }

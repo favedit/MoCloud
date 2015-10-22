@@ -50,22 +50,6 @@
         return confirmx(
                 '确定删除?',
                 function() {
-                    //                  var url = "/product/configration/Configration.wa?do=delete&date=" + new Date().valueOf();
-                    //                  var data = {
-                    //                     "id": id
-                    //                  };
-                    //                  $.getJSON(url, data, function(d) {
-                    //                     alert(d);
-                    //                     var result = toJsonObject(d);
-                    //                      console.log(result);
-                    //                     if (result.status == "1") {
-                    //                        location.href = result.url;
-                    //                     } else {
-                    //                        alertx(result.url, "warning", function() {
-                    //                           location.href = "/product/configration/Configration.wa";
-                    //                        });
-                    //                     }
-                    //                  });
                     location.href = "/manage/product/financial/product/Product.wa?do=delete&id="
                             + id + "&date=" + new Date().valueOf();
                 });
@@ -76,7 +60,6 @@
         console.info(id);
         window.location.href = "/manage/product/financial/product/Product.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
-
     }
     
 </script>

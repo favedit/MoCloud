@@ -18,8 +18,6 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>理财师信息控制器</P>
 //@class FMarketerAction
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 public class FMarketerAction 
@@ -294,5 +292,43 @@ public class FMarketerAction
       } else {
          return "/manage/product/financial/marketer/MarketerList";
       }
+   }
+   // ============================================================
+   // <T>根据条件时间段，名称查询</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String selectByDate(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FMarketerPage page, 
+                              FBasePage basePage) {
+      _logger.debug(this, "selectByDate", "selectByDate begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      if (null != context.parameter("page")) {
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      } else {
+         page.setPageCurrent(0);
+      }
+      String StrPageSize = context.parameter("pageSize");
+      int pageSize = 20;
+      if (null != StrPageSize) {
+         pageSize = Integer.parseInt(StrPageSize);
+      }
+      String beginDateStr = context.parameter("beginDate");
+      String endDateStr = context.parameter("endDate");
+      String name = context.parameter("name");
+      _logger.debug(this, "selectByDate========================================="+beginDateStr, "selectByDate begin. (userId={1})", basePage.userId());
+      FLogicDataset<FDataFinancialMarketerUnit> unitlist = _marketerConsole.selectByMessage(logicContext, beginDateStr, endDateStr, name, page.pageCurrent() - 1, pageSize);
+      basePage.setJson(unitlist.toJsonListString());
+      _logger.debug(this, "selectByDate", "selectByDate finish. (unitListCount={1})", unitlist.count());
+      return "/manage/common/ajax";
+      
    }
 }

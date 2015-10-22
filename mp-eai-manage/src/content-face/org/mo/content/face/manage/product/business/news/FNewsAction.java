@@ -352,4 +352,88 @@ public class FNewsAction
          _newsConsole.saveImage(file, unit, flag);
       }
    }
+   // ============================================================
+   // <T>根据状态，是否显示，标题查询</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String selectByData(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FNewsPage page, 
+                              FBasePage basePage) {
+      _logger.debug(this, "selectByDate", "selectByDate begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      if (null != context.parameter("page")) {
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      } else {
+         page.setPageCurrent(0);
+      }
+      String StrPageSize = context.parameter("pageSize");
+      int pageSize = 20;
+      if (null != StrPageSize) {
+         pageSize = Integer.parseInt(StrPageSize);
+      }
+      Integer statusCd = context.parameterAsInteger("statusCd");
+      Integer displayCd = context.parameterAsInteger("displayCd");
+      String label = context.parameter("label");
+      FLogicDataset<FDataNewsInfo> unitlist = _newsConsole.selectByMessage(logicContext, statusCd, displayCd, label, page.pageCurrent() - 1, pageSize);
+      basePage.setJson(unitlist.toJsonListString());
+      _logger.debug(this, "selectByDate", "selectByDate finish. (unitListCount={1})", unitlist.count());
+      return "/manage/common/ajax";
+   }
+   // ============================================================
+   // <T>查询内容</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String getDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FNewsPage page, 
+                                FBasePage basePage) {
+      _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      FDataLogicNewsUnit unit = _newsConsole.find(logicContext, context.parameterAsLong("ouid"));
+      FDataNewsInfo info = new FDataNewsInfo();
+      info.setContent(unit.content());
+      page.setUnit(info);
+      _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
+      return "/manage/product/business/news/NewsDataInfoForContent";
+   }
+   
+   // ============================================================
+   // <T>获取内容</T>
+   //
+   // @param context 网络环境
+   // @param logicContext 逻辑环境
+   // @param page 容器
+   // @return 页面
+   // ============================================================
+   @Override
+   public String getUpdateDescription(IWebContext context, 
+                                ILogicContext logicContext, 
+                                FNewsPage page, 
+                                FBasePage basePage) {
+      _logger.debug(this, "getUpdateDescription", "getUpdateDescription begin. (userId={1})", basePage.userId());
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      FDataNewsInfo info = new FDataNewsInfo();
+      info.setContent(context.parameter("content"));
+      page.setUnit(info);
+      _logger.debug(this, "getUpdateDescription=============================="+info.content(), "getUpdateDescription begin. (userId={1})", basePage.userId());
+      return "/manage/product/business/news/NewsDataInfoForContent";
+   }
 }
