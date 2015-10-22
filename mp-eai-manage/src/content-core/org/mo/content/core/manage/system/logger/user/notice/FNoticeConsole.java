@@ -2,6 +2,9 @@ package org.mo.content.core.manage.system.logger.user.notice;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeLogic;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
+import com.cyou.gccloud.define.enums.common.EGcActive;
+
+import java.util.Iterator;
 
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
@@ -37,15 +40,19 @@ public class FNoticeConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> select(ILogicContext logicContext, 
-                                                            int pageNum, 
-                                                            int pageSize) {
+   public FLogicDataset<FDataNoticeInfo> select(ILogicContext logicContext, 
+                                                int pageNum, 
+                                                int pageSize) {
       if (0 > pageNum) {
          pageNum = 0;
       }
       String orderBy = String.format("%s %s", FLoggerPersonUserNoticeLogic.UPDATE_DATE, "DESC");
       FLoggerPersonUserNoticeLogic logic = new FLoggerPersonUserNoticeLogic(logicContext);
-      FLogicDataset<FLoggerPersonUserNoticeUnit> unitlist = logic.fetchClass(FLoggerPersonUserNoticeUnit.class, null, orderBy, pageSize, pageNum);
+      FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, null, orderBy, pageSize, pageNum);
+      for(Iterator<FDataNoticeInfo> itr = unitlist.iterator();itr.hasNext();){
+         FDataNoticeInfo info = itr.next();
+         info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
+      }
       return unitlist;
    }
 
@@ -61,12 +68,12 @@ public class FNoticeConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> selectByDateandMessage(ILogicContext logicContext, 
-                                                                            String beginDateStr, 
-                                                                            String endDateStr, 
-                                                                            int activeCd, 
-                                                                            int pageNum, 
-                                                                            int pageSize) {
+   public FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext, 
+                                                                 String beginDateStr, 
+                                                                 String endDateStr, 
+                                                                 int activeCd, 
+                                                                 int pageNum, 
+                                                                 int pageSize) {
       if (0 > pageNum) {
          pageNum = 0;
       }
@@ -89,7 +96,11 @@ public class FNoticeConsole
       }
       String orderBy = String.format("%s %s", FLoggerPersonUserNoticeLogic.UPDATE_DATE, "DESC");
       FLoggerPersonUserNoticeLogic logic = new FLoggerPersonUserNoticeLogic(logicContext);
-      FLogicDataset<FLoggerPersonUserNoticeUnit> unitlist = logic.fetchClass(FLoggerPersonUserNoticeUnit.class, whereSql.toString(), orderBy, pageSize, pageNum);
+      FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
+      for(Iterator<FDataNoticeInfo> itr = unitlist.iterator();itr.hasNext();){
+         FDataNoticeInfo info = itr.next();
+         info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
+      }
       return unitlist;
    }
 }

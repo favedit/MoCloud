@@ -33,7 +33,7 @@
             "pageSize" : pageSize
          };
       } else {
-         url = "/manage/system/logger/user/notice/Notice?do=select&date=" + new Date().valueOf();
+         url = "/manage/system/logger/user/notice/Notice.wa?do=select&date=" + new Date().valueOf();
       }
       $.ajax({
          type: "POST",
@@ -53,7 +53,7 @@
        progress();
        var beginDate = $('#beginDate').datebox('getValue');
        var endDate = $('#endDate').datebox('getValue'); 
-       var lm = $("#logicMessage").val();
+       var activeCd = $("#activeCd").combobox("getValue");
        var url = null;
        var data = null;
        if (page != null) {
@@ -62,16 +62,16 @@
              "pageSize" : pageSize,
              "beginDate" :beginDate,
              "endDate" :endDate,
-             "logicMessage" :lm
-          };
-          url = "/manage/system/logger/user/notice/Notice?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
+             "activeCd" :activeCd
+          };     
+          url = "/manage/system/logger/user/notice/Notice.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
        } else {
           data = {
                "beginDate" :beginDate,
                "endDate" :endDate,
-               "logicMessage" :lm
+               "activeCd" :activeCd
            };
-          url = "/manage/system/logger/user/notice/Notice?do=selectByDate&date=" + new Date().valueOf();
+          url = "/manage/system/logger/user/notice/Notice.wa?do=selectByDate&date=" + new Date().valueOf();
        }
        $.ajax({
           type: "POST",
@@ -102,7 +102,7 @@
       </div>
       <div class="btn_bar">
       <div class="nav_btn" style="width:720px;">
-      <form id="logerdat" action="/manage/product/user/logger/Access.wa" method="post" align="center">
+      <form id="logerdat" action="/manage/system/logger/user/notice/Notice" method="post" align="center">
          <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
             <tr>
                <td width="109" height="33">
@@ -142,11 +142,9 @@
       <thead>
          <tr>
             <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
-            <th data-options="field:'hostAddress',halign:'center',align:'left',sortable:true" width="150px">ip地址</th>
-            <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="100px">账号</th>
-            <th data-options="field:'logicMessage',halign:'center',align:'left',sortable:true" width="150px">操作信息</th>
-            <th data-options="field:'browserUri',halign:'center',align:'left',sortable:true" width="300px">请求地址</th>
-            <th data-options="field:'pageInfo',halign:'center',align:'left',sortable:true" width="450px">页面信息</th> 
+            <th data-options="field:'userId',halign:'center',align:'left',sortable:true" width="90px">用户id</th> 
+            <th data-options="field:'noticeId',halign:'center',align:'left',sortable:true" width="90px">日志公告id</th> 
+            <th data-options="field:'activeCdStr',halign:'center',align:'left',sortable:true" width="90px">是否激活</th> 
             <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true" width="160px">更新时间</th>
             <th data-options="field:'createDate',halign:'center',align:'left',sortable:true" width="160px">创建时间</th>
          </tr>

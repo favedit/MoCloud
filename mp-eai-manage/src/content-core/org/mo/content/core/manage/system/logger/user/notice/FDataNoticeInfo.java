@@ -16,10 +16,20 @@ public class FDataNoticeInfo
    // 结束时间符串
    protected String _endDateStr;
 
+   protected String _activeCdStr;
+   
+   public String activeCdStr() {
+      return _activeCdStr;
+   }
+
+   public void setActiveCdStr(String _activeCdStr) {
+      this._activeCdStr = _activeCdStr;
+   }
+   
    public String beginDateStr() {
       return _beginDateStr;
    }
-
+   
    public void setBeginDateStr(String _beginDateStr) {
       this._beginDateStr = _beginDateStr;
    }
@@ -41,5 +51,6 @@ public class FDataNoticeInfo
       super.saveMap(map);
       map.put("beginDateStr", _beginDateStr);
       map.put("endDateStr", _endDateStr);
+      map.put("activeCdStr", _activeCdStr);
    }
 }

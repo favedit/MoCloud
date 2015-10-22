@@ -22,9 +22,9 @@ public interface INoticeConsole
    // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FLoggerPersonUserNoticeUnit> select(ILogicContext logicContext, 
-                                                     int pageNum, 
-                                                     int pageSize);
+   FLogicDataset<FDataNoticeInfo> select(ILogicContext logicContext, 
+                                         int pageNum, 
+                                         int pageSize);
 
    // ============================================================
    // <T>根据时间段和操作信息查询数据</T>
@@ -37,10 +37,10 @@ public interface INoticeConsole
    // @param activeCd 是否激活
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FLoggerPersonUserNoticeUnit> selectByDateandMessage(ILogicContext logicContext, 
-                                                                     String beginDateStr, 
-                                                                     String endDateStr, 
-                                                                     int activeCd, 
-                                                                     int pageNum, 
-                                                                     int pageSize);
+   FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext, 
+                                                          String beginDateStr, 
+                                                          String endDateStr, 
+                                                          int activeCd, 
+                                                          int pageNum, 
+                                                          int pageSize);
 }

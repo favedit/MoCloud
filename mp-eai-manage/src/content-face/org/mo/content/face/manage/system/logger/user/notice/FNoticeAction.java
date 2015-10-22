@@ -2,6 +2,7 @@ package org.mo.content.face.manage.system.logger.user.notice;
 
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.manage.system.logger.user.notice.FDataNoticeInfo;
 import org.mo.content.core.manage.system.logger.user.notice.INoticeConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
@@ -9,10 +10,9 @@ import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
-import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
 
 //============================================================
-//<P>公告日志控制器</P>
+//<P>用户公告日志控制器</P>
 //@class FNoticeloggerAction
 //============================================================
 public class FNoticeAction 
@@ -65,7 +65,7 @@ public class FNoticeAction
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FLoggerPersonUserNoticeUnit> unitlist = _noticeLoggerConsole.select(logicContext, page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataNoticeInfo> unitlist = _noticeLoggerConsole.select(logicContext, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitlist.count());
       return "/manage/common/ajax";
@@ -101,8 +101,8 @@ public class FNoticeAction
       }
       String beginDateStr = context.parameter("beginDate");
       String endDateStr = context.parameter("endDate");
-      Integer displayCd = context.parameterAsInteger("displayCd");
-      FLogicDataset<FLoggerPersonUserNoticeUnit> unitlist = _noticeLoggerConsole.selectByDateandMessage(logicContext, beginDateStr, endDateStr, displayCd, accessPage.pageCurrent() - 1, pageSize);
+      Integer activeCd = context.parameterAsInteger("activeCd");
+      FLogicDataset<FDataNoticeInfo> unitlist = _noticeLoggerConsole.selectByDateandActiveCd(logicContext, beginDateStr, endDateStr, activeCd, accessPage.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
       _logger.debug(this, "selectByDate", "selectByDate finish. (unitListCount={1})", unitlist.count());
       return "/manage/common/ajax";
