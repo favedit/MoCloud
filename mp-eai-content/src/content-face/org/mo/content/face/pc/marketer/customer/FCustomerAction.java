@@ -1,19 +1,16 @@
 package org.mo.content.face.pc.marketer.customer;
 
-import com.cyou.gccloud.data.data.FDataFinancialMarketerMemberUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
-import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
-import com.cyou.gccloud.define.enums.financial.EGcFinancialMemberRelation;
+import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.web.FGcWebSession;
-import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
 import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
-import org.mo.content.core.financial.marketer.member.IDataMarketerMemberConsole;
-import org.mo.content.core.financial.member.IDataMemberConsole;
+import org.mo.content.core.financial.marketer.customer.IDataMarketerCustomerConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
@@ -44,10 +41,6 @@ public class FCustomerAction
    @ALink
    protected IUserConsole _userConsole;
 
-   // 成员控制器
-   @ALink
-   protected IDataMemberConsole _memberConsole;
-
    //理财师信息控制器
    @ALink
    protected IDataMarketerConsole _marketerConsole;
@@ -56,9 +49,9 @@ public class FCustomerAction
    @ALink
    protected ICustomerConsole _customerConsole;
 
-   //理财师成员控制器
+   // 理财师客户控制器
    @ALink
-   protected IDataMarketerMemberConsole _marketerMemberConsole;
+   protected IDataMarketerCustomerConsole _marketerCustomerConsole;
 
    //============================================================
    // <T>默认逻辑处理。</T>
@@ -74,19 +67,19 @@ public class FCustomerAction
                            FBasePage basePage,
                            FCustomerPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
-      _logger.debug(this, "construct", "construct default begin.(session={1})", session);
+      _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       long marketerId = 0;
       if(user != null){
          FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+         if(marketer == null){
+            _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
+            return "/apl/message/LogicFatal";
+         }
          marketerId = marketer.ouid();
          page.setLabel(user.label());
       }
-      // 检查此用户是否是理财师
-      if(marketerId == 0){
-         _logger.debug(this, "construct", "construct default begin.(session={1})", session);
-         return "/apl/message/LogicFatal";
-      }
+
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
@@ -94,7 +87,7 @@ public class FCustomerAction
          page.setPageCurrent(0);
       }
       //分页处理
-      int pageTotal = _marketerMemberConsole.getPageCount(logicContext, marketerId);
+      int pageTotal = _customerConsole.getPageCount(logicContext, marketerId);
       page.setPageTotal(pageTotal);
       // 第0页
       if(page.pageCurrent() == 0){
@@ -111,7 +104,7 @@ public class FCustomerAction
    }
 
    //============================================================
-   // <T>解除关系逻辑处理。</T>
+   // <T>短信提醒设置。</T>
    //
    // @param context 页面环境
    // @param sessionContext 会话
@@ -120,43 +113,38 @@ public class FCustomerAction
    // @param page 页面容器
    //============================================================
    @Override
-   public String removeRelation(IWebContext context,
-                                IWebSession sessionContext,
-                                ILogicContext logicContext,
-                                FBasePage basePage,
-                                FCustomerPage page){
-      String guid = context.parameter("id");
-      int feedbackCd = context.parameterAsInteger("feedbackCd");
-      String feedbackNote = context.parameter("feedbackNote");
-      _logger.debug(this, "RemoveRelation", "RemoveRelation begin.(guid={1},feedbackCd={2},feedbackNote={3})", guid, feedbackCd, feedbackNote);
-      if(guid.isEmpty() || feedbackCd == 0){
-         page.setMessage("false");
-         return "/apl/ajax";
+   public String settingsSMS(IWebContext context,
+                             IWebSession sessionContext,
+                             ILogicContext logicContext,
+                             FBasePage basePage,
+                             FCustomerPage page){
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "SettingsSMS", "SettingsSMS begin.(session={1})", session.id());
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      long marketerId = 0;
+      if(user != null){
+         FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+         marketerId = marketer.ouid();
+         page.setLabel(user.label());
       }
-      // 获取成员信息
-      FDataFinancialMemberUnit member = _memberConsole.findByGuid(logicContext, guid);
-      if(member == null){
-         page.setMessage("false");
-         return "/apl/ajax";
+      _logger.debug(this, "SettingsSMS", "find user finish.(user={1},marketer={2})", user.ouid(), marketerId);
+      // 目前只做登录提醒
+      long customer = context.parameterAsLong("customer");
+      Integer selected = context.parameterAsInteger("setting");
+      System.out.println(customer + "----" + selected);
+      // 是否存在（理财师、客户、提醒状态）
+      FDataFinancialMarketerCustomerUnit marketerCustomer = _marketerCustomerConsole.findBeenSet(logicContext, marketerId, customer);
+      if(marketerCustomer == null){
+         FDataFinancialMarketerCustomerUnit mCustomer = _marketerCustomerConsole.doPrepare(logicContext);
+         mCustomer.setMarketerId(marketerId);
+         mCustomer.setCustomerId(customer);
+         mCustomer.setSmsContactCd(selected);
+         mCustomer.setActiveCd(EGcActive.Active);
+         _marketerCustomerConsole.doInsert(logicContext, mCustomer);
+      }else{//如果存在，修改短信发送行为。
+         marketerCustomer.setSmsContactCd(selected);
+         _marketerCustomerConsole.doUpdate(logicContext, marketerCustomer);
       }
-      // 根据成员编号获取理财师信息      
-      FDataFinancialMarketerMemberUnit marketerMember = _marketerMemberConsole.findByMemberId(logicContext, member.ouid());
-      if(marketerMember == null){
-         _logger.debug(this, "RemoveRelation", "RemoveRelation find marketer member is null.(guid={1})", guid);
-         page.setMessage("false");
-         return "/apl/ajax";
-      }
-      marketerMember.setRelationCd(EGcFinancialMemberRelation.Unknown);
-      marketerMember.setFeedbackCd(feedbackCd);
-      marketerMember.setFeedbackNote(feedbackNote);
-      EResult result = _marketerMemberConsole.doUpdate(logicContext, marketerMember);
-      if(result.equals(EResult.Failure)){
-         _logger.debug(this, "RemoveRelation", "RemoveRelation update marketer member is failure.(guid={1})", guid);
-         page.setMessage("false");
-         return "/apl/ajax";
-      }
-      _logger.debug(this, "RemoveRelation", "RemoveRelation success.(guid={1})", guid);
-      page.setMessage("true");
-      return "/apl/ajax";
+      return "/pc/marketer/customer/CustomerList";
    }
 }

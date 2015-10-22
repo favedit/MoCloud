@@ -3,7 +3,6 @@ package org.mo.content.face.pc.marketer.customer;
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
-import org.mo.web.core.face.AWebAuthority;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -24,7 +23,7 @@ public interface ICustomerAction
    // @param basePage 公共容器
    // @param page 页面容器
    //============================================================
-   @AWebAuthority("eai.marketer.member.recommend")
+   //   @AWebAuthority("eai.marketer.member.recommend")
    String construct(IWebContext context,
                     IWebSession sessionContext,
                     ILogicContext logicContext,
@@ -32,7 +31,7 @@ public interface ICustomerAction
                     @AContainer(name = "page", fill = true) FCustomerPage page);
 
    //============================================================
-   // <T>解除关系逻辑处理。</T>
+   // <T>短信提醒设置。</T>
    //
    // @param context 页面环境
    // @param sessionContext 会话
@@ -40,11 +39,11 @@ public interface ICustomerAction
    // @param basePage 公共容器
    // @param page 页面容器
    //============================================================
-   @AWebAuthority("eai.marketer.member.recommend")
-   String removeRelation(IWebContext context,
-                         IWebSession sessionContext,
-                         ILogicContext logicContext,
-                         @AContainer(name = "basePage") FBasePage basePage,
-                         @AContainer(name = "page", fill = true) FCustomerPage page);
+   //   @AWebAuthority("eai.marketer.member.recommend")
+   String settingsSMS(IWebContext context,
+                      IWebSession sessionContext,
+                      ILogicContext logicContext,
+                      @AContainer(name = "basePage") FBasePage basePage,
+                      @AContainer(name = "page", fill = true) FCustomerPage page);
 
 }

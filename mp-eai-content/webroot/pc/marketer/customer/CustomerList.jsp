@@ -23,7 +23,23 @@
                            <td><jh:date source="&customer.lastLogin" format="yyyy-MM-dd hh:mm:ss" /></td>
                            <td><jh:write source="&customer.age" /></td>
                            <td align="right"><jh:write source="&customer.investmentTotal" /></td>
-                           <td class="pr"><a class="btn remove" data-id=""  href="javascript:;" onclick="setManagement();">短信提醒</a>
+<!--                           <td class="pr"><a class="btn remove" data-id=""  href="javascript:;" onclick="setManagement();">短信提醒</a>-->
+                           </td>
+                        <td class="pr" ><a class="btn btns" href="javascript:;">短信设置</a>
+                              <div class="note-setupthe">
+                                 <p>
+                                    <input type="radio" name="sms" value="1">上线提醒</p>
+                                 <p>
+                                    <input type="radio" name="sms" value="2">产品关注提醒</p>
+                                 <p>
+                                    <input type="radio" name="sms" value="3">产品购买提醒</p>
+                                 <p>
+                                    <input type="radio" name="sms" value="4">充值提醒</p>
+                                 <p class="btn-box"  data-id="<jh:write source='&customer.ouid' />">
+                                    <a class="btn" href="javascript:;" onclick="shutDown();">关闭</a>
+                                    <a class="btn confirm" href="javascript:; ">确认</a>
+                                 </p>
+                              </div>
                            </td>
                      </tr>
                      </jh:loop>                    
@@ -42,8 +58,6 @@
                      </div>
                      <img style="width:160px;margin-top: 10px;" src="/pc/marketer/recommend/images/loading.png">
                   </div>
-
-
                   <ul class="pages">
                      <li><a href="javascript:void(0);" onclick="pading(-1)">上一页</a></li>
                <li><jh:write source="&page.pageCurrent" />/<jh:write source="&page.pageTotal" /></li>
@@ -64,7 +78,7 @@
       </TABLE>
    </FORM>
    <%@ include file='remove.jsp' %>
-   <script type="text/javascript" src="/pc/marketer/recommend/js/existingUser.js"></script>
+   <script type="text/javascript" src="/pc/marketer/customer/js/existingUser.js"></script>
 <script>
       function pading(nubmer){
          $(".loading").show();

@@ -153,12 +153,12 @@
 .focus .trs{
 	cursor:pointer;
 }
-.focus .trs:hover{
+/*.focus .trs:hover{
 	background:rgba(120, 179, 204, 0.2);
 }
 .focus .trs:active{
 	background:rgba(120, 179, 204, 0.4);
-}
+}*/
 /*loading*/
 #loading_img_div{
 	position: absolute;

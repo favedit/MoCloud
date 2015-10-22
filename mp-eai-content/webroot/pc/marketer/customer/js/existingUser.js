@@ -23,12 +23,32 @@ $(function() {
   var page = getQueryString("page");
   var data = {};
   var id = null;
+  function shutDown() {
+    $(".note-setupthe").slideUp();
+    $shadowBg.hide();
+    $managementPrompt.hide();
+  };
   // hover 跳转
-  $(".focus").on("click", ".trs", function() {
-    var url = $(this).attr("href");
-    window.open(url, "_blank")
-    // location.href = url;
+  // $(".focus").on("click", ".trs", function() {
+  //   var url = $(this).attr("href");
+  //   window.open(url, "_blank")
+  //   // location.href = url;
+  // })
+ $(".focus").on("click", ".btns", function(event) {
+    event.stopPropagation();
+    $(this).parent().find('.note-setupthe').slideDown();
   })
+ // 短信设置
+   $(".focus").on("click",".confirm",function(){
+      var customer=$(this).parent().data("id");
+      var selected = $(this).parent().parent().find("input:checked").val()
+      var url ="/pc/marketer/customer/Customer.wa?do=settingsSMS";
+      var data = {customer:customer,setting:selected};
+        setAjax(url, data, function(msg) {
+           console.log(msg);
+        })
+       shutDown();
+   })
   // 解除关系
   $(".imag-container").on("click", ".remove", function(event) {
     event.stopPropagation();

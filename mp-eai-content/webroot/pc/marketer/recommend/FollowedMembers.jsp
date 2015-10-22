@@ -26,7 +26,8 @@
                            <td class="pr"><a class="btn remove" data-id="<jh:write source="&mMember.memberGuid" />"  href="javascript:;" onclick="setManagement();">解除关系</a>
                            </td>
                      </tr>
-                     </jh:loop>                    
+                     </jh:loop>  
+                     
                   </table>
                   <div class="loading"></div>
                   <div id="loading_img_div" style="width:160px;">
