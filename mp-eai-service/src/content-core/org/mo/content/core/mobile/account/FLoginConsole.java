@@ -1,5 +1,7 @@
 package org.mo.content.core.mobile.account;
 
+import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
+import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
@@ -7,6 +9,8 @@ import com.cyou.gccloud.data.data.FDataPersonUserSigningLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.data.FDataSystemApplicationLogic;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
+import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeLogic;
+import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.ycjt.ead.ThreeDes;
@@ -421,6 +425,55 @@ public class FLoginConsole extends FObject implements ILoginConsole {
             FGcSessionInfo sessionInfo = iterator.next();
             session.loadInfo(sessionInfo);
             _webSessionConsole.close(session);
+        }
+    }
+
+    // ============================================================
+    // @查看当前用户是否有最新的公告
+    // @param context 页面环境
+    // @param input 输入配置
+    // @param output 输出配置
+    // @return 处理结果
+    // @logicContext 逻辑上下文
+    // @sessionContext session上下文
+    // ============================================================
+
+    @Override
+    public String isThereNotices(long userId, IWebSession sessionContext,
+            ILogicContext logicContext, IGcSessionConsole _sessionConsole,
+            IWebSessionConsole _webSessionConsole) {
+        FDataLogicNoticeLogic noticeLogic = logicContext
+                .findLogic(FDataLogicNoticeLogic.class);
+        FLoggerPersonUserNoticeLogic personUserNoticeLogic = logicContext
+                .findLogic(FLoggerPersonUserNoticeLogic.class);
+        FSql whereSql = new FSql();
+        whereSql.append(FDataLogicNoticeLogic.CREATE_DATE);
+        whereSql.append(" =(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `STATUS_CD`=2 AND `DISPLAY_CD`=1 )");
+        FLogicDataset<FDataLogicNoticeUnit> noticeUnits = noticeLogic
+                .fetch(whereSql);
+        if (noticeUnits != null && noticeUnits.count() > 0) {
+            FDataLogicNoticeUnit noticeUnit = noticeUnits.first();
+            long noticeOuid = noticeUnit.ouid();
+            FSql whereSql2 = new FSql();
+            whereSql2.append(FLoggerPersonUserNoticeLogic.USER_ID);
+            whereSql2.append("=");
+            whereSql2.append(userId);
+            whereSql2.append(" AND ");
+            whereSql2.append(FLoggerPersonUserNoticeLogic.NOTICE_ID);
+            whereSql2.append("=");
+            whereSql2.append(noticeOuid);
+            FLogicDataset<FLoggerPersonUserNoticeUnit> personUserNoticeUnits = personUserNoticeLogic
+                    .fetch(whereSql2);
+            if (personUserNoticeUnits != null
+                    && personUserNoticeUnits.count() > 0) {
+                return "deActive";// 公告已读,deActive
+            } else {
+                return noticeUnit.guid();// 公告未读active
+            }
+
+        } else {
+            // 没有公告
+            return "deActive";// deActive
         }
     }
 }

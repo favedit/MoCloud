@@ -1,6 +1,6 @@
 function Earnings(dir) {
 	this.earnings = 0;
-	that = this,
+	that = this;
 	// this.deom = this.$(dir);
 	this.setClick = function(picId, fun){
 		var product = this.$(picId);
@@ -42,6 +42,9 @@ function Earnings(dir) {
 					if( inputV0 == "" ){
 						inputs[0].value = "请输入投资金额";
 						return false;
+					}else if( inputV0 < 0 ){
+						inputs[0].value = "请输入投资金额";
+						return false;
 					}else if( inputV1 == "" ){
 						inputs[1].value = "请输入投资天数";
 						return false;
@@ -78,7 +81,7 @@ function Earnings(dir) {
 			this.value = "";
 		}
 		inputs[0].onkeyup = function  () {
-			if(!Number(this.value)){
+			if(!Number(this.value) || this.value < 0){
 				this.value = "";
 			}
 		}
@@ -86,9 +89,15 @@ function Earnings(dir) {
 			this.value = "";
 		}
 		inputs[1].onkeyup = function(){
-			if(!Number(this.value)){
+			var re = /^[1-9]+[0-9]*]*$/;
+			if(!Number(this.value) || this.value < 0 ){
 				this.value = "";
+
 			}
+			if(this.value!=""){
+				this.value = parseInt(this.value);
+			}
+			
 			if( this.value > 365){
 				this.value = 365;
 			}

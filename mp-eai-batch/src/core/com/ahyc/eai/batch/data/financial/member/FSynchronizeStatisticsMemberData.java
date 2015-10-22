@@ -10,6 +10,8 @@ import com.cyou.gccloud.data.data.FDataFinancialMemberScoreUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
@@ -31,422 +33,590 @@ import org.mo.data.logic.FLogicDataset;
 //@version 1.0.0
 //============================================================
 
-public class FSynchronizeStatisticsMemberData
-{
-   // 日志输出接口
-   private static ILogger _logger = RLogger.find(FSynchronizeStatisticsMemberData.class);
+public class FSynchronizeStatisticsMemberData {
+    // 日志输出接口
+    private static ILogger _logger = RLogger
+            .find(FSynchronizeStatisticsMemberData.class);
 
-   //同步ST_FIN_MEMBER表数据到DT_FIN_MEMBER表
-   public static void synchronizedMember(FLogicContext logicContext){
-      //开始同步数据日志
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "synchronizedMember", "synchronizedMember begin. (logicContext={1})", logicContext.toString());
-      FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
-      FStatisticsFinancialCustomerLogic statisticsCustomerLogic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
-      FStatisticsFinancialMemberLogic statisticsMemberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
-      FDataFinancialMemberLogic dataMemberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-      FDataFinancialCustomerLogic dataCustomerLogic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
-      FDataFinancialMarketerLogic dataMarketerLogic = logicContext.findLogic(FDataFinancialMarketerLogic.class);
+    // 同步ST_FIN_MEMBER表数据到DT_FIN_MEMBER表
+    public static void synchronizedMember(FLogicContext logicContext) {
+        // 开始同步数据日志
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "synchronizedMember",
+                "synchronizedMember begin. (logicContext={1})",
+                logicContext.toString());
+        FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext
+                .findLogic(FStatisticsFinancialMarketerLogic.class);
+        FStatisticsFinancialCustomerLogic statisticsCustomerLogic = logicContext
+                .findLogic(FStatisticsFinancialCustomerLogic.class);
+        FStatisticsFinancialMemberLogic statisticsMemberLogic = logicContext
+                .findLogic(FStatisticsFinancialMemberLogic.class);
+        FDataFinancialMemberLogic dataMemberLogic = logicContext
+                .findLogic(FDataFinancialMemberLogic.class);
+        FDataFinancialCustomerLogic dataCustomerLogic = logicContext
+                .findLogic(FDataFinancialCustomerLogic.class);
+        FDataFinancialMarketerLogic dataMarketerLogic = logicContext
+                .findLogic(FDataFinancialMarketerLogic.class);
+        FStatisticsFinancialDynamicLogic statisticsDynamicLogic = logicContext
+                .findLogic(FStatisticsFinancialDynamicLogic.class);
 
-      //获取最近一礼拜统计成员表的数据,将其同步到存储表,,score字段计算获得
-      FLogicDataset<FStatisticsFinancialMemberUnit> statisticsMemberLatestWeek = getLatestWeek(statisticsMemberLogic);
-      //抓取到的数据日志
-      for(Iterator<FStatisticsFinancialMemberUnit> iterator = statisticsMemberLatestWeek.iterator(); iterator.hasNext();){
-         FStatisticsFinancialMemberUnit statisticsMember = iterator.next();
-         _logger.debug(FSynchronizeStatisticsMemberData.class, "fetch one statisticsMember", "fetch one statisticsMember begin. (statisticsMember_label={1})", statisticsMember.label());
-         FSql whereSqlGuid = new FSql();
-         whereSqlGuid.append(FDataFinancialMemberLogic.GUID);
-         whereSqlGuid.append("=\"");
-         whereSqlGuid.append(statisticsMember.guid() + "\"");
-         FLogicDataset<FDataFinancialMemberUnit> dataMembers = dataMemberLogic.fetch(whereSqlGuid);
-         //如果存在,则更新数据
-         if(dataMembers != null && dataMembers.count() > 0){
-            FDataFinancialMemberUnit dataMember = dataMembers.first();
-            loadDTMemberData(dataMember, statisticsMember);
-            dataMemberLogic.doUpdate(dataMember);
-            //同步更新与之关联的customer和marketer
-            long linkId = dataMember.linkId();
-            FSql wheresqlCustomer = new FSql();
-            wheresqlCustomer.append(FDataFinancialCustomerLogic.LINK_ID);
-            wheresqlCustomer.append(" = ");
-            wheresqlCustomer.append(linkId);
-            FLogicDataset<FDataFinancialCustomerUnit> FDataFinancialCustomerUnits = dataCustomerLogic.fetch(wheresqlCustomer);
-            if(FDataFinancialCustomerUnits != null && FDataFinancialCustomerUnits.count() > 0){
-               FDataFinancialCustomerUnit dataCustomerUnit = FDataFinancialCustomerUnits.first();
-               FSql wheresql = new FSql();
-               wheresql.append(FStatisticsFinancialCustomerLogic.LINK_ID);
-               wheresql.append(" = ");
-               wheresql.append(linkId);
-               FLogicDataset<FStatisticsFinancialCustomerUnit> fetchByLink_ID = statisticsCustomerLogic.fetch(wheresql);
-               loadDTCustomerData(linkId, dataMember.ouid(), statisticsCustomerLogic, dataCustomerLogic, dataCustomerUnit, fetchByLink_ID.first());
-               dataCustomerLogic.doUpdate(dataCustomerUnit);
+        // 获取最近一礼拜统计成员表的数据,将其同步到存储表,,score字段计算获得
+        FLogicDataset<FStatisticsFinancialMemberUnit> statisticsMemberLatestWeek = getLatestWeek(statisticsMemberLogic);
+        // 抓取到的数据日志
+        for (Iterator<FStatisticsFinancialMemberUnit> iterator = statisticsMemberLatestWeek
+                .iterator(); iterator.hasNext();) {
+            FStatisticsFinancialMemberUnit statisticsMember = iterator.next();
+            _logger.debug(
+                    FSynchronizeStatisticsMemberData.class,
+                    "fetch one statisticsMember",
+                    "fetch one statisticsMember begin. (statisticsMember_label={1})",
+                    statisticsMember.label());
+            FSql whereSqlGuid = new FSql();
+            whereSqlGuid.append(FDataFinancialMemberLogic.GUID);
+            whereSqlGuid.append("=\"");
+            whereSqlGuid.append(statisticsMember.guid() + "\"");
+            FLogicDataset<FDataFinancialMemberUnit> dataMembers = dataMemberLogic
+                    .fetch(whereSqlGuid);
+            // 如果存在,则更新数据
+            if (dataMembers != null && dataMembers.count() > 0) {
+                FDataFinancialMemberUnit dataMember = dataMembers.first();
+                loadDTMemberData(dataMember, statisticsMember);
+                dataMemberLogic.doUpdate(dataMember);
+                // 同步更新与之关联的customer和marketer
+                long linkId = dataMember.linkId();
+                FSql wheresqlCustomer = new FSql();
+                wheresqlCustomer.append(FDataFinancialCustomerLogic.LINK_ID);
+                wheresqlCustomer.append(" = ");
+                wheresqlCustomer.append(linkId);
+                FLogicDataset<FDataFinancialCustomerUnit> FDataFinancialCustomerUnits = dataCustomerLogic
+                        .fetch(wheresqlCustomer);
+                if (FDataFinancialCustomerUnits != null
+                        && FDataFinancialCustomerUnits.count() > 0) {
+                    FDataFinancialCustomerUnit dataCustomerUnit = FDataFinancialCustomerUnits
+                            .first();
+                    FSql wheresql = new FSql();
+                    wheresql.append(FStatisticsFinancialCustomerLogic.LINK_ID);
+                    wheresql.append(" = ");
+                    wheresql.append(linkId);
+                    FLogicDataset<FStatisticsFinancialCustomerUnit> fetchByLink_ID = statisticsCustomerLogic
+                            .fetch(wheresql);
+                    loadDTCustomerData(linkId, dataMember.ouid(),
+                            statisticsCustomerLogic, dataCustomerLogic,
+                            dataCustomerUnit, fetchByLink_ID.first());
+                    dataCustomerLogic.doUpdate(dataCustomerUnit);
+                }
+
+                FSql wheresqlMarketer = new FSql();
+                wheresqlMarketer.append(FDataFinancialMarketerLogic.LINK_ID);
+                wheresqlMarketer.append(" = ");
+                wheresqlMarketer.append(linkId);
+                FLogicDataset<FDataFinancialMarketerUnit> FDataFinancialMarketerUnits = dataMarketerLogic
+                        .fetch(wheresqlMarketer);
+                if (FDataFinancialMarketerUnits != null
+                        && FDataFinancialMarketerUnits.count() > 0) {
+                    FDataFinancialMarketerUnit dataMarketerUnit = FDataFinancialMarketerUnits
+                            .first();
+                    FSql wheresql2 = new FSql();
+                    wheresql2.append(FStatisticsFinancialMarketerLogic.LINK_ID);
+                    wheresql2.append(" = ");
+                    wheresql2.append(linkId);
+                    FLogicDataset<FStatisticsFinancialMarketerUnit> fetchByLink_ID2 = statisticsMarketerLogic
+                            .fetch(wheresql2);
+                    loadDTMarketerData(linkId, dataMember.ouid(),
+                            statisticsMarketerLogic, dataMarketerLogic,
+                            dataMarketerUnit, fetchByLink_ID2.first());
+                    dataMarketerLogic.doUpdate(dataMarketerUnit);
+                }
+                // 更新完毕member
+            } else {
+
+                // 如果member不存在,插入数据,同步数据的俩张表guid设置为一样,ouid也设置一样
+                // (如果member不存在,意味着与之关联的customer和marketer也要新添加
+                FDataFinancialMemberUnit dataMember = new FDataFinancialMemberUnit();
+                FDataFinancialCustomerUnit dataCustomerUnit = new FDataFinancialCustomerUnit();
+                FDataFinancialMarketerUnit dataMarketerUnit = new FDataFinancialMarketerUnit();
+                loadDTMemberData(dataMember, statisticsMember);
+                dataMemberLogic.doInsert(dataMember);
+                // 当同步添加了一个member后,要保证与member关联的customer和marketer的ouid要一致.拿member的link_id去ST关联customer和marketer的LINK_ID
+                long linkId = dataMember.linkId();
+                long ouid = dataMember.ouid();
+                // 首先去ST库下找有没有相应link_id的customer
+                FSql wheresql = new FSql();
+                wheresql.append(FStatisticsFinancialCustomerLogic.LINK_ID);
+                wheresql.append(" = ");
+                wheresql.append(linkId);
+                FLogicDataset<FStatisticsFinancialCustomerUnit> fetchByLink_ID = statisticsCustomerLogic
+                        .fetch(wheresql);
+                if (fetchByLink_ID != null && fetchByLink_ID.count() > 0) {
+                    FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit = fetchByLink_ID
+                            .first();
+                    loadDTCustomerData(linkId, ouid, statisticsCustomerLogic,
+                            dataCustomerLogic, dataCustomerUnit,
+                            firstStatisticsFinancialCustomerUnit);
+                    dataCustomerLogic.doInsert(dataCustomerUnit);
+                }
+
+                // 首先去ST库下找有没有相应link_id的marketer
+                FSql wheresql2 = new FSql();
+                wheresql2.append(FStatisticsFinancialMarketerLogic.LINK_ID);
+                wheresql2.append(" = ");
+                wheresql2.append(linkId);
+                FLogicDataset<FStatisticsFinancialMarketerUnit> fetchByLink_ID2 = statisticsMarketerLogic
+                        .fetch(wheresql2);
+                if (fetchByLink_ID2 != null && fetchByLink_ID2.count() > 0) {
+                    FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit = fetchByLink_ID2
+                            .first();
+                    loadDTMarketerData(linkId, ouid, statisticsMarketerLogic,
+                            dataMarketerLogic, dataMarketerUnit,
+                            firstStatisticsFinancialMarketerUnit);
+                    dataMarketerLogic.doInsert(dataMarketerUnit);
+                }
             }
+            /*
+             * System.out.println("年龄:" + getAgeByCard(idCard) + "  收入:" +
+             * statisticsMember.incomeCode() + "  dataMemberpassport:" +
+             * dataMember.passport() + "  dataMemberlinkId:" +
+             * dataMember.linkId() + "  dataMemberrecommendScore:" +
+             * dataMember.recommendScore());
+             */
 
-            FSql wheresqlMarketer = new FSql();
-            wheresqlMarketer.append(FDataFinancialMarketerLogic.LINK_ID);
-            wheresqlMarketer.append(" = ");
-            wheresqlMarketer.append(linkId);
-            FLogicDataset<FDataFinancialMarketerUnit> FDataFinancialMarketerUnits = dataMarketerLogic.fetch(wheresqlMarketer);
-            if(FDataFinancialMarketerUnits != null && FDataFinancialMarketerUnits.count() > 0){
-               FDataFinancialMarketerUnit dataMarketerUnit = FDataFinancialMarketerUnits.first();
-               FSql wheresql2 = new FSql();
-               wheresql2.append(FStatisticsFinancialMarketerLogic.LINK_ID);
-               wheresql2.append(" = ");
-               wheresql2.append(linkId);
-               FLogicDataset<FStatisticsFinancialMarketerUnit> fetchByLink_ID2 = statisticsMarketerLogic.fetch(wheresql2);
-               loadDTMarketerData(linkId, dataMember.ouid(), statisticsMarketerLogic, dataMarketerLogic, dataMarketerUnit, fetchByLink_ID2.first());
-               dataMarketerLogic.doUpdate(dataMarketerUnit);
+        }
+
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "synchronizedMember", "synchronizedMember end. (method={1})",
+                "synchronizedMember");
+    }
+
+    // 把ST的marketer同步到DT的marketer
+    public static void loadDTMarketerData(
+            long linkId,
+            long ouid,
+            FStatisticsFinancialMarketerLogic statisticsMarketerLogic,
+            FDataFinancialMarketerLogic dataMarketerLogic,
+            FDataFinancialMarketerUnit dataMarketerUnit,
+            FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "loadDTMarketerData", "loadDTMarketerData start. (linkId={1})",
+                linkId);
+        dataMarketerUnit.setOuid(ouid);
+        dataMarketerUnit.setGuid(firstStatisticsFinancialMarketerUnit.guid());
+        dataMarketerUnit.setLinkId(linkId);
+        dataMarketerUnit.setStatisticsId(firstStatisticsFinancialMarketerUnit
+                .ouid());
+        dataMarketerUnit.setLabel(firstStatisticsFinancialMarketerUnit.label());
+        dataMarketerUnit.setStatusCd(firstStatisticsFinancialMarketerUnit
+                .statusCd());
+        dataMarketerUnit.setPhone(firstStatisticsFinancialMarketerUnit.phone());
+        dataMarketerUnit.setCard(firstStatisticsFinancialMarketerUnit.card());
+        dataMarketerUnit.setRankLabel(firstStatisticsFinancialMarketerUnit
+                .rankLabel());
+        dataMarketerUnit.setDepartmentId(firstStatisticsFinancialMarketerUnit
+                .departmentLinkId());
+        dataMarketerUnit
+                .setDepartmentLabel(firstStatisticsFinancialMarketerUnit
+                        .departmentLabel());
+        dataMarketerUnit
+                .setCustomerInvestmentTotal(firstStatisticsFinancialMarketerUnit
+                        .investmentTotal());
+        dataMarketerUnit
+                .setCustomerRedemptionTotal(firstStatisticsFinancialMarketerUnit
+                        .redemptionTotal());
+        dataMarketerUnit
+                .setCustomerNetinvestmentTotal(firstStatisticsFinancialMarketerUnit
+                        .netinvestmentTotal());
+        dataMarketerUnit
+                .setCustomerInterestTotal(firstStatisticsFinancialMarketerUnit
+                        .interestTotal());
+        dataMarketerUnit
+                .setCustomerPerformanceTotal(firstStatisticsFinancialMarketerUnit
+                        .performanceTotal());
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "loadDTMarketerData", "loadDTMarketerData end. (linkId={1})",
+                linkId);
+
+    }
+
+    // 同步ST的customer时,拿着他的ouid去ST的dynamic找到理财师的id同步进来
+    public static void loadSTDynamicToDTCustomer(
+            FDataFinancialCustomerUnit dataCustomerUnit,
+            FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit,
+            FLogicContext logicContext) {
+        FStatisticsFinancialDynamicLogic statisticsDynamicLogic = logicContext
+                .findLogic(FStatisticsFinancialDynamicLogic.class);
+        FSql whereCustomerId = new FSql();
+        whereCustomerId
+                .append(FStatisticsFinancialDynamicLogic.CUSTOMER_ACTION_DATE);
+        whereCustomerId
+                .append("= (SELECT MAX(`CUSTOMER_ACTION_DATE`) FROM `ST_FIN_DYNAMIC` AS D1 WHERE D1.`CUSTOMER_ID`="
+                        + firstStatisticsFinancialCustomerUnit.ouid() + ")");
+        FLogicDataset<FStatisticsFinancialDynamicUnit> statisticsDynamicUnits = statisticsDynamicLogic
+                .fetch(whereCustomerId);
+        if (statisticsDynamicUnits != null
+                && statisticsDynamicUnits.count() > 0) {
+            FStatisticsFinancialDynamicUnit statisticsDynamicUnit = statisticsDynamicUnits
+                    .first();
+            dataCustomerUnit.setMarketerId(statisticsDynamicUnit.marketerId());
+            dataCustomerUnit.setMarketerLid(statisticsDynamicUnit
+                    .marketerLinkId());
+        }
+    }
+
+    // 把ST的customer同步到DT的customer
+    public static void loadDTCustomerData(
+            long linkId,
+            long ouid,
+            FStatisticsFinancialCustomerLogic statisticsCustomerLogic,
+            FDataFinancialCustomerLogic dataCustomerLogic,
+            FDataFinancialCustomerUnit dataCustomerUnit,
+            FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "loadDTCustomerData", "loadDTCustomerData start. (linkId={1})",
+                linkId);
+
+        dataCustomerUnit.setOuid(ouid);
+        dataCustomerUnit.setGuid(firstStatisticsFinancialCustomerUnit.guid());
+        // System.out.println("firstStatisticsFinancialCustomerUnit.guid()-->" +
+        // firstStatisticsFinancialCustomerUnit.guid());
+        dataCustomerUnit.setLinkId(linkId);
+        dataCustomerUnit
+                .setStatisticsId((int) firstStatisticsFinancialCustomerUnit
+                        .ouid());
+        dataCustomerUnit
+                .setInvestmentTotal(firstStatisticsFinancialCustomerUnit
+                        .investmentTotal());
+        dataCustomerUnit
+                .setRedemptionTotal((float) firstStatisticsFinancialCustomerUnit
+                        .redemptionTotal());
+        dataCustomerUnit
+                .setNetinvestment((float) firstStatisticsFinancialCustomerUnit
+                        .netinvestmentTotal());
+        dataCustomerUnit
+                .setInterestTotal((float) firstStatisticsFinancialCustomerUnit
+                        .interestTotal());
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "loadDTCustomerData", "loadDTCustomerData end. (linkId={1})",
+                linkId);
+
+        // 同步ST的customer时,拿着他的ouid去ST的dynamic找到理财师的id同步进来
+    }
+
+    // 计算分数 通过年龄和收入去计算
+    public static int getScore(int age, String incomeCode) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getScore",
+                "getScore start. (age={1})", age);
+        int ageScore = 0;
+        int incomeScore = 0;
+        if (age == -1 || age <= 20) {
+            ageScore = 50;
+        } else if (age > 20 && age <= 30) {
+            ageScore = 60;
+        } else if (age > 30 && age <= 40) {
+            ageScore = 70;
+        } else if (age > 40 && age <= 50) {
+            ageScore = 80;
+        } else if (age > 50 && age <= 60) {
+            ageScore = 90;
+        } else {
+            ageScore = 100;
+        }
+        if (incomeCode != null && (!"".equals(incomeCode))) {
+            if (incomeCode.equals("50000以上")) {
+                incomeScore = 100;
+            } else if (incomeCode.equals("10000-50000")) {
+                incomeScore = 80;
+            } else if (incomeCode.equals("5000-10000")) {
+                incomeScore = 60;
+            } else {
+                incomeScore = 40;
             }
-            //更新完毕member
-         }else{
+        } else {
+            return ageScore;
+        }
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getScore",
+                "getScore end. (age={1})", age);
+        return (int) (ageScore * 0.5 + incomeScore * 0.5);
+    }
 
-            //如果member不存在,插入数据,同步数据的俩张表guid设置为一样,ouid也设置一样  (如果member不存在,意味着与之关联的customer和marketer也要新添加
-            FDataFinancialMemberUnit dataMember = new FDataFinancialMemberUnit();
-            FDataFinancialCustomerUnit dataCustomerUnit = new FDataFinancialCustomerUnit();
-            FDataFinancialMarketerUnit dataMarketerUnit = new FDataFinancialMarketerUnit();
-            loadDTMemberData(dataMember, statisticsMember);
-            dataMemberLogic.doInsert(dataMember);
-            //当同步添加了一个member后,要保证与member关联的customer和marketer的ouid要一致.拿member的link_id去ST关联customer和marketer的LINK_ID
-            long linkId = dataMember.linkId();
-            long ouid = dataMember.ouid();
-            //首先去ST库下找有没有相应link_id的customer
-            FSql wheresql = new FSql();
-            wheresql.append(FStatisticsFinancialCustomerLogic.LINK_ID);
-            wheresql.append(" = ");
-            wheresql.append(linkId);
-            FLogicDataset<FStatisticsFinancialCustomerUnit> fetchByLink_ID = statisticsCustomerLogic.fetch(wheresql);
-            if(fetchByLink_ID != null && fetchByLink_ID.count() > 0){
-               FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit = fetchByLink_ID.first();
-               loadDTCustomerData(linkId, ouid, statisticsCustomerLogic, dataCustomerLogic, dataCustomerUnit, firstStatisticsFinancialCustomerUnit);
-               dataCustomerLogic.doInsert(dataCustomerUnit);
+    // 按最近登录时间计算分数
+    public static int getScoreByLastLoginDate(TDateTime lastLoginDate) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "getScoreByLastLoginDate",
+                "getScoreByLastLoginDate start. (lastLoginDate={1})",
+                lastLoginDate);
+        int lastLoginDateLastLoginDateScore = -1;
+        // 距今天0天 2015 09 25 00:00:00--2015 09 25 10:02:18 代码编辑于2015 09 25
+        // 10:02:18
+        if (lastLoginDate.isBetween(getNDayAgo(0), new TDateTime(new Date()))) {
+            lastLoginDateLastLoginDateScore = 100;
+        } else if (lastLoginDate.isBetween(getNDayAgo(-1), getNDayAgo(0))) {
+            // 距今天1天 (2015 09 24 00:00:00---2015 09 25 00:00:00 代码编辑于2015 09 25
+            // 10:02:18
+            lastLoginDateLastLoginDateScore = 90;
+        } else if (lastLoginDate.isBetween(getNDayAgo(-2), getNDayAgo(-1))) {
+            // 距今天2天
+            lastLoginDateLastLoginDateScore = 80;
+
+        } else if (lastLoginDate.isBetween(getNDayAgo(-3), getNDayAgo(-2))) {
+            // 距今天3天
+            lastLoginDateLastLoginDateScore = 70;
+        } else if (lastLoginDate.isBetween(getNDayAgo(-4), getNDayAgo(-3))) {
+            // 距今天4天
+            lastLoginDateLastLoginDateScore = 60;
+        } else if (lastLoginDate.isBetween(getNDayAgo(-5), getNDayAgo(-4))) {
+            // 距今天5天
+            lastLoginDateLastLoginDateScore = 50;
+        } else if (lastLoginDate.isBefore(getNDayAgo(-5))) {
+            // 距今天>=6天
+            lastLoginDateLastLoginDateScore = 40;
+        }
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "getScoreByLastLoginDate",
+                "getScoreByLastLoginDate end. (lastLoginDate={1})",
+                lastLoginDate);
+        return lastLoginDateLastLoginDateScore;
+    }
+
+    // 返回距今几天的方法,以00:00:00为判断点
+    public static TDateTime getNDayAgo(int dayNumber) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getNDayAgo",
+                "getNDayAgo start. (dayNumber={1})", dayNumber);
+
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, dayNumber);// 当前日期+dayNumber
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        date = calendar.getTime();
+        TDateTime DateTime = new TDateTime(date);
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getNDayAgo",
+                "getNDayAgo end. (dayNumber={1})", dayNumber);
+        return DateTime;
+    }
+
+    // 根据身份证计算年龄
+    public static int getAgeByCard(String idCard) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard",
+                "getAgeByCard start. (idCard={1})", idCard);
+        idCard = idCard.trim();
+        if (idCard == null || idCard.length() < 12) {
+            return -1;
+        }
+        int iAge = -1;
+        String year = idCard.substring(6, 10);
+        Calendar cal = Calendar.getInstance();
+        int iCurrYear = cal.get(Calendar.YEAR);
+        iAge = iCurrYear - Integer.valueOf(year);
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard",
+                "getAgeByCard end. (idCard={1})", idCard);
+        return iAge;
+    }
+
+    // 根据身份证获得生日字符串
+    public static TDateTime getBirthdayByIdCard(String idCard) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "getBirthdayByIdCard",
+                "getBirthdayByIdCard start. (idCard={1})", idCard);
+
+        String birthdayString = "";
+        TDateTime birthdayDateTime = null;
+        idCard = idCard.trim();
+        if (idCard != null && idCard.length() > 15) {
+            birthdayString = idCard.substring(6, 14);// 生日字符串19900326
+            birthdayDateTime = new TDateTime(birthdayString);
+        }
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "getBirthdayByIdCard", "getBirthdayByIdCard end. (idCard={1})",
+                idCard);
+        return birthdayDateTime;
+    }
+
+    // 装载数据
+    public static void loadDTMemberData(FDataFinancialMemberUnit dataMember,
+            FStatisticsFinancialMemberUnit statisticsMember) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "loadDTMemberData",
+                "loadDTMemberData start. (dataMember_linkId()={1})",
+                dataMember.linkId());
+
+        dataMember.setOuid(statisticsMember.ouid());
+        dataMember.setGuid(statisticsMember.guid());
+        dataMember.setLinkId(statisticsMember.linkId());// ******
+        dataMember.setStatisticsId(statisticsMember.ouid());
+        dataMember.setPassport(statisticsMember.passport());
+        dataMember.setLabel(statisticsMember.label());
+        dataMember.setCard(statisticsMember.card());
+        dataMember.setPhone(statisticsMember.phone());
+        dataMember.setEmail(statisticsMember.email());
+        String idCard = statisticsMember.card();// 身份证
+        // System.out.println("****************-------------->生日" +
+        // getBirthdayByIdCard(idCard));
+        // System.out.println("****************----年龄---------->" +
+        // getAgeByCard(idCard));
+        // System.out.println("****************-------------->" +
+        // birthdayStringDateTime);
+        dataMember.setBirthday(getBirthdayByIdCard(idCard));// 从身份证截取生日
+        dataMember.setGenderCd(statisticsMember.genderCd());
+        dataMember.setMarryCd(statisticsMember.marryCd());
+        dataMember.setEducationCd(statisticsMember.educationCd());
+        dataMember.setBusinessCd(statisticsMember.businessCd());
+        dataMember.setIncomeCd(statisticsMember.incomeCd());
+        dataMember.setRecommendScore(getScore(getAgeByCard(idCard),
+                statisticsMember.incomeCode()));// ------计算分数 通过年龄和收入去计算
+        dataMember.setProvinceAreaId(statisticsMember.provinceAreaId());
+        dataMember.setProvinceId(statisticsMember.provinceId());
+        dataMember.setCityId(statisticsMember.cityId());
+        dataMember.setAreaId(statisticsMember.areaId());
+        dataMember.setAddress(statisticsMember.address());
+        dataMember.setRegisterDate(statisticsMember.registerDate());
+        dataMember.setLastLoginDate(statisticsMember.lastLoginDate());
+        // dataMember.setRecommendBeginDate(value);
+        // dataMember.setRecommendEndDate(value);
+        // dataMember.setRecommendMarketerId(value);
+        // dataMember.setRecommendMarketerUserId(value);
+        dataMember.setNote(statisticsMember.info());
+        _logger.debug(FSynchronizeStatisticsMemberData.class,
+                "loadDTMemberData",
+                "loadDTMemberData end. (dataMember_linkId()={1})",
+                dataMember.linkId());
+
+    }
+
+    // 获取统计member表最近一个礼拜登录的数据
+    public static FLogicDataset<FStatisticsFinancialMemberUnit> getLatestWeek(
+            FStatisticsFinancialMemberLogic statisticsMemberLogic) {
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek",
+                "getLatestWeek start. (statisticsMemberLogic()={1})",
+                statisticsMemberLogic);
+
+        FSql whereSqlLatestWeek = new FSql();
+        whereSqlLatestWeek
+                .append(FStatisticsFinancialMemberLogic.LAST_LOGIN_DATE);
+        whereSqlLatestWeek
+                .append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 WEEK)  AND NOW()");
+        _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek",
+                "getLatestWeek end. (statisticsMemberLogic()={1})",
+                statisticsMemberLogic);
+        FLogicDataset<FStatisticsFinancialMemberUnit> lastWeek = statisticsMemberLogic
+                .fetch(whereSqlLatestWeek);
+        return lastWeek;
+    }
+
+    // 同时同步数据到DT_FIN_MEMBER_SCORE
+    public static void synchronizedMemberScore(FLogicContext logicContext) {
+        FDataFinancialMemberScoreLogic dataMemberScoreLogic = logicContext
+                .findLogic(FDataFinancialMemberScoreLogic.class);
+        // 抓取出来最近三天的数据
+        FDataFinancialMemberLogic dataMemberLogic = logicContext
+                .findLogic(FDataFinancialMemberLogic.class);
+        FSql whereSqlLatestThreeDays = new FSql();
+        whereSqlLatestThreeDays
+                .append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
+        whereSqlLatestThreeDays
+                .append(" BETWEEN DATE_SUB(NOW(),INTERVAL 3 DAY)  AND NOW()");
+        FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits = dataMemberLogic
+                .fetch(whereSqlLatestThreeDays);
+        FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits = new FLogicDataset<FDataFinancialMemberScoreUnit>();
+        // 如果最近3天大于8w抓取最近一天的
+        if (lastDataMemberUnits != null && lastDataMemberUnits.count() > 80000) {
+            FSql whereSqlLatestOneDays = new FSql();
+            whereSqlLatestOneDays
+                    .append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
+            whereSqlLatestOneDays
+                    .append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 DAY)  AND NOW()");
+            lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestOneDays);
+            // 如果最近一天的数据大于8w抓取最近12小时的
+            if (lastDataMemberUnits != null
+                    && lastDataMemberUnits.count() > 80000) {
+                FSql whereSqlLatestHour = new FSql();
+                whereSqlLatestHour
+                        .append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
+                whereSqlLatestHour
+                        .append(" BETWEEN DATE_SUB(NOW(),INTERVAL 12 HOUR)  AND NOW()");
+                lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestHour);
+                if (lastDataMemberUnits != null
+                        && lastDataMemberUnits.count() > 0) {
+                    insertOrUpdateMemberScore(lastDataMemberUnits,
+                            lastDataMemberScoreUnits, dataMemberScoreLogic);
+                }
+            } else {
+                if (lastDataMemberUnits != null
+                        && lastDataMemberUnits.count() > 0) {
+                    insertOrUpdateMemberScore(lastDataMemberUnits,
+                            lastDataMemberScoreUnits, dataMemberScoreLogic);
+                }
             }
-
-            //首先去ST库下找有没有相应link_id的marketer
-            FSql wheresql2 = new FSql();
-            wheresql2.append(FStatisticsFinancialMarketerLogic.LINK_ID);
-            wheresql2.append(" = ");
-            wheresql2.append(linkId);
-            FLogicDataset<FStatisticsFinancialMarketerUnit> fetchByLink_ID2 = statisticsMarketerLogic.fetch(wheresql2);
-            if(fetchByLink_ID2 != null && fetchByLink_ID2.count() > 0){
-               FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit = fetchByLink_ID2.first();
-               loadDTMarketerData(linkId, ouid, statisticsMarketerLogic, dataMarketerLogic, dataMarketerUnit, firstStatisticsFinancialMarketerUnit);
-               dataMarketerLogic.doInsert(dataMarketerUnit);
+        } else {
+            if (lastDataMemberUnits != null && lastDataMemberUnits.count() > 0) {
+                insertOrUpdateMemberScore(lastDataMemberUnits,
+                        lastDataMemberScoreUnits, dataMemberScoreLogic);
             }
-         }
-         /*System.out.println("年龄:" + getAgeByCard(idCard) + "  收入:" + statisticsMember.incomeCode() + "  dataMemberpassport:" + dataMember.passport() + "  dataMemberlinkId:" + dataMember.linkId() + "  dataMemberrecommendScore:"
-               + dataMember.recommendScore());*/
+        }
 
-      }
+    }
 
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "synchronizedMember", "synchronizedMember end. (method={1})", "synchronizedMember");
-   }
+    public static void insertOrUpdateMemberScore(
+            FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits,
+            FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits,
+            FDataFinancialMemberScoreLogic dataMemberScoreLogic) {
 
-   //同步删除数据
-   //   public static void synchronizedDeleteMember(FLogicContext logicContext){
-   //      FStatisticsFinancialMarketerLogic statisticsMarketerLogic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
-   //   }
-
-   //把ST的marketer同步到DT的marketer
-   public static void loadDTMarketerData(long linkId,
-                                         long ouid,
-                                         FStatisticsFinancialMarketerLogic statisticsMarketerLogic,
-                                         FDataFinancialMarketerLogic dataMarketerLogic,
-                                         FDataFinancialMarketerUnit dataMarketerUnit,
-                                         FStatisticsFinancialMarketerUnit firstStatisticsFinancialMarketerUnit){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMarketerData", "loadDTMarketerData start. (linkId={1})", linkId);
-      dataMarketerUnit.setOuid(ouid);
-      dataMarketerUnit.setGuid(firstStatisticsFinancialMarketerUnit.guid());
-      dataMarketerUnit.setLinkId(linkId);
-      dataMarketerUnit.setStatisticsId(firstStatisticsFinancialMarketerUnit.ouid());
-      dataMarketerUnit.setLabel(firstStatisticsFinancialMarketerUnit.label());
-      dataMarketerUnit.setStatusCd(firstStatisticsFinancialMarketerUnit.statusCd());
-      dataMarketerUnit.setPhone(firstStatisticsFinancialMarketerUnit.phone());
-      dataMarketerUnit.setCard(firstStatisticsFinancialMarketerUnit.card());
-      dataMarketerUnit.setRankLabel(firstStatisticsFinancialMarketerUnit.rankLabel());
-      dataMarketerUnit.setDepartmentId(firstStatisticsFinancialMarketerUnit.departmentLinkId());
-      dataMarketerUnit.setDepartmentLabel(firstStatisticsFinancialMarketerUnit.departmentLabel());
-      dataMarketerUnit.setCustomerInvestmentTotal(firstStatisticsFinancialMarketerUnit.investmentTotal());
-      dataMarketerUnit.setCustomerRedemptionTotal(firstStatisticsFinancialMarketerUnit.redemptionTotal());
-      dataMarketerUnit.setCustomerNetinvestmentTotal(firstStatisticsFinancialMarketerUnit.netinvestmentTotal());
-      dataMarketerUnit.setCustomerInterestTotal(firstStatisticsFinancialMarketerUnit.interestTotal());
-      dataMarketerUnit.setCustomerPerformanceTotal(firstStatisticsFinancialMarketerUnit.performanceTotal());
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMarketerData", "loadDTMarketerData end. (linkId={1})", linkId);
-
-   }
-
-   //把ST的customer同步到DT的customer
-   public static void loadDTCustomerData(long linkId,
-                                         long ouid,
-                                         FStatisticsFinancialCustomerLogic statisticsCustomerLogic,
-                                         FDataFinancialCustomerLogic dataCustomerLogic,
-                                         FDataFinancialCustomerUnit dataCustomerUnit,
-                                         FStatisticsFinancialCustomerUnit firstStatisticsFinancialCustomerUnit){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTCustomerData", "loadDTCustomerData start. (linkId={1})", linkId);
-
-      dataCustomerUnit.setOuid(ouid);
-      dataCustomerUnit.setGuid(firstStatisticsFinancialCustomerUnit.guid());
-      //      System.out.println("firstStatisticsFinancialCustomerUnit.guid()-->" + firstStatisticsFinancialCustomerUnit.guid());
-      dataCustomerUnit.setLinkId(linkId);
-      dataCustomerUnit.setStatisticsId((int)firstStatisticsFinancialCustomerUnit.ouid());
-      dataCustomerUnit.setInvestmentTotal(firstStatisticsFinancialCustomerUnit.investmentTotal());
-      dataCustomerUnit.setRedemptionTotal((float)firstStatisticsFinancialCustomerUnit.redemptionTotal());
-      dataCustomerUnit.setNetinvestment((float)firstStatisticsFinancialCustomerUnit.netinvestmentTotal());
-      dataCustomerUnit.setInterestTotal((float)firstStatisticsFinancialCustomerUnit.interestTotal());
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTCustomerData", "loadDTCustomerData end. (linkId={1})", linkId);
-   }
-
-   //计算分数  通过年龄和收入去计算
-   public static int getScore(int age,
-                              String incomeCode){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScore", "getScore start. (age={1})", age);
-      int ageScore = 0;
-      int incomeScore = 0;
-      if(age == -1 || age <= 20){
-         ageScore = 50;
-      }else if(age > 20 && age <= 30){
-         ageScore = 60;
-      }else if(age > 30 && age <= 40){
-         ageScore = 70;
-      }else if(age > 40 && age <= 50){
-         ageScore = 80;
-      }else if(age > 50 && age <= 60){
-         ageScore = 90;
-      }else{
-         ageScore = 100;
-      }
-      if(incomeCode != null && (!"".equals(incomeCode))){
-         if(incomeCode.equals("50000以上")){
-            incomeScore = 100;
-         }else if(incomeCode.equals("10000-50000")){
-            incomeScore = 80;
-         }else if(incomeCode.equals("5000-10000")){
-            incomeScore = 60;
-         }else{
-            incomeScore = 40;
-         }
-      }else{
-         return ageScore;
-      }
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScore", "getScore end. (age={1})", age);
-      return (int)(ageScore * 0.5 + incomeScore * 0.5);
-   }
-
-   //按最近登录时间计算分数
-   public static int getScoreByLastLoginDate(TDateTime lastLoginDate){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScoreByLastLoginDate", "getScoreByLastLoginDate start. (lastLoginDate={1})", lastLoginDate);
-      int lastLoginDateLastLoginDateScore = -1;
-      //距今天0天 2015 09 25 00:00:00--2015 09 25 10:02:18 代码编辑于2015 09 25 10:02:18
-      if(lastLoginDate.isBetween(getNDayAgo(0), new TDateTime(new Date()))){
-         lastLoginDateLastLoginDateScore = 100;
-      }else if(lastLoginDate.isBetween(getNDayAgo(-1), getNDayAgo(0))){
-         //距今天1天 (2015 09 24 00:00:00---2015 09 25 00:00:00   代码编辑于2015 09 25 10:02:18
-         lastLoginDateLastLoginDateScore = 90;
-      }else if(lastLoginDate.isBetween(getNDayAgo(-2), getNDayAgo(-1))){
-         //距今天2天
-         lastLoginDateLastLoginDateScore = 80;
-
-      }else if(lastLoginDate.isBetween(getNDayAgo(-3), getNDayAgo(-2))){
-         //距今天3天
-         lastLoginDateLastLoginDateScore = 70;
-      }else if(lastLoginDate.isBetween(getNDayAgo(-4), getNDayAgo(-3))){
-         //距今天4天
-         lastLoginDateLastLoginDateScore = 60;
-      }else if(lastLoginDate.isBetween(getNDayAgo(-5), getNDayAgo(-4))){
-         //距今天5天
-         lastLoginDateLastLoginDateScore = 50;
-      }else if(lastLoginDate.isBefore(getNDayAgo(-5))){
-         //距今天>=6天
-         lastLoginDateLastLoginDateScore = 40;
-      }
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getScoreByLastLoginDate", "getScoreByLastLoginDate end. (lastLoginDate={1})", lastLoginDate);
-      return lastLoginDateLastLoginDateScore;
-   }
-
-   //返回距今几天的方法,以00:00:00为判断点
-   public static TDateTime getNDayAgo(int dayNumber){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getNDayAgo", "getNDayAgo start. (dayNumber={1})", dayNumber);
-
-      Date date = new Date();
-      Calendar calendar = Calendar.getInstance();
-      calendar.setTime(date);
-      calendar.add(Calendar.DAY_OF_MONTH, dayNumber);//当前日期+dayNumber
-      calendar.set(Calendar.HOUR, 0);
-      calendar.set(Calendar.MINUTE, 0);
-      calendar.set(Calendar.SECOND, 0);
-      calendar.set(Calendar.MILLISECOND, 0);
-      date = calendar.getTime();
-      TDateTime DateTime = new TDateTime(date);
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getNDayAgo", "getNDayAgo end. (dayNumber={1})", dayNumber);
-      return DateTime;
-   }
-
-   //根据身份证计算年龄
-   public static int getAgeByCard(String idCard){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard", "getAgeByCard start. (idCard={1})", idCard);
-      idCard = idCard.trim();
-      if(idCard == null || idCard.length() < 12){
-         return -1;
-      }
-      int iAge = -1;
-      String year = idCard.substring(6, 10);
-      Calendar cal = Calendar.getInstance();
-      int iCurrYear = cal.get(Calendar.YEAR);
-      iAge = iCurrYear - Integer.valueOf(year);
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getAgeByCard", "getAgeByCard end. (idCard={1})", idCard);
-      return iAge;
-   }
-
-   //根据身份证获得生日字符串
-   public static TDateTime getBirthdayByIdCard(String idCard){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getBirthdayByIdCard", "getBirthdayByIdCard start. (idCard={1})", idCard);
-
-      String birthdayString = "";
-      TDateTime birthdayDateTime = null;
-      idCard = idCard.trim();
-      if(idCard != null && idCard.length() > 15){
-         birthdayString = idCard.substring(6, 14);//生日字符串19900326
-         birthdayDateTime = new TDateTime(birthdayString);
-      }
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getBirthdayByIdCard", "getBirthdayByIdCard end. (idCard={1})", idCard);
-      return birthdayDateTime;
-   }
-
-   //装载数据
-   public static void loadDTMemberData(FDataFinancialMemberUnit dataMember,
-                                       FStatisticsFinancialMemberUnit statisticsMember){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMemberData", "loadDTMemberData start. (dataMember_linkId()={1})", dataMember.linkId());
-
-      dataMember.setOuid(statisticsMember.ouid());
-      dataMember.setGuid(statisticsMember.guid());
-      dataMember.setLinkId(statisticsMember.linkId());//******
-      dataMember.setStatisticsId(statisticsMember.ouid());
-      dataMember.setPassport(statisticsMember.passport());
-      dataMember.setLabel(statisticsMember.label());
-      dataMember.setCard(statisticsMember.card());
-      dataMember.setPhone(statisticsMember.phone());
-      dataMember.setEmail(statisticsMember.email());
-      String idCard = statisticsMember.card();//身份证
-      //         System.out.println("****************-------------->生日" + getBirthdayByIdCard(idCard));
-      //         System.out.println("****************----年龄---------->" + getAgeByCard(idCard));
-      //         System.out.println("****************-------------->" + birthdayStringDateTime);
-      dataMember.setBirthday(getBirthdayByIdCard(idCard));//从身份证截取生日
-      dataMember.setGenderCd(statisticsMember.genderCd());
-      dataMember.setMarryCd(statisticsMember.marryCd());
-      dataMember.setEducationCd(statisticsMember.educationCd());
-      dataMember.setBusinessCd(statisticsMember.businessCd());
-      dataMember.setIncomeCd(statisticsMember.incomeCd());
-      dataMember.setRecommendScore(getScore(getAgeByCard(idCard), statisticsMember.incomeCode()));//------计算分数  通过年龄和收入去计算
-      dataMember.setProvinceAreaId(statisticsMember.provinceAreaId());
-      dataMember.setProvinceId(statisticsMember.provinceId());
-      dataMember.setCityId(statisticsMember.cityId());
-      dataMember.setAreaId(statisticsMember.areaId());
-      dataMember.setAddress(statisticsMember.address());
-      dataMember.setRegisterDate(statisticsMember.registerDate());
-      dataMember.setLastLoginDate(statisticsMember.lastLoginDate());
-      //         dataMember.setRecommendBeginDate(value);
-      //         dataMember.setRecommendEndDate(value);
-      //         dataMember.setRecommendMarketerId(value);
-      //         dataMember.setRecommendMarketerUserId(value);
-      dataMember.setNote(statisticsMember.info());
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "loadDTMemberData", "loadDTMemberData end. (dataMember_linkId()={1})", dataMember.linkId());
-
-   }
-
-   //获取统计member表最近一个礼拜登录的数据
-   public static FLogicDataset<FStatisticsFinancialMemberUnit> getLatestWeek(FStatisticsFinancialMemberLogic statisticsMemberLogic){
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek", "getLatestWeek start. (statisticsMemberLogic()={1})", statisticsMemberLogic);
-
-      FSql whereSqlLatestWeek = new FSql();
-      whereSqlLatestWeek.append(FStatisticsFinancialMemberLogic.LAST_LOGIN_DATE);
-      whereSqlLatestWeek.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 WEEK)  AND NOW()");
-      _logger.debug(FSynchronizeStatisticsMemberData.class, "getLatestWeek", "getLatestWeek end. (statisticsMemberLogic()={1})", statisticsMemberLogic);
-      FLogicDataset<FStatisticsFinancialMemberUnit> lastWeek = statisticsMemberLogic.fetch(whereSqlLatestWeek);
-      return lastWeek;
-   }
-
-   //同时同步数据到DT_FIN_MEMBER_SCORE
-   public static void synchronizedMemberScore(FLogicContext logicContext){
-      FDataFinancialMemberScoreLogic dataMemberScoreLogic = logicContext.findLogic(FDataFinancialMemberScoreLogic.class);
-      //抓取出来最近三天的数据
-      FDataFinancialMemberLogic dataMemberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-      FSql whereSqlLatestThreeDays = new FSql();
-      whereSqlLatestThreeDays.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
-      whereSqlLatestThreeDays.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 3 DAY)  AND NOW()");
-      FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestThreeDays);
-      FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits = new FLogicDataset<FDataFinancialMemberScoreUnit>();
-      //如果最近3天大于8w抓取最近一天的
-      if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 80000){
-         FSql whereSqlLatestOneDays = new FSql();
-         whereSqlLatestOneDays.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
-         whereSqlLatestOneDays.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 1 DAY)  AND NOW()");
-         lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestOneDays);
-         //如果最近一天的数据大于8w抓取最近12小时的
-         if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 80000){
-            FSql whereSqlLatestHour = new FSql();
-            whereSqlLatestHour.append(FDataFinancialMemberLogic.LAST_LOGIN_DATE);
-            whereSqlLatestHour.append(" BETWEEN DATE_SUB(NOW(),INTERVAL 12 HOUR)  AND NOW()");
-            lastDataMemberUnits = dataMemberLogic.fetch(whereSqlLatestHour);
-            if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 0){
-               insertOrUpdateMemberScore(lastDataMemberUnits, lastDataMemberScoreUnits, dataMemberScoreLogic);
+        loadDTMemberScoreData(lastDataMemberUnits, lastDataMemberScoreUnits);
+        FSql whereFSql = new FSql();
+        for (Iterator<FDataFinancialMemberScoreUnit> iterator = lastDataMemberScoreUnits
+                .iterator(); iterator.hasNext();) {
+            FDataFinancialMemberScoreUnit lastDataMemberScoreUnit = iterator
+                    .next();
+            whereFSql.append(FDataFinancialMemberScoreLogic.OUID);
+            whereFSql.append("=");
+            whereFSql.append(lastDataMemberScoreUnit.ouid());
+            FLogicDataset<FDataFinancialMemberScoreUnit> dataMemberScoreUnits = dataMemberScoreLogic
+                    .fetch(whereFSql);
+            if (dataMemberScoreUnits != null
+                    && dataMemberScoreUnits.count() > 0) {
+                dataMemberScoreLogic.doUpdate(lastDataMemberScoreUnit);
+            } else {
+                dataMemberScoreLogic.doInsert(lastDataMemberScoreUnit);
             }
-         }else{
-            if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 0){
-               insertOrUpdateMemberScore(lastDataMemberUnits, lastDataMemberScoreUnits, dataMemberScoreLogic);
-            }
-         }
-      }else{
-         if(lastDataMemberUnits != null && lastDataMemberUnits.count() > 0){
-            insertOrUpdateMemberScore(lastDataMemberUnits, lastDataMemberScoreUnits, dataMemberScoreLogic);
-         }
-      }
+            whereFSql.clear();
+        }
 
-   }
+    }
 
-   public static void insertOrUpdateMemberScore(FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits,
-                                                FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits,
-                                                FDataFinancialMemberScoreLogic dataMemberScoreLogic){
+    //
+    public static void loadDTMemberScoreData(
+            FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits,
+            FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits) {
+        FDataFinancialMemberScoreUnit lastDataMemberScoreUnit = null;
+        for (Iterator<FDataFinancialMemberUnit> iterator = lastDataMemberUnits
+                .iterator(); iterator.hasNext();) {
+            FDataFinancialMemberUnit lastDataMemberUnit = iterator.next();
+            lastDataMemberScoreUnit = new FDataFinancialMemberScoreUnit();
+            lastDataMemberScoreUnit.setOuid(lastDataMemberUnit.ouid());
+            lastDataMemberScoreUnit.setOvld(lastDataMemberUnit.ovld());
+            lastDataMemberScoreUnit.setGuid(lastDataMemberUnit.guid());
+            lastDataMemberScoreUnit.setPassport(lastDataMemberUnit.passport());
+            lastDataMemberScoreUnit.setLabel(lastDataMemberUnit.label());
+            lastDataMemberScoreUnit.setCityId(lastDataMemberUnit.cityId());
+            lastDataMemberScoreUnit.setBirthday(lastDataMemberUnit.birthday());
+            lastDataMemberScoreUnit.setRegisterDate(lastDataMemberUnit
+                    .registerDate());
+            lastDataMemberScoreUnit.setLastLoginDate(lastDataMemberUnit
+                    .lastLoginDate());
+            lastDataMemberScoreUnit.setRecommendScore(lastDataMemberUnit
+                    .recommendScore());
+            lastDataMemberScoreUnit.setNote(lastDataMemberUnit.note());
+            lastDataMemberScoreUnit.setCreateUserId(lastDataMemberUnit
+                    .createUserId());
+            lastDataMemberScoreUnit.setCreateDate(lastDataMemberUnit
+                    .createDate());
+            lastDataMemberScoreUnit.setUpdateDate(lastDataMemberUnit
+                    .updateDate());
+            lastDataMemberScoreUnit.setUpdateUserId(lastDataMemberUnit
+                    .updateUserId());
+            lastDataMemberScoreUnits.push(lastDataMemberScoreUnit);
+        }
 
-      loadDTMemberScoreData(lastDataMemberUnits, lastDataMemberScoreUnits);
-      FSql whereFSql = new FSql();
-      for(Iterator<FDataFinancialMemberScoreUnit> iterator = lastDataMemberScoreUnits.iterator(); iterator.hasNext();){
-         FDataFinancialMemberScoreUnit lastDataMemberScoreUnit = iterator.next();
-         whereFSql.append(FDataFinancialMemberScoreLogic.OUID);
-         whereFSql.append("=");
-         whereFSql.append(lastDataMemberScoreUnit.ouid());
-         FLogicDataset<FDataFinancialMemberScoreUnit> dataMemberScoreUnits = dataMemberScoreLogic.fetch(whereFSql);
-         if(dataMemberScoreUnits != null && dataMemberScoreUnits.count() > 0){
-            dataMemberScoreLogic.doUpdate(lastDataMemberScoreUnit);
-         }else{
-            dataMemberScoreLogic.doInsert(lastDataMemberScoreUnit);
-         }
-         whereFSql.clear();
-      }
-
-   }
-
-   //
-   public static void loadDTMemberScoreData(FLogicDataset<FDataFinancialMemberUnit> lastDataMemberUnits,
-                                            FLogicDataset<FDataFinancialMemberScoreUnit> lastDataMemberScoreUnits){
-      FDataFinancialMemberScoreUnit lastDataMemberScoreUnit = null;
-      for(Iterator<FDataFinancialMemberUnit> iterator = lastDataMemberUnits.iterator(); iterator.hasNext();){
-         FDataFinancialMemberUnit lastDataMemberUnit = iterator.next();
-         lastDataMemberScoreUnit = new FDataFinancialMemberScoreUnit();
-         lastDataMemberScoreUnit.setOuid(lastDataMemberUnit.ouid());
-         lastDataMemberScoreUnit.setOvld(lastDataMemberUnit.ovld());
-         lastDataMemberScoreUnit.setGuid(lastDataMemberUnit.guid());
-         lastDataMemberScoreUnit.setPassport(lastDataMemberUnit.passport());
-         lastDataMemberScoreUnit.setLabel(lastDataMemberUnit.label());
-         lastDataMemberScoreUnit.setCityId(lastDataMemberUnit.cityId());
-         lastDataMemberScoreUnit.setBirthday(lastDataMemberUnit.birthday());
-         lastDataMemberScoreUnit.setRegisterDate(lastDataMemberUnit.registerDate());
-         lastDataMemberScoreUnit.setLastLoginDate(lastDataMemberUnit.lastLoginDate());
-         lastDataMemberScoreUnit.setRecommendScore(lastDataMemberUnit.recommendScore());
-         lastDataMemberScoreUnit.setNote(lastDataMemberUnit.note());
-         lastDataMemberScoreUnit.setCreateUserId(lastDataMemberUnit.createUserId());
-         lastDataMemberScoreUnit.setCreateDate(lastDataMemberUnit.createDate());
-         lastDataMemberScoreUnit.setUpdateDate(lastDataMemberUnit.updateDate());
-         lastDataMemberScoreUnit.setUpdateUserId(lastDataMemberUnit.updateUserId());
-         lastDataMemberScoreUnits.push(lastDataMemberScoreUnit);
-      }
-
-   }
+    }
 }

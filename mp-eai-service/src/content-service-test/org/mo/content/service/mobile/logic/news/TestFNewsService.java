@@ -19,6 +19,7 @@ public class TestFNewsService {
     public void testSelect() throws ParseException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String url = "http://10.13.0.16:8020/eai.mobile.logic.news.wsp";
+        // String url = "http://eai.ezubo.com:8089/eai.mobile.logic.news.wsp";
         HttpPost post = new HttpPost(url);
         List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
         listPram.add(new BasicNameValuePair("page_size", "9"));

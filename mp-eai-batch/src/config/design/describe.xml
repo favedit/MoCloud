@@ -7,11 +7,11 @@
    <!-- ==================================================== -->
    <WebService
          name  = 'cloud.describe.persistence'
-         face  = 'org.mo.cloud.content.describe.persistence.IPersistenceService'/>
+         face  = 'org.mo.jfa.face.design.persistence.IPersistenceService'/>
 
    <Component
-         face  = 'org.mo.cloud.content.describe.persistence.IPersistenceService'
-         class = 'org.mo.cloud.content.describe.persistence.FPersistenceService'
+         face  = 'org.mo.jfa.face.design.persistence.IPersistenceService'
+         class = 'org.mo.jfa.face.design.persistence.FPersistenceService'
          scope = 'global'/>
 
    <!-- ==================================================== -->

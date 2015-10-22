@@ -2,7 +2,6 @@ package org.mo.content.service.financial.logic.message;
 
 import com.jianzhou.sdk.BusinessService;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 
 public class TestFMessagePushService {
@@ -53,8 +53,11 @@ public class TestFMessagePushService {
          * System.out.println("短信接口返回:" + bs.sendBatchMessage("sdk_yucheng",
          * "1qazxsw2", "15311444853", "测试短信接口来自钰诚集团测试【钰诚办公平台】"));
          */
-        System.out.println(new SimpleDateFormat("yyyyMMddHHmmss")
-                .format(new Date()));
+        TDateTime ttt = new TDateTime(RDateTime.currentDateTime());
+        ttt.addMinute(70);
+        TDateTime ddd = new TDateTime(RDateTime.currentDateTime());
+        ddd.addHour(1);
+        System.out.println(ttt.isAfter(ddd));// 20151021093302
+        // 20151021103430
     }
-
 }

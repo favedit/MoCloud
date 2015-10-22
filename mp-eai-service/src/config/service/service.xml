@@ -42,7 +42,9 @@
   face='org.mo.content.service.mobile.account.ILoginService' />
 
  <Component face='org.mo.content.service.mobile.account.ILoginService'
-  class='org.mo.content.service.mobile.account.FLoginService' scope='global' />
+  class='org.mo.content.service.mobile.account.FLoginService' scope='global' >
+  <Property name='contentServiceHost'>${eai.host.content}</Property>
+ </Component>
 
  <!-- ============================================================ -->
  <!-- 版本更新服务 -->

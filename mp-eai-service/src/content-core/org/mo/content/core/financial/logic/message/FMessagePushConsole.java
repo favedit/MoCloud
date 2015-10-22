@@ -38,6 +38,11 @@ public class FMessagePushConsole extends FObject implements IMessagePushConsole 
             IWebContext context, IWebSession sessionContext) {
         // _messageConsole.sendBatchMessage("15311444853",
         // "你好,,,田禄在测试短信接口,,,成功啦啦!!");
+        // TDateTime dateTime = new TDateTime(RDateTime.currentDateTime());
+        // if (dateTime.isAfter()&&(!dateTime.isBetween(,))){
+        //
+        // }
+
         return null;
     }
 }

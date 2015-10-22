@@ -2,6 +2,7 @@ package org.mo.content.service.mobile.account;
 
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
+import com.cyou.gccloud.define.enums.common.EGcActive;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import java.util.UUID;
 import org.mo.cloud.core.web.FGcWebSession;
@@ -16,6 +17,7 @@ import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.mobile.account.FDataPersonUserInfo;
 import org.mo.content.core.mobile.account.ILoginConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
@@ -41,6 +43,9 @@ public class FLoginService extends FObject implements ILoginService {
     // WebSession会话控制台
     @ALink
     protected IWebSessionConsole _webSessionConsole;
+    // content项目地址
+    @AProperty
+    protected String contentServiceHost;
 
     // ============================================================
     // <T>默认逻辑。</T>
@@ -163,6 +168,22 @@ public class FLoginService extends FObject implements ILoginService {
                 } else {
                     last_sign_date.setText("-1");
                 }
+            }
+            // 查看用户是否有最新的公告
+            String noticeGuid = _loginConsole.isThereNotices(user.ouid(),
+                    sessionContext, logicContext, _sessionConsole,
+                    _webSessionConsole);
+            if ("deActive".equals(noticeGuid)) {
+                output.config().createNode("notice")
+                        .setText(EGcActive.Deactive);
+            } else {
+                output.config()
+                        .createNode("notice_url")
+                        .setText(
+                                contentServiceHost
+                                        + "mobile/logic/notice/Notice.wa?do=getInfo&notice_id="
+                                        + noticeGuid);
+                output.config().createNode("notice").setText(EGcActive.Active);
             }
             return EResult.Success;
         } else {

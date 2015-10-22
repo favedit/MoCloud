@@ -1,2 +1,2 @@
 <%@ include file='/apl/public.inc'%>
-<jh:write source='&basePage.json' />
+<jh:write source='&basePage.json' format="text" />

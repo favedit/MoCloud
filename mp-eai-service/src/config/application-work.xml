@@ -18,9 +18,9 @@
  <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws
  </Define>
  <!--本地工作服主机地址 -->
- <Define name='eai.server.host'>http://10.13.0.100:8020/</Define>
+ <Define name='eai.server.host'>http://10.13.0.16:8020/</Define>
  <!--content项目地址 -->
- <Define name='eai.host.content'>http://10.13.0.100:8010/</Define>
+ <Define name='eai.host.content'>http://10.13.0.16:8010/</Define>
  <!--开发服OA接口地址 -->
  <Define name='eai.oa.enable'>Y</Define>
  <Define name='eai.oa.host'>http://10.13.0.141:6666/ycjt/auth/auth.jsp</Define>
