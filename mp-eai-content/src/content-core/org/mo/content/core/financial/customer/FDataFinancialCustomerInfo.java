@@ -19,6 +19,17 @@ public class FDataFinancialCustomerInfo
    // 年龄
    protected int _age;
 
+   // 短信设置状态
+   protected int _statusSMS;
+
+   public int statusSMS(){
+      return _statusSMS;
+   }
+
+   public void setStatusSMS(int _statusSMS){
+      this._statusSMS = _statusSMS;
+   }
+
    public String label(){
       return _label;
    }

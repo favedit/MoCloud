@@ -13,6 +13,7 @@
                            <td>最后登录时间</td>
                            <td>年龄</td>
                            <td>总投资</td>
+                           <td>状态</td>
                            <td width="30%">操作</td>
                      </tr>
                      
@@ -23,8 +24,9 @@
                            <td><jh:date source="&customer.lastLogin" format="yyyy-MM-dd hh:mm:ss" /></td>
                            <td><jh:write source="&customer.age" /></td>
                            <td align="right"><jh:write source="&customer.investmentTotal" /></td>
-<!--                           <td class="pr"><a class="btn remove" data-id=""  href="javascript:;" onclick="setManagement();">短信提醒</a>-->
-                           </td>
+                         <!--  <td class="pr"><a class="btn remove" data-id=""  href="javascript:;" onclick="setManagement();">短信提醒</a>
+                           </td>-->
+                         <td align="right"><jh:write source="&customer.statusSMS" /></td>
                         <td class="pr" ><a class="btn btns" href="javascript:;">短信设置</a>
                               <div class="note-setupthe">
                                  <p>

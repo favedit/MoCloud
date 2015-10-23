@@ -2,6 +2,7 @@ package org.mo.content.core.financial.marketer.customer;
 
 import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerUnit;
+import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.FFatalError;
@@ -48,6 +49,9 @@ public class FDataMarketerCustomerConsole
       whereSql.append(" AND ");
       whereSql.append(FDataFinancialMarketerCustomerLogic.CUSTOMER_ID, " = '{customerId}'");
       whereSql.bind("customerId", RString.parse(customerId));
+      whereSql.append(" AND ");
+      whereSql.append(FDataFinancialMarketerCustomerLogic.ACTIVE_CD, " = '{activeCd}'");
+      whereSql.bind("activeCd", RString.parse(EGcActive.Active));
       FDataFinancialMarketerCustomerUnit unit = logic.search(whereSql);
       return unit;
    }

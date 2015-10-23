@@ -12,7 +12,6 @@ import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
 import org.mo.content.core.financial.marketer.customer.IDataMarketerCustomerConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
-import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -57,14 +56,14 @@ public class FCustomerAction
    // <T>默认逻辑处理。</T>
    //
    // @param context 页面环境
+   // @param sessionContext 会话
    // @param logicContext 逻辑环境
-   // @param page 页面
+   // @param page 页面容器
    //============================================================
    @Override
    public String construct(IWebContext context,
                            IWebSession sessionContext,
                            ILogicContext logicContext,
-                           FBasePage basePage,
                            FCustomerPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
@@ -109,14 +108,12 @@ public class FCustomerAction
    // @param context 页面环境
    // @param sessionContext 会话
    // @param logicContext 逻辑环境
-   // @param basePage 公共容器
    // @param page 页面容器
    //============================================================
    @Override
    public String settingsSMS(IWebContext context,
                              IWebSession sessionContext,
                              ILogicContext logicContext,
-                             FBasePage basePage,
                              FCustomerPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "SettingsSMS", "SettingsSMS begin.(session={1})", session.id());
@@ -146,5 +143,25 @@ public class FCustomerAction
          _marketerCustomerConsole.doUpdate(logicContext, marketerCustomer);
       }
       return "/pc/marketer/customer/CustomerList";
+   }
+
+   //============================================================
+   // <T>获取客户信息。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话
+   // @param logicContext 逻辑环境
+   // @param page 页面容器
+   //============================================================
+   @Override
+   public String customerInfo(IWebContext context,
+                              IWebSession sessionContext,
+                              ILogicContext logicContext,
+                              FCustomerPage page){
+      // 根据客户获取客户的所有信息
+      long customer = context.parameterAsLong("customer");
+      FDataFinancialCustomerInfo customerInfo = _customerConsole.findInfo(logicContext, customer);
+      page.setCustomerInfo(customerInfo);
+      return "/pc/marketer/customer/CustomerInfo";
    }
 }

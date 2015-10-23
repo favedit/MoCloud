@@ -23,6 +23,16 @@ public interface ICustomerConsole
                                                                 long marketerId);
 
    // ============================================================
+   // <T>获取客户</T>
+   //
+   // @param logicContext 链接对象
+   // @param  objectId 对象编号
+   // @return 数据对象
+   // ============================================================
+   FDataFinancialCustomerInfo findInfo(ILogicContext logicContext,
+                                       long objectId);
+
+   // ============================================================
    // <T>获取总页数</T>
    //
    // @param logicContext 链接对象

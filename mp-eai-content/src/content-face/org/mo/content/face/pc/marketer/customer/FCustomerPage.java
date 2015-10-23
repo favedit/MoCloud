@@ -16,14 +16,25 @@ public class FCustomerPage
    // 总页数
    protected int _pageTotal;
 
-   // 成员集合
+   // 客户集合
    protected FLogicDataset<FDataFinancialCustomerInfo> _customerList;
+
+   // 客户信息
+   protected FDataFinancialCustomerInfo _customerInfo;
 
    //名称
    protected String _label;
 
    // 消息
    protected String _message;
+
+   public FDataFinancialCustomerInfo customerInfo(){
+      return _customerInfo;
+   }
+
+   public void setCustomerInfo(FDataFinancialCustomerInfo _customerInfo){
+      this._customerInfo = _customerInfo;
+   }
 
    public String message(){
       return _message;
