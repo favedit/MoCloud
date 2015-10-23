@@ -142,6 +142,12 @@
        var t=(screen.availHeight-500)/2;
        window.open('/manage/product/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height=600,width=600,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
+   //搜索按钮，enter键
+    document.onkeydown=function(){
+       if(event.keyCode=="13"){
+          submitForm();    
+       }
+    }
 </script>
 </HEAD>
 
@@ -151,7 +157,9 @@
    <span>公告信息</span>
   </div>
   <div class="btn_bar">
-  <div class="nav_btn" style="width:900px;">
+   <div class="nav_btn">
+   </div>
+   <div class="nav_search" style="width:760px;">
     <form id="logerdat" action="/manage/product/business/notice/Notice.wa" method="post" align="center">
       <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
          <tr>
@@ -179,21 +187,19 @@
                   <select>
                </div>
             </td>
-            <td width="60" height="33">
-               <div align="right">公告标题:</div>
+            <td width="30" height="33">
+               <div align="right">标题:</div>
             </td>
             <td width="158" height="33">
                <div align="left">
                   <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
                </div>
             </td>
-            <td width="30"><a href="javascript:void(0);" class="sub_btn" onclick="submitForm()"></a></td>
+            <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
             <td><a href="/manage/product/business/notice/Notice.wa?do=insertBefore" class="add_btn"></a></td>
          </tr>
       </table>
-      </form>
-    </div>
-   <div class="nav_search">
+     </form>
    </div>
    </div>
   </div>
@@ -206,7 +212,7 @@
      width="40px">编号</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="200px">公告标题</th>
+     width="200px">标题</th>
     <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
      width="30px">状态</th>

@@ -5,86 +5,73 @@
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 <script>
-    //显示更新成功
-    $(function() {
-        doSubmit(null, null);
-        var pager = $('#config').datagrid().datagrid('getPager');
-        pager.pagination({
-            pageSize : 20,
-            showPageList : [ 20, 30, 40 ],
-            onSelectPage : function(pageNumber, pageSize) {
-                doSubmit(pageNumber, pageSize);
-            }
-        });
-    });
+   //显示更新成功
+   $(function() {
+      doSubmit(null, null);
+      var pager = $('#config').datagrid().datagrid('getPager');
+      pager.pagination({
+         pageSize : 20,
+         showPageList : [ 20, 30, 40 ],
+         onSelectPage : function(pageNumber, pageSize) {
+            doSubmit(pageNumber, pageSize);
+         }
+     });
+   });
 
-    function doSubmit(page, pageSize) {
-        progress();
-        var url = "/manage/product/financial/department/Department.wa?do=select&date="
-                + new Date().valueOf();
-        var data = null;
-        var code = $.trim($('#code').val()).replaceAll("'", "");
-        if (code == "代码")
-            code = null;
-        if (page != null) {
-            url = "/manage/product/financial/department/Department.wa?do=select&page="
-                    + page + "&date=" + new Date().valueOf();
-            data = {
-                "code" : code,
-                "page" : page,
-                "pageSize" : pageSize
-            };
-        }
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                $('#config').datagrid('loadData', toJsonObject(msg));
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
-    }
+   function doSubmit(page, pageSize) {
+      progress();
+      var url = "/manage/product/financial/department/Department.wa?do=select&date="
+              + new Date().valueOf();
+      var data = null;
+      var label = $.trim($('#label').val()).replaceAll("'", "");
+      if (label == "部门名称")
+         label = null;
+      if (page != null) {
+          url = "/manage/product/financial/department/Department.wa?do=select&page="
+                  + page + "&date=" + new Date().valueOf();
+          data = {
+              "label" : label,
+              "page" : page,
+              "pageSize" : pageSize
+          };
+      }
+      $.ajax({
+          type : "POST",
+          url : url,
+          data : data,
+          success : function(msg) {
+             closeProgress();
+             $('#config').datagrid('loadData', toJsonObject(msg));
+          },
+          fail : function() {
+              closeProgress();
+              alert("error");
+          }
+      });
+   }
 
-    function del(id) {
-        return confirmx(
-                '确定删除?',
-                function() {
-                    //                  var url = "/product/configration/Configration.wa?do=delete&date=" + new Date().valueOf();
-                    //                  var data = {
-                    //                     "id": id
-                    //                  };
-                    //                  $.getJSON(url, data, function(d) {
-                    //                     alert(d);
-                    //                     var result = toJsonObject(d);
-                    //                      console.log(result);
-                    //                     if (result.status == "1") {
-                    //                        location.href = result.url;
-                    //                     } else {
-                    //                        alertx(result.url, "warning", function() {
-                    //                           location.href = "/product/configration/Configration.wa";
-                    //                        });
-                    //                     }
-                    //                  });
-                    location.href = "/manage/product/financial/department/Department.wa?do=delete&id="
-                            + id + "&date=" + new Date().valueOf();
-                });
-    }
-
-    //更新配置信息-AnjoyTian
-    function edit(id) {
-        console.info(id);
-        window.location.href = "/manage/product/financial/department/Department.wa?do=updateBefore&id="
-                + id + "&date=" + new Date().valueOf();
-
-    }
+   function del(id) {
+      return confirmx(
+             '确定删除?',
+             function() {
+                location.href = "/manage/product/financial/department/Department.wa?do=delete&id="
+                     + id + "&date=" + new Date().valueOf();
+            });
+   }
+   //更新配置信息-AnjoyTian
+   function edit(id) {
+      console.info(id);
+      window.location.href = "/manage/product/financial/department/Department.wa?do=updateBefore&id="
+             + id + "&date=" + new Date().valueOf();
+   }
+   //搜索按钮，enter键
+   document.onkeydown=function(){
+      if(event.keyCode=="13"){
+         doSubmit(0);    
+      }
+   }
 </script>
 </HEAD>
-
 <body>
  <div id="cy_right" style="width:100%">
   <div class="right_title">
@@ -97,10 +84,10 @@
      class="add_btn"></a>
    </div>
    <div class="nav_search">
-    <input id="code" name="" type="text"
-     onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}"
-     style="color:#ccc" value="代码"> <a onClick="doSubmit(0)"
+    <input id="label" name="label" type="text"
+     onfocus="if(this.value=='部门名称'){this.value='';}this.style.color='#000000';"
+     onblur="if(this.value=='') {this.value='部门名称';this.style.color='#ccc';}"
+     style="color:#ccc" value="部门名称"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>
    </div>
   </div>
@@ -112,30 +99,21 @@
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="60px">编号</th>
-    <!-- <th data-options="field:'ovld',halign:'center',align:'right'" width="55px">是否删除</th> -->
-    <!-- <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="80px">代码</th> -->
-    <!-- <th data-options="field:'name',halign:'center',align:'left',sortable:true" width="80px">名称</th> -->
-    <!-- <th data-options="field:'departmentId',halign:'center',align:'right'" width="100px">所属公司编号</th> -->
     <th
      data-options="field:'departmentLabel',halign:'center',align:'left'"
      width="100px">所属公司</th>
-    <!-- <th data-options="field:'regionId',halign:'center',align:'right'" width="100px">所属区域编号</th> -->
     <th data-options="field:'regionLabel',halign:'center',align:'left'"
      width="110px">所属区域</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="100px">部门名称</th>
-    <!--  <th data-options="field:'level',halign:'center',align:'left'" width="30px">级别</th> -->
-    <!-- <th data-options="field:'leaderId',halign:'center',align:'right'" width="100px">负责人编号</th> -->
     <th data-options="field:'leaderLabel',halign:'center',align:'left'"
      width="70px">负责人</th>
     <th data-options="field:'leaderPhone',halign:'center',align:'left'"
      width="100px">负责人电话</th>
-    <!-- <th data-options="field:'provinceId',halign:'center',align:'right'" width="100px">省份标签编号</th> -->
     <th
      data-options="field:'provinceLabel',halign:'center',align:'left'"
      width="80px">省份</th>
-    <!-- <th data-options="field:'cityId',halign:'center',align:'right'" width="100px">城市编号</th> -->
     <th data-options="field:'cityLabel',halign:'center',align:'left'"
      width="80px">城市</th>
     <th
@@ -177,7 +155,6 @@
     <th
      data-options="field:'performanceTotal',halign:'center',align:'left',sortable:true"
      width="80px">业绩总额</th>
-    <!-- <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">备注信息</th> -->
     <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
     <th

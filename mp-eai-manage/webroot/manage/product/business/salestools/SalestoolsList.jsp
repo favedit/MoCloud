@@ -118,6 +118,12 @@
        var t=(screen.availHeight-500)/2;
        window.open('/manage/product/business/salestools/Salestools.wa?do=getDescription&ouid='+ouid,'_blank','height=600,width=600,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
+   //搜索按钮，enter键
+    document.onkeydown=function(){
+       if(event.keyCode=="13"){
+          submitForm();    
+       }
+    }
 </script>
 </HEAD>
 
@@ -127,9 +133,11 @@
    <span>销售工具信息</span>
   </div>
   <div class="btn_bar">
-   <div class="nav_btn" style="width:900px;">
-    <form id="logerdat" action="/manage/product/business/salestools/Salestools.wa" method="post" align="center">
-      <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
+   <div class="nav_btn">
+    </div>
+   <div class="nav_search" style="width:760px;">
+    <form id="logerdat" action="/manage/product/business/salestools/Salestools.wa" method="post" align="right">
+      <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-right:1px">
          <tr>
             <td width="30" height="33">
                <div align="right">状态:</div>
@@ -163,13 +171,11 @@
                   <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
                </div>
             </td>
-            <td width="30"><a href="javascript:void(0);" class="sub_btn" onclick="submitForm()"></a></td>
+            <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
             <td><a href="/manage/product/business/salestools/Salestools.wa?do=insertBefore" class="add_btn"></a></td>
          </tr>
       </table>
-      </form>
-    </div>
-   <div class="nav_search">
+    </form>
    </div>
   </div>
  </div>

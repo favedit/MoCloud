@@ -101,12 +101,18 @@
             alert("error");
          }
       });
-  }
-  function submitForm(){
-    if (!isValid()) return;
-    doSubmitByCondition(null,null);
-    $("#flag").val("2");
-  }
+   }
+   function submitForm(){
+      if (!isValid()) return;
+      doSubmitByCondition(null,null);
+      $("#flag").val("2");
+   }
+    //搜索按钮，enter键
+   document.onkeydown=function(){
+     if(event.keyCode=="13"){
+        submitForm();    
+     }
+   }
 </script>
 </HEAD>
 
@@ -116,11 +122,13 @@
    <span>理财师信息</span>
   </div>
   <div class="btn_bar">
-   <div class="nav_btn" style="width:900px;">
+   <div class="nav_btn">
+    </div>
+   <div class="nav_search" style="width:900px;">
     <form id="logerdat" action="/manage/product/financial/marketer/Marketer.wa" method="post" align="center">
       <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
          <tr>
-            <td width="109" height="33">
+            <td width="59" height="33">
                <div align="left">开始时间:</div>
             </td>
             <td width="158">
@@ -129,7 +137,7 @@
                   <input id="flag" type="hidden"/>
                </div>
             </td>
-            <td width="109" height="33">
+            <td width="59" height="33">
                <div align="left">结束时间:</div>
             </td>
             <td width="158">
@@ -137,7 +145,7 @@
                   <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
                </div>
             </td>
-            <td width="60" height="33">
+            <td width="30" height="33">
                <div align="right">名称:</div>
             </td>
             <td width="158" height="33">
@@ -145,13 +153,11 @@
                   <input id="name" name="name" class="easyui-validatebox textbox" style="width:150px;" />
                </div>
             </td>
-            <td width="30"><a href="javascript:void(0);" class="sub_btn" onclick="submitForm()"></a></td>
+            <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
             <td><a href="/manage/product/financial/marketer/Marketer.wa?do=insertBefore" class="add_btn"></a></td>
          </tr>
       </table>
       </form>
-    </div>
-   <div class="nav_search">
    </div>
   </div>
  </div>

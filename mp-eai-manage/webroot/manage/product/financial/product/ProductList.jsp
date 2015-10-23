@@ -5,63 +5,72 @@
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 <script>
-    //显示更新成功
-    $(function() {
-        doSubmit(null, null);
-        var pager = $('#config').datagrid().datagrid('getPager');
-        pager.pagination({
-            pageSize : 20,
-            showPageList : [ 20, 30, 40 ],
-            onSelectPage : function(pageNumber, pageSize) {
-                doSubmit(pageNumber, pageSize);
-            }
-        });
-    });
+   //显示更新成功
+   $(function() {
+       doSubmit(null, null);
+       var pager = $('#config').datagrid().datagrid('getPager');
+       pager.pagination({
+           pageSize : 20,
+           showPageList : [ 20, 30, 40 ],
+           onSelectPage : function(pageNumber, pageSize) {
+               doSubmit(pageNumber, pageSize);
+           }
+       });
+   });
 
-    function doSubmit(page, pageSize) {
-        progress();
-        var url = "/manage/product/financial/product/Product.wa?do=select&date="
-                + new Date().valueOf();
-        var data = null;
-        if (page != null) {
-            url = "/manage/product/financial/product/Product.wa?do=select&page="
-                    + page + "&date=" + new Date().valueOf();
-            data = {
-                "page" : page,
-                "pageSize" : pageSize
-            };
-        }
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                $('#config').datagrid('loadData', toJsonObject(msg));
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
-    }
+   function doSubmit(page, pageSize) {
+       progress();
+       var url = "/manage/product/financial/product/Product.wa?do=select&date="
+               + new Date().valueOf();
+       var data = null;
+       var name = $.trim($('#name').val()).replaceAll("'", "");
+       if (name == "名称")
+          name = null;
+       if (page != null) {
+           url = "/manage/product/financial/product/Product.wa?do=select&page="
+                   + page + "&date=" + new Date().valueOf();
+           data = {
+               "name" : name,
+               "page" : page,
+               "pageSize" : pageSize
+           };
+       }
+       $.ajax({
+           type : "POST",
+           url : url,
+           data : data,
+           success : function(msg) {
+               closeProgress();
+               $('#config').datagrid('loadData', toJsonObject(msg));
+           },
+           fail : function() {
+               closeProgress();
+               alert("error");
+           }
+       });
+   }
 
-    function del(id) {
-        return confirmx(
-                '确定删除?',
-                function() {
-                    location.href = "/manage/product/financial/product/Product.wa?do=delete&id="
-                            + id + "&date=" + new Date().valueOf();
-                });
-    }
+   function del(id) {
+       return confirmx(
+               '确定删除?',
+               function() {
+                   location.href = "/manage/product/financial/product/Product.wa?do=delete&id="
+                           + id + "&date=" + new Date().valueOf();
+               });
+   }
 
-    //更新配置信息-AnjoyTian
-    function edit(id) {
-        console.info(id);
-        window.location.href = "/manage/product/financial/product/Product.wa?do=updateBefore&id="
-                + id + "&date=" + new Date().valueOf();
-    }
-    
+   //更新配置信息-AnjoyTian
+   function edit(id) {
+       console.info(id);
+       window.location.href = "/manage/product/financial/product/Product.wa?do=updateBefore&id="
+               + id + "&date=" + new Date().valueOf();
+   }
+  //搜索按钮，enter键
+   document.onkeydown=function(){
+      if(event.keyCode=="13"){
+         doSubmit(0);    
+      }
+   }
 </script>
 </HEAD>
 
@@ -91,9 +100,6 @@
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
-     <!-- <th
-     data-options="field:'memberId',halign:'center',align:'left',sortable:true"
-     width="60px">成员编号</th> -->
      <th
      data-options="field:'name',halign:'center',align:'center',sortable:true"
      width="60px" >名称</th>
@@ -106,7 +112,7 @@
      <th
      data-options="field:'tenantPerson',halign:'center',align:'left',sortable:true"
      width="60px">承租人</th>
-<th
+    <th
      data-options="field:'annualRateOfReturn',halign:'center',align:'left',sortable:true"
      width="80px">预期年收益率</th>
     <th
@@ -118,9 +124,6 @@
      
      <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>    
-    <!-- <th
-     data-options="field:'note',halign:'center',align:'left',sortable:true"
-     width="200px">备注信息</th> -->
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton"
      width="140px">操作</th>

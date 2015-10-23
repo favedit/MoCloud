@@ -5,70 +5,75 @@
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 <script>
-    //显示更新成功
-    $(function() {
-        doSubmit(null, null);
-        var pager = $('#browserAccess').datagrid().datagrid('getPager');
-        pager.pagination({
-            pageSize : 20,
-            showPageList : [ 20, 30, 40 ],
-            onSelectPage : function(pageNumber, pageSize) {
-                doSubmit(pageNumber, pageSize);
-            }
-        });
-    });
-    function doSubmit(page, pageSize) {
-        progress();
-        var url = "/manage/product/device/Device.wa?do=select&date="
-                + new Date().valueOf();
-        var data = null;
-        var agentCode = $.trim($('#agentCode').val()).replaceAll("'", "");
-        if (agentCode == "头信息") agentCode = null;
-        if (page != null) {
-            url = "/manage/product/device/Device.wa?do=select&page="
-                    + page + "&date=" + new Date().valueOf();
-            data = {
-                "agentCode" : agentCode,
-                "page" : page,
-                "pageSize" : pageSize
-            };
-        }
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                $('#browserAccess').datagrid('loadData', toJsonObject(msg));
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
-    }
-    function infoButton(value, row, index) {
-       var edit = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="rowInfo(\'' + row.ouid + '\')"><span class="l-btn-text icon-tip l-btn-icon-left">详情</span></span></a>';
-       return edit;
-    }
-    function rowInfo(id){
-       location.href="/manage/product/device/Device.wa?do=updateBefore&id="+id;
-    }
-    function expend(){
-       progress();
-       var url = "/manage/product/device/Device.wa?do=expend";
-       $.post(url,function(json){
-          json = toJsonObject(json);
-          closeProgress();
-          if(json.status == "1"){
-             alert("导出成功！文件："+json.url);
-             location.href="/manage/product/device/Device.wa";
-          }else{
-             alert("导出失败!"+json.url);
-          }
-          
+   //显示更新成功
+   $(function() {
+       doSubmit(null, null);
+       var pager = $('#browserAccess').datagrid().datagrid('getPager');
+       pager.pagination({
+           pageSize : 20,
+           showPageList : [ 20, 30, 40 ],
+           onSelectPage : function(pageNumber, pageSize) {
+               doSubmit(pageNumber, pageSize);
+           }
        });
-    }
+   });
+   function doSubmit(page, pageSize) {
+       progress();
+       var url = "/manage/product/device/Device.wa?do=select&date="
+               + new Date().valueOf();
+       var data = null;
+       var agentCode = $.trim($('#agentCode').val()).replaceAll("'", "");
+       if (agentCode == "头信息") agentCode = null;
+       if (page != null) {
+           url = "/manage/product/device/Device.wa?do=select&page="
+                   + page + "&date=" + new Date().valueOf();
+           data = {
+               "agentCode" : agentCode,
+               "page" : page,
+               "pageSize" : pageSize
+           };
+       }
+       $.ajax({
+           type : "POST",
+           url : url,
+           data : data,
+           success : function(msg) {
+               closeProgress();
+               $('#browserAccess').datagrid('loadData', toJsonObject(msg));
+           },
+           fail : function() {
+               closeProgress();
+               alert("error");
+           }
+       });
+   }
+   function infoButton(value, row, index) {
+      var edit = '<a href="javascript:void(0)" class="easyui-linkbutton l-btn l-btn-plain"  plain="true"><span class="l-btn-left" sizset="false" onClick="rowInfo(\'' + row.ouid + '\')"><span class="l-btn-text icon-tip l-btn-icon-left">详情</span></span></a>';
+      return edit;
+   }
+   function rowInfo(id){
+      location.href="/manage/product/device/Device.wa?do=updateBefore&id="+id;
+   }
+   function expend(){
+      progress();
+      var url = "/manage/product/device/Device.wa?do=expend";
+      $.post(url,function(json){
+         json = toJsonObject(json);
+         closeProgress();
+         if(json.status == "1"){
+            alert("导出成功！文件："+json.url);
+            location.href="/manage/product/device/Device.wa";
+         }else{
+            alert("导出失败!"+json.url);
+         }
+      });
+   }
+   //搜索按钮，enter键
+   document.onkeydown=function(){
+      if(event.keyCode=="13"){
+         doSubmit(0);
+      }
+   }
 </script>
 </HEAD>
 

@@ -71,6 +71,7 @@ public class FProductAction
          Page.setPageCurrent(0);
       }
       FDataFinancialProductUnit unit = new FDataFinancialProductUnit();
+      unit.setName(context.parameter("name"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {

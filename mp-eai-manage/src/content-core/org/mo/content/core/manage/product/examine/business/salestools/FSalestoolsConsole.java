@@ -62,6 +62,7 @@ public class FSalestoolsConsole
       whereSql.append(FDataLogicNewsLogic.STATUS_CD + " = '{statusCd}'");
       whereSql.bind("statusCd", EGcResourceStatus.Apply + "");// 只查询状态为申请
       if (!RString.isEmpty(unit.label())) {
+         whereSql.append(" and ");
          whereSql.append(FDataLogicSalestoolsLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }

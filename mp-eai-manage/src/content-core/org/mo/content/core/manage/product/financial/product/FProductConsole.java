@@ -58,9 +58,8 @@ public class FProductConsole
       }
       FSql whereSql = new FSql();
       if(!RString.isEmpty(unit.name())){
-         whereSql.append(FDataFinancialProductLogic.NAME);
-         whereSql.append(" LIKE '%");
-         whereSql.append(unit.name() + "%'");
+         whereSql.append(FDataFinancialProductLogic.NAME + " LIKE '%{name}%'");
+         whereSql.bind("name", RString.parse(unit.name()));
       }
       String orderBy = String.format("%s %s", FDataFinancialProductLogic.NAME, "ASC");
       FDataFinancialProductLogic logic = logicContext.findLogic(FDataFinancialProductLogic.class);

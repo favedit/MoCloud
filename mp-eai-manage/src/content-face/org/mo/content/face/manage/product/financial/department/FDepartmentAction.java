@@ -75,7 +75,7 @@ public class FDepartmentAction
          Page.setPageCurrent(0);
       }
       FDataFinancialDepartmentUnit unit = new FDataFinancialDepartmentUnit();
-      unit.setCode(context.parameter("code"));
+      unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {

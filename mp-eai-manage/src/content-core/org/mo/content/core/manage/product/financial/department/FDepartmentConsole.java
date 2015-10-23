@@ -1,5 +1,6 @@
 package org.mo.content.core.manage.product.financial.department;
 
+import com.cyou.gccloud.data.data.FDataCommonCountryLogic;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentLogic;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
@@ -56,10 +57,9 @@ public class FDepartmentConsole
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(unit.code())){
-         whereSql.append(FDataFinancialDepartmentLogic.CODE);
-         whereSql.append(" LIKE '%");
-         whereSql.append(unit.code() + "%'");
+      if(!RString.isEmpty(unit.label())){
+         whereSql.append(FDataCommonCountryLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.bind("label", RString.parse(unit.label()));
       }
       String orderBy = String.format("%s %s %s %s", FDataFinancialDepartmentLogic.DEPARTMENT_LABEL + ",", FDataFinancialDepartmentLogic.REGION_LABEL + ",", FDataFinancialDepartmentLogic.LABEL, "ASC");
       FDataFinancialDepartmentLogic logic = logicContext.findLogic(FDataFinancialDepartmentLogic.class);

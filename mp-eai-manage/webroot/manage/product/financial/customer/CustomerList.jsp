@@ -5,107 +5,96 @@
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
 <script>
-    //显示更新成功
-    $(function() {
-        doSubmit(null, null);
-        var pager = $('#config').datagrid().datagrid('getPager');
-        pager.pagination({
-            pageSize : 20,
-            showPageList : [ 20, 30, 40 ],
-            onSelectPage : function(pageNumber, pageSize) {
-                doSubmit(pageNumber, pageSize);
-            }
-        });
-    });
+   //显示更新成功
+   $(function() {
+       doSubmit(null, null);
+       var pager = $('#config').datagrid().datagrid('getPager');
+       pager.pagination({
+           pageSize : 20,
+           showPageList : [ 20, 30, 40 ],
+           onSelectPage : function(pageNumber, pageSize) {
+               doSubmit(pageNumber, pageSize);
+           }
+       });
+   });
 
-    function doSubmit(page, pageSize) {
-        progress();
-        var url = "/manage/product/financial/customer/Customer.wa?do=select&date="
-                + new Date().valueOf();
-        var data = null;
-        var highestEducation = $.trim($('#highestEducation').val()).replaceAll("'", "");
-        if (highestEducation == "学历")
-        	highestEducation = null;
-        if (page != null) {
-            url = "/manage/product/financial/customer/Customer.wa?do=select&page="
-                    + page + "&date=" + new Date().valueOf();
-            data = {
-                "highestEducation" : highestEducation,
-                "page" : page,
-                "pageSize" : pageSize
-            };
-        }
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                $('#config').datagrid('loadData', toJsonObject(msg));
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
-    }
+   function doSubmit(page, pageSize) {
+       progress();
+       var url = "/manage/product/financial/customer/Customer.wa?do=select&date="
+               + new Date().valueOf();
+       var data = null;
+       var highestEducation = $.trim($('#highestEducation').val()).replaceAll("'", "");
+       if (highestEducation == "学历")
+         highestEducation = null;
+       if (page != null) {
+           url = "/manage/product/financial/customer/Customer.wa?do=select&page="
+                   + page + "&date=" + new Date().valueOf();
+           data = {
+               "highestEducation" : highestEducation,
+               "page" : page,
+               "pageSize" : pageSize
+           };
+       }
+       $.ajax({
+           type : "POST",
+           url : url,
+           data : data,
+           success : function(msg) {
+               closeProgress();
+               $('#config').datagrid('loadData', toJsonObject(msg));
+           },
+           fail : function() {
+               closeProgress();
+               alert("error");
+           }
+       });
+   }
 
-    function del(id) {
-        return confirmx(
-                '确定删除?',
-                function() {
-                    //                  var url = "/product/configration/Configration.wa?do=delete&date=" + new Date().valueOf();
-                    //                  var data = {
-                    //                     "id": id
-                    //                  };
-                    //                  $.getJSON(url, data, function(d) {
-                    //                     alert(d);
-                    //                     var result = toJsonObject(d);
-                    //                      console.log(result);
-                    //                     if (result.status == "1") {
-                    //                        location.href = result.url;
-                    //                     } else {
-                    //                        alertx(result.url, "warning", function() {
-                    //                           location.href = "/product/configration/Configration.wa";
-                    //                        });
-                    //                     }
-                    //                  });
-                    location.href = "/manage/product/financial/customer/Customer.wa?do=delete&id="
-                            + id + "&date=" + new Date().valueOf();
-                });
-    }
+   function del(id) {
+       return confirmx(
+              '确定删除?',
+              function() {
+                   location.href = "/manage/product/financial/customer/Customer.wa?do=delete&id="
+                          + id + "&date=" + new Date().valueOf();
+              });
+   }
 
-    //更新配置信息-AnjoyTian
-    function edit(id) {
-        console.info(id);
-        window.location.href = "/manage/product/financial/customer/Customer.wa?do=updateBefore&id="
-                + id + "&date=" + new Date().valueOf();
-
-    }
+   //更新配置信息-AnjoyTian
+   function edit(id) {
+       console.info(id);
+       window.location.href = "/manage/product/financial/customer/Customer.wa?do=updateBefore&id="
+               + id + "&date=" + new Date().valueOf();
+   }
     
-    //是否结婚
-    function isMarried(val,row){
-        if(val==1){
-            return '是';
-        }else if(val==0){
-            return '否';
-        }else{
-            return '未填';
-        }
-    }
+   //是否结婚
+   function isMarried(val,row){
+       if(val==1){
+           return '是';
+       }else if(val==0){
+           return '否';
+       }else{
+           return '未填';
+       }
+   }
     
-    //教育
-    function education(val,row){
-        if(val==0){
-            return "学士";
-        }else if(val==1){
-            return "硕士";
-        }else if(val==2){
-            return "博士";
-        }else if(val==3){
-            return "博士后";
-        }
-    }
+   //教育
+   function education(val,row){
+       if(val==0){
+           return "学士";
+       }else if(val==1){
+           return "硕士";
+       }else if(val==2){
+           return "博士";
+       }else if(val==3){
+           return "博士后";
+       }
+   }
+   //搜索按钮，enter键
+   document.onkeydown=function(){
+      if(event.keyCode=="13"){
+         doSubmit(0);    
+      }
+   }
 </script>
 </HEAD>
 
@@ -135,10 +124,6 @@
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
-    <!-- <th data-options="field:'linkId',halign:'center',align:'right'"
-     width="40px">关联编号</th>
-    <th data-options="field:'statisticsId',halign:'center',align:'right'"
-     width="40px">统计编号</th> -->
      <th
      data-options="field:'marryCd',halign:'center',align:'center',sortable:true,formatter:isMarried"
      width="60px" >婚否</th>

@@ -59,6 +59,12 @@
         window.location.href = "/manage/product/common/configration/rule/Rule.wa?do=updateBefore&id="
                 + id + "&date=" + new Date().valueOf();
     }
+    //搜索按钮，enter键
+    document.onkeydown=function(){
+       if(event.keyCode=="13"){
+          doSubmit(0);    
+       }
+    }
 </script>
 </HEAD>
 
