@@ -447,8 +447,8 @@ public class FLoginConsole extends FObject implements ILoginConsole {
         FLoggerPersonUserNoticeLogic personUserNoticeLogic = logicContext
                 .findLogic(FLoggerPersonUserNoticeLogic.class);
         FSql whereSql = new FSql();
-        whereSql.append(FDataLogicNoticeLogic.CREATE_DATE);
-        whereSql.append(" =(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `STATUS_CD`=2 AND `DISPLAY_CD`=1 )");
+        whereSql.append(FDataLogicNoticeLogic.UPDATE_DATE);
+        whereSql.append(" =(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `STATUS_CD`=2 AND `DISPLAY_CD`=1 )");
         FLogicDataset<FDataLogicNoticeUnit> noticeUnits = noticeLogic
                 .fetch(whereSql);
         if (noticeUnits != null && noticeUnits.count() > 0) {

@@ -69,15 +69,10 @@ public class FNoticeAction implements INoticeAction {
     public String markRead(IWebContext context, IWebSession sessionContext,
             ILogicContext logicContext, FNoticePage Page, FBasePage basePage) {
         String sessionCode = context.head("mo-session-id");
-        System.out.println("------------------------------------------------->"
-                + sessionCode);
         if (RString.isNotEmpty(sessionCode)) {
             FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(
                     logicContext, sessionCode);
             long userId = sessionInfo.userId();
-            System.out
-                    .println("------------------------------------------------->"
-                            + userId);
             FDataLogicNoticeUnit unit = _noticeConsole.markRead(userId,
                     sessionContext, logicContext);
             Page.setUnit(unit);

@@ -183,6 +183,11 @@ public class FLoginService extends FObject implements ILoginService {
                                 contentServiceHost
                                         + "mobile/logic/notice/Notice.wa?do=getInfo&notice_id="
                                         + noticeGuid);
+                output.config()
+                        .createNode("read_url")
+                        .setText(
+                                contentServiceHost
+                                        + "mobile/logic/notice/Notice.wa?do=markRead");
                 output.config().createNode("notice").setText(EGcActive.Active);
             }
             return EResult.Success;

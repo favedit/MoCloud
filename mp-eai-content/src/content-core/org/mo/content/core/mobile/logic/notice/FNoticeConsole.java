@@ -17,7 +17,7 @@ import org.mo.web.core.session.IWebSession;
 //============================================================
 public class FNoticeConsole extends FObject implements INoticeConsole {
     // 日志输出接口
-    private static ILogger _logger = RLogger.find(FNoticeConsole.class);
+    private static ILogger _logger = RLogger.find(FNoticeConsole444.class);
 
     // ============================================================
     // <T>构造资源</T>
@@ -62,9 +62,9 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
                 "markRead From FNoticeConsole begin resultLong={1}", resultLong);
         // 如果是0意味着没有找到,把该用户的最新公告标志已读同时返回下一条最新公告
         FSql whereSqlFirst = new FSql();
-        whereSqlFirst.append(FDataLogicNoticeLogic.CREATE_DATE);
+        whereSqlFirst.append(FDataLogicNoticeLogic.UPDATE_DATE);
         whereSqlFirst
-                .append(" =(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1)");
+                .append(" =(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1)");
         FLogicDataset<FDataLogicNoticeUnit> noticeUnitsFirst = noticeLogic
                 .fetch(whereSqlFirst);
         if (resultLong == 0) {
@@ -76,9 +76,9 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
                 tempUnit.setOvld(true);
                 personUserNoticeLogic.doInsert(tempUnit);
                 FSql whereSql2 = new FSql();
-                whereSql2.append(FDataLogicNoticeLogic.CREATE_DATE);
+                whereSql2.append(FDataLogicNoticeLogic.UPDATE_DATE);
                 whereSql2
-                        .append(" =(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND `N1`.`OUID`<"
+                        .append(" =(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND `N1`.`OUID`<"
                                 + noticeUnit.ouid() + ")");
                 return noticeLogic.fetch(whereSql2).first();
             }
@@ -86,9 +86,9 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
             // 如果找到,意味着用户已经读过公告,继续标志下一条已读
             // 1 × 2 × 3 × 4 ×
             FSql whereSql3 = new FSql();
-            whereSql3.append(FDataLogicNoticeLogic.CREATE_DATE);
+            whereSql3.append(FDataLogicNoticeLogic.UPDATE_DATE);
             whereSql3
-                    .append(" =(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `STATUS_CD`=2 AND `DISPLAY_CD`=1 AND `OUID`<"
+                    .append(" =(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `STATUS_CD`=2 AND `DISPLAY_CD`=1 AND `OUID`<"
                             + resultLong + ")");
             FLogicDataset<FDataLogicNoticeUnit> noticeUnits = noticeLogic
                     .fetch(whereSql3);
@@ -99,33 +99,33 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
                 tempUnit.setNoticeId(noticeUnits.first().ouid());
                 personUserNoticeLogic.doInsert(tempUnit);
                 FSql whereSql4 = new FSql();
-                whereSql4.append(FDataLogicNoticeLogic.CREATE_DATE);
+                whereSql4.append(FDataLogicNoticeLogic.UPDATE_DATE);
                 whereSql4
-                        .append(" =(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND `N1`.`OUID`<"
+                        .append(" =(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND `N1`.`OUID`<"
                                 + noticeUnits.first().ouid() + ")");
                 return noticeLogic.fetch(whereSql4).first();
             } else {
                 // 1 √ 2 √ 3 × 4 ×逻辑
                 FSql whereSql5 = new FSql();
-                whereSql5.append(FLoggerPersonUserNoticeLogic.CREATE_DATE);
+                whereSql5.append(FLoggerPersonUserNoticeLogic.UPDATE_DATE);
                 whereSql5
-                        .append("=(SELECT MIN(`CREATE_DATE`) FROM `LG_PSN_USER_NOTICE` AS PUN1  WHERE PUN1.`USER_ID`="
+                        .append("=(SELECT MIN(`UPDATE_DATE`) FROM `LG_PSN_USER_NOTICE` AS PUN1  WHERE PUN1.`USER_ID`="
                                 + userId + ")");
                 FLoggerPersonUserNoticeUnit minUnit1 = personUserNoticeLogic
                         .fetch(whereSql5).first();
 
                 FSql whereSql6 = new FSql();
-                whereSql6.append(FLoggerPersonUserNoticeLogic.CREATE_DATE);
+                whereSql6.append(FLoggerPersonUserNoticeLogic.UPDATE_DATE);
                 whereSql6
-                        .append("=(SELECT MAX(`CREATE_DATE`) FROM `LG_PSN_USER_NOTICE` AS PUN1  WHERE PUN1.`USER_ID`="
+                        .append("=(SELECT MAX(`UPDATE_DATE`) FROM `LG_PSN_USER_NOTICE` AS PUN1  WHERE PUN1.`USER_ID`="
                                 + userId + ")");
                 FLoggerPersonUserNoticeUnit maxUnit2 = personUserNoticeLogic
                         .fetch(whereSql6).first();
 
                 FSql whereSql7 = new FSql();
-                whereSql7.append(FLoggerPersonUserNoticeLogic.CREATE_DATE);
+                whereSql7.append(FLoggerPersonUserNoticeLogic.UPDATE_DATE);
                 whereSql7
-                        .append("=(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND N1.OUID<"
+                        .append("=(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND N1.OUID<"
                                 + maxUnit2.noticeId()
                                 + " AND N1.OUID>"
                                 + minUnit1.noticeId() + ")");
@@ -146,9 +146,9 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
                     tempUnit.setNoticeId(noticeUnitFirstOuid);
                     personUserNoticeLogic.doInsert(tempUnit);
                     FSql whereSql9 = new FSql();
-                    whereSql9.append(FDataLogicNoticeLogic.CREATE_DATE);
+                    whereSql9.append(FDataLogicNoticeLogic.UPDATE_DATE);
                     whereSql9
-                            .append("=(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND N1.OUID<"
+                            .append("=(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND N1.OUID<"
                                     + noticeUnitFirstOuid + ")");
                     FLogicDataset<FDataLogicNoticeUnit> fetchSS = noticeLogic
                             .fetch(whereSql9);
@@ -163,9 +163,9 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
                     tempUnit.setNoticeId(noticeUnits2.first().ouid());
                     personUserNoticeLogic.doInsert(tempUnit);
                     FSql whereSql8 = new FSql();
-                    whereSql8.append(FDataLogicNoticeLogic.CREATE_DATE);
+                    whereSql8.append(FDataLogicNoticeLogic.UPDATE_DATE);
                     whereSql8
-                            .append("=(SELECT MAX(`CREATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND N1.OUID<"
+                            .append("=(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `N1`.`STATUS_CD`=2 AND `N1`.`DISPLAY_CD`=1 AND N1.OUID<"
                                     + noticeUnits2.first().ouid()
                                     + " AND N1.OUID>"
                                     + minUnit1.noticeId()
