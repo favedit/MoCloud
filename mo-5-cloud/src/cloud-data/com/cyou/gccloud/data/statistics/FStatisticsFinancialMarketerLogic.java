@@ -54,8 +54,11 @@ public class FStatisticsFinancialMarketerLogic
    // 字段数据编号的定义。
    public final static SLogicFieldInfo DATA_ID = new SLogicFieldInfo("DATA_ID");
 
+   // 字段部门编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
+
    // 字段部门关联编号的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LINK_ID");
+   public final static SLogicFieldInfo DEPARTMENT_LID = new SLogicFieldInfo("DEPARTMENT_LID");
 
    // 字段部门标签的定义。
    public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
@@ -178,7 +181,7 @@ public class FStatisticsFinancialMarketerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LABEL`,`DEPARTMENT_LEVEL8_ID`,`DEPARTMENT_LEVEL8_LABEL`,`CODE`,`LABEL`,`STATUS_CD`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`RANK_LABEL`,`INVESTMENT_TOTAL`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`REGISTER_DATE`,`ENTER_DATE`,`LEAVE_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造理财师统计表逻辑单元。</T>
@@ -778,7 +781,8 @@ public class FStatisticsFinancialMarketerLogic
       cmd.append(",`LINK_DATE`");
       cmd.append(",`LINK_CD`");
       cmd.append(",`DATA_ID`");
-      cmd.append(",`DEPARTMENT_LINK_ID`");
+      cmd.append(",`DEPARTMENT_ID`");
+      cmd.append(",`DEPARTMENT_LID`");
       cmd.append(",`DEPARTMENT_LABEL`");
       cmd.append(",`DEPARTMENT_LEVEL1_ID`");
       cmd.append(",`DEPARTMENT_LEVEL1_LABEL`");
@@ -861,11 +865,18 @@ public class FStatisticsFinancialMarketerLogic
          cmd.append(dataId);
       }
       cmd.append(',');
-      long departmentLinkId = unit.departmentLinkId();
-      if(departmentLinkId == 0){
+      long departmentId = unit.departmentId();
+      if(departmentId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(departmentLinkId);
+         cmd.append(departmentId);
+      }
+      cmd.append(',');
+      long departmentLid = unit.departmentLid();
+      if(departmentLid == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLid);
       }
       cmd.append(',');
       String departmentLabel = unit.departmentLabel();
@@ -1239,13 +1250,22 @@ public class FStatisticsFinancialMarketerLogic
             cmd.append(dataId);
          }
       }
-      if(unit.isDepartmentLinkIdChanged()){
-         cmd.append(",`DEPARTMENT_LINK_ID`=");
-         long departmentLinkId = unit.departmentLinkId();
-         if(departmentLinkId == 0){
+      if(unit.isDepartmentIdChanged()){
+         cmd.append(",`DEPARTMENT_ID`=");
+         long departmentId = unit.departmentId();
+         if(departmentId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(departmentLinkId);
+            cmd.append(departmentId);
+         }
+      }
+      if(unit.isDepartmentLidChanged()){
+         cmd.append(",`DEPARTMENT_LID`=");
+         long departmentLid = unit.departmentLid();
+         if(departmentLid == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLid);
          }
       }
       if(unit.isDepartmentLabelChanged()){

@@ -110,7 +110,7 @@ public class FStatisticsMarketerConsole
       // 获得部门标签
       long departmentId = 0;
       long belongDepartmentId = row.getLong("belong_dept");
-      unit.setDepartmentLinkId(belongDepartmentId);
+      unit.setDepartmentLid(belongDepartmentId);
       if(belongDepartmentId > 0){
          String belongDepartmentLabel = connection.executeScalar("SELECT dept_name FROM lzh_new_department WHERE id=" + belongDepartmentId);
          unit.setDepartmentLabel(belongDepartmentLabel);
@@ -179,7 +179,7 @@ public class FStatisticsMarketerConsole
       // 更新用户信息
       if(memberUnit.marketerId() == 0){
          memberUnit.setMarketerId(unit.ouid());
-         memberUnit.setDepartmentId(departmentId);
+         memberUnit.setDepartmentLid(departmentId);
          FStatisticsFinancialMemberLogic memberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
          memberLogic.doUpdate(memberUnit);
       }

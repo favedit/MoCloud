@@ -1,4 +1,4 @@
-package org.mo.cloud.storage.face.resource;
+package org.mo.cloud.storage.face.storage;
 
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
@@ -7,7 +7,7 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理接口。</T>
 //============================================================
-public interface IUploadServlet
+public interface IStorageServlet
 {
    //============================================================
    // <T>逻辑处理。</T>

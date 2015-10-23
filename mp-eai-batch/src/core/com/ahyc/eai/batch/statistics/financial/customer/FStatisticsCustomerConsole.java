@@ -136,6 +136,8 @@ public class FStatisticsCustomerConsole
       unit.setOuid(memberUnit.ouid());
       unit.setLinkId(linkId);
       unit.linkDate().assign(memberUnit.updateDate());
+      unit.setMarketerId(memberUnit.marketerId());
+      unit.setMarketerLid(memberUnit.marketerLid());
       unit.setLabel(memberUnit.label());
       unit.setCard(memberUnit.card());
       unit.setCardArea(memberUnit.cardArea());
@@ -148,8 +150,12 @@ public class FStatisticsCustomerConsole
       // 更新用户信息
       if(memberUnit.customerId() == 0){
          memberUnit.setCustomerId(unit.ouid());
+         memberUnit.setCustomerLid(unit.linkId());
          FStatisticsFinancialMemberLogic memberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
          memberLogic.doUpdate(memberUnit);
+      }
+      if(memberUnit.marketerId() == 0){
+
       }
       return unit;
    }

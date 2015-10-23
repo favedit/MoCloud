@@ -3,6 +3,18 @@
 <Config>   
          
    <!-- ============================================================ -->
+   <!-- 设计：存储服务处理                                           -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'cloud.storage'
+         face  = 'org.mo.cloud.storage.face.storage.IStorageServlet'/>
+
+   <Component
+         face  = 'org.mo.cloud.storage.face.storage.IStorageServlet'
+         class = 'org.mo.cloud.storage.face.storage.FStorageServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
    <!-- 设计：资源上传处理                                           -->
    <!-- ============================================================ -->
    <WebServlet

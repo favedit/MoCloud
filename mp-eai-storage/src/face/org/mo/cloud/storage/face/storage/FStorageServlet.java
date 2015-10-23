@@ -1,4 +1,4 @@
-package org.mo.cloud.storage.face.resource;
+package org.mo.cloud.storage.face.storage;
 
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
@@ -19,13 +19,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理。</T>
 //============================================================
-public class FUploadServlet
+public class FStorageServlet
       extends FObject
       implements
-         IUploadServlet
+         IStorageServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FUploadServlet.class);
+   private static ILogger _logger = RLogger.find(FStorageServlet.class);
 
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;

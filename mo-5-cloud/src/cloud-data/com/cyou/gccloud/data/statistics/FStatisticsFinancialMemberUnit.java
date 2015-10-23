@@ -68,6 +68,12 @@ public class FStatisticsFinancialMemberUnit
    // 字段客户编号的定义。
    protected long _customerId;
 
+   // 存储字段客户关联编号的定义。
+   private long __customerLid;
+
+   // 字段客户关联编号的定义。
+   protected long _customerLid;
+
    // 存储字段客户级别的定义。
    private int __customerLevelCd;
 
@@ -80,11 +86,23 @@ public class FStatisticsFinancialMemberUnit
    // 字段理财师编号的定义。
    protected long _marketerId;
 
+   // 存储字段理财师关联编号的定义。
+   private long __marketerLid;
+
+   // 字段理财师关联编号的定义。
+   protected long _marketerLid;
+
    // 存储字段部门编号的定义。
    private long __departmentId;
 
    // 字段部门编号的定义。
    protected long _departmentId;
+
+   // 存储字段部门关联编号的定义。
+   private long __departmentLid;
+
+   // 字段部门关联编号的定义。
+   protected long _departmentLid;
 
    // 存储字段账号的定义。
    private String __passport;
@@ -531,6 +549,33 @@ public class FStatisticsFinancialMemberUnit
    }
 
    //============================================================
+   // <T>判断客户关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerLidChanged(){
+      return __customerLid != _customerLid;
+   }
+
+   //============================================================
+   // <T>获得客户关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long customerLid(){
+      return _customerLid;
+   }
+
+   //============================================================
+   // <T>设置客户关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerLid(long value){
+      _customerLid = value;
+   }
+
+   //============================================================
    // <T>判断客户级别的数据是否改变。</T>
    //
    // @return 数据内容
@@ -585,6 +630,33 @@ public class FStatisticsFinancialMemberUnit
    }
 
    //============================================================
+   // <T>判断理财师关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerLidChanged(){
+      return __marketerLid != _marketerLid;
+   }
+
+   //============================================================
+   // <T>获得理财师关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerLid(){
+      return _marketerLid;
+   }
+
+   //============================================================
+   // <T>设置理财师关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerLid(long value){
+      _marketerLid = value;
+   }
+
+   //============================================================
    // <T>判断部门编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -609,6 +681,33 @@ public class FStatisticsFinancialMemberUnit
    //============================================================
    public void setDepartmentId(long value){
       _departmentId = value;
+   }
+
+   //============================================================
+   // <T>判断部门关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLidChanged(){
+      return __departmentLid != _departmentLid;
+   }
+
+   //============================================================
+   // <T>获得部门关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLid(){
+      return _departmentLid;
+   }
+
+   //============================================================
+   // <T>设置部门关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLid(long value){
+      _departmentLid = value;
    }
 
    //============================================================
@@ -1635,12 +1734,18 @@ public class FStatisticsFinancialMemberUnit
             return Long.toString(_dataId);
          case "customer_id":
             return Long.toString(_customerId);
+         case "customer_lid":
+            return Long.toString(_customerLid);
          case "customer_level_cd":
             return RInteger.toString(_customerLevelCd);
          case "marketer_id":
             return Long.toString(_marketerId);
+         case "marketer_lid":
+            return Long.toString(_marketerLid);
          case "department_id":
             return Long.toString(_departmentId);
+         case "department_lid":
+            return Long.toString(_departmentLid);
          case "passport":
             return _passport;
          case "label":
@@ -1753,14 +1858,23 @@ public class FStatisticsFinancialMemberUnit
          case "customer_id":
             _customerId = RLong.parse(value);
             break;
+         case "customer_lid":
+            _customerLid = RLong.parse(value);
+            break;
          case "customer_level_cd":
             _customerLevelCd = RInteger.parse(value);
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
+         case "marketer_lid":
+            _marketerLid = RLong.parse(value);
+            break;
          case "department_id":
             _departmentId = RLong.parse(value);
+            break;
+         case "department_lid":
+            _departmentLid = RLong.parse(value);
             break;
          case "passport":
             _passport = value;
@@ -1920,6 +2034,10 @@ public class FStatisticsFinancialMemberUnit
                __customerId = RLong.parse(value);
                _customerId = __customerId;
                break;
+            case "customer_lid":
+               __customerLid = RLong.parse(value);
+               _customerLid = __customerLid;
+               break;
             case "customer_level_cd":
                __customerLevelCd = RInteger.parse(value);
                _customerLevelCd = __customerLevelCd;
@@ -1928,9 +2046,17 @@ public class FStatisticsFinancialMemberUnit
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
                break;
+            case "marketer_lid":
+               __marketerLid = RLong.parse(value);
+               _marketerLid = __marketerLid;
+               break;
             case "department_id":
                __departmentId = RLong.parse(value);
                _departmentId = __departmentId;
+               break;
+            case "department_lid":
+               __departmentLid = RLong.parse(value);
+               _departmentLid = __departmentLid;
                break;
             case "passport":
                __passport = value;
@@ -2100,9 +2226,12 @@ public class FStatisticsFinancialMemberUnit
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("customerId", _customerId);
+      row.set("customerLid", _customerLid);
       row.set("customerLevelCd", _customerLevelCd);
       row.set("marketerId", _marketerId);
+      row.set("marketerLid", _marketerLid);
       row.set("departmentId", _departmentId);
+      row.set("departmentLid", _departmentLid);
       row.set("passport", _passport);
       row.set("label", _label);
       row.set("card", _card);
@@ -2158,9 +2287,12 @@ public class FStatisticsFinancialMemberUnit
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("customerId", RLong.toString(_customerId));
+      map.put("customerLid", RLong.toString(_customerLid));
       map.put("customerLevelCd", RInteger.toString(_customerLevelCd));
       map.put("marketerId", RLong.toString(_marketerId));
+      map.put("marketerLid", RLong.toString(_marketerLid));
       map.put("departmentId", RLong.toString(_departmentId));
+      map.put("departmentLid", RLong.toString(_departmentLid));
       map.put("passport", _passport);
       map.put("label", _label);
       map.put("card", _card);
@@ -2216,9 +2348,12 @@ public class FStatisticsFinancialMemberUnit
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _customerId = input.readInt64();
+      _customerLid = input.readInt64();
       _customerLevelCd = input.readInt32();
       _marketerId = input.readInt64();
+      _marketerLid = input.readInt64();
       _departmentId = input.readInt64();
+      _departmentLid = input.readInt64();
       _passport = input.readString();
       _label = input.readString();
       _card = input.readString();
@@ -2274,9 +2409,12 @@ public class FStatisticsFinancialMemberUnit
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeInt64(_customerId);
+      output.writeInt64(_customerLid);
       output.writeInt32(_customerLevelCd);
       output.writeInt64(_marketerId);
+      output.writeInt64(_marketerLid);
       output.writeInt64(_departmentId);
+      output.writeInt64(_departmentLid);
       output.writeString(_passport);
       output.writeString(_label);
       output.writeString(_card);

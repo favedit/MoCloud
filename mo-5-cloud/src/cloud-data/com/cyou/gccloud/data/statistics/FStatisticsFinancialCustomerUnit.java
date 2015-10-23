@@ -63,6 +63,30 @@ public class FStatisticsFinancialCustomerUnit
    // 字段数据编号的定义。
    protected long _dataId;
 
+   // 存储字段部门编号的定义。
+   private long __departmentId;
+
+   // 字段部门编号的定义。
+   protected long _departmentId;
+
+   // 存储字段部门关联编号的定义。
+   private long __departmentLid;
+
+   // 字段部门关联编号的定义。
+   protected long _departmentLid;
+
+   // 存储字段理财师编号的定义。
+   private long __marketerId;
+
+   // 字段理财师编号的定义。
+   protected long _marketerId;
+
+   // 存储字段理财师关联编号的定义。
+   private long __marketerLid;
+
+   // 字段理财师关联编号的定义。
+   protected long _marketerLid;
+
    // 存储字段标签的定义。
    private String __label;
 
@@ -418,6 +442,114 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setDataId(long value){
       _dataId = value;
+   }
+
+   //============================================================
+   // <T>判断部门编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
+   }
+
+   //============================================================
+   // <T>获得部门编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentId(){
+      return _departmentId;
+   }
+
+   //============================================================
+   // <T>设置部门编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentId(long value){
+      _departmentId = value;
+   }
+
+   //============================================================
+   // <T>判断部门关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLidChanged(){
+      return __departmentLid != _departmentLid;
+   }
+
+   //============================================================
+   // <T>获得部门关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLid(){
+      return _departmentLid;
+   }
+
+   //============================================================
+   // <T>设置部门关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLid(long value){
+      _departmentLid = value;
+   }
+
+   //============================================================
+   // <T>判断理财师编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerIdChanged(){
+      return __marketerId != _marketerId;
+   }
+
+   //============================================================
+   // <T>获得理财师编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerId(){
+      return _marketerId;
+   }
+
+   //============================================================
+   // <T>设置理财师编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerId(long value){
+      _marketerId = value;
+   }
+
+   //============================================================
+   // <T>判断理财师关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerLidChanged(){
+      return __marketerLid != _marketerLid;
+   }
+
+   //============================================================
+   // <T>获得理财师关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long marketerLid(){
+      return _marketerLid;
+   }
+
+   //============================================================
+   // <T>设置理财师关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerLid(long value){
+      _marketerLid = value;
    }
 
    //============================================================
@@ -1172,6 +1304,14 @@ public class FStatisticsFinancialCustomerUnit
             return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
+         case "department_id":
+            return Long.toString(_departmentId);
+         case "department_lid":
+            return Long.toString(_departmentLid);
+         case "marketer_id":
+            return Long.toString(_marketerId);
+         case "marketer_lid":
+            return Long.toString(_marketerLid);
          case "label":
             return _label;
          case "card":
@@ -1260,6 +1400,18 @@ public class FStatisticsFinancialCustomerUnit
             break;
          case "data_id":
             _dataId = RLong.parse(value);
+            break;
+         case "department_id":
+            _departmentId = RLong.parse(value);
+            break;
+         case "department_lid":
+            _departmentLid = RLong.parse(value);
+            break;
+         case "marketer_id":
+            _marketerId = RLong.parse(value);
+            break;
+         case "marketer_lid":
+            _marketerLid = RLong.parse(value);
             break;
          case "label":
             _label = value;
@@ -1384,6 +1536,22 @@ public class FStatisticsFinancialCustomerUnit
             case "data_id":
                __dataId = RLong.parse(value);
                _dataId = __dataId;
+               break;
+            case "department_id":
+               __departmentId = RLong.parse(value);
+               _departmentId = __departmentId;
+               break;
+            case "department_lid":
+               __departmentLid = RLong.parse(value);
+               _departmentLid = __departmentLid;
+               break;
+            case "marketer_id":
+               __marketerId = RLong.parse(value);
+               _marketerId = __marketerId;
+               break;
+            case "marketer_lid":
+               __marketerLid = RLong.parse(value);
+               _marketerLid = __marketerLid;
                break;
             case "label":
                __label = value;
@@ -1512,6 +1680,10 @@ public class FStatisticsFinancialCustomerUnit
       row.set("linkDate", _linkDate);
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
+      row.set("departmentId", _departmentId);
+      row.set("departmentLid", _departmentLid);
+      row.set("marketerId", _marketerId);
+      row.set("marketerLid", _marketerLid);
       row.set("label", _label);
       row.set("card", _card);
       row.set("cardArea", _cardArea);
@@ -1556,6 +1728,10 @@ public class FStatisticsFinancialCustomerUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
+      map.put("departmentId", RLong.toString(_departmentId));
+      map.put("departmentLid", RLong.toString(_departmentLid));
+      map.put("marketerId", RLong.toString(_marketerId));
+      map.put("marketerLid", RLong.toString(_marketerLid));
       map.put("label", _label);
       map.put("card", _card);
       map.put("cardArea", _cardArea);
@@ -1600,6 +1776,10 @@ public class FStatisticsFinancialCustomerUnit
       _linkDate.set(input.readInt64());
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
+      _departmentId = input.readInt64();
+      _departmentLid = input.readInt64();
+      _marketerId = input.readInt64();
+      _marketerLid = input.readInt64();
       _label = input.readString();
       _card = input.readString();
       _cardArea = input.readString();
@@ -1639,6 +1819,10 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt64(_linkDate.get());
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
+      output.writeInt64(_departmentId);
+      output.writeInt64(_departmentLid);
+      output.writeInt64(_marketerId);
+      output.writeInt64(_marketerLid);
       output.writeString(_label);
       output.writeString(_card);
       output.writeString(_cardArea);

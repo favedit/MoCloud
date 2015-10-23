@@ -4,7 +4,8 @@
   <FieldDateTime _uuid="48b67a05-f1dc-4eb1-8775-8abc01ebe0f4" name="link_date" label="M#12cn14关联时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_DATE" />
   <FieldInteger _uuid="7f583c8b-6739-4a26-ab78-a186ede092d2" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
   <FieldRecordId _uuid="ef46ed4b-a24a-4191-82c5-582b566d4946" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
-  <FieldRecordId _uuid="62cc4bf3-922a-461a-8bf6-c834ba69a6ed" name="department_link_id" label="M#12cn16部门关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LINK_ID" />
+  <FieldRecordId _uuid="d125f4e8-dfbf-419b-b2e0-a118ada8bde9" name="department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_ID" />
+  <FieldRecordId _uuid="62cc4bf3-922a-461a-8bf6-c834ba69a6ed" name="department_lid" label="M#12cn16部门关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LID" />
   <FieldString _uuid="97156347-ec01-40d9-b475-9973b10cb03f" name="department_label" label="M#12cn14部门标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LABEL" data_size="80" />
   <FieldRecordId _uuid="37c9ab13-1222-47fa-86ac-fe8899cc564b" name="department_level1_id" label="M#12cn17部门级别1编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LEVEL1_ID" />
   <FieldString _uuid="ad05e98e-6d01-42b0-b13c-7e0946b74ac3" name="department_level1_label" label="M#12cn17部门级别1标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LEVEL1_LABEL" data_size="80" />

@@ -57,14 +57,23 @@ public class FStatisticsFinancialMemberLogic
    // 字段客户编号的定义。
    public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
 
+   // 字段客户关联编号的定义。
+   public final static SLogicFieldInfo CUSTOMER_LID = new SLogicFieldInfo("CUSTOMER_LID");
+
    // 字段客户级别的定义。
    public final static SLogicFieldInfo CUSTOMER_LEVEL_CD = new SLogicFieldInfo("CUSTOMER_LEVEL_CD");
 
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
+   // 字段理财师关联编号的定义。
+   public final static SLogicFieldInfo MARKETER_LID = new SLogicFieldInfo("MARKETER_LID");
+
    // 字段部门编号的定义。
    public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
+
+   // 字段部门关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LID = new SLogicFieldInfo("DEPARTMENT_LID");
 
    // 字段账号的定义。
    public final static SLogicFieldInfo PASSPORT = new SLogicFieldInfo("PASSPORT");
@@ -178,7 +187,7 @@ public class FStatisticsFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`DEPARTMENT_ID`,`PASSPORT`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`REDEMPTION_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`CUSTOMER_ID`,`CUSTOMER_LID`,`CUSTOMER_LEVEL_CD`,`MARKETER_ID`,`MARKETER_LID`,`DEPARTMENT_ID`,`DEPARTMENT_LID`,`PASSPORT`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`EMAIL`,`GENDER_CD`,`GENDER_CODE`,`MARRY_CD`,`MARRY_CODE`,`EDUCATION_CD`,`EDUCATION_CODE`,`BUSINESS_CD`,`BUSINESS_CODE`,`INCOME_CD`,`INCOME_CODE`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`PROVINCE_CODE`,`CITY_ID`,`CITY_CODE`,`AREA_ID`,`AREA_CODE`,`ADDRESS`,`INFO`,`REGISTER_DATE`,`INVESTMENT_DATE`,`REDEMPTION_DATE`,`LAST_LOGIN_DATE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造用户统计表逻辑单元。</T>
@@ -779,9 +788,12 @@ public class FStatisticsFinancialMemberLogic
       cmd.append(",`LINK_CD`");
       cmd.append(",`DATA_ID`");
       cmd.append(",`CUSTOMER_ID`");
+      cmd.append(",`CUSTOMER_LID`");
       cmd.append(",`CUSTOMER_LEVEL_CD`");
       cmd.append(",`MARKETER_ID`");
+      cmd.append(",`MARKETER_LID`");
       cmd.append(",`DEPARTMENT_ID`");
+      cmd.append(",`DEPARTMENT_LID`");
       cmd.append(",`PASSPORT`");
       cmd.append(",`LABEL`");
       cmd.append(",`CARD`");
@@ -868,6 +880,13 @@ public class FStatisticsFinancialMemberLogic
          cmd.append(customerId);
       }
       cmd.append(',');
+      long customerLid = unit.customerLid();
+      if(customerLid == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(customerLid);
+      }
+      cmd.append(',');
       cmd.append(unit.customerLevelCd());
       cmd.append(',');
       long marketerId = unit.marketerId();
@@ -877,11 +896,25 @@ public class FStatisticsFinancialMemberLogic
          cmd.append(marketerId);
       }
       cmd.append(',');
+      long marketerLid = unit.marketerLid();
+      if(marketerLid == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(marketerLid);
+      }
+      cmd.append(',');
       long departmentId = unit.departmentId();
       if(departmentId == 0){
          cmd.append("NULL");
       }else{
          cmd.append(departmentId);
+      }
+      cmd.append(',');
+      long departmentLid = unit.departmentLid();
+      if(departmentLid == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLid);
       }
       cmd.append(',');
       String passport = unit.passport();
@@ -1233,6 +1266,15 @@ public class FStatisticsFinancialMemberLogic
             cmd.append(customerId);
          }
       }
+      if(unit.isCustomerLidChanged()){
+         cmd.append(",`CUSTOMER_LID`=");
+         long customerLid = unit.customerLid();
+         if(customerLid == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(customerLid);
+         }
+      }
       if(unit.isCustomerLevelCdChanged()){
          cmd.append(",`CUSTOMER_LEVEL_CD`=");
          cmd.append(unit.customerLevelCd());
@@ -1246,6 +1288,15 @@ public class FStatisticsFinancialMemberLogic
             cmd.append(marketerId);
          }
       }
+      if(unit.isMarketerLidChanged()){
+         cmd.append(",`MARKETER_LID`=");
+         long marketerLid = unit.marketerLid();
+         if(marketerLid == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(marketerLid);
+         }
+      }
       if(unit.isDepartmentIdChanged()){
          cmd.append(",`DEPARTMENT_ID`=");
          long departmentId = unit.departmentId();
@@ -1253,6 +1304,15 @@ public class FStatisticsFinancialMemberLogic
             cmd.append("NULL");
          }else{
             cmd.append(departmentId);
+         }
+      }
+      if(unit.isDepartmentLidChanged()){
+         cmd.append(",`DEPARTMENT_LID`=");
+         long departmentLid = unit.departmentLid();
+         if(departmentLid == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLid);
          }
       }
       if(unit.isPassportChanged()){

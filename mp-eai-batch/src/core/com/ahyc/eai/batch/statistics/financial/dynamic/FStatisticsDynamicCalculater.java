@@ -114,10 +114,62 @@ public class FStatisticsDynamicCalculater
             }
          }
          //............................................................
+         // 统计部门信息
+         boolean departmentExist = false;
+         FStatisticsFinancialDepartmentUnit departmentUnit = null;
+         if(departmentId > 0){
+            departmentUnit = _departmentConsole.syncByLinkId(logicContext, dynamicUnit.departmentLinkId());
+            departmentExist = departmentUnit.linkCd() > 0;
+            departmentUnit.setLinkCd(1);
+            departmentUnit.linkDate().assign(customerActionDate);
+            double departmentInvestmentTotal = departmentUnit.investmentTotal();
+            double departmentRedemptionTotal = departmentUnit.redemptionTotal();
+            double departmentInterestTotal = departmentUnit.interestTotal();
+            if(customerActionCd == EGcFinancialCustomerAction.Investment){
+               departmentInvestmentTotal += customerActionAmount;
+               departmentUnit.setInvestmentTotal(departmentInvestmentTotal);
+            }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+               departmentRedemptionTotal += customerActionAmount;
+               departmentUnit.setRedemptionTotal(departmentRedemptionTotal);
+               departmentInterestTotal += customerActionInterest;
+               departmentUnit.setInterestTotal(departmentInterestTotal);
+            }else{
+               throw new FFatalError("Customer action invalid.");
+            }
+            departmentUnit.setNetinvestmentTotal(departmentInvestmentTotal - departmentRedemptionTotal);
+            departmentLogic.doUpdate(departmentUnit);
+         }
+         //............................................................
+         // 统计理财师信息
+         boolean marketerExist = false;
+         FStatisticsFinancialMarketerUnit marketerUnit = null;
+         if(marketerId > 0){
+            marketerUnit = _marketerConsole.syncByLinkId(logicContext, dynamicUnit.marketerLinkId());
+            marketerExist = marketerUnit.linkCd() > 0;
+            marketerUnit.setLinkCd(1);
+            double marketerInvestmentTotal = marketerUnit.investmentTotal();
+            double marketerRedemptionTotal = marketerUnit.redemptionTotal();
+            double marketerInterestTotal = marketerUnit.interestTotal();
+            if(customerActionCd == EGcFinancialCustomerAction.Investment){
+               marketerInvestmentTotal += customerActionAmount;
+               marketerUnit.setInvestmentTotal(marketerInvestmentTotal);
+            }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
+               marketerRedemptionTotal += customerActionAmount;
+               marketerUnit.setRedemptionTotal(marketerRedemptionTotal);
+               marketerInterestTotal += customerActionInterest;
+               marketerUnit.setInterestTotal(marketerInterestTotal);
+            }else{
+               throw new FFatalError("Customer action invalid.");
+            }
+            marketerUnit.setNetinvestmentTotal(marketerInvestmentTotal - marketerRedemptionTotal);
+            marketerLogic.doUpdate(marketerUnit);
+         }
+         //............................................................
          // 统计客户信息
          boolean customerExist = false;
          if(customerId > 0){
-            FStatisticsFinancialCustomerUnit customerUnit = _customerConsole.syncByLinkId(logicContext, dynamicUnit.customerLinkId());
+            long customerLinkId = dynamicUnit.customerLinkId();
+            FStatisticsFinancialCustomerUnit customerUnit = _customerConsole.syncByLinkId(logicContext, customerLinkId);
             customerExist = customerUnit.linkCd() > 0;
             customerUnit.setLinkCd(1);
             customerUnit.linkDate().assign(customerActionDate);
@@ -158,56 +210,17 @@ public class FStatisticsDynamicCalculater
                throw new FFatalError("Customer action invalid.");
             }
             customerUnit.setNetinvestmentTotal(customerInvestmentTotal - customerRedemptionTotal);
+            // 设置理财师
+            if(marketerUnit != null){
+               customerUnit.setMarketerId(marketerUnit.ouid());
+               customerUnit.setMarketerLid(marketerUnit.linkId());
+            }
+            // 设置部门
+            if(departmentUnit != null){
+               customerUnit.setDepartmentId(departmentUnit.ouid());
+               customerUnit.setDepartmentLid(departmentUnit.linkId());
+            }
             customerLogic.doUpdate(customerUnit);
-         }
-         //............................................................
-         // 统计理财师信息
-         boolean marketerExist = false;
-         if(marketerId > 0){
-            FStatisticsFinancialMarketerUnit marketerUnit = _marketerConsole.syncByLinkId(logicContext, dynamicUnit.marketerLinkId());
-            marketerExist = marketerUnit.linkCd() > 0;
-            marketerUnit.setLinkCd(1);
-            double marketerInvestmentTotal = marketerUnit.investmentTotal();
-            double marketerRedemptionTotal = marketerUnit.redemptionTotal();
-            double marketerInterestTotal = marketerUnit.interestTotal();
-            if(customerActionCd == EGcFinancialCustomerAction.Investment){
-               marketerInvestmentTotal += customerActionAmount;
-               marketerUnit.setInvestmentTotal(marketerInvestmentTotal);
-            }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
-               marketerRedemptionTotal += customerActionAmount;
-               marketerUnit.setRedemptionTotal(marketerRedemptionTotal);
-               marketerInterestTotal += customerActionInterest;
-               marketerUnit.setInterestTotal(marketerInterestTotal);
-            }else{
-               throw new FFatalError("Customer action invalid.");
-            }
-            marketerUnit.setNetinvestmentTotal(marketerInvestmentTotal - marketerRedemptionTotal);
-            marketerLogic.doUpdate(marketerUnit);
-         }
-         //............................................................
-         // 统计部门信息
-         boolean departmentExist = false;
-         if(departmentId > 0){
-            FStatisticsFinancialDepartmentUnit departmentUnit = _departmentConsole.syncByLinkId(logicContext, dynamicUnit.departmentLinkId());
-            departmentExist = departmentUnit.linkCd() > 0;
-            departmentUnit.setLinkCd(1);
-            departmentUnit.linkDate().assign(customerActionDate);
-            double departmentInvestmentTotal = departmentUnit.investmentTotal();
-            double departmentRedemptionTotal = departmentUnit.redemptionTotal();
-            double departmentInterestTotal = departmentUnit.interestTotal();
-            if(customerActionCd == EGcFinancialCustomerAction.Investment){
-               departmentInvestmentTotal += customerActionAmount;
-               departmentUnit.setInvestmentTotal(departmentInvestmentTotal);
-            }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
-               departmentRedemptionTotal += customerActionAmount;
-               departmentUnit.setRedemptionTotal(departmentRedemptionTotal);
-               departmentInterestTotal += customerActionInterest;
-               departmentUnit.setInterestTotal(departmentInterestTotal);
-            }else{
-               throw new FFatalError("Customer action invalid.");
-            }
-            departmentUnit.setNetinvestmentTotal(departmentInvestmentTotal - departmentRedemptionTotal);
-            departmentLogic.doUpdate(departmentUnit);
          }
          //............................................................
          // 统计合计信息

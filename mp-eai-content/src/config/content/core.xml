@@ -32,6 +32,18 @@
    <!-- StorageConsole:资源存储控制台                        -->
    <!-- ==================================================== -->
    <Component
+         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
+         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
+         scope = 'global'>
+      <Property name='enable'>Y</Property>
+      <Property name='uploadUrl'>${eai.server.storage.upload}</Property>
+      <Initialize name='initialize'/>
+   </Component>
+
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
          face  = 'org.mo.content.engine.core.storage.IResStorageConsole'
          class = 'org.mo.content.engine.core.storage.FResStorageConsole'
          scope = 'global'>
