@@ -65,13 +65,9 @@
        return "<img src="+iconUrl+" height=50px width=55px/>";
     }
     function phoneInfo(ouid){
-       $('#w').window({
-           width: 600,
-           height: 600,
-           modal: true,
-           href: "/manage/product/business/truetime/Truetime.wa?do=getDescription&ouid="+ouid,
-           title: "销售工具内容"
-       });
+       var l=(screen.availWidth-500)/2;
+       var t=(screen.availHeight-500)/2;
+       window.open('/manage/product/business/truetime/Truetime.wa?do=getDescription&ouid='+ouid,'_blank','height=600,width=600,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
     }
 </script>
 </HEAD>

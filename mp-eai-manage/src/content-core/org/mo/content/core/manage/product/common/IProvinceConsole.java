@@ -61,7 +61,7 @@ public interface IProvinceConsole
    // @return 数据对象
    // ============================================================
    FDataCommonProvinceUnit findByProvinceLabel(ILogicContext logicContext, 
-                                                      String label);
+                                               String label);
 
    // ============================================================
    // <T>判断是否存在</T>
@@ -71,10 +71,22 @@ public interface IProvinceConsole
    // @param countryId 国家id
    // @return 数据对象
    // ============================================================
-   boolean isExistsByLabelandAreaIdandCountryId(ILogicContext logicContext, 
-                                                       String proviceLabel, 
-                                                       Long areaId, 
-                                                       Long countryId);
+   boolean isExistsByLabelandAIdandCId(ILogicContext logicContext, 
+                                       String proviceLabel, 
+                                       Long areaId, 
+                                       Long countryId);
+   
+   // ============================================================
+   // <T>根据标签,区域id,国家id,ouid判读数据库中是否已重复</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return boolean
+   // ============================================================
+   boolean isExistsByLabelandAIdandCIdandOuid(ILogicContext logicContext, 
+                                              String proviceLabel, 
+                                              Long areaId, 
+                                              Long countryId,
+                                              Long ouid);
    
    // ============================================================
    // <T>更具区域id查询所有省份</T>

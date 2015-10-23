@@ -140,7 +140,7 @@ public class FCitycardAction
       FDataCommonCityCardUnit unit = _citycardConsole.doPrepare(logicContext);
       setCitycardDat(unit, context, logicContext);
       if (_citycardConsole.isExsitsByCardcodeandByCityId(logicContext, unit.cityId(), unit.cardCode())) {
-         page.setResult("请重新增加!");
+         page.setResult("数据重复,请重新增加!");
          return "/manage/product/common/InsertCitycard";
       }
       EResult result = _citycardConsole.doInsert(logicContext, unit);
@@ -196,16 +196,20 @@ public class FCitycardAction
    @Override
    public String update(IWebContext context, 
                         ILogicContext logicContext, 
-                        FCitycardPage Page, 
+                        FCitycardPage page, 
                         FBasePage basePage) {
 
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
+      _logger.debug(this, "Update----------------------------------------", "Update Begin.(id={1})", basePage.userId());
       FDataCommonCityCardUnit unit = _citycardConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       setCitycardDat(unit, context, logicContext);
+      if (_citycardConsole.isExsitsByCardcodeandByCityIdandOuid(logicContext, unit.cityId(), unit.cardCode(),unit.ouid())) {
+         page.setResult("数据重复,请重新增加!");
+         return "/manage/product/common/UpdateCitycard";
+      }
       _citycardConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }

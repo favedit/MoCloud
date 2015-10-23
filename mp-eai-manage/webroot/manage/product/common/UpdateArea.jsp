@@ -64,7 +64,7 @@
         data-options="required:true,validType:'length[0,80]'" />  <input id="adminId"
         name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
-          <input id="ouid" name="ouid" style="display:none;"
+        <input id="ouid" name="ouid" style="display:none;"
         value="<jh:write source='&unit.ouid'/>" />
       </div></td>
     </tr>

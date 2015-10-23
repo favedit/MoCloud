@@ -131,6 +131,39 @@ public class FAreaConsole
    }
 
    // ============================================================
+   // <T>根据区域标签和国家id，ouid判断是否重复</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public boolean isExistByAreaLabelandCountryIdandOuid(ILogicContext logicContext, 
+                                                        String areaLabel, 
+                                                        Long countryId,
+                                                        Long ouid) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(areaLabel) && !RString.isEmpty(countryId + "")) {
+         whereSql.append(FDataCommonAreaLogic.LABEL);
+         whereSql.append(" like ");
+         whereSql.append(" '%{label}%'");
+         whereSql.bind("label", areaLabel);
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonAreaLogic.COUNTRY_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {countryId}");
+         whereSql.bind("countryId", RString.parse(countryId));
+         FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
+         FLogicDataset<FDataCommonAreaUnit> areaList = logic.fetch(whereSql.toString());
+         for(Iterator<FDataCommonAreaUnit> iter = areaList.iterator();iter.hasNext();){
+            FDataCommonAreaUnit unit = iter.next();
+            if(!RString.equals(unit.ouid(),ouid)){
+               return true;
+            }
+         }
+      }
+      return false;
+   }
+   // ============================================================
    // <T>根据标签获取对象列表</T>
    // @param logicContext 链接对象
    // @param label 标签

@@ -128,7 +128,7 @@
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
   <form id="config"
-   action="/manage/product/common/Citycard.wa?do=insert"
+   action="/manage/product/common/Citycard.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="850" border="0" align="left"
@@ -141,6 +141,8 @@
         data-options="required:true,validType:'length[0,11]'" /> <input id="adminId"
         name="adminId" style="display:none"
         value="<jh:write source='&basePage.userId'/>" />
+        <input id="ouid" name="ouid" style="display:none;"
+        value="<jh:write source='&unit.ouid'/>" />
       </div></td>
     </tr>
     <tr>

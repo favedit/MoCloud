@@ -136,8 +136,8 @@ public class FProvinceAction
       }
       FDataCommonProvinceUnit unit = _proviConsole.doPrepare(logicContext);
       setProvinceDat(unit, context, logicContext);
-      if (_proviConsole.isExistsByLabelandAreaIdandCountryId(logicContext, unit.label(), unit.areaId(), unit.countryId())) {
-         page.setResult("请重新增加!");
+      if (_proviConsole.isExistsByLabelandAIdandCId(logicContext, unit.label(), unit.areaId(), unit.countryId())) {
+         page.setResult("数据重复,请重新增加!");
          return "/manage/product/common/InsertProvince";
       }
       EResult result = _proviConsole.doInsert(logicContext, unit);
@@ -183,7 +183,7 @@ public class FProvinceAction
    @Override
    public String update(IWebContext context, 
                         ILogicContext logicContext, 
-                        FProvincePage Page, 
+                        FProvincePage page, 
                         FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -191,6 +191,10 @@ public class FProvinceAction
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataCommonProvinceUnit unit = _proviConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setProvinceDat(unit, context, logicContext);
+      if (_proviConsole.isExistsByLabelandAIdandCIdandOuid(logicContext, unit.label(), unit.areaId(), unit.countryId(),unit.ouid())) {
+         page.setResult("数据重复,请重新增加!");
+         return "/manage/product/common/UpdateProvince";
+      }
       _proviConsole.doUpdate(logicContext, unit);
       return "/manage/product/common/ProvinceList";
    }

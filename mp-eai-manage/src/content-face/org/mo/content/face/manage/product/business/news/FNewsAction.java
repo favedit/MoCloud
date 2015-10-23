@@ -192,12 +192,6 @@ public class FNewsAction
       }
       page.setUnit(info);
       page.setResult("");
-      String flag = context.parameter("flag");
-      if(RString.equals(flag,"1")){
-         basePage.setMenuString("hide");
-      }else{
-         basePage.setMenuString("show");
-      }
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
       return "/manage/product/business/news/UpdateNews";
    }

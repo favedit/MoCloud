@@ -129,7 +129,7 @@ public class FCityConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public boolean isExsitsByLabelandByCountryIdandAreaIdandProvinceId(ILogicContext logicContext, 
+   public boolean isExsitsByLabelandByCIdandAIdandPId(ILogicContext logicContext, 
                                                                       String label, 
                                                                       Long countryId, 
                                                                       Long areaId, 
@@ -159,6 +159,55 @@ public class FCityConsole
          FLogicDataset<FDataCommonCityUnit> areaList = logic.fetch(whereSql.toString());
          if (areaList.count() > 0) {
             return true;
+         }
+      }
+      return false;
+   }
+   
+   // ============================================================
+   // <T>根据label,countryId,areaId,provinceId,ouid判断数据存在重复</T>
+   // @param logicContext 链接对象
+   // @param label 市区标签
+   // @param countryId 国家id
+   // @param areaId 区域id
+   // @param provinceId 身份id
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public boolean isExsitsByLabelandByCIdandAIdandPIdandOuid(ILogicContext logicContext, 
+                                                             String label, 
+                                                             Long countryId, 
+                                                             Long areaId, 
+                                                             Long provinceId,
+                                                             Long ouid) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(label) && !RString.isEmpty(areaId + "") && !RString.isEmpty(countryId + "") && !RString.isEmpty(provinceId + "")) {
+         whereSql.append(FDataCommonCityLogic.LABEL);
+         whereSql.append(" like ");
+         whereSql.append(" '%{label}%'");
+         whereSql.bind("label", label);
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonCityLogic.COUNTRY_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {countryId}");
+         whereSql.bind("countryId", RString.parse(countryId));
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonCityLogic.AREA_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {areaId}");
+         whereSql.bind("areaId", RString.parse(areaId));
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonCityLogic.PROVINCE_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {provinceId}");
+         whereSql.bind("provinceId", RString.parse(provinceId));
+         FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
+         FLogicDataset<FDataCommonCityUnit> areaList = logic.fetch(whereSql.toString());
+         for(Iterator<FDataCommonCityUnit> iter = areaList.iterator();iter.hasNext();){
+            FDataCommonCityUnit unit = iter.next();
+            if(!RString.equals(ouid, unit.ouid())){
+               return true;
+            }
          }
       }
       return false;

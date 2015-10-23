@@ -39,6 +39,17 @@ public interface ICitycardConsole
                                                 int cardCode);
    
    // ============================================================
+   // <T>根据身份证号和城市id，ouid判断是否存在</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   boolean isExsitsByCardcodeandByCityIdandOuid(ILogicContext logicContext, 
+                                                Long cityId, 
+                                                int cardCode,
+                                                Long ouid);
+   
+   // ============================================================
    // <T>根据标签获取对象列表</T>
    // @param logicContext 链接对象
    // @param label 标签

@@ -97,15 +97,21 @@
    function phoneInfo(){
       $("#getHtml").click();
       var content = $("#content").val();
-      $("#w").html(content);
-      $('#w').show(); 
-      $('#w').dialog({ 
-         modal:true,
-         collapsible: true, 
-         minimizable: true, 
-         maximizable: true
-      });
+      var l=(screen.availWidth-500)/2;
+      var t=(screen.availHeight-500)/2;
+      openwin(content,l,t);
    }
+   function openwin(content,l,t) 
+   { 
+     OpenWindow=window.open("", '_blank','height=600,width=600,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
+     //写成一行 
+     OpenWindow.document.write("<TITLE>销售工具内容</TITLE>") 
+     OpenWindow.document.write("<BODY BGCOLOR=#ffffff>") 
+     OpenWindow.document.write(content) 
+     OpenWindow.document.write("</BODY>") 
+     OpenWindow.document.write("</HTML>") 
+     OpenWindow.document.close() 
+   } 
 </script>
 
 <body bgcolor="#198bc9">
@@ -126,7 +132,7 @@
    action="/manage/product/business/salestools/Salestools.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-   <table width="870" height="346" border="0" align="left"
+   <table width="790" height="346" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
       <td width="54" height="38"><div align="left">标题:</div></td>
@@ -188,6 +194,9 @@
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
         style="width:380px;height:20px" data-options="validType:'length[0,800]'" value="<jh:write source='&unit.linkUrl'/>"/>
      </div></td>
+     <td style="text-align:left;float:left;" >
+      <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px" onclick="phoneInfo()">浏览</a>
+     </td>
     </tr>
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
@@ -204,12 +213,10 @@
           <input style="display:none" id="content" name="content" />
           <input type="button" style="display:none" id="getHtml" value="取得HTML" />
      </td>
-     <td style="vertical-align:top;float:left;" ><input type="button" value="手机浏览" onclick="phoneInfo()"></td>
+     <td></td>
     </tr>
    </table>
   </form>
- </div>
- <div id="w" style="width:600px;height:600px;padding:5px;display:none;" title="销售工具内容">
  </div>
 </body>
 </HTML>

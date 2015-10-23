@@ -20,8 +20,6 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 //<P>区域信息控制器</P>
 //@class FAreaAction
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 public class FAreaAction 
@@ -146,7 +144,7 @@ public class FAreaAction
       FDataCommonAreaUnit unit = _areaConsole.doPrepare(logicContext);
       setAreaDa(unit, context, logicContext);
       if (_areaConsole.isExistByAreaLabelandCountryId(logicContext, unit.label(), unit.countryId())) {
-         page.setResult("请重新增加!");
+         page.setResult("数据重复,请重新增加!");
          return "/manage/product/common/InsertArea";
       }
       EResult result = _areaConsole.doInsert(logicContext, unit);
@@ -192,7 +190,7 @@ public class FAreaAction
    @Override
    public String update(IWebContext context, 
                         ILogicContext logicContext, 
-                        FAreaPage Page, 
+                        FAreaPage page, 
                         FBasePage basePage) {
 
       if (!basePage.userExists()) {
@@ -201,6 +199,10 @@ public class FAreaAction
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataCommonAreaUnit unit = _areaConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setAreaDa(unit, context, logicContext);
+      if(_areaConsole.isExistByAreaLabelandCountryIdandOuid(logicContext, unit.label(), unit.countryId(),unit.ouid())){
+         page.setResult("数据重复,请重新增加!");
+         return "/manage/product/common/UpdateArea";
+      }
       _areaConsole.doUpdate(logicContext, unit);
       return "/manage/common/ajax";
    }

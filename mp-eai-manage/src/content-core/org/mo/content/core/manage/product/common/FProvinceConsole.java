@@ -150,10 +150,10 @@ public class FProvinceConsole
    // @return boolean
    // ============================================================
    @Override
-   public boolean isExistsByLabelandAreaIdandCountryId(ILogicContext logicContext, 
-                                                       String proviceLabel, 
-                                                       Long areaId, 
-                                                       Long countryId) {
+   public boolean isExistsByLabelandAIdandCId(ILogicContext logicContext, 
+                                              String proviceLabel, 
+                                              Long areaId, 
+                                              Long countryId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(proviceLabel) && !RString.isEmpty(countryId + "") && !RString.isEmpty(areaId + "")) {
          whereSql.append(FDataCommonProvinceLogic.LABEL);
@@ -179,6 +179,45 @@ public class FProvinceConsole
       return false;
    }
    
+   // ============================================================
+   // <T>根据标签,区域id,国家id,ouid判读数据库中是否已重复</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return boolean
+   // ============================================================
+   @Override
+   public boolean isExistsByLabelandAIdandCIdandOuid(ILogicContext logicContext, 
+                                                     String proviceLabel, 
+                                                     Long areaId, 
+                                                     Long countryId,
+                                                     Long ouid) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(proviceLabel) && !RString.isEmpty(countryId + "") && !RString.isEmpty(areaId + "")) {
+         whereSql.append(FDataCommonProvinceLogic.LABEL);
+         whereSql.append(" like ");
+         whereSql.append(" '%{label}%'");
+         whereSql.bind("label", proviceLabel);
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonProvinceLogic.COUNTRY_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {countryId}");
+         whereSql.bind("countryId", RString.parse(countryId));
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonProvinceLogic.AREA_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {areaId}");
+         whereSql.bind("areaId", RString.parse(areaId));
+         FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
+         FLogicDataset<FDataCommonProvinceUnit> provinceList = logic.fetch(whereSql.toString());
+         for(Iterator<FDataCommonProvinceUnit> iter = provinceList.iterator();iter.hasNext();){
+            FDataCommonProvinceUnit unit = iter.next();
+            if(!RString.equals(unit.ouid(), ouid)){
+               return true;
+            }
+         }
+      }
+      return false;
+   }
    // ============================================================
    // <T>根据区域id获取对象列表</T>
    // @param logicContext 链接对象

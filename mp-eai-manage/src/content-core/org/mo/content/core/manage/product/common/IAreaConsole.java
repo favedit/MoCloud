@@ -46,6 +46,17 @@ public interface IAreaConsole
    boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, 
                                                  String areaLabel, 
                                                  Long countryId);
+   
+   // ============================================================
+   // <T>根据区域标签和国家id，ouid判断是否重复</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   boolean isExistByAreaLabelandCountryIdandOuid(ILogicContext logicContext, 
+                                                 String areaLabel, 
+                                                 Long countryId,
+                                                 Long ouid);
 
    // ============================================================
    // <T>根据国家id获取区域</T>

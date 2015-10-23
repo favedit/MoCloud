@@ -100,6 +100,40 @@ public class FCitycardConsole
    }
 
    // ============================================================
+   // <T>根据身份证号和城市id，ouid判断是否存在</T>
+   // @param logicContext 链接对象
+   // @param label 标签
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public boolean isExsitsByCardcodeandByCityIdandOuid(ILogicContext logicContext, 
+                                                       Long cityId, 
+                                                       int cardCode,
+                                                       Long ouid) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(cityId+"") && !RString.isEmpty(cardCode + "")) {
+         whereSql.append(FDataCommonCityCardLogic.CITY_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {cityId}");
+         whereSql.bind("cityId", RString.parse(cityId));
+         whereSql.append(" and ");
+         whereSql.append(FDataCommonCityCardLogic.CARD_CODE);
+         whereSql.append(" = ");
+         whereSql.append(" {cardCode}");
+         whereSql.bind("cardCode", RString.parse(cardCode));
+         FDataCommonCityCardLogic logic = logicContext.findLogic(FDataCommonCityCardLogic.class);
+         FLogicDataset<FDataCommonCityCardUnit> areaList = logic.fetch(whereSql.toString());
+         for(Iterator<FDataCommonCityCardUnit> it = areaList.iterator();it.hasNext();){
+            FDataCommonCityCardUnit unit = it.next();
+            if(!RString.equals(ouid,unit.ouid())){
+               return true;
+            }
+         }
+      }
+      return false;
+   }
+   
+   // ============================================================
    // <T>根据标签获取对象列表</T>
    // @param logicContext 链接对象
    // @param label 标签
