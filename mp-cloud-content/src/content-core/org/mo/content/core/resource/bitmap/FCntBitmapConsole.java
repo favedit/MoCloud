@@ -1,7 +1,8 @@
 package org.mo.content.core.resource.bitmap;
 
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
+
 import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
@@ -61,12 +62,12 @@ public class FCntBitmapConsole
       //............................................................
       // 存储数据
       String guid = bitmapInfo.guid();
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.ResourceBitmap, guid);
+      SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.ResourceBitmap, guid);
       storage.setData(stream.toArray());
       _storageConsole.store(storage);
       //............................................................
       // 删除缓冲数据
-      _storageConsole.delete(EGcStorageCatalog.CacheBitmapPreview, guid);
+      _storageConsole.delete(EGcStorageMongoCatalog.CacheBitmapPreview, guid);
       return EResult.Success;
    }
 

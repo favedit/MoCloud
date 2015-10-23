@@ -1,7 +1,9 @@
 package org.mo.content.engine.core.scene;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
 import org.mo.cloud.logic.data.resource.template.FGcResTemplateMaterialInfo;
 import org.mo.cloud.logic.data.resource.scene.FGcResSceneConsole;
@@ -9,8 +11,6 @@ import org.mo.cloud.logic.data.resource.scene.FGcResSceneInfo;
 import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
 import org.mo.cloud.logic.data.resource.FGcResourceInfo;
 import java.io.File;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.io.FByteStream;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
@@ -99,7 +99,7 @@ public class FResSceneConsole
    public byte[] makeSceneData(ILogicContext logicContext,
                                String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceScene, guid);
+      SGcMongoStorage findStorage = _storageConsole.find(EGcStorageMongoCatalog.CacheResourceScene, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -116,7 +116,7 @@ public class FResSceneConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheResourceScene, guid);
+      SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.CacheResourceScene, guid);
       storage.setCode(scene.code());
       storage.setData(data);
       _storageConsole.store(storage);
@@ -199,7 +199,7 @@ public class FResSceneConsole
       //............................................................
       // 废弃临时数据
       FGcResourceInfo resource = _dataResourceConsole.get(logicContext, resourceId);
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceScene, resource.guid());
+      _storageConsole.delete(EGcStorageMongoCatalog.CacheResourceScene, resource.guid());
       _dataResourceConsole.doUpdate(logicContext, resource);
       // 返回场景信息
       return sceneInfo;

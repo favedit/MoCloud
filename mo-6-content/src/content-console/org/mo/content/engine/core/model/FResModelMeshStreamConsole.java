@@ -1,13 +1,13 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshStreamConsole;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshStreamInfo;
 import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.content.resource.common.FResStream;
 import org.mo.data.logic.ILogicContext;
 
@@ -38,7 +38,7 @@ public class FResModelMeshStreamConsole
       stream.setDataStride(streamInfo.dataStride());
       stream.setDataCount(streamInfo.dataCount());
       // 读取数据
-      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceModelMeshStream, guid);
+      SGcMongoStorage resource = _storageConsole.find(EGcStorageMongoCatalog.ResourceModelMeshStream, guid);
       stream.setData(resource.data());
       return stream;
    }
@@ -90,7 +90,7 @@ public class FResModelMeshStreamConsole
       //............................................................
       // 存储数据
       String guid = streamInfo.guid();
-      SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelMeshStream, guid);
+      SGcMongoStorage resource = new SGcMongoStorage(EGcStorageMongoCatalog.ResourceModelMeshStream, guid);
       resource.setData(stream.data());
       _storageConsole.store(resource);
       //............................................................
@@ -122,7 +122,7 @@ public class FResModelMeshStreamConsole
       //............................................................
       // 存储数据
       String guid = streamInfo.guid();
-      SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelMeshStream, guid);
+      SGcMongoStorage resource = new SGcMongoStorage(EGcStorageMongoCatalog.ResourceModelMeshStream, guid);
       resource.setData(stream.data());
       _storageConsole.store(resource);
       //............................................................

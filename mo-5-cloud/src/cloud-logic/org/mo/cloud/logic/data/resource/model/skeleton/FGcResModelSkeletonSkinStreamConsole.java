@@ -1,9 +1,10 @@
 package org.mo.cloud.logic.data.resource.model.skeleton;
 
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceModelSkeletonSkinStreamLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -19,7 +20,7 @@ public class FGcResModelSkeletonSkinStreamConsole
 {
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    //============================================================
    // <T>构造资源模型骨骼蒙皮数据流控制台。</T>
@@ -56,7 +57,7 @@ public class FGcResModelSkeletonSkinStreamConsole
                                  FGcResModelSkeletonSkinStreamInfo streamInfo){
       // 删除关联数据
       String guid = streamInfo.guid();
-      _storageConsole.delete(EGcStorageCatalog.ResourceModelSkeletonSkinStream, guid);
+      _storageConsole.delete(EGcStorageMongoCatalog.ResourceModelSkeletonSkinStream, guid);
       // 返回结果
       return EResult.Success;
    }

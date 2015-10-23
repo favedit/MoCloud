@@ -1,13 +1,14 @@
 package org.mo.cloud.logic.data.resource.model;
 
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelMeshLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelSkeletonLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.data.resource.FGcResourceInfo;
 import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationInfo;
@@ -32,7 +33,7 @@ public class FGcResModelConsole
 {
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    // 资源管理器
    @ALink
@@ -169,7 +170,7 @@ public class FGcResModelConsole
       // 删除缓冲数据
       FGcResourceInfo resourceInfo = _dataResourceConsole.get(logicContext, resourceId);
       String resourceGuid = resourceInfo.guid();
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, resourceGuid);
+      _storageConsole.delete(EGcStorageMongoCatalog.CacheResourceModel, resourceGuid);
       // 删除动画集合
       String animationWhereSql = FDataResourceModelAnimationLogic.MODEL_ID + "=" + modelId;
       FLogicDataset<FGcResModelAnimationInfo> animationDataset = _dataModelAnimationConsole.fetch(logicContext, animationWhereSql);

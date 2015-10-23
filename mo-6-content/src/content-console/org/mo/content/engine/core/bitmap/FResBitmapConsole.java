@@ -1,11 +1,11 @@
 package org.mo.content.engine.core.bitmap;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapConsole;
 import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -39,7 +39,7 @@ public class FResBitmapConsole
    public byte[] makeViewData(ILogicContext logicContext,
                               String guid){
       // 获得数据
-      SGcStorage storage = _storageConsole.find(EGcStorageCatalog.ResourceBitmap, guid);
+      SGcMongoStorage storage = _storageConsole.find(EGcStorageMongoCatalog.ResourceBitmap, guid);
       return storage.data();
    }
 
@@ -53,7 +53,7 @@ public class FResBitmapConsole
    public byte[] makePreview(ILogicContext context,
                              String guid){
       // 获得数据
-      SGcStorage storage = _storageConsole.find(EGcStorageCatalog.ResourceBitmap, guid);
+      SGcMongoStorage storage = _storageConsole.find(EGcStorageMongoCatalog.ResourceBitmap, guid);
       byte[] imageData = storage.data();
       // 生成预览图
       byte[] data = null;
@@ -81,7 +81,7 @@ public class FResBitmapConsole
                                  String guid){
       //............................................................
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheBitmapPreview, guid);
+      SGcMongoStorage findStorage = _storageConsole.find(EGcStorageMongoCatalog.CacheBitmapPreview, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -89,7 +89,7 @@ public class FResBitmapConsole
       // 生成模型
       byte[] data = makePreview(logicContext, guid);
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheBitmapPreview, guid, "bin");
+      SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.CacheBitmapPreview, guid, "bin");
       storage.setData(data);
       _storageConsole.store(storage);
       // 返回数据
@@ -115,7 +115,7 @@ public class FResBitmapConsole
       bitmapInfo.setSizeHeight(bitmap.height());
       doUpdate(logicContext, bitmapInfo);
       // 存储数据
-      SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceBitmap, guid);
+      SGcMongoStorage resource = new SGcMongoStorage(EGcStorageMongoCatalog.ResourceBitmap, guid);
       resource.setData(bitmap.toBytes("jpeg"));
       _storageConsole.store(resource);
       return EResult.Success;

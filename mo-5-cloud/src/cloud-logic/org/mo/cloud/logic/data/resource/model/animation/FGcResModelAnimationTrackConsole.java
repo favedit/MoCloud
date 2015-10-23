@@ -1,9 +1,10 @@
 package org.mo.cloud.logic.data.resource.model.animation;
 
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationTrackLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -18,7 +19,7 @@ public class FGcResModelAnimationTrackConsole
 {
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    //============================================================
    // <T>构造资源模型动画轨迹控制台。</T>
@@ -39,7 +40,7 @@ public class FGcResModelAnimationTrackConsole
                                  FGcResModelAnimationTrackInfo trackInfo){
       // 删除关联数据
       String guid = trackInfo.guid();
-      _storageConsole.delete(EGcStorageCatalog.ResourceModelAnimationTrack, guid);
+      _storageConsole.delete(EGcStorageMongoCatalog.ResourceModelAnimationTrack, guid);
       // 返回结果
       return EResult.Success;
    }

@@ -1,10 +1,10 @@
 package org.mo.content.engine.core.model.skeleton;
 
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
+
 import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonSkinStreamConsole;
 import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonSkinStreamInfo;
-
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.content.resource.common.FResStream;
 import org.mo.data.logic.ILogicContext;
 
@@ -35,7 +35,7 @@ public class FResModelSkeletonSkinStreamConsole
       stream.setDataStride(streamInfo.dataStride());
       stream.setDataCount(streamInfo.dataCount());
       // 读取数据
-      SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceModelSkeletonSkinStream, guid);
+      SGcMongoStorage resource = _storageConsole.find(EGcStorageMongoCatalog.ResourceModelSkeletonSkinStream, guid);
       stream.setData(resource.data());
       return stream;
    }
@@ -78,7 +78,7 @@ public class FResModelSkeletonSkinStreamConsole
       streamInfo.setDataLength(stream.dataLength());
       doUpdate(logicContext, streamInfo);
       // 存储数据
-      SGcStorage resource = new SGcStorage(EGcStorageCatalog.ResourceModelSkeletonSkinStream, guid);
+      SGcMongoStorage resource = new SGcMongoStorage(EGcStorageMongoCatalog.ResourceModelSkeletonSkinStream, guid);
       resource.setData(stream.data());
       _storageConsole.store(resource);
       // 返回内容

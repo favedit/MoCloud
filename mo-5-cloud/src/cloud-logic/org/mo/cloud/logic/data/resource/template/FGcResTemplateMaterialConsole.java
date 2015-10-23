@@ -1,8 +1,9 @@
 package org.mo.cloud.logic.data.resource.template;
 
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceTemplateMaterialLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import org.mo.cloud.logic.data.resource.material.IGcResMaterialConsole;
 import org.mo.com.data.RSql;
@@ -20,7 +21,7 @@ public class FGcResTemplateMaterialConsole
 {
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    // 资源管理器
    @ALink

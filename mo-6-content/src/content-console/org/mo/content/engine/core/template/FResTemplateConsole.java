@@ -1,7 +1,9 @@
 package org.mo.content.engine.core.template;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.template.FGcResTemplateConsole;
 import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
 import org.mo.cloud.logic.data.resource.template.FGcResTemplateMaterialInfo;
@@ -11,8 +13,6 @@ import org.mo.cloud.logic.data.resource.material.FGcResMaterialBitmapInfo;
 import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
 import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.data.resource.FGcResourceInfo;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -155,7 +155,7 @@ public class FResTemplateConsole
    public byte[] makeTemplateData(ILogicContext logicContext,
                                   String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceTemplate, guid);
+      SGcMongoStorage findStorage = _storageConsole.find(EGcStorageMongoCatalog.CacheResourceTemplate, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -172,7 +172,7 @@ public class FResTemplateConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheResourceTemplate, guid);
+      SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.CacheResourceTemplate, guid);
       storage.setCode(template.code());
       storage.setData(data);
       _storageConsole.store(storage);
@@ -221,7 +221,7 @@ public class FResTemplateConsole
       //............................................................
       // 废弃临时数据
       FGcResourceInfo resource = _dataResourceConsole.get(logicContext, resourceId);
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceTemplate, resource.guid());
+      _storageConsole.delete(EGcStorageMongoCatalog.CacheResourceTemplate, resource.guid());
       _dataResourceConsole.doUpdate(logicContext, resource);
       // 返回网格单元
       return templateInfo;

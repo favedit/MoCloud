@@ -1,7 +1,8 @@
 package org.mo.content.core.resource.material;
 
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
+
 import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.data.resource.material.FGcResMaterialBitmapInfo;
 import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
@@ -74,7 +75,7 @@ public class FCntMaterialConsole
                                  String guid){
       //............................................................
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheMaterialPreview, guid);
+      SGcMongoStorage findStorage = _storageConsole.find(EGcStorageMongoCatalog.CacheMaterialPreview, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -83,7 +84,7 @@ public class FCntMaterialConsole
       byte[] data = makePreview(logicContext, guid);
       // 存储数据
       if(data != null){
-         SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheMaterialPreview, guid);
+         SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.CacheMaterialPreview, guid);
          storage.setData(data);
          _storageConsole.store(storage);
       }
@@ -128,7 +129,7 @@ public class FCntMaterialConsole
                   throw new FFatalError("Material bitmap is not exists. (code={1})", code);
                }
                FGcResBitmapInfo bitmapInfo = _bitmapConsole.get(logicContext, materialBitmapInfo.bitmapId());
-               SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmap, bitmapInfo.guid());
+               SGcMongoStorage resource = _storageConsole.find(EGcStorageMongoCatalog.ResourceBitmap, bitmapInfo.guid());
                itemDatas[n] = resource.data();
             }
          }
@@ -153,7 +154,7 @@ public class FCntMaterialConsole
             throw new FFatalError("Texture bitmap is not exists. (code={1})", code);
          }
          FGcResBitmapInfo bitmapInfo = _bitmapConsole.get(logicContext, materialBitmapInfo.bitmapId());
-         SGcStorage resource = _storageConsole.find(EGcStorageCatalog.ResourceBitmap, bitmapInfo.guid());
+         SGcMongoStorage resource = _storageConsole.find(EGcStorageMongoCatalog.ResourceBitmap, bitmapInfo.guid());
          data = resource.data();
          if(bitmapInfo.formatCode().equals("jpg")){
             // 对大于128K的数据进行降低画质压缩处理
@@ -201,7 +202,7 @@ public class FCntMaterialConsole
       String flag = guid + "|" + code;
       //............................................................
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceMaterialBitmapPack, flag);
+      SGcMongoStorage findStorage = _storageConsole.find(EGcStorageMongoCatalog.CacheResourceMaterialBitmapPack, flag);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -209,7 +210,7 @@ public class FCntMaterialConsole
       // 生成模型
       byte[] data = makeBitmap(logicContext, guid, code);
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheResourceMaterialBitmapPack, flag, "bin");
+      SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.CacheResourceMaterialBitmapPack, flag, "bin");
       storage.setCode(flag);
       storage.setData(data);
       _storageConsole.store(storage);

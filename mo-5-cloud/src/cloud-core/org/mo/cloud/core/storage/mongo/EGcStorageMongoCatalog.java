@@ -1,9 +1,9 @@
-package org.mo.cloud.core.storage;
+package org.mo.cloud.core.storage.mongo;
 
 //============================================================
 // <T>存储类型。</T>
 //============================================================
-public class EGcStorageCatalog
+public class EGcStorageMongoCatalog
 {
    // 资源位图预览数据
    public final static String CacheBitmapPreview = "cache.bitmap.preview";

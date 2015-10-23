@@ -1,7 +1,9 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.SGcMongoStorage;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.model.skeleton.FGcResModelSkeletonInfo;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshStreamInfo;
@@ -12,8 +14,6 @@ import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelSkeletonLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelUnit;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -141,7 +141,7 @@ public class FResModelConsole
    public byte[] makeModelData(ILogicContext logicContext,
                                String guid){
       // 查找数据
-      SGcStorage findStorage = _storageConsole.find(EGcStorageCatalog.CacheResourceModel, guid);
+      SGcMongoStorage findStorage = _storageConsole.find(EGcStorageMongoCatalog.CacheResourceModel, guid);
       if(findStorage != null){
          return findStorage.data();
       }
@@ -163,7 +163,7 @@ public class FResModelConsole
       }
       //............................................................
       // 存储数据
-      SGcStorage storage = new SGcStorage(EGcStorageCatalog.CacheResourceModel, guid);
+      SGcMongoStorage storage = new SGcMongoStorage(EGcStorageMongoCatalog.CacheResourceModel, guid);
       storage.setCode(model.code());
       storage.setData(data);
       _storageConsole.store(storage);
@@ -251,7 +251,7 @@ public class FResModelConsole
       doUpdate(logicContext, modelInfo);
       //............................................................
       // 废弃临时数据
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceModel, modelGuid);
+      _storageConsole.delete(EGcStorageMongoCatalog.CacheResourceModel, modelGuid);
       //............................................................
       return EResult.Success;
    }

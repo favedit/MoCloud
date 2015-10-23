@@ -1,9 +1,9 @@
-package org.mo.cloud.core.storage;
+package org.mo.cloud.core.storage.mongo;
 
 //============================================================
 // <T>资源信息。</T>
 //============================================================
-public class SGcStorage
+public class SGcMongoStorage
 {
    // 分类
    protected String _catalog;
@@ -29,7 +29,7 @@ public class SGcStorage
    //============================================================
    // <T>构造资源信息。</T>
    //============================================================
-   public SGcStorage(){
+   public SGcMongoStorage(){
    }
 
    //============================================================
@@ -38,7 +38,7 @@ public class SGcStorage
    // @param catalog 分类
    // @param guid 类型
    //============================================================
-   public SGcStorage(String catalog,
+   public SGcMongoStorage(String catalog,
                      String guid){
       _catalog = catalog;
       _guid = guid;
@@ -51,7 +51,7 @@ public class SGcStorage
    // @param guid 类型
    // @param type 类型
    //============================================================
-   public SGcStorage(String catalog,
+   public SGcMongoStorage(String catalog,
                      String guid,
                      String type){
       _catalog = catalog;

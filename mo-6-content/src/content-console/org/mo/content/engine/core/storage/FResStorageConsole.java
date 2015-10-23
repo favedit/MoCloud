@@ -1,6 +1,7 @@
 package org.mo.content.engine.core.storage;
 
-import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import org.mo.com.collections.FRow;
 import org.mo.com.console.FConsole;
 import org.mo.com.data.ISqlConnection;
@@ -43,7 +44,7 @@ public class FResStorageConsole
 
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    //============================================================
    // <T>清空数据。</T>

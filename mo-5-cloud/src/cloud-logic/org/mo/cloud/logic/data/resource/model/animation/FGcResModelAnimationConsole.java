@@ -1,10 +1,11 @@
 package org.mo.cloud.logic.data.resource.model.animation;
 
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationActionLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationTrackLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -20,7 +21,7 @@ public class FGcResModelAnimationConsole
 {
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _dataStorageConsole;
+   protected IGcStorageMongoConsole _dataStorageConsole;
 
    // 资源模型动画轨迹管理器
    @ALink

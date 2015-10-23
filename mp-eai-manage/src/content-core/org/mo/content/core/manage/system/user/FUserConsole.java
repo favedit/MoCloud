@@ -1,10 +1,11 @@
 package org.mo.content.core.manage.system.user;
 
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
@@ -25,7 +26,7 @@ public class FUserConsole
 
    // 存储控制台
    @ALink
-   public IGcStorageConsole _storageConsole;
+   public IGcStorageMongoConsole _storageConsole;
 
    @ALink
    protected IRoleConsole _roleConsole;

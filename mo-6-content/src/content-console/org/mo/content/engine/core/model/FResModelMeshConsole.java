@@ -1,13 +1,13 @@
 package org.mo.content.engine.core.model;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshConsole;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshInfo;
 import org.mo.cloud.logic.data.resource.model.mesh.FGcResModelMeshStreamInfo;
 import org.mo.cloud.logic.data.resource.model.FGcResModelInfo;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.FFatalError;
 import org.mo.content.resource.common.FResStream;
 import org.mo.content.resource.model.FResModelMesh;
@@ -25,7 +25,7 @@ public class FResModelMeshConsole
 {
    // 存储管理接口
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    // 数据网格数据流控制台
    @ALink
@@ -115,7 +115,7 @@ public class FResModelMeshConsole
       doUpdate(logicContext, meshInfo);
       //............................................................
       // 废弃临时数据
-      _storageConsole.delete(EGcStorageCatalog.CacheResourceMesh, meshGuid);
+      _storageConsole.delete(EGcStorageMongoCatalog.CacheResourceMesh, meshGuid);
       //............................................................
       // 返回网格单元
       return meshInfo;

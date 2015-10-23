@@ -1,7 +1,8 @@
 package org.mo.content.face.resource.material;
 
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import javax.servlet.http.HttpServletResponse;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.data.resource.bitmap.FGcResBitmapInfo;
 import org.mo.cloud.logic.data.resource.material.FGcResMaterialBitmapInfo;
 import org.mo.cloud.logic.data.resource.material.FGcResMaterialInfo;
@@ -41,7 +42,7 @@ public class FMaterialServlet
 
    // 存储管理接口
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    // 资源位图控制台
    @ALink

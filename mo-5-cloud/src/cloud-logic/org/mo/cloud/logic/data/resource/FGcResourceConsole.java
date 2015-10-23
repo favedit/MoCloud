@@ -1,9 +1,10 @@
 package org.mo.cloud.logic.data.resource;
 
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import com.cyou.gccloud.data.data.FDataResourceResourceLogic;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
@@ -18,7 +19,7 @@ public class FGcResourceConsole
 {
    // 存储控制台
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    //============================================================
    // <T>构造资源信息控制台。</T>
@@ -39,7 +40,7 @@ public class FGcResourceConsole
                                  FGcResourceInfo resourceInfo){
       // 删除关联数据
       String guid = resourceInfo.guid();
-      _storageConsole.delete(EGcStorageCatalog.ResourcePreview, guid);
+      _storageConsole.delete(EGcStorageMongoCatalog.ResourcePreview, guid);
       // 返回结果
       return EResult.Success;
    }

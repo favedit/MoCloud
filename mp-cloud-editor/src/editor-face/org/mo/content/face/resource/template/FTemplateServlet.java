@@ -1,10 +1,10 @@
 package org.mo.content.face.resource.template;
 
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
 
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.resource.template.FGcResTemplateInfo;
 import javax.servlet.http.HttpServletResponse;
-import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
@@ -34,7 +34,7 @@ public class FTemplateServlet
 
    // 存储管理接口
    @ALink
-   protected IGcStorageConsole _storageConsole;
+   protected IGcStorageMongoConsole _storageConsole;
 
    // 资源模板接口
    @ALink

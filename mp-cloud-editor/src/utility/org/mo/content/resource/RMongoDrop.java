@@ -1,7 +1,8 @@
 package org.mo.content.resource;
 
-import org.mo.cloud.core.storage.EGcStorageCatalog;
-import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
+
 import org.mo.com.logging.RLogger;
 import org.mo.content.common.RRs3Configuration;
 import org.mo.core.aop.RAop;
@@ -12,22 +13,22 @@ public class RMongoDrop
    // <T>导入处理。</T>
    //============================================================
    public static void process() throws Exception{
-      IGcStorageConsole console = RAop.find(IGcStorageConsole.class);
+      IGcStorageMongoConsole console = RAop.find(IGcStorageMongoConsole.class);
       // 删除缓冲
-      console.drop(EGcStorageCatalog.CacheBitmapPreview);
-      console.drop(EGcStorageCatalog.CacheMaterialPreview);
-      console.drop(EGcStorageCatalog.CacheResourceMaterial);
-      console.drop(EGcStorageCatalog.CacheResourceMaterialBitmapPack);
-      console.drop(EGcStorageCatalog.CacheResourceMesh);
-      console.drop(EGcStorageCatalog.CacheResourceModel);
-      console.drop(EGcStorageCatalog.CacheResourceTemplate);
-      console.drop(EGcStorageCatalog.CacheResourceScene);
+      console.drop(EGcStorageMongoCatalog.CacheBitmapPreview);
+      console.drop(EGcStorageMongoCatalog.CacheMaterialPreview);
+      console.drop(EGcStorageMongoCatalog.CacheResourceMaterial);
+      console.drop(EGcStorageMongoCatalog.CacheResourceMaterialBitmapPack);
+      console.drop(EGcStorageMongoCatalog.CacheResourceMesh);
+      console.drop(EGcStorageMongoCatalog.CacheResourceModel);
+      console.drop(EGcStorageMongoCatalog.CacheResourceTemplate);
+      console.drop(EGcStorageMongoCatalog.CacheResourceScene);
       // 删除数据
-      console.drop(EGcStorageCatalog.ResourcePreview);
-      console.drop(EGcStorageCatalog.ResourceBitmap);
-      console.drop(EGcStorageCatalog.ResourceModelMeshStream);
-      console.drop(EGcStorageCatalog.ResourceModelSkeletonSkinStream);
-      console.drop(EGcStorageCatalog.ResourceModelAnimationTrack);
+      console.drop(EGcStorageMongoCatalog.ResourcePreview);
+      console.drop(EGcStorageMongoCatalog.ResourceBitmap);
+      console.drop(EGcStorageMongoCatalog.ResourceModelMeshStream);
+      console.drop(EGcStorageMongoCatalog.ResourceModelSkeletonSkinStream);
+      console.drop(EGcStorageMongoCatalog.ResourceModelAnimationTrack);
    }
 
    //============================================================
