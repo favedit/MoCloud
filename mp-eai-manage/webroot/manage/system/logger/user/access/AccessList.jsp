@@ -27,13 +27,13 @@
       var url = null;
       var data = null;
       if (page != null) {
-         url = "/manage/product/user/logger/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+         url = "/manage/system/logger/user/access/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
          data = {
             "page": page,
             "pageSize" : pageSize
          };
       } else {
-         url = "/manage/product/user/logger/Access.wa?do=select&date=" + new Date().valueOf();
+         url = "/manage/system/logger/user/access/Access.wa?do=select&date=" + new Date().valueOf();
       }
       $.ajax({
          type: "POST",
@@ -64,14 +64,14 @@
              "endDate" :endDate,
              "logicMessage" :lm
           };
-          url = "/manage/product/user/logger/Access.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
+          url = "/manage/system/logger/user/access/Access.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
        } else {
           data = {
                "beginDate" :beginDate,
                "endDate" :endDate,
                "logicMessage" :lm
            };
-          url = "/manage/product/user/logger/Access.wa?do=selectByDate&date=" + new Date().valueOf();
+          url = "/manage/system/logger/user/access/Access.wa?do=selectByDate&date=" + new Date().valueOf();
        }
        $.ajax({
           type: "POST",
@@ -110,7 +110,7 @@
       <div class="nav_btn">
       </div>
       <div class="nav_search" style="width:720px;">
-      <form id="logerdat" action="/manage/product/user/logger/Access.wa" method="post" align="center">
+      <form id="logerdat" action="/manage/system/logger/user/access/Access.wa" method="post" align="center">
          <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-right:10px;">
             <tr>
                <td width="109" height="33">

@@ -62,7 +62,9 @@
        closeProgress();
     }
     function showPhoto(iconUrl){
-       return "<img src="+iconUrl+" height=50px width=55px/>";
+       if(iconUrl!=null&&iconUrl.length>0){
+          return "<img src="+iconUrl+" height=55px width=55px/>";
+       }
     }
     function phoneInfo(ouid){
        var l=(screen.availWidth-500)/2;
@@ -106,7 +108,7 @@
      width="40px">编号</th>
      <th
      data-options="field:'iconUrl',halign:'center',align:'left',formatter:showPhoto"
-     width="60px">图片</th>
+     width="55px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="200px">实时数据标题</th>

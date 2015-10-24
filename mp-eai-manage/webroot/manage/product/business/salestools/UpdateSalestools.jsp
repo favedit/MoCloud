@@ -10,17 +10,28 @@
 </HEAD>
 <style> 
   form {
-  margin: 0;
+      margin: 0;
   }
   textarea {
-  display: block;
+      display: block;
   }
-  </style> 
+  #manage_id{
+      width:100%;
+      margin-top:-10px;
+      margin-left:-10px;
+      padding-bottom:20px;
+      height:100%;
+  }
+</style> 
 
 <script>
     $(function(){
        var image = $("#image").val();
-       $("#oriIcon").attr("src",image);
+       if(image!=null&&image.length>0){
+          $("#oriIcon").attr("src",image);
+       }else{
+          $("#oriIcon").hide();
+       }
        $('#displayCd').combobox("select", $('#oldDisplayCd').val());
        $('#linkCd').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
@@ -74,7 +85,17 @@
        editor=K.create('#kindeditor_view', {
            uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
            items : kindeditor_items,
-           resizeType : 1
+           resizeType : 1,
+           allowFileManager : true,
+           afterCreate : function() {
+              var self = this;
+              K.ctrl(document, 83, function() {
+                 return false;
+              });
+              K.ctrl(self.edit.doc, 83, function() {
+                 return false;
+              });
+           }
        });
        K('input[id=getHtml]').click(function(e) {
            $("#content").val(editor.html())
@@ -115,6 +136,7 @@
 </script>
 
 <body bgcolor="#198bc9">
+<div id="manage_id">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
    <span>修改销售工具信息</span>
@@ -218,5 +240,6 @@
    </table>
   </form>
  </div>
+</div>
 </body>
 </HTML>

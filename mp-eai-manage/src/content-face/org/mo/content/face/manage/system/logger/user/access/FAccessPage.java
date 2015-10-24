@@ -1,13 +1,11 @@
-package org.mo.content.face.manage.product.user.logger;
+package org.mo.content.face.manage.system.logger.user.access;
 
 import org.mo.com.lang.FObjectId;
-import org.mo.content.core.manage.product.user.logger.FDataAccessInfo;
+import org.mo.content.core.manage.system.logger.user.access.FDataAccessInfo;
 
 //============================================================
 //<P>用户容器</P>
 //@class FAccessPage
-//@author Sunhr
-//@Date 2012.11.05  
 //@version 1.0.0
 //============================================================
 public class FAccessPage 

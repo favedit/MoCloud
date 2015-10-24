@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.product.user.logger;
+package org.mo.content.face.manage.system.logger.user.access;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;

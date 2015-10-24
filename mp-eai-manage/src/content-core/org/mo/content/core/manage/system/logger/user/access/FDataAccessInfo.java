@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.product.user.logger;
+package org.mo.content.core.manage.system.logger.user.access;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
 import java.util.Map;
