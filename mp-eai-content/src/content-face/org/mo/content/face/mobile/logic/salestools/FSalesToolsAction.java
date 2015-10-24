@@ -36,7 +36,7 @@ public class FSalesToolsAction implements ISalesToolsAction {
     public String construct(IWebContext context, ILogicContext logicContext,
             FSalesToolsPage page, FBasePage basePage) {
 
-        return "";
+        return "index";
     }
 
     // ============================================================
@@ -50,8 +50,6 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getInfo(IWebContext context, ILogicContext logicContext,
             FSalesToolsPage page, FBasePage basePage) {
-        System.out.println(page.result
-                + "-----------------------------page.result" + page.result);
         return "/manage/mobile/salestools/calculator/SalesInfo";
     }
 
@@ -66,15 +64,9 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getContent(IWebContext context, ILogicContext logicContext,
             FSalesToolsPage page, FBasePage basePage) {
-        System.out.println(page.result
-                + "-----------------------------page.result" + page.result);
         String guid = context.parameter("guid");
         FDataLogicSalestoolsUnit salesUnit = _salesToolsConsole.getNewsByGuid(
                 guid, logicContext);
-        System.out
-                .println("**********************************************newsUnit"
-                        + salesUnit + guid);
-
         if (salesUnit != null) {
             FSql whereFSql = new FSql();
             whereFSql.append(FDataPersonUserLogic.OUID);
@@ -88,8 +80,6 @@ public class FSalesToolsAction implements ISalesToolsAction {
             }
             page.setUserLabel(userLabel);
             page.setUnit(salesUnit);
-            // System.out.println("**********************************************"
-            // + guid + newsUnit.content());
         } else {
             page.setUnit(new FDataLogicSalestoolsUnit());
             page.setUserLabel("");
@@ -109,8 +99,6 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getGroupInfo(IWebContext context, ILogicContext logicContext,
             FSalesToolsPage page, FBasePage basePage) {
-        System.out.println(page.result
-                + "-----------------------------page.result" + page.result);
         return "/manage/mobile/salestools/groupinfo/GroupInfo";
     }
 
@@ -125,9 +113,7 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getProductInfo(IWebContext context,
             ILogicContext logicContext, FSalesToolsPage page, FBasePage basePage) {
-        System.out.println(page.result
-                + "-----------------------------page.result" + page.result);
-        return "/manage/mobile/salestools/groupinfo/GroupInfo";
+        return "/manage/mobile/salestools/productinfo/ProductInfo";
     }
 
     // ============================================================
@@ -141,9 +127,7 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getGroupHonorInfo(IWebContext context,
             ILogicContext logicContext, FSalesToolsPage page, FBasePage basePage) {
-        System.out.println(page.result
-                + "-----------------------------page.result" + page.result);
-        return "/manage/mobile/salestools/groupinfo/GroupInfo";
+        return "/manage/mobile/salestools/grouphonorinfo/GroupHonorInfo";
     }
 
     // ============================================================
@@ -156,7 +140,7 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getPartnerInfo(IWebContext context,
             ILogicContext logicContext, FSalesToolsPage page, FBasePage basePage) {
-        return null;
+        return "/manage/mobile/salestools/partnerinfo/PartnerInfo";
     }
 
     // ============================================================
@@ -169,6 +153,6 @@ public class FSalesToolsAction implements ISalesToolsAction {
     @Override
     public String getBrandInfo(IWebContext context, ILogicContext logicContext,
             FSalesToolsPage page, FBasePage basePage) {
-        return null;
+        return "/manage/mobile/salestools/brandinfo/BrandInfo";
     }
 }
