@@ -20,7 +20,7 @@
    <!-- ============================================================ -->
    <!-- 资源存储控制台                                               -->
    <!-- ============================================================ -->
-   <Component
+   <!--<Component
          face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' >
@@ -30,7 +30,7 @@
       <Property name='storage_name'>eai</Property>
       <Initialize name='initialize'/>
    </Component>
-   
+   -->
    <!-- ==================================================== -->
    <!-- LogicServiceInfoConsole:逻辑服务信息控制台           -->
    <!-- ==================================================== -->

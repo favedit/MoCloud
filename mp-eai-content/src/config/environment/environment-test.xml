@@ -20,7 +20,7 @@
    <!-- ============================================================ -->
    <!-- 资源存储控制台                                               -->
    <!-- ============================================================ -->
-   <Component
+   <!--<Component
          face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' >
@@ -30,7 +30,7 @@
       <Property name='storage_name'>eai</Property>
       <Initialize name='initialize'/>
    </Component>
-   
+   -->
    <!-- ==================================================== -->
    <!-- LogicServiceInfoConsole:逻辑服务信息控制台           -->
    <!-- ==================================================== -->
@@ -97,7 +97,7 @@
                <Property name='name'>cache</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.136.134:3306/EAI_CACHE</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_CACHE</Property>
                <Property name='passport'>eai_test</Property>
                <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -122,7 +122,7 @@
                <Property name='name'>data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.136.134:3306/EAI_DATA</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_DATA</Property>
                <Property name='passport'>eai_test</Property>
                <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -147,7 +147,7 @@
                <Property name='name'>statictics</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.136.134:3306/EAI_STATICTICS</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_STATICTICS</Property>
                <Property name='passport'>eai_test</Property>
                <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
                <Property name='initConnectionNumber'>1</Property>
@@ -172,7 +172,7 @@
                <Property name='name'>logger</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.136.134:3306/EAI_LOGGER</Property>
+               <Property name='url'>jdbc:mysql://127.0.0.1:3306/EAI_LOGGER</Property>
                <Property name='passport'>eai_test</Property>
                <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
                <Property name='initConnectionNumber'>1</Property>
