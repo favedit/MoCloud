@@ -1,5 +1,7 @@
 package org.mo.cloud.core.storage;
 
+import org.mo.com.lang.FAttributes;
+
 //============================================================
 // <T>存储信息。</T>
 //============================================================
@@ -277,5 +279,28 @@ public class SGcStorage
       image.setHeight(height);
       image.setRound(round);
       _images.push(image);
+   }
+
+   //============================================================
+   // <T>打包信息。</T>
+   //
+   // @param width 宽度
+   // @param height 高度
+   // @param round 圆角
+   //============================================================
+   public String pack(){
+      FAttributes map = new FAttributes();
+      map.set("catalog", _catalog);
+      return map.pack();
+   }
+
+   //============================================================
+   // <T>解包信息。</T>
+   //
+   // @param width 宽度
+   // @param height 高度
+   // @param round 圆角
+   //============================================================
+   public void unpack(String source){
    }
 }

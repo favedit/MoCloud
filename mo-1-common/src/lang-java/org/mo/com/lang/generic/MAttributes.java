@@ -473,7 +473,7 @@ public abstract class MAttributes
          pack.append(String.valueOf(Integer.toString(length).length()));
          pack.append(String.valueOf(length));
          pack.append(name);
-         if(null != value){
+         if(value != null){
             length = value.length();
             pack.append(String.valueOf(Integer.toString(length).length()));
             pack.append(String.valueOf(length));
@@ -524,17 +524,16 @@ public abstract class MAttributes
       // 分解内容
       if((pack != null) && !pack.isEmpty()){
          try{
-            String name;
-            int len, length = 0, n = 0;
+            int n = 0;
             int total = pack.length();
             char[] chars = pack.toCharArray();
             // 处理所有名称值对
             while(n < total){
                // 读取名称
-               len = chars[n++] - '0';
-               length = Integer.parseInt(new String(chars, n, len));
+               int len = chars[n++] - '0';
+               int length = Integer.parseInt(new String(chars, n, len));
                n += len;
-               name = new String(chars, n, length);
+               String name = new String(chars, n, length);
                if(_nameCase == EStringCase.Lower){
                   name = name.toLowerCase();
                }else if(_nameCase == EStringCase.Upper){

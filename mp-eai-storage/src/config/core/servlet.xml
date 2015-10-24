@@ -17,13 +17,13 @@
    <!-- ============================================================ -->
    <!-- 设计：资源上传处理                                           -->
    <!-- ============================================================ -->
-   <WebServlet
+   <!-- <WebServlet
          name  = 'cloud.resource.upload'
          face  = 'org.mo.cloud.storage.face.resource.IUploadServlet'/>
 
    <Component
          face  = 'org.mo.cloud.storage.face.resource.IUploadServlet'
          class = 'org.mo.cloud.storage.face.resource.FUploadServlet'
-         scope = 'global'/>
+         scope = 'global'/> -->
 
 </Config>
