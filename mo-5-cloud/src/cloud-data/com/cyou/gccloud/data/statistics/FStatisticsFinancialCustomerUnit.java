@@ -70,10 +70,10 @@ public class FStatisticsFinancialCustomerUnit
    protected long _departmentId;
 
    // 存储字段部门关联编号的定义。
-   private long __departmentLid;
+   private long __departmentLinkId;
 
    // 字段部门关联编号的定义。
-   protected long _departmentLid;
+   protected long _departmentLinkId;
 
    // 存储字段理财师编号的定义。
    private long __marketerId;
@@ -82,10 +82,10 @@ public class FStatisticsFinancialCustomerUnit
    protected long _marketerId;
 
    // 存储字段理财师关联编号的定义。
-   private long __marketerLid;
+   private long __marketerLinkId;
 
    // 字段理财师关联编号的定义。
-   protected long _marketerLid;
+   protected long _marketerLinkId;
 
    // 存储字段标签的定义。
    private String __label;
@@ -476,8 +476,8 @@ public class FStatisticsFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLidChanged(){
-      return __departmentLid != _departmentLid;
+   public boolean isDepartmentLinkIdChanged(){
+      return __departmentLinkId != _departmentLinkId;
    }
 
    //============================================================
@@ -485,8 +485,8 @@ public class FStatisticsFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public long departmentLid(){
-      return _departmentLid;
+   public long departmentLinkId(){
+      return _departmentLinkId;
    }
 
    //============================================================
@@ -494,8 +494,8 @@ public class FStatisticsFinancialCustomerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLid(long value){
-      _departmentLid = value;
+   public void setDepartmentLinkId(long value){
+      _departmentLinkId = value;
    }
 
    //============================================================
@@ -530,8 +530,8 @@ public class FStatisticsFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerLidChanged(){
-      return __marketerLid != _marketerLid;
+   public boolean isMarketerLinkIdChanged(){
+      return __marketerLinkId != _marketerLinkId;
    }
 
    //============================================================
@@ -539,8 +539,8 @@ public class FStatisticsFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public long marketerLid(){
-      return _marketerLid;
+   public long marketerLinkId(){
+      return _marketerLinkId;
    }
 
    //============================================================
@@ -548,8 +548,8 @@ public class FStatisticsFinancialCustomerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerLid(long value){
-      _marketerLid = value;
+   public void setMarketerLinkId(long value){
+      _marketerLinkId = value;
    }
 
    //============================================================
@@ -1306,12 +1306,12 @@ public class FStatisticsFinancialCustomerUnit
             return Long.toString(_dataId);
          case "department_id":
             return Long.toString(_departmentId);
-         case "department_lid":
-            return Long.toString(_departmentLid);
+         case "department_link_id":
+            return Long.toString(_departmentLinkId);
          case "marketer_id":
             return Long.toString(_marketerId);
-         case "marketer_lid":
-            return Long.toString(_marketerLid);
+         case "marketer_link_id":
+            return Long.toString(_marketerLinkId);
          case "label":
             return _label;
          case "card":
@@ -1404,14 +1404,14 @@ public class FStatisticsFinancialCustomerUnit
          case "department_id":
             _departmentId = RLong.parse(value);
             break;
-         case "department_lid":
-            _departmentLid = RLong.parse(value);
+         case "department_link_id":
+            _departmentLinkId = RLong.parse(value);
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
-         case "marketer_lid":
-            _marketerLid = RLong.parse(value);
+         case "marketer_link_id":
+            _marketerLinkId = RLong.parse(value);
             break;
          case "label":
             _label = value;
@@ -1541,17 +1541,17 @@ public class FStatisticsFinancialCustomerUnit
                __departmentId = RLong.parse(value);
                _departmentId = __departmentId;
                break;
-            case "department_lid":
-               __departmentLid = RLong.parse(value);
-               _departmentLid = __departmentLid;
+            case "department_link_id":
+               __departmentLinkId = RLong.parse(value);
+               _departmentLinkId = __departmentLinkId;
                break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
                break;
-            case "marketer_lid":
-               __marketerLid = RLong.parse(value);
-               _marketerLid = __marketerLid;
+            case "marketer_link_id":
+               __marketerLinkId = RLong.parse(value);
+               _marketerLinkId = __marketerLinkId;
                break;
             case "label":
                __label = value;
@@ -1681,9 +1681,9 @@ public class FStatisticsFinancialCustomerUnit
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("departmentId", _departmentId);
-      row.set("departmentLid", _departmentLid);
+      row.set("departmentLinkId", _departmentLinkId);
       row.set("marketerId", _marketerId);
-      row.set("marketerLid", _marketerLid);
+      row.set("marketerLinkId", _marketerLinkId);
       row.set("label", _label);
       row.set("card", _card);
       row.set("cardArea", _cardArea);
@@ -1729,9 +1729,9 @@ public class FStatisticsFinancialCustomerUnit
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("departmentId", RLong.toString(_departmentId));
-      map.put("departmentLid", RLong.toString(_departmentLid));
+      map.put("departmentLinkId", RLong.toString(_departmentLinkId));
       map.put("marketerId", RLong.toString(_marketerId));
-      map.put("marketerLid", RLong.toString(_marketerLid));
+      map.put("marketerLinkId", RLong.toString(_marketerLinkId));
       map.put("label", _label);
       map.put("card", _card);
       map.put("cardArea", _cardArea);
@@ -1777,9 +1777,9 @@ public class FStatisticsFinancialCustomerUnit
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _departmentId = input.readInt64();
-      _departmentLid = input.readInt64();
+      _departmentLinkId = input.readInt64();
       _marketerId = input.readInt64();
-      _marketerLid = input.readInt64();
+      _marketerLinkId = input.readInt64();
       _label = input.readString();
       _card = input.readString();
       _cardArea = input.readString();
@@ -1820,9 +1820,9 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeInt64(_departmentId);
-      output.writeInt64(_departmentLid);
+      output.writeInt64(_departmentLinkId);
       output.writeInt64(_marketerId);
-      output.writeInt64(_marketerLid);
+      output.writeInt64(_marketerLinkId);
       output.writeString(_label);
       output.writeString(_card);
       output.writeString(_cardArea);

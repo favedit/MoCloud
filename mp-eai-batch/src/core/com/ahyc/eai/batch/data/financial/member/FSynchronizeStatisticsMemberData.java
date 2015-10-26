@@ -166,7 +166,7 @@ public class FSynchronizeStatisticsMemberData
       dataMarketerUnit.setPhone(firstStatisticsFinancialMarketerUnit.phone());
       dataMarketerUnit.setCard(firstStatisticsFinancialMarketerUnit.card());
       dataMarketerUnit.setRankLabel(firstStatisticsFinancialMarketerUnit.rankLabel());
-      dataMarketerUnit.setDepartmentId(firstStatisticsFinancialMarketerUnit.departmentLid());
+      dataMarketerUnit.setDepartmentId(firstStatisticsFinancialMarketerUnit.departmentLinkId());
       dataMarketerUnit.setDepartmentLabel(firstStatisticsFinancialMarketerUnit.departmentLabel());
       dataMarketerUnit.setCustomerInvestmentTotal(firstStatisticsFinancialMarketerUnit.investmentTotal());
       dataMarketerUnit.setCustomerRedemptionTotal(firstStatisticsFinancialMarketerUnit.redemptionTotal());

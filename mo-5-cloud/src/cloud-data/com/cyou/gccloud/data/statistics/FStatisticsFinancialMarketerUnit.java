@@ -70,10 +70,10 @@ public class FStatisticsFinancialMarketerUnit
    protected long _departmentId;
 
    // 存储字段部门关联编号的定义。
-   private long __departmentLid;
+   private long __departmentLinkId;
 
    // 字段部门关联编号的定义。
-   protected long _departmentLid;
+   protected long _departmentLinkId;
 
    // 存储字段部门标签的定义。
    private String __departmentLabel;
@@ -542,8 +542,8 @@ public class FStatisticsFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLidChanged(){
-      return __departmentLid != _departmentLid;
+   public boolean isDepartmentLinkIdChanged(){
+      return __departmentLinkId != _departmentLinkId;
    }
 
    //============================================================
@@ -551,8 +551,8 @@ public class FStatisticsFinancialMarketerUnit
    //
    // @return 数据内容
    //============================================================
-   public long departmentLid(){
-      return _departmentLid;
+   public long departmentLinkId(){
+      return _departmentLinkId;
    }
 
    //============================================================
@@ -560,8 +560,8 @@ public class FStatisticsFinancialMarketerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLid(long value){
-      _departmentLid = value;
+   public void setDepartmentLinkId(long value){
+      _departmentLinkId = value;
    }
 
    //============================================================
@@ -1669,8 +1669,8 @@ public class FStatisticsFinancialMarketerUnit
             return Long.toString(_dataId);
          case "department_id":
             return Long.toString(_departmentId);
-         case "department_lid":
-            return Long.toString(_departmentLid);
+         case "department_link_id":
+            return Long.toString(_departmentLinkId);
          case "department_label":
             return _departmentLabel;
          case "department_level1_id":
@@ -1789,8 +1789,8 @@ public class FStatisticsFinancialMarketerUnit
          case "department_id":
             _departmentId = RLong.parse(value);
             break;
-         case "department_lid":
-            _departmentLid = RLong.parse(value);
+         case "department_link_id":
+            _departmentLinkId = RLong.parse(value);
             break;
          case "department_label":
             _departmentLabel = value;
@@ -1959,9 +1959,9 @@ public class FStatisticsFinancialMarketerUnit
                __departmentId = RLong.parse(value);
                _departmentId = __departmentId;
                break;
-            case "department_lid":
-               __departmentLid = RLong.parse(value);
-               _departmentLid = __departmentLid;
+            case "department_link_id":
+               __departmentLinkId = RLong.parse(value);
+               _departmentLinkId = __departmentLinkId;
                break;
             case "department_label":
                __departmentLabel = value;
@@ -2143,7 +2143,7 @@ public class FStatisticsFinancialMarketerUnit
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("departmentId", _departmentId);
-      row.set("departmentLid", _departmentLid);
+      row.set("departmentLinkId", _departmentLinkId);
       row.set("departmentLabel", _departmentLabel);
       row.set("departmentLevel1Id", _departmentLevel1Id);
       row.set("departmentLevel1Label", _departmentLevel1Label);
@@ -2202,7 +2202,7 @@ public class FStatisticsFinancialMarketerUnit
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("departmentId", RLong.toString(_departmentId));
-      map.put("departmentLid", RLong.toString(_departmentLid));
+      map.put("departmentLinkId", RLong.toString(_departmentLinkId));
       map.put("departmentLabel", _departmentLabel);
       map.put("departmentLevel1Id", RLong.toString(_departmentLevel1Id));
       map.put("departmentLevel1Label", _departmentLevel1Label);
@@ -2261,7 +2261,7 @@ public class FStatisticsFinancialMarketerUnit
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _departmentId = input.readInt64();
-      _departmentLid = input.readInt64();
+      _departmentLinkId = input.readInt64();
       _departmentLabel = input.readString();
       _departmentLevel1Id = input.readInt64();
       _departmentLevel1Label = input.readString();
@@ -2315,7 +2315,7 @@ public class FStatisticsFinancialMarketerUnit
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeInt64(_departmentId);
-      output.writeInt64(_departmentLid);
+      output.writeInt64(_departmentLinkId);
       output.writeString(_departmentLabel);
       output.writeInt64(_departmentLevel1Id);
       output.writeString(_departmentLevel1Label);

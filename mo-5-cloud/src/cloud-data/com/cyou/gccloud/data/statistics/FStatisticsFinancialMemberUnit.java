@@ -62,23 +62,17 @@ public class FStatisticsFinancialMemberUnit
    // 字段数据编号的定义。
    protected long _dataId;
 
-   // 存储字段客户编号的定义。
-   private long __customerId;
+   // 存储字段部门编号的定义。
+   private long __departmentId;
 
-   // 字段客户编号的定义。
-   protected long _customerId;
+   // 字段部门编号的定义。
+   protected long _departmentId;
 
-   // 存储字段客户关联编号的定义。
-   private long __customerLid;
+   // 存储字段部门关联编号的定义。
+   private long __departmentLinkId;
 
-   // 字段客户关联编号的定义。
-   protected long _customerLid;
-
-   // 存储字段客户级别的定义。
-   private int __customerLevelCd;
-
-   // 字段客户级别的定义。
-   protected int _customerLevelCd;
+   // 字段部门关联编号的定义。
+   protected long _departmentLinkId;
 
    // 存储字段理财师编号的定义。
    private long __marketerId;
@@ -87,22 +81,28 @@ public class FStatisticsFinancialMemberUnit
    protected long _marketerId;
 
    // 存储字段理财师关联编号的定义。
-   private long __marketerLid;
+   private long __marketerLinkId;
 
    // 字段理财师关联编号的定义。
-   protected long _marketerLid;
+   protected long _marketerLinkId;
 
-   // 存储字段部门编号的定义。
-   private long __departmentId;
+   // 存储字段客户编号的定义。
+   private long __customerId;
 
-   // 字段部门编号的定义。
-   protected long _departmentId;
+   // 字段客户编号的定义。
+   protected long _customerId;
 
-   // 存储字段部门关联编号的定义。
-   private long __departmentLid;
+   // 存储字段客户关联编号的定义。
+   private long __customerLinkId;
 
-   // 字段部门关联编号的定义。
-   protected long _departmentLid;
+   // 字段客户关联编号的定义。
+   protected long _customerLinkId;
+
+   // 存储字段客户级别的定义。
+   private int __customerLevelCd;
+
+   // 字段客户级别的定义。
+   protected int _customerLevelCd;
 
    // 存储字段账号的定义。
    private String __passport;
@@ -522,84 +522,57 @@ public class FStatisticsFinancialMemberUnit
    }
 
    //============================================================
-   // <T>判断客户编号的数据是否改变。</T>
+   // <T>判断部门编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerIdChanged(){
-      return __customerId != _customerId;
+   public boolean isDepartmentIdChanged(){
+      return __departmentId != _departmentId;
    }
 
    //============================================================
-   // <T>获得客户编号的数据内容。</T>
+   // <T>获得部门编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long customerId(){
-      return _customerId;
+   public long departmentId(){
+      return _departmentId;
    }
 
    //============================================================
-   // <T>设置客户编号的数据内容。</T>
+   // <T>设置部门编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerId(long value){
-      _customerId = value;
+   public void setDepartmentId(long value){
+      _departmentId = value;
    }
 
    //============================================================
-   // <T>判断客户关联编号的数据是否改变。</T>
+   // <T>判断部门关联编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isCustomerLidChanged(){
-      return __customerLid != _customerLid;
+   public boolean isDepartmentLinkIdChanged(){
+      return __departmentLinkId != _departmentLinkId;
    }
 
    //============================================================
-   // <T>获得客户关联编号的数据内容。</T>
+   // <T>获得部门关联编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long customerLid(){
-      return _customerLid;
+   public long departmentLinkId(){
+      return _departmentLinkId;
    }
 
    //============================================================
-   // <T>设置客户关联编号的数据内容。</T>
+   // <T>设置部门关联编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setCustomerLid(long value){
-      _customerLid = value;
-   }
-
-   //============================================================
-   // <T>判断客户级别的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isCustomerLevelCdChanged(){
-      return __customerLevelCd != _customerLevelCd;
-   }
-
-   //============================================================
-   // <T>获得客户级别的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public int customerLevelCd(){
-      return _customerLevelCd;
-   }
-
-   //============================================================
-   // <T>设置客户级别的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setCustomerLevelCd(int value){
-      _customerLevelCd = value;
+   public void setDepartmentLinkId(long value){
+      _departmentLinkId = value;
    }
 
    //============================================================
@@ -634,8 +607,8 @@ public class FStatisticsFinancialMemberUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isMarketerLidChanged(){
-      return __marketerLid != _marketerLid;
+   public boolean isMarketerLinkIdChanged(){
+      return __marketerLinkId != _marketerLinkId;
    }
 
    //============================================================
@@ -643,8 +616,8 @@ public class FStatisticsFinancialMemberUnit
    //
    // @return 数据内容
    //============================================================
-   public long marketerLid(){
-      return _marketerLid;
+   public long marketerLinkId(){
+      return _marketerLinkId;
    }
 
    //============================================================
@@ -652,62 +625,89 @@ public class FStatisticsFinancialMemberUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setMarketerLid(long value){
-      _marketerLid = value;
+   public void setMarketerLinkId(long value){
+      _marketerLinkId = value;
    }
 
    //============================================================
-   // <T>判断部门编号的数据是否改变。</T>
+   // <T>判断客户编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentIdChanged(){
-      return __departmentId != _departmentId;
+   public boolean isCustomerIdChanged(){
+      return __customerId != _customerId;
    }
 
    //============================================================
-   // <T>获得部门编号的数据内容。</T>
+   // <T>获得客户编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long departmentId(){
-      return _departmentId;
+   public long customerId(){
+      return _customerId;
    }
 
    //============================================================
-   // <T>设置部门编号的数据内容。</T>
+   // <T>设置客户编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentId(long value){
-      _departmentId = value;
+   public void setCustomerId(long value){
+      _customerId = value;
    }
 
    //============================================================
-   // <T>判断部门关联编号的数据是否改变。</T>
+   // <T>判断客户关联编号的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isDepartmentLidChanged(){
-      return __departmentLid != _departmentLid;
+   public boolean isCustomerLinkIdChanged(){
+      return __customerLinkId != _customerLinkId;
    }
 
    //============================================================
-   // <T>获得部门关联编号的数据内容。</T>
+   // <T>获得客户关联编号的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public long departmentLid(){
-      return _departmentLid;
+   public long customerLinkId(){
+      return _customerLinkId;
    }
 
    //============================================================
-   // <T>设置部门关联编号的数据内容。</T>
+   // <T>设置客户关联编号的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentLid(long value){
-      _departmentLid = value;
+   public void setCustomerLinkId(long value){
+      _customerLinkId = value;
+   }
+
+   //============================================================
+   // <T>判断客户级别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isCustomerLevelCdChanged(){
+      return __customerLevelCd != _customerLevelCd;
+   }
+
+   //============================================================
+   // <T>获得客户级别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int customerLevelCd(){
+      return _customerLevelCd;
+   }
+
+   //============================================================
+   // <T>设置客户级别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setCustomerLevelCd(int value){
+      _customerLevelCd = value;
    }
 
    //============================================================
@@ -1732,20 +1732,20 @@ public class FStatisticsFinancialMemberUnit
             return RInteger.toString(_linkCd);
          case "data_id":
             return Long.toString(_dataId);
-         case "customer_id":
-            return Long.toString(_customerId);
-         case "customer_lid":
-            return Long.toString(_customerLid);
-         case "customer_level_cd":
-            return RInteger.toString(_customerLevelCd);
-         case "marketer_id":
-            return Long.toString(_marketerId);
-         case "marketer_lid":
-            return Long.toString(_marketerLid);
          case "department_id":
             return Long.toString(_departmentId);
-         case "department_lid":
-            return Long.toString(_departmentLid);
+         case "department_link_id":
+            return Long.toString(_departmentLinkId);
+         case "marketer_id":
+            return Long.toString(_marketerId);
+         case "marketer_link_id":
+            return Long.toString(_marketerLinkId);
+         case "customer_id":
+            return Long.toString(_customerId);
+         case "customer_link_id":
+            return Long.toString(_customerLinkId);
+         case "customer_level_cd":
+            return RInteger.toString(_customerLevelCd);
          case "passport":
             return _passport;
          case "label":
@@ -1855,26 +1855,26 @@ public class FStatisticsFinancialMemberUnit
          case "data_id":
             _dataId = RLong.parse(value);
             break;
-         case "customer_id":
-            _customerId = RLong.parse(value);
+         case "department_id":
+            _departmentId = RLong.parse(value);
             break;
-         case "customer_lid":
-            _customerLid = RLong.parse(value);
-            break;
-         case "customer_level_cd":
-            _customerLevelCd = RInteger.parse(value);
+         case "department_link_id":
+            _departmentLinkId = RLong.parse(value);
             break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
-         case "marketer_lid":
-            _marketerLid = RLong.parse(value);
+         case "marketer_link_id":
+            _marketerLinkId = RLong.parse(value);
             break;
-         case "department_id":
-            _departmentId = RLong.parse(value);
+         case "customer_id":
+            _customerId = RLong.parse(value);
             break;
-         case "department_lid":
-            _departmentLid = RLong.parse(value);
+         case "customer_link_id":
+            _customerLinkId = RLong.parse(value);
+            break;
+         case "customer_level_cd":
+            _customerLevelCd = RInteger.parse(value);
             break;
          case "passport":
             _passport = value;
@@ -2030,33 +2030,33 @@ public class FStatisticsFinancialMemberUnit
                __dataId = RLong.parse(value);
                _dataId = __dataId;
                break;
-            case "customer_id":
-               __customerId = RLong.parse(value);
-               _customerId = __customerId;
+            case "department_id":
+               __departmentId = RLong.parse(value);
+               _departmentId = __departmentId;
                break;
-            case "customer_lid":
-               __customerLid = RLong.parse(value);
-               _customerLid = __customerLid;
-               break;
-            case "customer_level_cd":
-               __customerLevelCd = RInteger.parse(value);
-               _customerLevelCd = __customerLevelCd;
+            case "department_link_id":
+               __departmentLinkId = RLong.parse(value);
+               _departmentLinkId = __departmentLinkId;
                break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
                break;
-            case "marketer_lid":
-               __marketerLid = RLong.parse(value);
-               _marketerLid = __marketerLid;
+            case "marketer_link_id":
+               __marketerLinkId = RLong.parse(value);
+               _marketerLinkId = __marketerLinkId;
                break;
-            case "department_id":
-               __departmentId = RLong.parse(value);
-               _departmentId = __departmentId;
+            case "customer_id":
+               __customerId = RLong.parse(value);
+               _customerId = __customerId;
                break;
-            case "department_lid":
-               __departmentLid = RLong.parse(value);
-               _departmentLid = __departmentLid;
+            case "customer_link_id":
+               __customerLinkId = RLong.parse(value);
+               _customerLinkId = __customerLinkId;
+               break;
+            case "customer_level_cd":
+               __customerLevelCd = RInteger.parse(value);
+               _customerLevelCd = __customerLevelCd;
                break;
             case "passport":
                __passport = value;
@@ -2225,13 +2225,13 @@ public class FStatisticsFinancialMemberUnit
       row.set("linkDate", _linkDate);
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
-      row.set("customerId", _customerId);
-      row.set("customerLid", _customerLid);
-      row.set("customerLevelCd", _customerLevelCd);
-      row.set("marketerId", _marketerId);
-      row.set("marketerLid", _marketerLid);
       row.set("departmentId", _departmentId);
-      row.set("departmentLid", _departmentLid);
+      row.set("departmentLinkId", _departmentLinkId);
+      row.set("marketerId", _marketerId);
+      row.set("marketerLinkId", _marketerLinkId);
+      row.set("customerId", _customerId);
+      row.set("customerLinkId", _customerLinkId);
+      row.set("customerLevelCd", _customerLevelCd);
       row.set("passport", _passport);
       row.set("label", _label);
       row.set("card", _card);
@@ -2286,13 +2286,13 @@ public class FStatisticsFinancialMemberUnit
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
-      map.put("customerId", RLong.toString(_customerId));
-      map.put("customerLid", RLong.toString(_customerLid));
-      map.put("customerLevelCd", RInteger.toString(_customerLevelCd));
-      map.put("marketerId", RLong.toString(_marketerId));
-      map.put("marketerLid", RLong.toString(_marketerLid));
       map.put("departmentId", RLong.toString(_departmentId));
-      map.put("departmentLid", RLong.toString(_departmentLid));
+      map.put("departmentLinkId", RLong.toString(_departmentLinkId));
+      map.put("marketerId", RLong.toString(_marketerId));
+      map.put("marketerLinkId", RLong.toString(_marketerLinkId));
+      map.put("customerId", RLong.toString(_customerId));
+      map.put("customerLinkId", RLong.toString(_customerLinkId));
+      map.put("customerLevelCd", RInteger.toString(_customerLevelCd));
       map.put("passport", _passport);
       map.put("label", _label);
       map.put("card", _card);
@@ -2347,13 +2347,13 @@ public class FStatisticsFinancialMemberUnit
       _linkDate.set(input.readInt64());
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
-      _customerId = input.readInt64();
-      _customerLid = input.readInt64();
-      _customerLevelCd = input.readInt32();
-      _marketerId = input.readInt64();
-      _marketerLid = input.readInt64();
       _departmentId = input.readInt64();
-      _departmentLid = input.readInt64();
+      _departmentLinkId = input.readInt64();
+      _marketerId = input.readInt64();
+      _marketerLinkId = input.readInt64();
+      _customerId = input.readInt64();
+      _customerLinkId = input.readInt64();
+      _customerLevelCd = input.readInt32();
       _passport = input.readString();
       _label = input.readString();
       _card = input.readString();
@@ -2408,13 +2408,13 @@ public class FStatisticsFinancialMemberUnit
       output.writeInt64(_linkDate.get());
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
-      output.writeInt64(_customerId);
-      output.writeInt64(_customerLid);
-      output.writeInt32(_customerLevelCd);
-      output.writeInt64(_marketerId);
-      output.writeInt64(_marketerLid);
       output.writeInt64(_departmentId);
-      output.writeInt64(_departmentLid);
+      output.writeInt64(_departmentLinkId);
+      output.writeInt64(_marketerId);
+      output.writeInt64(_marketerLinkId);
+      output.writeInt64(_customerId);
+      output.writeInt64(_customerLinkId);
+      output.writeInt32(_customerLevelCd);
       output.writeString(_passport);
       output.writeString(_label);
       output.writeString(_card);

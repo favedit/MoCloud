@@ -58,13 +58,13 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo DEPARTMENT_ID = new SLogicFieldInfo("DEPARTMENT_ID");
 
    // 字段部门关联编号的定义。
-   public final static SLogicFieldInfo DEPARTMENT_LID = new SLogicFieldInfo("DEPARTMENT_LID");
+   public final static SLogicFieldInfo DEPARTMENT_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LINK_ID");
 
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
    // 字段理财师关联编号的定义。
-   public final static SLogicFieldInfo MARKETER_LID = new SLogicFieldInfo("MARKETER_LID");
+   public final static SLogicFieldInfo MARKETER_LINK_ID = new SLogicFieldInfo("MARKETER_LINK_ID");
 
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
@@ -148,7 +148,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LID`,`MARKETER_ID`,`MARKETER_LID`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`MARKETER_ID`,`MARKETER_LINK_ID`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -749,9 +749,9 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`LINK_CD`");
       cmd.append(",`DATA_ID`");
       cmd.append(",`DEPARTMENT_ID`");
-      cmd.append(",`DEPARTMENT_LID`");
+      cmd.append(",`DEPARTMENT_LINK_ID`");
       cmd.append(",`MARKETER_ID`");
-      cmd.append(",`MARKETER_LID`");
+      cmd.append(",`MARKETER_LINK_ID`");
       cmd.append(",`LABEL`");
       cmd.append(",`CARD`");
       cmd.append(",`CARD_AREA`");
@@ -828,11 +828,11 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append(departmentId);
       }
       cmd.append(',');
-      long departmentLid = unit.departmentLid();
-      if(departmentLid == 0){
+      long departmentLinkId = unit.departmentLinkId();
+      if(departmentLinkId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(departmentLid);
+         cmd.append(departmentLinkId);
       }
       cmd.append(',');
       long marketerId = unit.marketerId();
@@ -842,11 +842,11 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append(marketerId);
       }
       cmd.append(',');
-      long marketerLid = unit.marketerLid();
-      if(marketerLid == 0){
+      long marketerLinkId = unit.marketerLinkId();
+      if(marketerLinkId == 0){
          cmd.append("NULL");
       }else{
-         cmd.append(marketerLid);
+         cmd.append(marketerLinkId);
       }
       cmd.append(',');
       String label = unit.label();
@@ -1121,13 +1121,13 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append(departmentId);
          }
       }
-      if(unit.isDepartmentLidChanged()){
-         cmd.append(",`DEPARTMENT_LID`=");
-         long departmentLid = unit.departmentLid();
-         if(departmentLid == 0){
+      if(unit.isDepartmentLinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LINK_ID`=");
+         long departmentLinkId = unit.departmentLinkId();
+         if(departmentLinkId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(departmentLid);
+            cmd.append(departmentLinkId);
          }
       }
       if(unit.isMarketerIdChanged()){
@@ -1139,13 +1139,13 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append(marketerId);
          }
       }
-      if(unit.isMarketerLidChanged()){
-         cmd.append(",`MARKETER_LID`=");
-         long marketerLid = unit.marketerLid();
-         if(marketerLid == 0){
+      if(unit.isMarketerLinkIdChanged()){
+         cmd.append(",`MARKETER_LINK_ID`=");
+         long marketerLinkId = unit.marketerLinkId();
+         if(marketerLinkId == 0){
             cmd.append("NULL");
          }else{
-            cmd.append(marketerLid);
+            cmd.append(marketerLinkId);
          }
       }
       if(unit.isLabelChanged()){

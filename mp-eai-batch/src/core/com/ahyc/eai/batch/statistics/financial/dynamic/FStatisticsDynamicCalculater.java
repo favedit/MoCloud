@@ -213,12 +213,12 @@ public class FStatisticsDynamicCalculater
             // 设置理财师
             if(marketerUnit != null){
                customerUnit.setMarketerId(marketerUnit.ouid());
-               customerUnit.setMarketerLid(marketerUnit.linkId());
+               customerUnit.setMarketerLinkId(marketerUnit.linkId());
             }
             // 设置部门
             if(departmentUnit != null){
                customerUnit.setDepartmentId(departmentUnit.ouid());
-               customerUnit.setDepartmentLid(departmentUnit.linkId());
+               customerUnit.setDepartmentLinkId(departmentUnit.linkId());
             }
             customerLogic.doUpdate(customerUnit);
          }

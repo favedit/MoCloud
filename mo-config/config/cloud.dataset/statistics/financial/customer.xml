@@ -5,9 +5,9 @@
   <FieldInteger _uuid="4385bee6-8371-42b1-85e2-7158145d7d56" name="link_cd" label="M#12cn14关联类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
   <FieldRecordId _uuid="bd3f6bc3-0a33-4973-9f90-c062d3ad41f9" name="data_id" label="M#12cn14数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DATA_ID" />
   <FieldRecordId _uuid="8d8f5271-5414-4801-806f-d576dff811cd" name="department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_ID" />
-  <FieldRecordId _uuid="02002cfa-feb7-4f8a-a7bd-4a687c5d3813" name="department_lid" label="M#12cn16部门关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LID" />
+  <FieldRecordId _uuid="02002cfa-feb7-4f8a-a7bd-4a687c5d3813" name="department_link_id" label="M#12cn16部门关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_LINK_ID" />
   <FieldRecordId _uuid="1d1b5aa1-d112-45a7-9c12-cd7c7112950c" name="marketer_id" label="M#12cn15理财师编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_ID" />
-  <FieldRecordId _uuid="184621ff-1469-4bc5-9a71-cf5b98180fed" name="marketer_lid" label="M#12cn17理财师关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_LID" />
+  <FieldRecordId _uuid="184621ff-1469-4bc5-9a71-cf5b98180fed" name="marketer_link_id" label="M#12cn17理财师关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MARKETER_LINK_ID" />
   <FieldString _uuid="66d1693f-0ee4-47a7-ac06-032e7fdea6b5" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
   <FieldString _uuid="2cf1d15c-7423-4bad-b92c-7bd866c3c099" name="card" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
   <FieldString _uuid="d302c3d6-f349-4b7d-817e-876ad4205db4" name="card_area" label="M#12cn14卡片地区" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_AREA" data_size="6" />
