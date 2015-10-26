@@ -70,6 +70,7 @@ public class SGcStorage
    public SGcStorage(String catalog,
                      File file){
       _catalog = catalog;
+      _date = RDateTime.format("YYMMDD");
       _code = RUuid.makeUniqueIdLower();
       _name = RUuid.makeUniqueIdLower();
       loadFile(file.getAbsolutePath());
