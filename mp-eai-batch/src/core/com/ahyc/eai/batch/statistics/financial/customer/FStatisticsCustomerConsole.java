@@ -120,7 +120,7 @@ public class FStatisticsCustomerConsole
       }
       // 查找单元
       FStatisticsFinancialCustomerLogic logic = logicContext.findLogic(FStatisticsFinancialCustomerLogic.class);
-      unit = logic.search("LINK_ID=" + linkId);
+      unit = logic.search(FStatisticsFinancialCustomerLogic.LINK_ID + "=" + linkId);
       if(unit != null){
          return unit;
       }
@@ -153,9 +153,6 @@ public class FStatisticsCustomerConsole
          memberUnit.setCustomerLinkId(unit.linkId());
          FStatisticsFinancialMemberLogic memberLogic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
          memberLogic.doUpdate(memberUnit);
-      }
-      if(memberUnit.marketerId() == 0){
-
       }
       return unit;
    }

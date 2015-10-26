@@ -52,7 +52,7 @@ public class FStatisticsMemberConsole
       }
       // 查找单元
       FStatisticsFinancialMemberLogic logic = logicContext.findLogic(FStatisticsFinancialMemberLogic.class);
-      unit = logic.search("LINK_ID=" + linkId);
+      unit = logic.search(FStatisticsFinancialMemberLogic.LINK_ID + "=" + linkId);
       if(unit != null){
          return unit;
       }

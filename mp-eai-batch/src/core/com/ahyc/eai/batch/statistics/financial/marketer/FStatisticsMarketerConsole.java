@@ -72,7 +72,7 @@ public class FStatisticsMarketerConsole
       }
       // 查找单元
       FStatisticsFinancialMarketerLogic logic = logicContext.findLogic(FStatisticsFinancialMarketerLogic.class);
-      unit = logic.search("LINK_ID=" + linkId);
+      unit = logic.search(FStatisticsFinancialMarketerLogic.LINK_ID + "=" + linkId);
       if(unit != null){
          return unit;
       }
@@ -122,6 +122,8 @@ public class FStatisticsMarketerConsole
       if(departmentRow != null){
          // 设置级别
          unit.setRankLabel(departmentRow.get("rank"));
+         // unit.setDepartmentId(value);
+         unit.setDepartmentLinkId(linkId);
          departmentId = departmentRow.getLong("dept_id");
          // 设置相关信息
          FStatisticsDepartmentInfo info = _departmentConsole.findInfo(logicContext, departmentId);
