@@ -1,10 +1,13 @@
 package org.mo.cloud.core.storage;
 
+import java.io.File;
 import org.mo.com.io.FByteFile;
 import org.mo.com.io.RFile;
 import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.RUuid;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 
@@ -53,24 +56,23 @@ public class SGcStorage
    // <T>构造存储信息。</T>
    //============================================================
    public SGcStorage(){
+      _date = RDateTime.format("YYMMDD");
+      _code = RUuid.makeUniqueIdLower();
+      _name = RUuid.makeUniqueIdLower();
    }
 
    //============================================================
    // <T>构造存储信息。</T>
    //
    // @param catalog 分类
-   // @param type 类型
-   // @param code 代码
-   // @param name 名称
+   // @param file 文件
    //============================================================
    public SGcStorage(String catalog,
-                     String type,
-                     String code,
-                     String name){
+                     File file){
       _catalog = catalog;
-      _type = type;
-      _code = code;
-      _name = name;
+      _code = RUuid.makeUniqueIdLower();
+      _name = RUuid.makeUniqueIdLower();
+      loadFile(file.getAbsolutePath());
    }
 
    //============================================================
