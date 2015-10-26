@@ -50,7 +50,7 @@
             <li id="two" class="files">
                <a href="#">日志管理</a>
                <ul class="sub-menu">
-                  <jh:equals source="manage.system.logger.user.notice" value="&basePage.menuString"><li><a href="/manage/system/logger/user/notice/Notice.wa" target="right">公告日志管理</a></li></jh:equals>
+                  <jh:equals source="manage.system.logger.user.notice" value="&basePage.menuString"><li><a href="/manage/system/logger/user/notice/Notice.wa" target="right">用户公告日志管理</a></li></jh:equals>
                   <jh:equals source="manage.system.logger.user.access" value="&basePage.menuString"><li><a href="/manage/system/logger/user/access/Access.wa" target="right">用户日志管理</a></li></jh:equals>
                </ul>
             </li>

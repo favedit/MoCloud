@@ -40,7 +40,8 @@ public interface INoticeConsole
    FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext, 
                                                           String beginDateStr, 
                                                           String endDateStr, 
-                                                          int activeCd, 
+                                                          int activeCd,
+                                                          Long noticeId,
                                                           int pageNum, 
                                                           int pageSize);
 }

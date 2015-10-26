@@ -135,9 +135,10 @@
    <span>销售工具信息</span>
   </div>
   <div class="btn_bar">
-   <div class="nav_btn">
+    <div class="nav_btn">
+      <td><a href="/manage/product/business/salestools/Salestools.wa?do=insertBefore" class="add_btn"></a></td>
     </div>
-   <div class="nav_search" style="width:760px;">
+   <div class="nav_search" style="width:660px;">
     <form id="logerdat" action="/manage/product/business/salestools/Salestools.wa" method="post" align="right">
       <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-right:1px">
          <tr>
@@ -174,7 +175,6 @@
                </div>
             </td>
             <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
-            <td><a href="/manage/product/business/salestools/Salestools.wa?do=insertBefore" class="add_btn"></a></td>
          </tr>
       </table>
     </form>

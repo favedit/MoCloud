@@ -27,7 +27,6 @@ public class FDeviceBrowserConsole
 
    //============================================================
    // <T>插入设备信息。</T>
-   //
    // @param logicContext 逻辑环境
    // @param deviceBrowserInfo 设备信息
    // @return 插入结果
@@ -38,7 +37,11 @@ public class FDeviceBrowserConsole
       EResult resultCd = doInsert(logicContext, deviceBrowserInfo);
       return resultCd;
    }
-
+   //============================================================
+   // <T>查询设备信息。</T>
+   // @param logicContext 逻辑环境
+   // @return 查询结果
+   //============================================================
    @Override
    public FLogicDataset<FDataInfoDeviceBrowserUnit> select(ILogicContext logicContext){
       FDataInfoDeviceBrowserLogic logic = new FDataInfoDeviceBrowserLogic(logicContext);

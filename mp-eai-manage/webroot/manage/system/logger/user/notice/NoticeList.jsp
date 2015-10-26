@@ -92,6 +92,12 @@
      doSubmitByCondition(null,null);
      $("#flag").val("2");
    }
+   //搜索按钮，enter键
+   document.onkeydown=function(){
+      if(event.keyCode=="13"){
+         submitForm();    
+      }
+   }
 </script>
 </HEAD>
 
@@ -103,7 +109,7 @@
       <div class="btn_bar">
       <div class="nav_btn">
       </div>
-      <div class="nav_search" style="width:720px;">
+      <div class="nav_search" style="width:940px;">
         <form id="logerdat" action="/manage/system/logger/user/notice/Notice" method="post" align="center">
          <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
             <tr>
@@ -134,6 +140,14 @@
 	                     <option value="2">非激活</option>
 	                  <select>
 	               </div>
+               </td>
+               <td width="70" height="33">
+                  <div align="left">日志公告id:</div>
+               </td>
+               <td width="150" height="33">
+                  <div align="left">
+                     <input id="noticeId" name="noticeId" class="easyui-validatebox textbox" style="width:150px;" />
+                  </div>
                </td>
                <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
             </tr>

@@ -136,16 +136,16 @@
      <th
      data-options="field:'businessCd',halign:'center',align:'left',sortable:true"
      width="60px">职业</th>
-<th
+     <th
      data-options="field:'investmentTotal',halign:'center',align:'left',sortable:true"
      width="80px">投资总额</th>
-    <th
+     <th
      data-options="field:'investmentCount',halign:'center',align:'left',sortable:true"
      width="60px">投资次数</th>
      <th
      data-options="field:'redemptionTotal',halign:'center',align:'left',sortable:true"
      width="80px">赎回总额</th>
-    <th
+     <th
      data-options="field:'redemptionCount',halign:'center',align:'left',sortable:true"
      width="60px">赎回次数</th>
      <th

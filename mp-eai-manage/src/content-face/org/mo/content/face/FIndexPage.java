@@ -5,14 +5,15 @@ import org.mo.com.lang.FObjectId;
 //============================================================
 //<P>用户容器</P>
 //
-//@class FProvincePage
+//@class FIndexPage
 //@author Sunhr
 //@Date 2012.11.05  
 //@version 1.0.0
 //============================================================
 
 public class FIndexPage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    // 当前页
    protected int _pageCurrent;

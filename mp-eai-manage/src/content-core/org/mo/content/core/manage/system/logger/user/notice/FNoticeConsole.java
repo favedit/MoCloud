@@ -71,7 +71,8 @@ public class FNoticeConsole
    public FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext, 
                                                                  String beginDateStr, 
                                                                  String endDateStr, 
-                                                                 int activeCd, 
+                                                                 int activeCd,
+                                                                 Long noticeId,
                                                                  int pageNum, 
                                                                  int pageSize) {
       if (0 > pageNum) {
@@ -93,6 +94,11 @@ public class FNoticeConsole
          whereSql.append(" and ");
          whereSql.append(FLoggerPersonUserNoticeLogic.CREATE_DATE + " <= '{endDateStr}'");
          whereSql.bind("endDateStr", RString.parse(endDateStr));
+      }
+      if (!RString.isEmpty(noticeId+"")) {
+         whereSql.append(" and ");
+         whereSql.append(FLoggerPersonUserNoticeLogic.NOTICE_ID + " = '{noticeId}'");
+         whereSql.bind("noticeId", RString.parse(noticeId));
       }
       String orderBy = String.format("%s %s", FLoggerPersonUserNoticeLogic.UPDATE_DATE, "DESC");
       FLoggerPersonUserNoticeLogic logic = new FLoggerPersonUserNoticeLogic(logicContext);

@@ -158,8 +158,9 @@
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
+    <a href="/manage/product/business/notice/Notice.wa?do=insertBefore" class="add_btn"></a>
    </div>
-   <div class="nav_search" style="width:760px;">
+   <div class="nav_search" style="width:660px;">
     <form id="logerdat" action="/manage/product/business/notice/Notice.wa" method="post" align="center">
       <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
          <tr>
@@ -196,7 +197,6 @@
                </div>
             </td>
             <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
-            <td><a href="/manage/product/business/notice/Notice.wa?do=insertBefore" class="add_btn"></a></td>
          </tr>
       </table>
      </form>

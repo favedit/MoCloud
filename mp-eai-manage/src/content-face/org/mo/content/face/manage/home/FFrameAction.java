@@ -21,7 +21,10 @@ import org.mo.web.protocol.context.IWebContext;
 //@version 1.0.0
 //============================================================
 
-public class FFrameAction implements IFrameAction {
+public class FFrameAction 
+      implements 
+         IFrameAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FFrameAction.class);
 
@@ -37,7 +40,9 @@ public class FFrameAction implements IFrameAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String construct(IWebContext context, FFramePage formPage, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           FFramePage formPage, 
+                           FBasePage basePage) {
       _logger.debug(this, "construct", "construct begin.");
       if (!basePage.userExists()) {
          return "/manage/home/Frame";
@@ -53,7 +58,10 @@ public class FFrameAction implements IFrameAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String loginUser(IWebContext context, ILogicContext logicContext, FFramePage formPage, FBasePage basePage) {
+   public String loginUser(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FFramePage formPage, 
+                           FBasePage basePage) {
       _logger.debug(this, "LoginUser", "LoginUser begin. (passport={1},password={2})", context.parameter("passport"), context.parameter("password"));
       String passport = context.parameter("passport").trim();
       String password = context.parameter("password").trim();
@@ -117,7 +125,9 @@ public class FFrameAction implements IFrameAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String changePwdPrepare(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String changePwdPrepare(IWebContext context, 
+                                  ILogicContext logicContext, 
+                                  FBasePage basePage) {
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
@@ -132,7 +142,10 @@ public class FFrameAction implements IFrameAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String changePwd(IWebContext context, ILogicContext logicContext, FFramePage formPage, FBasePage basePage) {
+   public String changePwd(IWebContext context, 
+                           ILogicContext logicContext, 
+                           FFramePage formPage, 
+                           FBasePage basePage) {
       _logger.debug(this, "ChangePwd", "ChangePwd begin.(userId={1})", context.parameter("id"));
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -163,7 +176,10 @@ public class FFrameAction implements IFrameAction {
    // @return 要跳转页面
    // ============================================================
    @Override
-   public String loginOut(IWebContext context, ILogicContext logicContext, FFramePage formPage, FBasePage basePage) {
+   public String loginOut(IWebContext context, 
+                          ILogicContext logicContext, 
+                          FFramePage formPage, 
+                          FBasePage basePage) {
       _logger.debug(this, "loginOut", "loginOut begin.");
       // 清空basePage
       formPage.setUser(null);

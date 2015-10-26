@@ -122,9 +122,10 @@
    <span>理财师信息</span>
   </div>
   <div class="btn_bar">
-   <div class="nav_btn">
+    <div class="nav_btn">
+      <td><a href="/manage/product/financial/marketer/Marketer.wa?do=insertBefore" class="add_btn"></a></td>
     </div>
-   <div class="nav_search" style="width:900px;">
+   <div class="nav_search" style="width:680px;">
     <form id="logerdat" action="/manage/product/financial/marketer/Marketer.wa" method="post" align="center">
       <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
          <tr>
@@ -140,7 +141,7 @@
             <td width="59" height="33">
                <div align="left">结束时间:</div>
             </td>
-            <td width="158">
+            <td width="150">
                <div align="left">
                   <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
                </div>
@@ -148,13 +149,12 @@
             <td width="30" height="33">
                <div align="right">名称:</div>
             </td>
-            <td width="158" height="33">
+            <td width="150" height="33">
                <div align="left">
                   <input id="name" name="name" class="easyui-validatebox textbox" style="width:150px;" />
                </div>
             </td>
             <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
-            <td><a href="/manage/product/financial/marketer/Marketer.wa?do=insertBefore" class="add_btn"></a></td>
          </tr>
       </table>
       </form>

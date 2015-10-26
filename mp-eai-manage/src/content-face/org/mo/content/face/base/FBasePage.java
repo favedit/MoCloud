@@ -14,7 +14,8 @@ import org.mo.com.lang.RString;
 //@version 1.0.0
 //============================================================
 public class FBasePage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    //ajax
    protected String _json;

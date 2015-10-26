@@ -7,7 +7,8 @@ import org.mo.com.xml.FXmlNode;
 // <T>消息页面。</T>
 //============================================================
 public class FWebMessagePage
-      extends FObjectId
+      extends 
+         FObjectId
 {
    protected String _type;
 

@@ -23,7 +23,10 @@ import org.mo.web.protocol.context.IWebContext;
 //@version 1.0.0
 //============================================================
 
-public class FHeaderAction implements IHeaderAction {
+public class FHeaderAction 
+      implements 
+         IHeaderAction 
+{
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FHeaderAction.class);
 
@@ -49,7 +52,8 @@ public class FHeaderAction implements IHeaderAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String construct(IWebContext context, FBasePage basePage) {
+   public String construct(IWebContext context, 
+                           FBasePage basePage) {
       _logger.debug(this, "construct", "construct begin. ");
       // basePage.setVersion(_versonConsole.currentVersion());
       if (!basePage.userExists()) {
@@ -66,7 +70,10 @@ public class FHeaderAction implements IHeaderAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String productLeft(IWebContext context, ILogicContext logicContext, FFramePage framePage, FBasePage basePage) {
+   public String productLeft(IWebContext context, 
+                             ILogicContext logicContext, 
+                             FFramePage framePage, 
+                             FBasePage basePage) {
       _logger.debug(this, "Header", "Header productLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -83,7 +90,9 @@ public class FHeaderAction implements IHeaderAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String analysisLeft(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String analysisLeft(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FBasePage basePage) {
       _logger.debug(this, "Header", "Header analysisLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       // tackAuthority(context, logicContext, basePage);
       return "#/manage/home/AnalysisLeft";
@@ -97,7 +106,9 @@ public class FHeaderAction implements IHeaderAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String manageLeft(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String manageLeft(IWebContext context, 
+                            ILogicContext logicContext, 
+                            FBasePage basePage) {
       _logger.debug(this, "Header", "Header manageLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
@@ -114,7 +125,9 @@ public class FHeaderAction implements IHeaderAction {
    // @return 处理结果
    // ============================================================
    @Override
-   public String databaseLeft(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   public String databaseLeft(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FBasePage basePage) {
       _logger.debug(this, "Header", "Header databaseLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       return "#/manage/home/DatabaseLeft";
    }
@@ -125,7 +138,9 @@ public class FHeaderAction implements IHeaderAction {
    // @param context 环境
    // @param basePage 容器
    // ============================================================
-   private void tackAuthority(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
+   private void tackAuthority(IWebContext context, 
+                              ILogicContext logicContext, 
+                              FBasePage basePage) {
       _logger.debug(this, "TackAuthority", "TackAuthority begin. (userId={1})", basePage.userId());
       StringBuffer menuStrings = new StringBuffer();
       // 初始用户单独处理
