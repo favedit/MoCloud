@@ -1,13 +1,28 @@
 @charset "utf-8";
 html { height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; font-family: sans-serif; font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/ }
-body { table-layout:fixed; word-break: break-all;margin: 0; padding: 0; min-height: 100%; height: auto; /*text-align:center;*/ color: #404040; font-size: 1.2rem; font-family: DroidSans, "Droid Sans Fallback","Hiragino Sans GB W3", "Hiragino Sans GB W6" ; }
+body {background-color:#f4f4f1;table-layout:fixed; word-break: break-all;margin: 0; padding: 0; min-height: 100%; height: auto; /*text-align:center;*/ color: #404040; font-size: 1.2rem; font-family: DroidSans, "Droid Sans Fallback","Hiragino Sans GB W3", "Hiragino Sans GB W6" ; }
 h1, h2, h3, h4, h5, h6, p, figure, form { margin: 0; }
 i, em { font-style: normal; vertical-align: middle; }
+ul, li, ol { margin: 0; padding: 0; list-style: none outside none; }
 table { border-collapse: collapse; border-spacing: 0; }
 img { border: 0; vertical-align: middle; -ms-interpolation-mode: bicubic; }
 a, a:link { color: #666666; text-decoration: none; cursor: pointer; }
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
 .pt10{
   padding-top: 10px;
+}
+.area{
+  margin: 10px;
+  padding: 10px;
+  background: #fff;
+  border:1px #dfdfdf solid;
 }
 .header h4{
   text-align: center;
@@ -29,10 +44,20 @@ a, a:link { color: #666666; text-decoration: none; cursor: pointer; }
 .header p i{
   padding-left: 30px;
 }
-.main{
-  padding: 0px 15px;
-  border-top: 1px solid #698090;
-  padding-bottom: 10px;
+.figure{
+  width: 100%;
+  text-align: center;
+  // position: relative;
+}
+.figure span{
+  display: block;
+  font-size: 15px;
+  padding-top: 6px;
+}
+.main .figure img{
+  width: 188px;
+  top:0px;
+  left:0px;
 }
 .main img{
   width: 100%;
@@ -40,7 +65,7 @@ a, a:link { color: #666666; text-decoration: none; cursor: pointer; }
 .main h3{
   color: #0864a5;
   font-size: 20px!important;
-  padding-top: 10px;
+  // padding-top: 10px;
   padding-bottom: 8px;
 }
 .main h5{
@@ -52,22 +77,23 @@ a, a:link { color: #666666; text-decoration: none; cursor: pointer; }
   font-size: 16px;
   font-weight: normal;
   color: #f96;
-
 }
 .main .ti0 {
   text-indent:0px;
 }
 .main .ti0 span{
-  height: 25px;
-  width: 25px;
+  // height: 25px;
+  // width: 25px;
+  font-style: italic;
   line-height: 25px;
   text-align: center;
   // padding: 5px 5px;
   display: inline-block;
-  background: #0864a5;
-  color: #fff;
-  border-radius: 15px;
-  margin-right: 10px;
+  // background: #0864a5;
+  color:#0864a5;
+  // margin-right: 10px;
+  font-weight: bold;
+  font-size: 22px;
 }
 .main p{
   text-indent:2em;

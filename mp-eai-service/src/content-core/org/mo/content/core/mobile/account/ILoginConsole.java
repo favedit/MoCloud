@@ -1,8 +1,10 @@
 package org.mo.content.core.mobile.account;
 
+import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
@@ -114,7 +116,8 @@ public interface ILoginConsole {
     // @logicContext 逻辑上下文
     // @sessionContext session上下文
     // ============================================================
-    public String isThereNotices(long userId, IWebSession sessionContext,
-            ILogicContext logicContext, IGcSessionConsole _sessionConsole,
+    public FLogicDataset<FDataLogicNoticeUnit> isThereNotices(long userId,
+            IWebSession sessionContext, ILogicContext logicContext,
+            IGcSessionConsole _sessionConsole,
             IWebSessionConsole _webSessionConsole);
 }

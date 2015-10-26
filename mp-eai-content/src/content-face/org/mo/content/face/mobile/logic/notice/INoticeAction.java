@@ -3,7 +3,6 @@ package org.mo.content.face.mobile.logic.notice;
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
-import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -36,14 +35,16 @@ public interface INoticeAction {
             @AContainer(name = "basePage") FBasePage basePage);
 
     // ============================================================
-    // <T>标记已读接口。</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
+    // <T>根据guid获取通告</T>
+    // @通告
+    // @param context 网络环境
+    // @param logicContext 逻辑环境
+    // @param page 容器
+    // @return 页面
     // ============================================================
-    public String markRead(IWebContext context, IWebSession sessionContext,
+    public String noticePublish(IWebContext context,
             ILogicContext logicContext,
             @AContainer(name = "page") FNoticePage Page,
             @AContainer(name = "basePage") FBasePage basePage);
+
 }

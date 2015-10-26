@@ -1,14 +1,12 @@
 package org.mo.content.face.mobile.logic.notice;
 
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
-import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
-import org.mo.com.lang.RString;
 import org.mo.content.core.mobile.logic.notice.INoticeConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.session.IWebSession;
+import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -59,29 +57,18 @@ public class FNoticeAction implements INoticeAction {
     }
 
     // ============================================================
-    // <T>标记已读务接口。</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
+    // <T>根据guid获取通告</T>
+    // @通告
+    // @param context 网络环境
+    // @param logicContext 逻辑环境
+    // @param page 容器
+    // @return 页面
     // ============================================================
     @Override
-    public String markRead(IWebContext context, IWebSession sessionContext,
-            ILogicContext logicContext, FNoticePage Page, FBasePage basePage) {
-        String sessionCode = context.head("mo-session-id");
-        if (RString.isNotEmpty(sessionCode)) {
-            FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(
-                    logicContext, sessionCode);
-            long userId = sessionInfo.userId();
-            FDataLogicNoticeUnit unit = _noticeConsole.markRead(userId,
-                    sessionContext, logicContext);
-            Page.setUnit(unit);
-            // 没有公告
-            if (unit == null) {
-                basePage.setJson("{\"message\":\"empty\"}");
-                return "/manage/common/ajax";
-            }
-        }
-        return "/manage/mobile/notices/NoticeInfo";
+    public String noticePublish(IWebContext context,
+            ILogicContext logicContext,
+            @AContainer(name = "page") FNoticePage Page,
+            @AContainer(name = "basePage") FBasePage basePage) {
+        return "";
     }
 }

@@ -92,4 +92,17 @@
   scope='global'>
   <Property name='trueTimeDataHost'>${eai.host.content}</Property>
  </Component>
+ <!-- ============================================================ -->
+ <!-- 号令服务接口 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.logic.notice'
+  face='org.mo.content.service.mobile.logic.notice.INoticeService' />
+
+ <Component
+  face='org.mo.content.service.mobile.logic.notice.INoticeService'
+  class='org.mo.content.service.mobile.logic.notice.FNoticeService'
+  scope='global'>
+  <Property name='contentHost'>${eai.host.content}</Property>
+  <Property name='localHost'>${eai.server.host}</Property>
+ </Component>
 </Config>

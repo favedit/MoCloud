@@ -9,10 +9,10 @@ import com.cyou.gccloud.data.data.FDataPersonUserSigningLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.data.FDataSystemApplicationLogic;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
-import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeLogic;
-import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
+import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
+import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import com.ycjt.ead.ThreeDes;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -439,41 +439,29 @@ public class FLoginConsole extends FObject implements ILoginConsole {
     // ============================================================
 
     @Override
-    public String isThereNotices(long userId, IWebSession sessionContext,
-            ILogicContext logicContext, IGcSessionConsole _sessionConsole,
+    public FLogicDataset<FDataLogicNoticeUnit> isThereNotices(long userId,
+            IWebSession sessionContext, ILogicContext logicContext,
+            IGcSessionConsole _sessionConsole,
             IWebSessionConsole _webSessionConsole) {
         FDataLogicNoticeLogic noticeLogic = logicContext
                 .findLogic(FDataLogicNoticeLogic.class);
-        FLoggerPersonUserNoticeLogic personUserNoticeLogic = logicContext
-                .findLogic(FLoggerPersonUserNoticeLogic.class);
-        FSql whereSql = new FSql();
-        whereSql.append(FDataLogicNoticeLogic.UPDATE_DATE);
-        whereSql.append(" =(SELECT MAX(`UPDATE_DATE`) FROM `DT_LGC_NOTICE` AS N1 WHERE `STATUS_CD`=2 AND `DISPLAY_CD`=1 )");
-        FLogicDataset<FDataLogicNoticeUnit> noticeUnits = noticeLogic
-                .fetch(whereSql);
-        if (noticeUnits != null && noticeUnits.count() > 0) {
-            FDataLogicNoticeUnit noticeUnit = noticeUnits.first();
-            long noticeOuid = noticeUnit.ouid();
-            FSql whereSql2 = new FSql();
-            whereSql2.append(FLoggerPersonUserNoticeLogic.USER_ID);
-            whereSql2.append("=");
-            whereSql2.append(userId);
-            whereSql2.append(" AND ");
-            whereSql2.append(FLoggerPersonUserNoticeLogic.NOTICE_ID);
-            whereSql2.append("=");
-            whereSql2.append(noticeOuid);
-            FLogicDataset<FLoggerPersonUserNoticeUnit> personUserNoticeUnits = personUserNoticeLogic
-                    .fetch(whereSql2);
-            if (personUserNoticeUnits != null
-                    && personUserNoticeUnits.count() > 0) {
-                return "deActive";// 公告已读,deActive
-            } else {
-                return noticeUnit.guid();// 公告未读active
-            }
+        FSql whereSql2 = new FSql();
+        whereSql2.append(FDataLogicNoticeLogic.STATUS_CD);
+        whereSql2.append("=");
+        whereSql2.append(EGcResourceStatus.Publish);
+        whereSql2.append(" AND ");
+        whereSql2.append(FDataLogicNoticeLogic.DISPLAY_CD);
+        whereSql2.append("=");
+        whereSql2.append(EGcDisplay.Enabled);
+        whereSql2.append(" AND ");
+        whereSql2.append(FDataLogicNoticeLogic.OUID);
+        whereSql2
+                .append(" NOT in (SELECT `NOTICE_ID` FROM `EAI_LOGGER`.`LG_PSN_USER_NOTICE` WHERE `USER_ID`="
+                        + userId);
+        whereSql2.append(")");
+        FLogicDataset<FDataLogicNoticeUnit> moduleList = noticeLogic
+                .fetch(whereSql2);
+        return moduleList;
 
-        } else {
-            // 没有公告
-            return "deActive";// deActive
-        }
     }
 }

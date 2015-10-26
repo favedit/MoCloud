@@ -71,14 +71,14 @@ public class TestFLoginService {
     @Test
     public void testAutoLogin() throws ClientProtocolException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        String url = "http://10.13.0.100:8020/eai.mobile.account.wsp";
+        String url = "http://10.13.0.16:8020/eai.mobile.account.wsp";
         HttpPost post = new HttpPost(url);
         List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
         listPram.add(new BasicNameValuePair("action", "autoLogin"));
         listPram.add(new BasicNameValuePair("format_cd", "json"));
         // listPram.add(new BasicNameValuePair("mo-session-id",
         // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
+        post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
         post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
         CloseableHttpResponse response = httpclient.execute(post);
         HttpEntity entity = response.getEntity();
