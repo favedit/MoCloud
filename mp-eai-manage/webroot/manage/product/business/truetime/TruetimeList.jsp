@@ -69,7 +69,9 @@
     function phoneInfo(ouid){
        var l=(screen.availWidth-500)/2;
        var t=(screen.availHeight-500)/2;
-       window.open('/manage/product/business/truetime/Truetime.wa?do=getDescription&ouid='+ouid,'_blank','height=600,width=600,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+       var w = screen.availWidth*7/19;
+       var h = screen.availHeight*12/19;
+       window.open('/manage/product/business/truetime/Truetime.wa?do=getDescription&ouid='+ouid,'_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
    }
     //搜索按钮，enter键
     document.onkeydown=function(){

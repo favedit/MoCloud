@@ -79,11 +79,13 @@
       var content = $("#content").val();
       var l=(screen.availWidth-500)/2;
       var t=(screen.availHeight-500)/2;
-      openwin(content,l,t);
+      var w = screen.availWidth*7/19;
+      var h = screen.availHeight*12/19;
+      openwin(content,l,t,w,h);
    }
-   function openwin(content,l,t) 
+   function openwin(content,l,t,w,h) 
    { 
-    OpenWindow=window.open("", '_blank','height=600,width=600,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
+    OpenWindow=window.open("", '_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
     //写成一行 
     OpenWindow.document.write("<TITLE>用户公告内容</TITLE>") 
     OpenWindow.document.write("<BODY BGCOLOR=#ffffff>") 
