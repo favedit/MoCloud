@@ -17,9 +17,10 @@
    <!-- 服务设定 -->
    <Define name='eai.content.login.oa'>Y</Define>
    <Define name='eai.content.login.oa.service'>http://115.182.232.150:8181/oauser</Define>
-   <Define name='eai.server.storage.enable'>Y</Define>
-   <Define name='eai.server.storage.access'>http://localhost:8030/cloud.storage.wv?do=view</Define>
-   <Define name='eai.server.storage.upload'>http://localhost:8030/cloud.storage.wv?do=upload</Define>
+   <Define name='cloud.server.storage.enable'>Y</Define>
+   <Define name='cloud.server.storage.upload'>http://localhost:8030/cloud.storage.upload.wv</Define>
+   <Define name='cloud.server.storage.access'>http://localhost:8030/storage</Define>
+   <Define name='cloud.server.storage.picture'>http://localhost:8030/cloud.storage.picture.wv</Define>
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://10.169.23.66:9099/eai.logger.publish.ws</Define>
 

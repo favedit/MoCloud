@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="src/content-describe"/>
 	<classpathentry kind="src" path="src/content-service"/>
 	<classpathentry kind="src" path="src/content-face"/>
+	<classpathentry kind="src" path="src/test-java"/>
 	<classpathentry kind="src" path="src/config"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-2-core"/>

@@ -6,8 +6,8 @@
    <!-- 存储控制台                                                   -->
    <!-- ============================================================ -->
    <Component
-         face  = 'org.mo.cloud.storage.core.storage.IGcStorageConsole'
-         class = 'org.mo.cloud.storage.core.storage.FGcStorageConsole'
+         face  = 'org.mo.cloud.core.storage.ICloudStorageConsole'
+         class = 'org.mo.cloud.core.storage.FCloudStorageConsole'
          scope = 'global' >
       <Property name='store_path'>${application.storage}</Property>
    </Component>

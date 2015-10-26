@@ -1,17 +1,29 @@
 package org.mo.cloud.core.storage;
 
+import org.mo.com.io.FByteFile;
+import org.mo.com.io.RFile;
 import org.mo.com.lang.FAttributes;
+import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 
 //============================================================
 // <T>存储信息。</T>
 //============================================================
 public class SGcStorage
 {
+   // 日志输出接口
+   private final static ILogger _logger = RLogger.find(SGcStorage.class);
+
    // 分类
    protected String _catalog;
 
    // 类型
    protected String _type;
+
+   // 日期
+   protected String _date;
 
    // 代码
    protected String _code;
@@ -22,11 +34,11 @@ public class SGcStorage
    // 扩展名
    protected String _extension;
 
-   // 来源
-   protected String _source;
+   // 数据
+   protected byte[] _data;
 
-   // 来源大小
-   protected int _sourceLength;
+   // 大小
+   protected int _size;
 
    // 网络地址
    protected String _uri;
@@ -35,7 +47,7 @@ public class SGcStorage
    protected String _url;
 
    // 图片集合
-   protected SGcStorageImages _images = new SGcStorageImages();
+   //protected SGcStorageImages _images = new SGcStorageImages();
 
    //============================================================
    // <T>构造存储信息。</T>
@@ -49,7 +61,7 @@ public class SGcStorage
    // @param catalog 分类
    // @param type 类型
    // @param code 代码
-   // @param source 来源
+   // @param name 名称
    //============================================================
    public SGcStorage(String catalog,
                      String type,
@@ -59,27 +71,6 @@ public class SGcStorage
       _type = type;
       _code = code;
       _name = name;
-   }
-
-   //============================================================
-   // <T>构造存储信息。</T>
-   //
-   // @param catalog 分类
-   // @param type 类型
-   // @param code 代码
-   // @param name 名称
-   // @param source 来源
-   //============================================================
-   public SGcStorage(String catalog,
-                     String type,
-                     String code,
-                     String name,
-                     String source){
-      _catalog = catalog;
-      _type = type;
-      _code = code;
-      _name = name;
-      _source = source;
    }
 
    //============================================================
@@ -116,6 +107,24 @@ public class SGcStorage
    //============================================================
    public void setType(String type){
       _type = type;
+   }
+
+   //============================================================
+   // <T>获得日期。</T>
+   //
+   // @return 日期
+   //============================================================
+   public String date(){
+      return _date;
+   }
+
+   //============================================================
+   // <T>设置日期。</T>
+   //
+   // @param date 日期
+   //============================================================
+   public void setDate(String date){
+      _date = date;
    }
 
    //============================================================
@@ -173,39 +182,39 @@ public class SGcStorage
    }
 
    //============================================================
-   // <T>获得来源。</T>
+   // <T>获得数据。</T>
    //
-   // @return 来源
+   // @return 数据
    //============================================================
-   public String source(){
-      return _source;
+   public byte[] data(){
+      return _data;
    }
 
    //============================================================
-   // <T>设置来源。</T>
+   // <T>设置数据。</T>
    //
-   // @param source 来源
+   // @param data 数据
    //============================================================
-   public void setSource(String source){
-      _source = source;
+   public void setData(byte[] data){
+      _data = data;
    }
 
    //============================================================
-   // <T>获得来源。</T>
+   // <T>获得大小。</T>
    //
-   // @return 来源
+   // @return 大小
    //============================================================
-   public int sourceLength(){
-      return _sourceLength;
+   public int size(){
+      return _size;
    }
 
    //============================================================
-   // <T>设置来源。</T>
+   // <T>设置大小。</T>
    //
-   // @param source 来源
+   // @param size 大小
    //============================================================
-   public void setSourceLength(int sourceLength){
-      _sourceLength = sourceLength;
+   public void setSize(int size){
+      _size = size;
    }
 
    //============================================================
@@ -244,63 +253,101 @@ public class SGcStorage
       _url = url;
    }
 
-   //============================================================
-   // <T>获得图片集合。</T>
+   //   //============================================================
+   //   // <T>获得图片集合。</T>
+   //   //
+   //   // @return 图片集合
+   //   //============================================================
+   //   public SGcStorageImages images(){
+   //      return _images;
+   //   }
    //
-   // @return 图片集合
+   //   //============================================================
+   //   // <T>增加一个图片。</T>
+   //   //
+   //   // @param width 宽度
+   //   // @param height 高度
+   //   //============================================================
+   //   public void pushImage(int width,
+   //                         int height){
+   //      pushImage(width, height, 0);
+   //   }
+   //
+   //   //============================================================
+   //   // <T>增加一个图片。</T>
+   //   //
+   //   // @param width 宽度
+   //   // @param height 高度
+   //   // @param round 圆角
+   //   //============================================================
+   //   public void pushImage(int width,
+   //                         int height,
+   //                         int round){
+   //      SGcStorageImage image = new SGcStorageImage();
+   //      image.setWidth(width);
+   //      image.setHeight(height);
+   //      image.setRound(round);
+   //      //_images.push(image);
+   //   }
+
    //============================================================
-   public SGcStorageImages images(){
-      return _images;
+   // <T>设置网络地址。</T>
+   //
+   // @param url 网络地址
+   //============================================================
+   public void loadFile(String fileName){
+      // 检查文件存在性
+      if(!RFile.exists(fileName)){
+         throw new FFatalError("File is not exists. (file_name={1})", fileName);
+      }
+      // 设置名称
+      if(RString.isEmpty(_name)){
+         _name = RFile.shortName(fileName);
+      }
+      // 设置扩展
+      if(RString.isEmpty(_extension)){
+         _extension = RFile.extension(fileName);
+      }
+      // 加载文件
+      try(FByteFile file = new FByteFile(fileName)){
+         _data = file.toArray();
+      }catch(Exception exception){
+         _logger.error(this, "loadFile", exception);
+      }
    }
 
    //============================================================
-   // <T>增加一个图片。</T>
+   // <T>打包处理。</T>
    //
-   // @param width 宽度
-   // @param height 高度
-   //============================================================
-   public void pushImage(int width,
-                         int height){
-      pushImage(width, height, 0);
-   }
-
-   //============================================================
-   // <T>增加一个图片。</T>
-   //
-   // @param width 宽度
-   // @param height 高度
-   // @param round 圆角
-   //============================================================
-   public void pushImage(int width,
-                         int height,
-                         int round){
-      SGcStorageImage image = new SGcStorageImage();
-      image.setWidth(width);
-      image.setHeight(height);
-      image.setRound(round);
-      _images.push(image);
-   }
-
-   //============================================================
-   // <T>打包信息。</T>
-   //
-   // @param width 宽度
-   // @param height 高度
-   // @param round 圆角
+   // @return 打包字符串
    //============================================================
    public String pack(){
+      if(_data == null){
+         return null;
+      }
       FAttributes map = new FAttributes();
       map.set("catalog", _catalog);
+      map.set("date", _date);
+      map.set("code", _code);
+      map.set("name", _name);
+      map.set("extension", _extension);
+      map.set("size", _data.length);
       return map.pack();
    }
 
    //============================================================
-   // <T>解包信息。</T>
+   // <T>解包处理。</T>
    //
-   // @param width 宽度
-   // @param height 高度
-   // @param round 圆角
+   // @param pack 打包字符串
    //============================================================
-   public void unpack(String source){
+   public void unpack(String pack){
+      FAttributes map = new FAttributes();
+      map.unpack(pack);
+      _catalog = map.get("catalog");
+      _date = map.get("date");
+      _code = map.get("code");
+      _name = map.get("name");
+      _extension = map.get("extension");
+      _size = map.getInt("size");
    }
 }

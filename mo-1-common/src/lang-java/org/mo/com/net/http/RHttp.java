@@ -1,12 +1,43 @@
 package org.mo.com.net.http;
 
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FString;
 
 //============================================================
 // <T>网络工具。</T>
 //============================================================
 public class RHttp
 {
+   //============================================================
+   // <T>生成文件名称。</T>
+   //
+   // @param params 参数集合
+   // @return 文件名称
+   //============================================================
+   public static String makeUrl(String... params){
+      FString result = new FString();
+      if(params != null){
+         int count = params.length;
+         for(int n = 0; n < count; n++){
+            String param = params[n];
+            if(param != null){
+               // 写入内容
+               if(n < count - 1){
+                  if(param.endsWith("/")){
+                     result.append(param);
+                  }else{
+                     result.append(param);
+                     result.append("/");
+                  }
+               }else{
+                  result.append(param);
+               }
+            }
+         }
+      }
+      return result.toString();
+   }
+
    //============================================================
    // <T>获得指定网络地址的数据。</T>
    //

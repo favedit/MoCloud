@@ -14,6 +14,10 @@
    <Define name='application.storage'>${application}/mt-storage</Define>
 
    <!-- 服务设定 -->
+   <Define name='cloud.server.storage.enable'>Y</Define>
+   <Define name='cloud.server.storage.upload'>http://localhost:8030/cloud.storage.upload.wv</Define>
+   <Define name='cloud.server.storage.access'>http://localhost:8030/storage</Define>
+   <Define name='cloud.server.storage.picture'>http://localhost:8030/cloud.storage.picture.wv</Define>
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://localhost:9099/eai.logger.publish.ws</Define>
 

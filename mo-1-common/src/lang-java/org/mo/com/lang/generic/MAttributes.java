@@ -614,11 +614,11 @@ public abstract class MAttributes
    // @param valueSplit 内容分割
    // @return 内容字符串
    //============================================================
-   public FString toString(String nameSplit,
-                           String valueSplit){
+   public String toString(String nameSplit,
+                          String valueSplit){
       FString result = new FString();
       RStrings.join(result, _names, _values, 0, _count, nameSplit, valueSplit);
-      return result;
+      return result.toString();
    }
 
    //============================================================
