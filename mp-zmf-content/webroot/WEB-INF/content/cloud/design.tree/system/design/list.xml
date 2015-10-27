@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="system.design.frame" update_date="20141209154356">
+   <TreeView _uuid2="71202174-098f-48b0-ad14-024064f85750" name="content.design.frame" label="M#12cn18内容-设计-页面" is_valid="Y" note="M#" is_config="N" disp_checked="N" service="catalog@cloud.describe.list">
+      <TreeNodeType name="package" code="Package" label="包" is_valid="Y" note="" icon="system.design.frame.package" action="list"/>
+      <TreeNodeType name="workspace" code="Workspace" label="工作空间" is_valid="Y" note="" icon="system.design.frame.workspace" action="list"/>
+      <TreeNodeType name="frameSet" code="FrameSet" label="页面布局" is_valid="Y" note="" icon="system.design.frame.frameset" action="list"/>
+      <TreeNodeType name="frame" code="Frame" label="页面" is_valid="Y" note="" icon="system.design.frame.frame" action="list"/>
+      <TreeNodeType name="form" code="Form" label="表单" is_valid="Y" note="" icon="system.design.frame.form" action="list"/>
+      <TreeNodeType name="table" code="Table" label="表格" is_valid="Y" note="" icon="system.design.frame.table" action="list"/>
+      <TreeNodeType name="bar" code="Bar" label="停靠栏" is_valid="Y" note="" icon="system.design.frame.bar" action="list" attributes="property_frame=system.design.persistence.property.BarFrame"/>
+      <TreeNodeType name="window" code="Window" label="窗口" is_valid="Y" note="" icon="system.design.frame.window" action="list"/>
+      <TreeNodeType name="toolBar" code="ToolBar" label="工具栏" is_valid="Y" note="" icon="system.design.frame.toolbar" action="list"/>
+      <TreeNodeType name="menuBar" code="MenuBar" label="菜单栏" is_valid="Y" note="" icon="system.design.frame.menubar" action="list"/>
+      <TreeNodeType name="tabBar" code="TabBar" label="分页栏" is_valid="Y" note="" icon="system.design.frame.tabbar" action="list"/>
+      <TreeNodeType name="button" code="Button" label="按键" is_valid="Y" note="" icon="system.design.frame.button" attributes="property_frame=system.design.persistence.property.ButtonFrame"/>
+      <TreeNodeType name="picture" code="Picture" label="图片" is_valid="Y" note="" icon="system.design.frame.picture" attributes="property_frame=system.design.persistence.property.PictureFrame"/>
+   </TreeView>
+</Content>

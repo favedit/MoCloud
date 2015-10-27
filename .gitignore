@@ -42,6 +42,8 @@
 /mp-eai-hadoop/webroot/WEB-INF/lib
 /mp-eai-demo/webroot/WEB-INF/classes
 /mp-eai-demo/webroot/WEB-INF/lib
+/mp-zmf-content/webroot/WEB-INF/classes
+/mp-zmf-content/webroot/WEB-INF/lib
 /mt-server/tomcat-cloud.develop/logs
 /mt-server/tomcat-cloud.editor/logs
 /mt-server/tomcat-cloud.manage/logs
@@ -57,6 +59,7 @@
 /mt-server/tomcat-eai.manage/logs
 /mt-server/tomcat-eai.logger/logs
 /mt-server/tomcat-eai.demo/logs
+/mt-server/tomcat-zmf.content/logs
 /mt-database
 /mt-storage
 /mt-temp

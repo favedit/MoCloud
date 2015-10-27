@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ==================================================== -->
+   <!-- 用户信息设备服务                                     -->
+   <!-- ==================================================== -->
+   <WebService
+         name  = 'cloud.info.device'
+         face  = 'org.mo.content.service.info.device.IDeviceService'/>
+
+   <Component
+         face  = 'org.mo.content.service.info.device.IDeviceService'
+         class = 'org.mo.content.service.info.device.FDeviceService'
+         scope = 'global'/>
+</Config>

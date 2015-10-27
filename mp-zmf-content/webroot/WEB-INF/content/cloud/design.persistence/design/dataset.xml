@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content name="design.dataset" update_date="20150902103350">
+  <Persistence _uuid2="lUFHlSFaFAgD22CPbRzTuw" name="cloud.editor.dataset" label="数据集信息" is_valid="Y" note="" template="xmlobject" source="${output.design}/src/content-design">
+    <Interface _uuid2="EUsC8pyj1s4aSxTr]cNipg" name="IObject" label="对象" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XObjectFace" inherits="">
+      <Attribute _uuid2="MEhdZTCCyYfx87n]60zsmQ" name="name" label="名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="QkKVATvlJL1B4RlBT56blg" name="alias" label="简称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="IUcxcfdLaQO[QXtyKdIojA" name="label" label="标签" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_abstract="N" is_default="N" data_group="" data_code="" data_default="" />
+      <Attribute _uuid2="LkaPS9z5LVEABD4xNvpfiA" name="is_valid" label="有效性" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" data_default="Y" />
+      <Attribute _uuid2="]krvxsWWhEVj68WPed1BmA" name="attributes" label="属性列表" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="1UQx1omXLnyMDO2jjs4Iqg" name="note" label="注释信息" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_abstract="N" is_default="N" data_group="" data_code="" data_default="" />
+    </Interface>
+    <Interface _uuid2="a0iLk[6HNyVJnuskeruclA" name="IAccess" label="权限对象" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XAccessFace">
+      <Attribute _uuid2="zEAKG3EVHDXCjUI]SLnXkg" name="access_query" label="查询可" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="S0yocctueTAUNFz3A3F4tA" name="access_insert" label="新建可" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="eEi83w2q[oUsGP4s8t53uw" name="access_update" label="更新可" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="ek1jW80hEfsCmk6LUI40jw" name="access_delete" label="删除可" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" />
+    </Interface>
+    <Interface _uuid2="TUUvRwzwyATACOM3wAQOpg" name="IField" label="数据对象" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldFace" inherits="IObject,IAccess">
+      <Attribute _uuid2="9kSdI1pemHbF81Fixmhqlw" name="is_key" label="主键" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="yE2Xt9MEc4jBASIyaYQwiA" name="is_null" label="空值" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="FUA]b246tfYsYgzSEk5Xlw" name="is_unique" label="唯一值" is_valid="Y" note="" type="Boolean" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="5UDh9tHwU6hdAlLsELwzpw" name="is_store" label="可存储" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="g0PPnN74qc[oH6fzwPjSiQ" name="is_abstract" label="虚字段" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="JEryWEPX1twvcUdS01d2lA" name="is_encrypt" label="可加密" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="N" />
+      <Attribute _uuid2="oUU2WRSR3qkedYYK51Yprw" name="data_name" label="数据名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="l0sGqpfej1fMPrGQJN6biA" name="data_format" label="数据格式" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="j0zCl042chBzYOpLZHrHtg" name="data_alias" label="数据别称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="4kfphWDlhdkzdqqYigJjlw" name="data_type" label="数据类型" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="IExFsqE7CeCFwJZu3f43pA" name="data_size" label="数据大小" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="ckMSwvWVkL0fEPSl694RlQ" name="data_refer" label="数据引用" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="XE1yb1KPmNvhFMiMd9Pklw" name="data_code" label="数据编号" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="6kdxc2TTe5RjmDnLqSzumQ" name="data_uniques" label="唯一名称集" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="1U77DN6xfHebCSKwyMWoiQ" name="group" label="分组类型" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="ik3m4Ltj1qRbP294Mxw0kA" name="data_default" label="新建缺省" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="N" />
+      <Attribute _uuid2="WEgcfrLMLocwDXWrDty6tA" name="data_insert" label="新建数据" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="00mVQtKcAbjeRy8dXuJFtg" name="data_update" label="更新数据" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="N" />
+      <Attribute _uuid2="g0UrvfBqWUFv4nc24xlVvw" name="index_names" label="索引名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    </Interface>
+    <Interface _uuid2="7EEWfENKoUU6rA7I4DgEuQ" name="IFieldProperty" label="属性字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldPropertyFace" inherits="IField">
+      <Attribute _uuid2="JkCu20wLMd5LMJl03JLMtQ" name="property_id" label="属性代码号" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="N" />
+    </Interface>
+    <Interface _uuid2="m0Fb8nakCUCsau22v2r0lA" name="IDataset" label="数据集对象" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XDatasetFace" inherits="IObject,IAccess">
+      <Attribute _uuid2="HkdpGcIxwk7AIEXEwmxQuw" name="data_engine" label="数据引擎" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="fUXaOpEOLp7iXim98AyjkA" name="data_group" label="数据分组" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="30m3WnU1Nyorgk6CVU8WoA" name="data_factory" label="数据工厂" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="3EmFM83AGlUXxmJjnWxFnQ" name="data_name" label="数据名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="nUfRH0HBa9FuJ[YJYr4hhA" name="data_alias" label="数据别称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="b0mG6EzHk4k6DUvxKmYZlQ" name="data_logic" label="数据别称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="PkflD0fdoZx7XL[fzPSqgg" name="data_size" label="数据大小" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="eEpLJ0DXxCqTtiOvqNidvw" name="logic_name" label="逻辑接口" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="jUFa7kno9jSOdRPzpzLgqw" name="logic_face" label="处理接口" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="7UL85oAfuFkVn6nU]Rxnug" name="logic_entity" label="单元类" is_valid="Y" note="" type="String" is_store="Y" />
+      <Attribute _uuid2="203tgKjRZhlX8v8qeGdZiQ" name="logic_class" label="处理类" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="GEhAZpR7UPeCcaADAhNPjA" name="logic_insert" label="新建逻辑" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="I03sY4WQfJzU0qkg9FM1lg" name="logic_update" label="更新逻辑" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="o0b9OdbMO]6gWfYigX2Luw" name="logic_delete" label="删除逻辑" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" />
+      <Attribute _uuid2="6b537047-c8c1-4594-ba67-c595243527a0" name="logic_timeout" label="超时设定" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    </Interface>
+    <Component _uuid2="hEJqk3pxKFLem3h]UG[0hA" name="FieldRecordId" label="记录字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldRecordId" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldRecordId" inherits="IField" />
+    <Component _uuid2="tk3tsBo7VwcYlZ[kj4efvg" name="FieldRecordIdProperty" label="记录字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldRecordIdProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldRecordIdProperty" inherits="IFieldProperty" />
+    <Component _uuid2="1UHrr0UdMXntYFp7i]eanQ" name="FieldBoolean" label="布尔型字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldBoolean" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldBoolean" inherits="IField" />
+    <Component _uuid2="nUkacydgjfSfGTe16IB0rw" name="FieldBooleanProperty" label="布尔型字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldBooleanProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldBooleanProperty" inherits="IFieldProperty" />
+    <Component _uuid2="m0lSohrCTVcH2eYalAzfnw" name="FieldInteger" label="整数字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldInteger" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldInteger" inherits="IField" />
+    <Component _uuid2="NEZqDPOZUMs7xfYg1IltrA" name="FieldIntegerProperty" label="整数字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldIntegerProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldIntegerProperty" inherits="IFieldProperty" />
+    <Component _uuid2="TUacMX67CXa[mPhSf73fiA" name="FieldLong" label="长整数字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldLong" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldLong" inherits="IField" />
+    <Component _uuid2="H0R5TZW37]arlHnFgYiYrg" name="FieldLongProperty" label="长整数字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldLongProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldLongPropery" inherits="IFieldProperty" />
+    <Component _uuid2="v03fiYtnBrPcOZnoZAjzsw" name="FieldFloat" label="浮点数字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldFloat" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldFloat" inherits="IField" />
+    <Component _uuid2="3Eg3qvkKsz9XyyucLAmEtA" name="FieldFloatProperty" label="浮点数字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldFloatProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldFloatProperty" inherits="IFieldProperty" />
+    <Component _uuid2="f4c530fc-d950-4a1c-9cae-f00036b24afe" name="FieldDouble" label="双精度字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldDouble" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldDouble" inherits="IField" />
+    <Component _uuid2="15d63517-2adf-4fdd-9567-d85f54535bb5" name="FieldDoublePropery" label="双精度字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldDoubleProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldDoubleProperty" inherits="IFieldProperty" />
+    <Component _uuid2="w0F38ogxCgdaRvGKytDtqg" name="FieldTimeSpan" label="时间段字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldTimeSpan" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldTimeSpan" inherits="IField" />
+    <Component _uuid2="KU8rdlWAuL]hgSOIWV8blQ" name="FieldTimeSpanProperty" label="时间段字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldTimeSpanProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldTimeSpanProperty" inherits="IFieldProperty" />
+    <Component _uuid2="kEn[ctBFh434tEDmdmiYtg" name="FieldDate" label="日期字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldDate" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldDate" inherits="IField" />
+    <Component _uuid2="uk3rt5HgIG28fIzjdIUHkQ" name="FieldDateProperty" label="日期字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldDateProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldDateProperty" inherits="IFieldProperty" />
+    <Component _uuid2="zkli4z1GN]bY9hHPO2IKnw" name="FieldTime" label="时间字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldTime" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldTime" inherits="IField" />
+    <Component _uuid2="uk3rt5HgIG28fIzjdIUHkQ" name="FieldTimeProperty" label="时间字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldTimeProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldTimeProperty" inherits="IFieldProperty" />
+    <Component _uuid2="zUtrL3Subd7Ct0dM6cc9uw" name="FieldDateTime" label="日期时间字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldDateTime" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldDateTime" inherits="IField" />
+    <Component _uuid2="uk3rt5HgIG28fIzjdIUHkQ" name="FieldDateTimeProperty" label="日期时间字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldDateTimeProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldDateTimeProperty" inherits="IFieldProperty" />
+    <Component _uuid2="F0rgis3o0[MynlX2lIFtvQ" name="FieldEnum" label="枚举字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldEnum" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldEnum" inherits="IField" />
+    <Component _uuid2="20Hbm50MsItfYwuZL6EAlg" name="FieldEnumProperty" label="枚举字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldEnumProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldEnumProperty" inherits="IFieldProperty" />
+    <Component _uuid2="RkUI133KEEkQ[VzCFxrphQ" name="FieldSet" label="集合字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldSet" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldSet" inherits="IField" />
+    <Component _uuid2="AkbZC]cGZm8mC8GNbo]Qng" name="FieldSetProperty" label="集合字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldSetProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldSetProperty" inherits="IFieldProperty" />
+    <Component _uuid2="6UEG]EXi[Fa0bYccatkdrg" name="FieldChar" label="字段字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldChar" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldChar" inherits="IField" />
+    <Component _uuid2="j0]vIWLY3pl1Deo]PkRNnw" name="FieldCharProperty" label="字符字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldCharProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldCharProperty" inherits="IFieldProperty" />
+    <Component _uuid2="1kKiXQ8phKdg88sSVY[vtg" name="FieldString" label="字符串字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldString" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldString" inherits="IField" />
+    <Component _uuid2="zU]yK3s]0Kel[]102zNOrQ" name="FieldStringProperty" label="字符串字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldStringProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldStringProperty" inherits="IFieldProperty" />
+    <Component _uuid2="ckwwcaWN[7z00]kY0PBOtQ" name="FieldContent" label="内容字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldContent" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldContent" inherits="IField" />
+    <Component _uuid2="LEYnolUQTSZQRo6eB0zJuQ" name="FieldContentProperty" label="内容字段属性" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldContentProperty" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldContentProperty" inherits="IFieldProperty" />
+    <Component _uuid2="nEoysBBwId0eVF12h85joQ" name="FieldTemplate" label="模板字段" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XFieldTemplate" base_name="org.mo.cloud.content.design.dataset.base.XBaseFieldTemplate" inherits="IObject">
+      <Attribute _uuid2="8E7gN[DR9PZ0s]8UIYyCjQ" name="template_name" label="模板名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    </Component>
+    <Component _uuid2="XkEHmsUYhazYNao2yBi6sw" name="DataView" label="数据视图" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XDataView" base_name="org.mo.cloud.content.design.dataset.base.XBaseDataView" inherits="IDataset">
+      <Attribute _uuid2="TEKs2tXdZ6dtzBObUn7srA" name="data_from" label="数据来自" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="q0wJmO14TDBO]esPyiAqqQ" name="data_where" label="数据条件" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="7UGMrAh[i6DwUrJxiK9lmQ" name="data_order" label="数据排序" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    </Component>
+    <Component _uuid2="G0Hf1VaM1pm1al0I3nGstg" name="DataStore" label="数据存储" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XDataStore" base_name="org.mo.cloud.content.design.dataset.base.XBaseDataStore" inherits="IDataset">
+      <Attribute _uuid2="70NSkDAaThzthX3kug0FrQ" name="parent_name" label="父名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="GE5zdbJTZchUIkJ3JqEaiw" name="dataset_order" label="排序方法" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+      <Attribute _uuid2="MUw5r1aWuy8JeCeGIvS2iQ" name="data_type" label="数据类型" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="N" />
+    </Component>
+    <Component _uuid2="HUuL2L]3[Y6LSSbELanQpg" name="DataTemplate" label="数据模板" is_valid="Y" note="" class_name="org.mo.cloud.content.design.dataset.common.XDataTemplate" base_name="org.mo.cloud.content.design.dataset.base.XBaseDataTemplate" inherits="IDataset">
+      <Attribute _uuid2="i0MUn1Ml6VSnw7BKFSnmug" name="parent_name" label="父名称" is_valid="Y" note="" type="String" is_store="Y" is_config="Y" is_default="Y" />
+    </Component>
+  </Persistence>
+</Content>

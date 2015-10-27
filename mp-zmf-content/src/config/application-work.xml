@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration>
+   <!-- 应用定义 -->
+   <Define name='application'>${application}</Define>
+   <Define name='application.name'>mp-eai-content</Define>
+   <Define name='application.mode'>test</Define>
+   <Define name='application.root'>${application}/${application.name}</Define>
+   <Define name='application.deploy'>${application.root}/deploy</Define>
+   <Define name='application.web'>${application.root}/webroot</Define>
+   <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
+   <Define name='application.space'>${application.web}/WEB-INF/config</Define>
+   <Define name='application.content'>${application.web}/WEB-INF/content</Define>
+   <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
+   <Define name='application.storage'>${application}/mt-storage</Define>
+
+   <!-- 服务设定 -->
+   <Define name='eai.content.login.oa'>N</Define>
+   <Define name='eai.content.login.oa.service'>http://10.21.0.141:6666/ycjt/auth/auth.jsp</Define>
+   <Define name='cloud.server.storage.enable'>Y</Define>
+   <Define name='cloud.server.storage.upload'>http://localhost:8030/cloud.storage.upload.wv</Define>
+   <Define name='cloud.server.storage.access'>http://localhost:8030/storage</Define>
+   <Define name='cloud.server.storage.picture'>http://localhost:8030/cloud.storage.picture.wv</Define>
+   <Define name='cloud.server.logger.enable'>Y</Define>
+   <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws</Define>
+   
+   <!-- 应用设定 -->
+   <Include>${application.config}/application.xml</Include>
+
+   <!-- 环境设定 -->
+   <Include>${application.config}/environment/environment-work.xml</Include>
+</Configuration>

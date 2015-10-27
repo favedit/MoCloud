@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <Workspace name="resource.share.Workspace" type='FDsShareWorkspace' label="共享工作区">
+      <FrameSet name='mainFrameSet' direction_cd='V' label='页面布局'>
+         <FramePage name='toolbarFrame' linker='_frameMenuBar' label='菜单区' size='0,24'/>
+         <FramePage name='bodyFrame' linker='_frameBody' label='工作区'/>
+         <FramePage name='statusFrame' linker='_frameStatusBar' label='状态区' size='0,20'/>
+      </FrameSet>
+   </Workspace>
+</Content>

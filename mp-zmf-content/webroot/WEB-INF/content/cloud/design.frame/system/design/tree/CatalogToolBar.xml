@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Content>
+   <ToolBar name="system.design.frame.CatalogToolBar" label="目录工具栏">
+      <ToolButtonEdit name='search' linker='_controlSearch' edit_size='200,0' icon='tools.search' hint='搜索内容'/>
+      <ToolButtonSplit/>
+      <ToolButton name='folderProperty' linker='_controlFolderProperty' icon='tools.property' label='属性' hint='修改当前目录的内容'/>
+      <ToolButtonSplit/>
+      <ToolButton name='folderOpen' linker='_controlFolderOpen' icon='resource.tools.open' hint='展开选中节点'/>
+      <ToolButton name='folderClose' linker='_controlFolderClose' icon='resource.tools.close' hint='收起选中节点'/>
+   </ToolBar>
+</Content>

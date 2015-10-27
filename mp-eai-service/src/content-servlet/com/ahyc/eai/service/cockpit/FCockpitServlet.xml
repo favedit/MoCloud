@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.tender.model'>
+SELECT
+   TENDER_MODEL,
+   SUM(INVESTMENT) INVESTMENT_TOTAL
+FROM ST_FIN_TENDER_PHASE
+WHERE RECORD_MONTH = {date}
+GROUP BY TENDER_MODEL
+</Resource>
+
+</Config>

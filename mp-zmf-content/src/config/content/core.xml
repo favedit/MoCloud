@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ============================================================ -->
+   <!-- 时间控制台                                                   -->
+   <!-- ============================================================ -->
+   <Component
+         face   = 'org.mo.cloud.common.datetime.IDateTimeConsole'
+         class  = 'org.mo.cloud.common.datetime.FDateTimeConsole'
+         scope  = 'global'
+         deploy = 'start'>
+      <Initialize name='initialize'/>
+   </Component>
+
+   <!-- ============================================================ -->
+   <!-- GcLoggerConsole: 日志控制台                                  -->
+   <!-- ============================================================ -->
+   <Component
+         face   = 'org.mo.cloud.core.logger.IGcLoggerConsole'
+         class  = 'org.mo.cloud.core.logger.FGcLoggerConsole'
+         scope  = 'global'
+         deploy = 'start'>
+      <Property name='enable'>${cloud.server.logger.enable}</Property>
+      <Property name='server_code'>${application.code}</Property>
+      <Property name='logger_interval'>10000</Property>
+      <Property name='logger_service_publish'>${cloud.server.logger.publish}</Property>
+      <Initialize name='initialize'/>
+   </Component>
+
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
+         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
+         scope = 'global'>
+      <Property name='enable'>${cloud.server.storage.enable}</Property>
+      <Property name='upload_url'>${cloud.server.storage.upload}</Property>
+      <Property name='access_url'>${cloud.server.storage.access}</Property>
+      <Initialize name='initialize'/>
+   </Component>
+
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.content.engine.core.storage.IResStorageConsole'
+         class = 'org.mo.content.engine.core.storage.FResStorageConsole'
+         scope = 'global'>
+      <Property name='config_file_name'>${application}/data/storage.xml</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ==================================================== -->
+   <!-- IDataPersonAccessAuthorityConsole:账户登录                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole'
+         class = 'org.mo.eai.logic.data.person.user.FDataPersonAccessAuthorityConsole'
+         scope = 'global'>
+      <Property name='oaLoginEnable'>${eai.content.login.oa}</Property>
+      <Property name='oaLoginUrl'>${eai.content.login.oa.service}</Property>
+   </Component>
+</Config>

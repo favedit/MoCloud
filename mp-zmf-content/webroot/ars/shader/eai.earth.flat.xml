@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+   <!--=====================================================-->
+   <State name='fill_mode'   value='Face'/>
+   <State name='cull_mode'   value='Front'/>
+   <State name='depth_mode'  value='LessEqual'/>
+   <State name='depth_write' value='Y'/>
+   <State name='blend_mode'  value='Y' source='SrcAlpha' target='One'/>
+   <State name='alpha_test'  value='N'/>
+   <!--=====================================================-->
+   <Option name='shadow'   value='N'/>
+   <Option name='lightmap' value='N'/>
+   <Option name='fog'      value='N'/>
+   <!--=====================================================-->
+   <Parameter name='vc_land'         format='Float4'/>
+   <Parameter name='vc_ocean'        format='Float4'/>
+   <Parameter name='vc_model_matrix' format='Float4x4'/>
+   <Parameter name='vc_vp_matrix'    format='Float4x4'/>
+   <Parameter name='fc_cloud'        format='Float4'/>
+   <Parameter name='fc_land'         format='Float4'/>
+   <Parameter name='fc_ocean'        format='Float4'/>
+   <Parameter name='fc_water'        format='Float4'/>
+   <!--=====================================================-->
+   <Attribute name='va_position'   linker='position' format='Float4'/>
+   <Attribute name='va_color'      linker='color'    format='Byte4Normal'/>
+   <Attribute name='va_coord'      linker='coord'    format='Float2'/>
+   <!--=====================================================-->
+   <Sampler name='fs_cloud'        linker='cloud'/>
+   <Sampler name='fs_land'         linker='land'/>
+   <Sampler name='fs_ocean'        linker='ocean'/>
+   <Sampler name='fs_water'        linker='water'/>
+   <Sampler name='fs_water_normal' linker='water_normal'/>
+   <!--=====================================================-->
+   <Source name='vertex'><![CDATA[
+      //..........................................................
+      // 变换矩阵声明
+      uniform vec4 vc_land;
+      uniform vec4 vc_ocean;
+      uniform mat4 vc_model_matrix;
+      uniform mat4 vc_vp_matrix;
+      //..........................................................
+      // 属性流声明
+      attribute vec3 va_position;
+      attribute vec2 va_coord;
+      //..........................................................
+      // 属性流声明
+      varying vec2 v_coord;
+      //..........................................................
+      // 处理
+      void main(){
+         // 计算模型坐标
+         vec4 position = vec4(va_position, 1.0);
+         // 计算最终坐标
+         gl_Position = position;
+         // 设置纹理
+         v_coord = vec2(va_coord.x, 1.0 - va_coord.y);
+      }
+   ]]></Source>
+   <Source name='fragment'><![CDATA[
+      // 声明环境
+      #ifdef GL_ES
+      precision mediump float;
+      #endif
+      //..........................................................
+      // 声明常量
+      uniform vec4 fc_cloud;
+      uniform vec4 fc_land;
+      uniform vec4 fc_ocean;
+      uniform vec4 fc_water;
+      //..........................................................
+      // 声明插值器
+      varying vec2 v_coord;
+      //..........................................................
+      // 声明取样器
+      uniform sampler2D fs_cloud;
+      uniform sampler2D fs_land;
+      uniform sampler2D fs_ocean;
+      uniform sampler2D fs_water;
+      uniform sampler2D fs_water_normal;
+      //..........................................................
+      // 处理
+      void main(void){
+         vec3 constGrey = vec3(0.222, 0.707, 0.071);
+         // 获得云层1颜色
+         vec2 coordCloud1 = vec2(v_coord.x + fc_cloud.x, v_coord.y);
+         vec4 colorCloud1 = texture2D(fs_cloud, coordCloud1);
+         float rateCloud1 = dot(colorCloud1.rgb, constGrey.rgb) * 0.6;
+         // 获得云层2颜色
+         vec2 coordCloud2 = vec2(v_coord.x + fc_cloud.y, v_coord.y);
+         vec4 colorCloud2 = texture2D(fs_cloud, coordCloud2);
+         float rateCloud2 = dot(colorCloud2.rgb, constGrey.rgb) * 0.4;
+         // 获得云层3颜色
+         vec2 coordCloud3 = vec2(v_coord.x + fc_cloud.z, v_coord.y);
+         vec4 colorCloud3 = texture2D(fs_cloud, coordCloud3);
+         float rateCloud3 = dot(colorCloud3.rgb, constGrey.rgb) * 0.5;
+         // 获得陆地颜色
+         vec4 colorLand = texture2D(fs_land, v_coord);
+         // 获得水纹1颜色
+         vec2 coordWater1 = vec2(v_coord.x + fc_water.x, v_coord.y) * 30.0;
+         vec4 colorWater1 = vec4(texture2D(fs_water, coordWater1).rgb * 0.9, 1.0);
+         vec4 colorWater1Normal = texture2D(fs_water_normal, coordWater1) * 2.0 - 1.0;
+         vec3 water1Normal = normalize(colorWater1Normal.xyz) * colorWater1Normal.w;
+         float rateWater1 = dot(colorWater1.rgb, constGrey.rgb) * 0.3;
+         // 获得水纹2颜色
+         vec2 coordWater2 = vec2(v_coord.x + fc_water.y, v_coord.y) * 20.0;
+         vec4 colorWater2 = vec4(texture2D(fs_water, coordWater2).rgb * 0.8, 1.0);
+         vec4 colorWater2Normal = texture2D(fs_water_normal, coordWater2);
+         //vec3 water2Normal = normalize(colorWater2Normal.xyz) * colorWater2Normal.w;
+         float rateWater2 = dot(colorWater2.rgb, constGrey.rgb) * 0.2;
+         // 获得水纹3颜色
+         vec2 coordWater3 = vec2(v_coord.x + fc_water.z, v_coord.y) * 10.0;
+         vec4 colorWater3 = vec4(texture2D(fs_water, coordWater3).rgb * 0.7, 1.0);
+         vec4 colorWater3Normal = texture2D(fs_water_normal, coordWater3);
+         //vec3 water3Normal = normalize(colorWater3Normal.xyz) * colorWater3Normal.w;
+         float rateWater3 = dot(colorWater3.rgb, constGrey.rgb) * 0.1;
+         // 获得海洋颜色
+         vec4 colorOcean = texture2D(fs_ocean, v_coord + water1Normal.xy * water1Normal.z * 0.01);
+         //..........................................................
+         // 合成颜色
+         float rate = 1.0;
+         vec4 result = vec4(0.0, 0.0, 0.0, 1.0);
+         // 合并云1颜色
+         result.rgb += colorCloud1.rgb * rateCloud1;
+         rate = clamp(rate - rateCloud1, 0.0, 1.0);
+         // 合并云2颜色
+         //result.rgb += colorCloud2.rgb * rateCloud2;
+         //rate = clamp(rate - rateCloud2, 0.0, 1.0);
+         // 合并云3颜色
+         //result.rgb += colorCloud3.rgb * rateCloud3;
+         //rate = clamp(rate - rateCloud3, 0.0, 1.0);
+         // 合并陆地颜色
+         result.rgb += colorLand.rgb * rate * colorLand.w;
+         rate = clamp(rate - colorLand.w, 0.0, 1.0);
+         // 合并水纹1颜色
+         result.rgb += colorWater1.rgb * rate * rateWater1;
+         rate = clamp(rate - rateWater1, 0.0, 1.0);
+         // 合并水纹2颜色
+         result.rgb += colorWater2.rgb * rate * rateWater2;
+         rate = clamp(rate - rateWater2, 0.0, 1.0);
+         // 合并水纹3颜色
+         result.rgb += colorWater3.rgb * rate * rateWater3;
+         rate = clamp(rate - rateWater3, 0.0, 1.0);
+         // 合并海洋颜色
+         result.rgb += colorOcean.rgb * rate;
+         // 输出颜色
+         gl_FragColor = result;
+         //gl_FragColor = vec4(rateCloud, rateCloud, rateCloud, 1.0);
+         //gl_FragColor = vec4(rateWater, rateWater, rateWater, 1.0);
+         //gl_FragColor = colorLand;
+      }
+   ]]></Source>
+</Configuration>

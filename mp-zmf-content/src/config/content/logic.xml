@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Config>
+
+   <!-- ==================================================== -->
+   <!-- FinancialMarketerConsole:金融理财师控制台            -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.eai.console.financial.IFinancialMarketerConsole'
+         class = 'org.mo.eai.console.financial.FFinancialMarketerConsole'
+         scope = 'global'>
+      <Property name='mode_cd'>${application.mode}</Property>
+   </Component>
+
+</Config>

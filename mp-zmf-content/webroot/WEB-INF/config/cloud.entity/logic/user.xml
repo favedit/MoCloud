@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Group _uuid="nUR0nSjhzD4J0yYgjuP7kQ" name="logic.user" label="共通定义" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" source_name="MoMgStructCommon" code="Gcm" full_code="StructCommon" display_index="21" project_name="/Common/MoMessage" project_code="Mg">
+  <Entity _uuid="ZUdv1dBQ]mCbAB6Sra5diw" name="GcObject" label="对象" is_valid="Y" note="M#" is_server="Y" is_server_cpp="N" is_server_java="Y" is_client="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_class="N" is_final="N" parent_name="NetObject">
+    <Item _uuid="r03rRTBGwpEdgrnfeMVvgQ" name="objectCd" label="对象类型" is_valid="Y" note="M#" type="String" is_collection="N" property_id="1" is_persistence="Y" is_system="N" is_lock="N" is_get="N" is_set="N" />
+  </Entity>
+  <Entity _uuid="49c88351-e52e-48ab-b5f4-cd328d58c9ad" name="GcUserInfo" label="用户信息" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_class="N" is_final="N">
+    <Item _uuid="0266da96-d782-4fe8-9f61-5bd06b3746eb" name="label" label="标签" is_valid="Y" note="M#" type="String" is_collection="N" property_id="1" is_persistence="N" is_system="N" is_lock="N" is_get="N" is_set="N" />
+  </Entity>
+  <Entity _uuid="53487923-ef2b-4380-bbd6-ee98c4bc6daa" name="GcSession" label="会话信息" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" code="Session" is_class="N" is_final="N">
+    <Item _uuid="f8d1a69d-5ee7-4f56-ad88-85e2c3d6aecc" name="code" label="代码" is_valid="Y" note="M#" type="String" is_collection="N" property_id="1" is_persistence="N" is_system="N" is_lock="N" is_get="N" is_set="N" />
+  </Entity>
+</Group>

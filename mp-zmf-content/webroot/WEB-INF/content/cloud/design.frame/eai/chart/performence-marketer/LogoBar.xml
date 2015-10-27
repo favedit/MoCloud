@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Content update_date="20150623152404">
+  <Bar guid="F6E68BB974BB47C3B55161F5B2076588" border="1px solid red;" name="eai.chart.LogoBar" label="标志栏" size="500,1208">
+    <!-- 当日 -->
+    <!--  总投资金额  -->
+    <Label name="" label="总投资金额" location="150,280" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font="20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="dayInvestment" label="0" location="265,278" size="208,22"  fore_color='#f8b51a' align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 赎回总金额 -->
+    <Label name="" label="赎回总金额" location="150,330" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="dayRedemption" label="0" location="265,330" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 净投资金额 -->
+    <Label name="" label="净投资金额" location="150,380" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="dayNetinvestment" label="0" location="265,380" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 新注册人数 -->
+     <Label name="" label="新注册人数" location="150,430" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="dayMemberRegister" label="0" location="265,430" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 新投资人数 -->
+    <Label name="" label="新投资人数" location="150,480" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="dayCustomerRegister" label="0" location="265,480" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 当月 -->
+    <!--  总投资金额  -->
+    <Label name="" label="总投资金额" location="150,580" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="monthInvestment" label="0" location="265,578" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 赎回总金额 -->
+    <Label name="" label="赎回总金额" location="150,630" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="monthRedemption" label="0" location="265,630" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 净投资金额 -->
+    <Label name="" label="净投资金额" location="150,680" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="monthNetinvestment" label="0" location="265,680" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 新注册人数 -->
+     <Label name="" label="新注册人数" location="150,730" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="monthMemberRegister" label="0" location="265,730" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 新注册人数 -->
+    <Label name="" label="新投资人数" location="150,780" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="monthCustomerRegister" label="0" location="265,780" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 累计 -->
+    <!--  总投资金额  -->
+    <Label name="" label="总投资金额" location="150,880" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="yearInvestment" label="0" location="265,880" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 赎回总金额 -->
+    <Label name="" label="赎回总金额" location="150,930" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="yearRedemption" label="0" location="265,930" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 净投资金额 -->
+    <Label name="" label="净投资金额" location="150,980" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="yearNetinvestment" label="0" location="265,980" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 新注册人数 -->
+     <Label name="" label="新注册人数" location="150,1030" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="yearhMemberRegister" label="0" location="265,1030" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+    <!-- 新注册人数 -->
+    <Label name="" label="新投资人数" location="150,1080" size="105,28" align_cd="right" fore_color='#f8b51a' fore_font=" 20px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="yearCustomerRegister" label="0" location="265,1080" size="208,22" align_cd="right" fore_font=" 22px Microsoft YaHei" back_font=" 20px Microsoft YaHei"/>
+  </Bar>
+</Content>
