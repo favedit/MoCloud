@@ -146,7 +146,9 @@ public class FProvinceConsole
    // ============================================================
    // <T>根据标签,区域id,国家id,判读数据库中是否已存在</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param proviceLabel 标签
+   // @param countryId 国家id
+   // @param areaId 区域id
    // @return boolean
    // ============================================================
    @Override
@@ -182,7 +184,9 @@ public class FProvinceConsole
    // ============================================================
    // <T>根据标签,区域id,国家id,ouid判读数据库中是否已重复</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param proviceLabel 标签
+   // @param countryId 国家id
+   // @param ouid ouid
    // @return boolean
    // ============================================================
    @Override
@@ -221,12 +225,12 @@ public class FProvinceConsole
    // ============================================================
    // <T>根据区域id获取对象列表</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param areaId 区域id
    // @return 数据对象
    // ============================================================
    @Override
    public FLogicDataset<FDataCommonProvinceUnit> selectAll(ILogicContext logicContext, 
-                                                       Long areaId) {
+                                                           Long areaId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(areaId + "") && areaId > 0) {
          whereSql.append(FDataCommonProvinceLogic.AREA_ID);
@@ -238,5 +242,25 @@ public class FProvinceConsole
       }
       FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
       return logic.fetchAll();
+   }
+   // ============================================================
+   // <T>根据区域id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param areaId 区域id
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonProvinceUnit> selectAllByAreaId(ILogicContext logicContext, 
+                                                                   Long areaId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(areaId + "") && areaId > 0) {
+         whereSql.append(FDataCommonProvinceLogic.AREA_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {areaId}");
+         whereSql.bind("areaId", RString.parse(areaId));
+         FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
+         return logic.fetch(whereSql.toString());
+      }
+      return null;
    }
 }

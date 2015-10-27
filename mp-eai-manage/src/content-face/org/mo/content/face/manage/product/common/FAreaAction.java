@@ -1,6 +1,11 @@
 package org.mo.content.face.manage.product.common;
 
 import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
+import com.cyou.gccloud.data.data.FDataCommonCityUnit;
+import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
+
+import java.util.Iterator;
+
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -29,7 +34,7 @@ public class FAreaAction
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FAreaAction.class);
 
-   // 用户控制台
+   // 城市控制台
    @ALink
    protected ICityConsole _cityConsole;
 
@@ -203,8 +208,22 @@ public class FAreaAction
          page.setResult("数据重复,请重新增加!");
          return "/manage/product/common/UpdateArea";
       }
+      if(unit.isCountryIdChanged()){
+         FLogicDataset<FDataCommonProvinceUnit> provinceList = _provinceConsole.selectAllByAreaId(logicContext, unit.ouid());
+         for(Iterator<FDataCommonProvinceUnit> it = provinceList.iterator();it.hasNext();){
+            FDataCommonProvinceUnit un = it.next();
+            un.setCountryId(unit.countryId());
+            _provinceConsole.doUpdate(logicContext, un);
+         }
+         FLogicDataset<FDataCommonCityUnit> cityList = _cityConsole.selectAllByAreaId(logicContext, unit.ouid());
+         for(Iterator<FDataCommonCityUnit> itc = cityList.iterator();itc.hasNext();){
+            FDataCommonCityUnit unc = itc.next();
+            unc.setCountryId(unit.countryId());
+            _cityConsole.doUpdate(logicContext, unc);
+         }
+      }
       _areaConsole.doUpdate(logicContext, unit);
-      return "/manage/common/ajax";
+      return "/manage/product/common/AreaList";
    }
 
    // ============================================================

@@ -100,6 +100,15 @@
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
     <th
+     data-options="field:'countryLabel',halign:'center',align:'center',sortable:true"
+     width="60px">所属国家</th>
+    <th
+     data-options="field:'areaLabel',halign:'center',align:'center',sortable:true"
+     width="60px">所属区域</th>
+    <th
+     data-options="field:'provinceLabel',halign:'center',align:'center',sortable:true"
+     width="60px">所属省份</th>
+    <th
      data-options="field:'label',halign:'center',align:'center',sortable:true"
      width="60px">标签</th>
     <th
@@ -108,15 +117,6 @@
     <th
      data-options="field:'cityCode',halign:'center',align:'left',sortable:true"
      width="60px">城市区号</th>
-    <th
-     data-options="field:'countryLabel',halign:'center',align:'center',sortable:true"
-     width="60px">所属国家</th>
-    <th
-     data-options="field:'areaLabel',halign:'center',align:'center',sortable:true"
-     width="60px">所属区域</th>
-    <th
-     data-options="field:'provinceLabel',halign:'center',align:'center',sortable:true"
-     width="60px">所属省会</th>
     <th
      data-options="field:'locationLongitude',halign:'center',align:'left',sortable:true"
      width="95px">经度</th>

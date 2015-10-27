@@ -18,6 +18,7 @@
             "name" : $('#name').val(),
             "adminId" : $('#adminId').val(),
             "ouid" : $('#ouid').val(),
+            "displayCode" : $('#displayCode').val(),
             "label" : $('#label').val(),
             "phoneCode" : $('#phoneCode').val(),
             "code" : $('#code').val(),
@@ -76,6 +77,14 @@
        <input id="label" name="label" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.label'/>"
         style="width:380px;height:20px;"
         data-options="required:true,validType:'length[0,70]'" /> 
+      </div></td>
+    </tr>
+    <tr>
+     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
+     <td><div align="left">
+       <input id="displayCode" name="displayCode" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.displayCode'/>"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,11]'" /> 
       </div></td>
     </tr>
     <tr>

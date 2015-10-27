@@ -7,8 +7,6 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P城市信息控制台接口</P>
 //@interface ICityConsole
-//@author AnjoyTian
-//@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
 
@@ -49,10 +47,10 @@ public interface ICityConsole
    // @return 数据集合
    // ============================================================
    boolean isExsitsByLabelandByCIdandAIdandPId(ILogicContext logicContext, 
-                                                               String label, 
-                                                               Long countryId, 
-                                                               Long areaId, 
-                                                               Long provinceId);
+                                               String label, 
+                                               Long countryId, 
+                                               Long areaId, 
+                                               Long provinceId);
    
    // ============================================================
    // <T>根据label,countryId,areaId,provinceId,ouid判断数据存在重复</T>
@@ -61,21 +59,38 @@ public interface ICityConsole
    // @param countryId 国家id
    // @param areaId 区域id
    // @param provinceId 身份id
+   // @param ouid ouid主键
    // @return 数据集合
    // ============================================================
    boolean isExsitsByLabelandByCIdandAIdandPIdandOuid(ILogicContext logicContext, 
-                                                                      String label, 
-                                                                      Long countryId, 
-                                                                      Long areaId, 
-                                                                      Long provinceId,
-                                                                      Long ouid);
+                                                      String label, 
+                                                      Long countryId, 
+                                                      Long areaId, 
+                                                      Long provinceId,
+                                                      Long ouid);
    
    // ============================================================
    // <T>根据省份id获取对象列表</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param provinceId 省份id
    // @return 数据对象
    // ============================================================
    FLogicDataset<FDataCommonCityUnit> selectAll(ILogicContext logicContext, 
                                                 Long provinceId);
+   // ============================================================
+   // <T>根据区域id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param areaId 区域id
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCommonCityUnit> selectAllByAreaId(ILogicContext logicContext, 
+                                                        Long areaId);
+   // ============================================================
+   // <T>根据省份id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param provinceId 省份id
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCommonCityUnit> selectAllByProvinceId(ILogicContext logicContext, 
+                                                            Long provinceId);
 }

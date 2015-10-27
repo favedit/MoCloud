@@ -57,7 +57,7 @@
                      <li><a href="/manage/product/common/Area.wa" target="right">区域信息</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.common.province" value="&basePage.menuString">
-                     <li><a href="/manage/product/common/Province.wa" target="right">省会信息</a></li>
+                     <li><a href="/manage/product/common/Province.wa" target="right">省份信息</a></li>
                   </jh:equals>
                   <jh:equals source="manage.product.common.city" value="&basePage.menuString">
                      <li><a href="/manage/product/common/City.wa" target="right">城市信息</a></li>

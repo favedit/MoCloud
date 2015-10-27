@@ -32,7 +32,6 @@ public class FCityConsole
       implements 
          ICityConsole 
 {
-
    // 国家控制台
    @ALink
    protected ICountryConsole _countryConsole;
@@ -130,10 +129,10 @@ public class FCityConsole
    // ============================================================
    @Override
    public boolean isExsitsByLabelandByCIdandAIdandPId(ILogicContext logicContext, 
-                                                                      String label, 
-                                                                      Long countryId, 
-                                                                      Long areaId, 
-                                                                      Long provinceId) {
+                                                      String label, 
+                                                      Long countryId, 
+                                                      Long areaId, 
+                                                      Long provinceId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(label) && !RString.isEmpty(areaId + "") && !RString.isEmpty(countryId + "") && !RString.isEmpty(provinceId + "")) {
          whereSql.append(FDataCommonCityLogic.LABEL);
@@ -171,6 +170,7 @@ public class FCityConsole
    // @param countryId 国家id
    // @param areaId 区域id
    // @param provinceId 身份id
+   // @param ouid
    // @return 数据集合
    // ============================================================
    @Override
@@ -216,7 +216,7 @@ public class FCityConsole
    // ============================================================
    // <T>根据省份id获取对象列表</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param provinceId 身份id
    // @return 数据对象
    // ============================================================
    @Override
@@ -233,5 +233,45 @@ public class FCityConsole
       }
       FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
       return logic.fetchAll();
+   }
+   // ============================================================
+   // <T>根据省份id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param provinceId 身份id
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonCityUnit> selectAllByProvinceId(ILogicContext logicContext, 
+                                                                   Long provinceId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(provinceId + "") && provinceId > 0) {
+         whereSql.append(FDataCommonCityLogic.PROVINCE_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {provinceId}");
+         whereSql.bind("provinceId", RString.parse(provinceId));
+         FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
+         return logic.fetch(whereSql.toString());
+      }
+      return null;
+   }
+   // ============================================================
+   // <T>根据区域id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param areaId 区域id
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCommonCityUnit> selectAllByAreaId(ILogicContext logicContext, 
+                                                               Long areaId) {
+      FSql whereSql = new FSql();
+      if (!RString.isEmpty(areaId + "") && areaId > 0) {
+         whereSql.append(FDataCommonCityLogic.AREA_ID);
+         whereSql.append(" = ");
+         whereSql.append(" {areaId}");
+         whereSql.bind("areaId", RString.parse(areaId));
+         FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
+         return logic.fetch(whereSql.toString());
+      }
+      return null;
    }
 }

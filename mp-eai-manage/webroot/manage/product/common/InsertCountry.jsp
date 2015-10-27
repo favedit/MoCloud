@@ -54,6 +54,13 @@
       </div></td>
     </tr>
     <tr>
+     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
+     <td><div align="left">
+       <input id="displayCode" name="displayCode" style="width:380px;height:20px;" 
+        class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,11]'" /> 
+      </div></td>
+    </tr>
+    <tr>
      <td width="78" height="33"><div align="left">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</div></td>
      <td><div align="left">
        <input id="phoneCode" name="phoneCode" style="width:380px;height:20px;" 

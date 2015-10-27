@@ -21,8 +21,6 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>区域信息控制台</P>
 //@class FAreaConsole
-//@author AnjoyTian
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
 
@@ -104,6 +102,7 @@ public class FAreaConsole
    // <T>根据区域标签和国家id，判断是否存在</T>
    // @param logicContext 链接对象
    // @param label 标签
+   // @param countryId 国家id
    // @return 数据对象
    // ============================================================
    @Override
@@ -133,7 +132,9 @@ public class FAreaConsole
    // ============================================================
    // <T>根据区域标签和国家id，ouid判断是否重复</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param areaLabel 区域标签
+   // @param countryId 国家id
+   // @param ouid ouid
    // @return 数据对象
    // ============================================================
    @Override
@@ -166,7 +167,7 @@ public class FAreaConsole
    // ============================================================
    // <T>根据标签获取对象列表</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param countryId 国家id
    // @return 数据对象
    // ============================================================
    @Override

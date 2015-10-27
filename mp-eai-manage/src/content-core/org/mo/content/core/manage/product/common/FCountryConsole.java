@@ -2,6 +2,7 @@ package org.mo.content.core.manage.product.common;
 
 import com.cyou.gccloud.data.data.FDataCommonCountryLogic;
 import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
+
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 //============================================================
@@ -59,8 +60,9 @@ public class FCountryConsole
          whereSql.append(FDataCommonCountryLogic.NAME + " LIKE '%{name}%'");
          whereSql.bind("name", RString.parse(unit.name()));
       }
+      String orderBy = String.format("%s %s", FDataCommonCountryLogic.DISPLAY_CODE, "DESC");
       FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);
-      FLogicDataset<FDataCommonCountryUnit> moduleList = logic.fetchClass(FDataCommonCountryUnit.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataCommonCountryUnit> moduleList = logic.fetchClass(FDataCommonCountryUnit.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;
    }
 

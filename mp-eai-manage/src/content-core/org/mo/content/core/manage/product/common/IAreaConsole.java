@@ -34,7 +34,7 @@ public interface IAreaConsole
    // @return 数据
    // ============================================================
    FDataCommonAreaUnit findByLable(ILogicContext logicContext, 
-                                          String label);
+                                   String label);
 
    // ============================================================
    // <T>根据标签，国家id判断数据重复</T>
@@ -44,13 +44,15 @@ public interface IAreaConsole
    // @return 数据
    // ============================================================
    boolean isExistByAreaLabelandCountryId(ILogicContext logicContext, 
-                                                 String areaLabel, 
-                                                 Long countryId);
+                                          String areaLabel, 
+                                          Long countryId);
    
    // ============================================================
    // <T>根据区域标签和国家id，ouid判断是否重复</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param areaLabel 标签
+   // @param countryId 国家id
+   // @param ouid ouid
    // @return 数据对象
    // ============================================================
    boolean isExistByAreaLabelandCountryIdandOuid(ILogicContext logicContext, 
@@ -65,5 +67,5 @@ public interface IAreaConsole
    // @return 数据
    // ============================================================
    FLogicDataset<FDataCommonAreaUnit> selectAll(ILogicContext logicContext, 
-                                                       Long countryId);
+                                                Long countryId);
 }

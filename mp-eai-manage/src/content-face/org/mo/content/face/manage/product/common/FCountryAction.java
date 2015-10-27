@@ -234,6 +234,7 @@ public class FCountryAction
       unit.setLabel(context.parameter("label"));
       unit.setName(context.parameter("name"));
       unit.setNote(context.parameter("note"));
+      unit.setDisplayCode(context.parameterAsInteger("displayCode"));
       unit.setPhoneCode(context.parameter("phoneCode"));
    }
 

@@ -1,12 +1,17 @@
 package org.mo.content.face.manage.product.common;
 
+import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
+
+import java.util.Iterator;
+
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.product.common.FDataProvinceInfo;
 import org.mo.content.core.manage.product.common.IAreaConsole;
+import org.mo.content.core.manage.product.common.ICityConsole;
 import org.mo.content.core.manage.product.common.ICountryConsole;
 import org.mo.content.core.manage.product.common.IProvinceConsole;
 import org.mo.content.face.base.FBasePage;
@@ -38,6 +43,10 @@ public class FProvinceAction
    // 区域控制台
    @ALink
    protected IAreaConsole _areaConsole;
+   
+   // 城市控制台
+   @ALink
+   protected ICityConsole _cityConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -195,6 +204,15 @@ public class FProvinceAction
          page.setResult("数据重复,请重新增加!");
          return "/manage/product/common/UpdateProvince";
       }
+      if(unit.isAreaIdChanged()||unit.isCountryIdChanged()){
+         FLogicDataset<FDataCommonCityUnit> cityList = _cityConsole.selectAllByProvinceId(logicContext, unit.ouid());
+         for(Iterator<FDataCommonCityUnit> itc = cityList.iterator();itc.hasNext();){
+            FDataCommonCityUnit unc = itc.next();
+            unc.setCountryId(unit.countryId());
+            unc.setAreaId(unit.areaId());
+            _cityConsole.doUpdate(logicContext, unc);
+         }
+      }
       _proviConsole.doUpdate(logicContext, unit);
       return "/manage/product/common/ProvinceList";
    }
@@ -225,7 +243,7 @@ public class FProvinceAction
       if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
       } else {
-         return "/manage/product/financial/customer/CustomerList";
+         return "/manage/product/common/ProvinceList";
       }
    }
 

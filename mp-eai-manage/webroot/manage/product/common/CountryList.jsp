@@ -104,6 +104,9 @@
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="100px">标签</th>
+     <th
+     data-options="field:'displayCode',halign:'center',align:'left',sortable:true"
+     width="100px">排序</th>
     <th
      data-options="field:'phoneCode',halign:'center',align:'left',sortable:true"
      width="60px">区号</th>

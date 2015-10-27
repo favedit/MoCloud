@@ -79,7 +79,10 @@ public interface IProvinceConsole
    // ============================================================
    // <T>根据标签,区域id,国家id,ouid判读数据库中是否已重复</T>
    // @param logicContext 链接对象
-   // @param label 标签
+   // @param proviceLabel 省份标签
+   // @param areaId 区域id
+   // @param countryId 国家id
+   // @param ouid ouid
    // @return boolean
    // ============================================================
    boolean isExistsByLabelandAIdandCIdandOuid(ILogicContext logicContext, 
@@ -91,11 +94,17 @@ public interface IProvinceConsole
    // ============================================================
    // <T>更具区域id查询所有省份</T>
    // @param logicContext 链接对象
-   // @param proviceLabel 省份标签
    // @param areaId 区域id
-   // @param countryId 国家id
    // @return 数据对象
    // ============================================================
    FLogicDataset<FDataCommonProvinceUnit> selectAll(ILogicContext logicContext, 
                                                     Long areaId);
+   // ============================================================
+   // <T>根据区域id获取对象列表</T>
+   // @param logicContext 链接对象
+   // @param areaId 区域id
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCommonProvinceUnit> selectAllByAreaId(ILogicContext logicContext, 
+                                                            Long areaId);
 }
