@@ -57,11 +57,11 @@ public class FProductConsole
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(unit.name())){
-         whereSql.append(FDataFinancialProductLogic.NAME + " LIKE '%{name}%'");
-         whereSql.bind("name", RString.parse(unit.name()));
+      if(!RString.isEmpty(unit.label())){
+         whereSql.append(FDataFinancialProductLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.bind("label", RString.parse(unit.label()));
       }
-      String orderBy = String.format("%s %s", FDataFinancialProductLogic.NAME, "ASC");
+      String orderBy = String.format("%s %s", FDataFinancialProductLogic.LABEL, "ASC");
       FDataFinancialProductLogic logic = logicContext.findLogic(FDataFinancialProductLogic.class);
       FLogicDataset<FDataFinancialProductUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);
       return moduleList;
@@ -78,7 +78,7 @@ public class FProductConsole
                                                String code){
       FSql whereSql = new FSql();
       if(!RString.isEmpty(code)){
-         whereSql.append(FDataFinancialProductLogic.NAME);
+         whereSql.append(FDataFinancialProductLogic.CODE);
          whereSql.append("='");
          whereSql.append(code + "'");
       }

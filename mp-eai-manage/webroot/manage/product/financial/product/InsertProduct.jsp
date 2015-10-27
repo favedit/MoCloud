@@ -54,69 +54,78 @@
    action="/manage/product/financial/product/Product.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-<br>
-   <table width="710" height="446" border="0" align="left"
+   <br>
+   <table width="710" height="200" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="56" height="38"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
-      <td width="103"><div align="left"><input id="name" name="name" class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'" />
+      <td width="86" height="38"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+      <td width="123"><div align="left"><input id="code" name="code" class="easyui-validatebox textbox"
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,40]'" />
       </div></td>
-      <td width="54"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+      <td width="7">&nbsp;</td>
+      <td width="86"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'" /></td>
-      <td width="67">&nbsp;</td>
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,40]'" /></td>
       <td width="245">&nbsp;</td>
     </tr>
     <tr>
-     
-     <td><div align="left">出租人:</div></td>
+     <td><div align="left">收益率:</div></td>
      <td><div align="left">
-       <input id="rentPerson" name="rentPerson" class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'" />
-      </div></td><td height="30"><div align="left">承租人:</div></td>
-     <td><div align="left">
-       <input id="tenantPerson" name="tenantPerson"
-        class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'" />
-      </div></td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-    </tr>
-    <tr>
+       <input id="rate" name="rate" class="easyui-validatebox textbox"
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,11]'" />
+     </div></td>
+     <td width="7">&nbsp;</td>
      <td height="38"><div align="left">投资期限:</div></td>
      <td><div align="left">
-       <input id="timeLimit"
-        name="timeLimit"
+       <input id="horizonCount" name="horizonCount"
         class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'" />
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,11]'" />
       </div></td>
-     <td><div align="left">预期年收益率:</div></td>
-     <td><div align="left">
-       <input id="annualRateOfReturn"
-        name="annualRateOfReturn"
-        class="easyui-validatebox textbox"
-        style="width:80px;height:20px"
-        data-options="validType:'length[0,100]'" />
-      </div></td>
-     <td height="38"><div align="left"></div></td>
-     <td><div align="left"></div></td>
-
+     <td>&nbsp;</td>
     </tr>
     <tr>
-
-
-     <td height="19"><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
+     <td height="38"><div align="left">投资期限类型:</div></td>
+     <td><div align="left">
+       <input id="horizonUnit"
+        name="horizonUnit"
+        class="easyui-validatebox textbox"
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,40]'" />
+      </div></td>
+      <td width="7">&nbsp;</td>
+     <td><div align="left">关闭期:</div></td>
+     <td><div align="left">
+       <input id="horizonClosed"
+        name="horizonClosed"
+        class="easyui-validatebox textbox"
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,11]'" />
+      </div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">等待期:</div></td>
+     <td><div align="left">
+       <input id="horizonWait"
+        name="horizonWait"
+        class="easyui-validatebox textbox"
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,11]'" />
+      </div></td>
+      <td width="7">&nbsp;</td>
+     <td><div align="left">业绩:</div></td>
+     <td><div align="left">
+       <input id="factor"
+        name="factor"
+        class="easyui-validatebox textbox"
+        style="width:120px;height:20px"
+        data-options="validType:'length[0,11]'" />
+      </div></td>
+      <td>&nbsp;</td>
     </tr>
     <tr>
      <td height="38"><div align="left">备注:</div></td>
@@ -125,48 +134,7 @@
         data-options="multiline:true" style="height:100px;width:500px" />
       </div></td>
     </tr>
-    <tr>
-     <td height="38"><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-    </tr>
-    <tr>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-    </tr>
-    <tr>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-    </tr>
-    <tr>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-    </tr>
-    <tr>
-     <td height="38"><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-     <td><div align="left"></div></td>
-    </tr>
    </table>
-
   </form>
  </div>
 </body>

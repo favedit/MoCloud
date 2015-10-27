@@ -71,7 +71,7 @@ public class FProductAction
          Page.setPageCurrent(0);
       }
       FDataFinancialProductUnit unit = new FDataFinancialProductUnit();
-      unit.setName(context.parameter("name"));
+      unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {
@@ -125,11 +125,13 @@ public class FProductAction
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setNote(context.parameter("note"));
       unit.setLabel(context.parameter("label"));
-      unit.setName(context.parameter("name"));
-      unit.setTimeLimit(context.parameterAsInteger("timeLimit"));
-      unit.setAnnualRateOfReturn(context.parameterAsFloat("annualRateOfReturn"));
-      unit.setRentPerson(context.parameter("rentPerson"));
-      unit.setTenantPerson(context.parameter("tenantPerson"));
+      unit.setCode(context.parameter("code"));
+      unit.setHorizonCount(context.parameterAsInteger("horizonCount"));
+      unit.setHorizonClosed(context.parameterAsInteger("horizonClosed"));
+      unit.setHorizonWait(context.parameterAsInteger("horizonWait"));
+      unit.setFactor(context.parameterAsDouble("factor"));
+      unit.setRate(context.parameterAsDouble("rate"));
+      unit.setHorizonUnit(context.parameter("horizonUnit"));
       EResult result = _productConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
@@ -180,16 +182,17 @@ public class FProductAction
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataFinancialProductUnit unit = new FDataFinancialProductUnit();
-      unit.setOuid(Long.parseLong(context.parameter("ouid")));
+      FDataFinancialProductUnit unit = _productConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setNote(context.parameter("note"));
       unit.setLabel(context.parameter("label"));
-      unit.setName(context.parameter("name"));
-      unit.setTimeLimit(context.parameterAsInteger("timeLimit"));
-      unit.setAnnualRateOfReturn(context.parameterAsFloat("annualRateOfReturn"));
-      unit.setRentPerson(context.parameter("rentPerson"));
-      unit.setTenantPerson(context.parameter("tenantPerson"));
+      unit.setCode(context.parameter("code"));
+      unit.setHorizonCount(context.parameterAsInteger("horizonCount"));
+      unit.setHorizonClosed(context.parameterAsInteger("horizonClosed"));
+      unit.setHorizonWait(context.parameterAsInteger("horizonWait"));
+      unit.setFactor(context.parameterAsDouble("factor"));
+      unit.setRate(context.parameterAsDouble("rate"));
+      unit.setHorizonUnit(context.parameter("horizonUnit"));
       EResult result = _productConsole.doUpdate(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("更新失败");
@@ -224,7 +227,7 @@ public class FProductAction
       if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
       } else {
-         return "/manage/product/financial/customer/CustomerList";
+         return "/manage/product/financial/product/ProductList";
       }
    }
 }

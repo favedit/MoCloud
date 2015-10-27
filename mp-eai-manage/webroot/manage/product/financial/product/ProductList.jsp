@@ -23,14 +23,14 @@
        var url = "/manage/product/financial/product/Product.wa?do=select&date="
                + new Date().valueOf();
        var data = null;
-       var name = $.trim($('#name').val()).replaceAll("'", "");
-       if (name == "名称")
-          name = null;
+       var label = $.trim($('#label').val()).replaceAll("'", "");
+       if (label == "标签")
+          label = null;
        if (page != null) {
            url = "/manage/product/financial/product/Product.wa?do=select&page="
                    + page + "&date=" + new Date().valueOf();
            data = {
-               "name" : name,
+               "label" : label,
                "page" : page,
                "pageSize" : pageSize
            };
@@ -85,10 +85,10 @@
      class="add_btn"></a>
    </div>
    <div class="nav_search">
-    <input id="name" name="name" type="text"
-     onfocus="if(this.value=='名称'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='名称';this.style.color='#ccc';}"
-     style="color: #ccc" value="名称"> <a onClick="doSubmit(0)"
+    <input id="label" name="label" type="text"
+     onfocus="if(this.value=='标签'){this.value='';}this.style.color='#000000';"
+     onblur="if(this.value=='') {this.value='标签';this.style.color='#ccc';}"
+     style="color: #ccc" value="标签"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>
    </div>
   </div>
@@ -101,23 +101,29 @@
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
      <th
-     data-options="field:'name',halign:'center',align:'center',sortable:true"
+     data-options="field:'code',halign:'center',align:'center',sortable:true"
      width="60px" >名称</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="60px">标签</th>
      <th
-     data-options="field:'rentPerson',halign:'center',align:'left',sortable:true"
-     width="60px">出租人</th>
+     data-options="field:'rate',halign:'center',align:'left',sortable:true"
+     width="60px">收益率</th>
      <th
-     data-options="field:'tenantPerson',halign:'center',align:'left',sortable:true"
-     width="60px">承租人</th>
+     data-options="field:'horizonUnit',halign:'center',align:'left',sortable:true"
+     width="60px">投资期限类型</th>
     <th
-     data-options="field:'annualRateOfReturn',halign:'center',align:'left',sortable:true"
-     width="80px">预期年收益率</th>
-    <th
-     data-options="field:'timeLimit',halign:'center',align:'left',sortable:true"
+     data-options="field:'horizonCount',halign:'center',align:'left',sortable:true"
      width="60px">投资期限</th>
+    <th
+     data-options="field:'horizonClosed',halign:'center',align:'left',sortable:true"
+     width="80px">关闭期</th>
+    <th
+     data-options="field:'horizonWait',halign:'center',align:'left',sortable:true"
+     width="80px">等待期</th>
+    <th
+     data-options="field:'factor',halign:'center',align:'left',sortable:true"
+     width="80px">业绩</th>
      <th
      data-options="field:'note',halign:'center',align:'left',sortable:true"
      width="60px">备注</th>
