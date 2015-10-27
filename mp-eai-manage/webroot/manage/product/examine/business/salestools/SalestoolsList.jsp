@@ -84,7 +84,7 @@
   <div class="right_title">
    <span>销售工具未审核列表</span>
   </div>
-  <div class="btn_bar">
+  <div class="btn_bar" style="min-width:200px;min-height:5px;overflow:hidden;">
      <div class="nav_btn">
            <a href="javascript:checkTask('1');" class="ty_btn"></a>
            <a href="javascript:checkTask('0');" class="bty_btn"></a>

@@ -128,8 +128,8 @@
 </script>
 
 <body bgcolor="#198bc9">
-<div id="manage_id">
- <div id="cy_right" style="width:100%;height:10%;">
+<div id="manage_id" style="width:100%;height:100%;min-height:100px;min-width:100px;">
+ <div id="cy_right" style="width:100%;">
   <div class="right_title" style="width:100%">
    <span>修改业务资讯信息</span>
   </div>
@@ -147,7 +147,7 @@
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <table width="870" height="346" border="0" align="left"
-    cellpadding="0" cellspacing="0" style=" margin-left:10px;">
+    cellpadding="0" cellspacing="0" style="margin-left:10px;">
     <tr>
       <td width="54" height="38"><div align="left">资讯标题:</div></td>
       <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox notnull"

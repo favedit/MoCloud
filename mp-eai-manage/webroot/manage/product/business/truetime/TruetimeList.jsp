@@ -87,7 +87,7 @@
   <div class="right_title">
    <span>实时数据信息</span>
   </div>
-  <div class="btn_bar">
+  <div class="btn_bar" style="min-width:200px;min-height:5px;overflow:hidden;">
    <div class="nav_btn">
     <a href="/manage/product/business/truetime/Truetime.wa?do=insertBefore"
      class="add_btn"></a>

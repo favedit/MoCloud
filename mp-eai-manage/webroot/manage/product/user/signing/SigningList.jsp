@@ -4,6 +4,23 @@
 <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css"
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
+<style type="text/css">
+   #manage_id{
+      width:100%;
+      margin-top:-10px;
+      margin-left:-10px;
+      padding-bottom:-20px;
+      height:100%;
+   }
+   #cond_id{
+      float:right;
+      margin-right:10px;
+   }
+   #search_id{
+      float:right;
+      margin-bottom:6px;
+   }
+</style>
 <script>
    //显示更新成功
    $(function() {
@@ -100,43 +117,22 @@
 </HEAD>
 
 <body>
+<div id="manage_id" style="width:100%;height:100%;">
  <div id="cy_right" style="width: 100%">
   <div class="right_title">
    <span>用户签到信息</span>
   </div>
-  <div class="btn_bar">
-   <div class="nav_btn">
-   </div>
-   <div class="nav_search" style="width:520px;">
-   <form id="logerdat" action="/manage/product/user/signing/Signing.wa" method="post" align="center">
-      <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
-         <tr>
-            <td width="60" height="33">
-               <div align="left">开始时间:</div>
-            </td>
-            <td width="152">
-               <div align="left">
-                  <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox" data-options="editable:false"></input>
-                  <input id="flag" type="hidden"/>
-               </div>
-            </td>
-            <td width="60" height="33">
-               <div align="middle">结束时间:</div>
-            </td>
-            <td width="152">
-               <div align="left">
-                  <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
-               </div>
-            </td>
-            <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
-         </tr>
-      </table>
-    </form>
-   </div>
+  <div id="cond_id">
+    <span>开始时间:</span>
+      <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox" data-options="editable:false"></input>
+      <input id="flag" type="hidden"/>
+    <span>结束时间:</span>
+      <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
+      <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>
   </div>
  </div>
- <table id="signing" class="easyui-datagrid" fit='true'
-  style="align: true"
+ <table id="signing" class="easyui-datagrid" fit='false'
+  style="align: true;height:102%;width:101%;"
   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,striped: true">
   <thead>
    <tr>
@@ -166,5 +162,6 @@
    </tr>
   </thead>
  </table>
+ </div>
 </body>
 </HTML>

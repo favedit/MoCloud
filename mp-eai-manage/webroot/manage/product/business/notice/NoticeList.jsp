@@ -4,209 +4,205 @@
 <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css"
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
+<style type="text/css">
+   #manage_id{
+      width:100%;
+      margin-top:-10px;
+      margin-left:-10px;
+      padding-bottom:-20px;
+      height:100%;
+   }
+   #cond_id{
+      float:right;
+      margin-right:10px;
+   }
+   #search_id{
+      float:right;
+      margin-bottom:6px;
+   }
+   #add_id{
+      float:left;
+      margin-bottom:6px;
+   }
+</style>
 <script>
-    //显示更新成功
-    $(function() {
-        doSubmit(null, null);
-        var pager = $('#logicNews').datagrid().datagrid('getPager');
-        pager.pagination({
-            pageSize : 20,
-            showPageList : [ 20, 30, 40 ],
-            onSelectPage : function(pageNumber, pageSize) {
-               var tip = $("#flag").val();
-               if(tip=="2"){
-                  doSubmitByCondition(pageNumber,pageSize);
-               }else{
-                 doSubmit(pageNumber,pageSize);
-               }
+ //显示更新成功
+ $(function() {
+     doSubmit(null, null);
+     var pager = $('#logicNews').datagrid().datagrid('getPager');
+     pager.pagination({
+         pageSize : 20,
+         showPageList : [ 20, 30, 40 ],
+         onSelectPage : function(pageNumber, pageSize) {
+            var tip = $("#flag").val();
+            if(tip=="2"){
+               doSubmitByCondition(pageNumber,pageSize);
+            }else{
+              doSubmit(pageNumber,pageSize);
             }
-        });
-    });
-    function doSubmit(page, pageSize) {
-        progress();
-        var url = "/manage/product/business/notice/Notice.wa?do=select&date="
-                + new Date().valueOf();
-        var data = null;
-        var label = $.trim($('#label').val()).replaceAll("'", "");
-        if (label == "公告标题") label = null;
-        if (page != null) {
-            url = "/manage/product/business/notice/Notice.wa?do=select&page="
-                    + page + "&date=" + new Date().valueOf();
-            data = {
-                "label" : label,
-                "page" : page,
-                "pageSize" : pageSize
-            };
-        }
-        $.ajax({
-            type : "POST",
-            url : url,
-            data : data,
-            success : function(msg) {
-                closeProgress();
-                $('#logicNews').datagrid('loadData', toJsonObject(msg));
-            },
-            fail : function() {
-                closeProgress();
-                alert("error");
-            }
-        });
-    }
-    function doSubmitByCondition(page,pageSize) {
-       progress();
-       var statusCd = $("#statusCd").combobox("getValue");
-       var displayCd = $("#displayCd").combobox("getValue");
-       var label = $("#label").val();
-       var url = null;
-       var data = null;
-       if (page != null) {
-          data = {
-             "page": page,
-             "pageSize" : pageSize,
+         }
+     });
+ });
+ function doSubmit(page, pageSize) {
+     progress();
+     var url = "/manage/product/business/notice/Notice.wa?do=select&date="
+             + new Date().valueOf();
+     var data = null;
+     var label = $.trim($('#label').val()).replaceAll("'", "");
+     if (label == "公告标题") label = null;
+     if (page != null) {
+         url = "/manage/product/business/notice/Notice.wa?do=select&page="
+                 + page + "&date=" + new Date().valueOf();
+         data = {
+             "label" : label,
+             "page" : page,
+             "pageSize" : pageSize
+         };
+     }
+     $.ajax({
+         type : "POST",
+         url : url,
+         data : data,
+         success : function(msg) {
+             closeProgress();
+             $('#logicNews').datagrid('loadData', toJsonObject(msg));
+         },
+         fail : function() {
+             closeProgress();
+             alert("error");
+         }
+     });
+ }
+ function doSubmitByCondition(page,pageSize) {
+    progress();
+    var statusCd = $("#statusCd").combobox("getValue");
+    var displayCd = $("#displayCd").combobox("getValue");
+    var label = $("#label").val();
+    var url = null;
+    var data = null;
+    if (page != null) {
+       data = {
+          "page": page,
+          "pageSize" : pageSize,
+          "statusCd" :statusCd,
+          "displayCd" :displayCd,
+          "label" :label
+       };
+       url = "/manage/product/business/notice/Notice.wa?do=selectByData&page=" + page + "&date=" + new Date().valueOf();
+    } else {
+       data = {
              "statusCd" :statusCd,
              "displayCd" :displayCd,
              "label" :label
-          };
-          url = "/manage/product/business/notice/Notice.wa?do=selectByData&page=" + page + "&date=" + new Date().valueOf();
-       } else {
-          data = {
-                "statusCd" :statusCd,
-                "displayCd" :displayCd,
-                "label" :label
-           };
-          url = "/manage/product/business/notice/Notice.wa?do=selectByData&date=" + new Date().valueOf();
+        };
+       url = "/manage/product/business/notice/Notice.wa?do=selectByData&date=" + new Date().valueOf();
+    }
+    $.ajax({
+       type: "POST",
+       url: url,
+       data: data,
+       success: function(msg) {
+          closeProgress();
+          $('#logicNews').datagrid('loadData', toJsonObject(msg));
+       },
+       fail: function() {
+          closeProgress();
+          alert("error");
        }
-       $.ajax({
-          type: "POST",
-          url: url,
-          data: data,
-          success: function(msg) {
-             closeProgress();
-             $('#logicNews').datagrid('loadData', toJsonObject(msg));
-          },
-          fail: function() {
-             closeProgress();
-             alert("error");
-          }
-       });
-    }
-    function del(id) {
-       progress();
-       var url ="/manage/product/business/notice/Notice.wa?do=deleteBefore&id=" + id + "&date=" + new Date().valueOf();
-       $.ajax({
-          type : "POST",
-          url : url,
-          success : function(msg) {
+    });
+ }
+ function del(id) {
+    progress();
+    var url ="/manage/product/business/notice/Notice.wa?do=deleteBefore&id=" + id + "&date=" + new Date().valueOf();
+    $.ajax({
+       type : "POST",
+       url : url,
+       success : function(msg) {
+           closeProgress();
+           if(msg.indexOf("noDel")>-1){
+              alert("不可删除!");
+           }else{
               closeProgress();
-              if(msg.indexOf("noDel")>-1){
-                 alert("不可删除!");
-              }else{
-                 closeProgress();
-                 return confirmx('确定删除?',
-                    function() {
-                    location.href = "/manage/product/business/notice/Notice.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
-                 });
-              }
-          },
-          fail : function() {
-              closeProgress();
-              alert("error");
-          }
-      });
-    }
-    //更新配置信息-
-    function edit(id) {
-        progress();
-        console.info(id);
-        window.location.href = "/manage/product/business/notice/Notice.wa?do=updateBefore&id="
-                + id + "&date=" + new Date().valueOf();
-        closeProgress();
-    }
-    function reBack(id){
-       progress();
-       console.info(id);
-       window.location.href = "/manage/product/business/notice/Notice.wa?do=resetStatusCd&id="
-               + id + "&date=" + new Date().valueOf();
-       closeProgress();
-    }
-    function tip(){
-       alert("不可删除!");
-    }
-    function submitForm(){
-       if (!isValid()) return;
-       doSubmitByCondition(null,null);
-       $("#flag").val("2");
-    }
-    function phoneInfo(ouid){
-       var l=(screen.availWidth-500)/2;
-       var t=(screen.availHeight-500)/2;
-       var w = screen.availWidth*7/19;
-       var h = screen.availHeight*12/19;
-       window.open('/manage/product/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
-    }
-   //搜索按钮，enter键
-    document.onkeydown=function(){
-       if(event.keyCode=="13"){
-          submitForm();    
+              return confirmx('确定删除?',
+                 function() {
+                 location.href = "/manage/product/business/notice/Notice.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
+              });
+           }
+       },
+       fail : function() {
+           closeProgress();
+           alert("error");
        }
+   });
+ }
+ //更新配置信息-
+ function edit(id) {
+     progress();
+     console.info(id);
+     window.location.href = "/manage/product/business/notice/Notice.wa?do=updateBefore&id="
+             + id + "&date=" + new Date().valueOf();
+     closeProgress();
+ }
+ function reBack(id){
+    progress();
+    console.info(id);
+    window.location.href = "/manage/product/business/notice/Notice.wa?do=resetStatusCd&id="
+            + id + "&date=" + new Date().valueOf();
+    closeProgress();
+ }
+ function tip(){
+    alert("不可删除!");
+ }
+ function submitForm(){
+    if (!isValid()) return;
+    doSubmitByCondition(null,null);
+    $("#flag").val("2");
+ }
+ function phoneInfo(ouid){
+    var l=(screen.availWidth-500)/2;
+    var t=(screen.availHeight-500)/2;
+    var w = screen.availWidth*7/19;
+    var h = screen.availHeight*12/19;
+    window.open('/manage/product/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+ }
+//搜索按钮，enter键
+ document.onkeydown=function(){
+    if(event.keyCode=="13"){
+       submitForm();    
     }
+ }
 </script>
 </HEAD>
 
 <body>
+<div id="manage_id" style="width:100%;height:100%;">
  <div id="cy_right" style="width: 100%">
   <div class="right_title">
    <span>公告信息</span>
   </div>
-  <div class="btn_bar">
-   <div class="nav_btn">
+  <div id="add_id">
     <a href="/manage/product/business/notice/Notice.wa?do=insertBefore" class="add_btn"></a>
-   </div>
-   <div class="nav_search" style="width:660px;">
-    <form id="logerdat" action="/manage/product/business/notice/Notice.wa" method="post" align="center">
-      <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
-         <tr>
-            <td width="30" height="33">
-               <div align="right">状态:</div>
-            </td>
-            <td width="158">
-               <div align="left">
-                  <select style="width:158px;height:20px" id="statusCd" class="easyui-combobox" name="statusCd" data-options="editable:false">
-                     <option value="1">申请</option>
-                     <option value="2">发布</option>
-                     <option value="3">审核未通过</option>
-                  <select>
-                  <input id="flag" type="hidden"/>
-               </div>
-            </td>
-            <td width="60" height="33">
-               <div align="right">是否显示:</div>
-            </td>
-            <td width="158">
-               <div align="left">
-                  <select  style="width:158px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="editable:false">
-                     <option value="1">展示</option>
-                     <option value="2">非展示</option>
-                  <select>
-               </div>
-            </td>
-            <td width="30" height="33">
-               <div align="right">标题:</div>
-            </td>
-            <td width="158" height="33">
-               <div align="left">
-                  <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
-               </div>
-            </td>
-            <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
-         </tr>
-      </table>
-     </form>
-   </div>
-   </div>
   </div>
- <table id="logicNews" class="easyui-datagrid" fit='true'
-  style="align: true"
+  <div id="cond_id">
+    <span>状态:</span>
+    <select style="width:108px;height:20px" id="statusCd" class="easyui-combobox" name="statusCd" data-options="editable:false">
+      <option value="1">申请</option>
+      <option value="2">发布</option>
+      <option value="3">审核未通过</option>
+    </select>
+    <input id="flag" type="hidden"/>
+    <span>是否显示:</span>
+    <select  style="width:108px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="editable:false">
+      <option value="1">展示</option>
+      <option value="2">非展示</option>
+    </select>
+    <span>标题:</span>
+      <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
+      <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>
+  </div>
+ </div>
+ <table id="logicNews" class="easyui-datagrid" fit='false'
+  style="align: true;height:102%;width:101%;"
   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,striped: true">
   <thead>
    <tr>
@@ -248,5 +244,6 @@
    </tr>
   </thead>
  </table>
+ </div>
 </body>
 </HTML>
