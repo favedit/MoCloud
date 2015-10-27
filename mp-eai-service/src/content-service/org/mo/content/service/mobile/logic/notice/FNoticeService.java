@@ -179,7 +179,7 @@ public class FNoticeService extends FObject implements INoticeService {
     }
 
     // ============================================================
-    // <T>分页获取号令相关信息。</T>
+    // <T>标记已读</T>
     // @param context 页面环境
     // @param input 输入配置
     // @param output 输出配置
@@ -190,12 +190,43 @@ public class FNoticeService extends FObject implements INoticeService {
             IWebOutput output, ILogicContext logicContext) {
         String sessionCode = context.head("mo-session-id");
         String noticeGuid = context.parameter("notice_id");
+        String locationLongitude = context.parameter("location_longitude");
+        String locationLatitude = context.parameter("location_latitude");
+        float longitude = -1;
+        if (RString.isNotEmpty(locationLongitude)) {
+            longitude = Float.parseFloat(locationLongitude);
+        }
+        float latitude = -1;
+        if (RString.isNotEmpty(locationLatitude)) {
+            latitude = Float.parseFloat(locationLatitude);
+        }
         if (RString.isNotEmpty(sessionCode)) {
             FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(
                     logicContext, sessionCode);
             long userId = sessionInfo.userId();
-            _noticeConsole.markRead(noticeGuid, userId, logicContext);
+            _noticeConsole.markRead(noticeGuid, userId, longitude, latitude,
+                    logicContext);
         }
         return EResult.Success;
+    }
+
+    // ============================================================
+    // <T>号令发布功能</T>
+    // @param context 页面环境
+    // @param input 输入配置
+    // @param output 输出配置
+    // @return 处理结果
+    // ============================================================
+    @Override
+    public EResult noticePublish(IWebContext context, IWebInput input,
+            IWebOutput output, ILogicContext logicContext) {
+        String label = context.parameter("label");
+        String content = context.parameter("content");
+        if (RString.isNotEmpty(label) && RString.isNotEmpty(content)) {
+            _noticeConsole.noticePublish(label, content, logicContext);
+            return EResult.Success;
+        } else {
+            return EResult.Failure;
+        }
     }
 }

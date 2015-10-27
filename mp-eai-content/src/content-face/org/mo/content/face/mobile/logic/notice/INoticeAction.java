@@ -34,17 +34,4 @@ public interface INoticeAction {
             @AContainer(name = "page") FNoticePage Page,
             @AContainer(name = "basePage") FBasePage basePage);
 
-    // ============================================================
-    // <T>根据guid获取通告</T>
-    // @通告
-    // @param context 网络环境
-    // @param logicContext 逻辑环境
-    // @param page 容器
-    // @return 页面
-    // ============================================================
-    public String noticePublish(IWebContext context,
-            ILogicContext logicContext,
-            @AContainer(name = "page") FNoticePage Page,
-            @AContainer(name = "basePage") FBasePage basePage);
-
 }

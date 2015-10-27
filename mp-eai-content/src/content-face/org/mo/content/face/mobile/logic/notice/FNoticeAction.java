@@ -6,7 +6,6 @@ import org.mo.content.core.mobile.logic.notice.INoticeConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -56,19 +55,4 @@ public class FNoticeAction implements INoticeAction {
         return "/manage/mobile/notices/NoticeInfo";
     }
 
-    // ============================================================
-    // <T>根据guid获取通告</T>
-    // @通告
-    // @param context 网络环境
-    // @param logicContext 逻辑环境
-    // @param page 容器
-    // @return 页面
-    // ============================================================
-    @Override
-    public String noticePublish(IWebContext context,
-            ILogicContext logicContext,
-            @AContainer(name = "page") FNoticePage Page,
-            @AContainer(name = "basePage") FBasePage basePage) {
-        return "";
-    }
 }

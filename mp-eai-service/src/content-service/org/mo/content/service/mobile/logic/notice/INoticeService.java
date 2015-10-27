@@ -49,4 +49,14 @@ public interface INoticeService {
     // ============================================================
     EResult markRead(IWebContext context, IWebInput input, IWebOutput output,
             ILogicContext logicContext);
+
+    // ============================================================
+    // <T>分页获取号令相关信息。</T>
+    // @param context 页面环境
+    // @param input 输入配置
+    // @param output 输出配置
+    // @return 处理结果
+    // ============================================================
+    EResult noticePublish(IWebContext context, IWebInput input,
+            IWebOutput output, ILogicContext logicContext);
 }

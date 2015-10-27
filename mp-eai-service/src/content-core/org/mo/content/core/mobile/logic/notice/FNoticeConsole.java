@@ -1,5 +1,6 @@
 package org.mo.content.core.mobile.logic.notice;
 
+import com.ahyc.eai.core.common.EDatabaseConnection;
 import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
@@ -8,12 +9,18 @@ import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeLogic;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+import java.util.Iterator;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
+import org.mo.com.collections.FDataset;
+import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.content.service.info.mobile.FMobileService;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -28,6 +35,8 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
     // GcSession会话控制台
     @ALink
     protected IGcSessionConsole _sessionConsole;
+    // 资源访问接口
+    private static IResource _resource = RResource.find(FNoticeConsole.class);
 
     // ============================================================
     // <T>构造资源</T>
@@ -64,7 +73,6 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
             pageNum = 1;
         }
         FSql whereSql = new FSql();
-
         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(
                 logicContext, sessionCode);
         long userId = sessionInfo.userId();
@@ -115,6 +123,7 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
 
     @Override
     public String markRead(String noticeGuid, long userId,
+            float locationLongitude, float locationLatitude,
             ILogicContext logicContext) {
         FLoggerPersonUserNoticeLogic personUserNoticeLogic = logicContext
                 .findLogic(FLoggerPersonUserNoticeLogic.class);
@@ -139,8 +148,42 @@ public class FNoticeConsole extends FObject implements INoticeConsole {
             FLoggerPersonUserNoticeUnit tempUnit = new FLoggerPersonUserNoticeUnit();
             tempUnit.setUserId(userId);
             tempUnit.setNoticeId(noticeUnit.ouid());
+            tempUnit.setLocationLongitude(locationLongitude);
+            tempUnit.setLocationLatitude(locationLatitude);
+            // 同时更新通知的view_count字段,,累加阅读次数
+            noticeUnit.setViewCount(noticeUnit.viewCount() + 1);
+            noticeLogic.doUpdate(noticeUnit);
             personUserNoticeLogic.doInsert(tempUnit);
+
         }
         return "Success";
+    }
+
+    @Override
+    public String noticePublish(String label, String content,
+            ILogicContext logicContext) {
+        FSql modelSql = _resource.findString(FSql.class, "sql.notice.publish");
+        ISqlConnection connection = logicContext
+                .activeConnection(EDatabaseConnection.Data);
+        FDataset fetchDataset = connection.fetchDataset(modelSql);
+        int maxDisplayOrder = -1;
+        for (Iterator<FRow> iterator = fetchDataset.iterator(); iterator
+                .hasNext();) {
+            FRow row = iterator.next();
+            maxDisplayOrder = row.getInt(0);
+        }
+
+        FDataLogicNoticeLogic noticeLogic = logicContext
+                .findLogic(FDataLogicNoticeLogic.class);
+        FDataLogicNoticeUnit tempUnit = new FDataLogicNoticeUnit();
+        tempUnit.setStatusCd(EGcResourceStatus.Publish);
+        tempUnit.setDisplayCd(EGcDisplay.Enabled);
+        tempUnit.setDisplayOrder(maxDisplayOrder + 1);
+        tempUnit.setOvld(true);
+        tempUnit.setLabel(label);
+        tempUnit.setDescription("紧急号令!");
+        tempUnit.setContent(content);
+        noticeLogic.doInsert(tempUnit);
+        return null;
     }
 }

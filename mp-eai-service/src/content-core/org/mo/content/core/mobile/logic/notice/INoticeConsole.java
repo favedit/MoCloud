@@ -42,5 +42,16 @@ public interface INoticeConsole {
     // @param output 输出配置
     // @return 处理结果
     // ============================================================
-    String markRead(String noticeGuid, long userId, ILogicContext logicContext);
+    String markRead(String noticeGuid, long userId, float locationLongitude,
+            float locationLatitude, ILogicContext logicContext);
+
+    // ============================================================
+    // <T>分页获取号令相关信息。</T>
+    // @param context 页面环境
+    // @param input 输入配置
+    // @param output 输出配置
+    // @return 处理结果
+    // ============================================================
+    String noticePublish(String label, String content,
+            ILogicContext logicContext);
 }

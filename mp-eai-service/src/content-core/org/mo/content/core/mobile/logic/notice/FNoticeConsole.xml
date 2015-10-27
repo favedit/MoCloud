@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+
+<Resource name='sql.notice.publish'>
+<!--查找排序最靠前的号令记录  -->
+<![CDATA[SELECT MAX(`DISPLAY_ORDER`) FROM DT_LGC_NOTICE`]]>
+</Resource>
+</Config>

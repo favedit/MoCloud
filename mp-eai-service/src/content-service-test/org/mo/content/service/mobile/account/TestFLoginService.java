@@ -78,7 +78,7 @@ public class TestFLoginService {
         listPram.add(new BasicNameValuePair("format_cd", "json"));
         // listPram.add(new BasicNameValuePair("mo-session-id",
         // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
+        post.setHeader("mo-session-id", "2D2A3B16499C4B7CD3D5B9ACC86C43F8");
         post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
         CloseableHttpResponse response = httpclient.execute(post);
         HttpEntity entity = response.getEntity();
