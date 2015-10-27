@@ -6,7 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
-import org.mo.com.lang.RFloat;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -18,8 +18,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>金融产品信息逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialProductUnit
-      extends FLogicUnit
+public class FDataFinancialProductUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -40,10 +39,10 @@ public class FDataFinancialProductUnit
    protected String _guid;
 
    // 存储字段名称的定义。
-   private String __name;
+   private String __code;
 
    // 字段名称的定义。
-   protected String _name;
+   protected String _code;
 
    // 存储字段标签的定义。
    private String __label;
@@ -51,29 +50,41 @@ public class FDataFinancialProductUnit
    // 字段标签的定义。
    protected String _label;
 
-   // 存储字段出租人的定义。
-   private String __rentPerson;
+   // 存储字段收益率的定义。
+   private double __rate;
 
-   // 字段出租人的定义。
-   protected String _rentPerson;
-
-   // 存储字段承租人的定义。
-   private String __tenantPerson;
-
-   // 字段承租人的定义。
-   protected String _tenantPerson;
-
-   // 存储字段预期年化收益率的定义。
-   private float __annualRateOfReturn;
-
-   // 字段预期年化收益率的定义。
-   protected float _annualRateOfReturn;
+   // 字段收益率的定义。
+   protected double _rate;
 
    // 存储字段投资期限的定义。
-   private int __timeLimit;
+   private int __horizonCount;
 
    // 字段投资期限的定义。
-   protected int _timeLimit;
+   protected int _horizonCount;
+
+   // 存储字段投资期限类型的定义。
+   private String __horizonUnit;
+
+   // 字段投资期限类型的定义。
+   protected String _horizonUnit;
+
+   // 存储字段关闭期的定义。
+   private int __horizonClosed;
+
+   // 字段关闭期的定义。
+   protected int _horizonClosed;
+
+   // 存储字段等待期的定义。
+   private int __horizonWait;
+
+   // 字段等待期的定义。
+   protected int _horizonWait;
+
+   // 存储字段业绩计算的定义。
+   private double __factor;
+
+   // 字段业绩计算的定义。
+   protected double _factor;
 
    // 存储字段备注的定义。
    private String __note;
@@ -197,8 +208,8 @@ public class FDataFinancialProductUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isNameChanged(){
-      return !RString.equals(__name, _name);
+   public boolean isCodeChanged(){
+      return !RString.equals(__code, _code);
    }
 
    //============================================================
@@ -206,8 +217,8 @@ public class FDataFinancialProductUnit
    //
    // @return 数据内容
    //============================================================
-   public String name(){
-      return _name;
+   public String code(){
+      return _code;
    }
 
    //============================================================
@@ -215,8 +226,8 @@ public class FDataFinancialProductUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setName(String value){
-      _name = value;
+   public void setCode(String value){
+      _code = value;
    }
 
    //============================================================
@@ -247,84 +258,30 @@ public class FDataFinancialProductUnit
    }
 
    //============================================================
-   // <T>判断出租人的数据是否改变。</T>
+   // <T>判断收益率的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isRentPersonChanged(){
-      return !RString.equals(__rentPerson, _rentPerson);
+   public boolean isRateChanged(){
+      return __rate != _rate;
    }
 
    //============================================================
-   // <T>获得出租人的数据内容。</T>
+   // <T>获得收益率的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String rentPerson(){
-      return _rentPerson;
+   public double rate(){
+      return _rate;
    }
 
    //============================================================
-   // <T>设置出租人的数据内容。</T>
+   // <T>设置收益率的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setRentPerson(String value){
-      _rentPerson = value;
-   }
-
-   //============================================================
-   // <T>判断承租人的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isTenantPersonChanged(){
-      return !RString.equals(__tenantPerson, _tenantPerson);
-   }
-
-   //============================================================
-   // <T>获得承租人的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String tenantPerson(){
-      return _tenantPerson;
-   }
-
-   //============================================================
-   // <T>设置承租人的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setTenantPerson(String value){
-      _tenantPerson = value;
-   }
-
-   //============================================================
-   // <T>判断预期年化收益率的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isAnnualRateOfReturnChanged(){
-      return __annualRateOfReturn != _annualRateOfReturn;
-   }
-
-   //============================================================
-   // <T>获得预期年化收益率的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public float annualRateOfReturn(){
-      return _annualRateOfReturn;
-   }
-
-   //============================================================
-   // <T>设置预期年化收益率的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setAnnualRateOfReturn(float value){
-      _annualRateOfReturn = value;
+   public void setRate(double value){
+      _rate = value;
    }
 
    //============================================================
@@ -332,8 +289,8 @@ public class FDataFinancialProductUnit
    //
    // @return 数据内容
    //============================================================
-   public boolean isTimeLimitChanged(){
-      return __timeLimit != _timeLimit;
+   public boolean isHorizonCountChanged(){
+      return __horizonCount != _horizonCount;
    }
 
    //============================================================
@@ -341,8 +298,8 @@ public class FDataFinancialProductUnit
    //
    // @return 数据内容
    //============================================================
-   public int timeLimit(){
-      return _timeLimit;
+   public int horizonCount(){
+      return _horizonCount;
    }
 
    //============================================================
@@ -350,8 +307,116 @@ public class FDataFinancialProductUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setTimeLimit(int value){
-      _timeLimit = value;
+   public void setHorizonCount(int value){
+      _horizonCount = value;
+   }
+
+   //============================================================
+   // <T>判断投资期限类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHorizonUnitChanged(){
+      return !RString.equals(__horizonUnit, _horizonUnit);
+   }
+
+   //============================================================
+   // <T>获得投资期限类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String horizonUnit(){
+      return _horizonUnit;
+   }
+
+   //============================================================
+   // <T>设置投资期限类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHorizonUnit(String value){
+      _horizonUnit = value;
+   }
+
+   //============================================================
+   // <T>判断关闭期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHorizonClosedChanged(){
+      return __horizonClosed != _horizonClosed;
+   }
+
+   //============================================================
+   // <T>获得关闭期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int horizonClosed(){
+      return _horizonClosed;
+   }
+
+   //============================================================
+   // <T>设置关闭期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHorizonClosed(int value){
+      _horizonClosed = value;
+   }
+
+   //============================================================
+   // <T>判断等待期的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isHorizonWaitChanged(){
+      return __horizonWait != _horizonWait;
+   }
+
+   //============================================================
+   // <T>获得等待期的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int horizonWait(){
+      return _horizonWait;
+   }
+
+   //============================================================
+   // <T>设置等待期的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setHorizonWait(int value){
+      _horizonWait = value;
+   }
+
+   //============================================================
+   // <T>判断业绩计算的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isFactorChanged(){
+      return __factor != _factor;
+   }
+
+   //============================================================
+   // <T>获得业绩计算的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double factor(){
+      return _factor;
+   }
+
+   //============================================================
+   // <T>设置业绩计算的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setFactor(double value){
+      _factor = value;
    }
 
    //============================================================
@@ -504,18 +569,22 @@ public class FDataFinancialProductUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "name":
-            return _name;
+         case "code":
+            return _code;
          case "label":
             return _label;
-         case "rent_person":
-            return _rentPerson;
-         case "tenant_person":
-            return _tenantPerson;
-         case "annual_rate_of_return":
-            return RFloat.toString(_annualRateOfReturn);
-         case "time_limit":
-            return RInteger.toString(_timeLimit);
+         case "rate":
+            return RDouble.toString(_rate);
+         case "horizon_count":
+            return RInteger.toString(_horizonCount);
+         case "horizon_unit":
+            return _horizonUnit;
+         case "horizon_closed":
+            return RInteger.toString(_horizonClosed);
+         case "horizon_wait":
+            return RInteger.toString(_horizonWait);
+         case "factor":
+            return RDouble.toString(_factor);
          case "note":
             return _note;
          case "create_user_id":
@@ -549,23 +618,29 @@ public class FDataFinancialProductUnit
          case "guid":
             _guid = value;
             break;
-         case "name":
-            _name = value;
+         case "code":
+            _code = value;
             break;
          case "label":
             _label = value;
             break;
-         case "rent_person":
-            _rentPerson = value;
+         case "rate":
+            _rate = RDouble.parse(value);
             break;
-         case "tenant_person":
-            _tenantPerson = value;
+         case "horizon_count":
+            _horizonCount = RInteger.parse(value);
             break;
-         case "annual_rate_of_return":
-            _annualRateOfReturn = RFloat.parse(value);
+         case "horizon_unit":
+            _horizonUnit = value;
             break;
-         case "time_limit":
-            _timeLimit = RInteger.parse(value);
+         case "horizon_closed":
+            _horizonClosed = RInteger.parse(value);
+            break;
+         case "horizon_wait":
+            _horizonWait = RInteger.parse(value);
+            break;
+         case "factor":
+            _factor = RDouble.parse(value);
             break;
          case "note":
             _note = value;
@@ -609,29 +684,37 @@ public class FDataFinancialProductUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "name":
-               __name = value;
-               _name = __name;
+            case "code":
+               __code = value;
+               _code = __code;
                break;
             case "label":
                __label = value;
                _label = __label;
                break;
-            case "rent_person":
-               __rentPerson = value;
-               _rentPerson = __rentPerson;
+            case "rate":
+               __rate = RDouble.parse(value);
+               _rate = __rate;
                break;
-            case "tenant_person":
-               __tenantPerson = value;
-               _tenantPerson = __tenantPerson;
+            case "horizon_count":
+               __horizonCount = RInteger.parse(value);
+               _horizonCount = __horizonCount;
                break;
-            case "annual_rate_of_return":
-               __annualRateOfReturn = RFloat.parse(value);
-               _annualRateOfReturn = __annualRateOfReturn;
+            case "horizon_unit":
+               __horizonUnit = value;
+               _horizonUnit = __horizonUnit;
                break;
-            case "time_limit":
-               __timeLimit = RInteger.parse(value);
-               _timeLimit = __timeLimit;
+            case "horizon_closed":
+               __horizonClosed = RInteger.parse(value);
+               _horizonClosed = __horizonClosed;
+               break;
+            case "horizon_wait":
+               __horizonWait = RInteger.parse(value);
+               _horizonWait = __horizonWait;
+               break;
+            case "factor":
+               __factor = RDouble.parse(value);
+               _factor = __factor;
                break;
             case "note":
                __note = value;
@@ -668,12 +751,14 @@ public class FDataFinancialProductUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("name", _name);
+      row.set("code", _code);
       row.set("label", _label);
-      row.set("rentPerson", _rentPerson);
-      row.set("tenantPerson", _tenantPerson);
-      row.set("annualRateOfReturn", _annualRateOfReturn);
-      row.set("timeLimit", _timeLimit);
+      row.set("rate", _rate);
+      row.set("horizonCount", _horizonCount);
+      row.set("horizonUnit", _horizonUnit);
+      row.set("horizonClosed", _horizonClosed);
+      row.set("horizonWait", _horizonWait);
+      row.set("factor", _factor);
       row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
@@ -692,12 +777,14 @@ public class FDataFinancialProductUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("name", _name);
+      map.put("code", _code);
       map.put("label", _label);
-      map.put("rentPerson", _rentPerson);
-      map.put("tenantPerson", _tenantPerson);
-      map.put("annualRateOfReturn", RFloat.toString(_annualRateOfReturn));
-      map.put("timeLimit", RInteger.toString(_timeLimit));
+      map.put("rate", RDouble.toString(_rate));
+      map.put("horizonCount", RInteger.toString(_horizonCount));
+      map.put("horizonUnit", _horizonUnit);
+      map.put("horizonClosed", RInteger.toString(_horizonClosed));
+      map.put("horizonWait", RInteger.toString(_horizonWait));
+      map.put("factor", RDouble.toString(_factor));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -716,11 +803,12 @@ public class FDataFinancialProductUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _name = input.readString();
+      _code = input.readString();
       _label = input.readString();
-      _rentPerson = input.readString();
-      _tenantPerson = input.readString();
-      _timeLimit = input.readInt32();
+      _horizonCount = input.readInt32();
+      _horizonUnit = input.readString();
+      _horizonClosed = input.readInt32();
+      _horizonWait = input.readInt32();
       _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
@@ -739,11 +827,12 @@ public class FDataFinancialProductUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeString(_name);
+      output.writeString(_code);
       output.writeString(_label);
-      output.writeString(_rentPerson);
-      output.writeString(_tenantPerson);
-      output.writeInt32(_timeLimit);
+      output.writeInt32(_horizonCount);
+      output.writeString(_horizonUnit);
+      output.writeInt32(_horizonClosed);
+      output.writeInt32(_horizonWait);
       output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());

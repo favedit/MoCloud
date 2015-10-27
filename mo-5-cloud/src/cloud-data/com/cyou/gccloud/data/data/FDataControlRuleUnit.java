@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>数据挖掘规则配置表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataControlRuleUnit
-      extends FLogicUnit
+public class FDataControlRuleUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

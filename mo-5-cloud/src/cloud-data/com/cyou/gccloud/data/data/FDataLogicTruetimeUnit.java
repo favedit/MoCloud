@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>实时数据逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataLogicTruetimeUnit
-      extends FLogicUnit
+public class FDataLogicTruetimeUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

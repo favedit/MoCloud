@@ -45,7 +45,10 @@ $(function() {
       var url ="/pc/marketer/customer/Customer.wa?do=settingsSMS";
       var data = {customer:customer,setting:selected};
         setAjax(url, data, function(msg) {
-           console.log(msg);
+           if(msg){
+           location.reload();   
+           }
+           
         })
        shutDown();
    })

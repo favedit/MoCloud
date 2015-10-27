@@ -1,5 +1,6 @@
 package org.mo.content.face.pc.marketer.customer;
 
+import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
 import org.mo.web.core.session.IWebSession;
@@ -39,6 +40,7 @@ public interface ICustomerAction
    String settingsSMS(IWebContext context,
                       IWebSession sessionContext,
                       ILogicContext logicContext,
+                      @AContainer(name = "basePage") FBasePage basePage,
                       @AContainer(name = "page", fill = true) FCustomerPage page);
 
    //============================================================

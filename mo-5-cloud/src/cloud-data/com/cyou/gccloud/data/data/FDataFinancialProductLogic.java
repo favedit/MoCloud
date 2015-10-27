@@ -23,8 +23,7 @@ import org.mo.data.logic.SLogicTableInfo;
 // <T>金融产品信息逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FDataFinancialProductLogic
-      extends FLogicTable
+public class FDataFinancialProductLogic extends FLogicTable
 {
    // 金融产品信息的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
@@ -42,22 +41,28 @@ public class FDataFinancialProductLogic
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
    // 字段名称的定义。
-   public final static SLogicFieldInfo NAME = new SLogicFieldInfo("NAME");
+   public final static SLogicFieldInfo CODE = new SLogicFieldInfo("CODE");
 
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段出租人的定义。
-   public final static SLogicFieldInfo RENT_PERSON = new SLogicFieldInfo("RENT_PERSON");
-
-   // 字段承租人的定义。
-   public final static SLogicFieldInfo TENANT_PERSON = new SLogicFieldInfo("TENANT_PERSON");
-
-   // 字段预期年化收益率的定义。
-   public final static SLogicFieldInfo ANNUAL_RATE_OF_RETURN = new SLogicFieldInfo("ANNUAL_RATE_OF_RETURN");
+   // 字段收益率的定义。
+   public final static SLogicFieldInfo RATE = new SLogicFieldInfo("RATE");
 
    // 字段投资期限的定义。
-   public final static SLogicFieldInfo TIME_LIMIT = new SLogicFieldInfo("TIME_LIMIT");
+   public final static SLogicFieldInfo HORIZON_COUNT = new SLogicFieldInfo("HORIZON_COUNT");
+
+   // 字段投资期限类型的定义。
+   public final static SLogicFieldInfo HORIZON_UNIT = new SLogicFieldInfo("HORIZON_UNIT");
+
+   // 字段关闭期的定义。
+   public final static SLogicFieldInfo HORIZON_CLOSED = new SLogicFieldInfo("HORIZON_CLOSED");
+
+   // 字段等待期的定义。
+   public final static SLogicFieldInfo HORIZON_WAIT = new SLogicFieldInfo("HORIZON_WAIT");
+
+   // 字段业绩计算的定义。
+   public final static SLogicFieldInfo FACTOR = new SLogicFieldInfo("FACTOR");
 
    // 字段备注的定义。
    public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
@@ -75,7 +80,7 @@ public class FDataFinancialProductLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`NAME`,`LABEL`,`RENT_PERSON`,`TENANT_PERSON`,`ANNUAL_RATE_OF_RETURN`,`TIME_LIMIT`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CODE`,`LABEL`,`RATE`,`HORIZON_COUNT`,`HORIZON_UNIT`,`HORIZON_CLOSED`,`HORIZON_WAIT`,`FACTOR`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融产品信息逻辑单元。</T>
@@ -123,8 +128,7 @@ public class FDataFinancialProductLogic
    // @param id 编号
    // @return 查询字符串
    //============================================================
-   public String makeFindSql(CharSequence fields,
-                             long id){
+   public String makeFindSql(CharSequence fields, long id){
       FString sql = new FString("SELECT ");
       if(RString.isEmpty(fields)){
          sql.append(FIELDS);
@@ -203,9 +207,7 @@ public class FDataFinancialProductLogic
    //============================================================
    @Override
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> T find(T unit,
-                                        Class<T> clazz,
-                                        long recordId){
+   public <T extends FLogicUnit> T find(T unit, Class<T> clazz, long recordId){
       // 检查编号
       if(recordId <= 0){
          return null;
@@ -256,9 +258,7 @@ public class FDataFinancialProductLogic
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T findByGuid(T unit,
-                                              Class<T> clazz,
-                                              CharSequence guid){
+   public <T extends FLogicUnit> T findByGuid(T unit, Class<T> clazz, CharSequence guid){
       // 检查条件
       if(RString.isEmpty(guid)){
          return null;
@@ -295,9 +295,7 @@ public class FDataFinancialProductLogic
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T search(T unit,
-                                          Class<T> clazz,
-                                          CharSequence whereSql){
+   public <T extends FLogicUnit> T search(T unit, Class<T> clazz, CharSequence whereSql){
       // 检查条件
       if(RString.isEmpty(whereSql)){
          return null;
@@ -331,8 +329,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetch(int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataFinancialProductUnit> fetch(int pageSize, int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -344,9 +341,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence whereSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence whereSql, int pageSize, int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -359,8 +354,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence whereSql,
-                                                         CharSequence orderSql){
+   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence whereSql, CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -373,10 +367,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence whereSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -390,11 +381,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence fields,
-                                                         CharSequence whereSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -408,12 +395,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence fields,
-                                                         CharSequence whereSql,
-                                                         CharSequence groupSql,
-                                                         CharSequence orderSql,
-                                                         int pageSize,
-                                                         int page){
+   public FLogicDataset<FDataFinancialProductUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -424,8 +406,7 @@ public class FDataFinancialProductLogic
    // @param whereSql 条件命令
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
-                                                             CharSequence whereSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -442,10 +423,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
-                                                             CharSequence whereSql,
-                                                             int pageSize,
-                                                             int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, int pageSize, int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -463,9 +441,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
-                                                             CharSequence whereSql,
-                                                             CharSequence orderSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -483,11 +459,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
-                                                             CharSequence whereSql,
-                                                             CharSequence orderSql,
-                                                             int pageSize,
-                                                             int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -506,12 +478,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
-                                                             CharSequence fields,
-                                                             CharSequence whereSql,
-                                                             CharSequence orderSql,
-                                                             int pageSize,
-                                                             int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, null, orderSql);
       String sql = makeFetchSql(fields, whereSql, null, orderSql, 0, 0);
@@ -531,13 +498,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
-                                                             CharSequence fields,
-                                                             CharSequence whereSql,
-                                                             CharSequence groupSql,
-                                                             CharSequence orderSql,
-                                                             int pageSize,
-                                                             int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, groupSql, orderSql);
       String sql = makeFetchSql(fields, whereSql, groupSql, orderSql, 0, 0);
@@ -554,10 +515,7 @@ public class FDataFinancialProductLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FDataFinancialProductUnit> fetchSql(CharSequence code,
-                                                            CharSequence sql,
-                                                            int pageSize,
-                                                            int page){
+   public FLogicDataset<FDataFinancialProductUnit> fetchSql(CharSequence code, CharSequence sql, int pageSize, int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -572,11 +530,7 @@ public class FDataFinancialProductLogic
    // @return 数据单元集合
    //============================================================
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz,
-                                                           CharSequence code,
-                                                           CharSequence sql,
-                                                           int pageSize,
-                                                           int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz, CharSequence code, CharSequence sql, int pageSize, int page){
       // 获得数据
       FDataset dataset = innerFindDataset(code, sql, pageSize, page);
       // 返回结果
@@ -602,6 +556,7 @@ public class FDataFinancialProductLogic
       // 获得数据
       return fetchSql(null, code, sql, 0, 0);
    }
+
 
    //============================================================
    // <T>准备一个数据单元。</T>
@@ -653,7 +608,7 @@ public class FDataFinancialProductLogic
       FDataFinancialProductUnit unit = (FDataFinancialProductUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
-      if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
+      if((unit.createUserId() == 0)|| (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
          if(unit.createUserId() == 0){
             unit.setCreateUserId(operatorId);
@@ -671,12 +626,14 @@ public class FDataFinancialProductLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`NAME`");
+      cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
-      cmd.append(",`RENT_PERSON`");
-      cmd.append(",`TENANT_PERSON`");
-      cmd.append(",`ANNUAL_RATE_OF_RETURN`");
-      cmd.append(",`TIME_LIMIT`");
+      cmd.append(",`RATE`");
+      cmd.append(",`HORIZON_COUNT`");
+      cmd.append(",`HORIZON_UNIT`");
+      cmd.append(",`HORIZON_CLOSED`");
+      cmd.append(",`HORIZON_WAIT`");
+      cmd.append(",`FACTOR`");
       cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
@@ -697,12 +654,12 @@ public class FDataFinancialProductLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      String name = unit.name();
-      if(RString.isEmpty(name)){
+      String code = unit.code();
+      if(RString.isEmpty(code)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(name));
+         cmd.append(RSql.formatValue(code));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -715,27 +672,24 @@ public class FDataFinancialProductLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      String rentPerson = unit.rentPerson();
-      if(RString.isEmpty(rentPerson)){
+      cmd.append(unit.rate());
+      cmd.append(',');
+      cmd.append(unit.horizonCount());
+      cmd.append(',');
+      String horizonUnit = unit.horizonUnit();
+      if(RString.isEmpty(horizonUnit)){
          cmd.append("NULL");
       }else{
          cmd.append('\'');
-         cmd.append(RSql.formatValue(rentPerson));
+         cmd.append(RSql.formatValue(horizonUnit));
          cmd.append('\'');
       }
       cmd.append(',');
-      String tenantPerson = unit.tenantPerson();
-      if(RString.isEmpty(tenantPerson)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(tenantPerson));
-         cmd.append('\'');
-      }
+      cmd.append(unit.horizonClosed());
       cmd.append(',');
-      cmd.append(unit.annualRateOfReturn());
+      cmd.append(unit.horizonWait());
       cmd.append(',');
-      cmd.append(unit.timeLimit());
+      cmd.append(unit.factor());
       cmd.append(',');
       String note = unit.note();
       if(RString.isEmpty(note)){
@@ -819,14 +773,14 @@ public class FDataFinancialProductLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isNameChanged()){
-         cmd.append(",`NAME`=");
-         String name = unit.name();
-         if(RString.isEmpty(name)){
+      if(unit.isCodeChanged()){
+         cmd.append(",`CODE`=");
+         String code = unit.code();
+         if(RString.isEmpty(code)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(name));
+            cmd.append(RSql.formatValue(code));
             cmd.append('\'');
          }
       }
@@ -841,35 +795,36 @@ public class FDataFinancialProductLogic
             cmd.append('\'');
          }
       }
-      if(unit.isRentPersonChanged()){
-         cmd.append(",`RENT_PERSON`=");
-         String rentPerson = unit.rentPerson();
-         if(RString.isEmpty(rentPerson)){
+      if(unit.isRateChanged()){
+         cmd.append(",`RATE`=");
+         cmd.append(unit.rate());
+      }
+      if(unit.isHorizonCountChanged()){
+         cmd.append(",`HORIZON_COUNT`=");
+         cmd.append(unit.horizonCount());
+      }
+      if(unit.isHorizonUnitChanged()){
+         cmd.append(",`HORIZON_UNIT`=");
+         String horizonUnit = unit.horizonUnit();
+         if(RString.isEmpty(horizonUnit)){
             cmd.append("NULL");
          }else{
             cmd.append('\'');
-            cmd.append(RSql.formatValue(rentPerson));
+            cmd.append(RSql.formatValue(horizonUnit));
             cmd.append('\'');
          }
       }
-      if(unit.isTenantPersonChanged()){
-         cmd.append(",`TENANT_PERSON`=");
-         String tenantPerson = unit.tenantPerson();
-         if(RString.isEmpty(tenantPerson)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(tenantPerson));
-            cmd.append('\'');
-         }
+      if(unit.isHorizonClosedChanged()){
+         cmd.append(",`HORIZON_CLOSED`=");
+         cmd.append(unit.horizonClosed());
       }
-      if(unit.isAnnualRateOfReturnChanged()){
-         cmd.append(",`ANNUAL_RATE_OF_RETURN`=");
-         cmd.append(unit.annualRateOfReturn());
+      if(unit.isHorizonWaitChanged()){
+         cmd.append(",`HORIZON_WAIT`=");
+         cmd.append(unit.horizonWait());
       }
-      if(unit.isTimeLimitChanged()){
-         cmd.append(",`TIME_LIMIT`=");
-         cmd.append(unit.timeLimit());
+      if(unit.isFactorChanged()){
+         cmd.append(",`FACTOR`=");
+         cmd.append(unit.factor());
       }
       if(unit.isNoteChanged()){
          cmd.append(",`NOTE`=");

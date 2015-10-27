@@ -12,6 +12,7 @@ import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
 import org.mo.content.core.financial.marketer.customer.IDataMarketerCustomerConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
+import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -65,6 +66,7 @@ public class FCustomerAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FCustomerPage page){
+      System.out.println("------------------------------");
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
@@ -114,6 +116,7 @@ public class FCustomerAction
    public String settingsSMS(IWebContext context,
                              IWebSession sessionContext,
                              ILogicContext logicContext,
+                             FBasePage basePage,
                              FCustomerPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "SettingsSMS", "SettingsSMS begin.(session={1})", session.id());
@@ -142,7 +145,8 @@ public class FCustomerAction
          marketerCustomer.setSmsContactCd(selected);
          _marketerCustomerConsole.doUpdate(logicContext, marketerCustomer);
       }
-      return "/pc/marketer/customer/CustomerList";
+      page.setMessage("true");
+      return "/apl/ajax";
    }
 
    //============================================================

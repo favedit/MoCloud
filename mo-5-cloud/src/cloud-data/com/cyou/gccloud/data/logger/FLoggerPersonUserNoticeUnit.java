@@ -17,8 +17,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>人员公告访问逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerPersonUserNoticeUnit
-      extends FLogicUnit
+public class FLoggerPersonUserNoticeUnit extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
