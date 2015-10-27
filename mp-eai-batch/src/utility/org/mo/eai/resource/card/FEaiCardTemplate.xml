@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.card'><![CDATA[
+SELECT *
+FROM(
+   SELECT
+      c.CODE CITY_CODE,
+      d.CARD_CODE
+   FROM DT_COM_CITY_CARD d
+   LEFT JOIN DT_COM_CITY c ON c.OUID = d.CITY_ID  
+   WHERE IFNULL(c.LOCATION_LATITUDE, 0) > 0
+      AND IFNULL(c.LOCATION_LATITUDE, 0) > 0
+) t
+ORDER BY CITY_CODE, CARD_CODE
+]]></Resource>
+
+</Config>

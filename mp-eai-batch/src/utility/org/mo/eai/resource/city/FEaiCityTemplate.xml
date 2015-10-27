@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.city'><![CDATA[
+SELECT
+   p.CODE PROVINCE_CODE,
+   p.LABEL PROVINCE_LABEL,
+   c.CODE,
+   c.LABEL,
+   c.LEVEL,
+   c.LOCATION_LONGITUDE,
+   c.LOCATION_LATITUDE
+FROM DT_COM_CITY c
+LEFT JOIN DT_COM_PROVINCE p ON c.PROVINCE_ID = p.OUID  
+WHERE IFNULL(c.LOCATION_LONGITUDE, 0) > 0
+   AND IFNULL(c.LOCATION_LATITUDE, 0) > 0
+ORDER BY c.CODE
+]]></Resource>
+
+</Config>
