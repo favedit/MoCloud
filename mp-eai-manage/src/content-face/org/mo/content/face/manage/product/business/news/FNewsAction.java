@@ -2,6 +2,7 @@ package org.mo.content.face.manage.product.business.news;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -13,7 +14,6 @@ import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.upload.IWebUploadConsole;
 import org.mo.web.protocol.common.FWebUploadFile;
 import org.mo.web.protocol.context.IWebContext;
 
@@ -21,9 +21,9 @@ import org.mo.web.protocol.context.IWebContext;
 //<P>新闻控制器</P>
 //@class FNewsAction
 //============================================================
-public class FNewsAction 
-      implements 
-         INewsAction 
+public class FNewsAction
+      implements
+         INewsAction
 {
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FNewsAction.class);
@@ -32,8 +32,9 @@ public class FNewsAction
    @ALink
    protected INewsConsole _newsConsole;
 
+   // 存储控制台
    @ALink
-   protected IWebUploadConsole _webUploadConsole;
+   protected IGcStorageConsole _storageConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -42,11 +43,11 @@ public class FNewsAction
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, 
-                           ILogicContext logicContext, 
-                           FBasePage basePage) {
+   public String construct(IWebContext context,
+                           ILogicContext logicContext,
+                           FBasePage basePage){
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       return "/manage/product/business/news/NewsList";
@@ -61,25 +62,25 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FNewsPage page, 
-                        FBasePage basePage) {
+   public String select(IWebContext context,
+                        ILogicContext logicContext,
+                        FNewsPage page,
+                        FBasePage basePage){
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      if (null != context.parameter("page")) {
+      if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      } else {
+      }else{
          page.setPageCurrent(0);
       }
       FDataLogicNewsUnit unit = new FDataLogicNewsUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if (null != StrPageSize) {
+      if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataNewsInfo> unitList = _newsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
@@ -97,12 +98,12 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FNewsPage page, 
-                              FBasePage basePage) {
+   public String insertBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FNewsPage page,
+                              FBasePage basePage){
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       page.setResult("");
@@ -118,31 +119,31 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FNewsPage page, 
-                        FBasePage basePage) {
+   public String insert(IWebContext context,
+                        ILogicContext logicContext,
+                        FNewsPage page,
+                        FBasePage basePage){
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNewsUnit unit = _newsConsole.doPrepare(logicContext);
       FWebUploadFile file = context.files().first();
-      if (null != file) {
+      if(null != file){
          Integer len = file.length() / 1024;
-         if (len > 20) {
+         if(len > 20){
             page.setResult("请上传小于20k的图片!");
             return "/manage/product/business/news/InsertNews";
          }
          String type = file.contentType();
-         if (!type.contains("image")) {
+         if(!type.contains("image")){
             page.setResult("请上传图片!");
             return "/manage/product/business/news/InsertNews";
          }
       }
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _newsConsole.doInsert(logicContext, unit);
-      if (!result.equals(EResult.Success)) {
+      if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
          return "/manage/product/business/news/InsertNews";
       }
@@ -159,12 +160,12 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FNewsPage page, 
-                              FBasePage basePage) {
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FNewsPage page,
+                              FBasePage basePage){
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
@@ -179,15 +180,15 @@ public class FNewsAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
-      if (!RString.isEmpty(unit.iconUrl())) {
+      if(!RString.isEmpty(unit.iconUrl())){
          info.setIconUrl(unit.iconUrl());
          int na = unit.iconUrl().indexOf("newsImages");
          info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
       }
-      if(RString.equals(unit.statusCd(),2)){
+      if(RString.equals(unit.statusCd(), 2)){
          basePage.setMenuString("manage.hide");
       }
-      if(!RString.equals(unit.statusCd(),2)){
+      if(!RString.equals(unit.statusCd(), 2)){
          basePage.setMenuString("manage.show");
       }
       page.setUnit(info);
@@ -205,24 +206,24 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FNewsPage page, 
-                        FBasePage basePage) {
+   public String update(IWebContext context,
+                        ILogicContext logicContext,
+                        FNewsPage page,
+                        FBasePage basePage){
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       FWebUploadFile file = context.files().first();
-      if (null != file) {
+      if(null != file){
          Integer len = file.length() / 1024;
-         if (len > 20) {
+         if(len > 20){
             page.setResult("请上传小于20k的图片!");
             return "/manage/product/business/news/UpdateNews";
          }
          String type = file.contentType();
-         if (!type.contains("image")) {
+         if(!type.contains("image")){
             page.setResult("请上传图片!");
             return "/manage/product/business/news/UpdateNews";
          }
@@ -232,7 +233,7 @@ public class FNewsAction
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/product/business/news/NewsList";
    }
-   
+
    // ============================================================
    // <T>撤回</T>
    //
@@ -242,12 +243,12 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String resetStatusCd(IWebContext context, 
-                               ILogicContext logicContext, 
-                               FNewsPage page, 
+   public String resetStatusCd(IWebContext context,
+                               ILogicContext logicContext,
+                               FNewsPage page,
                                FBasePage basePage){
       _logger.debug(this, "resetStatusCd", "resetStatusCd begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
@@ -257,6 +258,7 @@ public class FNewsAction
       page.setResult("");
       return "/manage/product/business/news/NewsList";
    }
+
    // ============================================================
    // <T>删除之前</T>
    //
@@ -266,23 +268,24 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String deleteBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FNewsPage Page, 
+   public String deleteBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FNewsPage Page,
                               FBasePage basePage){
       _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
-      if(RString.equals(unit.statusCd(),2)){
+      if(RString.equals(unit.statusCd(), 2)){
          basePage.setJson("noDel");
       }else{
          basePage.setJson("yesDel");
       }
       return "/manage/common/ajax";
    }
+
    // ============================================================
    // <T>删除</T>
    //
@@ -292,23 +295,23 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FNewsPage Page, 
-                        FBasePage basePage) {
+   public String delete(IWebContext context,
+                        ILogicContext logicContext,
+                        FNewsPage Page,
+                        FBasePage basePage){
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
-      if (unit == null) {
+      if(unit == null){
          throw new FFatalError("id not exists.");
       }
       EResult result = _newsConsole.doDelete(logicContext, unit);
-      if (!result.equals(EResult.Success)) {
+      if(!result.equals(EResult.Success)){
          throw new FFatalError("Delete failure.");
-      } else {
+      }else{
          return "/manage/product/business/news/NewsList";
       }
    }
@@ -320,10 +323,10 @@ public class FNewsAction
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context, 
-                            ILogicContext logicContext, 
-                            FDataLogicNewsUnit unit, 
-                            String flag) {
+   public void setLogicNews(IWebContext context,
+                            ILogicContext logicContext,
+                            FDataLogicNewsUnit unit,
+                            String flag){
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
@@ -335,17 +338,18 @@ public class FNewsAction
       unit.setLinkUrl(context.parameter("linkUrl"));
       unit.setStatusCd(EGcResourceStatus.Apply);
       FWebUploadFile file = context.files().first();
-      if (null == file) {
+      if(null == file){
          String oiconUr = context.parameter("oiconUr");
-         if (!RString.isEmpty(oiconUr)) {
+         if(!RString.isEmpty(oiconUr)){
             unit.setIconUrl(oiconUr);
-         } else {
+         }else{
             unit.setIconUrl(context.parameter("iconUrl"));
          }
-      } else {
+      }else{
          _newsConsole.saveImage(file, unit, flag);
       }
    }
+
    // ============================================================
    // <T>根据状态，是否显示，标题查询</T>
    //
@@ -355,23 +359,23 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String selectByData(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FNewsPage page, 
-                              FBasePage basePage) {
+   public String selectByData(IWebContext context,
+                              ILogicContext logicContext,
+                              FNewsPage page,
+                              FBasePage basePage){
       _logger.debug(this, "selectByDate", "selectByDate begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      if (null != context.parameter("page")) {
+      if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      } else {
+      }else{
          page.setPageCurrent(0);
       }
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if (null != StrPageSize) {
+      if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
       Integer statusCd = context.parameterAsInteger("statusCd");
@@ -382,6 +386,7 @@ public class FNewsAction
       _logger.debug(this, "selectByDate", "selectByDate finish. (unitListCount={1})", unitlist.count());
       return "/manage/common/ajax";
    }
+
    // ============================================================
    // <T>查询内容</T>
    //
@@ -391,12 +396,12 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, 
-                                ILogicContext logicContext, 
-                                FNewsPage page, 
-                                FBasePage basePage) {
+   public String getDescription(IWebContext context,
+                                ILogicContext logicContext,
+                                FNewsPage page,
+                                FBasePage basePage){
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, context.parameterAsLong("ouid"));
@@ -406,7 +411,7 @@ public class FNewsAction
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/business/news/NewsDataInfoForContent";
    }
-   
+
    // ============================================================
    // <T>获取内容</T>
    //
@@ -416,18 +421,18 @@ public class FNewsAction
    // @return 页面
    // ============================================================
    @Override
-   public String getUpdateDescription(IWebContext context, 
-                                ILogicContext logicContext, 
-                                FNewsPage page, 
-                                FBasePage basePage) {
+   public String getUpdateDescription(IWebContext context,
+                                      ILogicContext logicContext,
+                                      FNewsPage page,
+                                      FBasePage basePage){
       _logger.debug(this, "getUpdateDescription", "getUpdateDescription begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataNewsInfo info = new FDataNewsInfo();
       info.setContent(context.parameter("content"));
       page.setUnit(info);
-      _logger.debug(this, "getUpdateDescription=============================="+info.content(), "getUpdateDescription begin. (userId={1})", basePage.userId());
+      _logger.debug(this, "getUpdateDescription==============================" + info.content(), "getUpdateDescription begin. (userId={1})", basePage.userId());
       return "/manage/product/business/news/NewsDataInfoForContent";
    }
 }
