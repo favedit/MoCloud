@@ -21,7 +21,7 @@ public class RGcStorageUtility
       RAop.initialize("D:/Microbject/MoCloud/mp-eai-manage/webroot/WEB-INF/classes/application-work.xml");
 
       IGcStorageConsole storageConsole = RAop.find(IGcStorageConsole.class);
-      SGcStorage storage = new SGcStorage("eai.images", new File("D:/picture-03.jpg"));
+      SGcStorage storage = new SGcStorage("eai.images", new File("E:/ima.png"));
       //      storage.setCatalog("eai.images");
       //      storage.setDate(RDateTime.format("YYMMDD"));
       //      storage.setCode(RUuid.makeUniqueIdLower());
@@ -30,6 +30,7 @@ public class RGcStorageUtility
       storageConsole.store(storage);
 
       String pack = storage.pack();
+      System.out.println(pack);
       System.out.println(storageConsole.makeUrl(pack));
       System.out.println(storageConsole.makeUrl(storage));
 
