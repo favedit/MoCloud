@@ -17,7 +17,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>全国所有城市逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataCommonAllprovincecityUnit extends FLogicUnit
+public class FDataCommonAllprovincecityUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

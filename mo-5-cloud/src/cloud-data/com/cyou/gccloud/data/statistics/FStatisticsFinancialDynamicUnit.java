@@ -18,7 +18,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>动态统计表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialDynamicUnit extends FLogicUnit
+public class FStatisticsFinancialDynamicUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

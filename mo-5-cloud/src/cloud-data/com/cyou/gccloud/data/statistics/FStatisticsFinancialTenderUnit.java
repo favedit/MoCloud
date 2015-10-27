@@ -19,7 +19,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>动态投标表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FStatisticsFinancialTenderUnit extends FLogicUnit
+public class FStatisticsFinancialTenderUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

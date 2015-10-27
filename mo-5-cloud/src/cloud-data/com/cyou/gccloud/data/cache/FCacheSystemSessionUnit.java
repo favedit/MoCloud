@@ -18,7 +18,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>系统会话表逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FCacheSystemSessionUnit extends FLogicUnit
+public class FCacheSystemSessionUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

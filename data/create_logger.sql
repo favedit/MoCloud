@@ -137,11 +137,15 @@ CREATE TABLE `LG_PSN_USER_NOTICE`
    `USER_ID`                       BIGINT, 
    `NOTICE_ID`                     BIGINT, 
    `ACTIVE_CD`                     INTEGER, 
+   `ACTIVE_DATE`                   DATETIME, 
+   `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
+   `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+) ENGINE=MYISAM DEFAULT CHARSET=utf8; 
 
 ALTER TABLE LG_PSN_USER_NOTICE 
    ADD CONSTRAINT LG_PSN_USR_NTC_UK_GID UNIQUE ( GUID ); 

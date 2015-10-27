@@ -6,6 +6,7 @@ import org.mo.com.io.IDataInput;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
+import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -17,7 +18,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>人员公告访问逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerPersonUserNoticeUnit extends FLogicUnit
+public class FLoggerPersonUserNoticeUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;
@@ -54,6 +56,30 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
 
    // 字段是否激活的定义。
    protected int _activeCd;
+
+   // 存储字段阅读时间的定义。
+   private TDateTime __activeDate = new TDateTime();
+
+   // 字段阅读时间的定义。
+   protected TDateTime _activeDate = new TDateTime();
+
+   // 存储字段位置经度的定义。
+   private double __locationLongitude;
+
+   // 字段位置经度的定义。
+   protected double _locationLongitude;
+
+   // 存储字段位置纬度的定义。
+   private double __locationLatitude;
+
+   // 字段位置纬度的定义。
+   protected double _locationLatitude;
+
+   // 存储字段备注的定义。
+   private String __note;
+
+   // 字段备注的定义。
+   protected String _note;
 
    // 存储字段创建用户标识的定义。
    private long __createUserId;
@@ -248,6 +274,114 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
    }
 
    //============================================================
+   // <T>判断阅读时间的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isActiveDateChanged(){
+      return !__activeDate.equals(_activeDate);
+   }
+
+   //============================================================
+   // <T>获得阅读时间的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public TDateTime activeDate(){
+      return _activeDate;
+   }
+
+   //============================================================
+   // <T>设置阅读时间的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setActiveDate(TDateTime value){
+      _activeDate = value;
+   }
+
+   //============================================================
+   // <T>判断位置经度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLongitudeChanged(){
+      return __locationLongitude != _locationLongitude;
+   }
+
+   //============================================================
+   // <T>获得位置经度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLongitude(){
+      return _locationLongitude;
+   }
+
+   //============================================================
+   // <T>设置位置经度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLongitude(double value){
+      _locationLongitude = value;
+   }
+
+   //============================================================
+   // <T>判断位置纬度的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLocationLatitudeChanged(){
+      return __locationLatitude != _locationLatitude;
+   }
+
+   //============================================================
+   // <T>获得位置纬度的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public double locationLatitude(){
+      return _locationLatitude;
+   }
+
+   //============================================================
+   // <T>设置位置纬度的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLocationLatitude(double value){
+      _locationLatitude = value;
+   }
+
+   //============================================================
+   // <T>判断备注的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNoteChanged(){
+      return !RString.equals(__note, _note);
+   }
+
+   //============================================================
+   // <T>获得备注的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String note(){
+      return _note;
+   }
+
+   //============================================================
+   // <T>设置备注的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNote(String value){
+      _note = value;
+   }
+
+   //============================================================
    // <T>判断创建用户标识的数据是否改变。</T>
    //
    // @return 数据内容
@@ -376,6 +510,14 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
             return Long.toString(_noticeId);
          case "active_cd":
             return RInteger.toString(_activeCd);
+         case "active_date":
+            return _activeDate.toString();
+         case "location_longitude":
+            return RDouble.toString(_locationLongitude);
+         case "location_latitude":
+            return RDouble.toString(_locationLatitude);
+         case "note":
+            return _note;
          case "create_user_id":
             return Long.toString(_createUserId);
          case "create_date":
@@ -415,6 +557,18 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
             break;
          case "active_cd":
             _activeCd = RInteger.parse(value);
+            break;
+         case "active_date":
+            _activeDate.parse(value);
+            break;
+         case "location_longitude":
+            _locationLongitude = RDouble.parse(value);
+            break;
+         case "location_latitude":
+            _locationLatitude = RDouble.parse(value);
+            break;
+         case "note":
+            _note = value;
             break;
          case "create_user_id":
             _createUserId = RLong.parse(value);
@@ -467,6 +621,22 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
                __activeCd = RInteger.parse(value);
                _activeCd = __activeCd;
                break;
+            case "active_date":
+               __activeDate.parse(value);
+               _activeDate.assign(__activeDate);
+               break;
+            case "location_longitude":
+               __locationLongitude = RDouble.parse(value);
+               _locationLongitude = __locationLongitude;
+               break;
+            case "location_latitude":
+               __locationLatitude = RDouble.parse(value);
+               _locationLatitude = __locationLatitude;
+               break;
+            case "note":
+               __note = value;
+               _note = __note;
+               break;
             case "create_user_id":
                __createUserId = RLong.parse(value);
                _createUserId = __createUserId;
@@ -501,6 +671,10 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
       row.set("userId", _userId);
       row.set("noticeId", _noticeId);
       row.set("activeCd", _activeCd);
+      row.set("activeDate", _activeDate);
+      row.set("locationLongitude", _locationLongitude);
+      row.set("locationLatitude", _locationLatitude);
+      row.set("note", _note);
       row.set("createUserId", _createUserId);
       row.set("createDate", _createDate);
       row.set("updateUserId", _updateUserId);
@@ -521,6 +695,10 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
       map.put("userId", RLong.toString(_userId));
       map.put("noticeId", RLong.toString(_noticeId));
       map.put("activeCd", RInteger.toString(_activeCd));
+      map.put("activeDate", _activeDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("locationLongitude", RDouble.toString(_locationLongitude));
+      map.put("locationLatitude", RDouble.toString(_locationLatitude));
+      map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("updateUserId", RLong.toString(_updateUserId));
@@ -541,6 +719,8 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
       _userId = input.readInt64();
       _noticeId = input.readInt64();
       _activeCd = input.readInt32();
+      _activeDate.set(input.readInt64());
+      _note = input.readString();
       _createUserId = input.readInt64();
       _createDate.set(input.readInt64());
       _updateUserId = input.readInt64();
@@ -561,6 +741,8 @@ public class FLoggerPersonUserNoticeUnit extends FLogicUnit
       output.writeInt64(_userId);
       output.writeInt64(_noticeId);
       output.writeInt32(_activeCd);
+      output.writeInt64(_activeDate.get());
+      output.writeString(_note);
       output.writeInt64(_createUserId);
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);

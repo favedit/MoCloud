@@ -17,7 +17,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>客户发送短信日志表   逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerFinancialCustomerMessageUnit extends FLogicUnit
+public class FLoggerFinancialCustomerMessageUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

@@ -17,7 +17,8 @@ import org.mo.data.logic.FLogicUnit;
 // <T>销售工具逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FDataLogicSalestoolsUnit extends FLogicUnit
+public class FDataLogicSalestoolsUnit
+      extends FLogicUnit
 {
    // 存储字段对象标识的定义。
    private long __ouid;

@@ -3,5 +3,9 @@
   <FieldRecordId _uuid="694423bf-c56f-4ba3-af5f-bb283eb8d947" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" />
   <FieldRecordId _uuid="c7d80e53-754b-4a31-aec8-a75906762520" name="notice_id" label="M#12cn14公告编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTICE_ID" />
   <FieldInteger _uuid="51faa470-6834-456d-ae67-c453bb6c94c1" name="active_cd" label="M#12cn14是否激活" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
+  <FieldDateTime _uuid="608061ca-e40a-4d4e-851f-3ea4053d9614" name="active_date" label="M#12cn14阅读时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_DATE" />
+  <FieldDouble _uuid="03958c46-1359-4b92-bbea-6f79a75e70f5" name="location_longitude" label="M#12cn14位置经度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LONGITUDE" />
+  <FieldDouble _uuid="d8f9703d-a321-4435-9ee6-0961abefa67d" name="location_latitude" label="M#12cn14位置纬度" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LOCATION_LATITUDE" />
+  <FieldString _uuid="db9111f1-6fa0-4612-94d9-faa1946d504c" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
   <FieldTemplate _uuid="fb7d074b-515d-4e42-a8b1-f6f720982319" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
 </DataStore>

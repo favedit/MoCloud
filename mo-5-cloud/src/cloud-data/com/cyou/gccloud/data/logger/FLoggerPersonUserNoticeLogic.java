@@ -3,12 +3,14 @@ package com.cyou.gccloud.data.logger;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
+import org.mo.com.data.RSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FString;
 import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.lang.reflect.RClass;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.FLogicTable;
@@ -22,7 +24,8 @@ import org.mo.data.logic.SLogicTableInfo;
 // <T>人员公告访问逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerPersonUserNoticeLogic extends FLogicTable
+public class FLoggerPersonUserNoticeLogic
+      extends FLogicTable
 {
    // 人员公告访问的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("logger");
@@ -48,6 +51,18 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // 字段是否激活的定义。
    public final static SLogicFieldInfo ACTIVE_CD = new SLogicFieldInfo("ACTIVE_CD");
 
+   // 字段阅读时间的定义。
+   public final static SLogicFieldInfo ACTIVE_DATE = new SLogicFieldInfo("ACTIVE_DATE");
+
+   // 字段位置经度的定义。
+   public final static SLogicFieldInfo LOCATION_LONGITUDE = new SLogicFieldInfo("LOCATION_LONGITUDE");
+
+   // 字段位置纬度的定义。
+   public final static SLogicFieldInfo LOCATION_LATITUDE = new SLogicFieldInfo("LOCATION_LATITUDE");
+
+   // 字段备注的定义。
+   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
+
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
 
@@ -61,7 +76,7 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`NOTICE_ID`,`ACTIVE_CD`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`NOTICE_ID`,`ACTIVE_CD`,`ACTIVE_DATE`,`LOCATION_LONGITUDE`,`LOCATION_LATITUDE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造人员公告访问逻辑单元。</T>
@@ -109,7 +124,8 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param id 编号
    // @return 查询字符串
    //============================================================
-   public String makeFindSql(CharSequence fields, long id){
+   public String makeFindSql(CharSequence fields,
+                             long id){
       FString sql = new FString("SELECT ");
       if(RString.isEmpty(fields)){
          sql.append(FIELDS);
@@ -188,7 +204,9 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    //============================================================
    @Override
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> T find(T unit, Class<T> clazz, long recordId){
+   public <T extends FLogicUnit> T find(T unit,
+                                        Class<T> clazz,
+                                        long recordId){
       // 检查编号
       if(recordId <= 0){
          return null;
@@ -239,7 +257,9 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T findByGuid(T unit, Class<T> clazz, CharSequence guid){
+   public <T extends FLogicUnit> T findByGuid(T unit,
+                                              Class<T> clazz,
+                                              CharSequence guid){
       // 检查条件
       if(RString.isEmpty(guid)){
          return null;
@@ -276,7 +296,9 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @return 是否获得
    //============================================================
    @Override
-   public <T extends FLogicUnit> T search(T unit, Class<T> clazz, CharSequence whereSql){
+   public <T extends FLogicUnit> T search(T unit,
+                                          Class<T> clazz,
+                                          CharSequence whereSql){
       // 检查条件
       if(RString.isEmpty(whereSql)){
          return null;
@@ -310,7 +332,8 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(int pageSize, int page){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(int pageSize,
+                                                           int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -322,7 +345,9 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql, int pageSize, int page){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -335,7 +360,8 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql, CharSequence orderSql){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql,
+                                                           CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -348,7 +374,10 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql,
+                                                           CharSequence orderSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -362,7 +391,11 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence fields,
+                                                           CharSequence whereSql,
+                                                           CharSequence orderSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -376,7 +409,12 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence fields,
+                                                           CharSequence whereSql,
+                                                           CharSequence groupSql,
+                                                           CharSequence orderSql,
+                                                           int pageSize,
+                                                           int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -387,7 +425,8 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param whereSql 条件命令
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -404,7 +443,10 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, null);
       String sql = makeFetchSql(null, whereSql, null, null, 0, 0);
@@ -422,7 +464,9 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -440,7 +484,11 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(null, whereSql, null, orderSql);
       String sql = makeFetchSql(null, whereSql, null, orderSql, 0, 0);
@@ -459,7 +507,12 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, null, orderSql);
       String sql = makeFetchSql(fields, whereSql, null, orderSql, 0, 0);
@@ -479,7 +532,13 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz, CharSequence fields, CharSequence whereSql, CharSequence groupSql, CharSequence orderSql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchClass(Class<T> clazz,
+                                                             CharSequence fields,
+                                                             CharSequence whereSql,
+                                                             CharSequence groupSql,
+                                                             CharSequence orderSql,
+                                                             int pageSize,
+                                                             int page){
       // 生成命令
       String code = innerMemcacheKey(fields, whereSql, groupSql, orderSql);
       String sql = makeFetchSql(fields, whereSql, groupSql, orderSql, 0, 0);
@@ -496,7 +555,10 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetchSql(CharSequence code, CharSequence sql, int pageSize, int page){
+   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetchSql(CharSequence code,
+                                                              CharSequence sql,
+                                                              int pageSize,
+                                                              int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -511,7 +573,11 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
    // @return 数据单元集合
    //============================================================
    @SuppressWarnings("unchecked")
-   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz, CharSequence code, CharSequence sql, int pageSize, int page){
+   public <T extends FLogicUnit> FLogicDataset<T> fetchSql(Class<T> clazz,
+                                                           CharSequence code,
+                                                           CharSequence sql,
+                                                           int pageSize,
+                                                           int page){
       // 获得数据
       FDataset dataset = innerFindDataset(code, sql, pageSize, page);
       // 返回结果
@@ -537,7 +603,6 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
       // 获得数据
       return fetchSql(null, code, sql, 0, 0);
    }
-
 
    //============================================================
    // <T>准备一个数据单元。</T>
@@ -589,7 +654,7 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
       FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
-      if((unit.createUserId() == 0)|| (unit.updateUserId() == 0)){
+      if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
          long operatorId = currentOperatorId();
          if(unit.createUserId() == 0){
             unit.setCreateUserId(operatorId);
@@ -610,6 +675,10 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
       cmd.append(",`USER_ID`");
       cmd.append(",`NOTICE_ID`");
       cmd.append(",`ACTIVE_CD`");
+      cmd.append(",`ACTIVE_DATE`");
+      cmd.append(",`LOCATION_LONGITUDE`");
+      cmd.append(",`LOCATION_LATITUDE`");
+      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -644,6 +713,30 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
       }
       cmd.append(',');
       cmd.append(unit.activeCd());
+      cmd.append(',');
+      TDateTime activeDate = unit.activeDate();
+      if(activeDate == null){
+         cmd.append("NULL");
+      }else if(activeDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(activeDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.locationLongitude());
+      cmd.append(',');
+      cmd.append(unit.locationLatitude());
+      cmd.append(',');
+      String note = unit.note();
+      if(RString.isEmpty(note)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(note));
+         cmd.append('\'');
+      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -739,6 +832,38 @@ public class FLoggerPersonUserNoticeLogic extends FLogicTable
       if(unit.isActiveCdChanged()){
          cmd.append(",`ACTIVE_CD`=");
          cmd.append(unit.activeCd());
+      }
+      if(unit.isActiveDateChanged()){
+         cmd.append(",`ACTIVE_DATE`=");
+         TDateTime activeDate = unit.activeDate();
+         if(activeDate == null){
+            cmd.append("NULL");
+         }else if(activeDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(activeDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isLocationLongitudeChanged()){
+         cmd.append(",`LOCATION_LONGITUDE`=");
+         cmd.append(unit.locationLongitude());
+      }
+      if(unit.isLocationLatitudeChanged()){
+         cmd.append(",`LOCATION_LATITUDE`=");
+         cmd.append(unit.locationLatitude());
+      }
+      if(unit.isNoteChanged()){
+         cmd.append(",`NOTE`=");
+         String note = unit.note();
+         if(RString.isEmpty(note)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(note));
+            cmd.append('\'');
+         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");
