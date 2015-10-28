@@ -16,9 +16,9 @@
    <!-- 服务设定 -->
    <Define name='cloud.server.storage.enable'>Y</Define>
    <!--  <Define name='cloud.server.storage.upload'>http://localhost:8030/cloud.storage.upload.wv</Define>  -->
-   <Define name='cloud.server.storage.upload'>http://115.28.136.134:8030/cloud.storage.upload.wv</Define>
-   <Define name='cloud.server.storage.access'>http://localhost:8030/storage</Define>
-   <Define name='cloud.server.storage.picture'>http://localhost:8030/cloud.storage.picture.wv</Define>
+   <Define name='cloud.server.storage.process'>http://10.13.0.250:8030/cloud.storage.process.wv</Define>
+   <Define name='cloud.server.storage.access'>http://10.13.0.250:8030/storage</Define>
+   <Define name='cloud.server.storage.picture'>http://10.13.0.250:8030/cloud.storage.picture.wv</Define>
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws</Define>
 

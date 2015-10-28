@@ -3,15 +3,15 @@
 <Config>   
          
    <!-- ============================================================ -->
-   <!-- 设计：存储服务处理                                           -->
+   <!-- 设计：存储处理                                               -->
    <!-- ============================================================ -->
    <WebServlet
-         name  = 'cloud.storage.upload'
-         face  = 'org.mo.cloud.servlet.storage.IUploadServlet'/>
+         name  = 'cloud.storage.process'
+         face  = 'org.mo.cloud.servlet.storage.IProcessServlet'/>
 
    <Component
-         face  = 'org.mo.cloud.servlet.storage.IUploadServlet'
-         class = 'org.mo.cloud.servlet.storage.FUploadServlet'
+         face  = 'org.mo.cloud.servlet.storage.IProcessServlet'
+         class = 'org.mo.cloud.servlet.storage.FProcessServlet'
          scope = 'global'/>
 
 </Config>

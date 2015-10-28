@@ -20,13 +20,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>上传处理。</T>
 //============================================================
-public class FUploadServlet
+public class FProcessServlet
       extends FObject
       implements
-         IUploadServlet
+         IProcessServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FUploadServlet.class);
+   private static ILogger _logger = RLogger.find(FProcessServlet.class);
 
    // 数据缓冲大小
    protected static int BufferLength = 1024 * 64;
@@ -36,10 +36,6 @@ public class FUploadServlet
 
    // 数据块最大尺寸
    protected static int BlockMaxSize = 1024 * 256;
-
-   // 图片服务接口
-   //   @ALink
-   //   protected IGcPictureConsole _pictureConsole;
 
    // 应用服务接口
    @ALink
@@ -53,19 +49,14 @@ public class FUploadServlet
    // @param response 应答
    //============================================================
    @Override
-   public void process(IWebContext context,
-                       IWebServletRequest request,
-                       IWebServletResponse response){
+   public void upload(IWebContext context,
+                      IWebServletRequest request,
+                      IWebServletResponse response){
       // 检查分类
       String catalog = context.parameter("catalog");
       if(RString.isEmpty(catalog)){
          throw new FFatalError("Upload catalog is empty.");
       }
-      //      // 检查类型
-      //      String type = context.parameter("type");
-      //      if(RString.isEmpty(type)){
-      //         throw new FFatalError("Upload type is empty.");
-      //      }
       // 检查日期
       String date = context.parameter("date");
       if(RString.isEmpty(date)){
@@ -80,11 +71,6 @@ public class FUploadServlet
       String name = context.parameter("name");
       if(RString.isEmpty(name)){
          throw new FFatalError("Upload name is empty.");
-      }
-      // 检查扩展
-      String extension = context.parameter("extension");
-      if(RString.isEmpty(extension)){
-         throw new FFatalError("Upload extension is empty.");
       }
       //............................................................
       // 上传处理
@@ -102,7 +88,7 @@ public class FUploadServlet
          blockSize = BlockMaxSize;
       }
       // 写入文件
-      File storageFile = _storageConsole.createFile(catalog, date, code, name + "." + extension);
+      File storageFile = _storageConsole.createFile(catalog, date, code, name);
       _logger.debug(this, "process", "Upload data. (catalog={1}, date={2}, code={3}, size={4}, block_size={5}, file_name={6})", catalog, date, code, size, blockSize, storageFile.getAbsolutePath());
       try(RandomAccessFile file = new RandomAccessFile(storageFile, "rw")){
          // 设置文件大小
@@ -143,5 +129,31 @@ public class FUploadServlet
          _logger.error(this, "process", exception);
          throw new FFatalError(exception);
       }
+   }
+
+   //============================================================
+   // <T>删除文件处理。</T>
+   //
+   // @param context 环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public void delete(IWebContext context,
+                      IWebServletRequest request,
+                      IWebServletResponse response){
+   }
+
+   //============================================================
+   // <T>删除目录处理。</T>
+   //
+   // @param context 环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public void drop(IWebContext context,
+                    IWebServletRequest request,
+                    IWebServletResponse response){
    }
 }

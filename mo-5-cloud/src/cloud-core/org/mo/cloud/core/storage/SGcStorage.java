@@ -10,6 +10,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.RUuid;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.web.protocol.common.FWebUploadFile;
 
 //============================================================
 // <T>存储信息。</T>
@@ -22,6 +23,9 @@ public class SGcStorage
    // 分类
    protected String _catalog;
 
+   // 内容类型
+   protected String _mime;
+
    // 类型
    protected String _type;
 
@@ -31,8 +35,11 @@ public class SGcStorage
    // 代码
    protected String _code;
 
-   // 名称
+   // 当前名称
    protected String _name;
+
+   // 原始名称
+   protected String _origin;
 
    // 扩展名
    protected String _extension;
@@ -64,6 +71,15 @@ public class SGcStorage
    //============================================================
    // <T>构造存储信息。</T>
    //
+   // @param pack 打包字符串
+   //============================================================
+   public SGcStorage(String pack){
+      unpack(pack);
+   }
+
+   //============================================================
+   // <T>构造存储信息。</T>
+   //
    // @param catalog 分类
    // @param file 文件
    //============================================================
@@ -74,6 +90,54 @@ public class SGcStorage
       _code = RUuid.makeUniqueIdLower();
       _name = RUuid.makeUniqueIdLower();
       loadFile(file.getAbsolutePath());
+   }
+
+   //============================================================
+   // <T>构造存储信息。</T>
+   //
+   // @param catalog 分类
+   // @param file 文件
+   //============================================================
+   public SGcStorage(String catalog,
+                     FWebUploadFile file){
+      // 加载文件
+      loadFile(file.uploadName());
+      // 设置属性
+      _catalog = catalog;
+      _date = RDateTime.format("YYMMDD");
+      _code = RUuid.makeUniqueIdLower();
+      _name = RUuid.makeUniqueIdLower();
+      _origin = file.fileName();
+      _mime = file.contentType();
+      _extension = RFile.extension(file.fileName());
+      if(!RString.isEmpty(_extension)){
+         _name += "." + _extension;
+      }
+   }
+
+   //============================================================
+   // <T>构造存储信息。</T>
+   //
+   // @param catalog 分类
+   // @param code 代码
+   // @param file 文件
+   //============================================================
+   public SGcStorage(String catalog,
+                     String code,
+                     FWebUploadFile file){
+      // 加载文件
+      loadFile(file.uploadName());
+      // 设置属性
+      _catalog = catalog;
+      _date = RDateTime.format("YYMMDD");
+      _code = code;
+      _name = RUuid.makeUniqueIdLower();
+      _origin = file.fileName();
+      _mime = file.contentType();
+      _extension = RFile.extension(file.fileName());
+      if(!RString.isEmpty(_extension)){
+         _name += "." + _extension;
+      }
    }
 
    //============================================================
@@ -164,6 +228,24 @@ public class SGcStorage
    //============================================================
    public void setName(String name){
       _name = name;
+   }
+
+   //============================================================
+   // <T>获得原始名称。</T>
+   //
+   // @return 原始名称
+   //============================================================
+   public String origin(){
+      return _origin;
+   }
+
+   //============================================================
+   // <T>设置原始名称。</T>
+   //
+   // @param origin 原始名称
+   //============================================================
+   public void setOrigin(String origin){
+      _origin = origin;
    }
 
    //============================================================
@@ -314,6 +396,7 @@ public class SGcStorage
       // 加载文件
       try(FByteFile file = new FByteFile(fileName)){
          _data = file.toArray();
+         _size = _data.length;
       }catch(Exception exception){
          _logger.error(this, "loadFile", exception);
       }
@@ -325,16 +408,14 @@ public class SGcStorage
    // @return 打包字符串
    //============================================================
    public String pack(){
-      if(_data == null){
-         return null;
-      }
       FAttributes map = new FAttributes();
       map.set("catalog", _catalog);
       map.set("date", _date);
       map.set("code", _code);
       map.set("name", _name);
-      map.set("extension", _extension);
-      map.set("size", _data.length);
+      map.set("origin", _origin);
+      map.set("mime", _mime);
+      map.set("size", _size);
       return map.pack();
    }
 
@@ -344,13 +425,18 @@ public class SGcStorage
    // @param pack 打包字符串
    //============================================================
    public void unpack(String pack){
-      FAttributes map = new FAttributes();
-      map.unpack(pack);
-      _catalog = map.get("catalog");
-      _date = map.get("date");
-      _code = map.get("code");
-      _name = map.get("name");
-      _extension = map.get("extension");
-      _size = map.getInt("size");
+      if(!RString.isEmpty(pack)){
+         // 解压数据
+         FAttributes map = new FAttributes();
+         map.unpack(pack);
+         // 获得内容
+         _catalog = map.get("catalog", null);
+         _date = map.get("date", null);
+         _code = map.get("code", null);
+         _name = map.get("name", null);
+         _origin = map.get("origin", null);
+         _mime = map.get("mime", null);
+         _size = map.getInt("size");
+      }
    }
 }

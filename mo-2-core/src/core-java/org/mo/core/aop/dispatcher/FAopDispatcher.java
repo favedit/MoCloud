@@ -63,13 +63,13 @@ public class FAopDispatcher
          if(adispatcher != null){
             _dispatcherConsole.invokeAfter(_delegate, proxy, method, result, args);
          }
-      }catch(Exception e){
+      }catch(Exception exception){
          // 获得原始异常
          Throwable throwable = null;
-         if(e instanceof InvocationTargetException){
-            throwable = ((InvocationTargetException)e).getTargetException();
+         if(exception instanceof InvocationTargetException){
+            throwable = ((InvocationTargetException)exception).getTargetException();
          }else{
-            throwable = e;
+            throwable = exception;
          }
          // 例外处理
          if(!_dispatcherConsole.invokeException(_delegate, proxy, method, args, throwable)){

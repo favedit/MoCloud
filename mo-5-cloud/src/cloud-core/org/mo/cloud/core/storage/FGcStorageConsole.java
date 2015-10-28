@@ -1,5 +1,6 @@
 package org.mo.cloud.core.storage;
 
+import org.mo.com.console.FConsole;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -12,6 +13,7 @@ import org.mo.core.aop.face.AProperty;
 // <T>存储控制台。</T>
 //============================================================
 public class FGcStorageConsole
+      extends FConsole
       implements
          IGcStorageConsole
 {
@@ -25,9 +27,9 @@ public class FGcStorageConsole
    @AProperty
    protected boolean _enable;
 
-   // 上传地址
+   // 处理地址
    @AProperty
-   protected String _uploadUrl;
+   protected String _processUrl;
 
    // 访问地址
    @AProperty
@@ -344,9 +346,12 @@ public class FGcStorageConsole
    //============================================================
    @Override
    public String makeUrl(String pack){
-      SGcStorage storage = new SGcStorage();
-      storage.unpack(pack);
-      return makeUrl(storage);
+      if(!RString.isEmpty(pack)){
+         SGcStorage storage = new SGcStorage();
+         storage.unpack(pack);
+         return makeUrl(storage);
+      }
+      return null;
    }
 
    //============================================================
@@ -357,7 +362,7 @@ public class FGcStorageConsole
    //============================================================
    @Override
    public String makeUrl(SGcStorage storage){
-      String url = RHttp.makeUrl(_accessUrl, storage.catalog(), storage.date(), storage.code(), storage.name() + "." + storage.extension());
+      String url = RHttp.makeUrl(_accessUrl, storage.catalog(), storage.date(), storage.code(), storage.name());
       return url;
    }
 
@@ -371,7 +376,7 @@ public class FGcStorageConsole
    public boolean store(SGcStorage storage){
       // 检查标志
       if(!_enable){
-         _logger.debug(this, "store", "Store is not enable.");
+         _logger.debug(this, "store", "Storage is not enable.");
          return true;
       }
       //............................................................
@@ -380,11 +385,6 @@ public class FGcStorageConsole
       if(RString.isEmpty(catalog)){
          throw new FFatalError("Store catalog is empty.");
       }
-      //      // 检查类型
-      //      String type = storage.type();
-      //      if(RString.isEmpty(type)){
-      //         throw new FFatalError("Store type is empty.");
-      //      }
       // 检查日期
       String date = storage.date();
       if(RString.isEmpty(date)){
@@ -400,24 +400,6 @@ public class FGcStorageConsole
       if(RString.isEmpty(name)){
          throw new FFatalError("Store name is empty.");
       }
-      // 检查扩展
-      String extension = storage.extension();
-      if(RString.isEmpty(extension)){
-         throw new FFatalError("Store extension is empty.");
-      }
-      //      // 生成名称
-      //      String extension = RFile.extension(name);
-      //      String storeName = RUuid.makeUniqueId();
-      //      if(!RString.isEmpty(extension)){
-      //         storeName += "." + extension;
-      //      }
-      //      // 获得位图设置
-      //      String typeName = catalog + "|" + type;
-      //      SGcStorageImages images = _imagesDictionary.find(typeName);
-      //      if(images != null){
-      //         storage.images().append(images);
-      //      }
-      //............................................................
       // 检查数据
       byte[] data = storage.data();
       if(data == null){
@@ -427,195 +409,111 @@ public class FGcStorageConsole
       if(size <= 0){
          throw new FFatalError("Data is empty.");
       }
+      //............................................................
       // 生成地址
-      // String urlFormat = "{1}?catalog={2}&type={3}&code={4}&name={5}&size={6}";
-      // String url = RString.format(urlFormat, _storageServlet, catalog, type, code, storeName, size);
-      String urlFormat = "{1}?catalog={2}&date={3}&code={4}&name={5}&extension={6}&size={7}";
-      String url = RString.format(urlFormat, _uploadUrl, catalog, date, code, name, extension, size);
-      // 追加位图打包
-      //            String imagePack = storage.images().pack();
-      //            if(!RString.isEmpty(imagePack)){
-      //               url += "&images=" + imagePack;
-      //            }
+      String urlFormat = "{1}?do=upload&catalog={2}&date={3}&code={4}&name={5}&size={6}";
+      String url = RString.format(urlFormat, _processUrl, catalog, date, code, name, size);
       _logger.debug(this, "store", "Storage store send. (url={1})", url);
       // 发送数据
       try(FHttpConnection connection = new FHttpConnection(url)){
          connection.fetch(data);
       }
       _logger.debug(this, "store", "Storage store success. (url={1}, data_length={2})", url, size);
-      // 设置地址
-      //String uri = "/" + catalog + "/" + code + "/" + storeName;
-      //storage.setUri(uri);
-      //storage.setUrl(_storageResource + uri);
-      //storage.setSourceLength(size);
       return true;
    }
 
-   //   //============================================================
-   //   // <T>保存一个存储信息。</T>
-   //   //
-   //   // @param storage 存储信息
-   //   // @return 处理结果
-   //   //============================================================
-   //   @Override
-   //   public boolean store(SGcStorage storage){
-   //      // 检查标志
-   //      if(!_enable){
-   //         _logger.debug(this, "store", "Store is not enable.");
-   //         return true;
-   //      }
-   //      //............................................................
-   //      // 检查分类
-   //      String catalog = storage.catalog();
-   //      if(RString.isEmpty(catalog)){
-   //         throw new FFatalError("Store catalog is empty.");
-   //      }
-   //      // 检查类型
-   //      String type = storage.type();
-   //      if(RString.isEmpty(type)){
-   //         throw new FFatalError("Store type is empty.");
-   //      }
-   //      // 检查代码
-   //      String code = storage.code();
-   //      if(RString.isEmpty(code)){
-   //         throw new FFatalError("Store code is empty.");
-   //      }
-   //      // 检查名称
-   //      String name = storage.name();
-   //      if(RString.isEmpty(name)){
-   //         throw new FFatalError("Store name is empty.");
-   //      }
-   //      // 生成名称
-   //      String extension = RFile.extension(name);
-   //      String storeName = RUuid.makeUniqueId();
-   //      if(!RString.isEmpty(extension)){
-   //         storeName += "." + extension;
-   //      }
-   //      // 获得位图设置
-   //      String typeName = catalog + "|" + type;
-   //      SGcStorageImages images = _imagesDictionary.find(typeName);
-   //      if(images != null){
-   //         storage.images().append(images);
-   //      }
-   //      //............................................................
-   //      // 检查数据
-   //      String source = storage.source();
-   //      try(FByteFile file = new FByteFile(source)){
-   //         int size = file.length();
-   //         if(size <= 0){
-   //            _logger.warn(this, "storeType", "File size is invalid. (source={1})", source);
-   //         }else{
-   //            // 生成地址
-   //            String urlFormat = "{1}?catalog={2}&type={3}&code={4}&name={5}&size={6}";
-   //            String url = RString.format(urlFormat, _storageServlet, catalog, type, code, storeName, size);
-   //            // 追加位图打包
-   //            String imagePack = storage.images().pack();
-   //            if(!RString.isEmpty(imagePack)){
-   //               url += "&images=" + imagePack;
-   //            }
-   //            _logger.debug(this, "store", "Store url send. (url={1})", url);
-   //            // 发送数据
-   //            try(FHttpConnection connection = new FHttpConnection(url)){
-   //               byte[] data = file.toArray();
-   //               connection.fetch(data);
-   //            }
-   //            _logger.debug(this, "store", "Store url send finish. (url={1}, length={2})", url, file.length());
-   //            // 设置地址
-   //            String uri = "/" + catalog + "/" + code + "/" + storeName;
-   //            storage.setUri(uri);
-   //            storage.setUrl(_storageResource + uri);
-   //            storage.setSourceLength(size);
-   //            return true;
-   //         }
-   //      }catch(Exception e){
-   //         _logger.error(this, "store", e);
-   //      }
-   //      return false;
-   //   }
+   //============================================================
+   // <T>删除一个存储信息。</T>
+   //
+   // @param pack 打包字符串
+   // @return 处理结果
+   //============================================================
+   @Override
+   public boolean delete(String pack){
+      if(RString.isEmpty(pack)){
+         SGcStorage storage = new SGcStorage(pack);
+         return delete(storage);
+      }
+      return false;
+   }
 
+   //============================================================
+   // <T>删除一个存储信息。</T>
    //
-   //   //============================================================
-   //   // <T>删除一个存储信息。</T>
-   //   //
-   //   // @param storage 存储信息
-   //   // @return 处理结果
-   //   //============================================================
-   //   @Override
-   //   public boolean deleteFile(SGcStorage storage){
-   //      // 检查分类
-   //      String catalog = storage.catalog();
-   //      if(RString.isEmpty(catalog)){
-   //         throw new FFatalError("Store catalog is empty.");
-   //      }
-   //      // 检查类型
-   //      String type = storage.type();
-   //      if(RString.isEmpty(type)){
-   //         throw new FFatalError("Store type is empty.");
-   //      }
-   //      // 检查代码
-   //      String code = storage.code();
-   //      if(RString.isEmpty(code)){
-   //         throw new FFatalError("Store code is empty.");
-   //      }
-   //      // 检查名称
-   //      String name = storage.name();
-   //      if(RString.isEmpty(name)){
-   //         throw new FFatalError("Store name is empty.");
-   //      }
-   //      // 生成地址
-   //      String urlFormat = "{1}?catalog={2}&type={3}&code={4}&name={5}";
-   //      String url = RString.format(urlFormat, _storageService, catalog, type, code, name);
-   //      // 发送数据
-   //      FXmlNode xresult = null;
-   //      try(FXmlConnection connection = new FXmlConnection(url)){
-   //         xresult = connection.process("deleteFiles");
-   //      }
-   //      // 设置地址
-   //      String resultCd = xresult.get("result_cd", "failure");
-   //      if("success".equals(resultCd)){
-   //         return true;
-   //      }
-   //      return false;
-   //   }
+   // @param storage 存储信息
+   // @return 处理结果
+   //============================================================
+   @Override
+   public boolean delete(SGcStorage storage){
+      // 检查标志
+      if(!_enable){
+         _logger.debug(this, "delete", "Storage is not enable.");
+         return true;
+      }
+      //............................................................
+      // 检查分类
+      String catalog = storage.catalog();
+      if(RString.isEmpty(catalog)){
+         throw new FFatalError("Delete catalog is empty.");
+      }
+      // 检查日期
+      String date = storage.date();
+      if(RString.isEmpty(date)){
+         throw new FFatalError("Delete date is empty.");
+      }
+      // 检查代码
+      String code = storage.code();
+      if(RString.isEmpty(code)){
+         throw new FFatalError("Delete code is empty.");
+      }
+      // 检查名称
+      String name = storage.name();
+      if(RString.isEmpty(name)){
+         throw new FFatalError("Delete name is empty.");
+      }
+      //............................................................
+      // 生成地址
+      String urlFormat = "{1}?do=delete&catalog={2}&date={3}&code={4}&name={5}";
+      String url = RString.format(urlFormat, _processUrl, catalog, date, code, name);
+      _logger.debug(this, "store", "Storage delete send. (url={1})", url);
+      // 发送数据
+      try(FHttpConnection connection = new FHttpConnection(url)){
+         connection.fetch();
+      }
+      _logger.debug(this, "store", "Storage delete success. (url={1})", url);
+      return true;
+   }
+
+   //============================================================
+   // <T>删除一个存储空间。</T>
    //
-   //   //============================================================
-   //   // <T>删除一个存储目录。</T>
-   //   //
-   //   // @param storage 存储信息
-   //   // @return 处理结果
-   //   //============================================================
-   //   @Override
-   //   public boolean deleteDirectory(SGcStorage storage){
-   //      // 检查分类
-   //      String catalog = storage.catalog();
-   //      if(RString.isEmpty(catalog)){
-   //         throw new FFatalError("Store catalog is empty.");
-   //      }
-   //      // 检查类型
-   //      String type = storage.type();
-   //      if(RString.isEmpty(type)){
-   //         throw new FFatalError("Store type is empty.");
-   //      }
-   //      // 检查代码
-   //      String code = storage.code();
-   //      if(RString.isEmpty(code)){
-   //         throw new FFatalError("Store code is empty.");
-   //      }
-   //      // 生成地址
-   //      String urlFormat = "{1}?catalog={2}&type={3}&code={4}";
-   //      String url = RString.format(urlFormat, _storageService, catalog, type, code);
-   //      // 发送数据
-   //      FXmlNode xresult = null;
-   //      try(FXmlConnection connection = new FXmlConnection(url)){
-   //         xresult = connection.process("deleteDirectory");
-   //      }
-   //      // 设置地址
-   //      String resultCd = xresult.get("result_cd", "failure");
-   //      if("success".equals(resultCd)){
-   //         return true;
-   //      }
-   //      return false;
-   //   }
+   // @param storage 存储信息
+   // @return 处理结果
+   //============================================================
+   @Override
+   public boolean drop(String catalog){
+      // 检查标志
+      if(!_enable){
+         _logger.debug(this, "delete", "Storage is not enable.");
+         return true;
+      }
+      //............................................................
+      // 检查分类
+      if(RString.isEmpty(catalog)){
+         throw new FFatalError("Delete catalog is empty.");
+      }
+      //............................................................
+      // 生成地址
+      String urlFormat = "{1}?do=drop&catalog={2}";
+      String url = RString.format(urlFormat, _processUrl, catalog);
+      _logger.debug(this, "store", "Storage drop send. (url={1})", url);
+      // 发送数据
+      try(FHttpConnection connection = new FHttpConnection(url)){
+         connection.fetch();
+      }
+      _logger.debug(this, "store", "Storage drop success. (url={1})", url);
+      return true;
+   }
 
    //============================================================
    // <T>初始化内容。</T>
@@ -635,19 +533,4 @@ public class FGcStorageConsole
       //         }
       //      }
    }
-
-   //============================================================
-   // <T>获得运行信息。</T>
-   //
-   // @return 运行信息
-   //============================================================
-   //   public String dump(){
-   //      FString dump = new FString();
-   //      dump.appendLine("Count:" + _imagesDictionary.count());
-   //      for(INamePair<SGcStorageImages> pair : _imagesDictionary){
-   //         dump.appendLine("name=" + pair.name());
-   //         dump.appendLine(pair.value().dump());
-   //      }
-   //      return dump.toString();
-   //   }
 }

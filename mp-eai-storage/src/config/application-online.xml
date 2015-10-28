@@ -11,7 +11,7 @@
    <Define name='application.space'>${application.web}/WEB-INF/config</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.resource'>${application.web}/resource</Define>
-   <Define name='application.storage'>${application}/mt-storage</Define>
+   <Define name='application.storage'>/data/eai/storage</Define>
 
    <!-- 服务器设定 -->
    <Define name='cloud.eai.server.content'>http://localhost:8010</Define>

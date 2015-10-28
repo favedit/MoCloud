@@ -36,7 +36,7 @@
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global'>
       <Property name='enable'>${cloud.server.storage.enable}</Property>
-      <Property name='upload_url'>${cloud.server.storage.upload}</Property>
+      <Property name='process_url'>${cloud.server.storage.process}</Property>
       <Property name='access_url'>${cloud.server.storage.access}</Property>
       <Initialize name='initialize'/>
    </Component>

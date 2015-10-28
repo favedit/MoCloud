@@ -2,7 +2,6 @@ package org.mo.content.face.manage.product.business.truetime;
 
 import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
-import java.io.File;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.lang.EResult;
@@ -232,8 +231,7 @@ public class FTruetimeAction
       }
 
       System.out.println(file.uploadName() + "=======================" + file.fileName());
-      String filePath = file.uploadName();
-      SGcStorage storage = new SGcStorage("eai.images.manage", new File(filePath));
+      SGcStorage storage = new SGcStorage("eai.images.manage", unit.guid(), file);
       _storageConsole.store(storage);
 
       unit.setIconUrl(storage.pack());

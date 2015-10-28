@@ -16,10 +16,7 @@
 
    <!-- 服务器设定 -->
    <Define name='eai.content.login.oa'>N</Define>
-   <Define name='cloud.server.storage.enable'>Y</Define>
-   <Define name='cloud.server.storage.upload'>http://localhost:8030/cloud.storage.upload.wv</Define>
-   <Define name='cloud.server.storage.access'>http://localhost:8030/storage</Define>
-   <Define name='cloud.server.storage.picture'>http://localhost:8030/cloud.storage.picture.wv</Define>
+   <Define name='cloud.server.storage.enable'>N</Define>
    <Define name='cloud.server.logger.enable'>N</Define>
 
    <!-- 应用设定 -->
