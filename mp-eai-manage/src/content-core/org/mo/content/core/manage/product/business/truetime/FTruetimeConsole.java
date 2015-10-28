@@ -94,7 +94,6 @@ public class FTruetimeConsole
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
-         info.setIconUrl(_storageConsole.makeUrl(info.iconUrl()));
       }
       return moduleList;
    }

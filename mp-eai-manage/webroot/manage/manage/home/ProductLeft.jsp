@@ -1,7 +1,6 @@
 <!doctype html>
 <%@ include file='/apl/public.inc' %>
    <html>
-
    <head>
       <meta charset="utf-8">
       <title>后台管理系统</title>

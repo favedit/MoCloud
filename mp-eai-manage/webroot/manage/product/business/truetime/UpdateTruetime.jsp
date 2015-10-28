@@ -26,12 +26,12 @@
 
 <script>
     $(function(){
-       var image = $("#image").val();
-       if(image!=null&&image.length>0){
-          $("#oriIcon").attr("src",image);
-       }else{
-          $("#oriIcon").hide();
-       }
+//       var image = $("#image").val();
+//       if(image!=null&&image.length>0){
+//          $("#oriIcon").attr("src",image);
+//       }else{
+//          $("#oriIcon").hide();
+//       }
        $('#displayCd').combobox("select", $('#oldDisplayCd').val());
        $('#linkCd').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
@@ -60,9 +60,10 @@
              return false;
           }
           var fileSize = document.getElementById("iconUrl").files[0].size;
-          if(fileSize>20480){
+          fileSize = fileSize / 1024;
+          if(fileSize>1024){
              closeProgress();
-             alert("请上传大小小于20k的等比例图片!");
+             alert("请上传大小小于1M的等比例图片!");
              return false;
           }
        }
@@ -163,7 +164,7 @@
         value="<jh:write source='&unit.content'/>" />
       </td>
       <td rowspan="3" style="width:140px;" ><div align="left" id="imgdiv">
-       <img width="140" height="140" id="oriIcon"></div></td>
+       <img width="140" height="140" src="<jh:write source='&unit.makeUrl'/>"></div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否展示:</div></td>

@@ -90,6 +90,9 @@ public class FTruetimeAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataTruetimeInfo info : unitList){
+         info.setIconUrl(_storageConsole.makeUrl(info.iconUrl()));
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -137,8 +140,8 @@ public class FTruetimeAction
       FWebUploadFile file = context.files().first();
       if(null != file){
          Integer len = file.length() / 1024;
-         if(len > 20){
-            page.setResult("请上传小于20k的图片!");
+         if(len > 1024){
+            page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/truetime/InsertTruetime";
          }
          String type = file.contentType();
@@ -146,6 +149,10 @@ public class FTruetimeAction
             page.setResult("请上传图片!");
             return "/manage/product/business/truetime/InsertTruetime";
          }
+         SGcStorage storage = new SGcStorage("data.logic.truetime", unit.guid(), file);
+         _storageConsole.store(storage);
+         unit.setIconUrl(storage.pack());
+         _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _truetimeConsole.doInsert(logicContext, unit);
@@ -186,12 +193,15 @@ public class FTruetimeAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
+
       if(!RString.isEmpty(unit.iconUrl())){
-         System.out.println(_storageConsole.makeUrl(unit.iconUrl()) + "---------------");
-         info.setIconUrl(_storageConsole.makeUrl(unit.iconUrl()));
+         String iconUrl = _storageConsole.makeUrl(unit.iconUrl());
+         info.setMakeUrl(iconUrl);
          //         int na = unit.iconUrl().indexOf("truetimeImages");
          //         info.setImageName("/manage/images/truetimeImages/" + unit.iconUrl().substring(na + 15, unit.iconUrl().length()));
+         _logger.debug(this, "UpdateBefore", "UpdateBefore makeImages .(url={1})", iconUrl);
       }
+
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
@@ -219,8 +229,8 @@ public class FTruetimeAction
       FWebUploadFile file = context.files().findByName("iconUrl");
       if(null != file){
          Integer len = file.length() / 1024;
-         if(len > 20){
-            page.setResult("请上传小于20k的图片!");
+         if(len > 1024){
+            page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/truetime/UpdateTruetime";
          }
          String type = file.contentType();
@@ -228,13 +238,11 @@ public class FTruetimeAction
             page.setResult("请上传图片!");
             return "/manage/product/business/truetime/UpdateTruetime";
          }
+         SGcStorage storage = new SGcStorage("data.logic.truetime", unit.guid(), file);
+         _storageConsole.store(storage);
+         unit.setIconUrl(storage.pack());
+         _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
-
-      System.out.println(file.uploadName() + "=======================" + file.fileName());
-      SGcStorage storage = new SGcStorage("eai.images.manage", unit.guid(), file);
-      _storageConsole.store(storage);
-
-      unit.setIconUrl(storage.pack());
       setLogicNews(context, logicContext, unit, "1");
       _truetimeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");

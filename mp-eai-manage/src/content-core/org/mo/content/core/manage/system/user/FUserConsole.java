@@ -1,11 +1,11 @@
 package org.mo.content.core.manage.system.user;
 
-import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
-
 import com.cyou.gccloud.data.data.FDataControlRoleUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RString;
@@ -14,11 +14,10 @@ import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
-public class FUserConsole 
-      extends 
-         FAbstractLogicUnitConsole<FDataPersonUserLogic, FDataPersonUserUnit>
-      implements 
-         IUserConsole 
+public class FUserConsole
+      extends FAbstractLogicUnitConsole<FDataPersonUserLogic, FDataPersonUserUnit>
+      implements
+         IUserConsole
 {
 
    // 每页条数
@@ -34,7 +33,7 @@ public class FUserConsole
    // ============================================================
    // <T>构造设备控制台。</T>
    // ============================================================
-   public FUserConsole() {
+   public FUserConsole(){
       super(FDataPersonUserLogic.class, FDataPersonUserUnit.class);
    }
 
@@ -46,10 +45,10 @@ public class FUserConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public FLogicDataset<FDataPersonUserInfo> selectDataByPageAndSomerow(ILogicContext logicContext, 
-                                                                        FDataPersonUserUnit userUnit, 
-                                                                        int pageNum) {
-      if (0 > pageNum) {
+   public FLogicDataset<FDataPersonUserInfo> selectDataByPageAndSomerow(ILogicContext logicContext,
+                                                                        FDataPersonUserUnit userUnit,
+                                                                        int pageNum){
+      if(0 > pageNum){
          pageNum = 0;
       }
       FDataPersonUserLogic userUnitLogic = logicContext.findLogic(FDataPersonUserLogic.class);
@@ -57,16 +56,16 @@ public class FUserConsole
       where.append(FDataPersonUserLogic.OVLD);
       where.append(" = ");
       where.append(1);
-      if (!RString.isEmpty(userUnit.passport())) {
+      if(!RString.isEmpty(userUnit.passport())){
          where.append(" AND ");
          where.append(FDataPersonUserLogic.PASSPORT);
          where.append(" LIKE '%{passport}%'");
          where.bind("passport", userUnit.passport());
       }
       FLogicDataset<FDataPersonUserInfo> userInfoList = userUnitLogic.fetchClass(FDataPersonUserInfo.class, null, where.toString(), null, _pageSize, pageNum);
-      for (FDataPersonUserInfo info : userInfoList) {
+      for(FDataPersonUserInfo info : userInfoList){
          FDataControlRoleUnit role = _roleConsole.find(logicContext, info.roleId());
-         if (role != null) {
+         if(role != null){
             info.setRoleLabel(role.label());
          }
       }
@@ -74,12 +73,12 @@ public class FUserConsole
    }
 
    @Override
-   public FLogicDataset<FDataPersonUserUnit> loginUser(ILogicContext logicContext, 
-                                                       FDataPersonUserUnit userUnit) {
+   public FLogicDataset<FDataPersonUserUnit> loginUser(ILogicContext logicContext,
+                                                       FDataPersonUserUnit userUnit){
       FDataPersonUserLogic userUnitLogic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
-      // whereSB.append(FDataPersonUserLogic.FieldRoleCd).append(" =
-      // ").append(EGcPersonRole.Admin);
+      whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(EGcActive.Active);
+      whereSB.append(" AND ");
       whereSB.append(FDataPersonUserLogic.PASSPORT).append(" = ").append("'" + userUnit.passport() + "'");
       FLogicDataset<FDataPersonUserUnit> userUnitList = userUnitLogic.fetch(whereSB.toString(), -1, -1);
       return userUnitList;
@@ -93,12 +92,12 @@ public class FUserConsole
    // @return 模块数据
    // ============================================================
    @Override
-   public EResult passportExists(ILogicContext logicContext, 
-                                 String passport) {
+   public EResult passportExists(ILogicContext logicContext,
+                                 String passport){
       FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
       whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
-      if (!RString.isEmpty(passport))
+      if(!RString.isEmpty(passport))
          whereSB.append(" AND ").append(FDataPersonUserLogic.PASSPORT).append(" = '").append(passport).append("'");
       FLogicDataset<FDataPersonUserUnit> unitlist = logic.fetch(whereSB);
       return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
@@ -112,12 +111,12 @@ public class FUserConsole
    // @return 模块数据
    // ============================================================
    @Override
-   public EResult roleExists(ILogicContext logicContext, 
-                             String role) {
+   public EResult roleExists(ILogicContext logicContext,
+                             String role){
       FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       StringBuffer whereSB = new StringBuffer();
       whereSB.append(FDataPersonUserLogic.OVLD).append(" = ").append(1);
-      if (!RString.isEmpty(role))
+      if(!RString.isEmpty(role))
          whereSB.append(" AND ").append(FDataPersonUserLogic.ROLE_ID).append(" = '").append(role).append("'");
       FLogicDataset<FDataPersonUserUnit> unitlist = logic.fetch(whereSB);
       return unitlist.count() > 0 ? EResult.Success : EResult.Failure;
@@ -131,8 +130,8 @@ public class FUserConsole
    // @return 数据信息
    // ============================================================
    @Override
-   public void updateByOuid(ILogicContext logicContext, 
-                            FDataPersonUserUnit user) {
+   public void updateByOuid(ILogicContext logicContext,
+                            FDataPersonUserUnit user){
       logicContext.findLogic(FDataPersonUserLogic.class).doUpdate(user, user.ouid());
    }
 
@@ -144,8 +143,8 @@ public class FUserConsole
    // @return 数据信息
    // ============================================================
    @Override
-   public EResult delete(ILogicContext logicContext, 
-                         long id) {
+   public EResult delete(ILogicContext logicContext,
+                         long id){
       FDataPersonUserLogic logic = logicContext.findLogic(FDataPersonUserLogic.class);
       FDataPersonUserUnit user = logic.find(id);
       user.setOvld(false);
