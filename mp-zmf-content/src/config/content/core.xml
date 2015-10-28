@@ -10,6 +10,7 @@
          class  = 'org.mo.cloud.common.datetime.FDateTimeConsole'
          scope  = 'global'
          deploy = 'start'>
+      <Property name='enable'>N</Property>
       <Initialize name='initialize'/>
    </Component>
 

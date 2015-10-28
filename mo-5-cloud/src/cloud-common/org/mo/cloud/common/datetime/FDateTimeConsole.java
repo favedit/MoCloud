@@ -5,6 +5,7 @@ import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ALink;
+import org.mo.core.aop.face.AProperty;
 import org.mo.core.monitor.IMonitorConsole;
 import org.mo.eng.data.IDatabaseConsole;
 
@@ -17,6 +18,10 @@ public class FDateTimeConsole
 {
    // 代码修正
    public static final String CURRENT_DATE_SQL = "SELECT CURRENT_TIMESTAMP";
+
+   // 是否允许
+   @AProperty
+   protected boolean _enable = true;
 
    // 监视器
    protected FDataTimeMonitor _monitor;
@@ -62,23 +67,25 @@ public class FDateTimeConsole
    // <T>刷新数据处理。</T>
    //============================================================
    public boolean refresh(){
-      ISqlConnection connection = null;
-      try{
-         connection = _databaseConsole.alloc();
-         // 获得时间
-         FRow row = connection.find(CURRENT_DATE_SQL);
-         if(!row.isEmpty()){
-            String datetime = row.value(0);
-            _tickDateTime.parse(datetime);
-         }
-         // 计算时差
-         TDateTime currentTime = RDateTime.currentDateTime();
-         _tickDifference = _tickDateTime.get() - currentTime.get();
-      }catch(Exception exception){
-         return false;
-      }finally{
-         if(connection != null){
-            _databaseConsole.free(connection);
+      if(_enable){
+         ISqlConnection connection = null;
+         try{
+            connection = _databaseConsole.alloc();
+            // 获得时间
+            FRow row = connection.find(CURRENT_DATE_SQL);
+            if(!row.isEmpty()){
+               String datetime = row.value(0);
+               _tickDateTime.parse(datetime);
+            }
+            // 计算时差
+            TDateTime currentTime = RDateTime.currentDateTime();
+            _tickDifference = _tickDateTime.get() - currentTime.get();
+         }catch(Exception exception){
+            return false;
+         }finally{
+            if(connection != null){
+               _databaseConsole.free(connection);
+            }
          }
       }
       return true;

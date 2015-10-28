@@ -4,7 +4,7 @@
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
    <Define name='application.name'>zmf.content</Define>
-   <Define name='application.mode'>online</Define>
+   <Define name='application.mode'>test</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
@@ -24,5 +24,5 @@
    <Include>${application.config}/application.xml</Include>
 
    <!-- 环境设定 -->
-   <Include>${application.config}/environment/environment-online.xml</Include>
+   <Include>${application.config}/environment/environment-test.xml</Include>
 </Configuration>
