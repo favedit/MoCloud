@@ -58,9 +58,16 @@ public class FDepartmentConsole
       }
       FSql whereSql = new FSql();
       if(!RString.isEmpty(unit.label())){
-         whereSql.append(FDataCommonCountryLogic.LABEL + " LIKE '%{label}%'");
+         whereSql.append(FDataFinancialDepartmentLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
+      if(unit.cityId()>0){
+    	  if(!RString.isEmpty(unit.label())){
+    		  whereSql.append(" and ");
+    	  }
+          whereSql.append(FDataFinancialDepartmentLogic.CITY_ID + " = {cityId}");
+          whereSql.bind("cityId", RString.parse(unit.cityId()));
+       }
       String orderBy = String.format("%s %s %s %s", FDataFinancialDepartmentLogic.DEPARTMENT_LABEL + ",", FDataFinancialDepartmentLogic.REGION_LABEL + ",", FDataFinancialDepartmentLogic.LABEL, "ASC");
       FDataFinancialDepartmentLogic logic = logicContext.findLogic(FDataFinancialDepartmentLogic.class);
       FLogicDataset<FDataFinancialDepartmentUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum);

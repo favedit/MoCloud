@@ -24,12 +24,17 @@
               + new Date().valueOf();
       var data = null;
       var label = $.trim($('#label').val()).replaceAll("'", "");
+      
+      var cityId =$("#city").combobox('getValue');
+   
+      
       if (label == "部门名称")
          label = null;
       if (page != null) {
           url = "/manage/product/financial/department/Department.wa?do=select&page="
                   + page + "&date=" + new Date().valueOf();
           data = {
+        	  "cityId" : cityId,
               "label" : label,
               "page" : page,
               "pageSize" : pageSize
@@ -70,6 +75,70 @@
          doSubmit(0);    
       }
    }
+   
+   $(function() {
+       var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
+       var data = null;
+       $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: function(msg) {
+             var result = toJsonObject(msg);
+             $('#country').combobox('loadData', result);
+             $('#country').combobox('select', result[0].ouid);
+          },
+          fail: function() {
+             alert("error");
+           }
+        });
+       getAData(null);
+       getCData(null);
+   })
+	   function getAData(data){
+	      var url = "/manage/product/common/Province.wa?do=selectAll&date=" + new Date().valueOf();
+	      $.ajax({
+	         type: "POST",
+	         url: url,
+	         data: data,
+	         success: function(msg) {
+	               var result = toJsonObject(msg);
+	               if(result.length==0){
+	               }
+	               $('#province').combobox("setValue",null);
+	               $('#province').combobox('loadData', result);
+	               $('#province').combobox('select', result[0].ouid);
+	         },
+	         fail: function() {
+	            alert("error");
+	         }
+	      });
+	   }
+	   function getProvince(){
+	      var data = null;
+	      var provinceId = $('#province').combobox("getValue");
+	      if(provinceId!=null) data={"provinceId":provinceId};
+	      getPData(data);
+	   }
+	   function getPData(data){
+	      var url = "/manage/product/common/City.wa?do=selectAll&date=" + new Date().valueOf();
+	      $.ajax({
+	         type: "POST",
+	         url: url,
+	         data: data,
+	         success: function(msg) {
+	               var result = toJsonObject(msg);
+	               if(result.length==0){
+	               }
+	               $('#city').combobox("setValue",null);
+	               $('#city').combobox('loadData', result);
+	               $('#city').combobox('select', result[0].ouid);
+	         },
+	         fail: function() {
+	            alert("error");
+	         }
+	      });
+	   }
 </script>
 </HEAD>
 <body>
@@ -83,6 +152,13 @@
      href="/manage/product/financial/department/Department.wa?do=insertBefore"
      class="add_btn"></a>
    </div>
+ <div style="float: left; margin-top:5px; margin-left: 480px;">
+ <span>所属省份</span>  
+   <span onclick="getArea()" style="width:140px;"><input class="easyui-combobox" style="width:140px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></span>
+       <input name="areaId" id="provinceId" type="hidden">
+   <span>所属城市</span>
+       <span onclick="getProvince()" style="width:140px;"><input class="easyui-combobox" style="width:140px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></span>
+</div>
    <div class="nav_search">
     <input id="label" name="label" type="text"
      onfocus="if(this.value=='部门名称'){this.value='';}this.style.color='#000000';"
