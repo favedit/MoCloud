@@ -8,7 +8,7 @@
 <%@ page import="org.mo.com.lang.*" %>
 <%@ page import="org.mo.core.aop.*" %>
 <%@ page import="org.mo.web.core.upload.*" %>
-<%@ page import="org.mo.cloud.storage.core.storage.*" %>
+<%@ page import="org.mo.cloud.core.storage.*" %>
 <%!
 private String getError(String message) {
    JSONObject obj = new JSONObject();
@@ -110,9 +110,9 @@ while(iterator.hasNext()){
 		}
 		String url = saveUrl + newFileName;
 		// 上传到存储服务器
-		SGcStorage storage = new SGcStorage(EGcStorageCatalog.Temp, EGcStorageType.Picture, date, newFileName, uploadedFile.getAbsolutePath());
+		SGcStorage storage = new SGcStorage(EGcStorageCatalog.TempUpload, uploadedFile);
 		if(storageConsole.store(storage)){
-		    url = storage.url();
+		    url = storageConsole.makeUrl(storage);
 		    uploadedFile.delete();
 		}
 		// 返回内容

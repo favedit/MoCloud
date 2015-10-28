@@ -387,7 +387,7 @@ public class SGcStorage
       }
       // 设置名称
       if(RString.isEmpty(_name)){
-         _name = RFile.shortName(fileName);
+         _name = RFile.name(fileName);
       }
       // 设置扩展
       if(RString.isEmpty(_extension)){
