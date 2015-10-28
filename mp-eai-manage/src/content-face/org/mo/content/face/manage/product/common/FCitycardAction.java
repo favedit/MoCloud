@@ -215,7 +215,7 @@ public class FCitycardAction
          return "/manage/product/common/UpdateCitycard";
       }
       _citycardConsole.doUpdate(logicContext, unit);
-      return "/manage/common/ajax";
+      return "/manage/product/common/CitycardList";
    }
 
    // ============================================================
