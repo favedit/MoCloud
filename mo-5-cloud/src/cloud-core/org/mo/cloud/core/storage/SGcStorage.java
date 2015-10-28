@@ -63,7 +63,7 @@ public class SGcStorage
    // <T>构造存储信息。</T>
    //============================================================
    public SGcStorage(){
-      _date = RDateTime.format("YYMMDD");
+      _date = RDateTime.format("YYYYMMDD");
       _code = RUuid.makeUniqueIdLower();
       _name = RUuid.makeUniqueIdLower();
    }
@@ -85,11 +85,19 @@ public class SGcStorage
    //============================================================
    public SGcStorage(String catalog,
                      File file){
+      // 加载文件
+      String fileName = file.getAbsolutePath();
+      loadFile(fileName);
+      // 设置属性
       _catalog = catalog;
-      _date = RDateTime.format("YYMMDD");
+      _date = RDateTime.format("YYYYMMDD");
       _code = RUuid.makeUniqueIdLower();
       _name = RUuid.makeUniqueIdLower();
-      loadFile(file.getAbsolutePath());
+      _origin = file.getName();
+      _extension = RFile.extension(file);
+      if(!RString.isEmpty(_extension)){
+         _name += "." + _extension;
+      }
    }
 
    //============================================================
@@ -104,7 +112,7 @@ public class SGcStorage
       loadFile(file.uploadName());
       // 设置属性
       _catalog = catalog;
-      _date = RDateTime.format("YYMMDD");
+      _date = RDateTime.format("YYYYMMDD");
       _code = RUuid.makeUniqueIdLower();
       _name = RUuid.makeUniqueIdLower();
       _origin = file.fileName();
@@ -129,7 +137,7 @@ public class SGcStorage
       loadFile(file.uploadName());
       // 设置属性
       _catalog = catalog;
-      _date = RDateTime.format("YYMMDD");
+      _date = RDateTime.format("YYYYMMDD");
       _code = code;
       _name = RUuid.makeUniqueIdLower();
       _origin = file.fileName();

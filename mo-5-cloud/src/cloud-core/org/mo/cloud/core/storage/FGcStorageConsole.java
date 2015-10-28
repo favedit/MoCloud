@@ -98,35 +98,37 @@ public class FGcStorageConsole
    //   public String storageTemp(){
    //      return _storageTemp;
    //   }
+
+   //============================================================
+   // <T>生成文本。</T>
    //
-   //   //============================================================
-   //   // <T>生成文本。</T>
-   //   //
-   //   // @param text 文本
-   //   // @return 文本
-   //   //============================================================
-   //   @Override
-   //   public String makeText(String text){
-   //      if(RString.isEmpty(text)){
-   //         return RString.EMPTY;
-   //      }
-   //      return RString.replace(text, _storageResource, RGcStorageUtility.StorageServer);
-   //   }
+   // @param text 文本
+   // @return 文本
+   //============================================================
+   @Override
+   public String makeText(String text){
+      //      if(RString.isEmpty(text)){
+      //         return RString.EMPTY;
+      //      }
+      //      return RString.replace(text, _storageResource, RGcStorageUtility.StorageServer);
+      return text;
+   }
+
+   //============================================================
+   // <T>生成显示文本。</T>
    //
-   //   //============================================================
-   //   // <T>生成显示文本。</T>
-   //   //
-   //   // @param text 文本
-   //   // @return 文本
-   //   //============================================================
-   //   @Override
-   //   public String makeDisplay(String text){
-   //      if(RString.isEmpty(text)){
-   //         return RString.EMPTY;
-   //      }
-   //      return RString.replace(text, RGcStorageUtility.StorageServer, _storageResource);
-   //   }
-   //
+   // @param text 文本
+   // @return 文本
+   //============================================================
+   @Override
+   public String makeDisplay(String text){
+      //      if(RString.isEmpty(text)){
+      //         return RString.EMPTY;
+      //      }
+      //      return RString.replace(text, RGcStorageUtility.StorageServer, _storageResource);
+      return text;
+   }
+
    //   //============================================================
    //   // <T>生成网络地址。</T>
    //   //

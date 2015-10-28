@@ -53,8 +53,8 @@ if(!uploadDir.canWrite()){
 	return;
 }
 String dirName = request.getParameter("dir");
-if(dirName == null) {
-	dirName = "image";
+if(RString.isEmpty(dirName)){
+	dirName = "images";
 }
 if(!extMap.containsKey(dirName)){
 	out.println(getError("目录名不正确。"));
@@ -62,14 +62,12 @@ if(!extMap.containsKey(dirName)){
 }
 // 创建文件夹
 savePath += dirName + "/";
-saveUrl += dirName + "/";
 File saveDirFile = new File(savePath);
 if (!saveDirFile.exists()) {
 	saveDirFile.mkdirs();
 }
 String date = RDateTime.format("yyyymmdd");
 savePath += date + "/";
-saveUrl += date + "/";
 File dirFile = new File(savePath);
 if (!dirFile.exists()) {
 	dirFile.mkdirs();
@@ -85,21 +83,19 @@ while(iterator.hasNext()){
 	FileItem item = (FileItem)iterator.next();
 	String fileName = item.getName();
 	long fileSize = item.getSize();
-	if (!item.isFormField()) {
-		//检查文件大小
+	if(!item.isFormField()){
+		// 检查文件大小
 		if(item.getSize() > maxSize){
 			out.println(getError("上传文件大小超过限制。"));
 			return;
 		}
-		//检查扩展名
+		// 检查扩展名
 		String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 		if(!Arrays.<String>asList(extMap.get(dirName).split(",")).contains(fileExt)){
 			out.println(getError("上传文件扩展名是不允许的扩展名。\n只允许" + extMap.get(dirName) + "格式。"));
 			return;
 		}
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-		String newFileName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
-		String storeFileName = null;
+      String newFileName = RUuid.makeUniqueIdLower() + "." + fileExt;
 		File uploadedFile = null;
 		try{
 			uploadedFile = new File(savePath, newFileName);
@@ -108,11 +104,11 @@ while(iterator.hasNext()){
 			out.println(getError("上传文件失败。"));
 			return;
 		}
-		String url = saveUrl + newFileName;
 		// 上传到存储服务器
+		String url = null;
 		SGcStorage storage = new SGcStorage(EGcStorageCatalog.TempUpload, uploadedFile);
 		if(storageConsole.store(storage)){
-		    url = storageConsole.makeUrl(storage);
+		    url = storageConsole.makeUrl(storage) + "?" + storage.pack();
 		    uploadedFile.delete();
 		}
 		// 返回内容
