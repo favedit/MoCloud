@@ -3,6 +3,6 @@
 
 <Resource name='sql.notice.publish'>
 <!--查找排序最靠前的号令记录  -->
-<![CDATA[SELECT MAX(`DISPLAY_ORDER`) FROM DT_LGC_NOTICE`]]>
+<![CDATA[SELECT MAX(`DISPLAY_ORDER`) FROM `DT_LGC_NOTICE`]]>
 </Resource>
 </Config>

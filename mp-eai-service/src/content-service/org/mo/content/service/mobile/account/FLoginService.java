@@ -105,12 +105,8 @@ public class FLoginService extends FObject implements ILoginService {
             status_cd.setText(EGcAuthorityResult.PasswordIllegal);
             return EResult.Failure;
         }
-        _logger.debug(this, "login_user*****************",
-                "username={1},password={2}", passport, password);
         FDataPersonUserUnit user = _loginConsole.login(context, passport,
                 password, logicContext, sessionContext);
-        _logger.debug(this, "login_*****************------>status_cd",
-                "status_cd={1}", user.statusCd());
         // 如果OA登录成功 oa那边接口返回的是0
         if (sessionStr == null || "".equals(sessionStr)) {
             sessionStr = UUID.randomUUID().toString().replaceAll("-", "");
@@ -138,10 +134,7 @@ public class FLoginService extends FObject implements ILoginService {
             session.setUserId(user.ouid());
             session.setFromCode("0");
             session.setApplicationId(applicationUnit.ouid());
-            EResult sessionResult = _webSessionConsole.open(session);
-            _logger.debug(this, "session_id*****************------>",
-                    "session_id={1},user_id={2},applicationUnit.ouid()={3}",
-                    session.id(), user.ouid(), applicationUnit.ouid());
+            _webSessionConsole.open(session);
             sessionId.setText(session.id());
             FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(
                     logicContext, "eai.mobile", "0", session.id());
@@ -155,8 +148,6 @@ public class FLoginService extends FObject implements ILoginService {
                     modules.setText("-1");
                 }
             }
-            _logger.debug(this, "session_id*****************------>",
-                    "sessionResult={1}", sessionResult);
 
             // 返回上一次的打卡时间和用户的个人信息
             FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(
@@ -214,8 +205,6 @@ public class FLoginService extends FObject implements ILoginService {
         // FGcSessionInfo sessionInfo =
         // _sessionConsole.findBySessionCode(log`icContext, "eai",
         // "mobile_android", sessionCode);
-        _logger.debug(this, "autoLogin*****************mo_session_id---->",
-                "mo_session_id={1}", sessionCode);
         if (sessionInfo == null) {
             // session已经失效
             output.config().createNode("session_status").setText(0);
@@ -299,9 +288,6 @@ public class FLoginService extends FObject implements ILoginService {
             return EResult.Success;
         }
         session.loadInfo(sessionInfo);
-        _logger.debug(this, "------------------------------------>logout",
-                "sessionCode={1},session.recordId={2}", session.id(),
-                session.recordId());
         _webSessionConsole.close(session);
         return EResult.Success;
     }
@@ -325,9 +311,6 @@ public class FLoginService extends FObject implements ILoginService {
                 logicContext, sessionCode);
         if (sessionInfo != null) {
             session.loadInfo(sessionInfo);
-            _logger.debug(this, "------------------------------------>logout",
-                    "sessionCode={1},session.recordId={2}", session.id(),
-                    session.recordId());
             _webSessionConsole.close(session);
         }
 
@@ -422,16 +405,13 @@ public class FLoginService extends FObject implements ILoginService {
             IWebOutput output, ILogicContext logicContext,
             IWebSession sessionContext) {
         // 获得参数
-        FXmlNode inputNode = input.config();
-        FXmlNode sysAppCodeNode = inputNode.findNode("SysAppCode");
-        FXmlNode versionNode = inputNode.findNode("Version");
-        FXmlNode contentNode = inputNode.findNode("Content");
-        String sysAppCode = sysAppCodeNode.text();
-        String version = versionNode.text();
-        String content = contentNode.text();
-        _logger.debug(this, "*****************feedback",
-                "SysAppCode={1},Version={2},Content={3}", sysAppCode, version,
-                content);
+        // FXmlNode inputNode = input.config();
+        // FXmlNode sysAppCodeNode = inputNode.findNode("SysAppCode");
+        // FXmlNode versionNode = inputNode.findNode("Version");
+        // FXmlNode contentNode = inputNode.findNode("Content");
+        // String sysAppCode = sysAppCodeNode.text();
+        // String version = versionNode.text();
+        // String content = contentNode.text();
         return EResult.Success;
     }
 

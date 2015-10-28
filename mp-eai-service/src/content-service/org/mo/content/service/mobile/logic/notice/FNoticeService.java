@@ -114,7 +114,7 @@ public class FNoticeService extends FObject implements INoticeService {
     @Override
     public EResult select(IWebContext context, IWebInput input,
             IWebOutput output, ILogicContext logicContext) {
-        _logger.debug(this, "*********************************select",
+        _logger.debug(this, "select",
                 "select from FNoticeService is beginning. ");
         int pageNum = 1, pageSize = 10;
         String pageSizeStr = input.config().findNode("pagesize").text();
@@ -156,8 +156,6 @@ public class FNoticeService extends FObject implements INoticeService {
                 viewNode.setText(unit.viewCount());
                 if (userCount != null && userCount.count() > 0) {
                     FXmlNode percentNode = xruntime.createNode("percent");
-                    System.out.println("******************************"
-                            + unit.viewCount() + "-------" + userCount.count());
                     NumberFormat numberFormat = NumberFormat.getInstance();
                     numberFormat.setMaximumFractionDigits(0);
                     numberFormat.setRoundingMode(RoundingMode.HALF_UP);
