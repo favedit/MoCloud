@@ -6,7 +6,7 @@ import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <P>省会信息接口。</P>
+// <P>省份信息接口。</P>
 //@interface IProvinceAction
 //@version 1.0.0
 //============================================================

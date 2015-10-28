@@ -112,6 +112,9 @@
      data-options="field:'label',halign:'center',align:'center',sortable:true"
      width="60px">标签</th>
     <th
+     data-options="field:'displayOrder',halign:'center',align:'center',sortable:true"
+     width="60px">排序</th>
+    <th
      data-options="field:'level',halign:'center',align:'center',sortable:true"
      width="30px">级别</th>
     <th

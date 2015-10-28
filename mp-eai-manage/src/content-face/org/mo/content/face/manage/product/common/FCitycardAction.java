@@ -18,7 +18,11 @@ import org.mo.web.protocol.context.IWebContext;
 
 import com.cyou.gccloud.data.data.FDataCommonCityCardUnit;
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
-
+//============================================================
+//<P>城市身份对照控制器</P>
+//@class FCitycardAction
+//@version 1.0.0
+//============================================================
 public class FCitycardAction 
       implements 
          ICitycardAction 
@@ -202,7 +206,7 @@ public class FCitycardAction
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      _logger.debug(this, "Update----------------------------------------", "Update Begin.(id={1})", basePage.userId());
+      _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataCommonCityCardUnit unit = _citycardConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       unit.setOuid(Long.parseLong(context.parameter("ouid")));
       setCitycardDat(unit, context, logicContext);

@@ -9,7 +9,6 @@ import org.mo.data.logic.ILogicContext;
 //@interface ICityConsole
 //@version 1.0.0
 //============================================================
-
 public interface ICityConsole 
       extends 
          IAbstractLogicUnitConsole<FDataCommonCityUnit> 

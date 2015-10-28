@@ -4,7 +4,7 @@ import org.mo.com.lang.FObjectId;
 import org.mo.content.core.manage.product.common.FDataCitycardInfo;
 
 //============================================================
-//<P>城市身份证容器</P>
+//<P>城市身份对照容器</P>
 //@class FCitycardPage
 //@version 1.0.0
 //============================================================

@@ -6,7 +6,7 @@ import org.mo.web.core.container.AContainer;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>城市省份证信息接口。</P>
+//<P>城市省份证信息对照接口。</P>
 //@interface ICitycardAction
 //@version 1.0.0
 //============================================================

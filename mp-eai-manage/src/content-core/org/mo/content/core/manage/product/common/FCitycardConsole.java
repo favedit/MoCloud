@@ -16,14 +16,18 @@ import org.mo.core.aop.face.ALink;
 //============================================================
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-
+//============================================================
+//<P>城市省份对照控制台</P>
+//@class FCitycardConsole
+//@version 1.0.0
+//============================================================
 public class FCitycardConsole
       extends FAbstractLogicUnitConsole<FDataCommonCityCardLogic, FDataCommonCityCardUnit>
       implements
          ICitycardConsole
 {
 
-   //用户控制台
+   //城市控制台
    @ALink
    protected ICityConsole _cityConsole;
 

@@ -8,14 +8,6 @@ import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
-//============================================================
-//<P>区域信息操作接口</P>
-//
-//@class FAreaConsole
-//@author Sunhr
-//@Date 2015.09.13  
-//@version 1.0.0
-//============================================================
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
@@ -23,7 +15,6 @@ import org.mo.data.logic.ILogicContext;
 //@class FAreaConsole
 //@version 1.0.0
 //============================================================
-
 public class FAreaConsole 
       extends 
          FAbstractLogicUnitConsole<FDataCommonAreaLogic, FDataCommonAreaUnit>
@@ -64,8 +55,9 @@ public class FAreaConsole
          whereSql.append(" '%{label}%'");
          whereSql.bind("label", unit.label());
       }
+      String orderBy = String.format("%s %s", FDataCommonAreaLogic.DISPLAY_ORDER, "DESC");
       FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
-      FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataAreaInfo> userInfoList = logic.fetchClass(FDataAreaInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (Iterator<FDataAreaInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
          FDataAreaInfo tempUnit = iterator.next();
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());

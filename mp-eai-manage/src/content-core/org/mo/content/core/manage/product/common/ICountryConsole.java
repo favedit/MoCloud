@@ -11,7 +11,6 @@ import org.mo.data.logic.ILogicContext;
 //@Date 2015.09.21  
 //@version 1.0.0
 //============================================================
-
 public interface ICountryConsole 
       extends 
          IAbstractLogicUnitConsole<FDataCommonCountryUnit> 

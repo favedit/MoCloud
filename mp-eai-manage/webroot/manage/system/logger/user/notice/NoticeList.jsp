@@ -3,6 +3,23 @@
 <HEAD>
 <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css" media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
+<style type="text/css">
+   #manage_id{
+      width:100%;
+      margin-top:-10px;
+      margin-left:-10px;
+      padding-bottom:-20px;
+      height:100%;
+   }
+   #cond_id{
+      float:right;
+      margin-right:10px;
+   }
+   #search_id{
+      float:right;
+      margin-bottom:6px;
+   }
+</style>
 <script>
    $(function() {
       doSubmit(null,null);
@@ -54,6 +71,7 @@
        var beginDate = $('#beginDate').datebox('getValue');
        var endDate = $('#endDate').datebox('getValue'); 
        var activeCd = $("#activeCd").combobox("getValue");
+       var noticeId = $("#noticeId").val();
        var url = null;
        var data = null;
        if (page != null) {
@@ -61,14 +79,16 @@
              "page": page,
              "pageSize" : pageSize,
              "beginDate" :beginDate,
+             "noticeId" :noticeId,
              "endDate" :endDate,
              "activeCd" :activeCd
-          };     
+          };
           url = "/manage/system/logger/user/notice/Notice.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
        } else {
           data = {
                "beginDate" :beginDate,
                "endDate" :endDate,
+               "noticeId" :noticeId,
                "activeCd" :activeCd
            };
           url = "/manage/system/logger/user/notice/Notice.wa?do=selectByDate&date=" + new Date().valueOf();
@@ -102,61 +122,29 @@
 </HEAD>
 
 <body>
+ <div id="manage_id" style="width:100%;height:100%;">
    <div id="cy_right">
       <div class="right_title">
          <span>用户公告日志</span>
       </div>
-      <div class="btn_bar">
-      <div class="nav_btn">
-      </div>
-      <div class="nav_search" style="width:940px;">
-        <form id="logerdat" action="/manage/system/logger/user/notice/Notice" method="post" align="center">
-         <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
-            <tr>
-               <td width="60" height="33">
-                  <div align="left">开始时间:</div>
-               </td>
-               <td width="158">
-                  <div align="left">
-                     <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox" data-options="editable:false"></input>
-                     <input id="flag" type="hidden"/>
-                  </div>
-               </td>
-               <td width="60" height="33">
-                  <div align="left">结束时间:</div>
-               </td>
-               <td width="158">
-                  <div align="left">
-                     <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
-                  </div>
-               </td>
-               <td width="60" height="33">
-                  <div align="left">激活状态:</div>
-               </td>
-               <td width="158">
-	               <div align="left">
-	                  <select  style="width:158px;height:20px" id="activeCd" class="easyui-combobox" name="activeCd" data-options="editable:false">
-	                     <option value="1">激活</option>
-	                     <option value="2">非激活</option>
-	                  <select>
-	               </div>
-               </td>
-               <td width="70" height="33">
-                  <div align="left">日志公告id:</div>
-               </td>
-               <td width="150" height="33">
-                  <div align="left">
-                     <input id="noticeId" name="noticeId" class="easyui-validatebox textbox" style="width:150px;" />
-                  </div>
-               </td>
-               <td width="30"><a onClick="submitForm()" href="javascript:void(0);" class="sear_btn"></a></td>
-            </tr>
-         </table>
-        </form>
+      <div id="cond_id">
+      <span>开始时间:</span>
+         <input id="beginDate" style="width:150px" name="beginDate" class="easyui-datebox" data-options="editable:false"></input>
+         <input id="flag" type="hidden"/>
+      <span>结束时间:</span>
+         <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
+      <span>激活状态:</span>
+        <select  style="width:158px;height:20px" id="activeCd" class="easyui-combobox" name="activeCd" data-options="editable:false">
+           <option value="1">激活</option>
+           <option value="2">非激活</option>
+        <select>
+      <span>日志公告id:</span>
+        <input id="noticeId" name="noticeId" class="easyui-validatebox textbox" style="width:150px;" />
+        <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>
       </div>
    </div>
-   </div>
-   <table id="access" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
+   <table id="access" class="easyui-datagrid" fit='true' style="align:true;height:102%;width:101%;" 
+         data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
       <thead>
          <tr>
             <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
@@ -168,6 +156,6 @@
          </tr>
       </thead>
    </table>
+</div>
 </body>
-
 </HTML>

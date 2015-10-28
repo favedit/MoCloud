@@ -270,6 +270,7 @@ public class FAreaAction
       unit.setCode(context.parameter("code"));
       unit.setLabel(context.parameter("label"));
       unit.setNote(context.parameter("note"));
+      unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
       unit.setCountryId(context.parameterAsLong("countryId"));
    }
 

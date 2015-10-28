@@ -5,14 +5,6 @@ import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
-//============================================================
-//<P>国家信息操作接口</P>
-//
-//@class FCountryConsole
-//@author Sunhr
-//@Date 2015.09.13  
-//@version 1.0.0
-//============================================================
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;

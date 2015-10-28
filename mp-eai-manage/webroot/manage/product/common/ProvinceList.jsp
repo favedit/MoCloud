@@ -107,9 +107,12 @@
     <th
      data-options="field:'areaLabel',halign:'center',align:'left',sortable:true"
      width="60px">所属区域</th>
-     <th
+    <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="60px">标签</th>
+    <th
+     data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
+     width="60px">排序</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
      width="60px">代码</th>

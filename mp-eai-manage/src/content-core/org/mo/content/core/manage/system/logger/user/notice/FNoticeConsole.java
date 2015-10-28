@@ -95,7 +95,7 @@ public class FNoticeConsole
          whereSql.append(FLoggerPersonUserNoticeLogic.CREATE_DATE + " <= '{endDateStr}'");
          whereSql.bind("endDateStr", RString.parse(endDateStr));
       }
-      if (!RString.isEmpty(noticeId+"")) {
+      if (!RString.isEmpty(noticeId+"")&&noticeId>0) {
          whereSql.append(" and ");
          whereSql.append(FLoggerPersonUserNoticeLogic.NOTICE_ID + " = '{noticeId}'");
          whereSql.bind("noticeId", RString.parse(noticeId));

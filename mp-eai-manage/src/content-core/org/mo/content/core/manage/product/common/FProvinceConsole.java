@@ -13,21 +13,12 @@ import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
-//============================================================
-//<P>省份信息操作接口</P>
-//
-//@class FProvinceConsole
-//@author Sunhr
-//@Date 2015.09.13  
-//@version 1.0.0
-//============================================================
 import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>省会控制台</P>
 //@class FProvinceConsole
 //@version 1.0.0
 //============================================================
-
 public class FProvinceConsole 
       extends 
          FAbstractLogicUnitConsole<FDataCommonProvinceLogic, FDataCommonProvinceUnit>
@@ -77,8 +68,9 @@ public class FProvinceConsole
          whereSql.append(" '%{label}%'");
          whereSql.bind("label", unit.label());
       }
+      String orderBy = String.format("%s %s", FDataCommonProvinceLogic.DISPLAY_ORDER, "DESC");
       FDataCommonProvinceLogic logic = logicContext.findLogic(FDataCommonProvinceLogic.class);
-      FLogicDataset<FDataProvinceInfo> userInfoList = logic.fetchClass(FDataProvinceInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataProvinceInfo> userInfoList = logic.fetchClass(FDataProvinceInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (Iterator<FDataProvinceInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
          FDataProvinceInfo tempUnit = iterator.next();
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());

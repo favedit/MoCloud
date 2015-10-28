@@ -83,16 +83,6 @@
    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
-     <td><div align="left">
-       <input id="label" name="label" class="easyui-validatebox textbox notnull"
-        style="width:380px;height:20px;"
-        data-options="required:true,validType:'length[0,80]'" /> <input id="adminId"
-        name="adminId" style="display:none"
-        value="<jh:write source='&basePage.userId'/>" />
-      </div></td>
-    </tr>
-    <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
        <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
@@ -104,6 +94,24 @@
      <td><div align="left">
        <div onclick="getCountry()" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="areaId" type="hidden">
+      </div></td>
+    </tr>
+    <tr>
+     <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td><div align="left">
+       <input id="label" name="label" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,80]'" /> <input id="adminId"
+        name="adminId" style="display:none"
+        value="<jh:write source='&basePage.userId'/>" />
+      </div></td>
+    </tr>
+    <tr>
+     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
+     <td><div align="left">
+       <input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px;"
+        data-options="required:true,validType:'length[0,11]'" /> 
       </div></td>
     </tr>
     <tr>

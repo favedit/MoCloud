@@ -11,14 +11,6 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
-//============================================================
-//<P>区域信息操作接口</P>
-//
-//@class FCityConsole
-//@author Sunhr
-//@Date 2015.09.13  
-//@version 1.0.0
-//============================================================
 import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>城市信息控制台</P>
@@ -95,8 +87,9 @@ public class FCityConsole
          where.append(" '%{label}%'");
          where.bind("label", unit.label());
       }
+      String orderBy = String.format("%s %s", FDataCommonCityLogic.DISPLAY_ORDER, "DESC");
       FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
-      FLogicDataset<FDataCityInfo> userInfoList = logic.fetchClass(FDataCityInfo.class, null, where.toString(), null, pageSize, pageNum);
+      FLogicDataset<FDataCityInfo> userInfoList = logic.fetchClass(FDataCityInfo.class, null, where.toString(), orderBy, pageSize, pageNum);
       for (Iterator<FDataCityInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
          FDataCityInfo tempUnit = iterator.next();
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());

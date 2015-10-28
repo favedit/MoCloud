@@ -264,6 +264,7 @@ public class FCityAction
       unit.setCountryId(context.parameterAsLong("countryId"));
       unit.setAreaId(context.parameterAsLong("areaId"));
       unit.setProvinceId(context.parameterAsLong("provinceId"));
+      unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
    }
    // ============================================================
    // <T>全查</T>

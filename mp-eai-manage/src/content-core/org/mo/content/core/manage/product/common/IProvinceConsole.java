@@ -4,14 +4,6 @@ import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicContext;
 import org.mo.data.logic.FLogicDataset;
-//============================================================
-//<P>省份信息操作接口</P>
-//
-//@class IProvinceConsole
-//@author Sunhr
-//@Date 2015.09.13
-//@version 1.0.0
-//============================================================
 import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P省会信息控制台接口</P>

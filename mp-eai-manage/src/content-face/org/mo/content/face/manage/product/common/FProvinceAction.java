@@ -262,6 +262,7 @@ public class FProvinceAction
       unit.setNote(context.parameter("note"));
       unit.setCountryId(context.parameterAsLong("countryId"));
       unit.setAreaId(context.parameterAsLong("areaId"));
+      unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
    }
    
    // ============================================================

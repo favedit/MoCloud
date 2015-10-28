@@ -34,7 +34,7 @@
             pageSize : 20,
             showPageList : [ 20, 30, 40 ],
             onSelectPage : function(pageNumber, pageSize) {
-               var tip = $("#flag").val();alert(tip);
+               var tip = $("#flag").val();
                if(tip=="2"){
                   doSubmitByCondition(pageNumber,pageSize);
                }else{
