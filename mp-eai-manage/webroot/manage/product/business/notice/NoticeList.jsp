@@ -112,29 +112,11 @@
     });
  }
  function del(id) {
-    progress();
-    var url ="/manage/product/business/notice/Notice.wa?do=deleteBefore&id=" + id + "&date=" + new Date().valueOf();
-    $.ajax({
-       type : "POST",
-       url : url,
-       success : function(msg) {
-           closeProgress();
-           if(msg.indexOf("noDel")>-1){
-              alert("不可删除!");
-           }else{
-              closeProgress();
-              return confirmx('确定删除?',
-                 function() {
-                 location.href = "/manage/product/business/notice/Notice.wa?do=delete&id=" + id + "&date=" + new Date().valueOf();
-              });
-           }
-       },
-       fail : function() {
-           closeProgress();
-           alert("error");
-       }
-   });
- }
+    return confirmx('确定删除?', function() {
+        location.href = "/manage/product/business/notice/Notice.wa?do=delete&id=" + id
+                + "&date=" + new Date().valueOf();
+    });
+}
  //更新配置信息-
  function edit(id) {
      progress();

@@ -55,7 +55,7 @@ public class FCitycardConsole
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(unit.cardCode() + "")){
+      if(!RString.isEmpty(unit.cardCode() + "")&&unit.cardCode()>0){
          whereSql.append(FDataCommonCityCardLogic.CARD_CODE);
          whereSql.append(" like ");
          whereSql.append(" '%{cardCode}%'");
@@ -65,7 +65,9 @@ public class FCitycardConsole
       FLogicDataset<FDataCitycardInfo> userInfoList = logic.fetchClass(FDataCitycardInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
       for(Iterator<FDataCitycardInfo> iterator = userInfoList.iterator(); iterator.hasNext();){
          FDataCitycardInfo tempUnit = iterator.next();
-         tempUnit.setCityLabel(tempUnit.city().label());
+         if(tempUnit.city()!=null&&!RString.isEmpty(tempUnit.city().label())){
+            tempUnit.setCityLabel(tempUnit.city().label());
+         }
       }
       return userInfoList;
    }
