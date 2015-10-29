@@ -4,16 +4,10 @@ import com.cyou.gccloud.data.data.FDataCommonAreaLogic;
 import com.cyou.gccloud.data.data.FDataCommonAreaUnit;
 import com.cyou.gccloud.data.data.FDataCommonCityCardLogic;
 import com.cyou.gccloud.data.data.FDataCommonCityCardUnit;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
 import org.mo.core.aop.face.ALink;
-//============================================================
-//<P>城市身份证关联控制台</P>
-//@class FCitycardConsole
-//@version 1.0.0
-//============================================================
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
@@ -63,8 +57,7 @@ public class FCitycardConsole
       }
       FDataCommonCityCardLogic logic = logicContext.findLogic(FDataCommonCityCardLogic.class);
       FLogicDataset<FDataCitycardInfo> userInfoList = logic.fetchClass(FDataCitycardInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
-      for(Iterator<FDataCitycardInfo> iterator = userInfoList.iterator(); iterator.hasNext();){
-         FDataCitycardInfo tempUnit = iterator.next();
+      for(FDataCitycardInfo tempUnit : userInfoList){
          if(tempUnit.city()!=null&&!RString.isEmpty(tempUnit.city().label())){
             tempUnit.setCityLabel(tempUnit.city().label());
          }
@@ -83,17 +76,17 @@ public class FCitycardConsole
                                                 Long cityId,
                                                 int cardCode){
       FSql whereSql = new FSql();
-      if(cityId != null){
+      whereSql.append(" 1=1 ");
+      if(!RString.isEmpty(cityId+"")&& cityId>0){
+         whereSql.append(" AND ");
          whereSql.append(FDataCommonCityCardLogic.CITY_ID);
          whereSql.append(" = ");
          whereSql.append(" {cityId}");
          whereSql.bind("cityId", RString.parse(cityId));
       }
 
-      if(cardCode != 0){
-         if(cityId != null){
-            whereSql.append(" AND ");
-         }
+      if(!RString.isEmpty(cardCode+"")&& cardCode>0){
+         whereSql.append(" AND ");
          whereSql.append(FDataCommonCityCardLogic.CARD_CODE);
          whereSql.append(" = ");
          whereSql.append(" {cardCode}");
@@ -132,8 +125,7 @@ public class FCitycardConsole
          whereSql.bind("cardCode", RString.parse(cardCode));
          FDataCommonCityCardLogic logic = logicContext.findLogic(FDataCommonCityCardLogic.class);
          FLogicDataset<FDataCommonCityCardUnit> areaList = logic.fetch(whereSql.toString());
-         for(Iterator<FDataCommonCityCardUnit> it = areaList.iterator(); it.hasNext();){
-            FDataCommonCityCardUnit unit = it.next();
+         for(FDataCommonCityCardUnit unit : areaList){
             if(!RString.equals(ouid, unit.ouid())){
                return true;
             }

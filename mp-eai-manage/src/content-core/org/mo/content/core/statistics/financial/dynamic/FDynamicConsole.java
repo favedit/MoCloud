@@ -17,7 +17,8 @@ import org.mo.data.logic.ILogicContext;
 //@version 150801
 //============================================================
 public class FDynamicConsole
-      extends FAbstractLogicUnitConsole<FStatisticsFinancialDynamicLogic, FStatisticsFinancialDynamicUnit>
+      extends 
+         FAbstractLogicUnitConsole<FStatisticsFinancialDynamicLogic, FStatisticsFinancialDynamicUnit>
       implements
          IDynamicConsole
 {

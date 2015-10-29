@@ -18,8 +18,6 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>客户信息控制台</P>
 //@class FCustomerConsole
-//@author AnjoyTian
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
 

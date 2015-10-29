@@ -3,7 +3,6 @@ package org.mo.content.core.manage.product.user.signing;
 import com.cyou.gccloud.data.data.FDataPersonUserSigningLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserSigningUnit;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessLogic;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RLong;
@@ -56,8 +55,7 @@ public class FSigningConsole
       }
       FDataPersonUserSigningLogic logic = logicContext.findLogic(FDataPersonUserSigningLogic.class);
       FLogicDataset<FDataSigningInfo> moduleList = logic.fetchClass(FDataSigningInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
-      for (Iterator<FDataSigningInfo> iter = moduleList.iterator(); iter.hasNext();) {
-         FDataSigningInfo info = iter.next();
+      for (FDataSigningInfo info : moduleList) {
          info.setUserLabel(info.user().label());
       }
       return moduleList;
@@ -94,8 +92,7 @@ public class FSigningConsole
       String orderBy = String.format("%s %s", FLoggerPersonUserAccessLogic.UPDATE_DATE, "DESC");
       FDataPersonUserSigningLogic logic = new FDataPersonUserSigningLogic(logicContext);
       FLogicDataset<FDataSigningInfo> unitlist = logic.fetchClass(FDataSigningInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataSigningInfo> iter = unitlist.iterator(); iter.hasNext();) {
-         FDataSigningInfo info = iter.next();
+      for (FDataSigningInfo info : unitlist) {
          info.setUserLabel(info.user().label());
       }
       return unitlist;

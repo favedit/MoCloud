@@ -3,9 +3,6 @@ package org.mo.content.core.manage.system.logger.user.notice;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeLogic;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
 import com.cyou.gccloud.define.enums.common.EGcActive;
-
-import java.util.Iterator;
-
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -49,8 +46,7 @@ public class FNoticeConsole
       String orderBy = String.format("%s %s", FLoggerPersonUserNoticeLogic.UPDATE_DATE, "DESC");
       FLoggerPersonUserNoticeLogic logic = new FLoggerPersonUserNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, null, orderBy, pageSize, pageNum);
-      for(Iterator<FDataNoticeInfo> itr = unitlist.iterator();itr.hasNext();){
-         FDataNoticeInfo info = itr.next();
+      for(FDataNoticeInfo info : unitlist){
          info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
       }
       return unitlist;
@@ -103,8 +99,7 @@ public class FNoticeConsole
       String orderBy = String.format("%s %s", FLoggerPersonUserNoticeLogic.UPDATE_DATE, "DESC");
       FLoggerPersonUserNoticeLogic logic = new FLoggerPersonUserNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
-      for(Iterator<FDataNoticeInfo> itr = unitlist.iterator();itr.hasNext();){
-         FDataNoticeInfo info = itr.next();
+      for(FDataNoticeInfo info : unitlist){
          info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
       }
       return unitlist;

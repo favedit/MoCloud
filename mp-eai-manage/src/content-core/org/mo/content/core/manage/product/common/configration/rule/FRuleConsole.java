@@ -1,7 +1,5 @@
 package org.mo.content.core.manage.product.common.configration.rule;
 
-import java.util.Iterator;
-
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -17,10 +15,10 @@ import com.cyou.gccloud.define.enums.core.EGcRule;
 //@version 1.0.0
 //============================================================
 public class FRuleConsole 
-               extends 
-                  FAbstractLogicUnitConsole<FDataControlRuleLogic, FDataControlRuleUnit>
-               implements 
-                  IRuleConsole 
+      extends 
+         FAbstractLogicUnitConsole<FDataControlRuleLogic, FDataControlRuleUnit>
+      implements 
+         IRuleConsole 
 {
 
    // 每页条数
@@ -50,8 +48,7 @@ public class FRuleConsole
       FSql whereSql = new FSql();
       FDataControlRuleLogic logic = logicContext.findLogic(FDataControlRuleLogic.class);
       FLogicDataset<FDataRuleInfo> moduleList = logic.fetchClass(FDataRuleInfo.class, null, whereSql.toString(), null, _pageSize, pageNum);
-      for(Iterator<FDataRuleInfo> iterator = moduleList.iterator(); iterator.hasNext();){
-         FDataRuleInfo tunit = iterator.next();
+      for(FDataRuleInfo tunit : moduleList){
          if(RString.equals(EGcRule.Unknown,tunit.ruleCd())){
             tunit.setRuleCdStr(EGcRule.UnknownLabel);
          }
@@ -89,8 +86,7 @@ public class FRuleConsole
       whereSql.bind("rulecd", RString.parse(unit.ruleCd()));
       FDataControlRuleLogic logic = logicContext.findLogic(FDataControlRuleLogic.class);
       FLogicDataset<FDataRuleInfo> moduleList = logic.fetchClass(FDataRuleInfo.class, null, whereSql.toString(), null, _pageSize, pageNum);
-      for(Iterator<FDataRuleInfo> iterator = moduleList.iterator(); iterator.hasNext();){
-         FDataRuleInfo tunit = iterator.next();
+      for(FDataRuleInfo tunit : moduleList){
          if(RString.equals(EGcRule.Unknown,tunit.ruleCd())){
             tunit.setRuleCdStr(EGcRule.UnknownLabel);
          }

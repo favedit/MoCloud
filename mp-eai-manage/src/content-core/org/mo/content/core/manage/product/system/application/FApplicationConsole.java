@@ -14,7 +14,8 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 public class FApplicationConsole
-      extends FAbstractLogicUnitConsole<FDataSystemApplicationLogic, FDataSystemApplicationUnit>
+      extends 
+         FAbstractLogicUnitConsole<FDataSystemApplicationLogic, FDataSystemApplicationUnit>
       implements
          IApplicationConsole
 {

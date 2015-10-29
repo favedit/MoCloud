@@ -6,7 +6,6 @@ import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -69,8 +68,7 @@ public class FSalestoolsConsole
       String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC", FDataLogicNewsLogic.CREATE_DATE, "DESC");
       FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
       FLogicDataset<FDataSalestoolsInfo> moduleList = logic.fetchClass(FDataSalestoolsInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataSalestoolsInfo> ite = moduleList.iterator(); ite.hasNext();) {
-         FDataSalestoolsInfo info = ite.next();
+      for (FDataSalestoolsInfo info : moduleList) {
          if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
             info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
          }

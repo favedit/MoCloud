@@ -18,13 +18,12 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>产品信息控制台</P>
 //@class FProductConsole
-//@author AnjoyTian
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
 
 public class FProductConsole
-      extends FAbstractLogicUnitConsole<FDataFinancialProductLogic, FDataFinancialProductUnit>
+      extends 
+         FAbstractLogicUnitConsole<FDataFinancialProductLogic, FDataFinancialProductUnit>
       implements
          IProductConsole
 {

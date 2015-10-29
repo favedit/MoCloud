@@ -287,6 +287,7 @@ public class FAreaAction
                            ILogicContext logicContext, 
                            FBasePage basePage) {
       FLogicDataset<FDataCommonAreaUnit> countryList = _areaConsole.selectAll(logicContext, context.parameterAsLong("countryId"));
+      _logger.debug(this, "Delete======================="+countryList.count(), "Delete begin. (userId={1})", basePage.userId());
       basePage.setJson(countryList.toJsonString());
       return "/manage/common/ajax";
    }

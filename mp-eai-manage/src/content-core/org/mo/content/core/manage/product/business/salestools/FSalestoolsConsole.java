@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -25,8 +24,6 @@ import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 //<P>销售工具控制台</P>
 //@class FSalestoolsConsole
-//@author XIAOHUI ZHANG
-//@Date 2015.10.10
 //@version 1.0.0
 //============================================================
 public class FSalestoolsConsole 
@@ -82,8 +79,7 @@ public class FSalestoolsConsole
       String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC", FDataLogicNewsLogic.CREATE_DATE, "DESC");
       FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
       FLogicDataset<FDataSalestoolsInfo> moduleList = logic.fetchClass(FDataSalestoolsInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataSalestoolsInfo> ite = moduleList.iterator(); ite.hasNext();) {
-         FDataSalestoolsInfo info = ite.next();
+      for (FDataSalestoolsInfo info : moduleList) {
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
@@ -178,8 +174,7 @@ public class FSalestoolsConsole
       String orderBy = String.format("%s %s", FDataLogicSalestoolsLogic.UPDATE_DATE, "DESC");
       FDataLogicSalestoolsLogic logic = new FDataLogicSalestoolsLogic(logicContext);
       FLogicDataset<FDataSalestoolsInfo> unitlist = logic.fetchClass(FDataSalestoolsInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataSalestoolsInfo> ite = unitlist.iterator(); ite.hasNext();) {
-         FDataSalestoolsInfo info = ite.next();
+      for (FDataSalestoolsInfo info : unitlist) {
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));

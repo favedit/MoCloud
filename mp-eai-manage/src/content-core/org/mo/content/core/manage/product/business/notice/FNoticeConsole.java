@@ -5,7 +5,6 @@ import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -65,8 +64,7 @@ public class FNoticeConsole
       String orderBy = String.format("%s %s, %s %s", FDataLogicNoticeLogic.DISPLAY_ORDER, "DESC", FDataLogicNoticeLogic.CREATE_DATE, "DESC");
       FDataLogicNoticeLogic logic = logicContext.findLogic(FDataLogicNoticeLogic.class);
       FLogicDataset<FDataNoticeInfo> moduleList = logic.fetchClass(FDataNoticeInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataNoticeInfo> ite = moduleList.iterator(); ite.hasNext();) {
-         FDataNoticeInfo info = ite.next();
+      for (FDataNoticeInfo info : moduleList) {
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
@@ -113,8 +111,7 @@ public class FNoticeConsole
       String orderBy = String.format("%s %s", FDataLogicNoticeLogic.UPDATE_DATE, "DESC");
       FDataLogicNoticeLogic logic = new FDataLogicNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataNoticeInfo> ite = unitlist.iterator(); ite.hasNext();) {
-         FDataNoticeInfo info = ite.next();
+      for (FDataNoticeInfo info : unitlist) {
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));

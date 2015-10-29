@@ -147,8 +147,7 @@ public class FAreaConsole
          whereSql.bind("countryId", RString.parse(countryId));
          FDataCommonAreaLogic logic = logicContext.findLogic(FDataCommonAreaLogic.class);
          FLogicDataset<FDataCommonAreaUnit> areaList = logic.fetch(whereSql.toString());
-         for(Iterator<FDataCommonAreaUnit> iter = areaList.iterator();iter.hasNext();){
-            FDataCommonAreaUnit unit = iter.next();
+         for(FDataCommonAreaUnit unit : areaList){
             if(!RString.equals(unit.ouid(),ouid)){
                return true;
             }

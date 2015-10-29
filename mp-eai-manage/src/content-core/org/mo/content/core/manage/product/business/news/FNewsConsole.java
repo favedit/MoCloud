@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -24,8 +23,6 @@ import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 //<P>新闻控制台</P>
 //@class FNewsConsole
-//@author XIAOHUI ZHANG
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
 public class FNewsConsole 
@@ -81,8 +78,7 @@ public class FNewsConsole
       String orderBy = String.format("%s %s, %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC", FDataLogicNewsLogic.CREATE_DATE, "DESC");
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
       FLogicDataset<FDataNewsInfo> moduleList = logic.fetchClass(FDataNewsInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataNewsInfo> ite = moduleList.iterator(); ite.hasNext();) {
-         FDataNewsInfo info = ite.next();
+      for (FDataNewsInfo info : moduleList) {
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
@@ -177,8 +173,7 @@ public class FNewsConsole
       String orderBy = String.format("%s %s", FDataLogicNewsLogic.UPDATE_DATE, "DESC");
       FDataLogicNewsLogic logic = new FDataLogicNewsLogic(logicContext);
       FLogicDataset<FDataNewsInfo> unitlist = logic.fetchClass(FDataNewsInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataNewsInfo> ite = unitlist.iterator(); ite.hasNext();) {
-         FDataNewsInfo info = ite.next();
+      for (FDataNewsInfo info :unitlist) {
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));

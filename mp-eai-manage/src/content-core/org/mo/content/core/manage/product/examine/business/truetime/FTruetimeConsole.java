@@ -5,7 +5,6 @@ import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -18,7 +17,8 @@ import org.mo.data.logic.ILogicContext;
 //@version 1.0.0
 //============================================================
 public class FTruetimeConsole 
-      extends FAbstractLogicUnitConsole<FDataLogicTruetimeLogic, FDataLogicTruetimeUnit>
+      extends 
+         FAbstractLogicUnitConsole<FDataLogicTruetimeLogic, FDataLogicTruetimeUnit>
       implements 
          ITruetimeConsole 
 {
@@ -59,8 +59,7 @@ public class FTruetimeConsole
       }
       FDataLogicTruetimeLogic logic = logicContext.findLogic(FDataLogicTruetimeLogic.class);
       FLogicDataset<FDataTruetimeInfo> moduleList = logic.fetchClass(FDataTruetimeInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
-      for (Iterator<FDataTruetimeInfo> ite = moduleList.iterator(); ite.hasNext();) {
-         FDataTruetimeInfo info = ite.next();
+      for (FDataTruetimeInfo info : moduleList) {
          if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
             info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
          }

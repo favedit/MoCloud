@@ -5,7 +5,6 @@ import com.cyou.gccloud.data.data.FDataCommonCityLogic;
 import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
 import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
@@ -90,8 +89,7 @@ public class FCityConsole
       String orderBy = String.format("%s %s", FDataCommonCityLogic.DISPLAY_ORDER, "DESC");
       FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
       FLogicDataset<FDataCityInfo> userInfoList = logic.fetchClass(FDataCityInfo.class, null, where.toString(), orderBy, pageSize, pageNum);
-      for (Iterator<FDataCityInfo> iterator = userInfoList.iterator(); iterator.hasNext();) {
-         FDataCityInfo tempUnit = iterator.next();
+      for (FDataCityInfo  tempUnit : userInfoList) {
          FDataCommonCountryUnit unit2 = _countryConsole.find(logicContext, tempUnit.countryId());
          if (unit2 != null) {
             String _countryLabel = unit2.name();
@@ -196,8 +194,7 @@ public class FCityConsole
          whereSql.bind("provinceId", RString.parse(provinceId));
          FDataCommonCityLogic logic = logicContext.findLogic(FDataCommonCityLogic.class);
          FLogicDataset<FDataCommonCityUnit> areaList = logic.fetch(whereSql.toString());
-         for(Iterator<FDataCommonCityUnit> iter = areaList.iterator();iter.hasNext();){
-            FDataCommonCityUnit unit = iter.next();
+         for(FDataCommonCityUnit unit : areaList){
             if(!RString.equals(ouid, unit.ouid())){
                return true;
             }

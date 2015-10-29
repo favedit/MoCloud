@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Iterator;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.data.FSql;
@@ -26,7 +25,6 @@ import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 //<P>实时数据制台</P>
 //@class FTruetimeConsole
-//@author XIAOHUI ZHANG
 //@version 1.0.0
 //============================================================
 public class FTruetimeConsole
@@ -89,8 +87,7 @@ public class FTruetimeConsole
       String orderBy = String.format("%s %s, %s %s", FDataLogicTruetimeLogic.DISPLAY_ORDER, "DESC", FDataLogicTruetimeLogic.CREATE_DATE, "DESC");
       FDataLogicTruetimeLogic logic = logicContext.findLogic(FDataLogicTruetimeLogic.class);
       FLogicDataset<FDataTruetimeInfo> moduleList = logic.fetchClass(FDataTruetimeInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
-      for(Iterator<FDataTruetimeInfo> ite = moduleList.iterator(); ite.hasNext();){
-         FDataTruetimeInfo info = ite.next();
+      for(FDataTruetimeInfo info : moduleList){
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));

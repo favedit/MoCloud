@@ -13,7 +13,6 @@ import org.mo.data.logic.ILogicContext;
 //@class FCountryConsole
 //@version 1.0.0
 //============================================================
-
 public class FCountryConsole 
       extends 
          FAbstractLogicUnitConsole<FDataCommonCountryLogic, FDataCommonCountryUnit>

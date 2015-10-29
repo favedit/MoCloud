@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import com.cyou.gccloud.define.enums.core.EGcVersionForce;
-import java.util.Iterator;
 
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
@@ -139,8 +138,7 @@ public class FVersionConsole
       FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
       FLogicDataset<FDataSystemVersionUnit> verList = logic.fetch(whereSql.toString());
       if (verList.count() > 0) {
-         for (Iterator<FDataSystemVersionUnit> iterator = verList.iterator(); iterator.hasNext();) {
-            FDataSystemVersionUnit unit = iterator.next();
+         for (FDataSystemVersionUnit unit : verList) {
             if (!RString.equals(unit.ouid(), ouid)) {
                return true;
             }

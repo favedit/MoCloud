@@ -1,31 +1,21 @@
 package org.mo.content.core.manage.product.financial.department;
 
-import com.cyou.gccloud.data.data.FDataCommonCountryLogic;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentLogic;
 import com.cyou.gccloud.data.data.FDataFinancialDepartmentUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
-//============================================================
-//<P>部门信息操作接口</P>
-//
-//@class FDepartmentConsole
-//@author Sunhr
-//@Date 2015.09.11
-//@version 1.0.0
-//============================================================
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 //============================================================
 //<P>部门信息控制台</P>
 //@class FDepartmentConsole
-//@author AnjoyTian
-//@Date 2015.09.21 
 //@version 1.0.0
 //============================================================
 
 public class FDepartmentConsole
-      extends FAbstractLogicUnitConsole<FDataFinancialDepartmentLogic, FDataFinancialDepartmentUnit>
+      extends 
+         FAbstractLogicUnitConsole<FDataFinancialDepartmentLogic, FDataFinancialDepartmentUnit>
       implements
          IDepartmentConsole
 {
