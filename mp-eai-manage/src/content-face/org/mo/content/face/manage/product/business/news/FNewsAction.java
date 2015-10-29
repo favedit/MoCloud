@@ -3,6 +3,7 @@ package org.mo.content.face.manage.product.business.news;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -84,6 +85,9 @@ public class FNewsAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataNewsInfo> unitList = _newsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataNewsInfo info : unitList){
+         info.setIconUrl(_storageConsole.makeUrl(info.iconUrl()));
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -131,8 +135,8 @@ public class FNewsAction
       FWebUploadFile file = context.files().first();
       if(null != file){
          Integer len = file.length() / 1024;
-         if(len > 20){
-            page.setResult("请上传小于20k的图片!");
+         if(len > 1024){
+            page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/news/InsertNews";
          }
          String type = file.contentType();
@@ -140,6 +144,9 @@ public class FNewsAction
             page.setResult("请上传图片!");
             return "/manage/product/business/news/InsertNews";
          }
+         SGcStorage storage = new SGcStorage("data.logic.news", unit.guid(), file);
+         _storageConsole.store(storage);
+         unit.setIconUrl(storage.pack());
       }
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _newsConsole.doInsert(logicContext, unit);
@@ -181,9 +188,11 @@ public class FNewsAction
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
       if(!RString.isEmpty(unit.iconUrl())){
-         info.setIconUrl(unit.iconUrl());
-         int na = unit.iconUrl().indexOf("newsImages");
-         info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
+         String iconUrl = _storageConsole.makeUrl(unit.iconUrl());
+         info.setMakeUrl(iconUrl);
+//         info.setIconUrl(unit.iconUrl());
+//         int na = unit.iconUrl().indexOf("newsImages");
+//         info.setImageName("/manage/images/newsImages/" + unit.iconUrl().substring(na + 11, unit.iconUrl().length()));
       }
       if(RString.equals(unit.statusCd(), 2)){
          basePage.setMenuString("manage.hide");
@@ -218,8 +227,8 @@ public class FNewsAction
       FWebUploadFile file = context.files().first();
       if(null != file){
          Integer len = file.length() / 1024;
-         if(len > 20){
-            page.setResult("请上传小于20k的图片!");
+         if(len > 1024){
+            page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/news/UpdateNews";
          }
          String type = file.contentType();
@@ -227,6 +236,9 @@ public class FNewsAction
             page.setResult("请上传图片!");
             return "/manage/product/business/news/UpdateNews";
          }
+         SGcStorage storage = new SGcStorage("data.logic.news", unit.guid(), file);
+         _storageConsole.store(storage);
+         unit.setIconUrl(storage.pack());
       }
       setLogicNews(context, logicContext, unit, "1");
       _newsConsole.doUpdate(logicContext, unit);

@@ -64,7 +64,7 @@
        });
     }
     function getArea(flag){//获取省份数据
-       $('#province').combobox('clear');alert(2);
+       $('#province').combobox('clear');
        var data = null;
        var areaId = $('#area').combobox("getValue");
        if(areaId!=null) data={"areaId":areaId};
