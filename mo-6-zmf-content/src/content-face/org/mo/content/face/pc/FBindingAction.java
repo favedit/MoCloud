@@ -6,7 +6,6 @@ import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.core.EGcValidationValidate;
-import com.jianzhou.sdk.BusinessService;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
@@ -286,12 +285,13 @@ public class FBindingAction
    //============================================================
    private int sendMessage(String random,
                            String mobile){
-      _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},mobile={2})", random, mobile);
-      BusinessService bs = new BusinessService();
-      bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-      String text = "验证码" + random + ",您正在使用[全球实时数据中心系统]进行账户绑定，千万不要告诉别人哟。【钰诚办公平台】";
-      int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
-      _logger.debug(this, "SendValidate", "sendMessage finish. (text={1},result={2})", text, result);
-      return result;
+      //      _logger.debug(this, "SendValidate", "sendMessage begin. (random={1},mobile={2})", random, mobile);
+      //      BusinessService bs = new BusinessService();
+      //      bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
+      //      String text = "验证码" + random + ",您正在使用[全球实时数据中心系统]进行账户绑定，千万不要告诉别人哟。【钰诚办公平台】";
+      //      int result = bs.sendBatchMessage("sdk_yucheng", "1qazxsw2", mobile, text);
+      //      _logger.debug(this, "SendValidate", "sendMessage finish. (text={1},result={2})", text, result);
+      //return result;
+      return 0;
    }
 }

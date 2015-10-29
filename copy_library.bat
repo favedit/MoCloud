@@ -127,4 +127,5 @@ COPY /Y %HOME_SOURCE%\mo-web.jar            %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-cloud.jar          %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-content.jar        %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-eai-content.jar    %HOME_TARGET%
+COPY /Y %HOME_SOURCE%\mo-zmf-content.jar    %HOME_TARGET%
 COPY /Y %HOME_SOURCE%\mo-lib-lzma.jar       %HOME_TARGET%
