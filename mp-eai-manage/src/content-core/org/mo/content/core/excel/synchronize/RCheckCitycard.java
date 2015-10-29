@@ -7,7 +7,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.mo.com.lang.FAttributes;
-import org.mo.content.core.manage.product.common.ICityConsole;
 import org.mo.content.core.manage.product.common.ICitycardConsole;
 import org.mo.core.aop.RAop;
 import org.mo.data.logic.FLogicContext;
@@ -48,7 +47,7 @@ public class RCheckCitycard
          //省份
          ICitycardConsole citycardConsole = RAop.find(ICitycardConsole.class);
          //城市
-         ICityConsole cityConsole = RAop.find(ICityConsole.class);
+         //         ICityConsole cityConsole = RAop.find(ICityConsole.class);
 
          HSSFWorkbook wb = new HSSFWorkbook(fis);
          HSSFSheet s = wb.getSheet("Sheet1");

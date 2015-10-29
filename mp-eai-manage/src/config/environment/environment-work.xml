@@ -24,8 +24,8 @@
          class = 'org.mo.cloud.core.storage.FGcStorageConsole'
          scope = 'global' >
       <Property name='enable'>Y</Property>
-      <Property name='storage_host'>10.127.3.11</Property>
-      <Property name='storage_port'>27017</Property>
+      <Property name='storage_host'>127.0.0.1</Property>
+      <Property name='storage_port'>8030</Property>
       <Property name='storage_name'>content</Property>
       <Initialize name='initialize'/>
    </Component> -->
@@ -83,15 +83,15 @@
    </Component>
    
    <!-- ============================================================ -->
-   <!-- 数据控制台                                                   -->
+   <!-- 数据控制台                                                                                                                          -->
    <!-- ============================================================ -->
    <Component
          face  = 'org.mo.eng.data.IDatabaseConsole'
          class = 'org.mo.eng.data.FDatabaseConsole'
          scope = 'global'>
       <Property name='default'>data</Property>
-       <!-- ============================================================ -->
-      <!-- 缓冲链接控制台                                               -->
+      <!-- ============================================================ -->
+      <!-- 缓冲链接控制台                                                                                                                  -->
       <!-- ============================================================ -->
       <Initialize name='add'>
          <Parameter>
