@@ -2,6 +2,7 @@ package org.mo.content.service.mobile.logic.notice;
 
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -38,7 +39,7 @@ public interface INoticeService {
     // @return 处理结果
     // ============================================================
     EResult select(IWebContext context, IWebInput input, IWebOutput output,
-            ILogicContext logicContext);
+            ILogicContext logicContext, IWebSession sessionContext);
 
     // ============================================================
     // <T>分页获取号令相关信息。</T>

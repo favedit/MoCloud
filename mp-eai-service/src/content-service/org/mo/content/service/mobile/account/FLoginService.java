@@ -91,17 +91,18 @@ public class FLoginService extends FObject implements ILoginService {
         String sessionStr = context.head("mo-session-id");
         clearSessionCode(sessionStr, sessionContext, logicContext);
         FXmlNode status_cd = output.config().createNode("status_cd");
-        String passport = RString.trimRight(passportNode.text());
-        String password = RString.trimRight(passwordNode.text());
+        String passport = passportNode.text();
+        String password = passwordNode.text();
         if (RString.isEmpty(passport) || passport.indexOf("'") > -1
                 || passport.indexOf("%") > -1 || passport.length() > 18
-                || passport.length() < 2) {
+                || passport.length() < 2 || passport.indexOf(" ") > -1) {
             status_cd.setText(EGcAuthorityResult.PassportIllegal);
             return EResult.Failure;
         }
         if (RString.isEmpty(password) || password.indexOf("'") > -1
                 || password.indexOf("%") > -1 || password.indexOf(";") > -1
-                || password.length() > 32 || password.length() < 6) {
+                || password.length() > 32 || password.length() < 6
+                || password.indexOf(" ") > -1) {
             status_cd.setText(EGcAuthorityResult.PasswordIllegal);
             return EResult.Failure;
         }

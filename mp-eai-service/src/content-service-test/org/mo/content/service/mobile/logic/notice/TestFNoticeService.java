@@ -21,11 +21,11 @@ public class TestFNoticeService {
     public void testSelect() throws ParseException, IOException,
             NoSuchAlgorithmException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        // String url = "http://10.13.0.16:8020/eai.mobile.logic.notice.wsp";
-        String url = "http://eai.ezubo.com:8089/eai.mobile.logic.notice.wsp";
+        String url = "http://10.13.0.16:8020/eai.mobile.logic.notice.wsp";
+        // String url = "http://eai.ezubo.com:8089/eai.mobile.logic.notice.wsp";
         HttpPost post = new HttpPost(url);
         List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-        listPram.add(new BasicNameValuePair("page_size", "9"));
+        listPram.add(new BasicNameValuePair("page_size", "111"));
         listPram.add(new BasicNameValuePair("format_cd", "json"));
         listPram.add(new BasicNameValuePair("page_number", "1"));
         listPram.add(new BasicNameValuePair("action", "select"));
@@ -63,7 +63,7 @@ public class TestFNoticeService {
         // 经度
         listPram.add(new BasicNameValuePair("location_longitude", "15.6"));
         listPram.add(new BasicNameValuePair("notice_id",
-                "9EECE08E649C49CC982414BEBB582C66"));
+                "9EECE08E649C49CC982414BEBB511C78"));
         post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
         post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
         CloseableHttpResponse response = httpclient.execute(post);

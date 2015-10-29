@@ -12,12 +12,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
    <div class="box">
    <header class="header">
-        <img src="<%=basePath%>/salestools/groupinfo/images/1 (5).png">
+        <img src="<%=basePath%>/salestools/groupinfo/images/5.png">
    </header>
    <div class="main">
       <div class="area">
          <h3>集团简介</h3>
-           <img src="<%=basePath%>/salestools/groupinfo/images/1 (1).jpg">
+           <img src="<%=basePath%>/salestools/groupinfo/images/1.jpg">
           <p class="ti0"><span>1.</span>钰诚国际控股集团有限公司，以建设和发展区域经济自由体为主轴，以科技金融、国际安防服务与咨询产业为两翼的综合性集团。旗下主要包括钰诚云商国际控股集团有限公司、兰花国际控股集团有限公司、金易融（北京）网络科技有限公司、安徽钰诚融资租赁有限公司、东南亚联合银行、安徽钰诚控股集团、安信惠鑫金融信息服务（北京）有限公司，并运营与建设钰诚东南亚自由贸易区，形成了“7大企业实体+1大经济建设实体”的架构。</p>
            <p>钰诚集团与全球40余家大型金融机构合作，提供全球化的科技金融服务、先进的国际安防技术服务与咨询，在未来以建设钰诚东南亚自由贸易区为主体，形成“一体为主 两翼齐飞”的发展格局。</p>
            <p>集团以融资租赁为核心的互联网金融服务平台——e租宝，是中国互联网金融标杆型的著名品牌，也是全世界最大的融资租赁互联网金融平台。</p>
@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="area">
          <h3>领导人简介</h3>
          <ul class="figure clearfix pr">
-           <img class="pa" src="<%=basePath%>/salestools/groupinfo/images/1 (6).png">
+           <img class="pa" src="<%=basePath%>/salestools/groupinfo/images/6.png">
            <span>丁宁</sapn>
          </ul>
 
@@ -73,13 +73,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="area">
           <h3>旗下公司</h3>
-            <img src="<%=basePath%>/salestools/groupinfo/images/1 (0).jpg">
+            <img src="<%=basePath%>/salestools/groupinfo/images/0.jpg">
             <p>E租宝专业优势</p>
-            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/1 (7).png">
-            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/1 (1).png">
-            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/1 (2).png">
-            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/1 (3).png">
-            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/1 (4).png">
+            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/7.png">
+            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/1.png">
+            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/2.png">
+            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/3.png">
+            <img class="pt10" src="<%=basePath%>/salestools/groupinfo/images/4.png">
         </div>
    </div>
    </div>

@@ -13,11 +13,14 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.mobile.account.ILoginConsole;
 import org.mo.content.core.mobile.logic.notice.INoticeConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
+import org.mo.web.core.session.IWebSessionConsole;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -43,6 +46,12 @@ public class FNoticeService extends FObject implements INoticeService {
     // GcSession会话控制台
     @ALink
     protected IGcSessionConsole _sessionConsole;
+    // 登录逻辑控制台
+    @ALink
+    protected ILoginConsole _loginConsole;
+    // WebSession会话控制台
+    @ALink
+    protected IWebSessionConsole _webSessionConsole;
 
     // ============================================================
     // <T>默认逻辑。</T>
@@ -113,7 +122,8 @@ public class FNoticeService extends FObject implements INoticeService {
     // ============================================================
     @Override
     public EResult select(IWebContext context, IWebInput input,
-            IWebOutput output, ILogicContext logicContext) {
+            IWebOutput output, ILogicContext logicContext,
+            IWebSession sessionContext) {
         _logger.debug(this, "select",
                 "select from FNoticeService is beginning. ");
         int pageNum = 1, pageSize = 10;
@@ -126,7 +136,17 @@ public class FNoticeService extends FObject implements INoticeService {
         if (pageNumStr != null && (!"".equals(pageNumStr))) {
             pageNum = Integer.parseInt(pageNumStr);
         }
-
+        // 查看用户是否有最新的公告
+        FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(
+                logicContext, sessionCode);
+        FLogicDataset<FDataLogicNoticeUnit> noticeUnits = _loginConsole
+                .isThereNotices(sessionInfo.userId(), sessionContext,
+                        logicContext, _sessionConsole, _webSessionConsole);
+        if (noticeUnits != null && noticeUnits.count() > 0) {
+            output.config().createNode("notice").setText(noticeUnits.count());
+        } else {
+            output.config().createNode("notice").setText(-1);
+        }
         FLogicDataset<FDataLogicNoticeUnit> units = _noticeConsole.select(
                 pageNum, pageSize, sessionCode, logicContext);
         if (units != null && units.count() > 0) {

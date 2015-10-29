@@ -90,4 +90,10 @@ public class TestFVersionService {
 
     }
 
+    @Test
+    public void testSpace() {
+        String str = "abd  g f";
+        System.out.println(str.lastIndexOf(" "));
+    }
+
 }
