@@ -246,6 +246,7 @@ public class FTruetimeAction
       }
       String content = context.parameter("content");
       unit.setContent(_storageConsole.makeText(content));
+      
       setLogicNews(context, logicContext, unit, "1");
       _truetimeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");

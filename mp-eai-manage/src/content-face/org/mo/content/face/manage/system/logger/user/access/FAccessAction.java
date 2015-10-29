@@ -101,7 +101,8 @@ public class FAccessAction
       String beginDateStr = context.parameter("beginDate");
       String endDateStr = context.parameter("endDate");
       String logicMessage = context.parameter("logicMessage");
-      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = _accessConsole.selectByDateandMessage(logicContext, beginDateStr, endDateStr, logicMessage, accessPage.pageCurrent() - 1, pageSize);
+      String passport = context.parameter("passport");
+      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = _accessConsole.selectByDateandMessage(logicContext, beginDateStr, endDateStr, logicMessage,passport, accessPage.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
       _logger.debug(this, "selectByDate", "selectByDate finish. (unitListCount={1})", unitlist.count());
       return "/manage/common/ajax";

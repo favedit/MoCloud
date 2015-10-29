@@ -39,7 +39,8 @@ public interface IAccessConsole
    FLogicDataset<FLoggerPersonUserAccessUnit> selectByDateandMessage(ILogicContext logicContext, 
                                                                      String beginDateStr, 
                                                                      String endDateStr, 
-                                                                     String logicMessage, 
+                                                                     String logicMessage,
+                                                                     String passport,
                                                                      int pageNum, 
                                                                      int pageSize);
 }

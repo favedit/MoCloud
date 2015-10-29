@@ -63,7 +63,7 @@
       var t=(screen.availHeight-500)/2;
       var w = screen.availWidth*7/19;
       var h = screen.availHeight*12/19;
-      window.open('/manage/product/examine/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      window.open('/manage/product/examine/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
    }
   //搜索按钮，enter键
    document.onkeydown=function(){
@@ -110,6 +110,9 @@
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
+     <th
+     data-options="field:'viewCount',halign:'center',align:'left',sortable:true"
+     width="60px">浏览次数</th>
      <th
      data-options="field:'linkCdStr',halign:'center',align:'left',sortable:true"
      width="60px">外链状态</th>

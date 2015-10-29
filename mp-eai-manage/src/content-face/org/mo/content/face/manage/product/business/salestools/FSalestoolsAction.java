@@ -87,9 +87,8 @@ public class FSalestoolsAction
       }
       FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataSalestoolsInfo info : unitList){
-         if(info.iconUrl() != null && info.iconUrl().trim().length() > 0){
-            info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
-         }
+         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         info.setContent(_storageConsole.makeDisplay(unit.content()));
       }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
@@ -152,6 +151,8 @@ public class FSalestoolsAction
          unit.setIconUrl(storage.pack());
          _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
+      unit.setContent(_storageConsole.makeText(context.parameter("context")));
+      
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _salestoolsConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
@@ -192,6 +193,9 @@ public class FSalestoolsAction
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
       info.setIconUrl(unit.iconUrl());
+      if(unit.content().trim().length() > 0){
+         info.setContent(_storageConsole.makeEdit(unit.content()));
+      }
       if(info.iconUrl() != null && info.iconUrl().trim().length() > 0){
          String iconUrl = _storageConsole.makeUrl(info.iconUrl());
          info.setMakeUrl(iconUrl);
@@ -237,6 +241,9 @@ public class FSalestoolsAction
          unit.setIconUrl(storage.pack());
          _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
+      String content = context.parameter("content");
+      unit.setContent(_storageConsole.makeText(content));
+      
       setLogicNews(context, logicContext, unit, "1");
       _salestoolsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
@@ -312,7 +319,6 @@ public class FSalestoolsAction
                             FDataLogicSalestoolsUnit unit,
                             String flag){
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
       unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
@@ -390,7 +396,7 @@ public class FSalestoolsAction
       }
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, context.parameterAsLong("ouid"));
       FDataSalestoolsInfo info = new FDataSalestoolsInfo();
-      info.setContent(unit.content());
+      info.setContent(_storageConsole.makeDisplay(unit.content()));
       page.setUnit(info);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/business/salestools/SalestoolsDataInfoForContent";

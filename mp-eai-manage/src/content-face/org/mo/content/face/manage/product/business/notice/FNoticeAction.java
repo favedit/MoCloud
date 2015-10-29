@@ -2,6 +2,8 @@ package org.mo.content.face.manage.product.business.notice;
 
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -33,6 +35,10 @@ public class FNoticeAction
 
    @ALink
    protected IWebUploadConsole _webUploadConsole;
+   
+// 存储服务器
+   @ALink
+   protected IGcStorageConsole _storageConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -82,6 +88,9 @@ public class FNoticeAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataNoticeInfo> unitList = _noticeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataNoticeInfo info : unitList){
+         info.setContent(_storageConsole.makeDisplay(unit.content()));
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -126,6 +135,7 @@ public class FNoticeAction
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNoticeUnit unit = _noticeConsole.doPrepare(logicContext);
+      unit.setContent(_storageConsole.makeText(context.parameter("context")));
       setLogicNews(context, logicContext, unit);
       EResult result = _noticeConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
@@ -164,11 +174,8 @@ public class FNoticeAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
-      if(RString.equals(unit.statusCd(),2)){
-         basePage.setMenuString("manage.hide");
-      }
-      if(!RString.equals(unit.statusCd(),2)){
-         basePage.setMenuString("manage.show");
+      if(unit.content().trim().length() > 0){
+         info.setContent(_storageConsole.makeEdit(unit.content()));
       }
       page.setUnit(info);
       page.setResult("");
@@ -194,6 +201,9 @@ public class FNoticeAction
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
+      String content = context.parameter("content");
+      unit.setContent(_storageConsole.makeText(content));
+      
       setLogicNews(context, logicContext, unit);
       _noticeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
@@ -291,7 +301,6 @@ public class FNoticeAction
                             ILogicContext logicContext, 
                             FDataLogicNoticeUnit unit) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
       unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
       unit.setDisplayCd(context.parameterAsInteger("displayCd"));
@@ -355,7 +364,7 @@ public class FNoticeAction
       }
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, context.parameterAsLong("ouid"));
       FDataNoticeInfo info = new FDataNoticeInfo();
-      info.setContent(unit.content());
+      info.setContent(_storageConsole.makeDisplay(unit.content()));
       page.setUnit(info);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/business/notice/NoticeDataInfoForContent";

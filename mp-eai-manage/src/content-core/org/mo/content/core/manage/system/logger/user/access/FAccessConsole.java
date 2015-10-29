@@ -63,7 +63,8 @@ public class FAccessConsole
    public FLogicDataset<FLoggerPersonUserAccessUnit> selectByDateandMessage(ILogicContext logicContext, 
                                                                             String beginDateStr, 
                                                                             String endDateStr, 
-                                                                            String logicMessage, 
+                                                                            String logicMessage,
+                                                                            String passport,
                                                                             int pageNum, 
                                                                             int pageSize) {
       if (0 > pageNum) {
@@ -71,6 +72,11 @@ public class FAccessConsole
       }
       FSql whereSql = new FSql();
       whereSql.append(" 1=1 ");
+      if (!RString.isEmpty(passport)) {
+         whereSql.append(" and ");
+         whereSql.append(FLoggerPersonUserAccessLogic.PASSPORT + " LIKE '%{passport}%'");
+         whereSql.bind("passport", RString.parse(passport));
+      }
       if (!RString.isEmpty(logicMessage)) {
          whereSql.append(" and ");
          whereSql.append(FLoggerPersonUserAccessLogic.LOGIC_MESSAGE + " LIKE '%{logicMessage}%'");

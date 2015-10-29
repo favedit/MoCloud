@@ -26,12 +26,6 @@
 
 <script>
     $(function(){
-//       var image = $("#image").val();
-//       if(image!=null&&image.length>0){
-//          $("#oriIcon").attr("src",image);
-//       }else{
-//          $("#oriIcon").hide();
-//       }
        $('#displayCd').combobox("select", $('#oldDisplayCd').val());
        $('#linkCd').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
@@ -70,16 +64,6 @@
     $("#getHtml").click();
     $("#logicNews").submit();
     closeProgress();
-    }
-    var removeFile = function(){
-       $('#iconUrl').val("");
-       $('#iconUrl').show();
-       $('#oiconUr').val("");
-       $('#oiconUr').hide();
-       $('#imgdiv').hide();
-       $("#oriIcon").attr("src","");
-       $("#removeFile").hide();
-       $('#butto1').hide();
     }
     var editor;
     KindEditor.ready(function(K) {
@@ -125,7 +109,7 @@
    }
    function openwin(content,l,t) 
    { 
-     OpenWindow=window.open("", '_blank','height=360px,width=640px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
+     OpenWindow=window.open("", '_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
      //写成一行 
      OpenWindow.document.write("<TITLE>销售工具内容</TITLE>") 
      OpenWindow.document.write("<BODY BGCOLOR=#ffffff>") 
@@ -195,7 +179,7 @@
      <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
-       <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
+       <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.makeUrl'/>" >
        <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于1M的等比例图片</span>
       </div></td>
     </tr>

@@ -71,6 +71,7 @@ function doSubmitByCondition(page,pageSize) {
     var beginDate = $('#beginDate').datebox('getValue');
     var endDate = $('#endDate').datebox('getValue'); 
     var lm = $("#logicMessage").val();
+    var passport = $("#passport").val();
     var url = null;
     var data = null;
     if (page != null) {
@@ -79,6 +80,7 @@ function doSubmitByCondition(page,pageSize) {
           "pageSize" : pageSize,
           "beginDate" :beginDate,
           "endDate" :endDate,
+          "passport" :passport,
           "logicMessage" :lm
        };
        url = "/manage/system/logger/user/access/Access.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
@@ -86,6 +88,7 @@ function doSubmitByCondition(page,pageSize) {
        data = {
             "beginDate" :beginDate,
             "endDate" :endDate,
+            "passport" :passport,
             "logicMessage" :lm
         };
        url = "/manage/system/logger/user/access/Access.wa?do=selectByDate&date=" + new Date().valueOf();
@@ -130,6 +133,8 @@ document.onkeydown=function(){
       <input id="flag" type="hidden"/>
     <span>结束时间:</span>
       <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
+    <span>账号:</span>
+      <input id="passport" name="passport" class="easyui-validatebox textbox" style="width:150px;" />
     <span>操作信息:</span>
       <input id="logicMessage" name="logicMessage" class="easyui-validatebox textbox" style="width:150px;" />
       <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>

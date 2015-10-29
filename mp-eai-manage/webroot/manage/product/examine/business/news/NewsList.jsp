@@ -68,7 +68,7 @@
       var t=(screen.availHeight-500)/2;
       var w = screen.availWidth*7/19;
       var h = screen.availHeight*12/19;
-      window.open('/manage/product/examine/business/news/News.wa?do=getDescription&ouid='+ouid,'_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      window.open('/manage/product/examine/business/news/News.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
    }
    //搜索按钮，enter键
    document.onkeydown=function(){
