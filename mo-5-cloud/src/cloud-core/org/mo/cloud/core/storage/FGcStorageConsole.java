@@ -23,6 +23,12 @@ public class FGcStorageConsole
    // 资源访问接口
    //private final static IResource _resource = RResource.find(FGcStorageConsole.class);
 
+   // 块开始定义
+   public final static String BLOCK_BEGIN = "{$mosr:";
+
+   // 块结束定义
+   public final static String BLOCK_END = "}";
+
    // 使用标志
    @AProperty
    protected boolean _enable;
@@ -100,6 +106,35 @@ public class FGcStorageConsole
    //   }
 
    //============================================================
+   // <T>生成显示文本。</T>
+   //
+   // @param text 文本
+   // @return 文本
+   //============================================================
+   @Override
+   public String makeDisplay(String text){
+      if(!RString.isEmpty(text)){
+         while(true){
+            int start = text.indexOf(BLOCK_BEGIN);
+            if(start == -1){
+               break;
+            }else{
+               start += BLOCK_BEGIN.length();
+            }
+            int end = text.indexOf(BLOCK_END, start);
+            if(end == -1){
+               break;
+            }
+            String pack = text.substring(start, end);
+            String source = BLOCK_BEGIN + pack + BLOCK_END;
+            String url = makeUrl(pack);
+            text = RString.replace(text, source, url);
+         }
+      }
+      return text;
+   }
+
+   //============================================================
    // <T>生成文本。</T>
    //
    // @param text 文本
@@ -107,10 +142,28 @@ public class FGcStorageConsole
    //============================================================
    @Override
    public String makeText(String text){
-      //      if(RString.isEmpty(text)){
-      //         return RString.EMPTY;
-      //      }
-      //      return RString.replace(text, _storageResource, RGcStorageUtility.StorageServer);
+      if(!RString.isEmpty(text)){
+         while(true){
+            int index = text.indexOf(_accessUrl);
+            if(index == -1){
+               break;
+            }
+            int start = text.indexOf('?', index);
+            if(start == -1){
+               break;
+            }else{
+               start += 1;
+            }
+            int end = text.indexOf('\"', start);
+            if(end == -1){
+               break;
+            }
+            String pack = text.substring(start, end);
+            String source = text.substring(index, end);
+            String target = BLOCK_BEGIN + pack + BLOCK_END;
+            text = RString.replace(text, source, target);
+         }
+      }
       return text;
    }
 
@@ -121,11 +174,26 @@ public class FGcStorageConsole
    // @return 文本
    //============================================================
    @Override
-   public String makeDisplay(String text){
-      //      if(RString.isEmpty(text)){
-      //         return RString.EMPTY;
-      //      }
-      //      return RString.replace(text, RGcStorageUtility.StorageServer, _storageResource);
+   public String makeEdit(String text){
+      if(!RString.isEmpty(text)){
+         while(true){
+            int start = text.indexOf(BLOCK_BEGIN);
+            if(start == -1){
+               break;
+            }else{
+               start += BLOCK_BEGIN.length();
+            }
+            int end = text.indexOf(BLOCK_END, start);
+            if(end == -1){
+               break;
+            }
+            String pack = text.substring(start, end);
+            String url = makeUrl(pack);
+            String source = BLOCK_BEGIN + pack + BLOCK_END;
+            String target = url + "?" + pack;
+            text = RString.replace(text, source, target);
+         }
+      }
       return text;
    }
 

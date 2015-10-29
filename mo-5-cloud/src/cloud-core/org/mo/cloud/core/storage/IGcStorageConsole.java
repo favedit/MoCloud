@@ -27,6 +27,14 @@ public interface IGcStorageConsole
    //   String storageTemp();
 
    //============================================================
+   // <T>生成显示文本。</T>
+   //
+   // @param text 文本
+   // @return 文本
+   //============================================================
+   String makeDisplay(String text);
+
+   //============================================================
    // <T>生成文本。</T>
    //
    // @param text 文本
@@ -35,12 +43,12 @@ public interface IGcStorageConsole
    String makeText(String text);
 
    //============================================================
-   // <T>生成显示文本。</T>
+   // <T>生成编辑。</T>
    //
    // @param text 文本
    // @return 文本
    //============================================================
-   String makeDisplay(String text);
+   String makeEdit(String text);
 
    //============================================================
    // <T>生成网络地址。</T>

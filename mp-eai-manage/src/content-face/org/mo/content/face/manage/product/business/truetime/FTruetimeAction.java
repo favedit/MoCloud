@@ -92,6 +92,7 @@ public class FTruetimeAction
       FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataTruetimeInfo info : unitList){
          info.setIconUrl(_storageConsole.makeUrl(info.iconUrl()));
+         info.setContent(_storageConsole.makeDisplay(unit.content()));
       }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
@@ -185,7 +186,7 @@ public class FTruetimeAction
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, id);
       FDataTruetimeInfo info = new FDataTruetimeInfo();
       info.setOuid(unit.ouid());
-      info.setContent(unit.content());
+      info.setContent(_storageConsole.makeEdit(unit.content()));
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
       info.setDisplayCd(unit.displayCd());
@@ -244,6 +245,7 @@ public class FTruetimeAction
          _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       setLogicNews(context, logicContext, unit, "1");
+      unit.setContent(_storageConsole.makeText(unit.content()));
       _truetimeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/product/business/truetime/TruetimeList";
