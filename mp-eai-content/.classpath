@@ -5,6 +5,7 @@
 	<classpathentry kind="src" path="src/content-service"/>
 	<classpathentry kind="src" path="src/content-face"/>
 	<classpathentry kind="src" path="src/config"/>
+	<classpathentry kind="src" path="src/content-face-test"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-3-logic"/>
