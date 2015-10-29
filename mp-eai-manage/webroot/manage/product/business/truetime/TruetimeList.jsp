@@ -61,8 +61,7 @@
                 + id + "&date=" + new Date().valueOf();
        closeProgress();
     }
-    function showPhoto(makeUrl){
-       
+    function showPhoto(makeUrl){       
        if(makeUrl!=null&&makeUrl.length>0){
           return "<img src="+makeUrl+" height=55px width=55px/>";
        }

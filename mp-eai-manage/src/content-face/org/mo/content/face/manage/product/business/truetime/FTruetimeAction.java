@@ -334,7 +334,7 @@ public class FTruetimeAction
       }
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, context.parameterAsLong("ouid"));
       FDataTruetimeInfo info = new FDataTruetimeInfo();
-      info.setContent(unit.content());
+      info.setContent(_storageConsole.makeDisplay(unit.content()));
       page.setUnit(info);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/business/truetime/TruetimeDataInfoForContent";
