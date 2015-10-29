@@ -11,11 +11,11 @@
         if (!isValid())
             return;
         progress();
-        $("#countryId").val($('#country').combobox("getValue"));
         $("#config").submit();
         closeProgress();
     }
     $(function() {
+        $('#countryId').combobox('clear');
         var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
         var data = null;
         $.ajax({
@@ -24,8 +24,8 @@
            data: data,
            success: function(msg) {
               var result = toJsonObject(msg);
-              $('#country').combobox('loadData', result);
-              $('#country').combobox('select', result[0].ouid);
+              $('#countryId').combobox('loadData', result);
+              $('#countryId').combobox('select', result[0].ouid);
            },
            fail: function() {
               alert("error");
@@ -57,8 +57,7 @@
     <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-        <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false" />
-        <input name="countryId" id="countryId" type="hidden">
+        <input class="easyui-combobox" style="width:380px;" id="countryId" name="countryId" data-options="valueField:'ouid',textField:'name',editable:false" />
       </div></td>
     </tr>
     <tr>

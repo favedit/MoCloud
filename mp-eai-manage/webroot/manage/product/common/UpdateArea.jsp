@@ -9,6 +9,7 @@
 </HEAD>
 <script>
    $(function() {
+       $('#country').combobox('clear');
        var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
        var data = null;
        $.ajax({

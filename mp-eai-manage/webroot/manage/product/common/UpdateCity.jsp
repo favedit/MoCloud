@@ -19,6 +19,7 @@
       closeProgress();
     }
     $(function() {
+       $('#country').combobox('clear');
        var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
        var data = null;
        $.ajax({
@@ -29,20 +30,17 @@
              var result = toJsonObject(msg);
              $('#country').combobox('loadData', result);
              $('#country').combobox("select", $('#countryId').val());
+             getCountry('t');//初始化
           },
           fail: function() {
              alert("error");
           }
        });
-       getCountry(0);
-       
-       getArea(0);
-       getProvince(0);
     })
-    function getCountry(flag){
+    function getCountry(flag){//获取区域数据
+       $('#area').combobox('clear');
        var data = null;
        var counId = $('#country').combobox("getValue");
-       var countId =$('#countryId').val();
        if(counId!=null) data={"countryId":counId};
        var url = "/manage/product/common/Area.wa?do=selectAll&date=" + new Date().valueOf();
        $.ajax({
@@ -53,18 +51,20 @@
                 var result = toJsonObject(msg);
                 $('#area').combobox("setValue",null);
                 $('#area').combobox('loadData', result);
-                if(flag=='0'){
+                if(flag=='t'){
                    $('#area').combobox("select", $('#areaId').val());
                 }else{
-                   $('#area').combobox("select", null);
+                   $('#area').combobox("select", result[0].ouid);
                 }
+                getArea('t');
           },
           fail: function() {
              alert("error");
           }
        });
     }
-    function getArea(flag){
+    function getArea(flag){//获取省份数据
+       $('#province').combobox('clear');alert(2);
        var data = null;
        var areaId = $('#area').combobox("getValue");
        if(areaId!=null) data={"areaId":areaId};
@@ -75,14 +75,12 @@
           data: data,
           success: function(msg) {
                 var result = toJsonObject(msg);
-                if(result.length==0){
-                }
                 $('#province').combobox("setValue",null);
                 $('#province').combobox('loadData', result);
-                if(flag=='0'){
+                if(flag=='t'){
                    $('#province').combobox("select", $('#provinceId').val());
                 }else{
-                   $('#province').combobox("select", null);
+                   $('#province').combobox("select", result[0].ouid);
                 }
           },
           fail: function() {
@@ -121,14 +119,14 @@
     <tr>
      <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <div style="width:380px;"><input class="easyui-combobox" onclick="getCountry(1)" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div style="width:380px;" onclick="getCountry()"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="areaId" type="hidden" value="<jh:write source='&unit.areaId'/>">
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属省份:</div></td>
      <td><div align="left">
-       <div style="width:380px;"><input class="easyui-combobox" onclick="getArea(1)" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div style="width:380px;" onclick="getArea()"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="provinceId" id="provinceId" type="hidden" value="<jh:write source='&unit.provinceId'/>">
       </div></td>
     </tr>

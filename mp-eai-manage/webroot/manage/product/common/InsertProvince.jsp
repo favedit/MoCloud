@@ -11,12 +11,11 @@
        if (!isValid())
            return;
        progress();
-       $("#countryId").val($('#country').combobox("getValue"));
-       $("#areaId").val($('#area').combobox("getValue"));
        $("#config").submit();
        closeProgress();
     }
     $(function() {
+       $('#countryId').combobox('clear');
        var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
        var data = null;
        $.ajax({
@@ -25,23 +24,24 @@
           data: data,
           success: function(msg) {
              var result = toJsonObject(msg);
-             $('#country').combobox('loadData', result);
-             $('#country').combobox('select', result[0].ouid);
+             $('#countryId').combobox('loadData', result);
+             $('#countryId').combobox('select', result[0].ouid);
+             var data={"countryId":result[0].ouid};
+             getAreaData(data);
           },
           fail: function() {
              alert("error");
            }
         });
-       getData(null);
-       
    })
    function getCountry(){
       var data = null;
-      var counId = $('#country').combobox("getValue");
+      var counId = $('#countryId').combobox("getValue");
       if(counId!=null) data={"countryId":counId};
-      getData(data);
+      getAreaData(data);
    }
-    function getData(data){
+    function getAreaData(data){
+       $('#areaId').combobox('clear');
        var url = "/manage/product/common/Area.wa?do=selectAll&date=" + new Date().valueOf();
        $.ajax({
           type: "POST",
@@ -49,11 +49,9 @@
           data: data,
           success: function(msg) {
                 var result = toJsonObject(msg);
-                if(result.length==0){
-                }
-                $('#area').combobox("setValue",null);
-                $('#area').combobox('loadData', result);
-                $('#area').combobox('select', result[0].ouid);
+                $('#areaId').combobox("setValue",null);
+                $('#areaId').combobox('loadData', result);
+                $('#areaId').combobox('select', result[0].ouid);
           },
           fail: function() {
              alert("error");
@@ -85,15 +83,13 @@
     <tr>
      <td width="78" height="33"><div align="left">所属国家:</div></td>
      <td><div align="left">
-       <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
-       <input name="countryId" id="countryId" type="hidden">
+       <input class="easyui-combobox" style="width:380px;" id="countryId" name="countryId" data-options="valueField:'ouid',textField:'name',editable:false"/>
       </div></td>
     </tr>
     <tr>
      <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <div style="width:380px;"><input class="easyui-combobox" onclick="getCountry()" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
-       <input name="areaId" id="areaId" type="hidden">
+       <div style="width:380px;" onclick="getCountry()"><input class="easyui-combobox" style="width:380px;" id="areaId" name="areaId" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
       </div></td>
     </tr>
     <tr>

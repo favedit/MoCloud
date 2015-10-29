@@ -18,8 +18,9 @@
       closeProgress();
     }
     $(function() {
+       $('#country').combobox('clear');
        var url = "/manage/product/common/Country.wa?do=selectAll&date=" + new Date().valueOf();
-       var data = null;
+       var data = null;//初始化
        $.ajax({
           type: "POST",
           url: url,
@@ -28,14 +29,15 @@
              var result = toJsonObject(msg);
              $('#country').combobox('loadData', result);
              $('#country').combobox("select", $('#countryId').val());
+             getCountry('t');
           },
           fail: function() {
              alert("error");
           }
        });
-       getCountry(0);
     })
-    function getCountry(flag){
+    function getCountry(flag){//获取区域
+       $('#area').combobox('clear');
        var data = null;
        var counId = $('#country').combobox("getValue");
        var countId =$('#countryId').val();
@@ -49,10 +51,10 @@
                 var result = toJsonObject(msg);
                 $('#area').combobox("setValue",null);
                 $('#area').combobox('loadData', result);
-                if(flag=='0'){
+                if(flag=='t'){
                    $('#area').combobox("select", $('#areaId').val());
                 }else{
-                   $('#area').combobox("select", null);
+                   $('#area').combobox("select", result[0].ouid);
                 }
           },
           fail: function() {
@@ -93,7 +95,7 @@
     <tr>
      <td width="78" height="33"><div align="left">所属区域:</div></td>
      <td><div align="left">
-       <div style="width:380px;"><input class="easyui-combobox" onclick="getCountry(1)" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
+       <div style="width:380px;"><input class="easyui-combobox" onclick="getCountry()" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="areaId" type="hidden" value="<jh:write source='&unit.areaId'/>">
       </div></td>
     </tr>
