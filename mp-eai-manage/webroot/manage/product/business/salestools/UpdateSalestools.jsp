@@ -26,12 +26,12 @@
 
 <script>
     $(function(){
-       var image = $("#image").val();
-       if(image!=null&&image.length>0){
-          $("#oriIcon").attr("src",image);
-       }else{
-          $("#oriIcon").hide();
-       }
+//       var image = $("#image").val();
+//       if(image!=null&&image.length>0){
+//          $("#oriIcon").attr("src",image);
+//       }else{
+//          $("#oriIcon").hide();
+//       }
        $('#displayCd').combobox("select", $('#oldDisplayCd').val());
        $('#linkCd').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
@@ -53,16 +53,17 @@
        }
        
        var file = $("#iconUrl").val();
-       if(file!=""){
+       if(""!=file){
           if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(file)){
              closeProgress();
              alert("图片类型必须是.gif|jpg|jpeg|png|gif|jpg|png中的一种!");
              return false;
           }
           var fileSize = document.getElementById("iconUrl").files[0].size;
-          if(fileSize>20480){
+          fileSize = fileSize / 1024;
+          if(fileSize>1024){
              closeProgress();
-             alert("请上传大小小于20k的等比例图片!");
+             alert("请上传大小小于1M的等比例图片!");
              return false;
           }
        }
@@ -120,13 +121,11 @@
       var content = $("#content").val();
       var l=(screen.availWidth-500)/2;
       var t=(screen.availHeight-500)/2;
-      var w = screen.availWidth*7/19;
-      var h = screen.availHeight*12/19;
-      openwin(content,l,t,w,h);
+      openwin(content,l,t);
    }
-   function openwin(content,l,t,w,h) 
+   function openwin(content,l,t) 
    { 
-     OpenWindow=window.open("", '_blank','height='+h+',width='+w+',top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
+     OpenWindow=window.open("", '_blank','height=360px,width=640px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no'); 
      //写成一行 
      OpenWindow.document.write("<TITLE>销售工具内容</TITLE>") 
      OpenWindow.document.write("<BODY BGCOLOR=#ffffff>") 
@@ -173,7 +172,7 @@
         value="<jh:write source='&unit.content'/>" />
       </td>
       <td rowspan="3" style="width:140px;" ><div align="left" id="imgdiv">
-       <img width="140" height="140" id="oriIcon"></div></td>
+       <img width="140" height="140" src="<jh:write source='&unit.makeUrl'/>"></div></td>
     </tr>
     <tr>
      <td height="38"><div align="left">是否展示:</div></td>
@@ -197,7 +196,7 @@
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.iconUrl'/>" >
-       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
+       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于1M的等比例图片</span>
       </div></td>
     </tr>
     <tr>

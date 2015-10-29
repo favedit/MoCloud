@@ -1,5 +1,9 @@
 package org.mo.content.face.manage.product.business.salestools;
 
+import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
+import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -11,20 +15,16 @@ import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.upload.IWebUploadConsole;
 import org.mo.web.protocol.common.FWebUploadFile;
 import org.mo.web.protocol.context.IWebContext;
-
-import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
-import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 
 //============================================================
 //<P>销售工具控制器</P>
 //@class FSalestoolsAction
 //============================================================
-public class FSalestoolsAction 
-      implements 
-         ISalestoolsAction 
+public class FSalestoolsAction
+      implements
+         ISalestoolsAction
 {
 
    // 日志输出接口
@@ -34,8 +34,9 @@ public class FSalestoolsAction
    @ALink
    protected ISalestoolsConsole _salestoolsConsole;
 
+   // 存储服务器
    @ALink
-   protected IWebUploadConsole _webUploadConsole;
+   protected IGcStorageConsole _storageConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -44,11 +45,11 @@ public class FSalestoolsAction
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, 
-                           ILogicContext logicContext, 
-                           FBasePage basePage) {
+   public String construct(IWebContext context,
+                           ILogicContext logicContext,
+                           FBasePage basePage){
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       return "/manage/product/business/salestools/SalestoolsList";
@@ -63,29 +64,33 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FSalestoolsPage page, 
-                        FBasePage basePage) {
+   public String select(IWebContext context,
+                        ILogicContext logicContext,
+                        FSalestoolsPage page,
+                        FBasePage basePage){
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      if (null != context.parameter("page")) {
+      if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      } else {
+      }else{
          page.setPageCurrent(0);
       }
       FDataLogicSalestoolsUnit unit = new FDataLogicSalestoolsUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if (null != StrPageSize) {
+      if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit,
-            page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataSalestoolsInfo info : unitList){
+         if(info.iconUrl() != null && info.iconUrl().trim().length() > 0){
+            info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         }
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -100,12 +105,12 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context, 
-                              ILogicContext logicContext, 
+   public String insertBefore(IWebContext context,
+                              ILogicContext logicContext,
                               FSalestoolsPage page,
-                              FBasePage basePage) {
+                              FBasePage basePage){
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       page.setResult("");
@@ -121,31 +126,35 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FSalestoolsPage page, 
-                        FBasePage basePage) {
+   public String insert(IWebContext context,
+                        ILogicContext logicContext,
+                        FSalestoolsPage page,
+                        FBasePage basePage){
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.doPrepare(logicContext);
       FWebUploadFile file = context.files().first();
-      if (null != file) {
+      if(null != file){
          Integer len = file.length() / 1024;
-         if (len > 20) {
-            page.setResult("请上传小于20k的图片!");
+         if(len > 1024){
+            page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/salestools/InsertSalestools";
          }
          String type = file.contentType();
-         if (!type.contains("image")) {
+         if(!type.contains("image")){
             page.setResult("请上传图片!");
             return "/manage/product/business/salestools/InsertSalestools";
          }
+         SGcStorage storage = new SGcStorage("data.logic.salestools", unit.guid(), file);
+         _storageConsole.store(storage);
+         unit.setIconUrl(storage.pack());
+         _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _salestoolsConsole.doInsert(logicContext, unit);
-      if (!result.equals(EResult.Success)) {
+      if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
          return "/manage/product/business/salestools/InsertSalestools";
       }
@@ -162,12 +171,12 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context, 
-                              ILogicContext logicContext, 
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext,
                               FSalestoolsPage page,
-                              FBasePage basePage) {
+                              FBasePage basePage){
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
@@ -182,11 +191,10 @@ public class FSalestoolsAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
-      if (!RString.isEmpty(unit.iconUrl())) {
-         info.setIconUrl(unit.iconUrl());
-         int na = unit.iconUrl().indexOf("salestoolsImages");
-         info.setImageName(
-               "/manage/images/salestoolsImages/" + unit.iconUrl().substring(na + 17, unit.iconUrl().length()));
+      info.setIconUrl(unit.iconUrl());
+      if(info.iconUrl() != null && info.iconUrl().trim().length() > 0){
+         String iconUrl = _storageConsole.makeUrl(info.iconUrl());
+         info.setMakeUrl(iconUrl);
       }
       page.setUnit(info);
       page.setResult("");
@@ -203,27 +211,31 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FSalestoolsPage page, 
-                        FBasePage basePage) {
-      if (!basePage.userExists()) {
+   public String update(IWebContext context,
+                        ILogicContext logicContext,
+                        FSalestoolsPage page,
+                        FBasePage basePage){
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       FWebUploadFile file = context.files().first();
-      if (null != file) {
+      if(null != file){
          Integer len = file.length() / 1024;
-         if (len > 20) {
-            page.setResult("请上传小于20k的图片!");
+         if(len > 1024){
+            page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/salestools/UpdateSalestools";
          }
          String type = file.contentType();
-         if (!type.contains("image")) {
+         if(!type.contains("image")){
             page.setResult("请上传图片!");
             return "/manage/product/business/salestools/UpdateSalestools";
          }
+         SGcStorage storage = new SGcStorage("data.logic.salestools", unit.guid(), file);
+         _storageConsole.store(storage);
+         unit.setIconUrl(storage.pack());
+         _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       setLogicNews(context, logicContext, unit, "1");
       _salestoolsConsole.doUpdate(logicContext, unit);
@@ -240,23 +252,24 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String deleteBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FSalestoolsPage Page, 
+   public String deleteBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FSalestoolsPage Page,
                               FBasePage basePage){
       _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, id);
-      if(RString.equals(unit.statusCd(),2)){
+      if(RString.equals(unit.statusCd(), 2)){
          basePage.setJson("noDel");
       }else{
          basePage.setJson("yesDel");
       }
       return "/manage/common/ajax";
    }
+
    // ============================================================
    // <T>删除</T>
    //
@@ -266,23 +279,23 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FSalestoolsPage Page, 
-                        FBasePage basePage) {
+   public String delete(IWebContext context,
+                        ILogicContext logicContext,
+                        FSalestoolsPage Page,
+                        FBasePage basePage){
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, id);
-      if (unit == null) {
+      if(unit == null){
          throw new FFatalError("id not exists.");
       }
       EResult result = _salestoolsConsole.doDelete(logicContext, unit);
-      if (!result.equals(EResult.Success)) {
+      if(!result.equals(EResult.Success)){
          throw new FFatalError("Delete failure.");
-      } else {
+      }else{
          return "/manage/product/business/salestools/SalestoolsList";
       }
    }
@@ -294,10 +307,10 @@ public class FSalestoolsAction
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context, 
-                            ILogicContext logicContext, 
+   public void setLogicNews(IWebContext context,
+                            ILogicContext logicContext,
                             FDataLogicSalestoolsUnit unit,
-                            String flag) {
+                            String flag){
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
@@ -308,19 +321,19 @@ public class FSalestoolsAction
       unit.setStatusCd(EGcResourceStatus.Apply);
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
-      FWebUploadFile file = context.files().first();
-      if (null == file) {
-         String oiconUr = context.parameter("oiconUr");
-         if (!RString.isEmpty(oiconUr)) {
-            unit.setIconUrl(oiconUr);
-         } else {
-            unit.setIconUrl(context.parameter("iconUrl"));
-         }
-      } else {
-         _salestoolsConsole.saveImage(file, unit, flag);
-      }
+      //      FWebUploadFile file = context.files().first();
+      //      if(null == file){
+      //         String oiconUr = context.parameter("oiconUr");
+      //         if(!RString.isEmpty(oiconUr)){
+      //            unit.setIconUrl(oiconUr);
+      //         }else{
+      //            unit.setIconUrl(context.parameter("iconUrl"));
+      //         }
+      //      }else{
+      //         _salestoolsConsole.saveImage(file, unit, flag);
+      //      }
    }
-   
+
    // ============================================================
    // <T>根据状态，是否显示，标题查询</T>
    //
@@ -330,23 +343,23 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String selectByData(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FSalestoolsPage page, 
-                              FBasePage basePage) {
+   public String selectByData(IWebContext context,
+                              ILogicContext logicContext,
+                              FSalestoolsPage page,
+                              FBasePage basePage){
       _logger.debug(this, "selectByData", "selectByData begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      if (null != context.parameter("page")) {
+      if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      } else {
+      }else{
          page.setPageCurrent(0);
       }
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if (null != StrPageSize) {
+      if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
       Integer statusCd = context.parameterAsInteger("statusCd");
@@ -357,6 +370,7 @@ public class FSalestoolsAction
       _logger.debug(this, "selectByData", "selectByData finish. (unitListCount={1})", unitlist.count());
       return "/manage/common/ajax";
    }
+
    // ============================================================
    // <T>查询内容</T>
    //
@@ -366,12 +380,12 @@ public class FSalestoolsAction
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, 
-                                ILogicContext logicContext, 
-                                FSalestoolsPage page, 
-                                FBasePage basePage) {
+   public String getDescription(IWebContext context,
+                                ILogicContext logicContext,
+                                FSalestoolsPage page,
+                                FBasePage basePage){
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, context.parameterAsLong("ouid"));

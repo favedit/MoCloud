@@ -91,7 +91,7 @@ public class FTruetimeAction
       }
       FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataTruetimeInfo info : unitList){
-         info.setIconUrl(_storageConsole.makeUrl(info.iconUrl()));
+         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
          info.setContent(_storageConsole.makeDisplay(unit.content()));
       }
       basePage.setJson(unitList.toJsonListString());
@@ -155,6 +155,8 @@ public class FTruetimeAction
          unit.setIconUrl(storage.pack());
          _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
+      unit.setContent(_storageConsole.makeText(context.parameter("context")));
+
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _truetimeConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
@@ -186,7 +188,6 @@ public class FTruetimeAction
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, id);
       FDataTruetimeInfo info = new FDataTruetimeInfo();
       info.setOuid(unit.ouid());
-      info.setContent(_storageConsole.makeEdit(unit.content()));
       info.setDescription(unit.description());
       info.setKeywords(unit.keywords());
       info.setDisplayCd(unit.displayCd());
@@ -194,15 +195,14 @@ public class FTruetimeAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
-
+      if(unit.content().trim().length() > 0){
+         info.setContent(_storageConsole.makeEdit(unit.content()));
+      }
       if(!RString.isEmpty(unit.iconUrl())){
          String iconUrl = _storageConsole.makeUrl(unit.iconUrl());
          info.setMakeUrl(iconUrl);
-         //         int na = unit.iconUrl().indexOf("truetimeImages");
-         //         info.setImageName("/manage/images/truetimeImages/" + unit.iconUrl().substring(na + 15, unit.iconUrl().length()));
          _logger.debug(this, "UpdateBefore", "UpdateBefore makeImages .(url={1})", iconUrl);
       }
-
       page.setUnit(info);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
@@ -244,8 +244,9 @@ public class FTruetimeAction
          unit.setIconUrl(storage.pack());
          _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
+      String content = context.parameter("content");
+      unit.setContent(_storageConsole.makeText(content));
       setLogicNews(context, logicContext, unit, "1");
-      unit.setContent(_storageConsole.makeText(unit.content()));
       _truetimeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/product/business/truetime/TruetimeList";
@@ -293,7 +294,6 @@ public class FTruetimeAction
                             FDataLogicTruetimeUnit unit,
                             String flag){
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setContent(context.parameter("content"));
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
       unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));

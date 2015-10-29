@@ -84,7 +84,7 @@
       <Property name='applicationName'>${application}/${application.name}</Property>
    </Component>
    <!-- ============================================================ -->
-   <!-- 数据控制台                                                   -->
+   <!-- 数据控制台                                                                                                                          -->
    <!-- ============================================================ -->
    <Component
          face  = 'org.mo.eng.data.IDatabaseConsole'

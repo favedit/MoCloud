@@ -70,5 +70,6 @@ public class FDataTruetimeInfo
       map.put("linkCdStr", _linkCdStr);
       map.put("displayCdStr", _displayCdStr);
       map.put("imageName", _imageName);
+      map.put("makeUrl", _makeUrl);
    }
 }

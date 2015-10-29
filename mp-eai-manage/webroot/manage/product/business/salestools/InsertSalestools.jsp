@@ -22,17 +22,18 @@
           }
        }
        
-       var file = $("#iconUrl").val();
-       if(file!=""){
+        var file = $("#iconUrl").val();
+       if(""!=file){
           if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(file)){
              closeProgress();
              alert("图片类型必须是.gif|jpg|jpeg|png|gif|jpg|png中的一种!");
              return false;
           }
           var fileSize = document.getElementById("iconUrl").files[0].size;
-          if(fileSize>20480){
+         fileSize = fileSize / 1024;
+          if(fileSize>1024){
              closeProgress();
-             alert("请上传大小小于20k的等比例图片!");
+             alert("请上传大小小于1M的等比例图片!");
              return false;
           }
        }
@@ -113,7 +114,7 @@
      <td style="width:380px;"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="path" readonly="readonly" type="text" id="fileid" class="easyui-validatebox textbox">
-       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于20k的等比例图片</span>
+       <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于1M的等比例图片</span>
       </div></td>
     </tr>
     <tr>

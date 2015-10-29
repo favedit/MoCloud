@@ -2,6 +2,7 @@ package org.mo.content.face.manage.product.examine.business.truetime;
 
 import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -12,16 +13,15 @@ import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.core.upload.IWebUploadConsole;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
 //<P>实时数据控制器</P>
 //@class FTruetimeAction
 //============================================================
-public class FTruetimeAction 
-      implements 
-         ITruetimeAction 
+public class FTruetimeAction
+      implements
+         ITruetimeAction
 {
 
    //日志输出接口
@@ -30,9 +30,10 @@ public class FTruetimeAction
    //业务资讯控制台
    @ALink
    protected ITruetimeConsole _truetimeConsole;
-   //web控制台
+
+   // 存储服务器
    @ALink
-   protected IWebUploadConsole _webUploadConsole;
+   protected IGcStorageConsole _storageConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -41,11 +42,11 @@ public class FTruetimeAction
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context, 
-                           ILogicContext logicContext, 
-                           FBasePage basePage) {
+   public String construct(IWebContext context,
+                           ILogicContext logicContext,
+                           FBasePage basePage){
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       return "/manage/product/examine/business/truetime/TruetimeList";
@@ -60,28 +61,31 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FTruetimePage page, 
-                        FBasePage basePage) {
+   public String select(IWebContext context,
+                        ILogicContext logicContext,
+                        FTruetimePage page,
+                        FBasePage basePage){
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
-      if (null != context.parameter("page")) {
+      if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      } else {
+      }else{
          page.setPageCurrent(0);
       }
       FDataLogicTruetimeUnit unit = new FDataLogicTruetimeUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if (null != StrPageSize) {
+      if(null != StrPageSize){
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataTruetimeInfo info : unitList){
+         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -96,12 +100,12 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context, 
-                                ILogicContext logicContext, 
-                                FTruetimePage page, 
-                                FBasePage basePage) {
+   public String getDescription(IWebContext context,
+                                ILogicContext logicContext,
+                                FTruetimePage page,
+                                FBasePage basePage){
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, context.parameterAsLong("ouid"));
@@ -119,30 +123,30 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String checking(IWebContext context, 
-                          ILogicContext logicContext, 
-                          FTruetimePage page, 
-                          FBasePage basePage) {
+   public String checking(IWebContext context,
+                          ILogicContext logicContext,
+                          FTruetimePage page,
+                          FBasePage basePage){
       _logger.debug(this, "checking", "checking begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
+      if(!basePage.userExists()){
          return "/manage/common/ConnectTimeout";
       }
       String flag = context.parameter("flag");
       int statusCd = 0;
-      if (!RString.isEmpty(flag)) {
+      if(!RString.isEmpty(flag)){
          // 审核不通过时flag,0,状态改为审核未通过
-         if (RString.equals(EGcResourceStatus.Unknown, flag)) {
+         if(RString.equals(EGcResourceStatus.Unknown, flag)){
             statusCd = EGcResourceStatus.CheckFail;
          }
          // 审核通过flag,1，状态改为发布
-         if (RString.equals(EGcResourceStatus.Apply, flag)) {
+         if(RString.equals(EGcResourceStatus.Apply, flag)){
             statusCd = EGcResourceStatus.Publish;
          }
       }
       String ouids = context.parameter("newsIds");
-      if (!RString.isEmpty(ouids)) {
+      if(!RString.isEmpty(ouids)){
          String[] ouid = ouids.split(",");
-         for (String id : ouid) {
+         for(String id : ouid){
             FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, RLong.parse(id));
             unit.setStatusCd(statusCd);
             _truetimeConsole.doUpdate(logicContext, unit);
@@ -153,46 +157,46 @@ public class FTruetimeAction
    }
 
    @Override
-   public String insertBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FTruetimePage Page, 
-                              FBasePage basePage) {
+   public String insertBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FTruetimePage Page,
+                              FBasePage basePage){
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String insert(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FTruetimePage Page, 
-                        FBasePage basePage) {
+   public String insert(IWebContext context,
+                        ILogicContext logicContext,
+                        FTruetimePage Page,
+                        FBasePage basePage){
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String updateBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FTruetimePage Page, 
-                              FBasePage basePage) {
+   public String updateBefore(IWebContext context,
+                              ILogicContext logicContext,
+                              FTruetimePage Page,
+                              FBasePage basePage){
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String update(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FTruetimePage Page, 
-                        FBasePage basePage) {
+   public String update(IWebContext context,
+                        ILogicContext logicContext,
+                        FTruetimePage Page,
+                        FBasePage basePage){
       // TODO Auto-generated method stub
       return null;
    }
 
    @Override
-   public String delete(IWebContext context, 
-                        ILogicContext logicContext, 
-                        FTruetimePage Page, 
-                        FBasePage basePage) {
+   public String delete(IWebContext context,
+                        ILogicContext logicContext,
+                        FTruetimePage Page,
+                        FBasePage basePage){
       // TODO Auto-generated method stub
       return null;
    }
