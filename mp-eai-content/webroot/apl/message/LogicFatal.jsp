@@ -17,7 +17,7 @@
 	setTiming(document.getElementById("countdown"));
 	function setTiming(o) {
         if (wait == 0) {
-          //window.location.href = "http://eai.ezubo.com/";
+          window.location.href = "http://eai.ezubo.com/";
         } else {
            wait--;
            o.innerHTML = "("+wait+")";
@@ -27,7 +27,9 @@
         }
      };
 </script>	
-<jh:write source='&message.description' format='text'/>
+<DIV id='id_message' style='color:red'>
+<jh:write source='&message.description'/>
+</DIV>
 </BODY>
 </HEAD>
 </HTML>
