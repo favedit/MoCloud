@@ -656,6 +656,7 @@ CREATE TABLE `DT_LGC_TRUETIME`
 
 ALTER TABLE DT_LGC_TRUETIME 
    ADD CONSTRAINT DT_LGC_TRM_UK_GID UNIQUE ( GUID );   
+
 -- ------------------------------------------------------------
 -- Create table [Data.Logic.Notice]
 -- 20151021 sunhr
@@ -683,7 +684,41 @@ CREATE TABLE `DT_LGC_NOTICE`
 
 ALTER TABLE DT_LGC_NOTICE 
    ADD CONSTRAINT DT_LGC_NTC_UK_GID UNIQUE ( GUID ); 
-   
+
+-- ------------------------------------------------------------
+-- Create table [Data.Person.User.Notice]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_PSN_USER_NOTICE`;
+CREATE TABLE `DT_PSN_USER_NOTICE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `NOTICE_ID`                     BIGINT, 
+   `ACTIVE_CD`                     INTEGER, 
+   `ACTIVE_DATE`                   DATETIME, 
+   `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_PSN_USER_NOTICE 
+   ADD CONSTRAINT DT_PSN_USR_NTC_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER_NOTICE 
+   ADD CONSTRAINT DT_PSN_USR_NTC_UK_NTC UNIQUE ( USER_ID, NOTICE_ID ); 
+
+ALTER TABLE DT_PSN_USER_NOTICE ADD CONSTRAINT DT_PSN_USR_NTC_FK_USR 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+
+ALTER TABLE DT_PSN_USER_NOTICE ADD CONSTRAINT DT_PSN_USR_NTC_FK_NTC 
+      FOREIGN KEY (`NOTICE_ID`) REFERENCES DT_LGC_NOTICE(`OUID`); 
+
 -- ------------------------------------------------------------
 -- Create table [Data.Solution.Project]
 -- ------------------------------------------------------------

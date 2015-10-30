@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.logger;
+package com.cyou.gccloud.data.data;
 
 import java.util.Map;
 import org.mo.com.collections.FRow;
@@ -19,7 +19,7 @@ import org.mo.data.logic.FLogicUnit;
 // <T>人员公告访问逻辑单元。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerPersonUserNoticeUnit
+public class FDataPersonUserNoticeUnit
       extends FLogicUnit
 {
    // 存储字段对象标识的定义。
@@ -109,7 +109,7 @@ public class FLoggerPersonUserNoticeUnit
    //============================================================
    // <T>构造人员公告访问逻辑单元。</T>
    //============================================================
-   public FLoggerPersonUserNoticeUnit(){
+   public FDataPersonUserNoticeUnit(){
    }
 
    //============================================================
@@ -212,6 +212,17 @@ public class FLoggerPersonUserNoticeUnit
    }
 
    //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
+   }
+
+   //============================================================
    // <T>设置用户编号的数据内容。</T>
    //
    // @param value 数据内容
@@ -236,6 +247,17 @@ public class FLoggerPersonUserNoticeUnit
    //============================================================
    public long noticeId(){
       return _noticeId;
+   }
+
+   //============================================================
+   // <T>获得公告编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataLogicNoticeUnit notice(){
+      FDataLogicNoticeLogic logic = _logicContext.findLogic(FDataLogicNoticeLogic.class);
+      FDataLogicNoticeUnit unit = logic.find(_noticeId);
+      return unit;
    }
 
    //============================================================
@@ -759,7 +781,7 @@ public class FLoggerPersonUserNoticeUnit
    @Override
    public void copy(FLogicUnit logicUnit){
       super.copy(logicUnit);
-      FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
+      FDataPersonUserNoticeUnit unit = (FDataPersonUserNoticeUnit)logicUnit;
       unit.setOuid(_ouid);
       unit.setOvld(_ovld);
       unit.setGuid(_guid);
@@ -782,8 +804,8 @@ public class FLoggerPersonUserNoticeUnit
    // @return 对象
    //============================================================
    @Override
-   public FLoggerPersonUserNoticeUnit clone(){
-      FLoggerPersonUserNoticeUnit unit = RClass.newInstance(FLoggerPersonUserNoticeUnit.class);
+   public FDataPersonUserNoticeUnit clone(){
+      FDataPersonUserNoticeUnit unit = RClass.newInstance(FDataPersonUserNoticeUnit.class);
       copy(unit);
       return unit;
    }

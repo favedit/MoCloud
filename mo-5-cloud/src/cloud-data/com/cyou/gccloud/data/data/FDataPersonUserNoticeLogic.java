@@ -1,4 +1,4 @@
-package com.cyou.gccloud.data.logger;
+package com.cyou.gccloud.data.data;
 
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -24,14 +24,14 @@ import org.mo.data.logic.SLogicTableInfo;
 // <T>人员公告访问逻辑。</T>
 //============================================================
 @ASourceMachine
-public class FLoggerPersonUserNoticeLogic
+public class FDataPersonUserNoticeLogic
       extends FLogicTable
 {
    // 人员公告访问的定义。
-   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("logger");
+   public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
    // 人员公告访问的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("logger.person.user.notice", "LG_PSN_USER_NOTICE");
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.person.user.notice", "DT_PSN_USER_NOTICE");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -81,9 +81,9 @@ public class FLoggerPersonUserNoticeLogic
    //============================================================
    // <T>构造人员公告访问逻辑单元。</T>
    //============================================================
-   public FLoggerPersonUserNoticeLogic(){
+   public FDataPersonUserNoticeLogic(){
       _name = TABLE.name();
-      _classUnit = FLoggerPersonUserNoticeUnit.class;
+      _classUnit = FDataPersonUserNoticeUnit.class;
    }
 
    //============================================================
@@ -91,10 +91,10 @@ public class FLoggerPersonUserNoticeLogic
    //
    // @param context 逻辑环境
    //============================================================
-   public FLoggerPersonUserNoticeLogic(ILogicContext context){
+   public FDataPersonUserNoticeLogic(ILogicContext context){
       super(context);
       _name = TABLE.name();
-      _classUnit = FLoggerPersonUserNoticeUnit.class;
+      _classUnit = FDataPersonUserNoticeUnit.class;
    }
 
    //============================================================
@@ -228,7 +228,7 @@ public class FLoggerPersonUserNoticeLogic
       // 获得数据
       if(unit == null){
          if(clazz == null){
-            unit = (T)(new FLoggerPersonUserNoticeUnit());
+            unit = (T)(new FDataPersonUserNoticeUnit());
          }else{
             unit = RClass.newInstance(clazz);
          }
@@ -244,8 +244,8 @@ public class FLoggerPersonUserNoticeLogic
    // @param guid 唯一编号
    // @return 数据单元
    //============================================================
-   public FLoggerPersonUserNoticeUnit findByGuid(CharSequence guid){
-      return findByGuid(null, FLoggerPersonUserNoticeUnit.class, guid);
+   public FDataPersonUserNoticeUnit findByGuid(CharSequence guid){
+      return findByGuid(null, FDataPersonUserNoticeUnit.class, guid);
    }
 
    //============================================================
@@ -283,8 +283,8 @@ public class FLoggerPersonUserNoticeLogic
    // @param whereSql 条件
    // @return 数据单元
    //============================================================
-   public FLoggerPersonUserNoticeUnit search(CharSequence whereSql){
-      return search(null, FLoggerPersonUserNoticeUnit.class, whereSql);
+   public FDataPersonUserNoticeUnit search(CharSequence whereSql){
+      return search(null, FDataPersonUserNoticeUnit.class, whereSql);
    }
 
    //============================================================
@@ -321,7 +321,7 @@ public class FLoggerPersonUserNoticeLogic
    // @param whereSql 条件
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(CharSequence whereSql){
       return fetchClass(null, null, whereSql, null, null, -1, 0);
    }
 
@@ -332,8 +332,8 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(int pageSize,
+                                                         int page){
       return fetchClass(null, null, null, null, null, pageSize, page);
    }
 
@@ -345,9 +345,9 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(CharSequence whereSql,
+                                                         int pageSize,
+                                                         int page){
       return fetchClass(null, null, whereSql, null, null, pageSize, page);
    }
 
@@ -360,8 +360,8 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql,
-                                                           CharSequence orderSql){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(CharSequence whereSql,
+                                                         CharSequence orderSql){
       return fetchClass(null, null, whereSql, null, orderSql, -1, 0);
    }
 
@@ -374,10 +374,10 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence whereSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(CharSequence whereSql,
+                                                         CharSequence orderSql,
+                                                         int pageSize,
+                                                         int page){
       return fetchClass(null, null, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -391,11 +391,11 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence fields,
-                                                           CharSequence whereSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(CharSequence fields,
+                                                         CharSequence whereSql,
+                                                         CharSequence orderSql,
+                                                         int pageSize,
+                                                         int page){
       return fetchClass(null, fields, whereSql, null, orderSql, pageSize, page);
    }
 
@@ -409,12 +409,12 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetch(CharSequence fields,
-                                                           CharSequence whereSql,
-                                                           CharSequence groupSql,
-                                                           CharSequence orderSql,
-                                                           int pageSize,
-                                                           int page){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetch(CharSequence fields,
+                                                         CharSequence whereSql,
+                                                         CharSequence groupSql,
+                                                         CharSequence orderSql,
+                                                         int pageSize,
+                                                         int page){
       return fetchClass(null, fields, whereSql, groupSql, orderSql, pageSize, page);
    }
 
@@ -555,10 +555,10 @@ public class FLoggerPersonUserNoticeLogic
    // @param page 分页号码
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetchSql(CharSequence code,
-                                                              CharSequence sql,
-                                                              int pageSize,
-                                                              int page){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetchSql(CharSequence code,
+                                                            CharSequence sql,
+                                                            int pageSize,
+                                                            int page){
       return fetchSql(null, code, sql, pageSize, page);
    }
 
@@ -583,7 +583,7 @@ public class FLoggerPersonUserNoticeLogic
       // 返回结果
       FLogicDataset<T> result = null;
       if(clazz == null){
-         result = (FLogicDataset<T>)(new FLogicDataset<FLoggerPersonUserNoticeUnit>(FLoggerPersonUserNoticeUnit.class, _logicContext));
+         result = (FLogicDataset<T>)(new FLogicDataset<FDataPersonUserNoticeUnit>(FDataPersonUserNoticeUnit.class, _logicContext));
       }else{
          result = new FLogicDataset<T>(clazz, _logicContext);
       }
@@ -596,7 +596,7 @@ public class FLoggerPersonUserNoticeLogic
    //
    // @return 数据单元集合
    //============================================================
-   public FLogicDataset<FLoggerPersonUserNoticeUnit> fetchAll(){
+   public FLogicDataset<FDataPersonUserNoticeUnit> fetchAll(){
       // 生成命令
       String code = "null|null|null";
       String sql = makeFetchSql(null, null, null, null, 0, 0);
@@ -609,8 +609,8 @@ public class FLoggerPersonUserNoticeLogic
    //
    // @return 数据单元
    //============================================================
-   public FLoggerPersonUserNoticeUnit doPrepare(){
-      FLoggerPersonUserNoticeUnit unit = new FLoggerPersonUserNoticeUnit();
+   public FDataPersonUserNoticeUnit doPrepare(){
+      FDataPersonUserNoticeUnit unit = new FDataPersonUserNoticeUnit();
       unit.linkLogicContext(_logicContext);
       doPrepare(unit);
       return unit;
@@ -637,7 +637,7 @@ public class FLoggerPersonUserNoticeLogic
    //============================================================
    @Override
    public EResult doPrepare(FLogicUnit logicUnit){
-      FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
+      FDataPersonUserNoticeUnit unit = (FDataPersonUserNoticeUnit)logicUnit;
       unit.setOvld(true);
       unit.setGuid(RUuid.makeUniqueId());
       return EResult.Success;
@@ -651,7 +651,7 @@ public class FLoggerPersonUserNoticeLogic
    //============================================================
    @Override
    public EResult doInsert(FLogicUnit logicUnit){
-      FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
+      FDataPersonUserNoticeUnit unit = (FDataPersonUserNoticeUnit)logicUnit;
       long ouid = unit.ouid();
       // 设置操作用户
       if((unit.createUserId() == 0) || (unit.updateUserId() == 0)){
@@ -772,7 +772,7 @@ public class FLoggerPersonUserNoticeLogic
    //============================================================
    @Override
    public EResult doUpdate(FLogicUnit logicUnit){
-      FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
+      FDataPersonUserNoticeUnit unit = (FDataPersonUserNoticeUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -791,7 +791,7 @@ public class FLoggerPersonUserNoticeLogic
    @Override
    public EResult doUpdate(FLogicUnit logicUnit,
                            long recordId){
-      FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
+      FDataPersonUserNoticeUnit unit = (FDataPersonUserNoticeUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");
@@ -885,7 +885,7 @@ public class FLoggerPersonUserNoticeLogic
    //============================================================
    @Override
    public EResult doDelete(FLogicUnit logicUnit){
-      FLoggerPersonUserNoticeUnit unit = (FLoggerPersonUserNoticeUnit)logicUnit;
+      FDataPersonUserNoticeUnit unit = (FDataPersonUserNoticeUnit)logicUnit;
       // 检查参数
       if(unit == null){
          throw new FFatalError("Logic unit is null.");

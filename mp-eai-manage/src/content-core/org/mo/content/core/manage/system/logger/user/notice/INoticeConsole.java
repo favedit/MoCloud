@@ -1,7 +1,6 @@
 package org.mo.content.core.manage.system.logger.user.notice;
 
-import com.cyou.gccloud.data.logger.FLoggerPersonUserNoticeUnit;
-
+import com.cyou.gccloud.data.data.FDataPersonUserNoticeUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -9,11 +8,10 @@ import org.mo.data.logic.ILogicContext;
 //============================================================
 // <T>公告日志控制台接口。</T>
 //============================================================
-public interface INoticeConsole 
-      extends 
-         IAbstractLogicUnitConsole<FLoggerPersonUserNoticeUnit> 
+public interface INoticeConsole
+      extends
+         IAbstractLogicUnitConsole<FDataPersonUserNoticeUnit>
 {
-
    // ============================================================
    // <T>获得分页数据列表</T>
    // @param logicContext 链接对象
@@ -22,8 +20,8 @@ public interface INoticeConsole
    // @param pageSize 页大小
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataNoticeInfo> select(ILogicContext logicContext, 
-                                         int pageNum, 
+   FLogicDataset<FDataNoticeInfo> select(ILogicContext logicContext,
+                                         int pageNum,
                                          int pageSize);
 
    // ============================================================
@@ -37,11 +35,11 @@ public interface INoticeConsole
    // @param activeCd 是否激活
    // @return 数据集合
    // ============================================================
-   FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext, 
-                                                          String beginDateStr, 
-                                                          String endDateStr, 
+   FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext,
+                                                          String beginDateStr,
+                                                          String endDateStr,
                                                           int activeCd,
                                                           Long noticeId,
-                                                          int pageNum, 
+                                                          int pageNum,
                                                           int pageSize);
 }
