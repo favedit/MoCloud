@@ -240,7 +240,8 @@ public class FNoticeService extends FObject implements INoticeService {
             IWebOutput output, ILogicContext logicContext) {
         String label = context.parameter("label");
         String content = context.parameter("content");
-        if (RString.isNotEmpty(label) && RString.isNotEmpty(content)) {
+        if (RString.isNotEmpty(RString.trimSplit(label, ' '))
+                && RString.isNotEmpty(RString.trimSplit(content, ' '))) {
             _noticeConsole.noticePublish(label, content, logicContext);
             return EResult.Success;
         } else {
