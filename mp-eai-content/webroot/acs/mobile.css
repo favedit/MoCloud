@@ -147,11 +147,11 @@ textarea{
 /* ------------------------------------------------------ */
 #mask_transparent{
    position: absolute;
-   border-bottom:1px solid rgba(255,255,255,0.1);
-   height: 150px;
+   height: 90px;
+   width: 900px;
    top:0px;
-   left: 0px;
-   width: 100%;
+   left: 50%;
+   margin-left:-450px;
    z-index: 9;
 }
 #return_transparent{
