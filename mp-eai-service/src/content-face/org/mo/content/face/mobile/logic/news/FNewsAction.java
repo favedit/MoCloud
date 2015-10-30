@@ -1,11 +1,10 @@
 package org.mo.content.face.mobile.logic.news;
 
-import org.mo.content.core.mobile.logic.news.INewsConsole;
-
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.com.data.FSql;
+import org.mo.content.core.mobile.logic.news.INewsConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.content.service.mobile.logic.news.INewsService;
 import org.mo.core.aop.face.ALink;
@@ -97,7 +96,6 @@ public class FNewsAction
          }
          page.setUserLabel(userLabel);
          page.setUnit(newsUnit);
-         //      System.out.println("**********************************************" + guid + newsUnit.content());
       }else{
          page.setUnit(new FDataLogicNewsUnit());
          page.setUserLabel("");

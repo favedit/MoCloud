@@ -3,6 +3,7 @@ package org.mo.content.face.mobile.logic.news;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.data.FSql;
 import org.mo.content.core.mobile.logic.news.INewsConsole;
 import org.mo.content.face.base.FBasePage;
@@ -28,6 +29,10 @@ public class FNewsAction
    @ALink
    protected INewsConsole _newsConsole;
 
+   // 存储服务器
+   @ALink
+   protected IGcStorageConsole _storageConsole;
+
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -41,8 +46,7 @@ public class FNewsAction
                            FBasePage basePage){
       String guid = context.parameter("guid");
       FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
-      System.out.println("**********************************************newsUnit" + newsUnit + guid);
-
+      newsUnit.setContent(_storageConsole.makeDisplay(newsUnit.content()));
       if(newsUnit != null){
          FSql whereFSql = new FSql();
          whereFSql.append(FDataPersonUserLogic.OUID);
@@ -55,7 +59,6 @@ public class FNewsAction
          }
          page.setUserLabel(userLabel);
          page.setUnit(newsUnit);
-         //      System.out.println("**********************************************" + guid + newsUnit.content());
       }
 
       return "/manage/mobile/newslist/NewsInfo";
@@ -74,11 +77,8 @@ public class FNewsAction
                             ILogicContext logicContext,
                             FNewsPage page,
                             FBasePage basePage){
-      System.out.println(page.result + "-----------------------------page.result" + page.result);
       String guid = context.parameter("guid");
       FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
-      System.out.println("**********************************************newsUnit" + newsUnit + guid);
-
       if(newsUnit != null){
          FSql whereFSql = new FSql();
          whereFSql.append(FDataPersonUserLogic.OUID);
@@ -89,9 +89,9 @@ public class FNewsAction
          if(fetch != null && fetch.count() > 0){
             userLabel = fetch.first().label();
          }
+         newsUnit.setContent(_storageConsole.makeDisplay(newsUnit.content()));
          page.setUserLabel(userLabel);
          page.setUnit(newsUnit);
-         //      System.out.println("**********************************************" + guid + newsUnit.content());
       }else{
          page.setUnit(new FDataLogicNewsUnit());
          page.setUserLabel("");
