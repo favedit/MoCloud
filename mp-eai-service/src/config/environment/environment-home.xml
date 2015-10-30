@@ -15,19 +15,7 @@
       <Property name='workpath'>${home.web.config}/system.environment</Property>
       <Initialize name='initializeMonitor'/>
       <Initialize name='initializeConfig'/>
-   </Component>
-   
-   <!-- ============================================================ -->
-   <!-- 资源存储控制台                                               -->
-   <!-- ============================================================ -->
-   <Component
-         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
-         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
-         scope = 'global' >
-      <Property name='enable'>Y</Property>
-      <Property name='storage_host'>10.127.3.11</Property>
-      <Property name='storage_port'>27017</Property>
-      <Property name='storage_name'>content</Property>
+   </Component>me'>content</Property>
       <Initialize name='initialize'/>
    </Component>
    

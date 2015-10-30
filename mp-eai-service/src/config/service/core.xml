@@ -2,43 +2,57 @@
 
 <Config>
 
- <!-- ============================================================ -->
- <!-- 时间控制台 -->
- <!-- ============================================================ -->
- <Component face='org.mo.cloud.common.datetime.IDateTimeConsole'
-  class='org.mo.cloud.common.datetime.FDateTimeConsole' scope='global'
-  deploy='start'>
-  <Initialize name='initialize' />
- </Component>
+   <!-- ============================================================ -->
+   <!-- 时间控制台 -->
+   <!-- ============================================================ -->
+   <Component face='org.mo.cloud.common.datetime.IDateTimeConsole'
+              class='org.mo.cloud.common.datetime.FDateTimeConsole' scope='global'
+              deploy='start'>
+      <Initialize name='initialize' />
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- GcLoggerConsole: 日志控制台 -->
+   <!-- ============================================================ -->
+   <Component face='org.mo.cloud.core.logger.IGcLoggerConsole'
+              class='org.mo.cloud.core.logger.FGcLoggerConsole' scope='global'
+              deploy='start'>
+      <Property name='enable'>${cloud.server.logger.enable}</Property>
+      <Property name='server_code'>${application.code}</Property>
+      <Property name='logger_interval'>10000</Property>
+      <Property name='logger_service_publish'>${cloud.server.logger.publish}</Property>
+      <Initialize name='initialize' />
+   </Component>
+   
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台                        -->
+   <!-- ==================================================== -->
+   <Component
+         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
+         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
+         scope = 'global'>
+      <Property name='enable'>${cloud.server.storage.enable}</Property>
+      <Property name='process_url'>${cloud.server.storage.process}</Property>
+      <Property name='access_url'>${cloud.server.storage.access}</Property>
+      <Initialize name='initialize'/>
+   </Component>
+   
+   <!-- ============================================================ -->
+   <!-- FinancialConsole:金融控制台 -->
+   <!-- I:initialize - 初始化 -->
+   <!-- ============================================================ -->
+   <Component face='com.ahyc.eai.core.financial.IFinancialConsole'
+              class='com.ahyc.eai.core.financial.FFinancialConsole' scope='global'>
+      <Initialize name='initialize' />
+   </Component>
+   
+   <!-- ==================================================== -->
+   <!-- StorageConsole:资源存储控制台 -->
+   <!-- ==================================================== -->
+   <Component face='org.mo.content.core.mobile.account.ILoginConsole'
+              class='org.mo.content.core.mobile.account.FLoginConsole' scope='global'>
+      <Property name='oaLoginEnable'>${eai.oa.enable}</Property>
+      <Property name='oaLoginUrl'>${eai.oa.host}</Property>
+   </Component>
 
- <!-- ============================================================ -->
- <!-- GcLoggerConsole: 日志控制台 -->
- <!-- ============================================================ -->
- <Component face='org.mo.cloud.core.logger.IGcLoggerConsole'
-  class='org.mo.cloud.core.logger.FGcLoggerConsole' scope='global'
-  deploy='start'>
-  <Property name='enable'>${cloud.server.logger.enable}</Property>
-  <Property name='server_code'>${application.code}</Property>
-  <Property name='logger_interval'>10000</Property>
-  <Property name='logger_service_publish'>${cloud.server.logger.publish}</Property>
-  <Initialize name='initialize' />
- </Component>
-
- <!-- ============================================================ -->
- <!-- FinancialConsole:金融控制台 -->
- <!-- I:initialize - 初始化 -->
- <!-- ============================================================ -->
- <Component face='com.ahyc.eai.core.financial.IFinancialConsole'
-  class='com.ahyc.eai.core.financial.FFinancialConsole' scope='global'>
-  <Initialize name='initialize' />
- </Component>
-
- <!-- ==================================================== -->
- <!-- StorageConsole:资源存储控制台 -->
- <!-- ==================================================== -->
- <Component face='org.mo.content.core.mobile.account.ILoginConsole'
-  class='org.mo.content.core.mobile.account.FLoginConsole' scope='global'>
-  <Property name='oaLoginEnable'>${eai.oa.enable}</Property>
-  <Property name='oaLoginUrl'>${eai.oa.host}</Property>
- </Component>
 </Config>
