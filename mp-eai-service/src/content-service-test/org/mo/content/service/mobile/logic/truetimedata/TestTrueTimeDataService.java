@@ -22,9 +22,9 @@ public class TestTrueTimeDataService {
     public void testSelect() throws ParseException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         // http://eai.ezubo.com:8089/eai.mobile.logic.salestools.wsp
+        String url2 = "http://10.13.0.16:8020/eai.mobile.logic.truetimedata.wsp";
         // String url2 =
-        // "http://10.13.0.100:8020/eai.mobile.logic.truetimedata.wsp";
-        String url2 = "http://eai.ezubo.com:8089/eai.mobile.logic.truetimedata.wsp";
+        // "http://eai.ezubo.com:8089/eai.mobile.logic.truetimedata.wsp";
         // String url3 =
         // "http://10.13.0.250:8020/eai.mobile.logic.salestools.wsp";
         HttpPost post = new HttpPost(url2);

@@ -13,12 +13,13 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+import org.mo.com.lang.RString;
 
 public class TestFVersionService {
     @Test
     public void testConnect() throws ClientProtocolException, IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        String url = "http://10.13.0.100:8020/eai.mobile.wsp";
+        String url = "http://10.13.0.16:8020/eai.mobile.wsp";
         // String url = "http://eai.ezubo.com:8089/eai.mobile.wsp";
         HttpPost post = new HttpPost(url);
         List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
@@ -27,7 +28,7 @@ public class TestFVersionService {
                 "0E144A4C9CA64FAB854FF2DE8B589312"));
         // listPram.add(new BasicNameValuePair("mo-session-id",
         // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
+        post.setHeader("mo-session-id", "18E0612D9BCD48D9A53F08A2EEE7ADC9");
         listPram.add(new BasicNameValuePair("action", "connect"));
         listPram.add(new BasicNameValuePair("format_cd", "json"));
         post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
@@ -92,8 +93,7 @@ public class TestFVersionService {
 
     @Test
     public void testSpace() {
-        String str = "abd  g f";
-        System.out.println(str.lastIndexOf(" "));
+        System.out.println(RString.isNotEmpty(RString.trimSplit("    ", ' ')));
     }
 
 }

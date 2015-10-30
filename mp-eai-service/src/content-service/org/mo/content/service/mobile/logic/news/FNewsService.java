@@ -3,6 +3,7 @@ package org.mo.content.service.mobile.logic.news;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import java.util.Iterator;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -32,6 +33,9 @@ public class FNewsService extends FObject implements INewsService {
     // 配置文件注入属性
     @AProperty
     protected String _newsServiceHost;
+    // Storage服务器
+    @ALink
+    protected IGcStorageConsole _storageConsole;
 
     // ============================================================
     // <T>默认逻辑。</T>
@@ -166,7 +170,9 @@ public class FNewsService extends FObject implements INewsService {
                 }
                 if (newsUnit.iconUrl() != null
                         && (!"".equals(newsUnit.iconUrl()))) {
-                    xruntime.createNode("icon_url").setText(newsUnit.iconUrl());
+                    String makeUrl = _storageConsole
+                            .makeUrl(newsUnit.iconUrl());
+                    xruntime.createNode("icon_url").setText(makeUrl);
                 } else {
                     xruntime.createNode("icon_url").setText("0");
                 }

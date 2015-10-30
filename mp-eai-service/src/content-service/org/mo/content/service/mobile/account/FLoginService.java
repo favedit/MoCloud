@@ -118,7 +118,7 @@ public class FLoginService extends FObject implements ILoginService {
             FXmlNode icon_url = output.config().createNode("user_icon");
             FXmlNode company = output.config().createNode("company");
 
-            icon_url.setText("http://eai.ezubo.com/manage/images/userdefault.png");
+            icon_url.setText("http://service.test.eai.ezubo.com/manage/images/userdefault.png");
             company.setText("智慧企业推进中心");
             // last_sign_date.setText("20150910102023");
             status_cd.setText(user.statusCd());
@@ -236,7 +236,7 @@ public class FLoginService extends FObject implements ILoginService {
                 modules.setText("-1");
             }
         }
-        icon_url.setText("http://eai.ezubo.com/manage/images/userdefault.png");
+        icon_url.setText("http://service.test.eai.ezubo.com/manage/images/userdefault.png");
         String userLabel = sessionInfo.userLabel();
         if (userLabel != null && (!"".equals(userLabel))) {
             passportNodeOut.setText(userLabel);

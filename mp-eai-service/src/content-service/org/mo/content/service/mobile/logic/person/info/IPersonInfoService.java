@@ -1,4 +1,4 @@
-package org.mo.content.service.mobile.logic.notice;
+package org.mo.content.service.mobile.logic.person.info;
 
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
@@ -8,9 +8,9 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>号令服务接口。</T>
+// <T>登录service接口。</T>
 //============================================================
-public interface INoticeService {
+public interface IPersonInfoService {
     // ============================================================
     // <T>默认逻辑。</T>
     // @param context 页面环境
@@ -21,32 +21,14 @@ public interface INoticeService {
     EResult process(IWebContext context, IWebInput input, IWebOutput output);
 
     // ============================================================
-    // <T>分页获取号令相关信息。</T>
+    // <T>个人中心</T>
     // @param context 页面环境
     // @param input 输入配置
     // @param output 输出配置
     // @return 处理结果
+    // @logicContext 逻辑上下文
+    // @sessionContext session上下文
     // ============================================================
-    EResult select(IWebContext context, IWebInput input, IWebOutput output,
+    EResult personInfo(IWebContext context, IWebInput input, IWebOutput output,
             ILogicContext logicContext, IWebSession sessionContext);
-
-    // ============================================================
-    // <T>标记号令已读</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    EResult markRead(IWebContext context, IWebInput input, IWebOutput output,
-            ILogicContext logicContext);
-
-    // ============================================================
-    // <T>号令发布</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    EResult noticePublish(IWebContext context, IWebInput input,
-            IWebOutput output, ILogicContext logicContext);
 }

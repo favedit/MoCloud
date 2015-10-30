@@ -26,23 +26,21 @@ import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
 
 //============================================================
-// <T>新闻服务。</T>
+//<T>号令服务接口</T>
 //============================================================
 public class FNoticeService extends FObject implements INoticeService {
     // 日志输出接口
     private static ILogger _logger = RLogger.find(FNoticeService.class);
 
-    // 新闻逻辑控制台
+    // 号令逻辑控制台
     @ALink
     protected INoticeConsole _noticeConsole;
 
-    // protected String _contentHost = "http://eai.ezubo.com:8089/";
     // 配置文件注入属性
     @AProperty
     protected String _contentHost;
     @AProperty
     protected String _localHost;
-
     // GcSession会话控制台
     @ALink
     protected IGcSessionConsole _sessionConsole;
@@ -68,53 +66,7 @@ public class FNoticeService extends FObject implements INoticeService {
     }
 
     // ============================================================
-    // <T>根据guid获取新闻相关信息。</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    @Override
-    public EResult query(IWebContext context, IWebInput input,
-            IWebOutput output, ILogicContext logicContext) {
-        _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
-        // 获得guid参数
-        String guid = input.config().findNode("guid").text();
-        FDataLogicNoticeUnit newsUnit = _noticeConsole.getNewsByGuid(guid,
-                logicContext);
-        if (newsUnit != null) {
-            FXmlNode news_info = output.config().createNode("news_info");
-            String guidStr = newsUnit.guid();
-            String newsLabel = newsUnit.label();
-            String newsContent = newsUnit.content();
-            String newsUpdate = newsUnit.updateDate() + "";
-            if (guidStr != null && (!"".equals(guidStr))) {
-                news_info.createNode("guid").setText(guidStr);
-            } else {
-                news_info.createNode("guid").setText("0");
-            }
-            if (newsLabel != null && (!"".equals(newsLabel))) {
-                news_info.createNode("label").setText(newsLabel);
-            } else {
-                news_info.createNode("label").setText("0");
-            }
-            if (newsContent != null && (!"".equals(newsContent))) {
-                news_info.createNode("content").setText(newsContent);
-            } else {
-                news_info.createNode("content").setText("0");
-            }
-            if (newsUpdate != null && (!"".equals(newsUpdate))) {
-                news_info.createNode("update_date").setText(newsUpdate);
-            } else {
-                news_info.createNode("update_date").setText("0");
-            }
-            return EResult.Success;
-        }
-        return EResult.Failure;
-    }
-
-    // ============================================================
-    // <T>分页获取新闻相关信息。</T>
+    // <T>分页获取号令相关信息。</T>
     // @param context 页面环境
     // @param input 输入配置
     // @param output 输出配置
@@ -197,7 +149,7 @@ public class FNoticeService extends FObject implements INoticeService {
     }
 
     // ============================================================
-    // <T>标记已读</T>
+    // <T>标记号令已读</T>
     // @param context 页面环境
     // @param input 输入配置
     // @param output 输出配置
@@ -229,7 +181,7 @@ public class FNoticeService extends FObject implements INoticeService {
     }
 
     // ============================================================
-    // <T>号令发布功能</T>
+    // <T>号令发布</T>
     // @param context 页面环境
     // @param input 输入配置
     // @param output 输出配置

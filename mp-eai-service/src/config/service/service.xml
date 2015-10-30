@@ -42,7 +42,7 @@
   face='org.mo.content.service.mobile.account.ILoginService' />
 
  <Component face='org.mo.content.service.mobile.account.ILoginService'
-  class='org.mo.content.service.mobile.account.FLoginService' scope='global' >
+  class='org.mo.content.service.mobile.account.FLoginService' scope='global'>
   <Property name='contentServiceHost'>${eai.host.content}</Property>
  </Component>
 
@@ -98,9 +98,24 @@
  <WebService name='eai.mobile.logic.notice'
   face='org.mo.content.service.mobile.logic.notice.INoticeService' />
 
- <Component
-  face='org.mo.content.service.mobile.logic.notice.INoticeService'
+ <Component face='org.mo.content.service.mobile.logic.notice.INoticeService'
   class='org.mo.content.service.mobile.logic.notice.FNoticeService'
+  scope='global'>
+  <Property name='contentHost'>${eai.host.content}</Property>
+  <Property name='localHost'>${eai.server.host}</Property>
+ </Component>
+
+
+
+ <!-- ============================================================ -->
+ <!-- 个人中心服务接口 -->
+ <!-- ============================================================ -->
+ <WebService name='eai.mobile.logic.person.info'
+  face='org.mo.content.service.mobile.logic.person.info.IPersonInfoService' />
+
+ <Component
+  face='org.mo.content.service.mobile.logic.person.info.IPersonInfoService'
+  class='org.mo.content.service.mobile.logic.person.info.FPersonInfoService'
   scope='global'>
   <Property name='contentHost'>${eai.host.content}</Property>
   <Property name='localHost'>${eai.server.host}</Property>
