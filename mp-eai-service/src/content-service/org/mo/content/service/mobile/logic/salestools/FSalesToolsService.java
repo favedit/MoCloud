@@ -3,6 +3,7 @@ package org.mo.content.service.mobile.logic.salestools;
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import java.util.Iterator;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
@@ -32,6 +33,9 @@ public class FSalesToolsService extends FObject implements ISalesToolsService {
     // 配置文件注入属性
     @AProperty
     protected String _salesServiceHost;
+    // Storage服务器
+    @ALink
+    protected IGcStorageConsole _storageConsole;
 
     // ============================================================
     // <T>默认逻辑。</T>
@@ -166,11 +170,9 @@ public class FSalesToolsService extends FObject implements ISalesToolsService {
                 }
                 if (salesToolsUnit.iconUrl() != null
                         && (!"".equals(salesToolsUnit.iconUrl()))) {
-                    xruntime.createNode("icon_url").setText(
-                            salesToolsUnit.iconUrl());
-                    System.out
-                            .println("salesToolsUnit.iconUrl()----------------------"
-                                    + salesToolsUnit.iconUrl() + "aaaa");
+                    String makeUrl = _storageConsole.makeUrl(salesToolsUnit
+                            .iconUrl());
+                    xruntime.createNode("icon_url").setText(makeUrl);
                 } else {
                     xruntime.createNode("icon_url").setText("0");
                 }
