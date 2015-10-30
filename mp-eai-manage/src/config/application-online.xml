@@ -13,12 +13,11 @@
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
 
-   <!-- 存储服务器 -->
+   <!-- 服务设定 -->
    <Define name='cloud.server.storage.enable'>Y</Define>
-   <Define name='cloud.server.storage.process'>http://localhost:8030/cloud.storage.process.wv</Define>
+   <Define name='cloud.server.storage.process'>http://storage.eai.ezubo.com/cloud.storage.process.wv</Define>
    <Define name='cloud.server.storage.access'>http://storage.eai.ezubo.com/storage</Define>
    <Define name='cloud.server.storage.picture'>http://storage.eai.ezubo.com/cloud.storage.picture.wv</Define>
-   <!-- 日志服务器 -->
    <Define name='cloud.server.logger.enable'>Y</Define>
    <Define name='cloud.server.logger.publish'>http://10.169.23.66:9099/eai.logger.publish.ws</Define>
 

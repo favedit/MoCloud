@@ -35,8 +35,8 @@ CREATE TABLE `DT_COM_COUNTRY`
    `LABEL`                         VARCHAR(40), 
    `PHONE_CODE`                    VARCHAR(8), 
    `ICON_URL`                      VARCHAR(400), 
-   `LOCATION_LONGITUDE`            double DEFAULT NULL,
-   `LOCATION_LATITUDE`             double DEFAULT NULL,
+   `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
    `DISPLAY_CODE`                  INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
@@ -122,16 +122,16 @@ CREATE TABLE `DT_COM_CITY`
    `LABEL`                         VARCHAR(80), 
    `ICON_URL`                      VARCHAR(400), 
    `LEVEL`                         INTEGER, 
-   `CITY_CODE`                     VARCHAR(10),  
-   `LOCATION_LONGITUDE`            double, 
-   `LOCATION_LATITUDE`             double, 
+   `CITY_CODE`                     VARCHAR(10), 
+   `LOCATION_LONGITUDE`            DOUBLE, 
+   `LOCATION_LATITUDE`             DOUBLE, 
    `DISPLAY_ORDER`                 INTEGER, 
    `NOTE`                          VARCHAR(2000), 
    `CREATE_USER_ID`                BIGINT, 
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_COM_CITY 
    ADD CONSTRAINT DT_COM_CTY_UK_GID UNIQUE ( GUID ); 

@@ -75,12 +75,11 @@ public class FCustomerAction
          FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
          if(marketer == null){
             _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
-            return "/apl/message/LogicFatal";
+            return "/apl/message/NotMarketer";
          }
          marketerId = marketer.ouid();
          page.setLabel(user.label());
       }
-
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
