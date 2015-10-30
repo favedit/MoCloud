@@ -23,6 +23,7 @@ ALTER TABLE DT_COM_CONFIGURATION
 
 -- ------------------------------------------------------------
 -- Create table [Data.Common.Country]
+-- sunhr  20151030 update
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_COM_COUNTRY`;
 CREATE TABLE `DT_COM_COUNTRY` 
@@ -31,8 +32,8 @@ CREATE TABLE `DT_COM_COUNTRY`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `CODE`                          VARCHAR(8), 
-   `NAME`                          VARCHAR(20), 
-   `LABEL`                         VARCHAR(40), 
+   `NAME`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
    `PHONE_CODE`                    VARCHAR(8), 
    `ICON_URL`                      VARCHAR(400), 
    `LOCATION_LONGITUDE`            DOUBLE, 
@@ -1576,6 +1577,47 @@ CREATE TABLE `DT_FIN_MEMBER_SCORE`
 
 ALTER TABLE DT_FIN_MEMBER_SCORE 
    ADD CONSTRAINT DT_FIN_MBR_SCR_UK_GID UNIQUE ( GUID ); 
+   -- ------------------------------------------------------------
+-- Create table [Data.Financial.Marketer]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_FIN_MARKETER`;
+ CREATE TABLE `DT_FIN_MARKETER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `LINK_ID`                       BIGINT, 
+   `STATISTICS_ID`                 BIGINT, 
+   `NAME`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(40), 
+   `PASSPORT`                      VARCHAR(60), 
+   `STATUS_CD`                     INTEGER, 
+   `PHONE`                         VARCHAR(20), 
+   `CARD`                          VARCHAR(20), 
+   `RANK_LABEL`                    VARCHAR(40), 
+   `DEPARTMENT_ID`                 BIGINT, 
+   `DEPARTMENT_LABEL`              VARCHAR(200), 
+   `DEPARTMENT_LABELS`             VARCHAR(200), 
+   `CUSTOMER_INVESTMENT_TOTAL`     DOUBLE, 
+   `CUSTOMER_INVESTMENT_COUNT`     INTEGER, 
+   `CUSTOMER_INVESTMENT_DATE`      DATETIME, 
+   `CUSTOMER_REDEMPTION_TOTAL`     DOUBLE, 
+   `CUSTOMER_REDEMPTION_COUNT`     INTEGER, 
+   `CUSTOMER_REDEMPTION_DATE`      DATETIME, 
+   `CUSTOMER_NETINVESTMENT_TOTAL`  DOUBLE, 
+   `CUSTOMER_INTEREST_TOTAL`       DOUBLE, 
+   `CUSTOMER_PERFORMANCE_TOTAL`    DOUBLE, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_FIN_MARKETER 
+   ADD CONSTRAINT DT_FIN_MKT_UK_GID UNIQUE ( GUID ); 
+   
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Customer]
 -- ------------------------------------------------------------
@@ -1640,46 +1682,7 @@ CREATE TABLE `DT_FIN_TENDER`
 ALTER TABLE DT_FIN_TENDER 
    ADD CONSTRAINT DT_FIN_TDR_UK_GID UNIQUE ( GUID ); 
 
--- ------------------------------------------------------------
--- Create table [Data.Financial.Marketer]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_FIN_MARKETER`;
- CREATE TABLE `DT_FIN_MARKETER` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `USER_ID`                       BIGINT, 
-   `LINK_ID`                       BIGINT, 
-   `STATISTICS_ID`                 BIGINT, 
-   `NAME`                          VARCHAR(80), 
-   `LABEL`                         VARCHAR(40), 
-   `PASSPORT`                      VARCHAR(60), 
-   `STATUS_CD`                     INTEGER, 
-   `PHONE`                         VARCHAR(20), 
-   `CARD`                          VARCHAR(20), 
-   `RANK_LABEL`                    VARCHAR(40), 
-   `DEPARTMENT_ID`                 BIGINT, 
-   `DEPARTMENT_LABEL`              VARCHAR(200), 
-   `DEPARTMENT_LABELS`             VARCHAR(200), 
-   `CUSTOMER_INVESTMENT_TOTAL`     DOUBLE, 
-   `CUSTOMER_INVESTMENT_COUNT`     INTEGER, 
-   `CUSTOMER_INVESTMENT_DATE`      DATETIME, 
-   `CUSTOMER_REDEMPTION_TOTAL`     DOUBLE, 
-   `CUSTOMER_REDEMPTION_COUNT`     INTEGER, 
-   `CUSTOMER_REDEMPTION_DATE`      DATETIME, 
-   `CUSTOMER_NETINVESTMENT_TOTAL`  DOUBLE, 
-   `CUSTOMER_INTEREST_TOTAL`       DOUBLE, 
-   `CUSTOMER_PERFORMANCE_TOTAL`    DOUBLE, 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_FIN_MARKETER 
-   ADD CONSTRAINT DT_FIN_MKT_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Marketer.Member]
