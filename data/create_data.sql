@@ -551,7 +551,7 @@ CREATE TABLE `DT_LGC_NEWS`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `LABEL`                         VARCHAR(200), 
-   `ICON_URL`                      VARCHAR(200), 
+   `ICON_URL`                      VARCHAR(400), 
    `STATUS_CD`                     INTEGER, 
    `DISPLAY_CD`                    INTEGER, 
    `LINK_CD`                       INTEGER, 
@@ -566,7 +566,7 @@ CREATE TABLE `DT_LGC_NEWS`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_LGC_NEWS 
    ADD CONSTRAINT DT_LGC_NEW_UK_GID UNIQUE ( GUID ); 
@@ -606,7 +606,7 @@ CREATE TABLE `DT_LGC_SALESTOOLS`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `LABEL`                         VARCHAR(200), 
-   `ICON_URL`                      VARCHAR(200), 
+   `ICON_URL`                      VARCHAR(400), 
    `STATUS_CD`                     INTEGER, 
    `DISPLAY_CD`                    INTEGER, 
    `LINK_CD`                       INTEGER, 
@@ -621,7 +621,7 @@ CREATE TABLE `DT_LGC_SALESTOOLS`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_LGC_SALESTOOLS 
    ADD CONSTRAINT DT_LGC_SAL_UK_GID UNIQUE ( GUID ); 
@@ -637,7 +637,7 @@ CREATE TABLE `DT_LGC_TRUETIME`
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
    `LABEL`                         VARCHAR(200), 
-   `ICON_URL`                      VARCHAR(200), 
+   `ICON_URL`                      VARCHAR(400), 
    `STATUS_CD`                     INTEGER, 
    `DISPLAY_CD`                    INTEGER, 
    `LINK_CD`                       INTEGER, 
@@ -655,7 +655,7 @@ CREATE TABLE `DT_LGC_TRUETIME`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_LGC_TRUETIME 
-   ADD CONSTRAINT DT_LGC_TRM_UK_GID UNIQUE ( GUID );    
+   ADD CONSTRAINT DT_LGC_TRM_UK_GID UNIQUE ( GUID );   
 -- ------------------------------------------------------------
 -- Create table [Data.Logic.Notice]
 -- 20151021 sunhr

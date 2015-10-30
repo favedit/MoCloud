@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="d03d4303-df34-4e25-8ccb-084932bba2a0" name="data.logic.news" label="M#12cn15业务资讯表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.News" data_name="DT_LGC_NEWS" data_alias="DT_LGC_NEW" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
   <FieldString _uuid="e4fbd92d-7a6f-4df7-846a-e5245b2afaa0" name="label" label="M#12cn14资讯标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
-  <FieldString _uuid="8e133f3d-fb95-4207-9aef-c30c93c71dde" name="icon_url" label="M#12cn14资讯图标" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="200" />
+  <FieldString _uuid="8e133f3d-fb95-4207-9aef-c30c93c71dde" name="icon_url" label="M#12cn14资讯图标" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
   <FieldInteger _uuid="5361a92c-5b94-4cca-90f9-12a47eebef55" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
   <FieldInteger _uuid="74415138-57ba-4374-a1a3-4429e16805d6" name="display_cd" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />
   <FieldInteger _uuid="54821f1c-cdad-4e3c-907d-0f9be6e11332" name="link_cd" label="M#12cn14外链状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_CD" />
