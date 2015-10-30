@@ -87,10 +87,7 @@ public class FSalestoolsAction
       }
       FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataSalestoolsInfo info : unitList){
-         String urls = info.iconUrl();
-         if(!RString.isEmpty(urls)){
-            info.setMakeUrl(_storageConsole.makeUrl(urls.trim()));
-         }
+         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
          info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
@@ -151,10 +148,8 @@ public class FSalestoolsAction
          }
          SGcStorage storage = new SGcStorage("data.logic.salestools", unit.guid(), file);
          _storageConsole.store(storage);
-         String urls = storage.pack();
-         if(!RString.isEmpty(urls)){
-            unit.setIconUrl(urls.trim());
-         }
+         unit.setIconUrl(storage.pack());
+         _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       unit.setContent(_storageConsole.makeText(context.parameter("content")));
       setLogicNews(context, logicContext, unit, "0");
@@ -242,14 +237,11 @@ public class FSalestoolsAction
          }
          SGcStorage storage = new SGcStorage("data.logic.salestools", unit.guid(), file);
          _storageConsole.store(storage);
-         String urls = storage.pack();
-         if(!RString.isEmpty(urls)){
-            unit.setIconUrl(urls.trim());
-         }
+         unit.setIconUrl(storage.pack());
+         _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       String content = context.parameter("content");
       unit.setContent(_storageConsole.makeText(content));
-      
       setLogicNews(context, logicContext, unit, "1");
       _salestoolsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
