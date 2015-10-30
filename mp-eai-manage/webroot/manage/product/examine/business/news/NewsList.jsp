@@ -58,16 +58,14 @@
          location.href= "/manage/product/examine/business/news/News.wa?do=checking&newsIds="+ss+"&flag="+flag;
       }
    }
-   function showPhoto(iconUrl){
-      if(iconUrl!=null&&iconUrl.length>0){
-         return "<img src="+iconUrl+" height=55px width=55px/>";
+   function showPhoto(makeUrl){
+      if(makeUrl!=null&&makeUrl.length>0){
+         return "<img src="+makeUrl+" height=55px width=55px/>";
       }
    }
    function phoneInfo(ouid){
       var l=(screen.availWidth-500)/2;
       var t=(screen.availHeight-500)/2;
-      var w = screen.availWidth*7/19;
-      var h = screen.availHeight*12/19;
       window.open('/manage/product/examine/business/news/News.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
    }
    //搜索按钮，enter键
@@ -107,7 +105,7 @@
      <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
      <th
-     data-options="field:'iconUrl',halign:'center',align:'left',formatter:showPhoto"
+     data-options="field:'makeUrl',halign:'center',align:'left',formatter:showPhoto"
      width="55px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"

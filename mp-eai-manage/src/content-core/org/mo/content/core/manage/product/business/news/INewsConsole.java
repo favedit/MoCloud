@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 //<P>新闻信息操作接口</P>
 //
@@ -28,13 +27,6 @@ public interface INewsConsole
                                        int pageNum, 
                                        int pageSize);
 
-   // ============================================================
-   // <T>保存图片地址</T>
-   // @return void
-   // ============================================================
-   void saveImage(FWebUploadFile file, 
-                  FDataLogicNewsUnit unit, 
-                  String flag);
    
    // ============================================================
    // <T>根据状态，是否显示，标题查询数据</T>

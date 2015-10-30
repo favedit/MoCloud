@@ -54,37 +54,6 @@
       <Property name='servers'>10.30.101.11:11311</Property>
       <Initialize name='initialize'/>
    </Component>
-     <!-- ==================================================== -->
-   <!-- FNewsConsole:图片存储控制台                        -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.content.core.manage.product.business.news.INewsConsole'
-         class = 'org.mo.content.core.manage.product.business.news.FNewsConsole'
-         scope = 'global'>
-      <Property name='servers'>eai.ezubo.com:8087/</Property>
-      <Property name='applicationName'>${application}/${application.name}</Property>
-   </Component>
-   <!-- ==================================================== -->
-   <!-- FNewsConsole:图片存储控制台                        -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.content.core.manage.product.business.truetime.ITruetimeConsole'
-         class = 'org.mo.content.core.manage.product.business.truetime.FTruetimeConsole'
-         scope = 'global'>
-      <Property name='servers'>eai.ezubo.com:8087</Property>
-      <Property name='applicationName'>${application}/${application.name}</Property>
-   </Component>
-    <!-- ==================================================== -->
-   <!-- FSalestoolsConsole:图片存储控制台                        -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.content.core.manage.product.business.salestools.ISalestoolsConsole'
-         class = 'org.mo.content.core.manage.product.business.salestools.FSalestoolsConsole'
-         scope = 'global'>
-      <Property name='servers'>eai.ezubo.com:8087</Property>
-      <Property name='applicationName'>${application}/${application.name}</Property>
-   </Component>
-   
    <!-- ============================================================ -->
    <!-- 数据控制台                                                   -->
    <!-- ============================================================ -->

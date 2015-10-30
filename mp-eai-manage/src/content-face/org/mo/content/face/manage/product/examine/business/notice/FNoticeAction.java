@@ -2,6 +2,8 @@ package org.mo.content.face.manage.product.examine.business.notice;
 
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -32,6 +34,10 @@ public class FNoticeAction
 
    @ALink
    protected IWebUploadConsole _webUploadConsole;
+   
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _storageConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -81,6 +87,9 @@ public String select(IWebContext context,
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataNoticeInfo> unitList = _noticeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataNoticeInfo info : unitList){
+         info.setContent(_storageConsole.makeDisplay(info.content()));
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -105,7 +114,7 @@ public String select(IWebContext context,
       }
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, context.parameterAsLong("ouid"));
       FDataNoticeInfo info = new FDataNoticeInfo();
-      info.setContent(unit.content());
+      info.setContent(_storageConsole.makeDisplay(unit.content()));
       page.setUnit(info);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/examine/business/notice/NoticeDataInfoForContent";

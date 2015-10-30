@@ -23,10 +23,7 @@ import org.mo.web.protocol.context.IWebContext;
 //<P>实时数据控制器</P>
 //@class FTruetimeAction
 //============================================================
-public class FTruetimeAction
-      implements
-         ITruetimeAction
-{
+public class FTruetimeAction implements ITruetimeAction {
 
    // 日志输出接口
    private static ILogger _logger = RLogger.find(FTruetimeAction.class);
@@ -49,11 +46,9 @@ public class FTruetimeAction
    // @param page 页面
    // ============================================================
    @Override
-   public String construct(IWebContext context,
-                           ILogicContext logicContext,
-                           FBasePage basePage){
+   public String construct(IWebContext context, ILogicContext logicContext, FBasePage basePage) {
       _logger.debug(this, "Construct", "Construct begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       return "/manage/product/business/truetime/TruetimeList";
@@ -68,31 +63,29 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String select(IWebContext context,
-                        ILogicContext logicContext,
-                        FTruetimePage page,
-                        FBasePage basePage){
+   public String select(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      if(null != context.parameter("page")){
+      if (null != context.parameter("page")) {
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
-      }else{
+      } else {
          page.setPageCurrent(0);
       }
       FDataLogicTruetimeUnit unit = new FDataLogicTruetimeUnit();
       unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
-      if(null != StrPageSize){
+      if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
-      for(FDataTruetimeInfo info : unitList){
+      FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1,
+            pageSize);
+      for (FDataTruetimeInfo info : unitList) {
          info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
-         info.setContent(_storageConsole.makeDisplay(unit.content()));
+         info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
@@ -108,12 +101,9 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String insertBefore(IWebContext context,
-                              ILogicContext logicContext,
-                              FTruetimePage page,
-                              FBasePage basePage){
+   public String insertBefore(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       page.setResult("");
@@ -129,24 +119,21 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String insert(IWebContext context,
-                        ILogicContext logicContext,
-                        FTruetimePage page,
-                        FBasePage basePage){
+   public String insert(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicTruetimeUnit unit = _truetimeConsole.doPrepare(logicContext);
       FWebUploadFile file = context.files().first();
-      if(null != file){
+      if (null != file) {
          Integer len = file.length() / 1024;
-         if(len > 1024){
+         if (len > 1024) {
             page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/truetime/InsertTruetime";
          }
          String type = file.contentType();
-         if(!type.contains("image")){
+         if (!type.contains("image")) {
             page.setResult("请上传图片!");
             return "/manage/product/business/truetime/InsertTruetime";
          }
@@ -155,11 +142,11 @@ public class FTruetimeAction
          unit.setIconUrl(storage.pack());
          _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
-      unit.setContent(_storageConsole.makeText(context.parameter("context")));
+      unit.setContent(_storageConsole.makeText(context.parameter("content")));
 
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _truetimeConsole.doInsert(logicContext, unit);
-      if(!result.equals(EResult.Success)){
+      if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
          return "/manage/product/business/truetime/InsertTruetime";
       }
@@ -176,12 +163,9 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String updateBefore(IWebContext context,
-                              ILogicContext logicContext,
-                              FTruetimePage page,
-                              FBasePage basePage){
+   public String updateBefore(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
@@ -195,10 +179,10 @@ public class FTruetimeAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
-      if(unit.content().trim().length() > 0){
+      if (unit.content().trim().length() > 0) {
          info.setContent(_storageConsole.makeEdit(unit.content()));
       }
-      if(!RString.isEmpty(unit.iconUrl())){
+      if (!RString.isEmpty(unit.iconUrl())) {
          String iconUrl = _storageConsole.makeUrl(unit.iconUrl());
          info.setMakeUrl(iconUrl);
          _logger.debug(this, "UpdateBefore", "UpdateBefore makeImages .(url={1})", iconUrl);
@@ -218,24 +202,21 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String update(IWebContext context,
-                        ILogicContext logicContext,
-                        FTruetimePage page,
-                        FBasePage basePage){
+   public String update(IWebContext context, ILogicContext logicContext, FTruetimePage page, FBasePage basePage) {
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       FWebUploadFile file = context.files().findByName("iconUrl");
-      if(null != file){
+      if (null != file) {
          Integer len = file.length() / 1024;
-         if(len > 1024){
+         if (len > 1024) {
             page.setResult("请上传小于1M的图片!");
             return "/manage/product/business/truetime/UpdateTruetime";
          }
          String type = file.contentType();
-         if(!type.contains("image")){
+         if (!type.contains("image")) {
             page.setResult("请上传图片!");
             return "/manage/product/business/truetime/UpdateTruetime";
          }
@@ -246,7 +227,7 @@ public class FTruetimeAction
       }
       String content = context.parameter("content");
       unit.setContent(_storageConsole.makeText(content));
-      
+
       setLogicNews(context, logicContext, unit, "1");
       _truetimeConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
@@ -262,23 +243,20 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String delete(IWebContext context,
-                        ILogicContext logicContext,
-                        FTruetimePage Page,
-                        FBasePage basePage){
+   public String delete(IWebContext context, ILogicContext logicContext, FTruetimePage Page, FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, id);
-      if(unit == null){
+      if (unit == null) {
          throw new FFatalError("id not exists.");
       }
       EResult result = _truetimeConsole.doDelete(logicContext, unit);
-      if(!result.equals(EResult.Success)){
+      if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
-      }else{
+      } else {
          return "/manage/product/business/truetime/TruetimeList";
       }
    }
@@ -290,10 +268,7 @@ public class FTruetimeAction
    // @param page 容器
    // @return 页面
    // ============================================================
-   public void setLogicNews(IWebContext context,
-                            ILogicContext logicContext,
-                            FDataLogicTruetimeUnit unit,
-                            String flag){
+   public void setLogicNews(IWebContext context, ILogicContext logicContext, FDataLogicTruetimeUnit unit, String flag) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setDescription(context.parameter("description"));
       unit.setKeywords(context.parameter("keywords"));
@@ -303,17 +278,6 @@ public class FTruetimeAction
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
       unit.setStatusCd(EGcResourceStatus.Apply);
-      //      FWebUploadFile file = context.files().first();
-      //      if(null == file){
-      //         String oiconUr = context.parameter("oiconUr");
-      //         if(!RString.isEmpty(oiconUr)){
-      //            unit.setIconUrl(oiconUr);
-      //         }else{
-      //            unit.setIconUrl(context.parameter("iconUrl"));
-      //         }
-      //      }else{
-      //               _truetimeConsole.saveImage(file, unit, flag);
-      //      }
    }
 
    // ============================================================
@@ -325,12 +289,10 @@ public class FTruetimeAction
    // @return 页面
    // ============================================================
    @Override
-   public String getDescription(IWebContext context,
-                                ILogicContext logicContext,
-                                FTruetimePage page,
-                                FBasePage basePage){
+   public String getDescription(IWebContext context, ILogicContext logicContext, FTruetimePage page,
+         FBasePage basePage) {
       _logger.debug(this, "getDescription", "getDescription begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
+      if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, context.parameterAsLong("ouid"));

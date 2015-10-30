@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataLogicTruetimeUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 //<P>实时数据信息操作接口</P>
 //
@@ -27,11 +26,4 @@ public interface ITruetimeConsole
                                            int pageNum, 
                                            int pageSize);
 
-   // ============================================================
-   // <T>保存图片地址</T>
-   // @return void
-   // ============================================================
-   void saveImage(FWebUploadFile file, 
-                  FDataLogicTruetimeUnit unit, 
-                  String flag);
 }

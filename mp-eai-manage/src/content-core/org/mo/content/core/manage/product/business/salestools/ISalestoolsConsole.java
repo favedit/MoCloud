@@ -4,7 +4,6 @@ import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
-import org.mo.web.protocol.common.FWebUploadFile;
 //============================================================
 //<P>销售工具信息操作接口</P>
 //
@@ -28,13 +27,6 @@ public interface ISalestoolsConsole
                                              int pageNum, 
                                              int pageSize);
 
-   // ============================================================
-   // <T>保存图片地址</T>
-   // @return void
-   // ============================================================
-   void saveImage(FWebUploadFile file, 
-                  FDataLogicSalestoolsUnit unit, 
-                  String flag);
    // ============================================================
    // <T>根据状态，是否显示，标题查询数据</T>
    // @param logicContext 链接对象

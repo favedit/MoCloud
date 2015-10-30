@@ -2,6 +2,8 @@ package org.mo.content.face.manage.product.examine.business.salestools;
 
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
+
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
@@ -34,6 +36,10 @@ public class FSalestoolsAction
 
    @ALink
    protected IWebUploadConsole _webUploadConsole;
+   
+   // 存储控制台
+   @ALink
+   protected IGcStorageConsole _storageConsole;
 
    // ============================================================
    // <T>默认逻辑处理。</T>
@@ -82,6 +88,10 @@ public class FSalestoolsAction
          pageSize = Integer.parseInt(StrPageSize);
       }
       FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
+      for(FDataSalestoolsInfo info : unitList){
+         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         info.setContent(_storageConsole.makeDisplay(info.content()));
+      }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       return "/manage/common/ajax";
@@ -106,7 +116,7 @@ public class FSalestoolsAction
       }
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, context.parameterAsLong("ouid"));
       FDataSalestoolsInfo info = new FDataSalestoolsInfo();
-      info.setContent(unit.content());
+      info.setContent(_storageConsole.makeDisplay(unit.content()));
       page.setUnit(info);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/examine/business/salestools/SalestoolsDataInfoForContent";

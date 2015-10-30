@@ -149,8 +149,7 @@ public class FNewsAction
          _storageConsole.store(storage);
          unit.setIconUrl(storage.pack());
       }
-      unit.setContent(_storageConsole.makeText(context.parameter("context")));
-      
+      unit.setContent(_storageConsole.makeText(context.parameter("content")));
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _newsConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){

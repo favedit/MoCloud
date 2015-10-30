@@ -39,36 +39,6 @@
          scope = 'global'>
       <Property name='serviceHost'>115.28.136.134</Property>
    </Component>
-   <!-- ==================================================== -->
-   <!-- FNewsConsole:图片存储控制台                        -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.content.core.manage.product.business.news.INewsConsole'
-         class = 'org.mo.content.core.manage.product.business.news.FNewsConsole'
-         scope = 'global'>
-      <Property name='servers'>127.0.0.1:8040</Property>
-      <Property name='applicationName'>${application}/${application.name}</Property>
-   </Component>
-   <!-- ==================================================== -->
-   <!-- FNewsConsole:图片存储控制台                        -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.content.core.manage.product.business.truetime.ITruetimeConsole'
-         class = 'org.mo.content.core.manage.product.business.truetime.FTruetimeConsole'
-         scope = 'global'>
-      <Property name='servers'>127.0.0.1:8040</Property>
-      <Property name='applicationName'>${application}/${application.name}</Property>
-   </Component>
-   <!-- ==================================================== -->
-   <!-- FSalestoolsConsole:图片存储控制台                        -->
-   <!-- ==================================================== -->
-   <Component
-         face  = 'org.mo.content.core.manage.product.business.salestools.ISalestoolsConsole'
-         class = 'org.mo.content.core.manage.product.business.salestools.FSalestoolsConsole'
-         scope = 'global'>
-      <Property name='servers'>127.0.0.1:8040</Property>
-      <Property name='applicationName'>${application}/${application.name}</Property>
-   </Component>
    <!-- ============================================================ -->
    <!-- 内存缓冲控制台                                               -->
    <!-- ============================================================ -->

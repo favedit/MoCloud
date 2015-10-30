@@ -88,7 +88,7 @@ public class FSalestoolsAction
       FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataSalestoolsInfo info : unitList){
          info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
-         info.setContent(_storageConsole.makeDisplay(unit.content()));
+         info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
@@ -151,8 +151,7 @@ public class FSalestoolsAction
          unit.setIconUrl(storage.pack());
          _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
-      unit.setContent(_storageConsole.makeText(context.parameter("context")));
-      
+      unit.setContent(_storageConsole.makeText(context.parameter("content")));
       setLogicNews(context, logicContext, unit, "0");
       EResult result = _salestoolsConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
@@ -327,17 +326,6 @@ public class FSalestoolsAction
       unit.setStatusCd(EGcResourceStatus.Apply);
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
-      //      FWebUploadFile file = context.files().first();
-      //      if(null == file){
-      //         String oiconUr = context.parameter("oiconUr");
-      //         if(!RString.isEmpty(oiconUr)){
-      //            unit.setIconUrl(oiconUr);
-      //         }else{
-      //            unit.setIconUrl(context.parameter("iconUrl"));
-      //         }
-      //      }else{
-      //         _salestoolsConsole.saveImage(file, unit, flag);
-      //      }
    }
 
    // ============================================================

@@ -89,7 +89,7 @@ public class FNoticeAction
       }
       FLogicDataset<FDataNoticeInfo> unitList = _noticeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataNoticeInfo info : unitList){
-         info.setContent(_storageConsole.makeDisplay(unit.content()));
+         info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
@@ -135,7 +135,7 @@ public class FNoticeAction
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNoticeUnit unit = _noticeConsole.doPrepare(logicContext);
-      unit.setContent(_storageConsole.makeText(context.parameter("context")));
+      unit.setContent(_storageConsole.makeText(context.parameter("content")));
       setLogicNews(context, logicContext, unit);
       EResult result = _noticeConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {

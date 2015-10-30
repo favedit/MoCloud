@@ -30,7 +30,7 @@
              return false;
           }
           var fileSize = document.getElementById("iconUrl").files[0].size;
-         fileSize = fileSize / 1024;
+          fileSize = fileSize / 1024;
           if(fileSize>1024){
              closeProgress();
              alert("请上传大小小于1M的等比例图片!");
