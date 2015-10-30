@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Configuration>
- <!-- 应用定义 -->
- <Define name='application'>${application}</Define>
- <Define name='application.name'>mp-eai-service</Define>
- <Define name='application.root'>${application}/${application.name}</Define>
- <Define name='application.deploy'>${application.root}/deploy</Define>
- <Define name='application.web'>${application.root}/webroot</Define>
- <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
- <Define name='application.space'>${application.web}/WEB-INF/config</Define>
- <Define name='application.content'>${application.web}/WEB-INF/content</Define>
- <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
- <Define name='application.storage'>${application}/mt-storage</Define>
 
- <!-- 服务设定 -->
- <Define name='cloud.server.logger.enable'>Y</Define>
- <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws
- </Define>
- <!--本地工作服主机地址 -->
- <Define name='eai.server.host'>http://10.13.0.16:8020/</Define>
- <!--content项目地址 -->
- <Define name='eai.host.content'>http://10.13.0.16:8010/</Define>
- <!--开发服OA接口地址 -->
- <Define name='eai.oa.enable'>Y</Define>
- <Define name='eai.oa.host'>http://10.13.0.141:6666/ycjt/auth/auth.jsp</Define>
- <!-- 应用设定 -->
- <Include>${application.config}/application.xml</Include>
+   <!-- 应用定义 -->
+   <Define name='application'>${application}</Define>
+   <Define name='application.name'>mp-eai-service</Define>
+   <Define name='application.root'>${application}/${application.name}</Define>
+   <Define name='application.deploy'>${application.root}/deploy</Define>
+   <Define name='application.web'>${application.root}/webroot</Define>
+   <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
+   <Define name='application.space'>${application.web}/WEB-INF/config</Define>
+   <Define name='application.content'>${application.web}/WEB-INF/content</Define>
+   <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
+   <Define name='application.storage'>${application}/mt-storage</Define>
+   
+   <!-- 内容服务器 -->
+   <Define name='eai.host.content'>http://10.13.0.250:8010/</Define>
+   <!-- 接口服务器 -->
+   <Define name='eai.server.host'>http://10.13.0.250:8020/</Define>
+   <!-- OA登录服务器 -->
+   <Define name='eai.oa.enable'>Y</Define>
+   <Define name='eai.oa.host'>http://10.13.0.141:6666/ycjt/auth/auth.jsp</Define>
+   <!-- 存储服务器 -->
+   <Define name='cloud.server.storage.enable'>Y</Define>
+   <Define name='cloud.server.storage.process'>http://localhost:8030/cloud.storage.process.wv</Define>
+   <Define name='cloud.server.storage.access'>http://eai.ezubo.com:8030/storage</Define>
+   <Define name='cloud.server.storage.picture'>http://eai.ezubo.com:8030/cloud.storage.picture.wv</Define>
+   <!-- 服务器设定 -->
+   <Define name='cloud.server.logger.enable'>Y</Define>
+   <Define name='cloud.server.logger.publish'>http://10.13.0.250:9099/eai.logger.publish.ws</Define>
 
- <!-- 环境设定 -->
- <Include>${application.config}/environment/environment-work.xml
- </Include>
+   <!-- 应用设定 -->
+   <Include>${application.config}/application.xml</Include>
+   
+   <!-- 环境设定 -->
+   <Include>${application.config}/environment/environment-work.xml</Include>
+
 </Configuration>

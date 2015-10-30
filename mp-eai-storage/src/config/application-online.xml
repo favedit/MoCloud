@@ -3,14 +3,14 @@
 <Configuration>
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
-   <Define name='application.name'>mp-eai-storage</Define>
+   <Define name='application.name'>eai.storage</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
-   <Define name='application.deploy'>${application.root}/deploy</Define>
+   <Define name='application.deploy'>${application}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
    <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
    <Define name='application.space'>${application.web}/WEB-INF/config</Define>
+   <Define name='application.content'>${application.web}/WEB-INF/content</Define>
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
-   <Define name='application.resource'>${application.web}/resource</Define>
    <Define name='application.storage'>/data/eai/storage</Define>
 
    <!-- 服务器设定 -->
@@ -24,6 +24,6 @@
    <Include>${application.config}/application.xml</Include>
 
    <!-- 包含：环境设定 -->
-   <Include>${application.config}/environment/environment-online.xml</Include>
+   <Include>${application.config}/environment/environment-test.xml</Include>
 
 </Configuration>

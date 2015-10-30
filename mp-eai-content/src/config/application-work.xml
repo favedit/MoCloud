@@ -14,10 +14,10 @@
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
 
-   <!-- 服务设定 -->
+   <!-- OA登录服务器 -->
    <Define name='eai.content.login.oa'>N</Define>
    <Define name='eai.content.login.oa.service'>http://10.21.0.141:6666/ycjt/auth/auth.jsp</Define>
-   <!-- storage图片服务器 -->
+   <!-- 存储服务器 -->
    <Define name='cloud.server.storage.enable'>Y</Define>
    <Define name='cloud.server.storage.process'>http://10.13.0.250:8030/cloud.storage.process.wv</Define>
    <Define name='cloud.server.storage.access'>http://10.13.0.250:8030/storage</Define>

@@ -14,12 +14,12 @@
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
 
-   <!-- 服务设定 -->
+   <!-- OA登录服务器 -->
    <Define name='eai.content.login.oa'>Y</Define>
    <Define name='eai.content.login.oa.service'>http://115.182.232.150:8181/oauser</Define>
-   <!-- storage图片服务器 -->
+   <!-- 存储服务器 -->
    <Define name='cloud.server.storage.enable'>Y</Define>
-   <Define name='cloud.server.storage.process'>http://eai.ezubo.com:8030/cloud.storage.process.wv</Define>
+   <Define name='cloud.server.storage.process'>http://localhost:8030/cloud.storage.process.wv</Define>
    <Define name='cloud.server.storage.access'>http://eai.ezubo.com:8030/storage</Define>
    <Define name='cloud.server.storage.picture'>http://eai.ezubo.com:8030/cloud.storage.picture.wv</Define>
    <!-- 日志服务器 -->
