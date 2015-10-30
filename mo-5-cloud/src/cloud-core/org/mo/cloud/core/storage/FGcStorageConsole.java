@@ -417,6 +417,11 @@ public class FGcStorageConsole
    @Override
    public String makeUrl(String pack){
       if(!RString.isEmpty(pack)){
+         // 判断类型
+         if(pack.startsWith("http://")){
+            return pack;
+         }
+         // 解包处理
          SGcStorage storage = new SGcStorage();
          storage.unpack(pack);
          return makeUrl(storage);
