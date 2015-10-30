@@ -4,6 +4,7 @@
 
 <Resource name='sql.city'><![CDATA[
 SELECT
+   c.OUID,
    p.CODE PROVINCE_CODE,
    p.LABEL PROVINCE_LABEL,
    c.CODE,

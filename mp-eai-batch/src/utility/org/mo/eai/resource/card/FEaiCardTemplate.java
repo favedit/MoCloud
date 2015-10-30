@@ -9,9 +9,8 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.INamePair;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
-import org.mo.core.aop.RAop;
 import org.mo.eai.core.common.EEaiDataConnection;
-import org.mo.eng.data.IDatabaseConsole;
+import org.mo.eai.resource.REaiResourceExportor;
 
 //============================================================
 // <T>卡片模板。</T>
@@ -51,8 +50,7 @@ public class FEaiCardTemplate
    // <T>解析处理。</T>
    //============================================================
    public void parser(){
-      IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
-      ISqlConnection connection = databaseConsole.alloc(EEaiDataConnection.DATA);
+      ISqlConnection connection = REaiResourceExportor.logicContext.activeConnection(EEaiDataConnection.DATA);
       FSql sql = _resource.findString(FSql.class, "sql.card");
       FDataset dataset = connection.fetchDataset(sql);
       for(FRow row : dataset){

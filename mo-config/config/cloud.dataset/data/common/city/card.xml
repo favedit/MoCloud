@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="cd8fac3d-922c-4b5c-8789-592fdb17e7e8" name="data.common.city.card" label="M#12cn15共通城市表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Common.City" data_name="DT_COM_CITY_CARD" data_alias="DT_COM_CTY_CAD" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="84a655ff-f46d-4947-8dfb-45a7875c9e34" name="country_id" label="M#12cn14国家编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COUNTRY_ID" />
+  <FieldRecordId _uuid="9ab7a011-8b71-49d8-b580-3f48ad5e91ed" name="area_id" label="M#12cn14地区编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AREA_ID" />
+  <FieldRecordId _uuid="902f72c6-36f9-406f-8a43-5d0971e6a28d" name="province_id" label="M#12cn14省份编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE_ID" />
   <FieldRecordId _uuid="4a30f033-9456-4adb-9d32-ff1b3358a326" name="city_id" label="M#12cn14城市编号" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="CITY_ID" data_alias="CITY" data_size="11" data_refer="data.common.city" />
   <FieldInteger _uuid="3fba7d0e-be0b-4c8d-960a-a6c1810f1cec" name="card_code" label="M#12cn16身份证前4位" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD_CODE" data_size="11" />
   <FieldInteger _uuid="f7977877-b63e-4837-8db3-1b7bdd2466fb" name="display_order" label="M#12cn13排序值" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_ORDER" />

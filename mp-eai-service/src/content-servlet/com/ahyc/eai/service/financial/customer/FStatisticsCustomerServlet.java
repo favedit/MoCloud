@@ -120,7 +120,8 @@ public class FStatisticsCustomerServlet
       stream.writeInt32(rankCount);
       for(FRow row : rankDataset){
          stream.writeString(RString.left(row.get("customer_label"), 1));
-         stream.writeString(RString.left(row.get("customer_card"), 4));
+         //stream.writeString(RString.left(row.get("customer_card"), 4));
+         stream.writeString(RString.left(row.get("customer_card"), 6));
          stream.writeString(RString.right(row.get("customer_phone"), 4));
          stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
       }
@@ -170,7 +171,8 @@ public class FStatisticsCustomerServlet
          // 输出内容
          stream.writeString(dynamicUnit.customerActionDate().format());
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
-         stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
+         //stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
+         stream.writeString(RString.left(dynamicUnit.customerCard(), 6));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeBoolean(false);
          stream.writeUint16(0);

@@ -1,12 +1,12 @@
 package org.mo.eai.resource.province;
 
-import org.mo.com.io.FLinesFile;
+import com.cyou.gccloud.data.data.FDataCommonProvinceLogic;
+import com.cyou.gccloud.data.data.FDataCommonProvinceUnit;
 import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.FObjects;
-import org.mo.com.lang.RInteger;
-import org.mo.com.lang.RString;
-import org.mo.eai.RResourceConfiguration;
+import org.mo.data.logic.FLogicDataset;
+import org.mo.eai.resource.REaiResourceExportor;
 
 //============================================================
 // <T>省份模板。</T>
@@ -74,28 +74,17 @@ public class FEaiProvinceTemplate
    // <T>解析数据。</T>
    //============================================================
    public void parser(){
-      String fileName = RResourceConfiguration.HomeData + "/province.csv";
-      // 打开文件
-      FLinesFile file = new FLinesFile();
-      file.loadFile(fileName, "GB2312");
+      FDataCommonProvinceLogic logic = REaiResourceExportor.logicContext.findLogic(FDataCommonProvinceLogic.class);
+      FLogicDataset<FDataCommonProvinceUnit> units = logic.fetchAll();
       // 读取所有行
-      int count = file.count();
-      for(int n = 1; n < count; n++){
-         String line = file.line(n);
-         if(!RString.isEmpty(line)){
-            String[] items = RString.split(line.trim(), ',');
-            if(items.length != 5){
-               throw new FFatalError("Format is invalid.");
-            }
-            FEaiProvinceResource province = new FEaiProvinceResource();
-            province.setCode(RString.trim(items[0]));
-            province.setName(RString.trim(items[1]));
-            province.setLabel(RString.trim(items[2]));
-            province.setTypeCd(RString.trim(items[3]));
-            province.setDisplayOrder(RInteger.parse(items[4]));
-            _provinces.push(province);
-            System.out.println(items[0] + " - " + items[1] + " - " + items[2] + " - " + items[3]);
-         }
+      for(FDataCommonProvinceUnit unit : units){
+         FEaiProvinceResource province = new FEaiProvinceResource();
+         province.setCode(unit.code());
+         //province.setName(unit.n RString.trim(items[1]));
+         province.setLabel(unit.label());
+         //province.setTypeCd(uni RString.trim(items[3]));
+         province.setDisplayOrder(unit.displayOrder());
+         _provinces.push(province);
       }
    }
 

@@ -9,9 +9,8 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.INamePair;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
-import org.mo.core.aop.RAop;
 import org.mo.eai.core.common.EEaiDataConnection;
-import org.mo.eng.data.IDatabaseConsole;
+import org.mo.eai.resource.REaiResourceExportor;
 
 //============================================================
 // <T>城市模板。</T>
@@ -46,15 +45,14 @@ public class FEaiCityTemplate
    // <T>解析处理。</T>
    //============================================================
    public void parser(){
-      IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
-      ISqlConnection connection = databaseConsole.alloc(EEaiDataConnection.DATA);
+      ISqlConnection connection = REaiResourceExportor.logicContext.activeConnection(EEaiDataConnection.DATA);
       FSql sql = _resource.findString(FSql.class, "sql.city");
       FDataset dataset = connection.fetchDataset(sql);
       for(FRow row : dataset){
          FEaiCityResource city = new FEaiCityResource();
          city.setProvinceCode(row.get("province_code"));
          city.setProvinceLabel(row.get("province_label"));
-         city.setCode(row.get("code"));
+         city.setCode(row.get("ouid"));
          city.setLabel(row.get("label"));
          city.setLevel(row.getInt("level"));
          city.location().x = row.getDouble("location_longitude");

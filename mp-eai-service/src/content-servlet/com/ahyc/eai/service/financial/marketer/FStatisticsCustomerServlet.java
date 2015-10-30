@@ -1,5 +1,6 @@
 package com.ahyc.eai.service.financial.marketer;
 
+import com.ahyc.eai.core.common.REaiPersonCard;
 import com.ahyc.eai.core.financial.FFinancialTenderModel;
 import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
@@ -121,7 +122,7 @@ public class FStatisticsCustomerServlet
       stream.writeInt32(rankCount);
       for(FRow row : rankDataset){
          stream.writeString(RString.left(row.get("customer_label"), 1));
-         stream.writeString(RString.left(row.get("customer_card"), 4));
+         stream.writeString(REaiPersonCard.makeCityCard(row.get("customer_card")));
          stream.writeString(RString.right(row.get("customer_phone"), 4));
          stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
       }
@@ -177,7 +178,7 @@ public class FStatisticsCustomerServlet
          // 输出内容
          stream.writeString(dynamicUnit.customerActionDate().format());
          stream.writeString(RString.left(dynamicUnit.customerLabel(), 1));
-         stream.writeString(RString.left(dynamicUnit.customerCard(), 4));
+         stream.writeString(REaiPersonCard.makeCityCard(dynamicUnit.customerCard()));
          stream.writeString(RString.right(dynamicUnit.customerPhone(), 4));
          stream.writeBoolean(investmentFirst);
          stream.writeUint16(investmentNumber);

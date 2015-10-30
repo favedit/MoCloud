@@ -26,7 +26,8 @@ import org.mo.eng.data.IDatabaseConsole;
 public class REaiDatabaseExportor
 {
 
-   public static String CONNECTION_IMPORT = "test.data";
+   //public static String CONNECTION_IMPORT = "test.data";
+   public static String CONNECTION_IMPORT = "online.data";
 
    // 国家单元集合
    protected static FObjects<FDataCommonCountryUnit> _countryUnits = new FObjects<FDataCommonCountryUnit>(FDataCommonCountryUnit.class);

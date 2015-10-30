@@ -40,6 +40,15 @@ public class FDataCommonCityCardLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段国家编号的定义。
+   public final static SLogicFieldInfo COUNTRY_ID = new SLogicFieldInfo("COUNTRY_ID");
+
+   // 字段地区编号的定义。
+   public final static SLogicFieldInfo AREA_ID = new SLogicFieldInfo("AREA_ID");
+
+   // 字段省份编号的定义。
+   public final static SLogicFieldInfo PROVINCE_ID = new SLogicFieldInfo("PROVINCE_ID");
+
    // 字段城市编号的定义。
    public final static SLogicFieldInfo CITY_ID = new SLogicFieldInfo("CITY_ID");
 
@@ -62,7 +71,7 @@ public class FDataCommonCityCardLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CITY_ID`,`CARD_CODE`,`DISPLAY_ORDER`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`COUNTRY_ID`,`AREA_ID`,`PROVINCE_ID`,`CITY_ID`,`CARD_CODE`,`DISPLAY_ORDER`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造共通城市表逻辑单元。</T>
@@ -658,6 +667,9 @@ public class FDataCommonCityCardLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`COUNTRY_ID`");
+      cmd.append(",`AREA_ID`");
+      cmd.append(",`PROVINCE_ID`");
       cmd.append(",`CITY_ID`");
       cmd.append(",`CARD_CODE`");
       cmd.append(",`DISPLAY_ORDER`");
@@ -679,6 +691,27 @@ public class FDataCommonCityCardLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      long countryId = unit.countryId();
+      if(countryId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(countryId);
+      }
+      cmd.append(',');
+      long areaId = unit.areaId();
+      if(areaId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(areaId);
+      }
+      cmd.append(',');
+      long provinceId = unit.provinceId();
+      if(provinceId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(provinceId);
+      }
       cmd.append(',');
       long cityId = unit.cityId();
       if(cityId == 0){
@@ -764,6 +797,33 @@ public class FDataCommonCityCardLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isCountryIdChanged()){
+         cmd.append(",`COUNTRY_ID`=");
+         long countryId = unit.countryId();
+         if(countryId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(countryId);
+         }
+      }
+      if(unit.isAreaIdChanged()){
+         cmd.append(",`AREA_ID`=");
+         long areaId = unit.areaId();
+         if(areaId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(areaId);
+         }
+      }
+      if(unit.isProvinceIdChanged()){
+         cmd.append(",`PROVINCE_ID`=");
+         long provinceId = unit.provinceId();
+         if(provinceId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(provinceId);
+         }
+      }
       if(unit.isCityIdChanged()){
          cmd.append(",`CITY_ID`=");
          long cityId = unit.cityId();
