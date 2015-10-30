@@ -76,7 +76,7 @@
 
          function onLoad() {
             var date = new Date();
-            var url = '../ajs/eai.jc?time=' + date.toLocaleDateString();
+            var url = '../ajs/eai.jc?' + date.toLocaleDateString();
             MO.initialize();
             RJsLoader.loadUrl(url, onLoadScript);
          }

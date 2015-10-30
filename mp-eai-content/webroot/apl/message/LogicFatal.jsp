@@ -1,3 +1,5 @@
+<%@ page contentType='text/html;charset=utf-8' %>
+<%@ include file='/apl/public.inc' %>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -15,7 +17,7 @@
 	setTiming(document.getElementById("countdown"));
 	function setTiming(o) {
         if (wait == 0) {
-          window.location.href = "http://eai.ezubo.com/";
+          //window.location.href = "http://eai.ezubo.com/";
         } else {
            wait--;
            o.innerHTML = "("+wait+")";
@@ -25,6 +27,7 @@
         }
      };
 </script>	
+<jh:write source='&message.description' format='text'/>
 </BODY>
 </HEAD>
 </HTML>
