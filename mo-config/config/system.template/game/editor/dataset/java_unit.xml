@@ -5,6 +5,7 @@
 import java.util.Map;
 import org.mo.com.lang.*;
 import org.mo.com.lang.type.*;
+import org.mo.com.lang.reflect.*;
 import org.mo.com.collections.*;
 import org.mo.com.io.*;
 import org.mo.core.aop.face.*;
@@ -272,6 +273,38 @@ public class <jt:item source='$dataset.source_class_name'/>Unit extends FLogicUn
       output.writeInt64(_<jt:item source='$field.data_name' format='method'/>.get());
 </jt:equals>
 </jt:loop>
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      <jt:item source='$dataset.source_class_name'/>Unit unit = (<jt:item source='$dataset.source_class_name'/>Unit)logicUnit;
+<jt:loop source='$fields' alias='field'>
+<jt:equals source='$field.type' value='RecordId|Boolean|Integer|Long|Float|Double|Char|String|Content'>
+      unit.set<jt:item source='$field.data_name' format='class'/>(_<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+<jt:equals source='$field.type' value='Date|Time|DateTime'>
+      unit.<jt:item source='$field.data_name' format='method'/>().assign(_<jt:item source='$field.data_name' format='method'/>);
+</jt:equals>
+</jt:loop>
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public <jt:item source='$dataset.source_class_name'/>Unit clone(){
+      <jt:item source='$dataset.source_class_name'/>Unit unit = RClass.newInstance(<jt:item source='$dataset.source_class_name'/>Unit.class);
+      copy(unit);
+      return unit;
    }
 }
 ]]></Source>

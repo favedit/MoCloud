@@ -9,6 +9,7 @@ import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1348,5 +1349,56 @@ public class FDataPersonUserUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataPersonUserUnit unit = (FDataPersonUserUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setStatusCd(_statusCd);
+      unit.setPassport(_passport);
+      unit.setPassword(_password);
+      unit.setCode(_code);
+      unit.setName(_name);
+      unit.setLabel(_label);
+      unit.setIconUrl(_iconUrl);
+      unit.setContactPhone(_contactPhone);
+      unit.setContactPhoneVerifyCd(_contactPhoneVerifyCd);
+      unit.setContactMail(_contactMail);
+      unit.setContactMailVerifyCd(_contactMailVerifyCd);
+      unit.setIdCard(_idCard);
+      unit.setIdCardVerifyCd(_idCardVerifyCd);
+      unit.setRoleCd(_roleCd);
+      unit.setRoleId(_roleId);
+      unit.setRankLabel(_rankLabel);
+      unit.setDepartmentLabels(_departmentLabels);
+      unit.setDescription(_description);
+      unit.setContent(_content);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataPersonUserUnit clone(){
+      FDataPersonUserUnit unit = RClass.newInstance(FDataPersonUserUnit.class);
+      copy(unit);
+      return unit;
    }
 }

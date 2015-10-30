@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -839,5 +840,45 @@ public class FDataCommonCountryUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataCommonCountryUnit unit = (FDataCommonCountryUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setCode(_code);
+      unit.setName(_name);
+      unit.setLabel(_label);
+      unit.setPhoneCode(_phoneCode);
+      unit.setIconUrl(_iconUrl);
+      unit.setLocationLongitude(_locationLongitude);
+      unit.setLocationLatitude(_locationLatitude);
+      unit.setDisplayCode(_displayCode);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataCommonCountryUnit clone(){
+      FDataCommonCountryUnit unit = RClass.newInstance(FDataCommonCountryUnit.class);
+      copy(unit);
+      return unit;
    }
 }

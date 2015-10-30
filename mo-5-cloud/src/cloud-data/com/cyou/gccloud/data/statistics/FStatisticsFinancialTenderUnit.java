@@ -11,6 +11,7 @@ import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1704,5 +1705,64 @@ public class FStatisticsFinancialTenderUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialTenderUnit unit = (FStatisticsFinancialTenderUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.setGroupNumber(_groupNumber);
+      unit.setLabel(_label);
+      unit.beginDate().assign(_beginDate);
+      unit.endDate().assign(_endDate);
+      unit.setBorrowModel(_borrowModel);
+      unit.setBorrowDuration(_borrowDuration);
+      unit.setBorrowMoney(_borrowMoney);
+      unit.setBorrowInerest(_borrowInerest);
+      unit.setBorrowInerestRate(_borrowInerestRate);
+      unit.setBorrowInfo(_borrowInfo);
+      unit.setProjectInfo(_projectInfo);
+      unit.setCompanyInfo(_companyInfo);
+      unit.setSafeguardInfo(_safeguardInfo);
+      unit.setMortgageInfo(_mortgageInfo);
+      unit.investmentBeginDate().assign(_investmentBeginDate);
+      unit.investmentEndDate().assign(_investmentEndDate);
+      unit.setInvestmentCount(_investmentCount);
+      unit.setInvestmentUserCount(_investmentUserCount);
+      unit.setInvestmentTotal(_investmentTotal);
+      unit.redemptionBeginDate().assign(_redemptionBeginDate);
+      unit.redemptionEndDate().assign(_redemptionEndDate);
+      unit.setRedemptionCount(_redemptionCount);
+      unit.setRedemptionUserCount(_redemptionUserCount);
+      unit.setRedemptionTotal(_redemptionTotal);
+      unit.setInterestTotal(_interestTotal);
+      unit.setNetinvestmentTotal(_netinvestmentTotal);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialTenderUnit clone(){
+      FStatisticsFinancialTenderUnit unit = RClass.newInstance(FStatisticsFinancialTenderUnit.class);
+      copy(unit);
+      return unit;
    }
 }

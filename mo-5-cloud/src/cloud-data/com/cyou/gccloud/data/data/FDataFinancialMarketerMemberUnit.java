@@ -9,6 +9,7 @@ import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -864,5 +865,45 @@ public class FDataFinancialMarketerMemberUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataFinancialMarketerMemberUnit unit = (FDataFinancialMarketerMemberUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setMarketerId(_marketerId);
+      unit.setMemberId(_memberId);
+      unit.setRelationCd(_relationCd);
+      unit.setSmsContactCd(_smsContactCd);
+      unit.recommendBeginDate().assign(_recommendBeginDate);
+      unit.recommendEndDate().assign(_recommendEndDate);
+      unit.setFeedbackCd(_feedbackCd);
+      unit.setFeedbackNote(_feedbackNote);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataFinancialMarketerMemberUnit clone(){
+      FDataFinancialMarketerMemberUnit unit = RClass.newInstance(FDataFinancialMarketerMemberUnit.class);
+      copy(unit);
+      return unit;
    }
 }

@@ -8,6 +8,7 @@ import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -874,5 +875,45 @@ public class FDataResourceSceneUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataResourceSceneUnit unit = (FDataResourceSceneUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setUserId(_userId);
+      unit.setProjectId(_projectId);
+      unit.setResourceId(_resourceId);
+      unit.setFullCode(_fullCode);
+      unit.setCode(_code);
+      unit.setLabel(_label);
+      unit.setKeywords(_keywords);
+      unit.setContent(_content);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataResourceSceneUnit clone(){
+      FDataResourceSceneUnit unit = RClass.newInstance(FDataResourceSceneUnit.class);
+      copy(unit);
+      return unit;
    }
 }

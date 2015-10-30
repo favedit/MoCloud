@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1559,5 +1560,61 @@ public class FStatisticsFinancialMarketerPhaseUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialMarketerPhaseUnit unit = (FStatisticsFinancialMarketerPhaseUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.recordYear().assign(_recordYear);
+      unit.recordMonth().assign(_recordMonth);
+      unit.recordWeek().assign(_recordWeek);
+      unit.recordDay().assign(_recordDay);
+      unit.recordHour().assign(_recordHour);
+      unit.recordDate().assign(_recordDate);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setMarketerId(_marketerId);
+      unit.setMarketerLabel(_marketerLabel);
+      unit.setMarketerInvestment(_marketerInvestment);
+      unit.setMarketerInvestmentTotal(_marketerInvestmentTotal);
+      unit.setMarketerRedemption(_marketerRedemption);
+      unit.setMarketerRedemptionTotal(_marketerRedemptionTotal);
+      unit.setMarketerNetinvestment(_marketerNetinvestment);
+      unit.setMarketerNetinvestmentTotal(_marketerNetinvestmentTotal);
+      unit.setMarketerInterest(_marketerInterest);
+      unit.setMarketerInterestTotal(_marketerInterestTotal);
+      unit.setMarketerPerformance(_marketerPerformance);
+      unit.setMarketerPerformanceTotal(_marketerPerformanceTotal);
+      unit.customerActionDate().assign(_customerActionDate);
+      unit.setCustomerCount(_customerCount);
+      unit.setCustomerTotal(_customerTotal);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialMarketerPhaseUnit clone(){
+      FStatisticsFinancialMarketerPhaseUnit unit = RClass.newInstance(FStatisticsFinancialMarketerPhaseUnit.class);
+      copy(unit);
+      return unit;
    }
 }

@@ -100,9 +100,20 @@ public abstract class FLogicTable
    // @param logicContext 逻辑环境
    //============================================================
    public void linkLogicContext(ILogicContext logicContext){
-      _logicContext = logicContext;
       SLogicConnectionInfo connectionInfo = connectionInfo();
-      _connection = logicContext.activeConnection(connectionInfo.name());
+      linkLogicContext(logicContext, connectionInfo.name());
+   }
+
+   //============================================================
+   // <T>设置逻辑环境。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param connectionName 链接名称
+   //============================================================
+   public void linkLogicContext(ILogicContext logicContext,
+                                String connectionName){
+      _logicContext = logicContext;
+      _connection = logicContext.activeConnection(connectionName);
       if(_connection instanceof ILogicCacheVendor){
          _cacheVendor = (ILogicCacheVendor)_connection;
          if(_cacheVendor != null){

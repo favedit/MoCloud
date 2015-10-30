@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1851,5 +1852,67 @@ public class FStatisticsFinancialDynamicUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialDynamicUnit unit = (FStatisticsFinancialDynamicUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.setLinkBorrowId(_linkBorrowId);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLinkId(_departmentLinkId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setDepartmentLabelPath(_departmentLabelPath);
+      unit.setMarketerId(_marketerId);
+      unit.setMarketerLinkId(_marketerLinkId);
+      unit.setMarketerLabel(_marketerLabel);
+      unit.setMarketerStatusCd(_marketerStatusCd);
+      unit.setMarketerRankLabel(_marketerRankLabel);
+      unit.setCustomerId(_customerId);
+      unit.setCustomerLinkId(_customerLinkId);
+      unit.setCustomerLabel(_customerLabel);
+      unit.setCustomerCard(_customerCard);
+      unit.setCustomerArea(_customerArea);
+      unit.setCustomerBirth(_customerBirth);
+      unit.setCustomerGender(_customerGender);
+      unit.setCustomerPhone(_customerPhone);
+      unit.setCustomerActionCd(_customerActionCd);
+      unit.customerActionDate().assign(_customerActionDate);
+      unit.setCustomerActionAmount(_customerActionAmount);
+      unit.setCustomerActionInterest(_customerActionInterest);
+      unit.setTenderChanged(_tenderChanged);
+      unit.setTenderPriorId(_tenderPriorId);
+      unit.setTenderPriorLinkId(_tenderPriorLinkId);
+      unit.setTenderPriorModel(_tenderPriorModel);
+      unit.setTenderId(_tenderId);
+      unit.setTenderLinkId(_tenderLinkId);
+      unit.setTenderModel(_tenderModel);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialDynamicUnit clone(){
+      FStatisticsFinancialDynamicUnit unit = RClass.newInstance(FStatisticsFinancialDynamicUnit.class);
+      copy(unit);
+      return unit;
    }
 }

@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -2019,5 +2020,71 @@ public class FStatisticsFinancialPhaseUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialPhaseUnit unit = (FStatisticsFinancialPhaseUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.recordYear().assign(_recordYear);
+      unit.recordMonth().assign(_recordMonth);
+      unit.recordWeek().assign(_recordWeek);
+      unit.recordDay().assign(_recordDay);
+      unit.recordHour().assign(_recordHour);
+      unit.recordDate().assign(_recordDate);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.actionDate().assign(_actionDate);
+      unit.setDepartmentCount(_departmentCount);
+      unit.setDepartmentTotal(_departmentTotal);
+      unit.setMarketerCount(_marketerCount);
+      unit.setMarketerTotal(_marketerTotal);
+      unit.setCustomerCount(_customerCount);
+      unit.setCustomerTotal(_customerTotal);
+      unit.setMemberCount(_memberCount);
+      unit.setMemberTotal(_memberTotal);
+      unit.setInvestment(_investment);
+      unit.setInvestmentTotal(_investmentTotal);
+      unit.setInvestmentNumber(_investmentNumber);
+      unit.setInvestmentNumberTotal(_investmentNumberTotal);
+      unit.setInvestmentUser(_investmentUser);
+      unit.setInvestmentUserTotal(_investmentUserTotal);
+      unit.setRedemption(_redemption);
+      unit.setRedemptionTotal(_redemptionTotal);
+      unit.setRedemptionNumber(_redemptionNumber);
+      unit.setRedemptionNumberTotal(_redemptionNumberTotal);
+      unit.setRedemptionUser(_redemptionUser);
+      unit.setRedemptionUserTotal(_redemptionUserTotal);
+      unit.setNetinvestment(_netinvestment);
+      unit.setNetinvestmentTotal(_netinvestmentTotal);
+      unit.setInterest(_interest);
+      unit.setInterestTotal(_interestTotal);
+      unit.setPerformance(_performance);
+      unit.setPerformanceTotal(_performanceTotal);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialPhaseUnit clone(){
+      FStatisticsFinancialPhaseUnit unit = RClass.newInstance(FStatisticsFinancialPhaseUnit.class);
+      copy(unit);
+      return unit;
    }
 }

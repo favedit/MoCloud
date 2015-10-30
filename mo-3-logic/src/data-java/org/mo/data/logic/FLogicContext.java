@@ -54,6 +54,29 @@ public class FLogicContext
    }
 
    //============================================================
+   // <T>根据类对象获得逻辑表格接口。</T>
+   //
+   // @param clazz 类对象
+   // @return 逻辑表格接口
+   //============================================================
+   @Override
+   @SuppressWarnings("unchecked")
+   public <T extends ILogicTable> T findLogic(Class<T> clazz,
+                                              String connectionName){
+      if(_tables == null){
+         _tables = new FDictionary<ILogicTable>(ILogicTable.class);
+      }
+      String className = clazz.getName();
+      FLogicTable table = (FLogicTable)_tables.find(className + "@" + connectionName);
+      if(table == null){
+         table = (FLogicTable)RClass.newInstance(clazz);
+         table.linkLogicContext(this, connectionName);
+         _tables.set(className, table);
+      }
+      return (T)table;
+   }
+
+   //============================================================
    // <T>释放处理。</T>
    //============================================================
    @Override

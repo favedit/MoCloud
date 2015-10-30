@@ -16,4 +16,14 @@ public interface ILogicContext
    // @return 逻辑表格接口
    //============================================================
    <T extends ILogicTable> T findLogic(Class<T> clazz);
+
+   //============================================================
+   // <T>根据类对象获得逻辑表格接口。</T>
+   //
+   // @param clazz 类对象
+   // @param connectionName 链接名称
+   // @return 逻辑表格接口
+   //============================================================
+   <T extends ILogicTable> T findLogic(Class<T> clazz,
+                                       String connectionName);
 }

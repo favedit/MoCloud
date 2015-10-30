@@ -9,6 +9,7 @@ import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -980,5 +981,48 @@ public class FDataLogicNewsUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataLogicNewsUnit unit = (FDataLogicNewsUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setLabel(_label);
+      unit.setIconUrl(_iconUrl);
+      unit.setStatusCd(_statusCd);
+      unit.setDisplayCd(_displayCd);
+      unit.setLinkCd(_linkCd);
+      unit.setDisplayOrder(_displayOrder);
+      unit.recordDate().assign(_recordDate);
+      unit.setKeywords(_keywords);
+      unit.setLinkUrl(_linkUrl);
+      unit.setDescription(_description);
+      unit.setContent(_content);
+      unit.setViewCount(_viewCount);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataLogicNewsUnit clone(){
+      FDataLogicNewsUnit unit = RClass.newInstance(FDataLogicNewsUnit.class);
+      copy(unit);
+      return unit;
    }
 }

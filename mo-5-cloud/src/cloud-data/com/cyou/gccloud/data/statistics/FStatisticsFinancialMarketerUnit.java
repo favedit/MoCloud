@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -2351,5 +2352,78 @@ public class FStatisticsFinancialMarketerUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialMarketerUnit unit = (FStatisticsFinancialMarketerUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.setLinkCd(_linkCd);
+      unit.setDataId(_dataId);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLinkId(_departmentLinkId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setDepartmentLevel1Id(_departmentLevel1Id);
+      unit.setDepartmentLevel1Label(_departmentLevel1Label);
+      unit.setDepartmentLevel2Id(_departmentLevel2Id);
+      unit.setDepartmentLevel2Label(_departmentLevel2Label);
+      unit.setDepartmentLevel3Id(_departmentLevel3Id);
+      unit.setDepartmentLevel3Label(_departmentLevel3Label);
+      unit.setDepartmentLevel4Id(_departmentLevel4Id);
+      unit.setDepartmentLevel4Label(_departmentLevel4Label);
+      unit.setDepartmentLevel5Id(_departmentLevel5Id);
+      unit.setDepartmentLevel5Label(_departmentLevel5Label);
+      unit.setDepartmentLevel6Id(_departmentLevel6Id);
+      unit.setDepartmentLevel6Label(_departmentLevel6Label);
+      unit.setDepartmentLevel7Id(_departmentLevel7Id);
+      unit.setDepartmentLevel7Label(_departmentLevel7Label);
+      unit.setDepartmentLevel8Id(_departmentLevel8Id);
+      unit.setDepartmentLevel8Label(_departmentLevel8Label);
+      unit.setCode(_code);
+      unit.setLabel(_label);
+      unit.setStatusCd(_statusCd);
+      unit.setCard(_card);
+      unit.setCardArea(_cardArea);
+      unit.setCardBirth(_cardBirth);
+      unit.setCardGender(_cardGender);
+      unit.setPhone(_phone);
+      unit.setPhoneCityId(_phoneCityId);
+      unit.setPhoneCityCode(_phoneCityCode);
+      unit.setRankLabel(_rankLabel);
+      unit.setInvestmentTotal(_investmentTotal);
+      unit.setRedemptionTotal(_redemptionTotal);
+      unit.setNetinvestmentTotal(_netinvestmentTotal);
+      unit.setInterestTotal(_interestTotal);
+      unit.setPerformanceTotal(_performanceTotal);
+      unit.registerDate().assign(_registerDate);
+      unit.enterDate().assign(_enterDate);
+      unit.leaveDate().assign(_leaveDate);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialMarketerUnit clone(){
+      FStatisticsFinancialMarketerUnit unit = RClass.newInstance(FStatisticsFinancialMarketerUnit.class);
+      copy(unit);
+      return unit;
    }
 }

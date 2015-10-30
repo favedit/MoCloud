@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1559,5 +1560,61 @@ public class FStatisticsFinancialDepartmentPhaseUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialDepartmentPhaseUnit unit = (FStatisticsFinancialDepartmentPhaseUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.recordYear().assign(_recordYear);
+      unit.recordMonth().assign(_recordMonth);
+      unit.recordWeek().assign(_recordWeek);
+      unit.recordDay().assign(_recordDay);
+      unit.recordHour().assign(_recordHour);
+      unit.recordDate().assign(_recordDate);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setDepartmentInvestment(_departmentInvestment);
+      unit.setDepartmentInvestmentTotal(_departmentInvestmentTotal);
+      unit.setDepartmentRedemption(_departmentRedemption);
+      unit.setDepartmentRedemptionTotal(_departmentRedemptionTotal);
+      unit.setDepartmentNetinvestment(_departmentNetinvestment);
+      unit.setDepartmentNetinvestmentTotal(_departmentNetinvestmentTotal);
+      unit.setDepartmentInterest(_departmentInterest);
+      unit.setDepartmentInterestTotal(_departmentInterestTotal);
+      unit.setDepartmentPerformance(_departmentPerformance);
+      unit.setDepartmentPerformanceTotal(_departmentPerformanceTotal);
+      unit.setMarketerCount(_marketerCount);
+      unit.setMarketerTotal(_marketerTotal);
+      unit.customerActionDate().assign(_customerActionDate);
+      unit.setCustomerCount(_customerCount);
+      unit.setCustomerTotal(_customerTotal);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialDepartmentPhaseUnit clone(){
+      FStatisticsFinancialDepartmentPhaseUnit unit = RClass.newInstance(FStatisticsFinancialDepartmentPhaseUnit.class);
+      copy(unit);
+      return unit;
    }
 }

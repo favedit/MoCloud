@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1887,5 +1888,68 @@ public class FDataFinancialDepartmentUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataFinancialDepartmentUnit unit = (FDataFinancialDepartmentUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setLinkParentId(_linkParentId);
+      unit.setLinkId(_linkId);
+      unit.setCode(_code);
+      unit.setName(_name);
+      unit.setLabel(_label);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setRegionId(_regionId);
+      unit.setRegionLabel(_regionLabel);
+      unit.setLevel(_level);
+      unit.setLeaderId(_leaderId);
+      unit.setLeaderLabel(_leaderLabel);
+      unit.setLeaderPhone(_leaderPhone);
+      unit.setProvinceId(_provinceId);
+      unit.setProvinceLabel(_provinceLabel);
+      unit.setCityId(_cityId);
+      unit.setCityLabel(_cityLabel);
+      unit.setDetailAddress(_detailAddress);
+      unit.setLocationLongitude(_locationLongitude);
+      unit.setLocationLatitude(_locationLatitude);
+      unit.setDepartmentPhone(_departmentPhone);
+      unit.buildDate().assign(_buildDate);
+      unit.setInvestmentTotal(_investmentTotal);
+      unit.setInvestmentCount(_investmentCount);
+      unit.investmentDate().assign(_investmentDate);
+      unit.setRedemptionTotal(_redemptionTotal);
+      unit.setRedemptionCount(_redemptionCount);
+      unit.redemptionDate().assign(_redemptionDate);
+      unit.setNetinvestmentTotal(_netinvestmentTotal);
+      unit.setInterestTotal(_interestTotal);
+      unit.setPerformanceTotal(_performanceTotal);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataFinancialDepartmentUnit clone(){
+      FDataFinancialDepartmentUnit unit = RClass.newInstance(FDataFinancialDepartmentUnit.class);
+      copy(unit);
+      return unit;
    }
 }

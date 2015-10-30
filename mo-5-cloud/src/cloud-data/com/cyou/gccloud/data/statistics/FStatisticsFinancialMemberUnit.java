@@ -9,6 +9,7 @@ import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -2452,5 +2453,80 @@ public class FStatisticsFinancialMemberUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FStatisticsFinancialMemberUnit unit = (FStatisticsFinancialMemberUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setLinkId(_linkId);
+      unit.linkDate().assign(_linkDate);
+      unit.setLinkCd(_linkCd);
+      unit.setDataId(_dataId);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLinkId(_departmentLinkId);
+      unit.setMarketerId(_marketerId);
+      unit.setMarketerLinkId(_marketerLinkId);
+      unit.setCustomerId(_customerId);
+      unit.setCustomerLinkId(_customerLinkId);
+      unit.setCustomerLevelCd(_customerLevelCd);
+      unit.setPassport(_passport);
+      unit.setLabel(_label);
+      unit.setCard(_card);
+      unit.setCardArea(_cardArea);
+      unit.setCardBirth(_cardBirth);
+      unit.setCardGender(_cardGender);
+      unit.setPhone(_phone);
+      unit.setPhoneCityId(_phoneCityId);
+      unit.setPhoneCityCode(_phoneCityCode);
+      unit.setEmail(_email);
+      unit.setGenderCd(_genderCd);
+      unit.setGenderCode(_genderCode);
+      unit.setMarryCd(_marryCd);
+      unit.setMarryCode(_marryCode);
+      unit.setEducationCd(_educationCd);
+      unit.setEducationCode(_educationCode);
+      unit.setBusinessCd(_businessCd);
+      unit.setBusinessCode(_businessCode);
+      unit.setIncomeCd(_incomeCd);
+      unit.setIncomeCode(_incomeCode);
+      unit.setProvinceAreaId(_provinceAreaId);
+      unit.setProvinceId(_provinceId);
+      unit.setProvinceCode(_provinceCode);
+      unit.setCityId(_cityId);
+      unit.setCityCode(_cityCode);
+      unit.setAreaId(_areaId);
+      unit.setAreaCode(_areaCode);
+      unit.setAddress(_address);
+      unit.setInfo(_info);
+      unit.registerDate().assign(_registerDate);
+      unit.investmentDate().assign(_investmentDate);
+      unit.redemptionDate().assign(_redemptionDate);
+      unit.lastLoginDate().assign(_lastLoginDate);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FStatisticsFinancialMemberUnit clone(){
+      FStatisticsFinancialMemberUnit unit = RClass.newInstance(FStatisticsFinancialMemberUnit.class);
+      copy(unit);
+      return unit;
    }
 }

@@ -10,6 +10,7 @@ import org.mo.com.lang.RDouble;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -1477,5 +1478,59 @@ public class FDataFinancialMarketerUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataFinancialMarketerUnit unit = (FDataFinancialMarketerUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setUserId(_userId);
+      unit.setLinkId(_linkId);
+      unit.setStatisticsId(_statisticsId);
+      unit.setName(_name);
+      unit.setLabel(_label);
+      unit.setPassport(_passport);
+      unit.setStatusCd(_statusCd);
+      unit.setPhone(_phone);
+      unit.setCard(_card);
+      unit.setRankLabel(_rankLabel);
+      unit.setDepartmentId(_departmentId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setDepartmentLabels(_departmentLabels);
+      unit.setCustomerInvestmentTotal(_customerInvestmentTotal);
+      unit.setCustomerInvestmentCount(_customerInvestmentCount);
+      unit.customerInvestmentDate().assign(_customerInvestmentDate);
+      unit.setCustomerRedemptionTotal(_customerRedemptionTotal);
+      unit.setCustomerRedemptionCount(_customerRedemptionCount);
+      unit.customerRedemptionDate().assign(_customerRedemptionDate);
+      unit.setCustomerNetinvestmentTotal(_customerNetinvestmentTotal);
+      unit.setCustomerInterestTotal(_customerInterestTotal);
+      unit.setCustomerPerformanceTotal(_customerPerformanceTotal);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataFinancialMarketerUnit clone(){
+      FDataFinancialMarketerUnit unit = RClass.newInstance(FDataFinancialMarketerUnit.class);
+      copy(unit);
+      return unit;
    }
 }

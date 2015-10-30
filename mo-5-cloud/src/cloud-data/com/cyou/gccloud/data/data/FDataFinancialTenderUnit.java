@@ -10,6 +10,7 @@ import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.reflect.RClass;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
@@ -857,5 +858,45 @@ public class FDataFinancialTenderUnit
       output.writeInt64(_createDate.get());
       output.writeInt64(_updateUserId);
       output.writeInt64(_updateDate.get());
+   }
+
+   //============================================================
+   // <T>复制当前对象。</T>
+   //
+   // @param unit 对象
+   // @return 对象
+   //============================================================
+   @Override
+   public void copy(FLogicUnit logicUnit){
+      super.copy(logicUnit);
+      FDataFinancialTenderUnit unit = (FDataFinancialTenderUnit)logicUnit;
+      unit.setOuid(_ouid);
+      unit.setOvld(_ovld);
+      unit.setGuid(_guid);
+      unit.setCustomerId(_customerId);
+      unit.setProductId(_productId);
+      unit.setInvestment(_investment);
+      unit.investmentDate().assign(_investmentDate);
+      unit.setRedemption(_redemption);
+      unit.redemptionDate().assign(_redemptionDate);
+      unit.setNetinvestment(_netinvestment);
+      unit.setInterest(_interest);
+      unit.setNote(_note);
+      unit.setCreateUserId(_createUserId);
+      unit.createDate().assign(_createDate);
+      unit.setUpdateUserId(_updateUserId);
+      unit.updateDate().assign(_updateDate);
+   }
+
+   //============================================================
+   // <T>克隆当前对象。</T>
+   //
+   // @return 对象
+   //============================================================
+   @Override
+   public FDataFinancialTenderUnit clone(){
+      FDataFinancialTenderUnit unit = RClass.newInstance(FDataFinancialTenderUnit.class);
+      copy(unit);
+      return unit;
    }
 }
