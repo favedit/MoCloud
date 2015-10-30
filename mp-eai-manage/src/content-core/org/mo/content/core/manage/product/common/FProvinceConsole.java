@@ -144,15 +144,15 @@ public class FProvinceConsole
    // @return boolean
    // ============================================================
    @Override
-   public boolean isExistsByLabelandAIdandCId(ILogicContext logicContext, 
-                                              String proviceLabel, 
-                                              Long areaId, 
-                                              Long countryId) {
+   public boolean isExistsByLabelandId(ILogicContext logicContext, 
+                                       String proviceLabel, 
+                                       Long areaId, 
+                                       Long countryId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(proviceLabel) && !RString.isEmpty(countryId + "") && !RString.isEmpty(areaId + "")) {
          whereSql.append(FDataCommonProvinceLogic.LABEL);
          whereSql.append(" like ");
-         whereSql.append(" '%{label}%'");
+         whereSql.append(" '{label}' ");
          whereSql.bind("label", proviceLabel);
          whereSql.append(" and ");
          whereSql.append(FDataCommonProvinceLogic.COUNTRY_ID);
@@ -182,16 +182,16 @@ public class FProvinceConsole
    // @return boolean
    // ============================================================
    @Override
-   public boolean isExistsByLabelandAIdandCIdandOuid(ILogicContext logicContext, 
-                                                     String proviceLabel, 
-                                                     Long areaId, 
-                                                     Long countryId,
-                                                     Long ouid) {
+   public boolean isExistsByLabelandIdandOuid(ILogicContext logicContext, 
+                                              String proviceLabel, 
+                                              Long areaId, 
+                                              Long countryId,
+                                              Long ouid) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(proviceLabel) && !RString.isEmpty(countryId + "") && !RString.isEmpty(areaId + "")) {
          whereSql.append(FDataCommonProvinceLogic.LABEL);
          whereSql.append(" like ");
-         whereSql.append(" '%{label}%'");
+         whereSql.append(" '{label}' ");
          whereSql.bind("label", proviceLabel);
          whereSql.append(" and ");
          whereSql.append(FDataCommonProvinceLogic.COUNTRY_ID);

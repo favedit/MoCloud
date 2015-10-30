@@ -98,13 +98,13 @@
   <thead>
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="80px">编号</th>
     <th
      data-options="field:'cityLabel',halign:'center',align:'left',sortable:true"
-     width="60px">城市</th>
+     width="300px">城市</th>
     <th
      data-options="field:'cardCode',halign:'center',align:'center',sortable:true"
-     width="60px">身份证</th>
+     width="100px">身份证</th>
     <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
     <th

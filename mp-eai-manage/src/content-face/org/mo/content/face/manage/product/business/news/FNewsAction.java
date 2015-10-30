@@ -86,7 +86,10 @@ public class FNewsAction
       }
       FLogicDataset<FDataNewsInfo> unitList = _newsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataNewsInfo info : unitList){
-         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         String urls = info.iconUrl();
+         if(!RString.isEmpty(urls)){
+            info.setMakeUrl(_storageConsole.makeUrl(urls.trim()));
+         }
          info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
@@ -147,7 +150,10 @@ public class FNewsAction
          }
          SGcStorage storage = new SGcStorage("data.logic.news", unit.guid(), file);
          _storageConsole.store(storage);
-         unit.setIconUrl(storage.pack());
+         String urls = storage.pack();
+         if(!RString.isEmpty(urls)){
+            unit.setIconUrl(urls.trim());
+         }
       }
       unit.setContent(_storageConsole.makeText(context.parameter("content")));
       setLogicNews(context, logicContext, unit, "0");
@@ -234,7 +240,10 @@ public class FNewsAction
          }
          SGcStorage storage = new SGcStorage("data.logic.news", unit.guid(), file);
          _storageConsole.store(storage);
-         unit.setIconUrl(storage.pack());
+         String urls = storage.pack();
+         if(!RString.isEmpty(urls)){
+            unit.setIconUrl(urls.trim());
+         }
       }
       String content = context.parameter("content");
       unit.setContent(_storageConsole.makeText(content));
@@ -288,7 +297,7 @@ public class FNewsAction
       }
       long id = context.parameterAsLong("id");
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
-      if(RString.equals(unit.statusCd(), 2)){
+      if(RString.equals(unit.statusCd(), EGcResourceStatus.Publish)){
          basePage.setJson("noDel");
       }else{
          basePage.setJson("yesDel");
@@ -346,17 +355,6 @@ public class FNewsAction
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
       unit.setStatusCd(EGcResourceStatus.Apply);
-//      FWebUploadFile file = context.files().first();
-//      if(null == file){
-//         String oiconUr = context.parameter("oiconUr");
-//         if(!RString.isEmpty(oiconUr)){
-//            unit.setIconUrl(oiconUr);
-//         }else{
-//            unit.setIconUrl(context.parameter("iconUrl"));
-//         }
-//      }else{
-//         _newsConsole.saveImage(file, unit, flag);
-//      }
    }
 
    // ============================================================
@@ -421,26 +419,4 @@ public class FNewsAction
       return "/manage/product/business/news/NewsDataInfoForContent";
    }
 
-   // ============================================================
-   // <T>获取内容</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   @Override
-   public String getUpdateDescription(IWebContext context,
-                                      ILogicContext logicContext,
-                                      FNewsPage page,
-                                      FBasePage basePage){
-      _logger.debug(this, "getUpdateDescription", "getUpdateDescription begin. (userId={1})", basePage.userId());
-      if(!basePage.userExists()){
-         return "/manage/common/ConnectTimeout";
-      }
-      FDataNewsInfo info = new FDataNewsInfo();
-      info.setContent(context.parameter("content"));
-      page.setUnit(info);
-      return "/manage/product/business/news/NewsDataInfoForContent";
-   }
 }

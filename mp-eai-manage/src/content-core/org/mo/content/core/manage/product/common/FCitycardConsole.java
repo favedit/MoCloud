@@ -77,15 +77,12 @@ public class FCitycardConsole
                                                 int cardCode){
       FSql whereSql = new FSql();
       whereSql.append(" 1=1 ");
-      if(!RString.isEmpty(cityId+"")&& cityId>0){
+      if((!RString.isEmpty(cityId+"")&& cityId>0)&&(!RString.isEmpty(cardCode+"")&& cardCode>0)){
          whereSql.append(" AND ");
          whereSql.append(FDataCommonCityCardLogic.CITY_ID);
          whereSql.append(" = ");
          whereSql.append(" {cityId}");
          whereSql.bind("cityId", RString.parse(cityId));
-      }
-
-      if(!RString.isEmpty(cardCode+"")&& cardCode>0){
          whereSql.append(" AND ");
          whereSql.append(FDataCommonCityCardLogic.CARD_CODE);
          whereSql.append(" = ");

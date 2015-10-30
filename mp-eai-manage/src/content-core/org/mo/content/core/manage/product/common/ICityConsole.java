@@ -45,11 +45,11 @@ public interface ICityConsole
    // @param provinceId 省份id
    // @return 数据集合
    // ============================================================
-   boolean isExsitsByLabelandByCIdandAIdandPId(ILogicContext logicContext, 
-                                               String label, 
-                                               Long countryId, 
-                                               Long areaId, 
-                                               Long provinceId);
+   boolean isExsitsByLabelandId(ILogicContext logicContext, 
+                                String label, 
+                                Long countryId, 
+                                Long areaId, 
+                                Long provinceId);
    
    // ============================================================
    // <T>根据label,countryId,areaId,provinceId,ouid判断数据存在重复</T>
@@ -61,12 +61,12 @@ public interface ICityConsole
    // @param ouid ouid主键
    // @return 数据集合
    // ============================================================
-   boolean isExsitsByLabelandByCIdandAIdandPIdandOuid(ILogicContext logicContext, 
-                                                      String label, 
-                                                      Long countryId, 
-                                                      Long areaId, 
-                                                      Long provinceId,
-                                                      Long ouid);
+   boolean isExsitsByLabelandIdandOuid(ILogicContext logicContext, 
+                                       String label, 
+                                       Long countryId, 
+                                       Long areaId, 
+                                       Long provinceId,
+                                       Long ouid);
    
    // ============================================================
    // <T>根据省份id获取对象列表</T>

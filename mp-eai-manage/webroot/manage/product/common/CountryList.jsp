@@ -97,25 +97,25 @@
   <thead>
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="60px">编号</th>
     <th
      data-options="field:'name',halign:'center',align:'left',sortable:true"
-     width="100px" >名称</th>
+     width="200px" >名称</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="100px">标签</th>
+     width="200px">标签</th>
      <th
      data-options="field:'displayCode',halign:'center',align:'left',sortable:true"
      width="100px">排序</th>
     <th
      data-options="field:'phoneCode',halign:'center',align:'left',sortable:true"
-     width="60px">区号</th>
+     width="100px">区号</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="60px">代码</th>
+     width="100px">代码</th>
     <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
-     width="80px">图标地址</th>
+     width="200px">图标地址</th>
      <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>    
     <th

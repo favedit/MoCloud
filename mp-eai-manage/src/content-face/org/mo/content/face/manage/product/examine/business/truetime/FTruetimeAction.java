@@ -84,7 +84,10 @@ public class FTruetimeAction
       }
       FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataTruetimeInfo info : unitList){
-         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         String urls = info.iconUrl();
+         if(!RString.isEmpty(urls)){
+            info.setMakeUrl(_storageConsole.makeUrl(urls.trim()));
+         }
       }
       basePage.setJson(unitList.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());

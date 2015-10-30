@@ -141,7 +141,7 @@ public class FCityAction
       }
       FDataCommonCityUnit unit = _cityConsole.doPrepare(logicContext);
       setCityDat(unit, context, logicContext);
-      if (_cityConsole.isExsitsByLabelandByCIdandAIdandPId(logicContext, unit.label(), unit.countryId(), unit.areaId(), unit.provinceId())) {
+      if (_cityConsole.isExsitsByLabelandId(logicContext, unit.label(), unit.countryId(), unit.areaId(), unit.provinceId())) {
          page.setResult("请重新增加!");
          return "/manage/product/common/InsertCity";
       }
@@ -197,7 +197,7 @@ public class FCityAction
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
       FDataCommonCityUnit unit = _cityConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
       setCityDat(unit, context, logicContext);
-      if (_cityConsole.isExsitsByLabelandByCIdandAIdandPIdandOuid(logicContext, unit.label(), unit.countryId(), unit.areaId(), unit.provinceId(),unit.ouid())) {
+      if (_cityConsole.isExsitsByLabelandIdandOuid(logicContext, unit.label(), unit.countryId(), unit.areaId(), unit.provinceId(),unit.ouid())) {
          page.setResult("数据重复,请重新增加!");
          return "/manage/product/common/UpdateCity";
       }

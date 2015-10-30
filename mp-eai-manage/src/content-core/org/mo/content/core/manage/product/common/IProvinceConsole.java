@@ -63,10 +63,10 @@ public interface IProvinceConsole
    // @param countryId 国家id
    // @return 数据对象
    // ============================================================
-   boolean isExistsByLabelandAIdandCId(ILogicContext logicContext, 
-                                       String proviceLabel, 
-                                       Long areaId, 
-                                       Long countryId);
+   boolean isExistsByLabelandId(ILogicContext logicContext, 
+                                String proviceLabel, 
+                                Long areaId, 
+                                Long countryId);
    
    // ============================================================
    // <T>根据标签,区域id,国家id,ouid判读数据库中是否已重复</T>
@@ -77,11 +77,11 @@ public interface IProvinceConsole
    // @param ouid ouid
    // @return boolean
    // ============================================================
-   boolean isExistsByLabelandAIdandCIdandOuid(ILogicContext logicContext, 
-                                              String proviceLabel, 
-                                              Long areaId, 
-                                              Long countryId,
-                                              Long ouid);
+   boolean isExistsByLabelandIdandOuid(ILogicContext logicContext, 
+                                       String proviceLabel, 
+                                       Long areaId, 
+                                       Long countryId,
+                                       Long ouid);
    
    // ============================================================
    // <T>更具区域id查询所有省份</T>

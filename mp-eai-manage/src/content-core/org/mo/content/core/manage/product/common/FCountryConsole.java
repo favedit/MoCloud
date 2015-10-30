@@ -87,7 +87,7 @@ public class FCountryConsole
                                             String name) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(name)) {
-         whereSql.append(FDataCommonCountryLogic.NAME + " LIKE '%{name}%'");
+         whereSql.append(FDataCommonCountryLogic.NAME + " = '{name}'");
          whereSql.bind("name", RString.parse(name));
       }
       FDataCommonCountryLogic logic = logicContext.findLogic(FDataCommonCountryLogic.class);

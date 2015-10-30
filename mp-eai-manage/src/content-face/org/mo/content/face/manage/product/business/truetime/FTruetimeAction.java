@@ -84,7 +84,10 @@ public class FTruetimeAction implements ITruetimeAction {
       FLogicDataset<FDataTruetimeInfo> unitList = _truetimeConsole.select(logicContext, unit, page.pageCurrent() - 1,
             pageSize);
       for (FDataTruetimeInfo info : unitList) {
-         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         String urls = info.iconUrl();
+         if(!RString.isEmpty(urls)){
+            info.setMakeUrl(_storageConsole.makeUrl(urls.trim()));
+         }
          info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
@@ -139,7 +142,10 @@ public class FTruetimeAction implements ITruetimeAction {
          }
          SGcStorage storage = new SGcStorage("data.logic.truetime", unit.guid(), file);
          _storageConsole.store(storage);
-         unit.setIconUrl(storage.pack());
+         String urls = storage.pack();
+         if(!RString.isEmpty(urls)){
+            unit.setIconUrl(urls.trim());
+         }
          _logger.debug(this, "Insert", "Insert insertImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       unit.setContent(_storageConsole.makeText(context.parameter("content")));
@@ -222,7 +228,10 @@ public class FTruetimeAction implements ITruetimeAction {
          }
          SGcStorage storage = new SGcStorage("data.logic.truetime", unit.guid(), file);
          _storageConsole.store(storage);
-         unit.setIconUrl(storage.pack());
+         String urls = storage.pack();
+         if(!RString.isEmpty(urls)){
+            unit.setIconUrl(urls.trim());
+         }
          _logger.debug(this, "Update", "Update uploadImages .(url={1})", _storageConsole.makeUrl(storage.pack()));
       }
       String content = context.parameter("content");

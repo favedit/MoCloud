@@ -119,16 +119,16 @@ public class FCityConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public boolean isExsitsByLabelandByCIdandAIdandPId(ILogicContext logicContext, 
-                                                      String label, 
-                                                      Long countryId, 
-                                                      Long areaId, 
-                                                      Long provinceId) {
+   public boolean isExsitsByLabelandId(ILogicContext logicContext, 
+                                       String label, 
+                                       Long countryId, 
+                                       Long areaId, 
+                                       Long provinceId) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(label) && !RString.isEmpty(areaId + "") && !RString.isEmpty(countryId + "") && !RString.isEmpty(provinceId + "")) {
          whereSql.append(FDataCommonCityLogic.LABEL);
-         whereSql.append(" like ");
-         whereSql.append(" '%{label}%'");
+         whereSql.append(" = ");
+         whereSql.append(" '{label}' ");
          whereSql.bind("label", label);
          whereSql.append(" and ");
          whereSql.append(FDataCommonCityLogic.COUNTRY_ID);
@@ -165,17 +165,17 @@ public class FCityConsole
    // @return 数据集合
    // ============================================================
    @Override
-   public boolean isExsitsByLabelandByCIdandAIdandPIdandOuid(ILogicContext logicContext, 
-                                                             String label, 
-                                                             Long countryId, 
-                                                             Long areaId, 
-                                                             Long provinceId,
-                                                             Long ouid) {
+   public boolean isExsitsByLabelandIdandOuid(ILogicContext logicContext, 
+                                              String label, 
+                                              Long countryId, 
+                                              Long areaId, 
+                                              Long provinceId,
+                                              Long ouid) {
       FSql whereSql = new FSql();
       if (!RString.isEmpty(label) && !RString.isEmpty(areaId + "") && !RString.isEmpty(countryId + "") && !RString.isEmpty(provinceId + "")) {
          whereSql.append(FDataCommonCityLogic.LABEL);
-         whereSql.append(" like ");
-         whereSql.append(" '%{label}%'");
+         whereSql.append(" = ");
+         whereSql.append(" '{label}' ");
          whereSql.bind("label", label);
          whereSql.append(" and ");
          whereSql.append(FDataCommonCityLogic.COUNTRY_ID);

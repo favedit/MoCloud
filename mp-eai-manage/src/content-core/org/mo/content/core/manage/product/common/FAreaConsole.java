@@ -104,8 +104,8 @@ public class FAreaConsole
       FSql whereSql = new FSql();
       if (!RString.isEmpty(areaLabel) && !RString.isEmpty(countryId + "")) {
          whereSql.append(FDataCommonAreaLogic.LABEL);
-         whereSql.append(" like ");
-         whereSql.append(" '%{label}%'");
+         whereSql.append(" = ");
+         whereSql.append(" '{label}' ");
          whereSql.bind("label", areaLabel);
          whereSql.append(" and ");
          whereSql.append(FDataCommonAreaLogic.COUNTRY_ID);
@@ -138,7 +138,7 @@ public class FAreaConsole
       if (!RString.isEmpty(areaLabel) && !RString.isEmpty(countryId + "")) {
          whereSql.append(FDataCommonAreaLogic.LABEL);
          whereSql.append(" like ");
-         whereSql.append(" '%{label}%'");
+         whereSql.append(" '{label}' ");
          whereSql.bind("label", areaLabel);
          whereSql.append(" and ");
          whereSql.append(FDataCommonAreaLogic.COUNTRY_ID);

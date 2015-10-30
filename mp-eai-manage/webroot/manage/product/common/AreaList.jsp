@@ -92,22 +92,22 @@
   <thead>
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="60px">编号</th>
     <th
      data-options="field:'countryLabel',halign:'center',align:'center',sortable:true"
-     width="60px">所属国家</th>
+     width="200px">所属国家</th>
     <th
      data-options="field:'label',halign:'center',align:'center',sortable:true"
-     width="60px">标签</th>
+     width="200px">标签</th>
     <th
      data-options="field:'displayOrder',halign:'center',align:'center',sortable:true"
-     width="60px">排序</th>
+     width="100px">排序</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="95px">代码</th>
+     width="100px">代码</th>
     <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
-     width="95px">图标地址</th>
+     width="200px">图标地址</th>
     <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
     <th

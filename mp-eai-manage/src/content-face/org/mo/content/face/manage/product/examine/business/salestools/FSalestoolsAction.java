@@ -89,7 +89,10 @@ public class FSalestoolsAction
       }
       FLogicDataset<FDataSalestoolsInfo> unitList = _salestoolsConsole.select(logicContext, unit, page.pageCurrent() - 1, pageSize);
       for(FDataSalestoolsInfo info : unitList){
-         info.setMakeUrl(_storageConsole.makeUrl(info.iconUrl()));
+         String urls = info.iconUrl();
+         if(!RString.isEmpty(urls)){
+            info.setMakeUrl(_storageConsole.makeUrl(urls.trim()));
+         }
          info.setContent(_storageConsole.makeDisplay(info.content()));
       }
       basePage.setJson(unitList.toJsonListString());
