@@ -15,7 +15,7 @@
 
    <!-- 服务设定 -->
    <Define name='cloud.server.storage.enable'>Y</Define>
-   <Define name='cloud.server.storage.process'>http://storage.eai.ezubo.com/cloud.storage.process.wv</Define>
+   <Define name='cloud.server.storage.process'>http://121.42.136.88:9020/cloud.storage.process.wv</Define>
    <Define name='cloud.server.storage.access'>http://storage.eai.ezubo.com/storage</Define>
    <Define name='cloud.server.storage.picture'>http://storage.eai.ezubo.com/cloud.storage.picture.wv</Define>
    <Define name='cloud.server.logger.enable'>Y</Define>

@@ -22,6 +22,9 @@
    <Model code='ewealth'      label='e租财富'  rate='12.0' horizon_count='40' horizon_unit='day'   closed='30' wait='10' factor='0.8'/>
    <Model code='musetreasure' label='缪斯珍品' rate='14.6' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
    <Model code='musemovie'    label='缪斯影视' rate='14.6' horizon_count='12' horizon_unit='month' closed='0'  wait='10' factor='1'/>
+
+   <Model code='ewealth1'     label='e租财富'  rate='11.5' horizon_count='40' horizon_unit='day'   closed='30' wait='10' factor='0.8'/>
+   <Model code='newsuxiang1'  label='e租富享'  rate='12.8' horizon_count='3'  horizon_unit='month' closed='0'  wait='10' factor='0.4'/>
 </Resource>
 
 </Config>

@@ -417,13 +417,16 @@ public class SGcStorage
    //============================================================
    public String pack(){
       FAttributes map = new FAttributes();
-      map.set("catalog", _catalog);
-      map.set("date", _date);
-      map.set("code", _code);
-      map.set("name", _name);
-      map.set("origin", _origin);
-      map.set("mime", _mime);
-      map.set("size", _size);
+      map.setNvl("catalog", _catalog);
+      map.setNvl("date", _date);
+      map.setNvl("code", _code);
+      map.setNvl("name", _name);
+      map.setNvl("origin", _origin);
+      map.setNvl("mime", _mime);
+      map.setNvl("size", _size);
+      if(map.isEmpty()){
+         return null;
+      }
       return map.pack();
    }
 
@@ -434,17 +437,28 @@ public class SGcStorage
    //============================================================
    public void unpack(String pack){
       if(!RString.isEmpty(pack)){
-         // 解压数据
-         FAttributes map = new FAttributes();
-         map.unpack(pack);
-         // 获得内容
-         _catalog = map.get("catalog", null);
-         _date = map.get("date", null);
-         _code = map.get("code", null);
-         _name = map.get("name", null);
-         _origin = map.get("origin", null);
-         _mime = map.get("mime", null);
-         _size = map.getInt("size");
+         try{
+            // 解压数据
+            FAttributes map = new FAttributes();
+            map.unpack(pack);
+            // 获得内容
+            _catalog = map.get("catalog", null);
+            _date = map.get("date", null);
+            _code = map.get("code", null);
+            _name = map.get("name", null);
+            _origin = map.get("origin", null);
+            _mime = map.get("mime", null);
+            _size = map.getInt("size");
+         }catch(Throwable throwable){
+            _catalog = null;
+            _date = null;
+            _code = null;
+            _name = null;
+            _origin = null;
+            _mime = null;
+            _size = 0;
+            _logger.error(this, "unpack", throwable);
+         }
       }
    }
 }

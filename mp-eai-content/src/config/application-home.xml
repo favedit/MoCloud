@@ -17,6 +17,8 @@
    <!-- 服务器设定 -->
    <Define name='eai.content.login.oa'>N</Define>
    <Define name='cloud.server.storage.enable'>N</Define>
+   <!-- 处理服务器 -->
+   <Define name='cloud.server.service.host'>http://localhost:8020</Define>
    <Define name='cloud.server.logger.enable'>N</Define>
 
    <!-- 应用设定 -->

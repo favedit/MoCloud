@@ -292,6 +292,84 @@ public abstract class MAttributes
       set(name, Double.toString(value));
    }
 
+   //============================================================
+   // <T>根据名称设置非空布尔内容。</T>
+   //
+   // @param name 名称
+   // @param value 内容
+   //============================================================
+   public void setNvl(String name,
+                      boolean value){
+      if(value){
+         set(name, value);
+      }
+   }
+
+   //============================================================
+   // <T>根据名称设置非空整数内容。</T>
+   //
+   // @param name 名称
+   // @param value 内容
+   //============================================================
+   public void setNvl(String name,
+                      int value){
+      if(value != 0){
+         set(name, value);
+      }
+   }
+
+   //============================================================
+   // <T>根据名称设置非空长整数内容。</T>
+   //
+   // @param name 名称
+   // @param value 内容
+   //============================================================
+   public void setNvl(String name,
+                      long value){
+      if(value != 0){
+         set(name, value);
+      }
+   }
+
+   //============================================================
+   // <T>根据名称设置非空浮点数内容。</T>
+   //
+   // @param name 名称
+   // @param value 内容
+   //============================================================
+   public void setNvl(String name,
+                      float value){
+      if(value != 0){
+         set(name, value);
+      }
+   }
+
+   //============================================================
+   // <T>根据名称设置非空双精度浮点数内容。</T>
+   //
+   // @param name 名称
+   // @param value 内容
+   //============================================================
+   public void setNvl(String name,
+                      double value){
+      if(value != 0){
+         set(name, value);
+      }
+   }
+
+   //============================================================
+   // <T>根据名称设置非空字符串内容。</T>
+   //
+   // @param name 名称
+   // @param value 内容
+   //============================================================
+   public void setNvl(String name,
+                      String value){
+      if(!RString.isEmpty(value)){
+         set(name, value);
+      }
+   }
+
    //==========================================================
    // <T>将内部所有内容目关联成一个字符串。</T>
    //
