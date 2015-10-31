@@ -15,6 +15,7 @@ import org.mo.data.logic.ILogicContext;
 //@class FCitycardConsole
 //@version 1.0.0
 //============================================================
+
 public class FCitycardConsole
       extends FAbstractLogicUnitConsole<FDataCommonCityCardLogic, FDataCommonCityCardUnit>
       implements
@@ -49,7 +50,7 @@ public class FCitycardConsole
          pageNum = 0;
       }
       FSql whereSql = new FSql();
-      if(!RString.isEmpty(unit.cardCode() + "")&&unit.cardCode()>0){
+      if(!RString.isEmpty(unit.cardCode() + "") && unit.cardCode() > 0){
          whereSql.append(FDataCommonCityCardLogic.CARD_CODE);
          whereSql.append(" like ");
          whereSql.append(" '%{cardCode}%'");
@@ -58,7 +59,7 @@ public class FCitycardConsole
       FDataCommonCityCardLogic logic = logicContext.findLogic(FDataCommonCityCardLogic.class);
       FLogicDataset<FDataCitycardInfo> userInfoList = logic.fetchClass(FDataCitycardInfo.class, null, whereSql.toString(), null, pageSize, pageNum);
       for(FDataCitycardInfo tempUnit : userInfoList){
-         if(tempUnit.city()!=null&&!RString.isEmpty(tempUnit.city().label())){
+         if(tempUnit.city() != null && !RString.isEmpty(tempUnit.city().label())){
             tempUnit.setCityLabel(tempUnit.city().label());
          }
       }
@@ -76,14 +77,17 @@ public class FCitycardConsole
                                                 Long cityId,
                                                 int cardCode){
       FSql whereSql = new FSql();
-      whereSql.append(" 1=1 ");
-      if((!RString.isEmpty(cityId+"")&& cityId>0)&&(!RString.isEmpty(cardCode+"")&& cardCode>0)){
-         whereSql.append(" AND ");
+      if(cityId != null){
          whereSql.append(FDataCommonCityCardLogic.CITY_ID);
          whereSql.append(" = ");
          whereSql.append(" {cityId}");
          whereSql.bind("cityId", RString.parse(cityId));
-         whereSql.append(" AND ");
+      }
+
+      if(cardCode > 0){
+         if(cityId != null){
+            whereSql.append(" AND ");
+         }
          whereSql.append(FDataCommonCityCardLogic.CARD_CODE);
          whereSql.append(" = ");
          whereSql.append(" {cardCode}");
