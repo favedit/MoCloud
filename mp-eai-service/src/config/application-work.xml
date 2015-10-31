@@ -15,9 +15,9 @@
    <Define name='application.storage'>${application}/mt-storage</Define>
    
    <!-- 内容服务器 -->
-   <Define name='eai.host.content'>http://10.13.0.250:8010/</Define>
+   <Define name='eai.host.content'>http://10.13.0.16:8010/</Define>
    <!-- 接口服务器 -->
-   <Define name='eai.server.host'>http://10.13.0.250:8020/</Define>
+   <Define name='eai.server.host'>http://10.13.0.16:8020/</Define>
    <!-- OA登录服务器 -->
    <Define name='eai.oa.enable'>Y</Define>
    <Define name='eai.oa.host'>http://10.13.0.141:6666/ycjt/auth/auth.jsp</Define>

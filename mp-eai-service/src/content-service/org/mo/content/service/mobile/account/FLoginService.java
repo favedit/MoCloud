@@ -1,6 +1,5 @@
 package org.mo.content.service.mobile.account;
 
-import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
@@ -18,7 +17,6 @@ import org.mo.content.core.mobile.account.FDataPersonUserInfo;
 import org.mo.content.core.mobile.account.ILoginConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
-import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.core.session.IWebSessionConsole;
@@ -160,13 +158,6 @@ public class FLoginService
                last_sign_date.setText("-1");
             }
          }
-         // 查看用户是否有最新的公告
-         FLogicDataset<FDataLogicNoticeUnit> noticeUnits = _loginConsole.isThereNotices(user.ouid(), sessionContext, logicContext, _sessionConsole, _webSessionConsole);
-         if(noticeUnits != null && noticeUnits.count() > 0){
-            output.config().createNode("notice").setText(noticeUnits.count());
-         }else{
-            output.config().createNode("notice").setText(-1);
-         }
          return EResult.Success;
       }else{
          status_cd.setText(user.statusCd());
@@ -237,14 +228,6 @@ public class FLoginService
       }else{
          passportNodeOut.setText("-1");
 
-      }
-
-      // 查看用户是否有最新的公告
-      FLogicDataset<FDataLogicNoticeUnit> noticeUnits = _loginConsole.isThereNotices(sessionInfo.userId(), sessionContext, logicContext, _sessionConsole, _webSessionConsole);
-      if(noticeUnits != null && noticeUnits.count() > 0){
-         output.config().createNode("notice").setText(noticeUnits.count());
-      }else{
-         output.config().createNode("notice").setText(-1);
       }
       return EResult.Success;
    }

@@ -20,6 +20,6 @@ public class FIndexAction
    //============================================================
    @Override
    public String construct(IWebContext context){
-      return "/mobile/logic/news/News.wa?do=getNewInfo";
+      return "index";
    }
 }

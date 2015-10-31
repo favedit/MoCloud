@@ -74,9 +74,8 @@ public class FNoticeConsole
       whereSql.append(EGcDisplay.Enabled);
       whereSql.append(" AND ");
       whereSql.append(FDataLogicNoticeLogic.OUID);
-      whereSql.append(" NOT in (SELECT `NOTICE_ID` FROM `EAI_LOGGER`.`LG_PSN_USER_NOTICE` WHERE `USER_ID`=" + userId);
+      whereSql.append(" NOT in (SELECT `NOTICE_ID` FROM `EAI_DATA`.`DT_PSN_USER_NOTICE` WHERE `USER_ID`=" + userId);
       whereSql.append(")");
-
       String orderBy = String.format("%s %s %s %s", FDataLogicNoticeLogic.DISPLAY_ORDER, "DESC,", FDataLogicNoticeLogic.CREATE_DATE, "DESC");
       FDataLogicNoticeLogic logic = logicContext.findLogic(FDataLogicNoticeLogic.class);
       FLogicDataset<FDataLogicNoticeUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
@@ -142,7 +141,6 @@ public class FNoticeConsole
          noticeUnit.setViewCount(noticeUnit.viewCount() + 1);
          noticeLogic.doUpdate(noticeUnit);
          personUserNoticeLogic.doInsert(tempUnit);
-
       }
       return "Success";
    }
