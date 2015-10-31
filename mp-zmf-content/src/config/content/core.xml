@@ -54,11 +54,11 @@
    </Component>
    
    <!-- ==================================================== -->
-   <!-- IDataPersonAccessAuthorityConsole:账户登录                        -->
+   <!-- IDataPersonConsole:账户登录                        -->
    <!-- ==================================================== -->
    <Component
-         face  = 'org.mo.eai.logic.data.person.user.IDataPersonAccessAuthorityConsole'
-         class = 'org.mo.eai.logic.data.person.user.FDataPersonAccessAuthorityConsole'
+         face  = 'org.mo.eai.logic.data.person.user.IDataPersonConsole'
+         class = 'org.mo.eai.logic.data.person.user.FDataPersonConsole'
          scope = 'global'>
       <Property name='oaLoginEnable'>${eai.content.login.oa}</Property>
       <Property name='oaLoginUrl'>${eai.content.login.oa.service}</Property>

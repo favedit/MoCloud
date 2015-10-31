@@ -14,8 +14,9 @@
    <Define name='application.temp'>${application}/mt-temp/${application.name}</Define>
    <Define name='application.storage'>${application}/mt-storage</Define>
 
-   <!-- 服务设定 -->
+   <!-- OA登录服务器 -->
    <Define name='eai.content.login.oa'>N</Define>
+   <Define name='eai.content.login.oa.service'>http://10.21.0.141:6666/ycjt/auth/auth.jsp</Define>
    <Define name='cloud.server.storage.enable'>N</Define>
    <Define name='cloud.server.logger.enable'>N</Define>
    <Define name='cloud.server.logger.publish'>http://localhost</Define>

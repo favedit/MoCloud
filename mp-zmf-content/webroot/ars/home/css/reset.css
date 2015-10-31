@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+/*================================================
+Author:liufengbo
+English:Henry Liu
+Email:875626246@qq.com/liufengbolove@126.com
+Edited time:2013-08-11
+Explanation: The station generic CSS style
+==================================================*/
+/*Explanation:Reset Styles*/
+html { height: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; font-family: sans-serif; font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/ }
+body { margin: 0; padding: 0; min-height: 100%; height: auto; /*text-align:center;*/ color: #404040; font-size: 1.2rem; font-family: DroidSans, "Droid Sans Fallback","Hiragino Sans GB W3", "Hiragino Sans GB W6" ; }
+h1, h2, h3, h4, h5, h6, p, figure, form { margin: 0; }
+i, em { font-style: normal; vertical-align: middle; }
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0; vertical-align: middle; -ms-interpolation-mode: bicubic; }
+a, a:link { color: #666666; text-decoration: none; cursor: pointer; }
+/*{ text-decoration: underline; }*/
+a:visited { text-decoration: none; color: #6b6b6b; }
+a, a:focus, a:visited, a:active, a:hover, a:link { outline: none; /*background: none;*/ border: none; }
+html, a, input, button { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+/* hn */
+h1 { font-size: 1.6rem; line-height: 3.6rem; }
+h2 { font-size: 1.4rem; line-height: 3rem; }
+h3 { line-height: 2.4rem; }
+h3, h4, h5, h6 { font-size: 1.2rem; }
+/* ul ol dl */
+ul, li, ol { margin: 0; padding: 0; list-style: none outside none; }
+ul.has-style li, ol li { margin-left: 25px; }
+ul.has-style li { list-style: disc; }
+ol li { list-style: none; }
+ul.inline-style li { float: left; display: inline; }
+dl { margin-bottom: 18px; }
+dt { font-weight: bold; }
+dd { margin: 0 0 0 9px; padding: 0; }
+svg:not(:root) { overflow: hidden; }
+/* -------------------------------------------------
+ * form
+ * -------------------------------------------------
+*/
+button, input, select, textarea { font-size: 100%; font-family: tahoma; margin: 0; outline: 0 none; vertical-align: baseline; *vertical-align: middle;
+}
+textarea { overflow: auto; vertical-align: top; resize: none; }
+button, input { line-height: normal; }
+button, html input[type="button"], input[type="reset"], input[type="submit"], .submit-btn { -webkit-appearance: button; cursor: pointer; *overflow: visible;
+}
+button[disabled], input[disabled], .disable { cursor: default; }
+input[type="checkbox"], input[type="radio"], .form-radio, .form-checkbox { box-sizing: border-box; padding: 0; }
+fieldset { border: 1px solid #c0c0c0; margin: 0 2px 18px; padding: 0.35em 0.625em 0.75em; }
+legend { border: 0; padding: 0; white-space: normal; }
+button::-moz-focus-inner, input::-moz-focus-inner {
+border: 0;
+padding: 0;
+}
+/* -------------------------------------------------
+ * css3 & html5
+ * -------------------------------------------------
+*/
+/* html5 */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary { display: block; }
+audio, canvas, video { display: inline-block; *display: inline;
+ *zoom: 1;
+}
+audio:not([controls]) { display: none; height: 0; }
+input[type="search"] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+:-moz-placeholder {
+ color: #999;
+}
+::-webkit-input-placeholder {
+ color: #999;
+}
+
+::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+}
+::-webkit-outer-spin-button {
+-webkit-appearance: none;
+}
+::-ms-expand {
+ padding: .5em;
+ color: #34538b;
+ border: 1px solid #a0b3d6;
+ background: #000;
+}
+/*::-webkit-resizer {
+    display: none;
+}*/
+/* -------------------------------------------------
+ * 非 常见标签
+ * -------------------------------------------------
+*/
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: bold; }
+blockquote { margin: 1em 40px; }
+dfn { font-style: italic; }
+mark { background: #ff0; color: #444; }
+code, kbd, pre, samp { font-family: monospace, serif; _font-family: 'courier new', monospace; font-size: 1rem; }
+pre { margin: 1rem 0; white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+q { quotes: none; }
+q:before, q:after { content: ''; content: none; }
+small { font-size: 80%; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5rem; }
+sub { bottom: -0.25rem; }
