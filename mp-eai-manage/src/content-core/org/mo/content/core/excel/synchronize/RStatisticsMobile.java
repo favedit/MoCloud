@@ -1,5 +1,7 @@
 package org.mo.content.core.excel.synchronize;
 
+import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.net.http.FHttpConnection;
 import org.mo.com.xml.FXmlNode;
 
@@ -7,13 +9,16 @@ public class RStatisticsMobile
 {
 
    public static void main(String[] args){
+      TDateTime beginTime = new TDateTime(RDateTime.currentDateTime());
+      System.out.println(beginTime.format("yyyy-mm-dd hh:mm:ss:ms"));
       FXmlNode inputNode = new FXmlNode("Service");
-      inputNode.set("action", "getMobileInfo");
-      inputNode.createNode("mobile").setText("18710555908");
-      inputNode.createNode("mobile").setText("ddd");
-      inputNode.createNode("mobile").setText("18710555902");
+      inputNode.set("action", "fetch");
+      inputNode.createNode("mobile").setText("18700015908");
+      inputNode.createNode("mobile").setText("18720555908");
+      inputNode.createNode("mobile").setText("18730555908");
+      inputNode.createNode("mobile").setText("18740555908");
 
-      @SuppressWarnings("resource") FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws");
+      @SuppressWarnings("resource") FHttpConnection connection = new FHttpConnection("http://localhost:8020/eai.city.info.mobile.ws");
       //      try(FHttpConnection connection = new FHttpConnection("http://localhost:8099/eai.info.mobile.ws")){
       //         result = connection.fetch();
       //      }
@@ -26,6 +31,9 @@ public class RStatisticsMobile
 
       String content = connection.response().content();
       System.out.println(content);
+      TDateTime endTime = new TDateTime(RDateTime.currentDateTime());
+      System.out.println(endTime.format("yyyy-mm-dd hh:mm:ss:ms"));
+
       //      CloseableHttpClient httpclient = HttpClients.createDefault();
       //      JSONObject jo = JSONObject.fromObject("{}");
       //      try{

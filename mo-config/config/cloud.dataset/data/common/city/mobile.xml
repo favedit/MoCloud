@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="cd8fac3d-922c-4b5c-8789-592fdb17e7e8" name="data.common.city.mobile" label="M#12cn19共通城市手机关联表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Common.City.Mobile" data_name="DT_COM_CITY_CARD_MOBILE" data_alias="DT_COM_CTY_CAD_MBL" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="7e3520d1-2d26-414f-8a4e-51ea2f20a4a9" name="phone" label="M#12cn14手机号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />
+  <FieldString _uuid="ce745bdb-5066-40b6-8827-cc1197f809b8" name="province" label="M#12cn12省份" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROVINCE" data_size="20" />
+  <FieldString _uuid="1361674b-d727-49b9-a923-9e9d26b49450" name="city" label="M#12cn12城市" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CITY" data_size="20" />
+  <FieldString _uuid="4f19bb25-844a-45f9-932d-1c7461de23d3" name="operators" label="M#12cn13运营商" is_valid="Y" note="M#" is_store="Y" is_abstract="N" data_name="OPERATORS" data_size="20" />
+  <FieldInteger _uuid="3fba7d0e-be0b-4c8d-960a-a6c1810f1cec" name="stock" label="M#12cn14是否下架" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STOCK" />
+  <FieldInteger _uuid="f7977877-b63e-4837-8db3-1b7bdd2466fb" name="amount" label="M#12cn12数量" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="AMOUNT" />
+  <FieldDouble _uuid="6ed408f1-203a-45b7-b11f-d864ea097e90" name="max_price" label="M#12cn14最大价格" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MAX_PRICE" />
+  <FieldDouble _uuid="6bd4c134-5e61-4482-af46-f6b4d47e58ee" name="min_price" label="M#12cn14最小价格" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MIN_PRICE" />
+  <FieldString _uuid="c42ce7c0-cb14-440e-b962-0620329a45fe" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="5576865c-3a55-4373-9ba6-5e9764acfd6b" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

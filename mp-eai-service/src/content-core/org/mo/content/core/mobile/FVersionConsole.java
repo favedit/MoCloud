@@ -1,5 +1,7 @@
 package org.mo.content.core.mobile;
 
+import org.mo.content.service.city.info.FMobileService;
+
 import com.cyou.gccloud.data.data.FDataSystemApplicationLogic;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
@@ -12,7 +14,6 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.service.info.mobile.FMobileService;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;

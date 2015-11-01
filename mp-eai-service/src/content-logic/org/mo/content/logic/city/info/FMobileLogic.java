@@ -1,4 +1,4 @@
-package org.mo.content.logic.mobile;
+package org.mo.content.logic.city.info;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -14,7 +14,7 @@ import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.service.info.mobile.FMobileService;
+import org.mo.content.service.city.info.FMobileService;
 
 //============================================================
 // <T>手机服务接口。</T>
@@ -60,6 +60,10 @@ public class FMobileLogic
                   attributes.set("city", jo.get("cityname").toString());
                   attributes.set("telString", jo.get("mobile").toString());
                   attributes.set("operators", jo.get("isp").toString());
+                  attributes.set("stock", jo.get("stock").toString());
+                  attributes.set("amount", jo.get("amount").toString());
+                  attributes.set("maxprice", jo.get("maxprice").toString());
+                  attributes.set("minprice", jo.get("minprice").toString());
                }
             }
          }finally{

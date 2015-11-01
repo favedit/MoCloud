@@ -172,6 +172,34 @@ ALTER TABLE DT_COM_CITY_CARD
 
 ALTER TABLE DT_COM_CITY_CARD ADD CONSTRAINT DT_COM_CTY_CAD_FK_CITY 
       FOREIGN KEY (`CITY_ID`) REFERENCES DT_COM_CITY(`OUID`); 
+	  
+
+-- ------------------------------------------------------------
+-- Create table [Data.Common.City.Mobile]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_COM_CITY_CARD_MOBILE`;	
+CREATE TABLE `DT_COM_CITY_CARD_MOBILE` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `PHONE`                         VARCHAR(20), 
+   `PROVINCE`                      VARCHAR(20), 
+   `CITY`                          VARCHAR(20), 
+   `OPERATORS`                     VARCHAR(20) NOT NULL, 
+   `STOCK`                         INTEGER, 
+   `AMOUNT`                        INTEGER, 
+   `MAX_PRICE`                     DOUBLE, 
+   `MIN_PRICE`                     DOUBLE, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_COM_CITY_CARD_MOBILE 
+   ADD CONSTRAINT DT_COM_CTY_CAD_MBL_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Info.Device]

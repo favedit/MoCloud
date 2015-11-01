@@ -1,4 +1,4 @@
-package org.mo.content.service.info.mobile;
+package org.mo.content.service.city.info;
 
 import org.mo.com.lang.EResult;
 import org.mo.web.protocol.context.IWebContext;
@@ -30,8 +30,20 @@ public interface IMobileService
    // @param output 输出配置
    // @return 处理结果
    //============================================================
-   EResult getMobileInfo(IWebContext context,
-                         IWebInput input,
-                         IWebOutput output);
+   EResult fetch(IWebContext context,
+                 IWebInput input,
+                 IWebOutput output);
+
+   //============================================================
+   // <T>根据手机号获取相关信息。</T>
+   //
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   //============================================================
+   EResult find(IWebContext context,
+                IWebInput input,
+                IWebOutput output);
 
 }

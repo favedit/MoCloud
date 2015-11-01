@@ -61,7 +61,6 @@ public class RCheckCitycard
                int card = (int)cardCell.getNumericCellValue();
                boolean exists = citycardConsole.isExsitsByCardcodeandByCityId(logicContext, null, card);
                if(!exists){
-                  //                  System.out.println(card);
                   sb.append(card).append(",");
                }
             }

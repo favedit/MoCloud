@@ -1,5 +1,7 @@
 package org.mo.content.core.mobile.account;
 
+import org.mo.content.service.city.info.FMobileService;
+
 import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryLogic;
@@ -28,7 +30,6 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.http.FHttpConnection;
-import org.mo.content.service.info.mobile.FMobileService;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;

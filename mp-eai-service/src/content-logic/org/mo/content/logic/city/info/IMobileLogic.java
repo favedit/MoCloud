@@ -1,4 +1,4 @@
-package org.mo.content.logic.mobile;
+package org.mo.content.logic.city.info;
 
 import org.mo.com.lang.FAttributes;
 

@@ -4,11 +4,11 @@
  <!-- ============================================================ -->
  <!-- 手机相关处理服务 -->
  <!-- ============================================================ -->
- <WebService name='eai.info.mobile'
-  face='org.mo.content.service.info.mobile.IMobileService' />
+ <WebService name='eai.city.info.mobile'
+  face='org.mo.content.service.city.info.IMobileService' />
 
- <Component face='org.mo.content.service.info.mobile.IMobileService'
-  class='org.mo.content.service.info.mobile.FMobileService' scope='global' />
+ <Component face='org.mo.content.service.city.info.IMobileService'
+  class='org.mo.content.service.city.info.FMobileService' scope='global' />
 
  <!-- ============================================================ -->
  <!-- 新闻相关处理服务 -->

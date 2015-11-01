@@ -1,5 +1,7 @@
 package org.mo.content.core.mobile.logic.news;
 
+import org.mo.content.service.city.info.FMobileService;
+
 import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
@@ -8,7 +10,6 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.service.info.mobile.FMobileService;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 

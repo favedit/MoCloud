@@ -1,5 +1,6 @@
 package org.mo.content.face.pc.marketer.customer;
 
+import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
@@ -7,6 +8,7 @@ import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
 import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
@@ -53,6 +55,10 @@ public class FCustomerAction
    @ALink
    protected IDataMarketerCustomerConsole _marketerCustomerConsole;
 
+   // 理财师客户控制器
+   @ALink
+   protected IValidationConsole _validationConsole;
+
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -67,6 +73,9 @@ public class FCustomerAction
                            ILogicContext logicContext,
                            FCustomerPage page){
       System.out.println("------------------------------");
+      FCacheSystemValidationUnit unit = _validationConsole.find(logicContext, 1);
+      System.out.println(unit.passport() + "--------------------");
+
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
