@@ -4,7 +4,7 @@ html,body{
 	width: 100%;
 } 
 body{
-	background: url(../images/main/new3.png);
+	background: url(../ars/images/main/new3.png);
 	background-position: center top;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -22,7 +22,7 @@ body{
 	/*height: 100%;*/
 	position: relative;
 	display: inline-block;
-	background-image: url(../images/1.png);
+	background-image: url(../ars/images/1.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	width: 670px;
@@ -40,7 +40,7 @@ body{
 	margin-left: -270px;
 	margin-top: -150px;
 	text-align: left;
-	background: url(../images/5.png);
+	background: url(../ars/images/5.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 580px 188px;
@@ -53,7 +53,7 @@ body{
 .details-container p{
 	/*height: 50px;*/
 	/*padding: 20px;*/
-	background: url(../images/4.png) no-repeat;
+	background: url(../ars/images/4.png) no-repeat;
 	background-repeat: no-repeat;
 	background-size: 265px 50px;
 	background-position:92px center;
@@ -111,19 +111,19 @@ body{
   right: -51px;
   top: 19px\0;
   display: block;
-  background-image: url(../images/2.png);
+  background-image: url(../ars/images/2.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 264px;
 }
 .btn-container.on{
-	 background-image: url(../images/6.png);
+	 background-image: url(../ars/images/6.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 264px;
 }
 .btn-container.ons{
-	 background-image: url(../images/7.png);
+	 background-image: url(../ars/images/7.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 264px;
@@ -133,7 +133,7 @@ body{
 	right: -51px;
 	top: 19px\0;
 	display: block;
-	background-image: url(../images/3.png);
+	background-image: url(../ars/images/3.png);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 264px;

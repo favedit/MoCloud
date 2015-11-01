@@ -1,12 +1,10 @@
-package org.mo.content.face.pc;
+package org.mo.content.face;
 
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.face.ALink;
-import org.mo.data.logic.ILogicContext;
 import org.mo.eai.logic.data.person.user.IDataPersonConsole;
-import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -34,11 +32,8 @@ public class FIndexAction
    //============================================================
    @Override
    public String construct(IWebContext context,
-                           ILogicContext logicContext,
                            FIndexPage page){
-      System.out.println("--------------------------------");
-      // 非法设置
-      return "/ars/home/Login";
+      return "Login";
    }
 
    //============================================================
@@ -51,8 +46,6 @@ public class FIndexAction
    //============================================================
    @Override
    public String login(IWebContext context,
-                       IWebSession sessionContext,
-                       ILogicContext logicContext,
                        FIndexPage page){
       // 获得参数
       String passport = RString.trimRight(page.passport());
@@ -69,21 +62,23 @@ public class FIndexAction
       }
       _logger.debug(this, "Index", "Index login.(passport={1},password={2})", passport, password);
       // 0:验证成功，1:签名不通过，3:用户名或密码错误，98:IP不在白名单中
-      String resultCd = _personConsole.oaLogin(passport, password);
-      if(resultCd.equals("0")){
-         result = true;
-      }else if(resultCd.equals("1")){
-         message = "用户名或密码错误。";
-      }else if(resultCd.equals("3")){
-         message = "用户名或密码错误。";
-      }else if(resultCd.equals("98")){
-         message = "用户名或密码错误。";
+      if(message == null){
+         String resultCd = _personConsole.oaLogin(passport, password);
+         if(resultCd.equals("0")){
+            result = true;
+         }else if(resultCd.equals("1")){
+            message = "用户名或密码错误。";
+         }else if(resultCd.equals("3")){
+            message = "用户名或密码错误。";
+         }else if(resultCd.equals("98")){
+            message = "用户名或密码错误。";
+         }
       }
       if(result){
-         return "Main";
+         return "Chart";
       }
       page.setMessage(message);
       // 画面跳转
-      return "/ars/home/Login";
+      return "Login";
    }
 }

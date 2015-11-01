@@ -1,4 +1,4 @@
-package org.mo.content.face.pc;
+package org.mo.content.face;
 
 import org.mo.com.lang.FObjectId;
 

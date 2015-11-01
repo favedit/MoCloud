@@ -6,17 +6,17 @@
    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
    <meta content="always" name="referrer">
-   <link rel="stylesheet" type="text/css" href="css/reset.css">
-   <link rel="stylesheet" type="text/css" href="css/animate.css">
-   <link rel="stylesheet" type="text/css" href="css/login.css">
-   <script type="text/javascript" src="js/jquery.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="acs/reset.css">
+   <link rel="stylesheet" type="text/css" href="acs/animate.css">
+   <link rel="stylesheet" type="text/css" href="acs/login.css">
+   <script type="text/javascript" src="ajs/jquery.min.js"></script>
 </head>
 <body>
    <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >
       <tbody>
       <tr id="heads">
          <td height="50"  align="center" valign="center"  >
-          <img src="images/main/logos.png">
+          <img src="ars/images/main/logos.png">
         </td>
      </tr>
      <tr id="mains">
@@ -50,7 +50,7 @@
       var errorVal = document.getElementById("error").innerHTML;
       var $btnContainer =  document.getElementsByClassName("btn-container")[0];
       if (errorVal != "") {
-         $btnContainer.style.backgroundImage="url(images/6.png)";
+         $btnContainer.style.backgroundImage="url(ars/images//6.png)";
       }
 
 
@@ -67,19 +67,19 @@
 
       }
       $username.onfocus=function(){
-         $btnContainer.style.backgroundImage="url(images/2.png)";
+         $btnContainer.style.backgroundImage="url(ars/images//2.png)";
       }
       $password.onfocus=function(){
-         $btnContainer.style.backgroundImage="url(images/2.png)";
+         $btnContainer.style.backgroundImage="url(ars/images//2.png)";
       }
       function setBackgroundImage (){
-         $btnContainer.style.backgroundImage="url(images/7.png)";
+         $btnContainer.style.backgroundImage="url(ars/images//7.png)";
       }
       
       $btn.onclick = function() {
          if ($username.value == "" || $password.value == "") {
             // setPrompt("用户名或密码不能为空");
-            // $btnContainer.style.backgroundImage="images/7.png";
+            // $btnContainer.style.backgroundImage="ars/images//7.png";
           setBackgroundImage();
          // $(".btn-container").addClass("on");
             return false;

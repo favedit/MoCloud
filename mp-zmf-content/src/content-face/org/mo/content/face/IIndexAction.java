@@ -1,8 +1,6 @@
-package org.mo.content.face.pc;
+package org.mo.content.face;
 
-import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.container.AContainer;
-import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
@@ -21,7 +19,6 @@ public interface IIndexAction
    // @param page 页面
    //============================================================
    String construct(IWebContext context,
-                    ILogicContext logicContext,
                     @AContainer(name = "page") FIndexPage page);
 
    //============================================================
@@ -33,8 +30,6 @@ public interface IIndexAction
    // @param page 页面
    //============================================================
    String login(IWebContext context,
-                IWebSession sessionContext,
-                ILogicContext logicContext,
                 @AContainer(name = "page", fill = true) FIndexPage page);
 
 }
