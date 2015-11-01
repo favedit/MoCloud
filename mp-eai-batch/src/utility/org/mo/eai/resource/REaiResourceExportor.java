@@ -63,6 +63,7 @@ public class REaiResourceExportor
       // 设置数据库
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
       logicContext = new FLogicContext(databaseConsole);
+      logicContext.setDefaultName("online.data");
       // 输出应用资源
       String resourceFileName = "D:/Microbject/MoScript/source/ars/eai/resource.dat";
       FEaiResourceExporter resourceExporter = new FEaiResourceExporter();

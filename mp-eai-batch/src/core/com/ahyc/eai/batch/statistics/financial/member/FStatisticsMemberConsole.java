@@ -80,8 +80,8 @@ public class FStatisticsMemberConsole
       if(infoRow != null){
          String card = infoRow.get("idcard");
          unit.setLabel(infoRow.get("real_name"));
-         unit.setCard(card);
          if(!RString.isEmpty(card)){
+            unit.setCard(card);
             unit.setCardArea(RCustomerCard.calculateArea(card));
             unit.setCardBirth(RCustomerCard.calculateBirth(card));
             unit.setCardGender(RCustomerCard.calculateGender(card));
@@ -135,6 +135,7 @@ public class FStatisticsMemberConsole
          String card = infoRow.get("idcard");
          unit.setLabel(infoRow.get("real_name"));
          if(!RString.isEmpty(card)){
+            unit.setCard(card);
             unit.setCardArea(RCustomerCard.calculateArea(card));
             unit.setCardBirth(RCustomerCard.calculateBirth(card));
             unit.setCardGender(RCustomerCard.calculateGender(card));

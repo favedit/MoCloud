@@ -139,6 +139,17 @@ public class FStatisticsInvestmentCalculater
                if(RString.isEmpty(customerLabel)){
                   customerInfo = _customerConsole.updateByLinkId(logicContext, customerId);
                }
+               // 更新理财师信息
+               if(departmentInfo != null){
+                  customerInfo.setDepartmentId(departmentInfo.ouid());
+                  customerInfo.setDepartmentLinkId(departmentInfo.linkId());
+               }
+               // 更新理财师信息
+               if(marketerInfo != null){
+                  customerInfo.setMarketerId(marketerInfo.ouid());
+                  customerInfo.setMarketerLinkId(marketerInfo.linkId());
+               }
+               // 更新产品信息
                long findTenderId = customerInfo.tenderId();
                if((findTenderId != 0) && (findTenderId == tenderId)){
                   tenderChanged = true;

@@ -14,7 +14,9 @@ public class RDbImportData
    //============================================================
    public static void main(String[] args) throws Exception{
       String configPath = "D:/Microbject/MoCloud";
-      String path = "D:/Microbject/transfer";
+      String path = "D:/Microbject/transfer/develop";
+      String databaseName = "online.data";
+      //String databaseName = "develop.data";
       RAop.configConsole().defineCollection().attributes().set("application", configPath);
       RAop.initialize(configPath + "/mp-eai-batch/src/config/application-work.xml");
       try{
@@ -22,11 +24,11 @@ public class RDbImportData
          IDatabaseConsole dbConsole = RAop.find(IDatabaseConsole.class);
          try(ILogicContext logicContext = new FLogicContext(dbConsole)){
             IResStorageConsole storageConsole = RAop.find(IResStorageConsole.class);
-            storageConsole.importDataset(logicContext, "develop.data", "DT_COM_COUNTRY", path);
-            storageConsole.importDataset(logicContext, "develop.data", "DT_COM_AREA", path);
-            storageConsole.importDataset(logicContext, "develop.data", "DT_COM_PROVINCE", path);
-            storageConsole.importDataset(logicContext, "develop.data", "DT_COM_CITY", path);
-            storageConsole.importDataset(logicContext, "develop.data", "DT_COM_CITY_CARD", path);
+            storageConsole.importDataset(logicContext, databaseName, "DT_COM_COUNTRY", path);
+            storageConsole.importDataset(logicContext, databaseName, "DT_COM_AREA", path);
+            storageConsole.importDataset(logicContext, databaseName, "DT_COM_PROVINCE", path);
+            storageConsole.importDataset(logicContext, databaseName, "DT_COM_CITY", path);
+            storageConsole.importDataset(logicContext, databaseName, "DT_COM_CITY_CARD", path);
          }
       }catch(Exception e){
          RLogger.find(RDbImportData.class).error(null, "main", e);

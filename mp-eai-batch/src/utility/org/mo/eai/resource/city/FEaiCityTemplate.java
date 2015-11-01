@@ -9,7 +9,6 @@ import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.INamePair;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
-import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.eai.resource.REaiResourceExportor;
 
 //============================================================
@@ -45,7 +44,7 @@ public class FEaiCityTemplate
    // <T>解析处理。</T>
    //============================================================
    public void parser(){
-      ISqlConnection connection = REaiResourceExportor.logicContext.activeConnection(EEaiDataConnection.DATA);
+      ISqlConnection connection = REaiResourceExportor.logicContext.activeConnection();
       FSql sql = _resource.findString(FSql.class, "sql.city");
       FDataset dataset = connection.fetchDataset(sql);
       for(FRow row : dataset){
