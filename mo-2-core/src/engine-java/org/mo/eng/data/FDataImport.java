@@ -63,8 +63,10 @@ public class FDataImport
       FString fields = new FString();
       FString values = new FString();
       for(FRow column : columns){
-         String columnName = column.get("column_name").toLowerCase();
-         String columnType = column.get("column_type");
+         //         String columnName = column.get("column_name").toLowerCase();
+         //         String columnType = column.get("column_type");
+         String columnName = column.get("field").toLowerCase();
+         String columnType = column.get("type");
          if(row.contains(columnName)){
             // 增加字段
             if(!fields.isEmpty()){

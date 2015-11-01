@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserModuleUnit;
 import java.util.HashMap;
 import java.util.Map;
+import org.mo.cloud.core.version.IGcVersionConsole;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -33,6 +34,9 @@ public class FMainAction
 
    @ALink
    protected IWebSessionConsole _sessionConsole;
+
+   @ALink
+   protected IGcVersionConsole _versionConsole;
 
    @ALink
    protected ILogicServiceInfoConsole _loggerServiceInfoConsole;
@@ -216,6 +220,9 @@ public class FMainAction
                            FMainPage page,
                            String sceneCode,
                            String moduleCode){
+      // 设置版本
+      page.setVersion(_versionConsole.currentVersion());
+      // 生成日志 
       _logger.debug(this, "Scene", "Into Scene.(sceneCode={1},moduleCode={2})", sceneCode, moduleCode);
       page.setServiceLogic(_loggerServiceInfoConsole.serviceLogic());
       page.setSceneCode(sceneCode);

@@ -1,7 +1,7 @@
 package org.mo.content.engine.core.storage;
 
 import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
-
+import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.console.FConsole;
 import org.mo.com.data.ISqlConnection;
@@ -88,6 +88,51 @@ public class FResStorageConsole
    }
 
    //============================================================
+   // <T>导出数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param connectionName 链接名称
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult exportData(ILogicContext logicContext,
+                             String connectionName,
+                             String path){
+      ISqlConnection connection = logicContext.activeConnection(connectionName);
+      FDataset dataset = connection.fetchDataset("SHOW TABLES");
+      FDataExport exportor = new FDataExport(connection, _charset);
+      for(FRow row : dataset){
+         String dataName = row.value(0);
+         String fileName = RFile.format(path + "/" + dataName + ".pck");
+         exportor.makeTableSql(dataName, fileName);
+         _logger.debug(this, "exportData", "Export dataset. (data_name={1}, file_name={2})", dataName, fileName);
+      }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导出数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param connectionName 链接名称
+   // @param datasetName 数据名称
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult exportDataset(ILogicContext logicContext,
+                                String connectionName,
+                                String datasetName,
+                                String path){
+      ISqlConnection connection = logicContext.activeConnection(connectionName);
+      FDataExport exportor = new FDataExport(connection, _charset);
+      String fileName = RFile.format(path + "/" + datasetName + ".pck");
+      exportor.makeTableSql(datasetName, fileName);
+      _logger.debug(this, "exportDataset", "Export dataset. (data_name={1}, file_name={2})", datasetName, fileName);
+      return EResult.Success;
+   }
+
+   //============================================================
    // <T>导出存储。</T>
    //
    // @param logicContext 逻辑环境
@@ -133,6 +178,28 @@ public class FResStorageConsole
          importor.executeTable(fileName);
          _logger.debug(this, "importData", "Import dataset. (data_name={1}, file_name={2})", dataName, fileName);
       }
+      return EResult.Success;
+   }
+
+   //============================================================
+   // <T>导入数据。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param connectionName 链接名称
+   // @param datasetName 数据名称
+   // @param path 路径
+   // @return 处理结果
+   //============================================================
+   @Override
+   public EResult importDataset(ILogicContext logicContext,
+                                String connectionName,
+                                String datasetName,
+                                String path){
+      ISqlConnection connection = logicContext.activeConnection(connectionName);
+      FDataImport importor = new FDataImport(connection, _charset);
+      String fileName = RFile.format(path + "/" + datasetName + ".pck");
+      importor.executeTable(fileName);
+      _logger.debug(this, "importData", "Import dataset. (data_name={1}, file_name={2})", datasetName, fileName);
       return EResult.Success;
    }
 

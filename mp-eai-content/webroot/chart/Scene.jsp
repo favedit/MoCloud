@@ -60,6 +60,7 @@
          function onLoadScript() {
             // 设置变量
             MO.initialize();
+            MO.Runtime.setVersion('<jh:write source='&page.version'/>');
             MO.Window.Browser.setContentPath('..');
             MO.Window.Browser.fullscreen(window, true);
             MO.Window.lsnsLoaded.register(null, onLoaded);
@@ -67,7 +68,7 @@
             // 设置环境
             MO.Console.find(MO.FE3sVendorConsole).setup('net');
             MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.Resource, '/ars/eai');
-            MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.LogicService, '<jh:write source='&page.serviceLogic '/>');
+            MO.Console.find(MO.FEnvironmentConsole).registerValue(MO.EEaiConstant.LogicService, '<jh:write source='&page.serviceLogic'/>');
             // 设置应用
             var application = MO.Desktop.initialize(MO.FEaiChartApplication);
             application.setSceneCode(MO.EEaiScene. <jh:write source='&page.sceneCode'/>);
@@ -75,10 +76,8 @@
          }
 
          function onLoad() {
-            var date = new Date();
-            var url = '../ajs/eai.jc?' + date.toLocaleDateString();
             MO.initialize();
-            RJsLoader.loadUrl(url, onLoadScript);
+            RJsLoader.loadUrl('../ajs/eai.jc?<jh:write source='&page.version'/>', onLoadScript);
          }
       </SCRIPT>
    </HEAD>

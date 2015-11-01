@@ -3,6 +3,16 @@
 <Config>
 
    <!-- ============================================================ -->
+   <!-- 版本控制台                                                   -->
+   <!-- ============================================================ -->
+   <Component
+         face   = 'org.mo.cloud.core.version.IGcVersionConsole'
+         class  = 'org.mo.cloud.core.version.FGcVersionConsole'
+         scope  = 'global'>
+      <Property name='current_version'>${application.version}</Property>
+   </Component>
+
+   <!-- ============================================================ -->
    <!-- 时间控制台                                                   -->
    <!-- ============================================================ -->
    <Component

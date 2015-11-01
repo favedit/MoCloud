@@ -60,6 +60,7 @@
          function onLoadScript() {
             // 设置变量
             MO.initialize();
+            MO.Runtime.setVersion('<jh:write source='&page.version'/>');
             MO.Window.Browser.setContentPath('..');
             MO.Window.Browser.fullscreen(window, true);
             MO.Window.lsnsLoaded.register(null, onLoaded);
@@ -76,7 +77,7 @@
 
          function onLoad() {
             var date = new Date();
-            var url = '../ajs/eai.jc?' + date.toLocaleDateString();
+            var url = '../ajs/eai.jc? + version';
             MO.initialize();
             RJsLoader.loadUrl(url, onLoadScript);
          }

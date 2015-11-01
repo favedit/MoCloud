@@ -57,7 +57,8 @@ public class FDataExport
             fields.append(",");
          }
          fields.append('`');
-         fields.append(column.get("column_name"));
+         //fields.append(column.get("column_name"));
+         fields.append(column.get("field"));
          fields.append('`');
       }
       // 生成查询命令

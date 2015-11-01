@@ -6,11 +6,15 @@ import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.context.FContext;
 
+//============================================================
+// <T>数据上下文。</T>
+//============================================================
 public class FDataContext
       extends FContext
       implements
          IDataContext
 {
+   // 日志输出接口
    private static ILogger _logger = RLogger.find(FDataContext.class);
 
    private ISqlConnection _connection;
@@ -23,6 +27,7 @@ public class FDataContext
       _databaseConsole = dbConsole;
    }
 
+   @Override
    public ISqlConnection activeConnection(){
       if(_connection == null){
          _connection = _databaseConsole.alloc();
@@ -30,6 +35,7 @@ public class FDataContext
       return _connection;
    }
 
+   @Override
    public ISqlConnection activeConnection(String name){
       if(_connections == null){
          _connections = new FSqlConnections();
@@ -44,6 +50,7 @@ public class FDataContext
       return cnn;
    }
 
+   @Override
    public void release(){
       if(null != _connection){
          _logger.debug(this, "release", "Release data connection (connection={0})", _connection);

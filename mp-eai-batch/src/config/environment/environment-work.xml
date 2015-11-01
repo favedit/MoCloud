@@ -119,7 +119,7 @@
       <Initialize name='add'>
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>data2</Property>
+               <Property name='name'>develop.data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_DATA</Property>

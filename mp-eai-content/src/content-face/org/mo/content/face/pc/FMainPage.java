@@ -8,6 +8,9 @@ import org.mo.com.lang.FObjectId;
 public class FMainPage
       extends FObjectId
 {
+   // 版本
+   protected String _version;
+
    // 账号
    protected String _passport;
 
@@ -27,6 +30,20 @@ public class FMainPage
 
    public void setUserType(String _userType){
       this._userType = _userType;
+   }
+
+   //============================================================
+   // <P>获得版本。</P>
+   //============================================================
+   public String version(){
+      return _version;
+   }
+
+   //============================================================
+   // <P>设置版本。</P>
+   //============================================================
+   public void setVersion(String version){
+      _version = version;
    }
 
    //============================================================

@@ -60,7 +60,6 @@
        index = 0;
        timer2 = setInterval(function(t) {
          index -= Math.ceil((returnHeight) / 10);
-         console.log(index)
          if (index <= -returnHeight) {
            clearInterval(timer2);
            index = returnHeight;
