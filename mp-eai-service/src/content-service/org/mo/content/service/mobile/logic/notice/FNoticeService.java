@@ -135,6 +135,10 @@ public class FNoticeService
                String result = numberFormat.format((float)unit.viewCount() / (float)userCount.count() * 100);
                percentNode.setText(result);
             }
+            if(unit.content() != null && (!"".equals(unit.content()))){
+               FXmlNode contentNode = xruntime.createNode("content");
+               contentNode.setText(unit.content());
+            }
             if(unit.guid() != null && (!"".equals(unit.guid()))){
                FXmlNode urlNode = xruntime.createNode("notice_url");
                urlNode.setText(_contentHost + "mobile/logic/notice/Notice.wa?do=getInfo&notice_id=" + unit.guid());

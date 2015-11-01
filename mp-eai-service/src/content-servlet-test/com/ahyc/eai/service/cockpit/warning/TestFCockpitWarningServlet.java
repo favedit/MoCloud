@@ -1,4 +1,4 @@
-package org.mo.content.service.mobile.logic.person.info;
+package com.ahyc.eai.service.cockpit.warning;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,20 +13,19 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-import org.mo.com.lang.RString;
 
-public class TestFPersonInfoService
+public class TestFCockpitWarningServlet
 {
    @Test
-   public void testPersonInfo() throws ParseException, IOException{
+   public void testFetch() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.16:8020/eai.mobile.logic.person.info.wsp";
-      // String url = "http://eai.ezubo.com:8089/eai.mobile.wsp";
+      String url = "http://10.13.0.16:8020/eai.cockpit.warning.ws";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
-      listPram.add(new BasicNameValuePair("action", "personInfo"));
-      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      listPram.add(new BasicNameValuePair("begin", "33"));
+      //      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
+      listPram.add(new BasicNameValuePair("do", "fetch"));
+      //      listPram.add(new BasicNameValuePair("format_cd", "json"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       System.out.println(EntityUtils.toString(post.getEntity()));
       CloseableHttpResponse response = httpclient.execute(post);
@@ -40,7 +39,19 @@ public class TestFPersonInfoService
    }
 
    @Test
-   public void test(){
-      System.out.println(RString.isEmpty(null + ""));
+   public void testFetch2() throws ParseException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.16:8020/eai.cockpit.warning.ws?action=fetch";
+      HttpPost post = new HttpPost(url);
+      //      System.out.println(EntityUtils.toString(post.getEntity()));
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
+
    }
+
 }
