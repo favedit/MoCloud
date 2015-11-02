@@ -57,4 +57,14 @@ public interface INoticeConsole
                         String label,
                         String content,
                         ILogicContext logicContext);
+
+   // ============================================================
+   // <T>通过用户id找到用户</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   FDataPersonUserUnit getUserById(ILogicContext logicContext,
+                                   long usserId);
 }

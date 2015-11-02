@@ -130,6 +130,14 @@ public class FNoticeService
                FXmlNode fromNode = xruntime.createNode("from");
                fromNode.setText("myself");
             }
+            //通过用户的id找到用户
+            FDataPersonUserUnit userUnit = _noticeConsole.getUserById(logicContext, unit.userId());
+            if(userUnit != null){
+               if(RString.isNotEmpty(userUnit.label())){
+                  FXmlNode userNode = xruntime.createNode("user_label");
+                  userNode.setText(userUnit.label());
+               }
+            }
             FXmlNode viewNode = xruntime.createNode("view_count");
             viewNode.setText(unit.viewCount());
             if(userCount != null && userCount.count() > 0){

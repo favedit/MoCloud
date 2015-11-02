@@ -190,4 +190,19 @@ public class FNoticeConsole
       noticeLogic.doInsert(tempUnit);
       return null;
    }
+
+   // ============================================================
+   // <T>通过用户id找到用户</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public FDataPersonUserUnit getUserById(ILogicContext logicContext,
+                                          long userId){
+      FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = userLogic.find(userId);
+      return unit;
+   }
 }
