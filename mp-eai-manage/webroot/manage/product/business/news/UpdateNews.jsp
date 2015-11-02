@@ -108,11 +108,17 @@
       $("#oiconUr").val(obj.substr(a+1,obj.length));
    }
    function phoneInfo(){
-      $("#getHtml").click();
-      var content = $("#content").val();
       var l=(screen.availWidth-500)/2;
       var t=(screen.availHeight-500)/2;
-      openwin(content,l,t);
+      var linkCd = $("#linkCd").combobox("getValue");
+      if(linkCd==2){
+         var linkUrl = $("#linkUrl").val();
+         window.open(linkUrl,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      }else{
+         $("#getHtml").click();
+         var content = $("#content").val();
+         openwin(content,l,t);
+      }
    }
    function openwin(content,l,t) 
    { 
@@ -146,10 +152,10 @@
    action="/manage/product/business/news/News.wa?do=update"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
-   <table width="870" height="346" border="0" align="left"
+   <table width="870" height="646" border="0" align="left"
     cellpadding="0" cellspacing="0" style="margin-left:10px;">
     <tr>
-      <td width="54" height="38"><div align="left">资讯标题:</div></td>
+      <td width="84" height="38"><div align="left" style="width:84px;">资讯标题:</div></td>
       <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px" data-options="required:true,validType:'length[0,200]'" 
         value="<jh:write source='&unit.label'/>" />
@@ -164,43 +170,50 @@
        <img width="140" height="140" src="<jh:write source='&unit.makeUrl'/>"></div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">是否展示:</div></td>
+     <td width="84" height="38"><div align="left">是否展示:</div></td>
      <td style="width:380px;"><div align="left">
        <input type="hidden" id="oldDisplayCd" value="<jh:write source='&unit.displayCd'/>">
        <input style="width:380px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="valueField:'value',textField:'text',
        data:[{'value':'1','text':'展示'},{'value':'2','text':'非展示'}],editable:false"/>
-      </div></td>
+      </div></td><td></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">外链状态:</div></td>
+     <td width="84" height="38"><div align="left">外链状态:</div></td>
      <td><div align="left">
        <input type="hidden" id="oldLinkCd" value="<jh:write source='&unit.linkCd'/>">
        <input style="width:380px;height:20px" id="linkCd" class="easyui-combobox" name="linkCd" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}],editable:false"/>  
-      </div></td>
+       data:[{'value':'1','text':'内容'},{'value':'2','text':'外链'}],editable:false"/>
+      </div></td><td></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
-     <td  colspan="2"><div align="left">
+     <td width="84" height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.makeUrl'/>" >
        <input type="button" value="选择上传文件" onclick="but()"> <span style="color:red;">&nbsp;&nbsp;选择小于1M的等比例图片</span>
       </div></td>
     </tr>
     <tr>
-      <td  height="38" width="74"><div align="left">排序:</div></td>
+      <td width="84" height="38" width="74"><div align="left">排序:</div></td>
       <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
-        data-options="required:true,validType:'length[0,11]'"  value="<jh:write source='&unit.displayOrder'/>"/></td>
+        data-options="required:true,validType:'length[0,11]'"  value="<jh:write source='&unit.displayOrder'/>"/></td><td></td>
     </tr>
     <tr>
-      <td height="38"><div align="left">关键字:</div></td>
+      <td width="84" height="38"><div align="left">关键字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
-        data-options="validType:'length[0,800]'" value="<jh:write source='&unit.keywords'/>"/></td>
+        data-options="validType:'length[0,800]'" value="<jh:write source='&unit.keywords'/>"/></td><td></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">外链地址:</div></td>
+      <td width="84" align="left" height="38">原始发布时间:</td>
+      <td align="left">
+         <input class="easyui-datetimebox" name="recordDate" id="recordDate" data-options="showSeconds:true,editable:false" style="width:180px" value="">
+         <span id="oriRecordDate" style="display:none"><jh:date source='&unit.recordDate' format="YYYY-MM-DD HH24:MI:SS"/></span>
+      </td><td></td>
+    </tr>
+    <tr>
+     <td width="84" height="38"><div align="left">外链地址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
         style="width:380px;height:20px" data-options="validType:'length[0,800]'" value="<jh:write source='&unit.linkUrl'/>"/>
@@ -210,14 +223,7 @@
      </td>
     </tr>
     <tr>
-      <td align="left">原始发布时间:</td>
-      <td align="left">
-         <input class="easyui-datetimebox" name="recordDate" id="recordDate" data-options="showSeconds:true" style="width:380px" value="">
-         <span id="oriRecordDate" style="display:none"><jh:date source='&unit.recordDate' format="YYYY-MM-DD HH24:MI:SS"/></span>
-      </td>
-   </tr>
-    <tr>
-     <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
+     <td width="84" height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td colspan="2"><div align="left">
       <input id="description" name="description" class="easyui-textbox"
         data-options="multiline:true" value="<jh:write source='&unit.description'/>" 
@@ -225,7 +231,7 @@
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">资讯内容:</div></td>
+     <td width="84"><div align="left">资讯内容:</div></td>
      <td align="left"  colspan="2">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px" ></textarea>
           <input style="display:none" id="content" name="content" />

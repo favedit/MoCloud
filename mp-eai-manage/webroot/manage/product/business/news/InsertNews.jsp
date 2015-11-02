@@ -131,17 +131,17 @@
         data-options="validType:'length[0,800]'" /></td>
     </tr>
     <tr>
+      <td align="left" height="38">原始发布时间:</td>
+      <td align="left">
+         <input class="easyui-datetimebox" id="recordDate" name="recordDate" data-options="showSeconds:true,editable:false" style="width:180px">
+      </td>
+    </tr>
+    <tr>
      <td height="38"><div align="left">外链地址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
         style="width:380px;height:20px" data-options="validType:'length[0,800]'"/>
      </div></td>
-    </tr>
-    <tr>
-      <td align="left" height="38">原始发布时间</td>
-      <td align="left">
-         <input class="easyui-datetimebox" id="recordDate" name="recordDate" data-options="showSeconds:true" style="width:380px">
-      </td>
     </tr>
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>

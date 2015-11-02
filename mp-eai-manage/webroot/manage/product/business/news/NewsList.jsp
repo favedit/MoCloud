@@ -163,12 +163,14 @@
        doSubmitByCondition(null,null);
        $("#flag").val("2");
     }
-    function phoneInfo(ouid){
+    function phoneInfo(ouid,linkCd,linkUrl){
        var l=(screen.availWidth-500)/2;
        var t=(screen.availHeight-500)/2;
-      // var w = screen.availWidth*7/19;
-      //var h = screen.availHeight*12/19
-       window.open('/manage/product/business/news/News.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+       if(linkCd==2){
+          window.open(linkUrl,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+       }else{
+          window.open('/manage/product/business/news/News.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+       }
     }
     //搜索按钮，enter键
     document.onkeydown=function(){
@@ -233,13 +235,10 @@
      width="40px">排序</th>
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
-     width="80px">关键字</th>
+     width="160px">关键字</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
-     width="160px">描述</th>
-     <th
-     data-options="field:'content',halign:'center',align:'left',sortable:true"
-     width="460px">资讯内容</th>
+     width="540px">描述</th>
      <th
      data-options="field:'recordDate',halign:'center',align:'left',sortable:true"
      width="140px">原始发布时间</th>

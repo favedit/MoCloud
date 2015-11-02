@@ -1,7 +1,6 @@
 package org.mo.content.face.manage.product.business.notice;
 
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
-import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 
 import org.mo.cloud.core.storage.IGcStorageConsole;
@@ -363,10 +362,6 @@ public class FNoticeAction
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, context.parameterAsLong("ouid"));
-      Integer linkCd = unit.linkCd();//2-外链
-      if(RString.equals(EGcLink.Link, linkCd)){
-         
-      }
       unit.setContent(_storageConsole.makeDisplay(unit.content()));
       page.setUnit(unit);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");

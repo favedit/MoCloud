@@ -140,17 +140,19 @@
     doSubmitByCondition(null,null);
     $("#flag").val("2");
  }
- function phoneInfo(ouid){
+ function phoneInfo(ouid,linkCd,linkUrl){
     var l=(screen.availWidth-500)/2;
     var t=(screen.availHeight-500)/2;
-    var w = screen.availWidth*7/19;
-    var h = screen.availHeight*12/19;
-    window.open('/manage/product/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+    if(linkCd==2){
+       window.open(linkUrl,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+    }else{
+       window.open('/manage/product/business/notice/Notice.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+    }
  }
 //搜索按钮，enter键
  document.onkeydown=function(){
     if(event.keyCode=="13"){
-       submitForm();    
+       submitForm();
     }
  }
 </script>
@@ -212,14 +214,8 @@
      data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
      width="40px">排序</th>
     <th
-     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
-     width="160px">外链地址</th>
-    <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
-     width="160px">描述</th>
-    <th
-     data-options="field:'content',halign:'center',align:'left',sortable:true"
-     width="260px">公告内容</th>
+     width="420px">描述</th>
     <th 
      data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>

@@ -101,11 +101,17 @@
       $("#oiconUr").val(obj.substr(a+1,obj.length));
    }
    function phoneInfo(){
-      $("#getHtml").click();
-      var content = $("#content").val();
       var l=(screen.availWidth-500)/2;
       var t=(screen.availHeight-500)/2;
-      openwin(content,l,t);
+      var linkCd = $("#linkCd").combobox("getValue");
+      if(linkCd==2){
+         var linkUrl = $("#linkUrl").val();
+         window.open(linkUrl,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      }else{
+         $("#getHtml").click();
+         var content = $("#content").val();
+         openwin(content,l,t);
+      }
    }
    function openwin(content,l,t) 
    { 

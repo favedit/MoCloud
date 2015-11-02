@@ -4,6 +4,6 @@
 <HEAD>
 </HEAD>
 <body>
-  <jh:write source='&unit.content' format="text"/>
+    <jh:write source='&unit.content' format="text"/>
 </body>
 </HTML>

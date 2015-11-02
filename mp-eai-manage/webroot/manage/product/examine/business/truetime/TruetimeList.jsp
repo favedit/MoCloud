@@ -63,10 +63,14 @@
          return "<img src="+makeUrl+" height=55px width=55px/>";
       }
    }
-   function phoneInfo(ouid){
+   function phoneInfo(ouid,linkCd,linkUrl){
       var l=(screen.availWidth-500)/2;
       var t=(screen.availHeight-500)/2;
-      window.open('/manage/product/examine/business/truetime/Truetime.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      if(linkCd==2){
+         window.open(linkUrl,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      }else{
+         window.open('/manage/product/examine/business/truetime/Truetime.wa?do=getDescription&ouid='+ouid,'_blank','height=640px,width=360px,top='+t+',left='+l+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+      }
    }
    //搜索按钮，enter键
    document.onkeydown=function(){
@@ -124,16 +128,10 @@
      width="40px">排序</th>
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
-     width="60px">关键字</th>
-     <th
-     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
-     width="160px">外链地址</th>
+     width="160px">关键字</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
-     width="160px">描述</th>
-     <th
-     data-options="field:'content',halign:'center',align:'left',sortable:true"
-     width="260px">实时数据内容</th>
+     width="420px">描述</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
