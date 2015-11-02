@@ -46,7 +46,8 @@ public interface INoticeService
    EResult markRead(IWebContext context,
                     IWebInput input,
                     IWebOutput output,
-                    ILogicContext logicContext);
+                    ILogicContext logicContext,
+                    IWebSession sessionContext);
 
    // ============================================================
    // <T>号令发布</T>

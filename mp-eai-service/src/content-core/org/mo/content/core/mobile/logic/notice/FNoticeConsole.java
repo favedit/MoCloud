@@ -7,6 +7,7 @@ import com.cyou.gccloud.data.data.FDataPersonUserLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserNoticeLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
+import com.cyou.gccloud.define.enums.common.EGcActive;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import java.util.Iterator;
@@ -17,11 +18,13 @@ import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 
 //============================================================
 // <T>号令控制台接口。</T>
@@ -114,35 +117,43 @@ public class FNoticeConsole
                           long userId,
                           float locationLongitude,
                           float locationLatitude,
-                          ILogicContext logicContext){
+                          ILogicContext logicContext,
+                          IWebSession sessionContext){
       FDataPersonUserNoticeLogic personUserNoticeLogic = logicContext.findLogic(FDataPersonUserNoticeLogic.class);
       FDataLogicNoticeLogic noticeLogic = logicContext.findLogic(FDataLogicNoticeLogic.class);
       FDataLogicNoticeUnit noticeUnit = noticeLogic.findByGuid(noticeGuid);
       if(noticeUnit.userId() == userId){
          return "failure";
       }
-      FSql whereFSql = new FSql();
-      whereFSql.append(FDataPersonUserNoticeLogic.NOTICE_ID);
-      whereFSql.append("=");
-      whereFSql.append(noticeUnit.ouid());
-      whereFSql.append(" AND ");
-      whereFSql.append(FDataPersonUserNoticeLogic.USER_ID);
-      whereFSql.append("=");
-      whereFSql.append(userId);
-      FLogicDataset<FDataPersonUserNoticeUnit> units = personUserNoticeLogic.fetch(whereFSql);
-      if(units != null && units.count() > 0){
-         // 如果已经阅读了不操作
-      }else{
-         // 如果还没有阅读,标志阅读
-         FDataPersonUserNoticeUnit tempUnit = new FDataPersonUserNoticeUnit();
-         tempUnit.setUserId(userId);
-         tempUnit.setNoticeId(noticeUnit.ouid());
-         tempUnit.setLocationLongitude(locationLongitude);
-         tempUnit.setLocationLatitude(locationLatitude);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataPersonUserNoticeLogic.NOTICE_ID);
+      whereSql.append("=");
+      whereSql.append(noticeUnit.ouid());
+      whereSql.append(" AND ");
+      whereSql.append(FDataPersonUserNoticeLogic.USER_ID);
+      whereSql.append("=");
+      whereSql.append(userId);
+      //线程并发 同一用连续户多次点击
+      boolean flag = false;
+      synchronized(sessionContext){
+         FDataPersonUserNoticeUnit unit = personUserNoticeLogic.search(whereSql);
+         if(unit == null){
+            // 如果还没有阅读,标志阅读
+            FDataPersonUserNoticeUnit tempUnit = personUserNoticeLogic.doPrepare();
+            tempUnit.setUserId(userId);
+            tempUnit.setNoticeId(noticeUnit.ouid());
+            tempUnit.setActiveCd(EGcActive.Active);
+            tempUnit.setActiveDate(RDateTime.currentDateTime());
+            tempUnit.setLocationLongitude(locationLongitude);
+            tempUnit.setLocationLatitude(locationLatitude);
+            personUserNoticeLogic.doInsert(tempUnit);
+            flag = true;
+         }
+      }
+      if(flag){
          // 同时更新通知的view_count字段,,累加阅读次数
          noticeUnit.setViewCount(noticeUnit.viewCount() + 1);
          noticeLogic.doUpdate(noticeUnit);
-         personUserNoticeLogic.doInsert(tempUnit);
       }
       return "Success";
    }

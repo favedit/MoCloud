@@ -168,7 +168,8 @@ public class FNoticeService
    public EResult markRead(IWebContext context,
                            IWebInput input,
                            IWebOutput output,
-                           ILogicContext logicContext){
+                           ILogicContext logicContext,
+                           IWebSession sessionContext){
       String sessionCode = context.head("mo-session-id");
       String noticeGuid = context.parameter("notice_id");
       String locationLongitude = context.parameter("location_longitude");
@@ -184,7 +185,7 @@ public class FNoticeService
       if(RString.isNotEmpty(sessionCode)){
          FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
          long userId = sessionInfo.userId();
-         String isSuccess = _noticeConsole.markRead(noticeGuid, userId, longitude, latitude, logicContext);
+         String isSuccess = _noticeConsole.markRead(noticeGuid, userId, longitude, latitude, logicContext, sessionContext);
          if("failure".equals(isSuccess)){
             return EResult.Failure;
          }

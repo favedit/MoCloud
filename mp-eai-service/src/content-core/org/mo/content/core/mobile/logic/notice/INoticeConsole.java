@@ -4,6 +4,7 @@ import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 
 //============================================================
 //<T>号令控制台接口</T>
@@ -42,7 +43,8 @@ public interface INoticeConsole
                    long userId,
                    float locationLongitude,
                    float locationLatitude,
-                   ILogicContext logicContext);
+                   ILogicContext logicContext,
+                   IWebSession sessionContext);
 
    // ============================================================
    // <T>号令发布</T>
