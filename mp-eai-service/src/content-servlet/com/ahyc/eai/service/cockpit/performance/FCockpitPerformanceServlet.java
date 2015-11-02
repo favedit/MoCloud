@@ -1,8 +1,7 @@
-package com.ahyc.eai.service.cockpit.warning;
+package com.ahyc.eai.service.cockpit.performance;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import java.util.ArrayList;
-import java.util.HashSet;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
@@ -16,21 +15,21 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>阈值预警处理。</T>
+// <T>e租宝财富端本月业绩接口.</T>
 //============================================================
-public class FCockpitWarningServlet
+public class FCockpitPerformanceServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitWarningServlet
+         ICockpitPerformanceServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitWarningServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitPerformanceServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
 
    //============================================================
-   // <T>阈值预警列表</T>
+   // <T>e租宝财富端本月业绩列表</T>
    // @param context 环境
    // @param logicContext 逻辑环境
    // @param request 请求
@@ -41,7 +40,7 @@ public class FCockpitWarningServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named fetch from FCockpitWarningServlet is beginning... ");
+      _logger.debug(this, "fetch", "the method named fetch from FCockpitPerformanceServlet is beginning... ");
       // 检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
@@ -75,26 +74,39 @@ public class FCockpitWarningServlet
       FByteStream stream = createStream(context);
       //      ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
-      HashSet<ArrayList<String>> parent = new HashSet<ArrayList<String>>();
-      ArrayList<String> child1 = new ArrayList<String>();
-      child1.add("DA4B7F30C1C34A3CA231744C3BF1DD41");
-      child1.add("北京第七分公司本月离职率已达10%");
-      ArrayList<String> child2 = new ArrayList<String>();
-      child2.add("DA4B7F30C1C34A3CA231744C3BF1DD42");
-      child2.add("上海璟益本月任务还有60%没有完成.");
-      ArrayList<String> child3 = new ArrayList<String>();
-      child3.add("DA4B7F30C1C34A3CA231744C3BF1DD43");
-      child3.add("10月28日e租宝赎回总额超过3亿元.");
+      ArrayList<ArrayList<Object>> parent = new ArrayList<ArrayList<Object>>();
+      ArrayList<Object> child1 = new ArrayList<Object>();
+      child1.add("一诺财富");
+      child1.add("300万到3600元");
+      child1.add(1);
+      ArrayList<Object> child2 = new ArrayList<Object>();
+      child2.add("上海钰申");
+      child2.add("300万到3600元");
+      child2.add(2);
+      ArrayList<Object> child3 = new ArrayList<Object>();
+      child3.add("钰诚荣泰(安徽)");
+      child3.add("300万到3600元");
+      child3.add(3);
+      ArrayList<Object> child4 = new ArrayList<Object>();
+      child4.add("上海仁立");
+      child4.add("300万到3600元");
+      child4.add(4);
       parent.add(child1);
       parent.add(child2);
       parent.add(child3);
-      for(ArrayList<String> list : parent){
-         for(String string : list){
-            stream.writeString(string);
-         }
-      }
+      parent.add(child4);
       int count = parent.size();
       stream.writeInt32(count);
+      for(ArrayList<Object> list : parent){
+         for(Object obj : list){
+            if(obj instanceof String){
+               stream.writeString((String)obj);
+            }
+            if(obj instanceof Integer){
+               stream.writeInt32((Integer)obj);
+            }
+         }
+      }
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
@@ -105,45 +117,4 @@ public class FCockpitWarningServlet
       return sendStream(context, request, response, stream);
    }
 
-   //============================================================
-   // <T>根据guid获取阈值预警详情</T>
-   // @param context 环境
-   // @param logicContext 逻辑环境
-   // @param request 请求
-   // @param response 应答
-   //============================================================
-   @Override
-   public EResult find(IWebContext context,
-                       ILogicContext logicContext,
-                       IWebServletRequest request,
-                       IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named find from FCockpitWarningServlet is beginning... ");
-      // 检查参数
-      if(!checkParameters(context, request, response)){
-         return EResult.Failure;
-      }
-      //      String warningGuid = context.parameter("guid");
-      //............................................................
-      // 从缓冲中查找数据
-      String cacheCode = "find";
-      FByteStream cacheStream = findCacheStream(cacheCode);
-      if(cacheStream != null){
-         return sendStream(context, request, response, cacheStream);
-      }
-      //............................................................
-      //      TDateTime currentDate = RDateTime.currentDateTime();
-      // 设置输出流
-      FByteStream stream = createStream(context);
-      //      ISqlConnection connection = logicContext.activeConnection("statistics");
-      //............................................................
-      stream.writeString("本条阈值预警详情....");
-      //............................................................
-      // 保存数据到缓冲中
-      updateCacheStream(cacheCode, stream);
-      //............................................................
-      // 发送数据
-      int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer dynamic. (data_length={1})", dataLength);
-      return sendStream(context, request, response, stream);
-   }
 }

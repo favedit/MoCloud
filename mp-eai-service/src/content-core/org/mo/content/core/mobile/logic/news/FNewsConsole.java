@@ -1,7 +1,5 @@
 package org.mo.content.core.mobile.logic.news;
 
-import org.mo.content.service.city.info.TMobileService;
-
 import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
@@ -10,6 +8,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.service.city.info.FMobileService;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -22,7 +21,7 @@ public class FNewsConsole
          INewsConsole
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(TMobileService.class);
+   private static ILogger _logger = RLogger.find(FMobileService.class);
 
    //============================================================
    // <T>构造资源</T>
@@ -65,7 +64,7 @@ public class FNewsConsole
       whereSql.append(FDataLogicNewsLogic.DISPLAY_CD);
       whereSql.append("=");
       whereSql.append(EGcDisplay.Enabled);
-      String orderBy = String.format("%s %s %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC,", FDataLogicNewsLogic.CREATE_DATE, "DESC");
+      String orderBy = String.format("%s %s %s %s", FDataLogicNewsLogic.DISPLAY_ORDER, "DESC,", FDataLogicNewsLogic.RECORD_DATE, "DESC");
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
       FLogicDataset<FDataLogicNewsUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
       return moduleList;

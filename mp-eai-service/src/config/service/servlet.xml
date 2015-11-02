@@ -122,5 +122,14 @@
   class='com.ahyc.eai.service.cockpit.warning.FCockpitWarningServlet'
   scope='global'>
  </Component>
-
+ <!-- ============================================================ -->
+ <!-- e租宝财富端本月业绩 -->
+ <!-- ============================================================ -->
+ <WebServlet name='eai.cockpit.performance'
+  face='com.ahyc.eai.service.cockpit.performance.ICockpitPerformanceServlet' />
+ <Component
+  face='com.ahyc.eai.service.cockpit.performance.ICockpitPerformanceServlet'
+  class='com.ahyc.eai.service.cockpit.performance.FCockpitPerformanceServlet'
+  scope='global'>
+ </Component>
 </Config>

@@ -134,10 +134,12 @@ public class FNoticeService
             viewNode.setText(unit.viewCount());
             if(userCount != null && userCount.count() > 0){
                FXmlNode percentNode = xruntime.createNode("percent");
+               FXmlNode userCountNode = xruntime.createNode("user_count");
+               userCountNode.setText(userCount.count() + "");
                NumberFormat numberFormat = NumberFormat.getInstance();
                numberFormat.setMaximumFractionDigits(0);
                numberFormat.setRoundingMode(RoundingMode.HALF_UP);
-               String result = numberFormat.format((float)unit.viewCount() / (float)userCount.count() * 100);
+               String result = numberFormat.format(unit.viewCount() / (float)userCount.count() * 100);
                percentNode.setText(result);
             }
             if(unit.content() != null && (!"".equals(unit.content()))){
