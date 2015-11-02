@@ -11,7 +11,7 @@
          scope = 'global' >
       <Property name='enable'>Y</Property>
       <Property name='code'>WK</Property>
-      <Property name='servers'>10.13.0.250:11311</Property>
+      <Property name='servers'>10.13.0.250:11211</Property>
       <Initialize name='initialize'/>
       <Release name='release'/>
    </Component>

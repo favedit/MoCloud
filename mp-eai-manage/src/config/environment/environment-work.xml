@@ -16,20 +16,6 @@
       <Initialize name='initializeConfig'/>
    </Component>
    
-   <!-- ============================================================ -->
-   <!-- 资源存储控制台                                               -->
-   <!-- ============================================================ -->
-   <!-- <Component
-         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
-         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
-         scope = 'global' >
-      <Property name='enable'>Y</Property>
-      <Property name='storage_host'>127.0.0.1</Property>
-      <Property name='storage_port'>8030</Property>
-      <Property name='storage_name'>content</Property>
-      <Initialize name='initialize'/>
-   </Component> -->
-   
    <!-- ==================================================== -->
    <!-- LogicServiceInfoConsole:逻辑服务信息控制台           -->
    <!-- ==================================================== -->
@@ -39,6 +25,7 @@
          scope = 'global'>
       <Property name='serviceHost'>115.28.136.134</Property>
    </Component>
+
    <!-- ============================================================ -->
    <!-- 内存缓冲控制台                                               -->
    <!-- ============================================================ -->
@@ -46,10 +33,11 @@
          face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
          class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
          scope = 'global' >
-      <Property name='enable'>N</Property>
+      <Property name='enable'>Y</Property>
       <Property name='code'>WK</Property>
-      <Property name='servers'>10.21.0.250:11211</Property>
+      <Property name='servers'>10.13.0.250:11211</Property>
       <Initialize name='initialize'/>
+      <Release name='release'/>
    </Component>
    
    <!-- ============================================================ -->
