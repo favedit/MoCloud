@@ -709,7 +709,12 @@ public class FDataLogicNoticeLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      cmd.append(unit.userId());
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
       cmd.append(',');
       String label = unit.label();
       if(RString.isEmpty(label)){
@@ -832,7 +837,12 @@ public class FDataLogicNoticeLogic
       cmd.append(unit.ovld());
       if(unit.isUserIdChanged()){
          cmd.append(",`USER_ID`=");
-         cmd.append(unit.userId());
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
       }
       if(unit.isLabelChanged()){
          cmd.append(",`LABEL`=");

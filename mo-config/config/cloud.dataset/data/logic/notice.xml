@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataStore _uuid="9b46b5b5-f1e3-4da2-8edf-acd869e1366d" name="data.logic.notice" label="M#12cn15业务公告表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Logic.Notice" data_name="DT_LGC_NOTICE" data_alias="DT_LGC_NTC" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
-  <FieldInteger _uuid="28082811-32b1-4ccc-9203-9f22f7d04938" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USER" data_refer="data.person.user" />
+  <FieldRecordId _uuid="08cb9083-63fe-4112-b272-643f204b9394" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USER" data_refer="data.person.user" />
   <FieldString _uuid="9a568d55-dc1f-4ae0-a011-7732a1b477ca" name="label" label="M#12cn14资讯标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="200" />
   <FieldInteger _uuid="79f3e754-abc4-4141-8168-47e3c8da7997" name="status_cd" label="M#12cn12状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
   <FieldInteger _uuid="a21cd9fb-cc58-45d1-bb67-3f86c633e13e" name="display_cd" label="M#12cn14是否显示" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DISPLAY_CD" />

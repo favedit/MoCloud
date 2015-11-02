@@ -40,10 +40,10 @@ public class FDataLogicNoticeUnit
    protected String _guid;
 
    // 存储字段用户编号的定义。
-   private int __userId;
+   private long __userId;
 
    // 字段用户编号的定义。
-   protected int _userId;
+   protected long _userId;
 
    // 存储字段资讯标题的定义。
    private String __label;
@@ -224,7 +224,7 @@ public class FDataLogicNoticeUnit
    //
    // @return 数据内容
    //============================================================
-   public int userId(){
+   public long userId(){
       return _userId;
    }
 
@@ -244,7 +244,7 @@ public class FDataLogicNoticeUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setUserId(int value){
+   public void setUserId(long value){
       _userId = value;
    }
 
@@ -615,7 +615,7 @@ public class FDataLogicNoticeUnit
          case "guid":
             return _guid;
          case "user_id":
-            return RInteger.toString(_userId);
+            return Long.toString(_userId);
          case "label":
             return _label;
          case "status_cd":
@@ -666,7 +666,7 @@ public class FDataLogicNoticeUnit
             _guid = value;
             break;
          case "user_id":
-            _userId = RInteger.parse(value);
+            _userId = RLong.parse(value);
             break;
          case "label":
             _label = value;
@@ -735,7 +735,7 @@ public class FDataLogicNoticeUnit
                _guid = __guid;
                break;
             case "user_id":
-               __userId = RInteger.parse(value);
+               __userId = RLong.parse(value);
                _userId = __userId;
                break;
             case "label":
@@ -832,7 +832,7 @@ public class FDataLogicNoticeUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("userId", RInteger.toString(_userId));
+      map.put("userId", RLong.toString(_userId));
       map.put("label", _label);
       map.put("statusCd", RInteger.toString(_statusCd));
       map.put("displayCd", RInteger.toString(_displayCd));
@@ -859,7 +859,7 @@ public class FDataLogicNoticeUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _userId = input.readInt32();
+      _userId = input.readInt64();
       _label = input.readString();
       _statusCd = input.readInt32();
       _displayCd = input.readInt32();
@@ -886,7 +886,7 @@ public class FDataLogicNoticeUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeInt32(_userId);
+      output.writeInt64(_userId);
       output.writeString(_label);
       output.writeInt32(_statusCd);
       output.writeInt32(_displayCd);
