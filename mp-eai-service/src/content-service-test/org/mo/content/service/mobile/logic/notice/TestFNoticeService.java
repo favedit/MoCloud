@@ -85,7 +85,7 @@ public class TestFNoticeService
       listPram.add(new BasicNameValuePair("action", "noticePublish"));
       listPram.add(new BasicNameValuePair("label", "紧急号令"));
       listPram.add(new BasicNameValuePair("content", "全体员工请务必下午三点准时到北京国际大厦开会!!"));
-      post.setHeader("mo-session-id", "5E4137EB3AD343507454DC0719502E8D");
+      post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();

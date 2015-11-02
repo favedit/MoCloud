@@ -6,6 +6,10 @@
 	<classpathentry kind="src" path="src/content-service"/>
 	<classpathentry kind="src" path="src/content-face"/>
 	<classpathentry kind="src" path="src/config"/>
+	<classpathentry kind="src" path="src/content-core-test"/>
+	<classpathentry kind="src" path="src/content-face-test"/>
+	<classpathentry kind="src" path="src/content-service-test"/>
+	<classpathentry kind="src" path="src/content-servlet-test"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-3-logic"/>
@@ -37,5 +41,6 @@
 	<classpathentry kind="lib" path="lib/httpcore-4.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/ycjt3des-1.0.jar"/>
 	<classpathentry kind="lib" path="D:/Microbject/MoCloud/mt-server/tomcat-eai.service/lib/jzsms-6.0.jar"/>
+	<classpathentry kind="lib" path="D:/jar/junit-4.4.jar/junit-4.4.jar"/>
 	<classpathentry kind="output" path="webroot/WEB-INF/classes"/>
 </classpath>

@@ -10,43 +10,53 @@ import org.mo.web.protocol.context.IWebOutput;
 //============================================================
 // <T>号令服务接口。</T>
 //============================================================
-public interface INoticeService {
-    // ============================================================
-    // <T>默认逻辑。</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    EResult process(IWebContext context, IWebInput input, IWebOutput output);
+public interface INoticeService
+{
+   // ============================================================
+   // <T>默认逻辑。</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   EResult process(IWebContext context,
+                   IWebInput input,
+                   IWebOutput output);
 
-    // ============================================================
-    // <T>分页获取号令相关信息。</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    EResult select(IWebContext context, IWebInput input, IWebOutput output,
-            ILogicContext logicContext, IWebSession sessionContext);
+   // ============================================================
+   // <T>分页获取号令相关信息。</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   EResult select(IWebContext context,
+                  IWebInput input,
+                  IWebOutput output,
+                  ILogicContext logicContext,
+                  IWebSession sessionContext);
 
-    // ============================================================
-    // <T>标记号令已读</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    EResult markRead(IWebContext context, IWebInput input, IWebOutput output,
-            ILogicContext logicContext);
+   // ============================================================
+   // <T>标记号令已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   EResult markRead(IWebContext context,
+                    IWebInput input,
+                    IWebOutput output,
+                    ILogicContext logicContext);
 
-    // ============================================================
-    // <T>号令发布</T>
-    // @param context 页面环境
-    // @param input 输入配置
-    // @param output 输出配置
-    // @return 处理结果
-    // ============================================================
-    EResult noticePublish(IWebContext context, IWebInput input,
-            IWebOutput output, ILogicContext logicContext);
+   // ============================================================
+   // <T>号令发布</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   EResult noticePublish(IWebContext context,
+                         IWebInput input,
+                         IWebOutput output,
+                         ILogicContext logicContext);
 }

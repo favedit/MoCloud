@@ -194,10 +194,13 @@ public class FNoticeService
                                 IWebInput input,
                                 IWebOutput output,
                                 ILogicContext logicContext){
+      String sessionCode = context.head("mo-session-id");
+      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
+      long userId = sessionInfo.userId();
       String label = context.parameter("label");
       String content = context.parameter("content");
       if(RString.isNotEmpty(RString.trimSplit(label, ' ')) && RString.isNotEmpty(RString.trimSplit(content, ' '))){
-         _noticeConsole.noticePublish(label, content, logicContext);
+         _noticeConsole.noticePublish(userId, label, content, logicContext);
          return EResult.Success;
       }else{
          return EResult.Failure;

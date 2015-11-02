@@ -153,7 +153,8 @@ public class FNoticeConsole
    // @return 处理结果
    // ============================================================
    @Override
-   public String noticePublish(String label,
+   public String noticePublish(long userId,
+                               String label,
                                String content,
                                ILogicContext logicContext){
       FSql modelSql = _resource.findString(FSql.class, "sql.notice.publish");
@@ -171,7 +172,7 @@ public class FNoticeConsole
       tempUnit.setDisplayOrder(maxDisplayOrder + 1);
       tempUnit.setOvld(true);
       tempUnit.setLabel(label);
-      tempUnit.setDescription("紧急号令!");
+      tempUnit.setUserId(userId);
       tempUnit.setContent(content);
       noticeLogic.doInsert(tempUnit);
       return null;
