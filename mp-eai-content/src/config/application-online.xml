@@ -4,7 +4,7 @@
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
    <Define name='application.name'>eai.content</Define>
-   <Define name='application.version'>151101A</Define>
+   <Define name='application.version'>151102</Define>
    <Define name='application.mode'>online</Define>
    <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application}/deploy</Define>
