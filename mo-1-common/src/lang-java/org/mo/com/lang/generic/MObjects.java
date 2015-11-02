@@ -175,7 +175,7 @@ public abstract class MObjects<T>
    // @return 对象
    //============================================================
    public T first(){
-      return (_count > 0) ? _items[_count - 1] : null;
+      return (_count > 0) ? _items[0] : null;
    }
 
    //============================================================
