@@ -27,8 +27,7 @@
                      <td><jh:write source="&member.recommendScore" /></td>
                      <td><a class="btn" data-id="<jh:write source='&member.guid' />" href="javascript:;">关&nbsp;&nbsp;&nbsp;&nbsp;注</a></td>
                   </tr>
-               </jh:loop>
-            
+               </jh:loop>            
             </table>
             <div class="loading"></div>
             <div id="loading_img_div" style="width:160px;">

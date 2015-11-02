@@ -18,46 +18,47 @@ import org.junit.Test;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 
-public class TestFMessagePushService {
-    @Test
-    public void testPushSMS() throws ClientProtocolException, IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        String url = "http://10.13.0.100:8020/eai.financial.logic.message.wsp";
-        HttpPost post = new HttpPost(url);
-        List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-        listPram.add(new BasicNameValuePair("link_id", "33"));
-        listPram.add(new BasicNameValuePair("login_date", new TDateTime(
-                new Date()).toString()));// 20151019103636时间戳
-        // listPram.add(new BasicNameValuePair("mo-session-id",
-        // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
-        listPram.add(new BasicNameValuePair("action", "pushSMS"));
-        listPram.add(new BasicNameValuePair("format_cd", "json"));
-        post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
-        System.out.println(EntityUtils.toString(post.getEntity()));
-        CloseableHttpResponse response = httpclient.execute(post);
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            String responseContent = EntityUtils.toString(entity);
-            String result = new String(responseContent.getBytes("utf-8"));
-            System.out.println(result);
-        }
+public class TestFMessagePushService
+{
+   @Test
+   public void testPushSMS() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.100:8020/eai.financial.logic.message.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("link_id", "33"));
+      listPram.add(new BasicNameValuePair("login_date", new TDateTime(new Date()).toString()));// 20151019103636时间戳
+      // listPram.add(new BasicNameValuePair("mo-session-id",
+      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
+      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
+      listPram.add(new BasicNameValuePair("action", "pushSMS"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      System.out.println(EntityUtils.toString(post.getEntity()));
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
 
-    }
+   }
 
-    @Test
-    public void testSendMessage() {
-        BusinessService bs = new BusinessService();
-        bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
-        /*
-         * System.out.println("短信接口返回:" + bs.sendBatchMessage("sdk_yucheng",
-         * "1qazxsw2", "15311444853", "测试短信接口来自钰诚集团测试【钰诚办公平台】"));
-         */
-        TDateTime ttt = new TDateTime(RDateTime.currentDateTime());
-        ttt.addMinute(70);
-        TDateTime ddd = new TDateTime(RDateTime.currentDateTime());
-        ddd.addHour(1);
-        System.out.println(ttt.isAfter(ddd));// 20151021093302
-        // 20151021103430
-    }
+   @Test
+   public void testSendMessage(){
+      BusinessService bs = new BusinessService();
+      bs.setWebService("http://www.jianzhou.sh.cn/JianzhouSMSWSServer/services/BusinessService");
+
+      /*
+       * System.out.println("短信接口返回:" + bs.sendBatchMessage("sdk_yucheng",
+       * "1qazxsw2", "15311444853", "测试短信接口来自钰诚集团测试【钰诚办公平台】"));
+       */
+      TDateTime ttt = new TDateTime(RDateTime.currentDateTime());
+      ttt.addMinute(70);
+      TDateTime ddd = new TDateTime(RDateTime.currentDateTime());
+      ddd.addHour(1);
+      System.out.println(ttt.isAfter(ddd));// 20151021093302
+      // 20151021103430
+   }
 }

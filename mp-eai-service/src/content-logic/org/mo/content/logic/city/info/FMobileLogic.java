@@ -14,7 +14,7 @@ import org.mo.com.lang.FAttributes;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.service.city.info.FMobileService;
+import org.mo.content.service.city.info.TMobileService;
 
 //============================================================
 // <T>手机服务接口。</T>
@@ -25,7 +25,7 @@ public class FMobileLogic
          IMobileLogic
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FMobileService.class);
+   private static ILogger _logger = RLogger.find(TMobileService.class);
 
    //============================================================
    // <T>构造资源</T>

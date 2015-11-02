@@ -29,6 +29,8 @@
 	<classpathentry kind="lib" path="lib/xom-1.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/jasper.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jzsms-6.0.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-5-cloud"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-6-content"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>

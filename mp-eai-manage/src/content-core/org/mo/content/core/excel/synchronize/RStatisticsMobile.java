@@ -7,7 +7,6 @@ import org.mo.com.xml.FXmlNode;
 
 public class RStatisticsMobile
 {
-
    public static void main(String[] args){
       TDateTime beginTime = new TDateTime(RDateTime.currentDateTime());
       System.out.println(beginTime.format("yyyy-mm-dd hh:mm:ss:ms"));

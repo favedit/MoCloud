@@ -3,6 +3,8 @@
 	<classpathentry kind="src" path="src/content-core"/>
 	<classpathentry kind="src" path="src/content-face"/>
 	<classpathentry kind="src" path="src/config"/>
+	<classpathentry kind="src" path="src/content-face"/>
+	<classpathentry kind="src" path="src/content-core"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-1-common"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-2-core"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-3-logic"/>
@@ -22,6 +24,7 @@
 	<classpathentry kind="lib" path="lib/xom-1.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/jasper.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/ycjt3des-1.0.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-5-cloud"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-6-content"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>

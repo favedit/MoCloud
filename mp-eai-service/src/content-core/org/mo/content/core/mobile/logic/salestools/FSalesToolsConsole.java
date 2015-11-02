@@ -1,6 +1,6 @@
 package org.mo.content.core.mobile.logic.salestools;
 
-import org.mo.content.service.city.info.FMobileService;
+import org.mo.content.service.city.info.TMobileService;
 
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsLogic;
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
@@ -22,7 +22,7 @@ public class FSalesToolsConsole
          ISalesToolsConsole
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FMobileService.class);
+   private static ILogger _logger = RLogger.find(TMobileService.class);
 
    //============================================================
    // <T>构造资源</T>

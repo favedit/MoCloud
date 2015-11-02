@@ -1,6 +1,6 @@
 package org.mo.content.core.mobile.account;
 
-import org.mo.content.service.city.info.FMobileService;
+import org.mo.content.service.city.info.TMobileService;
 
 import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
@@ -49,7 +49,7 @@ public class FLoginConsole
          ILoginConsole
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FMobileService.class);
+   private static ILogger _logger = RLogger.find(TMobileService.class);
 
    // 用户添加日志控制台
    @ALink

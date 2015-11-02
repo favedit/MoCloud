@@ -22,7 +22,7 @@ public class FMobileService
          IMobileService
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FMobileService.class);
+   private static ILogger _logger = RLogger.find(TMobileService.class);
 
    @ALink
    protected IMobileLogic _mobileLogic;
