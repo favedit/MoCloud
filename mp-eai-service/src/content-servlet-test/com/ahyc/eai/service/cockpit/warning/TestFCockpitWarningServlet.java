@@ -23,9 +23,11 @@ public class TestFCockpitWarningServlet
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       //      listPram.add(new BasicNameValuePair("begin", "33"));
-      //      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
+      //      post.setHeader("sign", "77BEFC569B9E4CE5A65B34B8C1E89333");
       listPram.add(new BasicNameValuePair("do", "fetch"));
-      //      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      listPram.add(new BasicNameValuePair("sign", "146"));
+      listPram.add(new BasicNameValuePair("begin", "20151030"));
+      listPram.add(new BasicNameValuePair("end", "20151101"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       System.out.println(EntityUtils.toString(post.getEntity()));
       CloseableHttpResponse response = httpclient.execute(post);
