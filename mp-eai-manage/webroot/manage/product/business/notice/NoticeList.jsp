@@ -194,6 +194,9 @@
      data-options="field:'label',halign:'center',align:'left',sortable:true"
      width="200px">标题</th>
     <th
+     data-options="field:'userName',halign:'center',align:'left',sortable:true"
+     width="100px">用户</th>
+    <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
      width="30px">状态</th>
     <th

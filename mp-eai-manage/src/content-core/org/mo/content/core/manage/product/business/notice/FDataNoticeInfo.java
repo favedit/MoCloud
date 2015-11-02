@@ -15,9 +15,19 @@ public class FDataNoticeInfo
    private String _displayCdStr;
 
    private String _imageName;
-
-   public String getLinkCdStr() {
+   //用户名称
+   private String _userName;
+   
+   public String getUserName() {
       return _linkCdStr;
+   }
+
+   public void setUserName(String _userName) {
+      this._userName = _userName;
+   }
+   
+   public String getLinkCdStr() {
+      return _userName;
    }
 
    public void setLinkCdStr(String _linkCdStr) {
@@ -59,5 +69,6 @@ public class FDataNoticeInfo
       map.put("linkCdStr", _linkCdStr);
       map.put("displayCdStr", _displayCdStr);
       map.put("imageName", _imageName);
+      map.put("userName", _userName);
    }
 }

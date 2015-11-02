@@ -68,6 +68,7 @@ public class FNoticeConsole
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
          info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
          info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
+         info.setUserName(info.user()==null?"":info.user().label());
       }
       return moduleList;
    }

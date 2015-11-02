@@ -150,8 +150,6 @@
         value="<jh:write source='&basePage.userId'/>" />
         <input id="ouid" name="ouid" style="display:none"
         value="<jh:write source='&unit.ouid'/>" />
-        <input id="image" name="image" style="display:none"
-        value="<jh:write source='&unit.imageName'/>" />
         <input id="conte" name="conte" style="display:none"
         value="<jh:write source='&unit.content'/>" />
       </td>

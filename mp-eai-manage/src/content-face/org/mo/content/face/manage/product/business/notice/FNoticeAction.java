@@ -1,6 +1,7 @@
 package org.mo.content.face.manage.product.business.notice;
 
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
+import com.cyou.gccloud.define.enums.core.EGcLink;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 
 import org.mo.cloud.core.storage.IGcStorageConsole;
@@ -165,19 +166,18 @@ public class FNoticeAction
       }
       long id = context.parameterAsLong("id");
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, id);
-      FDataNoticeInfo info = new FDataNoticeInfo();
-      info.setOuid(unit.ouid());
-      info.setContent(unit.content());
-      info.setDescription(unit.description());
-      info.setDisplayCd(unit.displayCd());
-      info.setLinkCd(unit.linkCd());
-      info.setLinkUrl(unit.linkUrl());
-      info.setLabel(unit.label());
-      info.setDisplayOrder(unit.displayOrder());
-      if(unit.content().trim().length() > 0){
-         info.setContent(_storageConsole.makeEdit(unit.content()));
+      unit.setOuid(unit.ouid());
+      unit.setContent(unit.content());
+      unit.setDescription(unit.description());
+      unit.setDisplayCd(unit.displayCd());
+      unit.setLinkCd(unit.linkCd());
+      unit.setLinkUrl(unit.linkUrl());
+      unit.setLabel(unit.label());
+      unit.setDisplayOrder(unit.displayOrder());
+      if(unit.content()!=null&&unit.content().trim().length() > 0){
+         unit.setContent(_storageConsole.makeEdit(unit.content()));
       }
-      page.setUnit(info);
+      page.setUnit(unit);
       page.setResult("");
       _logger.debug(this, "ouid", "updateBefore begin. (Result={1})", "SUCCESS");
       return "/manage/product/business/notice/UpdateNotice";
@@ -245,7 +245,7 @@ public class FNoticeAction
    @Override
    public String deleteBefore(IWebContext context, 
                               ILogicContext logicContext, 
-                              FNoticePage Page, 
+                              FNoticePage page, 
                               FBasePage basePage){
       _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -271,7 +271,7 @@ public class FNoticeAction
    @Override
    public String delete(IWebContext context, 
                         ILogicContext logicContext, 
-                        FNoticePage Page, 
+                        FNoticePage page, 
                         FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -363,9 +363,12 @@ public class FNoticeAction
          return "/manage/common/ConnectTimeout";
       }
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, context.parameterAsLong("ouid"));
-      FDataNoticeInfo info = new FDataNoticeInfo();
-      info.setContent(_storageConsole.makeDisplay(unit.content()));
-      page.setUnit(info);
+      Integer linkCd = unit.linkCd();//2-外链
+      if(RString.equals(EGcLink.Link, linkCd)){
+         
+      }
+      unit.setContent(_storageConsole.makeDisplay(unit.content()));
+      page.setUnit(unit);
       _logger.debug(this, "getDescription", "getDescription finish. (Result={1})", "SUCCESS");
       return "/manage/product/business/notice/NoticeDataInfoForContent";
    }

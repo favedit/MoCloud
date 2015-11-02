@@ -30,6 +30,13 @@
        $('#linkCd').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
        $("#kindeditor_view").val(conte);
+       var oriBeginDate = $("#oriRecordDate").html();
+       oriBeginDate = replaceNbsp(oriBeginDate);
+       $('#recordDate').datetimebox({
+          value: oriBeginDate,
+          required: false,
+          showSeconds: true
+       });
     });
     function submitForm() {
        if (!isValid())
@@ -150,8 +157,6 @@
         value="<jh:write source='&basePage.userId'/>" />
         <input id="ouid" name="ouid" style="display:none"
         value="<jh:write source='&unit.ouid'/>" />
-        <input id="image" name="image" style="display:none"
-        value="<jh:write source='&unit.imageName'/>" />
         <input id="conte" name="conte" style="display:none"
         value="<jh:write source='&unit.content'/>" />
       </td>
@@ -204,6 +209,13 @@
       <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" style="width:80px" onclick="phoneInfo()">浏览</a>
      </td>
     </tr>
+    <tr>
+      <td align="left">原始发布时间:</td>
+      <td align="left">
+         <input class="easyui-datetimebox" name="recordDate" id="recordDate" data-options="showSeconds:true" style="width:380px" value="">
+         <span id="oriRecordDate" style="display:none"><jh:date source='&unit.recordDate' format="YYYY-MM-DD HH24:MI:SS"/></span>
+      </td>
+   </tr>
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td colspan="2"><div align="left">

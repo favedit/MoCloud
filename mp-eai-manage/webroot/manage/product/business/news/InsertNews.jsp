@@ -138,6 +138,12 @@
      </div></td>
     </tr>
     <tr>
+      <td align="left" height="38">原始发布时间</td>
+      <td align="left">
+         <input class="easyui-datetimebox" id="recordDate" name="recordDate" data-options="showSeconds:true" style="width:380px">
+      </td>
+    </tr>
+    <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td><div align="left">
      	<input id="description" name="description" class="easyui-textbox"

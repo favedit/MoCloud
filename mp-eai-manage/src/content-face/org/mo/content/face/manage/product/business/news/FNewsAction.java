@@ -7,6 +7,7 @@ import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.product.business.news.FDataNewsInfo;
@@ -195,6 +196,7 @@ public class FNewsAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
+      info.setRecordDate(unit.recordDate());
       if(unit.content()!=null&&unit.content().trim().length() > 0){
          info.setContent(_storageConsole.makeEdit(unit.content()));
       }
@@ -355,6 +357,10 @@ public class FNewsAction
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
       unit.setStatusCd(EGcResourceStatus.Apply);
+      String recordDateStr = context.parameter("recordDate");
+      TDateTime recordDate = new TDateTime();
+      recordDate.parse(recordDateStr, "YYYY-MM-DD HH24:MI:SS");
+      unit.setRecordDate(recordDate);
    }
 
    // ============================================================

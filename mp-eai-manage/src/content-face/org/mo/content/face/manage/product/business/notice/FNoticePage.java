@@ -1,7 +1,7 @@
 package org.mo.content.face.manage.product.business.notice;
 
 import org.mo.com.lang.FObjectId;
-import org.mo.content.core.manage.product.business.notice.FDataNoticeInfo;
+import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 
 //============================================================
 //<P>公告容器</P>
@@ -20,13 +20,13 @@ public class FNoticePage
    protected String result;
 
    // 业务资讯数据单元
-   protected FDataNoticeInfo unit;
+   protected FDataLogicNoticeUnit unit;
 
-   public FDataNoticeInfo getUnit() {
+   public FDataLogicNoticeUnit getUnit() {
       return unit;
    }
 
-   public void setUnit(FDataNoticeInfo unit) {
+   public void setUnit(FDataLogicNoticeUnit unit) {
       this.unit = unit;
    }
 

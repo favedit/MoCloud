@@ -218,7 +218,7 @@
      width="55px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="200px">标题</th>
+     width="260px">标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
      width="30px">状态</th>
@@ -233,22 +233,16 @@
      width="40px">排序</th>
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
-     width="60px">关键字</th>
-     <th
-     data-options="field:'linkUrl',halign:'center',align:'left',sortable:true"
-     width="160px">外链地址</th>
+     width="80px">关键字</th>
     <th
      data-options="field:'description',halign:'center',align:'left',sortable:true"
      width="160px">描述</th>
      <th
      data-options="field:'content',halign:'center',align:'left',sortable:true"
-     width="260px">资讯内容</th>
-     <th 
-     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
-     width="140px">更新时间</th>
-     <th 
-     data-options="field:'createDate',halign:'center',align:'left',sortable:true"
-     width="140px">创建时间</th>
+     width="460px">资讯内容</th>
+     <th
+     data-options="field:'recordDate',halign:'center',align:'left',sortable:true"
+     width="140px">原始发布时间</th>
     <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_browser_editAndDelAndWithdrawButton"
      width="230px">操作</th>
