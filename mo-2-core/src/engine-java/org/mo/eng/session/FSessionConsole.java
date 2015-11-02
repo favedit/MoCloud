@@ -391,7 +391,7 @@ public class FSessionConsole
       }
       _monitor.setConsole(this);
       _monitor.setInterval(_interval);
-      _monitorConsole.register(_monitor);
+      _monitorConsole.start(_monitor);
    }
 
    //============================================================
