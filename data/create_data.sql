@@ -690,11 +690,13 @@ ALTER TABLE DT_LGC_TRUETIME
 -- 20151021 sunhr
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_LGC_NOTICE`; 
+ 
 CREATE TABLE `DT_LGC_NOTICE` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
    `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       INTEGER, 
    `LABEL`                         VARCHAR(200), 
    `STATUS_CD`                     INTEGER, 
    `DISPLAY_CD`                    INTEGER, 
@@ -712,6 +714,11 @@ CREATE TABLE `DT_LGC_NOTICE`
 
 ALTER TABLE DT_LGC_NOTICE 
    ADD CONSTRAINT DT_LGC_NTC_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_LGC_NOTICE ADD CONSTRAINT DT_LGC_NTC_FK_USER 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+ 
+
 
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.Notice]

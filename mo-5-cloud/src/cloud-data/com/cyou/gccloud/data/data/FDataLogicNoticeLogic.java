@@ -41,6 +41,9 @@ public class FDataLogicNoticeLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
+   // 字段用户编号的定义。
+   public final static SLogicFieldInfo USER_ID = new SLogicFieldInfo("USER_ID");
+
    // 字段资讯标题的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
@@ -81,7 +84,7 @@ public class FDataLogicNoticeLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LABEL`,`STATUS_CD`,`DISPLAY_CD`,`DISPLAY_ORDER`,`LINK_CD`,`LINK_URL`,`DESCRIPTION`,`CONTENT`,`VIEW_COUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LABEL`,`STATUS_CD`,`DISPLAY_CD`,`DISPLAY_ORDER`,`LINK_CD`,`LINK_URL`,`DESCRIPTION`,`CONTENT`,`VIEW_COUNT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造业务公告表逻辑单元。</T>
@@ -677,6 +680,7 @@ public class FDataLogicNoticeLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
+      cmd.append(",`USER_ID`");
       cmd.append(",`LABEL`");
       cmd.append(",`STATUS_CD`");
       cmd.append(",`DISPLAY_CD`");
@@ -704,6 +708,8 @@ public class FDataLogicNoticeLogic
       cmd.append('\'');
       cmd.append(guid);
       cmd.append('\'');
+      cmd.append(',');
+      cmd.append(unit.userId());
       cmd.append(',');
       String label = unit.label();
       if(RString.isEmpty(label)){
@@ -824,6 +830,10 @@ public class FDataLogicNoticeLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
+      if(unit.isUserIdChanged()){
+         cmd.append(",`USER_ID`=");
+         cmd.append(unit.userId());
+      }
       if(unit.isLabelChanged()){
          cmd.append(",`LABEL`=");
          String label = unit.label();

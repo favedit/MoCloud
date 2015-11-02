@@ -39,6 +39,12 @@ public class FDataLogicNoticeUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
+   // 存储字段用户编号的定义。
+   private int __userId;
+
+   // 字段用户编号的定义。
+   protected int _userId;
+
    // 存储字段资讯标题的定义。
    private String __label;
 
@@ -202,6 +208,44 @@ public class FDataLogicNoticeUnit
    //============================================================
    public void setGuid(String value){
       _guid = value;
+   }
+
+   //============================================================
+   // <T>判断用户编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isUserIdChanged(){
+      return __userId != _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int userId(){
+      return _userId;
+   }
+
+   //============================================================
+   // <T>获得用户编号的数据单元。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public FDataPersonUserUnit user(){
+      FDataPersonUserLogic logic = _logicContext.findLogic(FDataPersonUserLogic.class);
+      FDataPersonUserUnit unit = logic.find(_userId);
+      return unit;
+   }
+
+   //============================================================
+   // <T>设置用户编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setUserId(int value){
+      _userId = value;
    }
 
    //============================================================
@@ -570,6 +614,8 @@ public class FDataLogicNoticeUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
+         case "user_id":
+            return RInteger.toString(_userId);
          case "label":
             return _label;
          case "status_cd":
@@ -618,6 +664,9 @@ public class FDataLogicNoticeUnit
             break;
          case "guid":
             _guid = value;
+            break;
+         case "user_id":
+            _userId = RInteger.parse(value);
             break;
          case "label":
             _label = value;
@@ -684,6 +733,10 @@ public class FDataLogicNoticeUnit
             case "guid":
                __guid = value;
                _guid = __guid;
+               break;
+            case "user_id":
+               __userId = RInteger.parse(value);
+               _userId = __userId;
                break;
             case "label":
                __label = value;
@@ -752,6 +805,7 @@ public class FDataLogicNoticeUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
+      row.set("userId", _userId);
       row.set("label", _label);
       row.set("statusCd", _statusCd);
       row.set("displayCd", _displayCd);
@@ -778,6 +832,7 @@ public class FDataLogicNoticeUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
+      map.put("userId", RInteger.toString(_userId));
       map.put("label", _label);
       map.put("statusCd", RInteger.toString(_statusCd));
       map.put("displayCd", RInteger.toString(_displayCd));
@@ -804,6 +859,7 @@ public class FDataLogicNoticeUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
+      _userId = input.readInt32();
       _label = input.readString();
       _statusCd = input.readInt32();
       _displayCd = input.readInt32();
@@ -830,6 +886,7 @@ public class FDataLogicNoticeUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
+      output.writeInt32(_userId);
       output.writeString(_label);
       output.writeInt32(_statusCd);
       output.writeInt32(_displayCd);
@@ -858,6 +915,7 @@ public class FDataLogicNoticeUnit
       unit.setOuid(_ouid);
       unit.setOvld(_ovld);
       unit.setGuid(_guid);
+      unit.setUserId(_userId);
       unit.setLabel(_label);
       unit.setStatusCd(_statusCd);
       unit.setDisplayCd(_displayCd);
