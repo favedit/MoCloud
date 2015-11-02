@@ -118,7 +118,9 @@ public class FNoticeConsole
       FDataPersonUserNoticeLogic personUserNoticeLogic = logicContext.findLogic(FDataPersonUserNoticeLogic.class);
       FDataLogicNoticeLogic noticeLogic = logicContext.findLogic(FDataLogicNoticeLogic.class);
       FDataLogicNoticeUnit noticeUnit = noticeLogic.findByGuid(noticeGuid);
-
+      if(noticeUnit.userId() == userId){
+         return "failure";
+      }
       FSql whereFSql = new FSql();
       whereFSql.append(FDataPersonUserNoticeLogic.NOTICE_ID);
       whereFSql.append("=");

@@ -157,6 +157,10 @@ public class FLoginService
             }else{
                last_sign_date.setText("-1");
             }
+            if(userInfo.guid() != null && (!"".equals(userInfo.guid()))){
+               FXmlNode userId = output.config().createNode("user_id");
+               userId.setText(userInfo.guid());
+            }
          }
          return EResult.Success;
       }else{
@@ -210,6 +214,10 @@ public class FLoginService
          last_sign_date.setText(last_sign_date2);
       }else{
          last_sign_date.setText("-1");
+      }
+      if(userInfo.guid() != null && (!"".equals(userInfo.guid()))){
+         FXmlNode userId = output.config().createNode("user_id");
+         userId.setText(userInfo.guid());
       }
       // 权限控制
       FXmlNode modules = output.config().createNode("modules");

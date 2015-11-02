@@ -19,31 +19,15 @@ public class TestFCockpitWarningServlet
    @Test
    public void testFetch() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.16:8020/eai.cockpit.warning.ws";
+      String url = "http://10.13.0.16:8020/eai.cockpit.warning.wv";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("begin", "33"));
+      //      listPram.add(new BasicNameValuePair("begin", "33"));
       //      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
       listPram.add(new BasicNameValuePair("do", "fetch"));
       //      listPram.add(new BasicNameValuePair("format_cd", "json"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       System.out.println(EntityUtils.toString(post.getEntity()));
-      CloseableHttpResponse response = httpclient.execute(post);
-      HttpEntity entity = response.getEntity();
-      if(entity != null){
-         String responseContent = EntityUtils.toString(entity);
-         String result = new String(responseContent.getBytes("utf-8"));
-         System.out.println(result);
-      }
-
-   }
-
-   @Test
-   public void testFetch2() throws ParseException, IOException{
-      CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.16:8020/eai.cockpit.warning.ws?action=fetch";
-      HttpPost post = new HttpPost(url);
-      //      System.out.println(EntityUtils.toString(post.getEntity()));
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();
       if(entity != null){

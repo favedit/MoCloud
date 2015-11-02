@@ -117,17 +117,4 @@
   <Property name='contentHost'>${eai.host.content}</Property>
   <Property name='localHost'>${eai.server.host}</Property>
  </Component>
- 
- 
- <!-- ============================================================ -->
- <!-- 阈值预警接口 -->
- <!-- ============================================================ -->
- <WebService name='eai.cockpit.warning'
-  face='com.ahyc.eai.service.cockpit.warning.ICockpitWarningServlet' />
-
- <Component
-  face='com.ahyc.eai.service.cockpit.warning.ICockpitWarningServlet'
-  class='com.ahyc.eai.service.cockpit.warning.FCockpitWarningServlet'
-  scope='global'>
- </Component>
 </Config>

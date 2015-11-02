@@ -62,7 +62,7 @@ public class TestFNoticeService
       listPram.add(new BasicNameValuePair("location_latitude", "11.3"));
       // 经度
       listPram.add(new BasicNameValuePair("location_longitude", "15.6"));
-      listPram.add(new BasicNameValuePair("notice_id", "9EECE08E649C49CC982414BEBB511C78"));
+      listPram.add(new BasicNameValuePair("notice_id", "9EECE08E649C49CC982414BEBB511C80"));
       post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
@@ -83,7 +83,7 @@ public class TestFNoticeService
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       listPram.add(new BasicNameValuePair("action", "noticePublish"));
-      listPram.add(new BasicNameValuePair("label", "紧急号令"));
+      listPram.add(new BasicNameValuePair("label", "紧急号令111111111111111111"));
       listPram.add(new BasicNameValuePair("content", "全体员工请务必下午三点准时到北京国际大厦开会!!"));
       post.setHeader("mo-session-id", "BEE9D1B8C75D9124331E5745EC421023");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求

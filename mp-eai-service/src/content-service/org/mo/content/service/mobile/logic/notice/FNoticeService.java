@@ -125,6 +125,11 @@ public class FNoticeService
                FXmlNode percentNode = xruntime.createNode("description");
                percentNode.setText(unit.description());
             }
+            //如果是用户自己发的公告
+            if(sessionInfo.userId() == unit.userId()){
+               FXmlNode fromNode = xruntime.createNode("from");
+               fromNode.setText("myself");
+            }
             FXmlNode viewNode = xruntime.createNode("view_count");
             viewNode.setText(unit.viewCount());
             if(userCount != null && userCount.count() > 0){
@@ -177,7 +182,10 @@ public class FNoticeService
       if(RString.isNotEmpty(sessionCode)){
          FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
          long userId = sessionInfo.userId();
-         _noticeConsole.markRead(noticeGuid, userId, longitude, latitude, logicContext);
+         String isSuccess = _noticeConsole.markRead(noticeGuid, userId, longitude, latitude, logicContext);
+         if("failure".equals(isSuccess)){
+            return EResult.Failure;
+         }
       }
       return EResult.Success;
    }

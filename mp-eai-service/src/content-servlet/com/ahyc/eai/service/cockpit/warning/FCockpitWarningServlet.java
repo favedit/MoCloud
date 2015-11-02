@@ -39,7 +39,7 @@ public class FCockpitWarningServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method fetch from FCockpitWarningServlet is beginning... ");
+      _logger.debug(this, "fetch", "the method named fetch from FCockpitWarningServlet is beginning... ");
       // 检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
@@ -47,7 +47,6 @@ public class FCockpitWarningServlet
       // 检查参数
       String beginSource = context.parameter("begin");
       String endSource = context.parameter("end");
-      boolean first = context.parameterAsBoolean("first");
       if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
          throw new FFatalError("Parameter is invalid.");
       }
@@ -64,11 +63,9 @@ public class FCockpitWarningServlet
       //............................................................
       // 从缓冲中查找数据
       String cacheCode = "fetch|" + beginSource + "-" + endSource;
-      if(!first){
-         FByteStream cacheStream = findCacheStream(cacheCode);
-         if(cacheStream != null){
-            return sendStream(context, request, response, cacheStream);
-         }
+      FByteStream cacheStream = findCacheStream(cacheCode);
+      if(cacheStream != null){
+         return sendStream(context, request, response, cacheStream);
       }
       //............................................................
       //      TDateTime currentDate = RDateTime.currentDateTime();
@@ -84,9 +81,7 @@ public class FCockpitWarningServlet
       }
       //............................................................
       // 保存数据到缓冲中
-      if(!first){
-         updateCacheStream(cacheCode, stream);
-      }
+      updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
       int dataLength = stream.length();
