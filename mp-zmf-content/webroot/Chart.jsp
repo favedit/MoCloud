@@ -8,6 +8,7 @@
 <LINK rel="stylesheet" href='/acs/mobile.css' type="text/css" media="all" />
 <SCRIPT language='javascript' src='/ajs/ml.js'></SCRIPT>
 <SCRIPT>
+   var version = '151102A';
    var g_loadingHandle;
    function doLoading() {
       var htmlBody = document.body;
@@ -51,6 +52,7 @@
    function onLoadScript() {
       // 设置变量
       MO.initialize();
+      MO.Runtime.setVersion(version);
       MO.Window.Browser.setContentPath('..');
       MO.Window.Browser.fullscreen(window, true);
       MO.Window.lsnsLoaded.register(null, onLoaded);
@@ -70,7 +72,7 @@
 
    function onLoad() {
       var date = new Date();
-      var url = '../ajs/eai.jc?time=' + date.toLocaleDateString();
+      var url = '../ajs/eai.jc?' + version;
       MO.initialize();
       RJsLoader.loadUrl(url, onLoadScript);
    }
