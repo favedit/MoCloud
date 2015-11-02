@@ -34,10 +34,11 @@
          face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
          class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
          scope = 'global' >
-      <Property name='enable'>N</Property>
+      <Property name='enable'>Y</Property>
       <Property name='code'>WK</Property>
-      <Property name='servers'>10.21.0.250:11211</Property>
+      <Property name='servers'>10.13.0.250:11311</Property>
       <Initialize name='initialize'/>
+      <Release name='release'/>
    </Component>
    
    <!-- ============================================================ -->

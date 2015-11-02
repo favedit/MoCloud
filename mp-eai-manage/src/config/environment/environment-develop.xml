@@ -16,20 +16,6 @@
       <Initialize name='initializeConfig'/>
    </Component>
    
-   <!-- ============================================================ -->
-   <!-- 资源存储控制台                                               -->
-   <!-- ============================================================ -->
-   <!-- <Component
-         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
-         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
-         scope = 'global' >
-      <Property name='enable'>Y</Property>
-      <Property name='storage_host'>10.127.3.11</Property>
-      <Property name='storage_port'>27017</Property>
-      <Property name='storage_name'>content</Property>
-      <Initialize name='initialize'/>
-   </Component> -->
-   
    <!-- ==================================================== -->
    <!-- LogicServiceInfoConsole:逻辑服务信息控制台           -->
    <!-- ==================================================== -->
@@ -52,6 +38,7 @@
       <Property name='servers'>10.21.0.250:11211</Property>
       <Initialize name='initialize'/>
    </Component>
+
    <!-- ============================================================ -->
    <!-- 数据控制台                                                                                                                          -->
    <!-- ============================================================ -->

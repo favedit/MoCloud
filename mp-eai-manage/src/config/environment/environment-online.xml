@@ -17,20 +17,6 @@
       <Initialize name='initializeConfig'/>
    </Component>
    
-   <!-- ============================================================ -->
-   <!-- 资源存储控制台                                               -->
-   <!-- ============================================================ -->
-   <!-- <Component
-         face  = 'org.mo.cloud.core.storage.IGcStorageConsole'
-         class = 'org.mo.cloud.core.storage.FGcStorageConsole'
-         scope = 'global' >
-      <Property name='enable'>Y</Property>
-      <Property name='storage_host'>localhost</Property>
-      <Property name='storage_port'>27017</Property>
-      <Property name='storage_name'>content</Property>
-      <Initialize name='initialize'/>
-   </Component> -->
-   
    <!-- ==================================================== -->
    <!-- LogicServiceInfoConsole:逻辑服务信息控制台           -->
    <!-- ==================================================== -->
@@ -48,10 +34,11 @@
          face  = 'org.mo.eng.memorycache.IMemoryCacheConsole'
          class = 'org.mo.eng.memorycache.FMemoryCacheConsole'
          scope = 'global' >
-      <Property name='enable'>N</Property>
-      <Property name='code'>CC</Property>
-      <Property name='servers'>10.30.101.11:11311</Property>
+      <Property name='enable'>Y</Property>
+      <Property name='code'>OL</Property>
+      <Property name='servers'>10.169.23.66:11211,10.163.173.14:11211,10.144.33.203:11211,10.144.25.111:11211</Property>
       <Initialize name='initialize'/>
+      <Release name='release'/>
    </Component>
    <!-- ============================================================ -->
    <!-- 数据控制台                                                   -->
