@@ -30,7 +30,7 @@ public class FDataCommonCityMobileLogic
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
    // 共通城市手机关联表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.common.city.mobile", "DT_COM_CITY_CARD_MOBILE");
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.common.city.mobile", "DT_COM_CITY_MOBILE");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");

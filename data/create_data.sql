@@ -177,8 +177,8 @@ ALTER TABLE DT_COM_CITY_CARD ADD CONSTRAINT DT_COM_CTY_CAD_FK_CITY
 -- ------------------------------------------------------------
 -- Create table [Data.Common.City.Mobile]
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_COM_CITY_CARD_MOBILE`;	
-CREATE TABLE `DT_COM_CITY_CARD_MOBILE` 
+DROP TABLE IF EXISTS `DT_COM_CITY_MOBILE`;	
+CREATE TABLE `DT_COM_CITY_MOBILE` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
@@ -198,8 +198,8 @@ CREATE TABLE `DT_COM_CITY_CARD_MOBILE`
    `UPDATE_DATE`                   DATETIME 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
-ALTER TABLE DT_COM_CITY_CARD_MOBILE 
-   ADD CONSTRAINT DT_COM_CTY_CAD_MBL_UK_GID UNIQUE ( GUID ); 
+ALTER TABLE DT_COM_CITY_MOBILE 
+   ADD CONSTRAINT DT_COM_CTY_MBL_UK_GID UNIQUE ( GUID ); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Info.Device]
