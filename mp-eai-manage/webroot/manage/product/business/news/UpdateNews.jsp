@@ -89,6 +89,7 @@
          $("#phoneShow").html(editor.html());
       });
    });
+   //选择图片
    function but(){
       $("#iconUrl").click();
    }

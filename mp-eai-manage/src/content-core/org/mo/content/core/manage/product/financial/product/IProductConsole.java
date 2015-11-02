@@ -31,6 +31,19 @@ public interface IProductConsole
                                                    int pageSize);
 
    // ============================================================
+   // <T>重写，获得分页数据列表</T>
+   // @param logicContext 链接对象
+   // @param moduleUnit 查询条件
+   // @param pageNum 页码
+   // @param pageSize 页面显示的行数
+   // @return 数据集合
+   // ============================================================
+   FLogicDataset<FDataProductInfo> select(ILogicContext logicContext,
+                                          FDataProductInfo unit,
+                                          int pageNum,
+                                          int pageSize);
+   
+   // ============================================================
    // <T>根据区号获取对象</T>
    // @param logicContext 链接对象
    // @param code 区号
@@ -38,4 +51,12 @@ public interface IProductConsole
    // ============================================================
    FDataFinancialProductUnit findByCode(ILogicContext logicContext,
                                         String code);
+   // ============================================================
+   // <T>根据ouid查询产品信息</T>
+   // @param logicContext 链接对象
+   // @param code 区号
+   // @return 数据对象
+   // ============================================================
+   FDataProductInfo findInfo(ILogicContext logicContext,
+                             Long ouid);
 }

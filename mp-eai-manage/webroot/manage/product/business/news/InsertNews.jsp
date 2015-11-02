@@ -55,6 +55,7 @@
                 $("#phoneShow").html(editor.html());
               });
     });
+   //选择图片
    function but(){
       $("#iconUrl").click();
    }   
@@ -78,7 +79,7 @@
   </div>
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
-  <form id="config"  enctype=multipart/form-data
+  <form id="config" enctype=multipart/form-data
    action="/manage/product/business/news/News.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>

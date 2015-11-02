@@ -8,7 +8,23 @@
 </HEAD>
 <script>
     function submitForm() {
+       if (!isValid())
+          return;
        progress();
+       var file = $("#iconUrl").val();
+       if(""!=file){
+          if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(file)){
+             closeProgress();
+             alert("图片类型必须是.gif|jpg|jpeg|png|gif|jpg|png中的一种!");
+             return false;
+          }
+          var fileSize = document.getElementById("iconUrl").files[0].size;
+          if(fileSize>1024*1024){
+             closeProgress();
+             alert("请上传大小小于1M的等比例图片!");
+             return false;
+          }
+       }
        $("#config").submit();
        closeProgress();
     }
@@ -33,6 +49,14 @@
             return new Date();
         }
     }
+    //选择图片
+    function but(){
+       $("#iconUrl").click();
+    }   
+    function changfile(obj){
+       var a = obj.lastIndexOf("\\");
+       $("#oiconUr").val(obj.substr(a+1,obj.length));
+    }
 </script>
 
 <body bgcolor="#198bc9">
@@ -50,40 +74,44 @@
  </div>
  <div class="easyui-panel" fit='true' data-options="border:false">
 
-  <form id="config"
+  <form id="config" enctype=multipart/form-data
    action="/manage/product/financial/product/Product.wa?do=insert"
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
    <br>
-   <table width="710" height="200" border="0" align="left"
+   <table width="810" height="200" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
       <td width="86" height="38"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
-      <td width="123"><div align="left"><input id="code" name="code" class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,40]'" />
+      <td width="380"><div align="left"><input id="code" name="code" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,40]'" />
       </div></td>
-      <td width="7">&nbsp;</td>
-      <td width="86"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
-      <td width="185"><input id="label" name="label" class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,40]'" /></td>
-      <td width="245">&nbsp;</td>
+      <td>&nbsp;</td>
     </tr>
     <tr>
-     <td><div align="left">收益率:</div></td>
+      <td width="86" height="38"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+      <td><input id="label" name="label" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,40]'" /></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">收益率:</div></td>
      <td><div align="left">
-       <input id="rate" name="rate" class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,11]'" />
+       <input id="rate" name="rate" class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,11]'" />
      </div></td>
-     <td width="7">&nbsp;</td>
+     <td>&nbsp;</td>
+     </tr>
+    <tr>
      <td height="38"><div align="left">投资期限:</div></td>
      <td><div align="left">
        <input id="horizonCount" name="horizonCount"
-        class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,11]'" />
+        class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,11]'" />
       </div></td>
      <td>&nbsp;</td>
     </tr>
@@ -92,18 +120,20 @@
      <td><div align="left">
        <input id="horizonUnit"
         name="horizonUnit"
-        class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,40]'" />
+        class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,40]'" />
       </div></td>
-      <td width="7">&nbsp;</td>
-     <td><div align="left">关闭期:</div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">关闭期:</div></td>
      <td><div align="left">
        <input id="horizonClosed"
         name="horizonClosed"
-        class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,11]'" />
+        class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,11]'" />
       </div></td>
       <td>&nbsp;</td>
     </tr>
@@ -112,26 +142,36 @@
      <td><div align="left">
        <input id="horizonWait"
         name="horizonWait"
-        class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,11]'" />
-      </div></td>
-      <td width="7">&nbsp;</td>
-     <td><div align="left">业绩:</div></td>
-     <td><div align="left">
-       <input id="factor"
-        name="factor"
-        class="easyui-validatebox textbox"
-        style="width:120px;height:20px"
-        data-options="validType:'length[0,11]'" />
+        class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,11]'" />
       </div></td>
       <td>&nbsp;</td>
     </tr>
     <tr>
+     <td height="38"><div align="left">业绩:</div></td>
+     <td><div align="left">
+       <input id="factor"
+        name="factor"
+        class="easyui-validatebox textbox notnull"
+        style="width:380px;height:20px"
+        data-options="required:true,validType:'length[0,11]'" />
+      </div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td style="width:380px;"><div align="left">
+     <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"/> 
+     <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox">
+     <input type="button" value="选择上传文件" onclick="but()">
+     </div></td><td><span style="color:red;">&nbsp;&nbsp;选择小于1M的等比例图片</span></td>
+    </tr>
+    <tr>
      <td height="38"><div align="left">备注:</div></td>
-     <td colspan="5"><div align="left">
+     <td colspan="2"><div align="left">
        <input id="note" name="note" class="easyui-textbox"
-        data-options="multiline:true" style="height:100px;width:500px" />
+        data-options="multiline:true" style="height:100px;width:700px" />
       </div></td>
     </tr>
    </table>

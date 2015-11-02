@@ -71,6 +71,12 @@
          doSubmit(0);    
       }
    }
+  //展示图片
+   function showPhoto(makeUrl){
+      if(makeUrl!=null&&makeUrl.length>0){
+         return "<img src="+makeUrl+" height=55px width=55px/>";
+      }
+   }
 </script>
 </HEAD>
 
@@ -101,32 +107,35 @@
     <th data-options="field:'ouid',halign:'center',align:'right'"
      width="40px">编号</th>
      <th
+     data-options="field:'makeUrl',halign:'center',align:'left',formatter:showPhoto"
+     width="55px">图片</th>
+     <th
      data-options="field:'code',halign:'center',align:'center',sortable:true"
-     width="60px" >名称</th>
+     width="120px" >名称</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="60px">标签</th>
+     width="130px">标签</th>
      <th
      data-options="field:'rate',halign:'center',align:'left',sortable:true"
-     width="60px">收益率</th>
+     width="100px">收益率</th>
      <th
      data-options="field:'horizonUnit',halign:'center',align:'left',sortable:true"
-     width="60px">投资期限类型</th>
+     width="100px">投资期限类型</th>
     <th
      data-options="field:'horizonCount',halign:'center',align:'left',sortable:true"
-     width="60px">投资期限</th>
+     width="100px">投资期限</th>
     <th
      data-options="field:'horizonClosed',halign:'center',align:'left',sortable:true"
-     width="80px">关闭期</th>
+     width="100px">关闭期</th>
     <th
      data-options="field:'horizonWait',halign:'center',align:'left',sortable:true"
-     width="80px">等待期</th>
+     width="100px">等待期</th>
     <th
      data-options="field:'factor',halign:'center',align:'left',sortable:true"
-     width="80px">业绩</th>
+     width="100px">业绩</th>
      <th
      data-options="field:'note',halign:'center',align:'left',sortable:true"
-     width="60px">备注</th>
+     width="230px">备注</th>
      
      <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>    

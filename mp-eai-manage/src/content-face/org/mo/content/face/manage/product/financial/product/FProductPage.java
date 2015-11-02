@@ -1,7 +1,7 @@
 package org.mo.content.face.manage.product.financial.product;
 
-import com.cyou.gccloud.data.data.FDataFinancialProductUnit;
 import org.mo.com.lang.FObjectId;
+import org.mo.content.core.manage.product.financial.product.FDataProductInfo;
 
 //============================================================
 //<P>产品信息容器</P>
@@ -19,13 +19,13 @@ public class FProductPage
    protected String result;
 
    //金融产品实体类
-   protected FDataFinancialProductUnit unit;
+   protected FDataProductInfo unit;
 
-   public FDataFinancialProductUnit unit(){
+   public FDataProductInfo unit(){
       return unit;
    }
 
-   public void setUnit(FDataFinancialProductUnit unit){
+   public void setUnit(FDataProductInfo unit){
       this.unit = unit;
    }
 

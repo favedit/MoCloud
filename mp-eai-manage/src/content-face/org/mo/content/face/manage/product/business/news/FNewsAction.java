@@ -195,7 +195,7 @@ public class FNewsAction
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
       info.setDisplayOrder(unit.displayOrder());
-      if(unit.content().trim().length() > 0){
+      if(unit.content()!=null&&unit.content().trim().length() > 0){
          info.setContent(_storageConsole.makeEdit(unit.content()));
       }
       if(!RString.isEmpty(unit.iconUrl())){
