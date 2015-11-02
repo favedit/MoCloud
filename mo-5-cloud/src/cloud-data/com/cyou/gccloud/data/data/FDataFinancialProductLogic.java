@@ -47,6 +47,9 @@ public class FDataFinancialProductLogic
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段图标的定义。
+   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
+
    // 字段收益率的定义。
    public final static SLogicFieldInfo RATE = new SLogicFieldInfo("RATE");
 
@@ -81,7 +84,7 @@ public class FDataFinancialProductLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CODE`,`LABEL`,`RATE`,`HORIZON_COUNT`,`HORIZON_UNIT`,`HORIZON_CLOSED`,`HORIZON_WAIT`,`FACTOR`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CODE`,`LABEL`,`ICON_URL`,`RATE`,`HORIZON_COUNT`,`HORIZON_UNIT`,`HORIZON_CLOSED`,`HORIZON_WAIT`,`FACTOR`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融产品信息逻辑单元。</T>
@@ -679,6 +682,7 @@ public class FDataFinancialProductLogic
       cmd.append(",`GUID`");
       cmd.append(",`CODE`");
       cmd.append(",`LABEL`");
+      cmd.append(",`ICON_URL`");
       cmd.append(",`RATE`");
       cmd.append(",`HORIZON_COUNT`");
       cmd.append(",`HORIZON_UNIT`");
@@ -720,6 +724,15 @@ public class FDataFinancialProductLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String iconUrl = unit.iconUrl();
+      if(RString.isEmpty(iconUrl)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(iconUrl));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -843,6 +856,17 @@ public class FDataFinancialProductLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isIconUrlChanged()){
+         cmd.append(",`ICON_URL`=");
+         String iconUrl = unit.iconUrl();
+         if(RString.isEmpty(iconUrl)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(iconUrl));
             cmd.append('\'');
          }
       }

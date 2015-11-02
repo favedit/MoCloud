@@ -690,7 +690,6 @@ ALTER TABLE DT_LGC_TRUETIME
 -- 20151021 sunhr
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_LGC_NOTICE`; 
- 
 CREATE TABLE `DT_LGC_NOTICE` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
@@ -1513,6 +1512,7 @@ CREATE TABLE `DT_FIN_PRODUCT`
    `GUID`                          VARCHAR(40) NOT NULL, 
    `CODE`                          VARCHAR(40), 
    `LABEL`                         VARCHAR(40), 
+   `ICON_URL`                      VARCHAR(400), 
    `RATE`                          DOUBLE, 
    `HORIZON_COUNT`                 INTEGER, 
    `HORIZON_UNIT`                  VARCHAR(40), 

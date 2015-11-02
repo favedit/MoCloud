@@ -2,6 +2,7 @@
 <DataStore _uuid="13102846-d000-4783-8d7d-1043c86eadce" name="data.financial.product" label="M#12cn16金融产品信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Product" data_name="DT_FIN_PRODUCT" data_alias="DT_FIN_PCT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
   <FieldString _uuid="fb70d91a-e6ba-4cf1-922c-ad8bbd81a644" name="code" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="40" />
   <FieldString _uuid="5c991e14-ecc8-4432-8998-770c05ca396c" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="07ac7f9c-6990-4f9b-b686-d40780265fed" name="icon_url" label="M#12cn12图标" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
   <FieldDouble _uuid="a6da1ff2-59c8-446b-8f98-3269ae70d3f1" name="rate" label="M#12cn13收益率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RATE" />
   <FieldInteger _uuid="59164c31-e73c-48fb-91da-46be42a358fa" name="horizon_count" label="M#12cn14投资期限" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HORIZON_COUNT" />
   <FieldString _uuid="124caad0-fe41-4e9d-892e-74ab7b39f6b9" name="horizon_unit" label="M#12cn16投资期限类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="HORIZON_UNIT" data_size="40" />

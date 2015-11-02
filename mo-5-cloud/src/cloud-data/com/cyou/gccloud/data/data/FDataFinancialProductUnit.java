@@ -52,6 +52,12 @@ public class FDataFinancialProductUnit
    // 字段标签的定义。
    protected String _label;
 
+   // 存储字段图标的定义。
+   private String __iconUrl;
+
+   // 字段图标的定义。
+   protected String _iconUrl;
+
    // 存储字段收益率的定义。
    private double __rate;
 
@@ -257,6 +263,33 @@ public class FDataFinancialProductUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断图标的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIconUrlChanged(){
+      return !RString.equals(__iconUrl, _iconUrl);
+   }
+
+   //============================================================
+   // <T>获得图标的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String iconUrl(){
+      return _iconUrl;
+   }
+
+   //============================================================
+   // <T>设置图标的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIconUrl(String value){
+      _iconUrl = value;
    }
 
    //============================================================
@@ -575,6 +608,8 @@ public class FDataFinancialProductUnit
             return _code;
          case "label":
             return _label;
+         case "icon_url":
+            return _iconUrl;
          case "rate":
             return RDouble.toString(_rate);
          case "horizon_count":
@@ -625,6 +660,9 @@ public class FDataFinancialProductUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "icon_url":
+            _iconUrl = value;
             break;
          case "rate":
             _rate = RDouble.parse(value);
@@ -694,6 +732,10 @@ public class FDataFinancialProductUnit
                __label = value;
                _label = __label;
                break;
+            case "icon_url":
+               __iconUrl = value;
+               _iconUrl = __iconUrl;
+               break;
             case "rate":
                __rate = RDouble.parse(value);
                _rate = __rate;
@@ -755,6 +797,7 @@ public class FDataFinancialProductUnit
       row.set("guid", _guid);
       row.set("code", _code);
       row.set("label", _label);
+      row.set("iconUrl", _iconUrl);
       row.set("rate", _rate);
       row.set("horizonCount", _horizonCount);
       row.set("horizonUnit", _horizonUnit);
@@ -781,6 +824,7 @@ public class FDataFinancialProductUnit
       map.put("guid", _guid);
       map.put("code", _code);
       map.put("label", _label);
+      map.put("iconUrl", _iconUrl);
       map.put("rate", RDouble.toString(_rate));
       map.put("horizonCount", RInteger.toString(_horizonCount));
       map.put("horizonUnit", _horizonUnit);
@@ -807,6 +851,7 @@ public class FDataFinancialProductUnit
       _guid = input.readString();
       _code = input.readString();
       _label = input.readString();
+      _iconUrl = input.readString();
       _horizonCount = input.readInt32();
       _horizonUnit = input.readString();
       _horizonClosed = input.readInt32();
@@ -831,6 +876,7 @@ public class FDataFinancialProductUnit
       output.writeString(_guid);
       output.writeString(_code);
       output.writeString(_label);
+      output.writeString(_iconUrl);
       output.writeInt32(_horizonCount);
       output.writeString(_horizonUnit);
       output.writeInt32(_horizonClosed);
@@ -857,6 +903,7 @@ public class FDataFinancialProductUnit
       unit.setGuid(_guid);
       unit.setCode(_code);
       unit.setLabel(_label);
+      unit.setIconUrl(_iconUrl);
       unit.setRate(_rate);
       unit.setHorizonCount(_horizonCount);
       unit.setHorizonUnit(_horizonUnit);
