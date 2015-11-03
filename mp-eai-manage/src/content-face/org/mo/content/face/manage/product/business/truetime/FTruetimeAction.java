@@ -260,7 +260,7 @@ public class FTruetimeAction implements ITruetimeAction {
       long id = context.parameterAsLong("id");
       FDataLogicTruetimeUnit unit = _truetimeConsole.find(logicContext, id);
       if (unit == null) {
-         throw new FFatalError("id not exists.");
+         return "/manage/product/business/truetime/TruetimeList";
       }
       EResult result = _truetimeConsole.doDelete(logicContext, unit);
       if (!result.equals(EResult.Success)) {

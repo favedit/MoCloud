@@ -327,7 +327,7 @@ public class FNewsAction
       long id = context.parameterAsLong("id");
       FDataLogicNewsUnit unit = _newsConsole.find(logicContext, id);
       if(unit == null){
-         throw new FFatalError("id not exists.");
+         return "/manage/product/business/news/NewsList";
       }
       EResult result = _newsConsole.doDelete(logicContext, unit);
       if(!result.equals(EResult.Success)){

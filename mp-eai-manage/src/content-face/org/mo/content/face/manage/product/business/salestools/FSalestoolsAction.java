@@ -295,7 +295,7 @@ public class FSalestoolsAction
       long id = context.parameterAsLong("id");
       FDataLogicSalestoolsUnit unit = _salestoolsConsole.find(logicContext, id);
       if(unit == null){
-         throw new FFatalError("id not exists.");
+         return "/manage/product/business/salestools/SalestoolsList";
       }
       EResult result = _salestoolsConsole.doDelete(logicContext, unit);
       if(!result.equals(EResult.Success)){

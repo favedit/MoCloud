@@ -6,7 +6,6 @@ import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.product.business.notice.FDataNoticeInfo;
@@ -234,32 +233,6 @@ public class FNoticeAction
       return "/manage/product/business/notice/NoticeList";
    }
    // ============================================================
-   // <T>删除之前</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return 页面
-   // ============================================================
-   @Override
-   public String deleteBefore(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FNoticePage page, 
-                              FBasePage basePage){
-      _logger.debug(this, "deleteBefore", "deleteBefore begin. (userId={1})", basePage.userId());
-      if (!basePage.userExists()) {
-         return "/manage/common/ConnectTimeout";
-      }
-      long id = context.parameterAsLong("id");
-      FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, id);
-      if(RString.equals(unit.statusCd(),2)){
-         basePage.setJson("noDel");
-      }else{
-         basePage.setJson("yesDel");
-      }
-      return "/manage/common/ajax";
-   }
-   // ============================================================
    // <T>删除</T>
    //
    // @param context 网络环境
@@ -279,7 +252,7 @@ public class FNoticeAction
       long id = context.parameterAsLong("id");
       FDataLogicNoticeUnit unit = _noticeConsole.find(logicContext, id);
       if (unit == null) {
-         throw new FFatalError("id not exists.");
+         return "/manage/product/business/notice/NoticeList";
       }
       EResult result = _noticeConsole.doDelete(logicContext, unit);
       if (!result.equals(EResult.Success)) {
