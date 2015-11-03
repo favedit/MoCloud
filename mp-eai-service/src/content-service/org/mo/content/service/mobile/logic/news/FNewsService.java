@@ -4,8 +4,12 @@ import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import java.util.Iterator;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
@@ -14,6 +18,7 @@ import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -32,6 +37,10 @@ public class FNewsService
    // 新闻逻辑控制台
    @ALink
    protected INewsConsole _newsConsole;
+
+   // GcSession会话控制台
+   @ALink
+   protected IGcSessionConsole _sessionConsole;
 
    // protected String _newsServiceHost = "http://eai.ezubo.com:8089/";
    // 配置文件注入属性
@@ -122,8 +131,16 @@ public class FNewsService
       // System.out.println("***************************************************---->"
       // + );
       int pageNum = 0, pageSize = 10;
+      String sessionCode = context.head("mo-session-id");
       String pageSizeStr = input.config().findNode("pagesize").text();
       String pageNumStr = input.config().findNode("pagenumber").text();
+      long userId = -1;
+      if(RString.isNotEmpty(sessionCode)){
+         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
+         if(sessionInfo != null){
+            userId = sessionInfo.userId();
+         }
+      }
       if(pageSizeStr != null && (!"".equals(pageSizeStr))){
          pageSize = Integer.parseInt(pageSizeStr);
       }
@@ -181,10 +198,45 @@ public class FNewsService
             }else{
                xruntime.createNode("update_date").setText("0");
             }
+            //返回新闻已读人数
+            xruntime.createNode("read_count").setText(newsUnit.viewCount() + "");
+            //返回新闻的发布日期
+            TDateTime recordDate = newsUnit.recordDate();
+            if(!recordDate.isEmpty()){
+               xruntime.createNode("publish_date").setText(newsUnit.recordDate().format("yyyy/mm/dd"));
+            }
+            //此新闻是否被用户已读
+            boolean isRead = _newsConsole.isRead(newsUnit.guid(), userId, logicContext);
+            xruntime.createNode("read").setText(isRead + "");
 
-            // 如果不是
          }
 
+      }
+      return EResult.Success;
+   }
+
+   // ============================================================
+   // <T>标记新闻已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public EResult markRead(IWebContext context,
+                           IWebInput input,
+                           IWebOutput output,
+                           ILogicContext logicContext,
+                           IWebSession sessionContext){
+      String sessionCode = context.head("mo-session-id");
+      String newsGuid = context.parameter("news_id");
+      if(RString.isNotEmpty(sessionCode)){
+         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
+         long userId = sessionInfo.userId();
+         String isSuccess = _newsConsole.markRead(newsGuid, userId, logicContext, sessionContext);
+         if("failure".equals(isSuccess)){
+            return EResult.Failure;
+         }
       }
       return EResult.Success;
    }

@@ -465,10 +465,10 @@ ALTER TABLE DT_PSN_USER_SIGNING ADD CONSTRAINT DT_PSN_USR_SIG_FK_USR
 	  
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.News]
--- sunhr 20151103
+-- AnjoyTian 20151103
 -- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_PSN_USER_NEWS`;
-CREATE TABLE `DT_PSN_USER_NEWS`
+DROP TABLE IF EXISTS `DT_PSN_USER_NEWS`; 
+CREATE TABLE `DT_PSN_USER_NEWS` 
 ( 
    `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
    `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
@@ -488,16 +488,14 @@ ALTER TABLE DT_PSN_USER_NEWS
    ADD CONSTRAINT DT_PSN_USR_NWS_UK_GID UNIQUE ( GUID ); 
 
 ALTER TABLE DT_PSN_USER_NEWS 
-   ADD CONSTRAINT DT_PSN_USR_NWS_UK_NTC UNIQUE ( USER_ID ); 
-
-ALTER TABLE DT_PSN_USER_NEWS 
-   ADD CONSTRAINT DT_PSN_USR_NWS_UK_NEWS UNIQUE ( NEWS_ID ); 
+   ADD CONSTRAINT DT_PSN_USR_NWS_UK_NEWS UNIQUE ( USER_ID, NEWS_ID ); 
 
 ALTER TABLE DT_PSN_USER_NEWS ADD CONSTRAINT DT_PSN_USR_NWS_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
 
 ALTER TABLE DT_PSN_USER_NEWS ADD CONSTRAINT DT_PSN_USR_NWS_FK_NEWS 
-      FOREIGN KEY (`NEWS_ID`) REFERENCES DT_LGC_NEWS(`OUID`); 
+      FOREIGN KEY (`NEWS_ID`) REFERENCES DT_LGC_NEWS(`OUID`);  
+
 -- ------------------------------------------------------------
 -- Create table [Data.Control.Module]
 -- ------------------------------------------------------------

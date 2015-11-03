@@ -2,15 +2,20 @@ package org.mo.content.core.mobile.logic.news;
 
 import com.cyou.gccloud.data.data.FDataLogicNewsLogic;
 import com.cyou.gccloud.data.data.FDataLogicNewsUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserNewsLogic;
+import com.cyou.gccloud.data.data.FDataPersonUserNewsUnit;
+import com.cyou.gccloud.define.enums.common.EGcActive;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.service.city.info.FMobileService;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 
 //============================================================
 // <T>新闻服务接口。</T>
@@ -68,5 +73,80 @@ public class FNewsConsole
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
       FLogicDataset<FDataLogicNewsUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
       return moduleList;
+   }
+
+   // ============================================================
+   // <T>标记新闻已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public String markRead(String guid,
+                          long userId,
+                          ILogicContext logicContext,
+                          IWebSession sessionContext){
+      FDataPersonUserNewsLogic personUserLogic = logicContext.findLogic(FDataPersonUserNewsLogic.class);
+      FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
+      FDataLogicNewsUnit newsUnit = logic.findByGuid(guid);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataPersonUserNewsLogic.NEWS_ID);
+      whereSql.append("=");
+      whereSql.append(newsUnit.ouid());
+      whereSql.append(" AND ");
+      whereSql.append(FDataPersonUserNewsLogic.USER_ID);
+      whereSql.append("=");
+      whereSql.append(userId);
+      //线程并发 同一用连续户多次点击
+      boolean flag = false;
+      synchronized(sessionContext){
+         FDataPersonUserNewsUnit unit = personUserLogic.search(whereSql);
+         if(unit == null){
+            // 如果还没有阅读,标志阅读
+            FDataPersonUserNewsUnit tempUnit = personUserLogic.doPrepare();
+            tempUnit.setUserId(userId);
+            tempUnit.setNewsId(newsUnit.ouid());
+            tempUnit.setActiveCd(EGcActive.Active);
+            tempUnit.setActiveDate(RDateTime.currentDateTime());
+            personUserLogic.doInsert(tempUnit);
+            flag = true;
+         }
+      }
+      if(flag){
+         // 同时更新通知的view_count字段,,累加阅读次数
+         newsUnit.setViewCount(newsUnit.viewCount() + 1);
+         logic.doUpdate(newsUnit);
+      }
+      return "Success";
+   }
+
+   // ============================================================
+   // <T>标记新闻是否已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public boolean isRead(String guid,
+                         long userId,
+                         ILogicContext logicContext){
+      FDataPersonUserNewsLogic personUserLogic = logicContext.findLogic(FDataPersonUserNewsLogic.class);
+      FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
+      FDataLogicNewsUnit newsUnit = logic.findByGuid(guid);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataPersonUserNewsLogic.NEWS_ID);
+      whereSql.append("=");
+      whereSql.append(newsUnit.ouid());
+      whereSql.append(" AND ");
+      whereSql.append(FDataPersonUserNewsLogic.USER_ID);
+      whereSql.append("=");
+      whereSql.append(userId);
+      FDataPersonUserNewsUnit unit = personUserLogic.search(whereSql);
+      if(unit == null){
+         return false;
+      }
+      return true;
    }
 }
