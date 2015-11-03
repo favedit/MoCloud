@@ -1,120 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Config>
- <!-- ============================================================ -->
- <!-- 手机相关处理服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.city.info.mobile'
-  face='org.mo.content.service.city.info.IMobileService' />
+   <!-- ============================================================ -->
+   <!-- 手机相关处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.city.info.mobile'
+         face='org.mo.content.service.city.info.IMobileService' />
 
- <Component face='org.mo.content.service.city.info.IMobileService'
-  class='org.mo.content.service.city.info.FMobileService' scope='global' />
+   <Component
+         face='org.mo.content.service.city.info.IMobileService'
+         class='org.mo.content.service.city.info.FMobileService'
+         scope='global' />
 
- <!-- ============================================================ -->
- <!-- 新闻相关处理服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.logic.news'
-  face='org.mo.content.service.mobile.logic.news.INewsService' />
+   <!-- ============================================================ -->
+   <!-- 新闻相关处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.logic.news'
+         face='org.mo.content.service.mobile.logic.news.INewsService' />
 
- <Component face='org.mo.content.service.mobile.logic.news.INewsService'
-  class='org.mo.content.service.mobile.logic.news.FNewsService' scope='global'>
-  <Property name='newsServiceHost'>${eai.host.content}</Property>
- </Component>
+   <Component
+         face='org.mo.content.service.mobile.logic.news.INewsService'
+         class='org.mo.content.service.mobile.logic.news.FNewsService'
+         scope='global'>
+         <Property name='newsServiceHost'>${eai.host.content}</Property>
+   </Component>
 
- <!-- ============================================================ -->
- <!-- 销售工具相关处理服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.logic.salestools'
-  face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService' />
+   <!-- ============================================================ -->
+   <!-- 销售工具相关处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.logic.salestools'
+         face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService' />
 
- <Component
-  face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService'
-  class='org.mo.content.service.mobile.logic.salestools.FSalesToolsService'
-  scope='global'>
-  <Property name='salesServiceHost'>${eai.host.content}</Property>
- </Component>
-
-
- <!-- ============================================================ -->
- <!-- 登录处理服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.account'
-  face='org.mo.content.service.mobile.account.ILoginService' />
-
- <Component face='org.mo.content.service.mobile.account.ILoginService'
-  class='org.mo.content.service.mobile.account.FLoginService' scope='global'>
-  <Property name='contentServiceHost'>${eai.host.content}</Property>
- </Component>
-
- <!-- ============================================================ -->
- <!-- 版本更新服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile'
-  face='org.mo.content.service.mobile.IVersionService' />
-
- <Component face='org.mo.content.service.mobile.IVersionService'
-  class='org.mo.content.service.mobile.FVersionService' scope='global' />
+   <Component
+         face='org.mo.content.service.mobile.logic.salestools.ISalesToolsService'
+         class='org.mo.content.service.mobile.logic.salestools.FSalesToolsService'
+         scope='global'>
+         <Property name='salesServiceHost'>${eai.host.content}</Property>
+   </Component>
 
 
+   <!-- ============================================================ -->
+   <!-- 登录处理服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.account'
+         face='org.mo.content.service.mobile.account.ILoginService' />
 
- <!-- ============================================================ -->
- <!-- 理财师短信推送服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.financial.logic.message'
-  face='org.mo.content.service.financial.logic.message.IMessagePushService' />
+   <Component
+         face='org.mo.content.service.mobile.account.ILoginService'
+         class='org.mo.content.service.mobile.account.FLoginService' scope='global'>
+         <Property name='contentServiceHost'>${eai.host.content}</Property>
+   </Component>
 
- <Component
-  face='org.mo.content.service.financial.logic.message.IMessagePushService'
-  class='org.mo.content.service.financial.logic.message.FMessagePushService'
-  scope='global' />
+   <!-- ============================================================ -->
+   <!-- 版本更新服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile'
+         face='org.mo.content.service.mobile.IVersionService' />
+
+   <Component
+         face='org.mo.content.service.mobile.IVersionService'
+         class='org.mo.content.service.mobile.FVersionService'
+         scope='global' />
 
 
- <!-- ============================================================ -->
- <!-- 打卡服务 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.logic.attendance'
-  face='org.mo.content.service.mobile.logic.attendance.IClickService' />
 
- <Component
-  face='org.mo.content.service.mobile.logic.attendance.IClickService'
-  class='org.mo.content.service.mobile.logic.attendance.FClickService'
-  scope='global' />
+   <!-- ============================================================ -->
+   <!-- 理财师短信推送服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.financial.logic.message'
+         face='org.mo.content.service.financial.logic.message.IMessagePushService' />
 
- <!-- ============================================================ -->
- <!-- 实时数据 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.logic.truetimedata'
-  face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService' />
+   <Component
+         face='org.mo.content.service.financial.logic.message.IMessagePushService'
+         class='org.mo.content.service.financial.logic.message.FMessagePushService'
+         scope='global' />
 
- <Component
-  face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService'
-  class='org.mo.content.service.mobile.logic.truetimedata.FTrueTimeDataService'
-  scope='global'>
-  <Property name='trueTimeDataHost'>${eai.host.content}</Property>
- </Component>
- <!-- ============================================================ -->
- <!-- 号令服务接口 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.logic.notice'
-  face='org.mo.content.service.mobile.logic.notice.INoticeService' />
 
- <Component face='org.mo.content.service.mobile.logic.notice.INoticeService'
-  class='org.mo.content.service.mobile.logic.notice.FNoticeService'
-  scope='global'>
-  <Property name='contentHost'>${eai.host.content}</Property>
-  <Property name='localHost'>${eai.server.host}</Property>
- </Component>
- <!-- ============================================================ -->
- <!-- 个人中心服务接口 -->
- <!-- ============================================================ -->
- <WebService name='eai.mobile.logic.person.info'
-  face='org.mo.content.service.mobile.logic.person.info.IPersonInfoService' />
+   <!-- ============================================================ -->
+   <!-- 打卡服务                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.logic.attendance'
+         face='org.mo.content.service.mobile.logic.attendance.IClickService' />
 
- <Component
-  face='org.mo.content.service.mobile.logic.person.info.IPersonInfoService'
-  class='org.mo.content.service.mobile.logic.person.info.FPersonInfoService'
-  scope='global'>
-  <Property name='contentHost'>${eai.host.content}</Property>
-  <Property name='localHost'>${eai.server.host}</Property>
- </Component>
+   <Component
+         face='org.mo.content.service.mobile.logic.attendance.IClickService'
+         class='org.mo.content.service.mobile.logic.attendance.FClickService'
+         scope='global' />
+
+   <!-- ============================================================ -->
+   <!-- 实时数据                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.logic.truetimedata'
+         face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService' />
+
+   <Component
+         face='org.mo.content.service.mobile.logic.truetimedata.ITrueTimeDataService'
+         class='org.mo.content.service.mobile.logic.truetimedata.FTrueTimeDataService'
+         scope='global'>
+         <Property name='trueTimeDataHost'>${eai.host.content}</Property>
+   </Component>
+   <!-- ============================================================ -->
+   <!-- 号令服务接口                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.logic.notice'
+         face='org.mo.content.service.mobile.logic.notice.INoticeService' />
+
+   <Component
+         face='org.mo.content.service.mobile.logic.notice.INoticeService'
+         class='org.mo.content.service.mobile.logic.notice.FNoticeService'
+         scope='global'>
+         <Property name='contentHost'>${eai.host.content}</Property>
+         <Property name='localHost'>${eai.server.host}</Property>
+   </Component>
+   <!-- ============================================================ -->
+   <!-- 个人中心服务接口                                             -->
+   <!-- ============================================================ -->
+   <WebService
+         name='eai.mobile.logic.person.info'
+         face='org.mo.content.service.mobile.logic.person.info.IPersonInfoService' />
+
+   <Component
+         face='org.mo.content.service.mobile.logic.person.info.IPersonInfoService'
+         class='org.mo.content.service.mobile.logic.person.info.FPersonInfoService'
+         scope='global'>
+         <Property name='contentHost'>${eai.host.content}</Property>
+         <Property name='localHost'>${eai.server.host}</Property>
+   </Component>
 </Config>

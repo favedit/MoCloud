@@ -2,173 +2,195 @@
 
 <Config>
 
- <!-- ============================================================ -->
- <!-- 统计动态数据处理 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.system'
-  face='com.ahyc.eai.service.system.ISystemServlet' />
+   <!-- ============================================================ -->
+   <!-- 统计动态数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.system'
+         face  = 'com.ahyc.eai.service.system.ISystemServlet'/>
 
- <Component face='com.ahyc.eai.service.system.ISystemServlet'
-  class='com.ahyc.eai.service.system.FSystemServlet' scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.system.ISystemServlet'
+         class = 'com.ahyc.eai.service.system.FSystemServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 统计动态数据处理 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.dynamic'
-  face='com.ahyc.eai.service.financial.IStatisticsDynamicServlet' />
+   <!-- ============================================================ -->
+   <!-- 统计动态数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.dynamic'
+         face  = 'com.ahyc.eai.service.financial.IStatisticsDynamicServlet'/>
 
- <Component face='com.ahyc.eai.service.financial.IStatisticsDynamicServlet'
-  class='com.ahyc.eai.service.financial.FStatisticsDynamicServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.IStatisticsDynamicServlet'
+         class = 'com.ahyc.eai.service.financial.FStatisticsDynamicServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 统计项目数据处理 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.tender'
-  face='com.ahyc.eai.service.financial.tender.IStatisticsTenderServlet' />
+   <!-- ============================================================ -->
+   <!-- 统计项目数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.tender'
+         face  = 'com.ahyc.eai.service.financial.tender.IStatisticsTenderServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.tender.IStatisticsTenderServlet'
-  class='com.ahyc.eai.service.financial.tender.FStatisticsTenderServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.tender.IStatisticsTenderServlet'
+         class = 'com.ahyc.eai.service.financial.tender.FStatisticsTenderServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 统计客户数据处理 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.customer'
-  face='com.ahyc.eai.service.financial.customer.IStatisticsCustomerServlet' />
+   <!-- ============================================================ -->
+   <!-- 统计客户数据处理                                             -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.customer'
+         face  = 'com.ahyc.eai.service.financial.customer.IStatisticsCustomerServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.customer.IStatisticsCustomerServlet'
-  class='com.ahyc.eai.service.financial.customer.FStatisticsCustomerServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.customer.IStatisticsCustomerServlet'
+         class = 'com.ahyc.eai.service.financial.customer.FStatisticsCustomerServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 理财师-客户数据统计 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.marketer.customer'
-  face='com.ahyc.eai.service.financial.marketer.IStatisticsCustomerServlet' />
+   <!-- ============================================================ -->
+   <!-- 理财师-客户数据统计                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.marketer.customer'
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsCustomerServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.marketer.IStatisticsCustomerServlet'
-  class='com.ahyc.eai.service.financial.marketer.FStatisticsCustomerServlet'
-  scope='global' />
- scope = 'global'/>
+   <Component
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsCustomerServlet'
+         class = 'com.ahyc.eai.service.financial.marketer.FStatisticsCustomerServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 理财师-理财师数据统计 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.marketer.marketer'
-  face='com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet' />
+   <!-- ============================================================ -->
+   <!-- 理财师-理财师数据统计                                        -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.marketer.marketer'
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'
-  class='com.ahyc.eai.service.financial.marketer.FStatisticsMarketerServlet'
-  scope='global' />
- scope = 'global'/>
+   <Component
+         face  = 'com.ahyc.eai.service.financial.marketer.IStatisticsMarketerServlet'
+         class = 'com.ahyc.eai.service.financial.marketer.FStatisticsMarketerServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 部门-理财师数据统计 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.department.customer'
-  face='com.ahyc.eai.service.financial.department.IStatisticsCustomerServlet' />
+   <!-- ============================================================ -->
+   <!-- 部门-理财师数据统计                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.department.customer'
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsCustomerServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.department.IStatisticsCustomerServlet'
-  class='com.ahyc.eai.service.financial.department.FStatisticsCustomerServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsCustomerServlet'
+         class = 'com.ahyc.eai.service.financial.department.FStatisticsCustomerServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 部门-理财师数据统计 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.department.marketer'
-  face='com.ahyc.eai.service.financial.department.IStatisticsMarketerServlet' />
+   <!-- ============================================================ -->
+   <!-- 部门-理财师数据统计                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.department.marketer'
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsMarketerServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.department.IStatisticsMarketerServlet'
-  class='com.ahyc.eai.service.financial.department.FStatisticsMarketerServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsMarketerServlet'
+         class = 'com.ahyc.eai.service.financial.department.FStatisticsMarketerServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 公司-公司数据统计 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.department.department'
-  face='com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet' />
+   <!-- ============================================================ -->
+   <!-- 公司-公司数据统计                                            -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.department.department'
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'
-  class='com.ahyc.eai.service.financial.department.FStatisticsDepartmentServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.department.IStatisticsDepartmentServlet'
+         class = 'com.ahyc.eai.service.financial.department.FStatisticsDepartmentServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 公司-业绩数据统计 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.financial.achievement'
-  face='com.ahyc.eai.service.financial.achievement.IStatisticsAchievementServlet' />
+   <!-- ============================================================ -->
+   <!-- 公司-业绩数据统计                                            -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.financial.achievement'
+         face  = 'com.ahyc.eai.service.financial.achievement.IStatisticsAchievementServlet'/>
 
- <Component
-  face='com.ahyc.eai.service.financial.achievement.IStatisticsAchievementServlet'
-  class='com.ahyc.eai.service.financial.achievement.FStatisticsAchievementServlet'
-  scope='global' />
+   <Component
+         face  = 'com.ahyc.eai.service.financial.achievement.IStatisticsAchievementServlet'
+         class = 'com.ahyc.eai.service.financial.achievement.FStatisticsAchievementServlet'
+         scope = 'global'/>
 
- <!-- ============================================================ -->
- <!-- 阈值预警接口 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.cockpit.warning'
-  face='com.ahyc.eai.service.cockpit.warning.ICockpitWarningServlet' />
+   <!-- ============================================================ -->
+   <!-- 阈值预警接口                                            -->
+   <!-- ============================================================ -->
+   <WebServlet 
+         name='eai.cockpit.warning'
+         face='com.ahyc.eai.service.cockpit.warning.ICockpitWarningServlet' />
 
- <Component
-  face='com.ahyc.eai.service.cockpit.warning.ICockpitWarningServlet'
-  class='com.ahyc.eai.service.cockpit.warning.FCockpitWarningServlet'
-  scope='global'>
- </Component>
- <!-- ============================================================ -->
- <!-- e租宝财富端本月业绩 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.cockpit.performance'
-  face='com.ahyc.eai.service.cockpit.performance.ICockpitPerformanceServlet' />
- <Component
-  face='com.ahyc.eai.service.cockpit.performance.ICockpitPerformanceServlet'
-  class='com.ahyc.eai.service.cockpit.performance.FCockpitPerformanceServlet'
-  scope='global'>
- </Component>
+   <Component
+         face='com.ahyc.eai.service.cockpit.warning.ICockpitWarningServlet'
+         class='com.ahyc.eai.service.cockpit.warning.FCockpitWarningServlet'
+         scope='global'>
+   </Component>
+   <!-- ============================================================ -->
+   <!-- e租宝财富端本月业绩                                            -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.performance'
+         face='com.ahyc.eai.service.cockpit.performance.ICockpitPerformanceServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.performance.ICockpitPerformanceServlet'
+         class='com.ahyc.eai.service.cockpit.performance.FCockpitPerformanceServlet'
+         scope='global'>
+   </Component>
 
- <!-- ============================================================ -->
- <!-- 业绩趋势 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.cockpit.trend'
-  face='com.ahyc.eai.service.cockpit.trend.ICockpitTrendServlet' />
- <Component face='com.ahyc.eai.service.cockpit.trend.ICockpitTrendServlet'
-  class='com.ahyc.eai.service.cockpit.trend.FCockpitTrendServlet' scope='global'>
- </Component>
+   <!-- ============================================================ -->
+   <!-- 业绩趋势                                           -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.trend'
+         face='com.ahyc.eai.service.cockpit.trend.ICockpitTrendServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.trend.ICockpitTrendServlet'
+         class='com.ahyc.eai.service.cockpit.trend.FCockpitTrendServlet'
+         scope='global'>
+   </Component>
 
- <!-- ============================================================ -->
- <!-- 号令 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.cockpit.notice'
-  face='com.ahyc.eai.service.cockpit.notice.ICockpitNoticeServlet' />
- <Component face='com.ahyc.eai.service.cockpit.notice.ICockpitNoticeServlet'
-  class='com.ahyc.eai.service.cockpit.notice.FCockpitNoticeServlet'
-  scope='global'>
- </Component>
+   <!-- ============================================================ -->
+   <!-- 号令                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.notice'
+         face='com.ahyc.eai.service.cockpit.notice.ICockpitNoticeServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.notice.ICockpitNoticeServlet'
+         class='com.ahyc.eai.service.cockpit.notice.FCockpitNoticeServlet'
+         scope='global'>
+   </Component>
 
- <!-- ============================================================ -->
- <!-- 智慧柯南 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.cockpit.wisdom'
-  face='com.ahyc.eai.service.cockpit.wisdom.ICockpitWisdomServlet' />
- <Component face='com.ahyc.eai.service.cockpit.wisdom.ICockpitWisdomServlet'
-  class='com.ahyc.eai.service.cockpit.wisdom.FCockpitWisdomServlet'
-  scope='global'>
- </Component>
+   <!-- ============================================================ -->
+   <!-- 智慧柯南                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.wisdom'
+         face='com.ahyc.eai.service.cockpit.wisdom.ICockpitWisdomServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.wisdom.ICockpitWisdomServlet'
+         class='com.ahyc.eai.service.cockpit.wisdom.FCockpitWisdomServlet'
+         scope='global'>
+   </Component>
 
- <!-- ============================================================ -->
- <!-- 实时数据 -->
- <!-- ============================================================ -->
- <WebServlet name='eai.cockpit.truetimedata'
-  face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet' />
- <Component face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet'
-  class='com.ahyc.eai.service.cockpit.truetimedata.FCockpitTrueTimeDataServlet'
-  scope='global'>
- </Component>
+   <!-- ============================================================ -->
+   <!-- 实时数据                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.truetimedata'
+         face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet'
+         class='com.ahyc.eai.service.cockpit.truetimedata.FCockpitTrueTimeDataServlet'
+         scope='global'>
+   </Component>
 </Config>
