@@ -1,13 +1,8 @@
-package com.ahyc.eai.service.cockpit.warning;
+package com.ahyc.eai.service.cockpit.truetimedata;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
-import java.util.ArrayList;
-import java.util.HashSet;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.data.logic.ILogicContext;
@@ -18,13 +13,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>阈值预警处理。</T>
 //============================================================
-public class FCockpitWarningServlet
+public class FCockpitTrueTimeDataServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitWarningServlet
+         ICockpitTrueTimeDataServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitWarningServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitTrueTimeDataServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
@@ -41,30 +36,15 @@ public class FCockpitWarningServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named fetch from FCockpitWarningServlet is beginning... ");
+      _logger.debug(this, "fetch", "the method named fetch from FCockpitTrueTimeDataServlet is beginning... ");
       // 检查参数
-      if(!checkParameters(context, request, response)){
-         return EResult.Failure;
-      }
-      // 检查参数
-      String beginSource = context.parameter("begin");
-      String endSource = context.parameter("end");
-      if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
-         throw new FFatalError("Parameter is invalid.");
-      }
-      if((beginSource.length() != 14) || (endSource.length() != 14)){
-         throw new FFatalError("Parameter length is invalid.");
-      }
-      // 限制查询范围最大10分钟
-      TDateTime beginDate = new TDateTime(beginSource);
-      TDateTime endDate = new TDateTime(endSource);
-      long span = endDate.get() - beginDate.get();
-      if((span < 0) && (span > 1000 * 600)){
-         throw new FFatalError("Parameter span is invalid.");
-      }
+      //      if(!checkParameters(context, request, response)){
+      //         return EResult.Failure;
+      //      }
+      //      String warningGuid = context.parameter("guid");
       //............................................................
       // 从缓冲中查找数据
-      String cacheCode = "fetch|" + beginSource + "-" + endSource;
+      String cacheCode = "fetch";
       FByteStream cacheStream = findCacheStream(cacheCode);
       if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
@@ -75,39 +55,31 @@ public class FCockpitWarningServlet
       FByteStream stream = createStream(context);
       //      ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
-      HashSet<ArrayList<String>> parent = new HashSet<ArrayList<String>>();
-      ArrayList<String> child1 = new ArrayList<String>();
-      child1.add("guid");
-      child1.add("DA4B7F30C1C34A3CA231744C3BF1DD41");
-      child1.add("message");
-      child1.add("北京第七分公司本月离职率已达10%");
-      ArrayList<String> child2 = new ArrayList<String>();
-      child2.add("guid");
-      child2.add("DA4B7F30C1C34A3CA231744C3BF1DD42");
-      child2.add("message");
-      child2.add("上海璟益本月任务还有60%没有完成.");
-      ArrayList<String> child3 = new ArrayList<String>();
-      child3.add("guid");
-      child3.add("DA4B7F30C1C34A3CA231744C3BF1DD43");
-      child3.add("message");
-      child3.add("10月28日e租宝赎回总额超过3亿元.");
-      parent.add(child1);
-      parent.add(child2);
-      parent.add(child3);
-      int count = parent.size();
-      stream.writeInt32(count);
-      for(ArrayList<String> list : parent){
-         for(String string : list){
-            stream.writeString(string);
-         }
-      }
+      stream.writeString("investment_total");
+      stream.writeString("520亿7979万2378元");
+      stream.writeString("current_investment");
+      stream.writeString("20亿7979万2378元");
+      stream.writeString("employee_count");
+      stream.writeInt32(92800);
+      stream.writeString("marketer_count");
+      stream.writeInt32(70000);
+      stream.writeString("subsidiary_count");
+      stream.writeInt32(45);
+      stream.writeString("wealth_count");
+      stream.writeInt32(250);
+      stream.writeString("workplace_count");
+      stream.writeInt32(485);
+      stream.writeString("thing_count");
+      stream.writeInt32(8);
+      stream.writeString("unread_count");
+      stream.writeInt32(5);
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send statistics customer dynamic. (data_length={1})", dataLength);
       return sendStream(context, request, response, stream);
    }
 

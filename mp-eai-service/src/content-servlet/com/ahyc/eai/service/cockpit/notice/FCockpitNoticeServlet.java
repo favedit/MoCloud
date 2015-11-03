@@ -1,35 +1,38 @@
-package com.ahyc.eai.service.cockpit.performance;
+package com.ahyc.eai.service.cockpit.notice;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import java.util.ArrayList;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
-import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.mobile.logic.notice.INoticeConsole;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>e租宝财富端本月业绩接口.</T>
+// <T>业绩趋势处理接口。</T>
 //============================================================
-public class FCockpitPerformanceServlet
+public class FCockpitNoticeServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitPerformanceServlet
+         ICockpitNoticeServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitPerformanceServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitNoticeServlet.class);
+
+   // 号令逻辑控制台
+   @ALink
+   protected INoticeConsole _noticeConsole;
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
 
    //============================================================
-   // <T>e租宝财富端本月业绩列表</T>
+   // <T>业绩趋势列表</T>
    // @param context 环境
    // @param logicContext 逻辑环境
    // @param request 请求
@@ -40,30 +43,14 @@ public class FCockpitPerformanceServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named fetch from FCockpitPerformanceServlet is beginning... ");
-      // 检查参数
+      _logger.debug(this, "fetch", "the method named fetch from FCockpitTrendServlet is beginning... ");
+      //       检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
       }
-      // 检查参数
-      String beginSource = context.parameter("begin");
-      String endSource = context.parameter("end");
-      if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
-         throw new FFatalError("Parameter is invalid.");
-      }
-      if((beginSource.length() != 14) || (endSource.length() != 14)){
-         throw new FFatalError("Parameter length is invalid.");
-      }
-      // 限制查询范围最大10分钟
-      TDateTime beginDate = new TDateTime(beginSource);
-      TDateTime endDate = new TDateTime(endSource);
-      long span = endDate.get() - beginDate.get();
-      if((span < 0) && (span > 1000 * 600)){
-         throw new FFatalError("Parameter span is invalid.");
-      }
       //............................................................
       // 从缓冲中查找数据
-      String cacheCode = "fetch|" + beginSource + "-" + endSource;
+      String cacheCode = "fetch";
       FByteStream cacheStream = findCacheStream(cacheCode);
       if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
@@ -77,32 +64,40 @@ public class FCockpitPerformanceServlet
       ArrayList<ArrayList<Object>> parent = new ArrayList<ArrayList<Object>>();
       ArrayList<Object> child1 = new ArrayList<Object>();
       child1.add("label");
-      child1.add("一诺财富");
-      child1.add("investment");
-      child1.add("300万到3600元");
-      child1.add("rank");
-      child1.add(1);
+      child1.add("关于规范集团知识产权管理的通知");
+      child1.add("user_name");
+      child1.add("丁甸");
+      child1.add("publish_date");
+      child1.add("2015-10-30");
+      child1.add("percent");
+      child1.add(10);//百分比
       ArrayList<Object> child2 = new ArrayList<Object>();
       child2.add("label");
-      child2.add("上海钰申");
-      child2.add("investment");
-      child2.add("300万到3600元");
-      child2.add("rank");
-      child2.add(2);
+      child2.add("关于规范集团知识产权管理的通知");
+      child2.add("user_name");
+      child2.add("丁甸");
+      child2.add("publish_date");
+      child2.add("2015-10-31");
+      child2.add("percent");
+      child2.add(20);//百分比
       ArrayList<Object> child3 = new ArrayList<Object>();
       child3.add("label");
-      child3.add("钰诚荣泰(安徽)");
-      child3.add("investment");
-      child3.add("300万到3600元");
-      child3.add("rank");
-      child3.add(3);
+      child3.add("关于规范集团知识产权管理的通知");
+      child3.add("user_name");
+      child3.add("丁甸");
+      child3.add("publish_date");
+      child3.add("2015-10-31");
+      child3.add("percent");
+      child3.add(30);
       ArrayList<Object> child4 = new ArrayList<Object>();
       child4.add("label");
-      child4.add("上海仁立");
-      child4.add("investment");
-      child4.add("rank");
-      child4.add("300万到3600元");
-      child4.add(4);
+      child4.add("关于规范集团知识产权管理的通知");
+      child4.add("user_name");
+      child4.add("丁甸");
+      child4.add("publish_date");
+      child4.add("percent");
+      child4.add("2015-10-31");
+      child4.add(40);//百分比
       parent.add(child1);
       parent.add(child2);
       parent.add(child3);
@@ -125,8 +120,7 @@ public class FCockpitPerformanceServlet
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send statistics customer dynamic. (count={1}, data_length={2})", count, dataLength);
       return sendStream(context, request, response, stream);
    }
-
 }

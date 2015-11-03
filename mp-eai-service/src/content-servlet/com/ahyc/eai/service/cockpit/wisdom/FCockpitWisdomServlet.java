@@ -1,4 +1,4 @@
-package com.ahyc.eai.service.cockpit.performance;
+package com.ahyc.eai.service.cockpit.wisdom;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>e租宝财富端本月业绩接口.</T>
 //============================================================
-public class FCockpitPerformanceServlet
+public class FCockpitWisdomServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitPerformanceServlet
+         ICockpitWisdomServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitPerformanceServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitWisdomServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);

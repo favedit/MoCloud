@@ -132,4 +132,43 @@
   class='com.ahyc.eai.service.cockpit.performance.FCockpitPerformanceServlet'
   scope='global'>
  </Component>
+
+ <!-- ============================================================ -->
+ <!-- 业绩趋势 -->
+ <!-- ============================================================ -->
+ <WebServlet name='eai.cockpit.trend'
+  face='com.ahyc.eai.service.cockpit.trend.ICockpitTrendServlet' />
+ <Component face='com.ahyc.eai.service.cockpit.trend.ICockpitTrendServlet'
+  class='com.ahyc.eai.service.cockpit.trend.FCockpitTrendServlet' scope='global'>
+ </Component>
+
+ <!-- ============================================================ -->
+ <!-- 号令 -->
+ <!-- ============================================================ -->
+ <WebServlet name='eai.cockpit.notice'
+  face='com.ahyc.eai.service.cockpit.notice.ICockpitNoticeServlet' />
+ <Component face='com.ahyc.eai.service.cockpit.notice.ICockpitNoticeServlet'
+  class='com.ahyc.eai.service.cockpit.notice.FCockpitNoticeServlet'
+  scope='global'>
+ </Component>
+
+ <!-- ============================================================ -->
+ <!-- 智慧柯南 -->
+ <!-- ============================================================ -->
+ <WebServlet name='eai.cockpit.wisdom'
+  face='com.ahyc.eai.service.cockpit.wisdom.ICockpitWisdomServlet' />
+ <Component face='com.ahyc.eai.service.cockpit.wisdom.ICockpitWisdomServlet'
+  class='com.ahyc.eai.service.cockpit.wisdom.FCockpitWisdomServlet'
+  scope='global'>
+ </Component>
+
+ <!-- ============================================================ -->
+ <!-- 实时数据 -->
+ <!-- ============================================================ -->
+ <WebServlet name='eai.cockpit.truetimedata'
+  face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet' />
+ <Component face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet'
+  class='com.ahyc.eai.service.cockpit.truetimedata.FCockpitTrueTimeDataServlet'
+  scope='global'>
+ </Component>
 </Config>

@@ -1,7 +1,11 @@
 package com.ahyc.eai.service.cockpit.warning;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -16,10 +20,12 @@ import org.junit.Test;
 
 public class TestFCockpitWarningServlet
 {
+   private InputStream content;
+
    @Test
    public void testFetch() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.16:8020/eai.cockpit.warning.wv";
+      String url = "http://10.13.0.16:8020/eai.cockpit.truetimedata.wv";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       //      listPram.add(new BasicNameValuePair("begin", "33"));
@@ -32,44 +38,39 @@ public class TestFCockpitWarningServlet
       System.out.println(EntityUtils.toString(post.getEntity()));
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();
-      if(entity != null){
-         String responseContent = EntityUtils.toString(entity);
-         String result = new String(responseContent.getBytes("UTF-8"));
-         System.out.println(result);
-      }
+      InputStream in = entity.getContent();
+      int a = -1;
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+      while((a = in.read()) != -1){
+         out.write(a);
+      }
+      System.out.println(out.toString("UTF-8"));
    }
 
    @Test
    public void test(){
-      ArrayList<ArrayList<Object>> parent = new ArrayList<ArrayList<Object>>();
-      ArrayList<Object> child1 = new ArrayList<Object>();
-      child1.add("一诺财富");
-      child1.add("300万到3600元");
-      child1.add(1);
-      ArrayList<Object> child2 = new ArrayList<Object>();
-      child2.add("上海钰申");
-      child2.add("300万到3600元");
-      child2.add(2);
-      ArrayList<Object> child3 = new ArrayList<Object>();
-      child3.add("上海仁立");
-      child3.add("300万到3600元");
-      child3.add(3);
+      ArrayList<Double[]> parent = new ArrayList<Double[]>();
+      Double[] child0 = new Double[31];
+      Double[] child1 = new Double[31];
+      Double[] child2 = new Double[31];
+      Double[] child3 = new Double[31];
+      Double[] child4 = new Double[31];
+      Double[] child5 = new Double[31];
+      parent.add(child0);
       parent.add(child1);
       parent.add(child2);
       parent.add(child3);
-      for(ArrayList<Object> list : parent){
-         for(Object obj : list){
-            if(obj instanceof Integer){
-               System.out.print((Integer)obj + " ");
-            }
-            if(obj instanceof String){
-               System.out.print((String)obj + " ");
-            }
-
+      parent.add(child4);
+      parent.add(child5);
+      for(Double[] doubles : parent){
+         for(int i = 0; i < doubles.length; i++){
+            doubles[i] = Double.parseDouble(new DecimalFormat("#").format(Math.random() * 100000));
          }
-         System.out.println();
+      }
+      int count = parent.size();
+      for(Double[] doubles : parent){
+         Arrays.toString(doubles);
       }
    }
-
 }
