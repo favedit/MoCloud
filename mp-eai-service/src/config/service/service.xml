@@ -135,4 +135,29 @@
          <Property name='contentHost'>${eai.host.content}</Property>
          <Property name='localHost'>${eai.server.host}</Property>
    </Component>
+ <!-- ============================================================ -->
+ <!-- 理财师业绩 -->
+ <!-- ============================================================ -->
+ <WebService 
+       name='eai.financial.marketer.achievements'
+       face='org.mo.content.service.financial.marketer.achievements.IAchievementsService' />
+
+ <Component
+       face='org.mo.content.service.financial.marketer.achievements.IAchievementsService'
+       class='org.mo.content.service.financial.marketer.achievements.FAchievementsService'
+       scope='global'>
+ </Component>
+ 
+ <!-- ============================================================ -->
+ <!-- 理财师业绩 -->
+ <!-- ============================================================ -->
+ <WebService 
+       name='eai.financial.marketer.achievements.customer'
+       face='org.mo.content.service.financial.marketer.achievements.customer.ICustomerService' />
+
+ <Component
+       face='org.mo.content.service.financial.marketer.achievements.customer.ICustomerService'
+       class='org.mo.content.service.financial.marketer.achievements.customer.FCustomerService'
+       scope='global'>
+ </Component>
 </Config>
