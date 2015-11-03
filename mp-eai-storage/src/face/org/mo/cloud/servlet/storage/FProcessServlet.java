@@ -76,8 +76,8 @@ public class FProcessServlet
       // 上传处理
       String sizeValue = context.parameter("size");
       int size = RInteger.parse(sizeValue);
-      if((size <= 0) || (size > RInteger.SIZE_64M)){
-         throw new FFatalError("Unknown size. (size={1})", size);
+      if((size <= 0) || (size > RInteger.SIZE_16M)){
+         throw new FFatalError("Invalid upload size. (size={1})", size);
       }
       // 计算分块大小
       int blockSize = size;

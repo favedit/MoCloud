@@ -15,6 +15,18 @@
          scope = 'global'/>
 
    <!-- ============================================================ -->
+   <!-- 驾驶舱业务处理                                               -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name  = 'eai.cockpit.achievement'
+         face  = 'com.ahyc.eai.service.cockpit.achievement.ICockpitAchievementServlet'/>
+
+   <Component
+         face  = 'com.ahyc.eai.service.cockpit.achievement.ICockpitAchievementServlet'
+         class = 'com.ahyc.eai.service.cockpit.achievement.FCockpitAchievementServlet'
+         scope = 'global'/>
+
+   <!-- ============================================================ -->
    <!-- 统计动态数据处理                                             -->
    <!-- ============================================================ -->
    <WebServlet

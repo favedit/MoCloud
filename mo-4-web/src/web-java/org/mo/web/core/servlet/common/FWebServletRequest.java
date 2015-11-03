@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.FObject;
 
 //============================================================
 // <T>网页请求。</T>
 //============================================================
 public class FWebServletRequest
+      extends FObject
       implements
          IWebServletRequest
 {
@@ -22,6 +24,15 @@ public class FWebServletRequest
    //============================================================
    public FWebServletRequest(HttpServletRequest request){
       _request = request;
+   }
+
+   //============================================================
+   // <T>获得请求对象。</T>
+   //
+   // @return 请求对象
+   //============================================================
+   public HttpServletRequest request(){
+      return _request;
    }
 
    //============================================================
