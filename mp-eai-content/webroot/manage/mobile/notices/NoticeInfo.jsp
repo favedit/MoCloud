@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
    <div class="box">
    <header class="header">
-      <h4><jh:write source="&unit.label"></jh:write></h4>
+      <h4><jh:write source="&unit.label" format="text"></jh:write></h4>
       <p><span><jh:write source="&page.userLabel" format="text"></jh:write></span><i><jh:date source="&unit.createDate" format="yyyy-mm-dd"></jh:date></i></p>
    </header>
    <div class="main">

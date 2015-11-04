@@ -5,6 +5,7 @@ import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Iterator;
+import org.mo.cloud.core.storage.IGcStorageConsole;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
@@ -12,6 +13,7 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.text.RHtmlFormat;
 import org.mo.com.xml.FXmlNode;
 import org.mo.content.core.mobile.account.ILoginConsole;
 import org.mo.content.core.mobile.logic.notice.INoticeConsole;
@@ -50,6 +52,10 @@ public class FNoticeService
    // GcSession会话控制台
    @ALink
    protected IGcSessionConsole _sessionConsole;
+
+   // 存储服务器
+   @ALink
+   protected IGcStorageConsole _storageConsole;
 
    // 登录逻辑控制台
    @ALink
@@ -219,6 +225,8 @@ public class FNoticeService
       String label = context.parameter("label");
       String content = context.parameter("content");
       if(RString.isNotEmpty(RString.trimSplit(label, ' ')) && RString.isNotEmpty(RString.trimSplit(content, ' '))){
+         content = RHtmlFormat.textToHtml(content).toString();
+         label = RHtmlFormat.textToHtml(label).toString();
          _noticeConsole.noticePublish(userId, label, content, logicContext);
          return EResult.Success;
       }else{

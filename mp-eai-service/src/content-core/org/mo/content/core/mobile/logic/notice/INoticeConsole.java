@@ -67,4 +67,15 @@ public interface INoticeConsole
    // ============================================================
    FDataPersonUserUnit getUserById(ILogicContext logicContext,
                                    long usserId);
+
+   // ============================================================
+   // <T>分页获取号令前五条。</T>
+   // @param pageNum 页数
+   // @param pageSize 每页的行数
+   // @param logicContext 逻辑上下文
+   // ============================================================
+   FLogicDataset<FNoticeModel> fetch(int pageNum,
+                                     int pageSize,
+                                     String sessionCode,
+                                     ILogicContext logicContext);
 }

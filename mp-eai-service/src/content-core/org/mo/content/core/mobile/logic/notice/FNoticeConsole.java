@@ -205,4 +205,41 @@ public class FNoticeConsole
       FDataPersonUserUnit unit = userLogic.find(userId);
       return unit;
    }
+
+   // ============================================================
+   // <T>分页获取号令前五条。</T>
+   // @param pageNum 页数
+   // @param pageSize 每页的行数
+   // @param logicContext 逻辑上下文
+   // ============================================================
+   @Override
+   public FLogicDataset<FNoticeModel> fetch(int pageNum,
+                                            int pageSize,
+                                            String sessionCode,
+                                            ILogicContext logicContext){
+      if(pageNum <= 0){
+         pageNum = 1;
+      }
+      FSql whereSql = new FSql();
+      //      FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
+      //      long userId = sessionInfo.userId();
+      whereSql.append(FDataLogicNoticeLogic.STATUS_CD);
+      whereSql.append("=");
+      whereSql.append(EGcResourceStatus.Publish);
+      whereSql.append(" AND ");
+      whereSql.append(FDataLogicNoticeLogic.DISPLAY_CD);
+      whereSql.append("=");
+      whereSql.append(EGcDisplay.Enabled);
+      String orderBy = String.format("%s %s", FDataLogicNoticeLogic.UPDATE_DATE, "DESC");
+      FDataLogicNoticeLogic logic = logicContext.findLogic(FDataLogicNoticeLogic.class);
+      FDataPersonUserLogic userLogic = logicContext.findLogic(FDataPersonUserLogic.class);
+      FLogicDataset<FNoticeModel> moduleList = logic.fetchClass(FNoticeModel.class, whereSql, orderBy, pageSize, pageNum - 1);
+      for(FNoticeModel noticeModel : moduleList){
+         FDataPersonUserUnit userUnit = userLogic.find(FDataPersonUserUnit.class, noticeModel.userId());
+         if(userUnit != null){
+            noticeModel.setUserLabel(userUnit.label());
+         }
+      }
+      return moduleList;
+   }
 }

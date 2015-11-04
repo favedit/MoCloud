@@ -25,7 +25,7 @@ public class TestFCockpitWarningServlet
    @Test
    public void testFetch() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.16:8020/eai.cockpit.truetimedata.wv";
+      String url = "http://10.13.0.16:8020/eai.cockpit.notice.wv";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       //      listPram.add(new BasicNameValuePair("begin", "33"));
