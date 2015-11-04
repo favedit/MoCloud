@@ -61,9 +61,6 @@ public class FVersionConsole
          info.setApplicationLabel(info.application().code());
          info.setForceCdStr(EGcVersionForce.formatLabel(info.forceCd()));
          info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
-//         DecimalFormat a = new DecimalFormat("#,##0.0");
-//         String frmStr = a.format(info.number());
-//         info.setNumberStr(frmStr);
       }
       return moduleList;
    }

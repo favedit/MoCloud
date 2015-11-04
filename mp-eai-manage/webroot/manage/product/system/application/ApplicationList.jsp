@@ -90,16 +90,16 @@
   <thead>
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="55px">编号</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="100px">标签</th>
+     width="390px">标签</th>
      <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="90px">代码</th>
+     width="291px">代码</th>
      <th
      data-options="field:'note',halign:'center',align:'left',sortable:true"
-     width="390px">内容</th>
+     width="590px">内容</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>

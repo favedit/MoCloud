@@ -46,7 +46,7 @@ a:hover, a:active, a:focus {
    width:380px;
    clear:both;
    float:left;
-   margin-left:173px;
+   margin-left:178px;
    margin-top:18px;
 }
 
@@ -246,7 +246,7 @@ a.sear_btn:hover {
    height:23px;
    float:left;
    padding:10px 0px 3px 75px;
-   background:url(../images/btn01_a.gif) 0 0px no-repeat;
+   background:url(../images/btn01_a.gif) 1px 1px no-repeat;
 }
 
 a.tb01 {
@@ -262,14 +262,14 @@ a.tb01 {
 
 
 .tb_02 {
-   width:110px;
+   width:104px;
    float:left;
 }
 
 .tb_02 a:link {
    color:#fff;
    display:block;
-   width:63px;
+   width:57px;
    height:23px;
    float:left;
    padding:10px 0px 0px 48px;
@@ -278,7 +278,7 @@ a.tb01 {
 .tb_02 a:visited {
    color:#fff;
    display:block;
-   width:63px;
+   width:57px;
    height:23px;
    float:left;
    padding:10px 0px 0px 48px;
@@ -287,7 +287,7 @@ a.tb01 {
 .tb_02 a:hover {
    color:#fff;
    display:block;
-   width:63px;
+   width:57px;
    height:23px;
    float:left;
    padding:10px 0px 0px 48px;
@@ -425,8 +425,8 @@ a.tb04 {
    text-align:right;
    color:#075587;
    padding-top:5px;
-   margin-right:20px;
-   margin-left:390px;
+   margin-right:50px;
+   margin-left:300px;
    background:url(../images/time_ico.gif) no-repeat 0px 5px;
 }
 

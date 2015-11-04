@@ -47,9 +47,9 @@
                uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
                items:['preview', 'code','|', 'justifyleft', 'justifycenter', 'justifyright',
                   'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'subscript',
-                  'superscript','|', 'fullscreen', 'formatblock', 'fontname', 'fontsize','|',
-                  'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'lineheight',
-                  'removeformat','|', 'image', 'multiimage', 'flash', 'media', 'table','/', 'hr',
+                  'superscript','|', 'formatblock', 'fontname', 'fontsize','|','forecolor',
+                  'hilitecolor', 'bold', 'italic', 'underline', 'lineheight','removeformat','|',
+                  'image', 'multiimage', 'flash', 'media', 'table', 'fullscreen','/', 'hr',
                   'emoticons', 'baidumap', 'pagebreak', 'link', 'unlink','|', 'about'
                ],
                resizeType : 1
@@ -89,10 +89,10 @@
    method="post" align="center">
    <font style="color:red;"><jh:write source='&page.result' /></font>
 <br>
-   <table width="810" height="346" border="0" align="left"
+   <table width="810" height="666" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="74"><div align="left">实时数据标题:</div></td>
+      <td width="74" height="38"><div align="left">实时数据标题:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
         data-options="required:true,validType:'length[0,200]'" /></td>
@@ -145,8 +145,7 @@
     <tr>
      <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td><div align="left">
-      <input id="description" name="description" class="easyui-textbox"
-        data-options="multiline:true" style="height:100px;width:700px" />
+      <textarea id="description" name="description" class="border_change" style="width:700px;height:100px"></textarea>
       </div></td>
     </tr>
     <tr>

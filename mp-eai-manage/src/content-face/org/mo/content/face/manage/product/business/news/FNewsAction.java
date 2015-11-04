@@ -157,7 +157,7 @@ public class FNewsAction
          }
       }
       unit.setContent(_storageConsole.makeText(context.parameter("content")));
-      setLogicNews(context, logicContext, unit, "0");
+      setLogicNews(context, logicContext, unit);
       EResult result = _newsConsole.doInsert(logicContext, unit);
       if(!result.equals(EResult.Success)){
          page.setResult("增加失败");
@@ -249,7 +249,7 @@ public class FNewsAction
       }
       String content = context.parameter("content");
       unit.setContent(_storageConsole.makeText(content));
-      setLogicNews(context, logicContext, unit, "1");
+      setLogicNews(context, logicContext, unit);
       _newsConsole.doUpdate(logicContext, unit);
       _logger.debug(this, "Update", "Update finish.(RESULT={1})", "SUCCESS");
       return "/manage/product/business/news/NewsList";
@@ -346,10 +346,11 @@ public class FNewsAction
    // ============================================================
    public void setLogicNews(IWebContext context,
                             ILogicContext logicContext,
-                            FDataLogicNewsUnit unit,
-                            String flag){
+                            FDataLogicNewsUnit unit){
       unit.setCreateUserId(context.parameterAsLong("adminId"));
-      unit.setDescription(context.parameter("description"));
+      String description = context.parameter("description");
+      description = description.replaceAll("<br>", "\r\n");
+      unit.setDescription(description);
       unit.setKeywords(context.parameter("keywords"));
       unit.setDisplayOrder(context.parameterAsInteger("displayOrder"));
       unit.setDisplayCd(context.parameterAsInteger("displayCd"));
