@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="2265d696-71cb-4e28-af71-f3bb47608a6e" name="data.financial.customer.tender" label="M#12cn210金融客户产品投资信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Customer.Tender" data_name="DT_FIN_CUSTOMER_TENDER" data_alias="DT_FIN_CST_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="63f51492-94c1-4525-90da-541d03493f9c" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_alias="CUSTOMER" data_refer="data.financial.customer" />
+  <FieldRecordId _uuid="bdad4083-c7a9-469d-9f28-7e583d99afcd" name="tender_id" label="M#12cn14产品编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" data_alias="TENDER" data_refer="data.financial.tender" />
+  <FieldFloat _uuid="aab6f7dc-d576-4b35-9334-aa0ca34d9599" name="investment" label="M#12cn13投资额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT" />
+  <FieldDateTime _uuid="b3f70d2b-3d8f-40f5-849f-2cb36cf55a67" name="investment_date" label="M#12cn14投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_DATE" />
+  <FieldFloat _uuid="b1f07e99-19d4-4e4f-b7f7-d162305523b1" name="redemption" label="M#12cn13赎回额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION" />
+  <FieldDateTime _uuid="2645e8bb-a4ec-4d46-bb37-77df15387faf" name="redemption_date" label="M#12cn14赎回时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_DATE" />
+  <FieldFloat _uuid="63a62354-9bca-436f-9b52-f0a1d1ef79aa" name="netinvestment" label="M#12cn13净投额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
+  <FieldFloat _uuid="d34b97df-b2c1-43d6-be2b-239d8e0c4983" name="interest" label="M#12cn13利息额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST" />
+  <FieldString _uuid="3ed47c14-494a-454a-8797-c6bda702c9dc" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="8c8175ff-c526-4b7b-8bfa-a8dc33961a64" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
