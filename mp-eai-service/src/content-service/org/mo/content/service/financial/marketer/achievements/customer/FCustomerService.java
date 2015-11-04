@@ -145,4 +145,14 @@ public class FCustomerService
       }
       return marketer;
    }
+
+   @Override
+   public EResult fetch(IWebContext context,
+                        IWebSession sessionContext,
+                        IWebInput input,
+                        IWebOutput output,
+                        ILogicContext logicContext){
+      // TODO Auto-generated method stub
+      return null;
+   }
 }
