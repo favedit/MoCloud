@@ -17,6 +17,18 @@ public class FDataNoticeInfo
    // 显示字符串
    private String _displayCdStr;
    
+   //用户名称
+   private String _userName;
+   
+   public String getUserName() {
+      return _userName;
+   }
+
+   public void setUserName(String _userName) {
+      this._userName = _userName;
+   }
+   
+   
    public String getLinkCdStr() {
       return _linkCdStr;
    }
@@ -51,5 +63,6 @@ public class FDataNoticeInfo
       map.put("statusCdStr", _statusCdStr);
       map.put("linkCdStr", _linkCdStr);
       map.put("displayCdStr", _displayCdStr);
+      map.put("userName", _userName);
    }
 }

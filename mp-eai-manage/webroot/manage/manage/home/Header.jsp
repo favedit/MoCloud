@@ -37,17 +37,11 @@
                   <a id="product" class="btn1" href="/manage/home/Header.wa?do=productLeft" target="left">产品管理</a>
                </li>
                <li class="tb_02">
-                  <a class="btn2" href="/manage/home/Header.wa?do=manageLeft" target="left">系统管理</a>
+                  <a id="data" class="btn2" href="/manage/home/Header.wa?do=statisticsLeft" target="left">数据分析</a>
                </li>
-<!--
                <li class="tb_03">
-                  <a class="btn3" href="/cloud/manage/home/Header.wa?do=manageLeft" target="left">后台管理</a>
+                  <a id="systemId" class="btn3" href="/manage/home/Header.wa?do=manageLeft" target="left">系统管理</a>
                </li>
--->
-               <!-- <li class="tb_04" id="databaseLI" hidden="true">
-                  <a class="btn2" href="/cloud/manage/home/Header.wa?do=databaseLeft" target="left">数据管理</a>
-               </li>
--->
             </ul>
             <div class="closebtn">
                <a href="#" onClick="loginout();"></a>

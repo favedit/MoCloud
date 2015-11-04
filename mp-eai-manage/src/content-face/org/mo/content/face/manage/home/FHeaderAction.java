@@ -90,12 +90,16 @@ public class FHeaderAction
    // @return 处理结果
    // ============================================================
    @Override
-   public String analysisLeft(IWebContext context, 
-                              ILogicContext logicContext, 
-                              FBasePage basePage) {
+   public String statisticsLeft(IWebContext context, 
+                                ILogicContext logicContext,
+                                FFramePage framePage,
+                                FBasePage basePage) {
       _logger.debug(this, "Header", "Header analysisLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
-      // tackAuthority(context, logicContext, basePage);
-      return "#/manage/home/AnalysisLeft";
+      if (!basePage.userExists()) {
+         return "/manage/common/ConnectTimeout";
+      }
+      tackAuthority(context, logicContext, basePage);
+      return "/manage/manage/home/StatisticsLeft";
    }
 
    // ============================================================
@@ -107,7 +111,8 @@ public class FHeaderAction
    // ============================================================
    @Override
    public String manageLeft(IWebContext context, 
-                            ILogicContext logicContext, 
+                            ILogicContext logicContext,
+                            FFramePage framePage,
                             FBasePage basePage) {
       _logger.debug(this, "Header", "Header manageLeft begin. (roleId={1})", context.parameterAsLong("roleId"));
       if (!basePage.userExists()) {
@@ -149,7 +154,7 @@ public class FHeaderAction
       if (roleCd == EGcPersonUserRole.Admin) {
          menuStrings.append("manage.system.user.module|manage.system.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|manage.product.financial.product|manage.system.user|manage.product.financial.department|manage.product.business.news|manage.product.financial.customer|manage.product.common.configration|");
          menuStrings.append("manage.product.common.configration.rule|manage.product.business.salestools|manage.product.examine.business|manage.product.examine.business.news|manage.product.system.application|manage.product.system.version|manage.product.financial.marketer|manage.product.device|manage.product.user.logger|manage.product.user.whitelists|manage.product.user.signing|");
-         menuStrings.append("manage.product.examine.system.version|manage.product.examine.business.salestools|manage.product.business.truetime|manage.product.examine.business.truetime|manage.product.common.citycard|manage.product.business.notice|manage.system.logger.user.notice|manage.product.examine.business.notice|manage.system.logger.user.access");
+         menuStrings.append("manage.product.examine.system.version|manage.product.examine.business.salestools|manage.product.business.truetime|manage.product.examine.business.truetime|manage.product.common.citycard|manage.product.business.notice|manage.system.logger.user.notice|manage.product.examine.business.notice|manage.system.logger.user.access|manage.system.statistics.user.login");
          basePage.setMenuString(menuStrings.toString());
       } else {
          long roleId = basePage.roleId();

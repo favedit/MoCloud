@@ -19,7 +19,7 @@ public class FDataNoticeInfo
    private String _userName;
    
    public String getUserName() {
-      return _linkCdStr;
+      return _userName;
    }
 
    public void setUserName(String _userName) {

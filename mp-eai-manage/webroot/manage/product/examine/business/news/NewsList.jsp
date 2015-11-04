@@ -107,16 +107,16 @@
    <tr>
     <th data-options="field:'ck',checkbox:true">全选</th>
      <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="55px">编号</th>
      <th
      data-options="field:'makeUrl',halign:'center',align:'left',formatter:showPhoto"
      width="55px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="200px">资讯标题</th>
+     width="510px">资讯标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="30px">状态</th>
+     width="80px">状态</th>
      <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
@@ -125,13 +125,10 @@
      width="60px">外链状态</th>
      <th 
      data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
-     width="40px">排序</th>
+     width="70px">排序</th>
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
-     width="160px">关键字</th>
-     <th
-     data-options="field:'description',halign:'center',align:'left',sortable:true"
-     width="420px">描述</th>
+     width="369px">关键字</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
@@ -140,7 +137,7 @@
      width="140px">创建时间</th>
      <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_BrowserButton"
-     width="140px">操作</th>
+     width="128px">操作</th>
    </tr>
   </thead>
  </table>

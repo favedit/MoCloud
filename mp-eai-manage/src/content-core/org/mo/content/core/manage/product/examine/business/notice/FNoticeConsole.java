@@ -61,24 +61,10 @@ public class FNoticeConsole
       FDataLogicNoticeLogic logic = logicContext.findLogic(FDataLogicNoticeLogic.class);
       FLogicDataset<FDataNoticeInfo> moduleList = logic.fetchClass(FDataNoticeInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for (FDataNoticeInfo info : moduleList) {
-         if (RString.equals(EGcResourceStatus.Apply, info.statusCd())) {
-            info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
-         }
-         if (RString.equals(EGcDisplay.Disable, info.displayCd())) {
-            info.setDisplayCdStr(EGcDisplay.DisableLabel);
-         }
-         if (RString.equals(EGcDisplay.Enabled, info.displayCd())) {
-            info.setDisplayCdStr(EGcDisplay.EnabledLabel);
-         }
-         if (RString.equals(EGcLink.Unknown, info.linkCd())) {
-            info.setLinkCdStr(EGcLink.UnknownLabel);
-         }
-         if (RString.equals(EGcLink.Content, info.linkCd())) {
-            info.setLinkCdStr(EGcLink.ContentLabel);
-         }
-         if (RString.equals(EGcLink.Link, info.linkCd())) {
-            info.setLinkCdStr(EGcLink.LinkLabel);
-         }
+         info.setStatusCdStr(EGcResourceStatus.formatLabel(info.statusCd()));
+         info.setDisplayCdStr(EGcDisplay.formatLabel(info.displayCd()));
+         info.setLinkCdStr(EGcLink.formatLabel(info.linkCd()));
+         info.setUserName(info.user()==null?"":info.user().label());
       }
       return moduleList;
    }

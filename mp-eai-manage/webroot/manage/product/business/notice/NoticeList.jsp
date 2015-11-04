@@ -191,16 +191,16 @@
   <thead>
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="55px">编号</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="200px">标题</th>
+     width="590px">标题</th>
     <th
      data-options="field:'userName',halign:'center',align:'left',sortable:true"
-     width="100px">用户</th>
+     width="180px">用户</th>
     <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
-     width="30px">状态</th>
+     width="80px">状态</th>
     <th
      data-options="field:'displayCdStr',halign:'center',align:'left',sortable:true"
      width="60px">是否显示</th>
@@ -212,10 +212,7 @@
      width="60px">外链状态</th>
     <th 
      data-options="field:'displayOrder',halign:'center',align:'left',sortable:true"
-     width="40px">排序</th>
-    <th
-     data-options="field:'description',halign:'center',align:'left',sortable:true"
-     width="420px">描述</th>
+     width="55px">排序</th>
     <th 
      data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>

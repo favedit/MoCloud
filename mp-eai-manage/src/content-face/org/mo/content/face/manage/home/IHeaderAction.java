@@ -44,9 +44,10 @@ public interface IHeaderAction
    // @param userPage 容器
    // @return 处理结果
    //============================================================
-   String analysisLeft(IWebContext context,
-                       ILogicContext logicContext,
-                       @AContainer(name = "basePage") FBasePage basePage);
+   String statisticsLeft(IWebContext context,
+                         ILogicContext logicContext,
+                         @AContainer(name = "framePage") FFramePage framePage,
+                         @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
    // <T>后台管理权限。</T>
@@ -57,6 +58,7 @@ public interface IHeaderAction
    //============================================================
    String manageLeft(IWebContext context,
                      ILogicContext logicContext,
+                     @AContainer(name = "framePage") FFramePage framePage,
                      @AContainer(name = "basePage") FBasePage basePage);
 
    //============================================================
