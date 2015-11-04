@@ -462,6 +462,19 @@ public abstract class MObjects<T>
    }
 
    //============================================================
+   // <T>倒序排列数据。</T>
+   //============================================================
+   public void revert(){
+      int begin = -1;
+      int end = _count;
+      while(++begin < --end){
+         T swap = _items[begin];
+         _items[begin] = _items[end];
+         _items[end] = swap;
+      }
+   }
+
+   //============================================================
    // <T>复制数据内容到指定内存位置。</T>
    //
    // @param items 对象数组

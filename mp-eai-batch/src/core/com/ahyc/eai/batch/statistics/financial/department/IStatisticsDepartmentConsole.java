@@ -18,8 +18,8 @@ public interface IStatisticsDepartmentConsole
    // @param linkId 关联编号
    // @return 数据信息
    //============================================================
-   FStatisticsDepartmentInfo findInfo(FLogicContext logicContext,
-                                      long id);
+   //FStatisticsDepartmentInfo findInfoByLinkId(FLogicContext logicContext,
+   //                                           long linkId);
 
    //============================================================
    // <T>根据编号同步一个部门信息。</T>

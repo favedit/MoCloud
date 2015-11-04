@@ -22,9 +22,6 @@ import org.mo.data.logic.FLogicDataset;
 public class FStatisticsTenderCalculater
       extends FStatisticsPeriodCalculater
 {
-   // 合计间隔(15分钟)
-   protected long _recordSpan = 1000 * 60 * 15;
-
    //============================================================
    // <T>构造金融理财师统计计算器。</T>
    //============================================================
@@ -150,8 +147,8 @@ public class FStatisticsTenderCalculater
          tenderLogic.doUpdate(tenderUnit);
          //............................................................
          // 插入用户数据
-         TDateTime spanDate = new TDateTime(customerActionDate.get());
-         spanDate.truncate(_recordSpan);
+         TDateTime spanDate = new TDateTime();
+         spanDate.parse(customerActionDate.format("YYYYMMDDHH24"), "YYYYMMDDHH24");
          FStatisticsFinancialTenderPhaseUnit phaseUnit = phaseLogic.search("TENDER_ID=" + tenderId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
          boolean phaseExist = (phaseUnit != null);
          if(!phaseExist){

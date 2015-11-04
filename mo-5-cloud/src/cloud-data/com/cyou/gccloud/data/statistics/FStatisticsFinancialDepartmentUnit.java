@@ -40,12 +40,6 @@ public class FStatisticsFinancialDepartmentUnit
    // 字段对象唯一标识的定义。
    protected String _guid;
 
-   // 存储字段关联顶层编号的定义。
-   private long __linkTopId;
-
-   // 字段关联顶层编号的定义。
-   protected long _linkTopId;
-
    // 存储字段关联父编号的定义。
    private long __linkParentId;
 
@@ -63,12 +57,6 @@ public class FStatisticsFinancialDepartmentUnit
 
    // 字段关联时间的定义。
    protected TDateTime _linkDate = new TDateTime();
-
-   // 存储字段关联编号路径的定义。
-   private String __linkIdPath;
-
-   // 字段关联编号路径的定义。
-   protected String _linkIdPath;
 
    // 存储字段关联类型的定义。
    private int __linkCd;
@@ -94,23 +82,143 @@ public class FStatisticsFinancialDepartmentUnit
    // 字段代码的定义。
    protected String _code;
 
-   // 存储字段顶层标签的定义。
-   private String __topLabel;
-
-   // 字段顶层标签的定义。
-   protected String _topLabel;
-
    // 存储字段标签的定义。
    private String __label;
 
    // 字段标签的定义。
    protected String _label;
 
-   // 存储字段标签路径的定义。
-   private String __labelPath;
+   // 存储字段当前级别的定义。
+   private int __level;
 
-   // 字段标签路径的定义。
-   protected String _labelPath;
+   // 字段当前级别的定义。
+   protected int _level;
+
+   // 存储字段级别1编号的定义。
+   private long __level1Id;
+
+   // 字段级别1编号的定义。
+   protected long _level1Id;
+
+   // 存储字段级别1关联编号的定义。
+   private long __level1LinkId;
+
+   // 字段级别1关联编号的定义。
+   protected long _level1LinkId;
+
+   // 存储字段级别1标签的定义。
+   private String __level1Label;
+
+   // 字段级别1标签的定义。
+   protected String _level1Label;
+
+   // 存储字段级别2编号的定义。
+   private long __level2Id;
+
+   // 字段级别2编号的定义。
+   protected long _level2Id;
+
+   // 存储字段级别2关联编号的定义。
+   private long __level2LinkId;
+
+   // 字段级别2关联编号的定义。
+   protected long _level2LinkId;
+
+   // 存储字段级别2标签的定义。
+   private String __level2Label;
+
+   // 字段级别2标签的定义。
+   protected String _level2Label;
+
+   // 存储字段级别3编号的定义。
+   private long __level3Id;
+
+   // 字段级别3编号的定义。
+   protected long _level3Id;
+
+   // 存储字段级别3关联编号的定义。
+   private long __level3LinkId;
+
+   // 字段级别3关联编号的定义。
+   protected long _level3LinkId;
+
+   // 存储字段级别3标签的定义。
+   private String __level3Label;
+
+   // 字段级别3标签的定义。
+   protected String _level3Label;
+
+   // 存储字段级别4编号的定义。
+   private long __level4Id;
+
+   // 字段级别4编号的定义。
+   protected long _level4Id;
+
+   // 存储字段级别4关联编号的定义。
+   private long __level4LinkId;
+
+   // 字段级别4关联编号的定义。
+   protected long _level4LinkId;
+
+   // 存储字段级别4标签的定义。
+   private String __level4Label;
+
+   // 字段级别4标签的定义。
+   protected String _level4Label;
+
+   // 存储字段级别5编号的定义。
+   private long __level5Id;
+
+   // 字段级别5编号的定义。
+   protected long _level5Id;
+
+   // 存储字段级别5关联编号的定义。
+   private long __level5LinkId;
+
+   // 字段级别5关联编号的定义。
+   protected long _level5LinkId;
+
+   // 存储字段级别5标签的定义。
+   private String __level5Label;
+
+   // 字段级别5标签的定义。
+   protected String _level5Label;
+
+   // 存储字段级别6编号的定义。
+   private long __level6Id;
+
+   // 字段级别6编号的定义。
+   protected long _level6Id;
+
+   // 存储字段级别6关联编号的定义。
+   private long __level6LinkId;
+
+   // 字段级别6关联编号的定义。
+   protected long _level6LinkId;
+
+   // 存储字段级别6标签的定义。
+   private String __level6Label;
+
+   // 字段级别6标签的定义。
+   protected String _level6Label;
+
+   // 存储字段级别7编号的定义。
+   private long __level7Id;
+
+   // 字段级别7编号的定义。
+   protected long _level7Id;
+
+   // 存储字段级别7关联编号的定义。
+   private long __level7LinkId;
+
+   // 字段级别7关联编号的定义。
+   protected long _level7LinkId;
+
+   // 存储字段级别7标签的定义。
+   private String __level7Label;
+
+   // 字段级别7标签的定义。
+   protected String _level7Label;
 
    // 存储字段投资总计的定义。
    private double __investmentTotal;
@@ -266,33 +374,6 @@ public class FStatisticsFinancialDepartmentUnit
    }
 
    //============================================================
-   // <T>判断关联顶层编号的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLinkTopIdChanged(){
-      return __linkTopId != _linkTopId;
-   }
-
-   //============================================================
-   // <T>获得关联顶层编号的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public long linkTopId(){
-      return _linkTopId;
-   }
-
-   //============================================================
-   // <T>设置关联顶层编号的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLinkTopId(long value){
-      _linkTopId = value;
-   }
-
-   //============================================================
    // <T>判断关联父编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -371,33 +452,6 @@ public class FStatisticsFinancialDepartmentUnit
    //============================================================
    public void setLinkDate(TDateTime value){
       _linkDate = value;
-   }
-
-   //============================================================
-   // <T>判断关联编号路径的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isLinkIdPathChanged(){
-      return !RString.equals(__linkIdPath, _linkIdPath);
-   }
-
-   //============================================================
-   // <T>获得关联编号路径的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String linkIdPath(){
-      return _linkIdPath;
-   }
-
-   //============================================================
-   // <T>设置关联编号路径的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setLinkIdPath(String value){
-      _linkIdPath = value;
    }
 
    //============================================================
@@ -509,33 +563,6 @@ public class FStatisticsFinancialDepartmentUnit
    }
 
    //============================================================
-   // <T>判断顶层标签的数据是否改变。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public boolean isTopLabelChanged(){
-      return !RString.equals(__topLabel, _topLabel);
-   }
-
-   //============================================================
-   // <T>获得顶层标签的数据内容。</T>
-   //
-   // @return 数据内容
-   //============================================================
-   public String topLabel(){
-      return _topLabel;
-   }
-
-   //============================================================
-   // <T>设置顶层标签的数据内容。</T>
-   //
-   // @param value 数据内容
-   //============================================================
-   public void setTopLabel(String value){
-      _topLabel = value;
-   }
-
-   //============================================================
    // <T>判断标签的数据是否改变。</T>
    //
    // @return 数据内容
@@ -563,30 +590,597 @@ public class FStatisticsFinancialDepartmentUnit
    }
 
    //============================================================
-   // <T>判断标签路径的数据是否改变。</T>
+   // <T>判断当前级别的数据是否改变。</T>
    //
    // @return 数据内容
    //============================================================
-   public boolean isLabelPathChanged(){
-      return !RString.equals(__labelPath, _labelPath);
+   public boolean isLevelChanged(){
+      return __level != _level;
    }
 
    //============================================================
-   // <T>获得标签路径的数据内容。</T>
+   // <T>获得当前级别的数据内容。</T>
    //
    // @return 数据内容
    //============================================================
-   public String labelPath(){
-      return _labelPath;
+   public int level(){
+      return _level;
    }
 
    //============================================================
-   // <T>设置标签路径的数据内容。</T>
+   // <T>设置当前级别的数据内容。</T>
    //
    // @param value 数据内容
    //============================================================
-   public void setLabelPath(String value){
-      _labelPath = value;
+   public void setLevel(int value){
+      _level = value;
+   }
+
+   //============================================================
+   // <T>判断级别1编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel1IdChanged(){
+      return __level1Id != _level1Id;
+   }
+
+   //============================================================
+   // <T>获得级别1编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level1Id(){
+      return _level1Id;
+   }
+
+   //============================================================
+   // <T>设置级别1编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel1Id(long value){
+      _level1Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别1关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel1LinkIdChanged(){
+      return __level1LinkId != _level1LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别1关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level1LinkId(){
+      return _level1LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别1关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel1LinkId(long value){
+      _level1LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别1标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel1LabelChanged(){
+      return !RString.equals(__level1Label, _level1Label);
+   }
+
+   //============================================================
+   // <T>获得级别1标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level1Label(){
+      return _level1Label;
+   }
+
+   //============================================================
+   // <T>设置级别1标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel1Label(String value){
+      _level1Label = value;
+   }
+
+   //============================================================
+   // <T>判断级别2编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel2IdChanged(){
+      return __level2Id != _level2Id;
+   }
+
+   //============================================================
+   // <T>获得级别2编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level2Id(){
+      return _level2Id;
+   }
+
+   //============================================================
+   // <T>设置级别2编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel2Id(long value){
+      _level2Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别2关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel2LinkIdChanged(){
+      return __level2LinkId != _level2LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别2关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level2LinkId(){
+      return _level2LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别2关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel2LinkId(long value){
+      _level2LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别2标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel2LabelChanged(){
+      return !RString.equals(__level2Label, _level2Label);
+   }
+
+   //============================================================
+   // <T>获得级别2标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level2Label(){
+      return _level2Label;
+   }
+
+   //============================================================
+   // <T>设置级别2标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel2Label(String value){
+      _level2Label = value;
+   }
+
+   //============================================================
+   // <T>判断级别3编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel3IdChanged(){
+      return __level3Id != _level3Id;
+   }
+
+   //============================================================
+   // <T>获得级别3编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level3Id(){
+      return _level3Id;
+   }
+
+   //============================================================
+   // <T>设置级别3编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel3Id(long value){
+      _level3Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别3关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel3LinkIdChanged(){
+      return __level3LinkId != _level3LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别3关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level3LinkId(){
+      return _level3LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别3关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel3LinkId(long value){
+      _level3LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别3标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel3LabelChanged(){
+      return !RString.equals(__level3Label, _level3Label);
+   }
+
+   //============================================================
+   // <T>获得级别3标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level3Label(){
+      return _level3Label;
+   }
+
+   //============================================================
+   // <T>设置级别3标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel3Label(String value){
+      _level3Label = value;
+   }
+
+   //============================================================
+   // <T>判断级别4编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel4IdChanged(){
+      return __level4Id != _level4Id;
+   }
+
+   //============================================================
+   // <T>获得级别4编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level4Id(){
+      return _level4Id;
+   }
+
+   //============================================================
+   // <T>设置级别4编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel4Id(long value){
+      _level4Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别4关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel4LinkIdChanged(){
+      return __level4LinkId != _level4LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别4关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level4LinkId(){
+      return _level4LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别4关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel4LinkId(long value){
+      _level4LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别4标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel4LabelChanged(){
+      return !RString.equals(__level4Label, _level4Label);
+   }
+
+   //============================================================
+   // <T>获得级别4标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level4Label(){
+      return _level4Label;
+   }
+
+   //============================================================
+   // <T>设置级别4标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel4Label(String value){
+      _level4Label = value;
+   }
+
+   //============================================================
+   // <T>判断级别5编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel5IdChanged(){
+      return __level5Id != _level5Id;
+   }
+
+   //============================================================
+   // <T>获得级别5编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level5Id(){
+      return _level5Id;
+   }
+
+   //============================================================
+   // <T>设置级别5编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel5Id(long value){
+      _level5Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别5关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel5LinkIdChanged(){
+      return __level5LinkId != _level5LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别5关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level5LinkId(){
+      return _level5LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别5关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel5LinkId(long value){
+      _level5LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别5标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel5LabelChanged(){
+      return !RString.equals(__level5Label, _level5Label);
+   }
+
+   //============================================================
+   // <T>获得级别5标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level5Label(){
+      return _level5Label;
+   }
+
+   //============================================================
+   // <T>设置级别5标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel5Label(String value){
+      _level5Label = value;
+   }
+
+   //============================================================
+   // <T>判断级别6编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel6IdChanged(){
+      return __level6Id != _level6Id;
+   }
+
+   //============================================================
+   // <T>获得级别6编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level6Id(){
+      return _level6Id;
+   }
+
+   //============================================================
+   // <T>设置级别6编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel6Id(long value){
+      _level6Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别6关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel6LinkIdChanged(){
+      return __level6LinkId != _level6LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别6关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level6LinkId(){
+      return _level6LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别6关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel6LinkId(long value){
+      _level6LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别6标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel6LabelChanged(){
+      return !RString.equals(__level6Label, _level6Label);
+   }
+
+   //============================================================
+   // <T>获得级别6标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level6Label(){
+      return _level6Label;
+   }
+
+   //============================================================
+   // <T>设置级别6标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel6Label(String value){
+      _level6Label = value;
+   }
+
+   //============================================================
+   // <T>判断级别7编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel7IdChanged(){
+      return __level7Id != _level7Id;
+   }
+
+   //============================================================
+   // <T>获得级别7编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level7Id(){
+      return _level7Id;
+   }
+
+   //============================================================
+   // <T>设置级别7编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel7Id(long value){
+      _level7Id = value;
+   }
+
+   //============================================================
+   // <T>判断级别7关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel7LinkIdChanged(){
+      return __level7LinkId != _level7LinkId;
+   }
+
+   //============================================================
+   // <T>获得级别7关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long level7LinkId(){
+      return _level7LinkId;
+   }
+
+   //============================================================
+   // <T>设置级别7关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel7LinkId(long value){
+      _level7LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断级别7标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isLevel7LabelChanged(){
+      return !RString.equals(__level7Label, _level7Label);
+   }
+
+   //============================================================
+   // <T>获得级别7标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String level7Label(){
+      return _level7Label;
+   }
+
+   //============================================================
+   // <T>设置级别7标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setLevel7Label(String value){
+      _level7Label = value;
    }
 
    //============================================================
@@ -901,16 +1495,12 @@ public class FStatisticsFinancialDepartmentUnit
             return RBoolean.toString(_ovld);
          case "guid":
             return _guid;
-         case "link_top_id":
-            return Long.toString(_linkTopId);
          case "link_parent_id":
             return Long.toString(_linkParentId);
          case "link_id":
             return Long.toString(_linkId);
          case "link_date":
             return _linkDate.toString();
-         case "link_id_path":
-            return _linkIdPath;
          case "link_cd":
             return RInteger.toString(_linkCd);
          case "data_id":
@@ -919,12 +1509,52 @@ public class FStatisticsFinancialDepartmentUnit
             return Long.toString(_parentId);
          case "code":
             return _code;
-         case "top_label":
-            return _topLabel;
          case "label":
             return _label;
-         case "label_path":
-            return _labelPath;
+         case "level":
+            return RInteger.toString(_level);
+         case "level1_id":
+            return Long.toString(_level1Id);
+         case "level1_link_id":
+            return Long.toString(_level1LinkId);
+         case "level1_label":
+            return _level1Label;
+         case "level2_id":
+            return Long.toString(_level2Id);
+         case "level2_link_id":
+            return Long.toString(_level2LinkId);
+         case "level2_label":
+            return _level2Label;
+         case "level3_id":
+            return Long.toString(_level3Id);
+         case "level3_link_id":
+            return Long.toString(_level3LinkId);
+         case "level3_label":
+            return _level3Label;
+         case "level4_id":
+            return Long.toString(_level4Id);
+         case "level4_link_id":
+            return Long.toString(_level4LinkId);
+         case "level4_label":
+            return _level4Label;
+         case "level5_id":
+            return Long.toString(_level5Id);
+         case "level5_link_id":
+            return Long.toString(_level5LinkId);
+         case "level5_label":
+            return _level5Label;
+         case "level6_id":
+            return Long.toString(_level6Id);
+         case "level6_link_id":
+            return Long.toString(_level6LinkId);
+         case "level6_label":
+            return _level6Label;
+         case "level7_id":
+            return Long.toString(_level7Id);
+         case "level7_link_id":
+            return Long.toString(_level7LinkId);
+         case "level7_label":
+            return _level7Label;
          case "investment_total":
             return RDouble.toString(_investmentTotal);
          case "redemption_total":
@@ -970,9 +1600,6 @@ public class FStatisticsFinancialDepartmentUnit
          case "guid":
             _guid = value;
             break;
-         case "link_top_id":
-            _linkTopId = RLong.parse(value);
-            break;
          case "link_parent_id":
             _linkParentId = RLong.parse(value);
             break;
@@ -981,9 +1608,6 @@ public class FStatisticsFinancialDepartmentUnit
             break;
          case "link_date":
             _linkDate.parse(value);
-            break;
-         case "link_id_path":
-            _linkIdPath = value;
             break;
          case "link_cd":
             _linkCd = RInteger.parse(value);
@@ -997,14 +1621,74 @@ public class FStatisticsFinancialDepartmentUnit
          case "code":
             _code = value;
             break;
-         case "top_label":
-            _topLabel = value;
-            break;
          case "label":
             _label = value;
             break;
-         case "label_path":
-            _labelPath = value;
+         case "level":
+            _level = RInteger.parse(value);
+            break;
+         case "level1_id":
+            _level1Id = RLong.parse(value);
+            break;
+         case "level1_link_id":
+            _level1LinkId = RLong.parse(value);
+            break;
+         case "level1_label":
+            _level1Label = value;
+            break;
+         case "level2_id":
+            _level2Id = RLong.parse(value);
+            break;
+         case "level2_link_id":
+            _level2LinkId = RLong.parse(value);
+            break;
+         case "level2_label":
+            _level2Label = value;
+            break;
+         case "level3_id":
+            _level3Id = RLong.parse(value);
+            break;
+         case "level3_link_id":
+            _level3LinkId = RLong.parse(value);
+            break;
+         case "level3_label":
+            _level3Label = value;
+            break;
+         case "level4_id":
+            _level4Id = RLong.parse(value);
+            break;
+         case "level4_link_id":
+            _level4LinkId = RLong.parse(value);
+            break;
+         case "level4_label":
+            _level4Label = value;
+            break;
+         case "level5_id":
+            _level5Id = RLong.parse(value);
+            break;
+         case "level5_link_id":
+            _level5LinkId = RLong.parse(value);
+            break;
+         case "level5_label":
+            _level5Label = value;
+            break;
+         case "level6_id":
+            _level6Id = RLong.parse(value);
+            break;
+         case "level6_link_id":
+            _level6LinkId = RLong.parse(value);
+            break;
+         case "level6_label":
+            _level6Label = value;
+            break;
+         case "level7_id":
+            _level7Id = RLong.parse(value);
+            break;
+         case "level7_link_id":
+            _level7LinkId = RLong.parse(value);
+            break;
+         case "level7_label":
+            _level7Label = value;
             break;
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
@@ -1066,10 +1750,6 @@ public class FStatisticsFinancialDepartmentUnit
                __guid = value;
                _guid = __guid;
                break;
-            case "link_top_id":
-               __linkTopId = RLong.parse(value);
-               _linkTopId = __linkTopId;
-               break;
             case "link_parent_id":
                __linkParentId = RLong.parse(value);
                _linkParentId = __linkParentId;
@@ -1081,10 +1761,6 @@ public class FStatisticsFinancialDepartmentUnit
             case "link_date":
                __linkDate.parse(value);
                _linkDate.assign(__linkDate);
-               break;
-            case "link_id_path":
-               __linkIdPath = value;
-               _linkIdPath = __linkIdPath;
                break;
             case "link_cd":
                __linkCd = RInteger.parse(value);
@@ -1102,17 +1778,97 @@ public class FStatisticsFinancialDepartmentUnit
                __code = value;
                _code = __code;
                break;
-            case "top_label":
-               __topLabel = value;
-               _topLabel = __topLabel;
-               break;
             case "label":
                __label = value;
                _label = __label;
                break;
-            case "label_path":
-               __labelPath = value;
-               _labelPath = __labelPath;
+            case "level":
+               __level = RInteger.parse(value);
+               _level = __level;
+               break;
+            case "level1_id":
+               __level1Id = RLong.parse(value);
+               _level1Id = __level1Id;
+               break;
+            case "level1_link_id":
+               __level1LinkId = RLong.parse(value);
+               _level1LinkId = __level1LinkId;
+               break;
+            case "level1_label":
+               __level1Label = value;
+               _level1Label = __level1Label;
+               break;
+            case "level2_id":
+               __level2Id = RLong.parse(value);
+               _level2Id = __level2Id;
+               break;
+            case "level2_link_id":
+               __level2LinkId = RLong.parse(value);
+               _level2LinkId = __level2LinkId;
+               break;
+            case "level2_label":
+               __level2Label = value;
+               _level2Label = __level2Label;
+               break;
+            case "level3_id":
+               __level3Id = RLong.parse(value);
+               _level3Id = __level3Id;
+               break;
+            case "level3_link_id":
+               __level3LinkId = RLong.parse(value);
+               _level3LinkId = __level3LinkId;
+               break;
+            case "level3_label":
+               __level3Label = value;
+               _level3Label = __level3Label;
+               break;
+            case "level4_id":
+               __level4Id = RLong.parse(value);
+               _level4Id = __level4Id;
+               break;
+            case "level4_link_id":
+               __level4LinkId = RLong.parse(value);
+               _level4LinkId = __level4LinkId;
+               break;
+            case "level4_label":
+               __level4Label = value;
+               _level4Label = __level4Label;
+               break;
+            case "level5_id":
+               __level5Id = RLong.parse(value);
+               _level5Id = __level5Id;
+               break;
+            case "level5_link_id":
+               __level5LinkId = RLong.parse(value);
+               _level5LinkId = __level5LinkId;
+               break;
+            case "level5_label":
+               __level5Label = value;
+               _level5Label = __level5Label;
+               break;
+            case "level6_id":
+               __level6Id = RLong.parse(value);
+               _level6Id = __level6Id;
+               break;
+            case "level6_link_id":
+               __level6LinkId = RLong.parse(value);
+               _level6LinkId = __level6LinkId;
+               break;
+            case "level6_label":
+               __level6Label = value;
+               _level6Label = __level6Label;
+               break;
+            case "level7_id":
+               __level7Id = RLong.parse(value);
+               _level7Id = __level7Id;
+               break;
+            case "level7_link_id":
+               __level7LinkId = RLong.parse(value);
+               _level7LinkId = __level7LinkId;
+               break;
+            case "level7_label":
+               __level7Label = value;
+               _level7Label = __level7Label;
                break;
             case "investment_total":
                __investmentTotal = RDouble.parse(value);
@@ -1173,18 +1929,36 @@ public class FStatisticsFinancialDepartmentUnit
       row.set("ouid", _ouid);
       row.set("ovld", _ovld);
       row.set("guid", _guid);
-      row.set("linkTopId", _linkTopId);
       row.set("linkParentId", _linkParentId);
       row.set("linkId", _linkId);
       row.set("linkDate", _linkDate);
-      row.set("linkIdPath", _linkIdPath);
       row.set("linkCd", _linkCd);
       row.set("dataId", _dataId);
       row.set("parentId", _parentId);
       row.set("code", _code);
-      row.set("topLabel", _topLabel);
       row.set("label", _label);
-      row.set("labelPath", _labelPath);
+      row.set("level", _level);
+      row.set("level1Id", _level1Id);
+      row.set("level1LinkId", _level1LinkId);
+      row.set("level1Label", _level1Label);
+      row.set("level2Id", _level2Id);
+      row.set("level2LinkId", _level2LinkId);
+      row.set("level2Label", _level2Label);
+      row.set("level3Id", _level3Id);
+      row.set("level3LinkId", _level3LinkId);
+      row.set("level3Label", _level3Label);
+      row.set("level4Id", _level4Id);
+      row.set("level4LinkId", _level4LinkId);
+      row.set("level4Label", _level4Label);
+      row.set("level5Id", _level5Id);
+      row.set("level5LinkId", _level5LinkId);
+      row.set("level5Label", _level5Label);
+      row.set("level6Id", _level6Id);
+      row.set("level6LinkId", _level6LinkId);
+      row.set("level6Label", _level6Label);
+      row.set("level7Id", _level7Id);
+      row.set("level7LinkId", _level7LinkId);
+      row.set("level7Label", _level7Label);
       row.set("investmentTotal", _investmentTotal);
       row.set("redemptionTotal", _redemptionTotal);
       row.set("netinvestmentTotal", _netinvestmentTotal);
@@ -1209,18 +1983,36 @@ public class FStatisticsFinancialDepartmentUnit
       map.put("ouid", RLong.toString(_ouid));
       map.put("ovld", RBoolean.toString(_ovld));
       map.put("guid", _guid);
-      map.put("linkTopId", RLong.toString(_linkTopId));
       map.put("linkParentId", RLong.toString(_linkParentId));
       map.put("linkId", RLong.toString(_linkId));
       map.put("linkDate", _linkDate.format("YYYY-MM-DD HH24:MI:SS"));
-      map.put("linkIdPath", _linkIdPath);
       map.put("linkCd", RInteger.toString(_linkCd));
       map.put("dataId", RLong.toString(_dataId));
       map.put("parentId", RLong.toString(_parentId));
       map.put("code", _code);
-      map.put("topLabel", _topLabel);
       map.put("label", _label);
-      map.put("labelPath", _labelPath);
+      map.put("level", RInteger.toString(_level));
+      map.put("level1Id", RLong.toString(_level1Id));
+      map.put("level1LinkId", RLong.toString(_level1LinkId));
+      map.put("level1Label", _level1Label);
+      map.put("level2Id", RLong.toString(_level2Id));
+      map.put("level2LinkId", RLong.toString(_level2LinkId));
+      map.put("level2Label", _level2Label);
+      map.put("level3Id", RLong.toString(_level3Id));
+      map.put("level3LinkId", RLong.toString(_level3LinkId));
+      map.put("level3Label", _level3Label);
+      map.put("level4Id", RLong.toString(_level4Id));
+      map.put("level4LinkId", RLong.toString(_level4LinkId));
+      map.put("level4Label", _level4Label);
+      map.put("level5Id", RLong.toString(_level5Id));
+      map.put("level5LinkId", RLong.toString(_level5LinkId));
+      map.put("level5Label", _level5Label);
+      map.put("level6Id", RLong.toString(_level6Id));
+      map.put("level6LinkId", RLong.toString(_level6LinkId));
+      map.put("level6Label", _level6Label);
+      map.put("level7Id", RLong.toString(_level7Id));
+      map.put("level7LinkId", RLong.toString(_level7LinkId));
+      map.put("level7Label", _level7Label);
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
@@ -1245,18 +2037,36 @@ public class FStatisticsFinancialDepartmentUnit
       _ouid = input.readInt64();
       _ovld = input.readBoolean();
       _guid = input.readString();
-      _linkTopId = input.readInt64();
       _linkParentId = input.readInt64();
       _linkId = input.readInt64();
       _linkDate.set(input.readInt64());
-      _linkIdPath = input.readString();
       _linkCd = input.readInt32();
       _dataId = input.readInt64();
       _parentId = input.readInt64();
       _code = input.readString();
-      _topLabel = input.readString();
       _label = input.readString();
-      _labelPath = input.readString();
+      _level = input.readInt32();
+      _level1Id = input.readInt64();
+      _level1LinkId = input.readInt64();
+      _level1Label = input.readString();
+      _level2Id = input.readInt64();
+      _level2LinkId = input.readInt64();
+      _level2Label = input.readString();
+      _level3Id = input.readInt64();
+      _level3LinkId = input.readInt64();
+      _level3Label = input.readString();
+      _level4Id = input.readInt64();
+      _level4LinkId = input.readInt64();
+      _level4Label = input.readString();
+      _level5Id = input.readInt64();
+      _level5LinkId = input.readInt64();
+      _level5Label = input.readString();
+      _level6Id = input.readInt64();
+      _level6LinkId = input.readInt64();
+      _level6Label = input.readString();
+      _level7Id = input.readInt64();
+      _level7LinkId = input.readInt64();
+      _level7Label = input.readString();
       _marketerTotal = input.readInt32();
       _customerTotal = input.readInt32();
       _createUserId = input.readInt64();
@@ -1276,18 +2086,36 @@ public class FStatisticsFinancialDepartmentUnit
       output.writeInt64(_ouid);
       output.writeBoolean(_ovld);
       output.writeString(_guid);
-      output.writeInt64(_linkTopId);
       output.writeInt64(_linkParentId);
       output.writeInt64(_linkId);
       output.writeInt64(_linkDate.get());
-      output.writeString(_linkIdPath);
       output.writeInt32(_linkCd);
       output.writeInt64(_dataId);
       output.writeInt64(_parentId);
       output.writeString(_code);
-      output.writeString(_topLabel);
       output.writeString(_label);
-      output.writeString(_labelPath);
+      output.writeInt32(_level);
+      output.writeInt64(_level1Id);
+      output.writeInt64(_level1LinkId);
+      output.writeString(_level1Label);
+      output.writeInt64(_level2Id);
+      output.writeInt64(_level2LinkId);
+      output.writeString(_level2Label);
+      output.writeInt64(_level3Id);
+      output.writeInt64(_level3LinkId);
+      output.writeString(_level3Label);
+      output.writeInt64(_level4Id);
+      output.writeInt64(_level4LinkId);
+      output.writeString(_level4Label);
+      output.writeInt64(_level5Id);
+      output.writeInt64(_level5LinkId);
+      output.writeString(_level5Label);
+      output.writeInt64(_level6Id);
+      output.writeInt64(_level6LinkId);
+      output.writeString(_level6Label);
+      output.writeInt64(_level7Id);
+      output.writeInt64(_level7LinkId);
+      output.writeString(_level7Label);
       output.writeInt32(_marketerTotal);
       output.writeInt32(_customerTotal);
       output.writeInt64(_createUserId);
@@ -1309,18 +2137,36 @@ public class FStatisticsFinancialDepartmentUnit
       unit.setOuid(_ouid);
       unit.setOvld(_ovld);
       unit.setGuid(_guid);
-      unit.setLinkTopId(_linkTopId);
       unit.setLinkParentId(_linkParentId);
       unit.setLinkId(_linkId);
       unit.linkDate().assign(_linkDate);
-      unit.setLinkIdPath(_linkIdPath);
       unit.setLinkCd(_linkCd);
       unit.setDataId(_dataId);
       unit.setParentId(_parentId);
       unit.setCode(_code);
-      unit.setTopLabel(_topLabel);
       unit.setLabel(_label);
-      unit.setLabelPath(_labelPath);
+      unit.setLevel(_level);
+      unit.setLevel1Id(_level1Id);
+      unit.setLevel1LinkId(_level1LinkId);
+      unit.setLevel1Label(_level1Label);
+      unit.setLevel2Id(_level2Id);
+      unit.setLevel2LinkId(_level2LinkId);
+      unit.setLevel2Label(_level2Label);
+      unit.setLevel3Id(_level3Id);
+      unit.setLevel3LinkId(_level3LinkId);
+      unit.setLevel3Label(_level3Label);
+      unit.setLevel4Id(_level4Id);
+      unit.setLevel4LinkId(_level4LinkId);
+      unit.setLevel4Label(_level4Label);
+      unit.setLevel5Id(_level5Id);
+      unit.setLevel5LinkId(_level5LinkId);
+      unit.setLevel5Label(_level5Label);
+      unit.setLevel6Id(_level6Id);
+      unit.setLevel6LinkId(_level6LinkId);
+      unit.setLevel6Label(_level6Label);
+      unit.setLevel7Id(_level7Id);
+      unit.setLevel7LinkId(_level7LinkId);
+      unit.setLevel7Label(_level7Label);
       unit.setInvestmentTotal(_investmentTotal);
       unit.setRedemptionTotal(_redemptionTotal);
       unit.setNetinvestmentTotal(_netinvestmentTotal);

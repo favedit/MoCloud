@@ -60,11 +60,80 @@ public class FStatisticsFinancialCustomerLogic
    // 字段部门关联编号的定义。
    public final static SLogicFieldInfo DEPARTMENT_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LINK_ID");
 
+   // 字段部门名称的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LABEL = new SLogicFieldInfo("DEPARTMENT_LABEL");
+
+   // 字段部门级别1编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL1_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL1_ID");
+
+   // 字段部门级别1关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL1_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL1_LINK_ID");
+
+   // 字段部门级别1标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL1_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL1_LABEL");
+
+   // 字段部门级别2编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL2_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL2_ID");
+
+   // 字段部门级别2关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL2_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL2_LINK_ID");
+
+   // 字段部门级别2标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL2_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL2_LABEL");
+
+   // 字段部门级别3编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL3_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL3_ID");
+
+   // 字段部门级别3关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL3_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL3_LINK_ID");
+
+   // 字段部门级别3标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL3_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL3_LABEL");
+
+   // 字段部门级别4编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL4_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL4_ID");
+
+   // 字段部门级别4关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL4_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL4_LINK_ID");
+
+   // 字段部门级别4标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL4_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL4_LABEL");
+
+   // 字段部门级别5编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL5_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL5_ID");
+
+   // 字段部门级别5关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL5_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL5_LINK_ID");
+
+   // 字段部门级别5标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL5_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL5_LABEL");
+
+   // 字段部门级别6编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL6_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL6_ID");
+
+   // 字段部门级别6关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL6_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL6_LINK_ID");
+
+   // 字段部门级别6标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL6_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL6_LABEL");
+
+   // 字段部门级别7编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL7_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL7_ID");
+
+   // 字段部门级别7关联编号的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL7_LINK_ID = new SLogicFieldInfo("DEPARTMENT_LEVEL7_LINK_ID");
+
+   // 字段部门级别7标签的定义。
+   public final static SLogicFieldInfo DEPARTMENT_LEVEL7_LABEL = new SLogicFieldInfo("DEPARTMENT_LEVEL7_LABEL");
+
    // 字段理财师编号的定义。
    public final static SLogicFieldInfo MARKETER_ID = new SLogicFieldInfo("MARKETER_ID");
 
    // 字段理财师关联编号的定义。
    public final static SLogicFieldInfo MARKETER_LINK_ID = new SLogicFieldInfo("MARKETER_LINK_ID");
+
+   // 字段理财师名称的定义。
+   public final static SLogicFieldInfo MARKETER_LABEL = new SLogicFieldInfo("MARKETER_LABEL");
 
    // 字段标签的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
@@ -148,7 +217,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`MARKETER_ID`,`MARKETER_LINK_ID`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LINK_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LINK_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LINK_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LINK_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LINK_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LINK_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LINK_ID`,`DEPARTMENT_LEVEL7_LABEL`,`MARKETER_ID`,`MARKETER_LINK_ID`,`MARKETER_LABEL`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -750,8 +819,31 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`DATA_ID`");
       cmd.append(",`DEPARTMENT_ID`");
       cmd.append(",`DEPARTMENT_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL1_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL1_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL1_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL2_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL2_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL2_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL3_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL3_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL3_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL4_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL4_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL4_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL5_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL5_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL5_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL6_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL6_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL6_LABEL`");
+      cmd.append(",`DEPARTMENT_LEVEL7_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL7_LINK_ID`");
+      cmd.append(",`DEPARTMENT_LEVEL7_LABEL`");
       cmd.append(",`MARKETER_ID`");
       cmd.append(",`MARKETER_LINK_ID`");
+      cmd.append(",`MARKETER_LABEL`");
       cmd.append(",`LABEL`");
       cmd.append(",`CARD`");
       cmd.append(",`CARD_AREA`");
@@ -835,6 +927,176 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append(departmentLinkId);
       }
       cmd.append(',');
+      String departmentLabel = unit.departmentLabel();
+      if(RString.isEmpty(departmentLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLabel));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel1Id = unit.departmentLevel1Id();
+      if(departmentLevel1Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel1Id);
+      }
+      cmd.append(',');
+      long departmentLevel1LinkId = unit.departmentLevel1LinkId();
+      if(departmentLevel1LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel1LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel1Label = unit.departmentLevel1Label();
+      if(RString.isEmpty(departmentLevel1Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel1Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel2Id = unit.departmentLevel2Id();
+      if(departmentLevel2Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel2Id);
+      }
+      cmd.append(',');
+      long departmentLevel2LinkId = unit.departmentLevel2LinkId();
+      if(departmentLevel2LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel2LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel2Label = unit.departmentLevel2Label();
+      if(RString.isEmpty(departmentLevel2Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel2Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel3Id = unit.departmentLevel3Id();
+      if(departmentLevel3Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel3Id);
+      }
+      cmd.append(',');
+      long departmentLevel3LinkId = unit.departmentLevel3LinkId();
+      if(departmentLevel3LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel3LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel3Label = unit.departmentLevel3Label();
+      if(RString.isEmpty(departmentLevel3Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel3Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel4Id = unit.departmentLevel4Id();
+      if(departmentLevel4Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel4Id);
+      }
+      cmd.append(',');
+      long departmentLevel4LinkId = unit.departmentLevel4LinkId();
+      if(departmentLevel4LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel4LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel4Label = unit.departmentLevel4Label();
+      if(RString.isEmpty(departmentLevel4Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel4Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel5Id = unit.departmentLevel5Id();
+      if(departmentLevel5Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel5Id);
+      }
+      cmd.append(',');
+      long departmentLevel5LinkId = unit.departmentLevel5LinkId();
+      if(departmentLevel5LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel5LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel5Label = unit.departmentLevel5Label();
+      if(RString.isEmpty(departmentLevel5Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel5Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel6Id = unit.departmentLevel6Id();
+      if(departmentLevel6Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel6Id);
+      }
+      cmd.append(',');
+      long departmentLevel6LinkId = unit.departmentLevel6LinkId();
+      if(departmentLevel6LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel6LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel6Label = unit.departmentLevel6Label();
+      if(RString.isEmpty(departmentLevel6Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel6Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      long departmentLevel7Id = unit.departmentLevel7Id();
+      if(departmentLevel7Id == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel7Id);
+      }
+      cmd.append(',');
+      long departmentLevel7LinkId = unit.departmentLevel7LinkId();
+      if(departmentLevel7LinkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentLevel7LinkId);
+      }
+      cmd.append(',');
+      String departmentLevel7Label = unit.departmentLevel7Label();
+      if(RString.isEmpty(departmentLevel7Label)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(departmentLevel7Label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
       long marketerId = unit.marketerId();
       if(marketerId == 0){
          cmd.append("NULL");
@@ -847,6 +1109,15 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append("NULL");
       }else{
          cmd.append(marketerLinkId);
+      }
+      cmd.append(',');
+      String marketerLabel = unit.marketerLabel();
+      if(RString.isEmpty(marketerLabel)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(marketerLabel));
+         cmd.append('\'');
       }
       cmd.append(',');
       String label = unit.label();
@@ -1130,6 +1401,220 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append(departmentLinkId);
          }
       }
+      if(unit.isDepartmentLabelChanged()){
+         cmd.append(",`DEPARTMENT_LABEL`=");
+         String departmentLabel = unit.departmentLabel();
+         if(RString.isEmpty(departmentLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLabel));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel1IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL1_ID`=");
+         long departmentLevel1Id = unit.departmentLevel1Id();
+         if(departmentLevel1Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel1Id);
+         }
+      }
+      if(unit.isDepartmentLevel1LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL1_LINK_ID`=");
+         long departmentLevel1LinkId = unit.departmentLevel1LinkId();
+         if(departmentLevel1LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel1LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel1LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL1_LABEL`=");
+         String departmentLevel1Label = unit.departmentLevel1Label();
+         if(RString.isEmpty(departmentLevel1Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel1Label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel2IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL2_ID`=");
+         long departmentLevel2Id = unit.departmentLevel2Id();
+         if(departmentLevel2Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel2Id);
+         }
+      }
+      if(unit.isDepartmentLevel2LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL2_LINK_ID`=");
+         long departmentLevel2LinkId = unit.departmentLevel2LinkId();
+         if(departmentLevel2LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel2LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel2LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL2_LABEL`=");
+         String departmentLevel2Label = unit.departmentLevel2Label();
+         if(RString.isEmpty(departmentLevel2Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel2Label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel3IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL3_ID`=");
+         long departmentLevel3Id = unit.departmentLevel3Id();
+         if(departmentLevel3Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel3Id);
+         }
+      }
+      if(unit.isDepartmentLevel3LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL3_LINK_ID`=");
+         long departmentLevel3LinkId = unit.departmentLevel3LinkId();
+         if(departmentLevel3LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel3LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel3LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL3_LABEL`=");
+         String departmentLevel3Label = unit.departmentLevel3Label();
+         if(RString.isEmpty(departmentLevel3Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel3Label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel4IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL4_ID`=");
+         long departmentLevel4Id = unit.departmentLevel4Id();
+         if(departmentLevel4Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel4Id);
+         }
+      }
+      if(unit.isDepartmentLevel4LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL4_LINK_ID`=");
+         long departmentLevel4LinkId = unit.departmentLevel4LinkId();
+         if(departmentLevel4LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel4LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel4LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL4_LABEL`=");
+         String departmentLevel4Label = unit.departmentLevel4Label();
+         if(RString.isEmpty(departmentLevel4Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel4Label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel5IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL5_ID`=");
+         long departmentLevel5Id = unit.departmentLevel5Id();
+         if(departmentLevel5Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel5Id);
+         }
+      }
+      if(unit.isDepartmentLevel5LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL5_LINK_ID`=");
+         long departmentLevel5LinkId = unit.departmentLevel5LinkId();
+         if(departmentLevel5LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel5LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel5LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL5_LABEL`=");
+         String departmentLevel5Label = unit.departmentLevel5Label();
+         if(RString.isEmpty(departmentLevel5Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel5Label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel6IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL6_ID`=");
+         long departmentLevel6Id = unit.departmentLevel6Id();
+         if(departmentLevel6Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel6Id);
+         }
+      }
+      if(unit.isDepartmentLevel6LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL6_LINK_ID`=");
+         long departmentLevel6LinkId = unit.departmentLevel6LinkId();
+         if(departmentLevel6LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel6LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel6LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL6_LABEL`=");
+         String departmentLevel6Label = unit.departmentLevel6Label();
+         if(RString.isEmpty(departmentLevel6Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel6Label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isDepartmentLevel7IdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL7_ID`=");
+         long departmentLevel7Id = unit.departmentLevel7Id();
+         if(departmentLevel7Id == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel7Id);
+         }
+      }
+      if(unit.isDepartmentLevel7LinkIdChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL7_LINK_ID`=");
+         long departmentLevel7LinkId = unit.departmentLevel7LinkId();
+         if(departmentLevel7LinkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentLevel7LinkId);
+         }
+      }
+      if(unit.isDepartmentLevel7LabelChanged()){
+         cmd.append(",`DEPARTMENT_LEVEL7_LABEL`=");
+         String departmentLevel7Label = unit.departmentLevel7Label();
+         if(RString.isEmpty(departmentLevel7Label)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(departmentLevel7Label));
+            cmd.append('\'');
+         }
+      }
       if(unit.isMarketerIdChanged()){
          cmd.append(",`MARKETER_ID`=");
          long marketerId = unit.marketerId();
@@ -1146,6 +1631,17 @@ public class FStatisticsFinancialCustomerLogic
             cmd.append("NULL");
          }else{
             cmd.append(marketerLinkId);
+         }
+      }
+      if(unit.isMarketerLabelChanged()){
+         cmd.append(",`MARKETER_LABEL`=");
+         String marketerLabel = unit.marketerLabel();
+         if(RString.isEmpty(marketerLabel)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(marketerLabel));
+            cmd.append('\'');
          }
       }
       if(unit.isLabelChanged()){

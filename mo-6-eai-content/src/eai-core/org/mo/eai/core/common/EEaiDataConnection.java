@@ -16,4 +16,11 @@ public class EEaiDataConnection
 
    // 统计库
    public final static String STATISTICS = "statistics";
+
+   // 计算库
+   public final static String CALCULATE = "calculate";
+
+   // 日志库
+   public final static String LOGGER = "logger";
+
 }

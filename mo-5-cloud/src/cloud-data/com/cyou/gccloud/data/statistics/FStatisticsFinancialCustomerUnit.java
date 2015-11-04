@@ -76,6 +76,138 @@ public class FStatisticsFinancialCustomerUnit
    // 字段部门关联编号的定义。
    protected long _departmentLinkId;
 
+   // 存储字段部门名称的定义。
+   private String __departmentLabel;
+
+   // 字段部门名称的定义。
+   protected String _departmentLabel;
+
+   // 存储字段部门级别1编号的定义。
+   private long __departmentLevel1Id;
+
+   // 字段部门级别1编号的定义。
+   protected long _departmentLevel1Id;
+
+   // 存储字段部门级别1关联编号的定义。
+   private long __departmentLevel1LinkId;
+
+   // 字段部门级别1关联编号的定义。
+   protected long _departmentLevel1LinkId;
+
+   // 存储字段部门级别1标签的定义。
+   private String __departmentLevel1Label;
+
+   // 字段部门级别1标签的定义。
+   protected String _departmentLevel1Label;
+
+   // 存储字段部门级别2编号的定义。
+   private long __departmentLevel2Id;
+
+   // 字段部门级别2编号的定义。
+   protected long _departmentLevel2Id;
+
+   // 存储字段部门级别2关联编号的定义。
+   private long __departmentLevel2LinkId;
+
+   // 字段部门级别2关联编号的定义。
+   protected long _departmentLevel2LinkId;
+
+   // 存储字段部门级别2标签的定义。
+   private String __departmentLevel2Label;
+
+   // 字段部门级别2标签的定义。
+   protected String _departmentLevel2Label;
+
+   // 存储字段部门级别3编号的定义。
+   private long __departmentLevel3Id;
+
+   // 字段部门级别3编号的定义。
+   protected long _departmentLevel3Id;
+
+   // 存储字段部门级别3关联编号的定义。
+   private long __departmentLevel3LinkId;
+
+   // 字段部门级别3关联编号的定义。
+   protected long _departmentLevel3LinkId;
+
+   // 存储字段部门级别3标签的定义。
+   private String __departmentLevel3Label;
+
+   // 字段部门级别3标签的定义。
+   protected String _departmentLevel3Label;
+
+   // 存储字段部门级别4编号的定义。
+   private long __departmentLevel4Id;
+
+   // 字段部门级别4编号的定义。
+   protected long _departmentLevel4Id;
+
+   // 存储字段部门级别4关联编号的定义。
+   private long __departmentLevel4LinkId;
+
+   // 字段部门级别4关联编号的定义。
+   protected long _departmentLevel4LinkId;
+
+   // 存储字段部门级别4标签的定义。
+   private String __departmentLevel4Label;
+
+   // 字段部门级别4标签的定义。
+   protected String _departmentLevel4Label;
+
+   // 存储字段部门级别5编号的定义。
+   private long __departmentLevel5Id;
+
+   // 字段部门级别5编号的定义。
+   protected long _departmentLevel5Id;
+
+   // 存储字段部门级别5关联编号的定义。
+   private long __departmentLevel5LinkId;
+
+   // 字段部门级别5关联编号的定义。
+   protected long _departmentLevel5LinkId;
+
+   // 存储字段部门级别5标签的定义。
+   private String __departmentLevel5Label;
+
+   // 字段部门级别5标签的定义。
+   protected String _departmentLevel5Label;
+
+   // 存储字段部门级别6编号的定义。
+   private long __departmentLevel6Id;
+
+   // 字段部门级别6编号的定义。
+   protected long _departmentLevel6Id;
+
+   // 存储字段部门级别6关联编号的定义。
+   private long __departmentLevel6LinkId;
+
+   // 字段部门级别6关联编号的定义。
+   protected long _departmentLevel6LinkId;
+
+   // 存储字段部门级别6标签的定义。
+   private String __departmentLevel6Label;
+
+   // 字段部门级别6标签的定义。
+   protected String _departmentLevel6Label;
+
+   // 存储字段部门级别7编号的定义。
+   private long __departmentLevel7Id;
+
+   // 字段部门级别7编号的定义。
+   protected long _departmentLevel7Id;
+
+   // 存储字段部门级别7关联编号的定义。
+   private long __departmentLevel7LinkId;
+
+   // 字段部门级别7关联编号的定义。
+   protected long _departmentLevel7LinkId;
+
+   // 存储字段部门级别7标签的定义。
+   private String __departmentLevel7Label;
+
+   // 字段部门级别7标签的定义。
+   protected String _departmentLevel7Label;
+
    // 存储字段理财师编号的定义。
    private long __marketerId;
 
@@ -87,6 +219,12 @@ public class FStatisticsFinancialCustomerUnit
 
    // 字段理财师关联编号的定义。
    protected long _marketerLinkId;
+
+   // 存储字段理财师名称的定义。
+   private String __marketerLabel;
+
+   // 字段理财师名称的定义。
+   protected String _marketerLabel;
 
    // 存储字段标签的定义。
    private String __label;
@@ -500,6 +638,600 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
+   // <T>判断部门名称的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLabelChanged(){
+      return !RString.equals(__departmentLabel, _departmentLabel);
+   }
+
+   //============================================================
+   // <T>获得部门名称的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLabel(){
+      return _departmentLabel;
+   }
+
+   //============================================================
+   // <T>设置部门名称的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLabel(String value){
+      _departmentLabel = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别1编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel1IdChanged(){
+      return __departmentLevel1Id != _departmentLevel1Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别1编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel1Id(){
+      return _departmentLevel1Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别1编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel1Id(long value){
+      _departmentLevel1Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别1关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel1LinkIdChanged(){
+      return __departmentLevel1LinkId != _departmentLevel1LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别1关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel1LinkId(){
+      return _departmentLevel1LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别1关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel1LinkId(long value){
+      _departmentLevel1LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别1标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel1LabelChanged(){
+      return !RString.equals(__departmentLevel1Label, _departmentLevel1Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别1标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel1Label(){
+      return _departmentLevel1Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别1标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel1Label(String value){
+      _departmentLevel1Label = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别2编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel2IdChanged(){
+      return __departmentLevel2Id != _departmentLevel2Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别2编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel2Id(){
+      return _departmentLevel2Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别2编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel2Id(long value){
+      _departmentLevel2Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别2关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel2LinkIdChanged(){
+      return __departmentLevel2LinkId != _departmentLevel2LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别2关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel2LinkId(){
+      return _departmentLevel2LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别2关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel2LinkId(long value){
+      _departmentLevel2LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别2标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel2LabelChanged(){
+      return !RString.equals(__departmentLevel2Label, _departmentLevel2Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别2标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel2Label(){
+      return _departmentLevel2Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别2标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel2Label(String value){
+      _departmentLevel2Label = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别3编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel3IdChanged(){
+      return __departmentLevel3Id != _departmentLevel3Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别3编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel3Id(){
+      return _departmentLevel3Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别3编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel3Id(long value){
+      _departmentLevel3Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别3关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel3LinkIdChanged(){
+      return __departmentLevel3LinkId != _departmentLevel3LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别3关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel3LinkId(){
+      return _departmentLevel3LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别3关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel3LinkId(long value){
+      _departmentLevel3LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别3标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel3LabelChanged(){
+      return !RString.equals(__departmentLevel3Label, _departmentLevel3Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别3标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel3Label(){
+      return _departmentLevel3Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别3标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel3Label(String value){
+      _departmentLevel3Label = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别4编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel4IdChanged(){
+      return __departmentLevel4Id != _departmentLevel4Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别4编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel4Id(){
+      return _departmentLevel4Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别4编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel4Id(long value){
+      _departmentLevel4Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别4关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel4LinkIdChanged(){
+      return __departmentLevel4LinkId != _departmentLevel4LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别4关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel4LinkId(){
+      return _departmentLevel4LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别4关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel4LinkId(long value){
+      _departmentLevel4LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别4标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel4LabelChanged(){
+      return !RString.equals(__departmentLevel4Label, _departmentLevel4Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别4标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel4Label(){
+      return _departmentLevel4Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别4标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel4Label(String value){
+      _departmentLevel4Label = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别5编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel5IdChanged(){
+      return __departmentLevel5Id != _departmentLevel5Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别5编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel5Id(){
+      return _departmentLevel5Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别5编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel5Id(long value){
+      _departmentLevel5Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别5关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel5LinkIdChanged(){
+      return __departmentLevel5LinkId != _departmentLevel5LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别5关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel5LinkId(){
+      return _departmentLevel5LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别5关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel5LinkId(long value){
+      _departmentLevel5LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别5标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel5LabelChanged(){
+      return !RString.equals(__departmentLevel5Label, _departmentLevel5Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别5标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel5Label(){
+      return _departmentLevel5Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别5标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel5Label(String value){
+      _departmentLevel5Label = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别6编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel6IdChanged(){
+      return __departmentLevel6Id != _departmentLevel6Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别6编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel6Id(){
+      return _departmentLevel6Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别6编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel6Id(long value){
+      _departmentLevel6Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别6关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel6LinkIdChanged(){
+      return __departmentLevel6LinkId != _departmentLevel6LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别6关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel6LinkId(){
+      return _departmentLevel6LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别6关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel6LinkId(long value){
+      _departmentLevel6LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别6标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel6LabelChanged(){
+      return !RString.equals(__departmentLevel6Label, _departmentLevel6Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别6标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel6Label(){
+      return _departmentLevel6Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别6标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel6Label(String value){
+      _departmentLevel6Label = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别7编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel7IdChanged(){
+      return __departmentLevel7Id != _departmentLevel7Id;
+   }
+
+   //============================================================
+   // <T>获得部门级别7编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel7Id(){
+      return _departmentLevel7Id;
+   }
+
+   //============================================================
+   // <T>设置部门级别7编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel7Id(long value){
+      _departmentLevel7Id = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别7关联编号的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel7LinkIdChanged(){
+      return __departmentLevel7LinkId != _departmentLevel7LinkId;
+   }
+
+   //============================================================
+   // <T>获得部门级别7关联编号的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public long departmentLevel7LinkId(){
+      return _departmentLevel7LinkId;
+   }
+
+   //============================================================
+   // <T>设置部门级别7关联编号的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel7LinkId(long value){
+      _departmentLevel7LinkId = value;
+   }
+
+   //============================================================
+   // <T>判断部门级别7标签的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isDepartmentLevel7LabelChanged(){
+      return !RString.equals(__departmentLevel7Label, _departmentLevel7Label);
+   }
+
+   //============================================================
+   // <T>获得部门级别7标签的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String departmentLevel7Label(){
+      return _departmentLevel7Label;
+   }
+
+   //============================================================
+   // <T>设置部门级别7标签的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setDepartmentLevel7Label(String value){
+      _departmentLevel7Label = value;
+   }
+
+   //============================================================
    // <T>判断理财师编号的数据是否改变。</T>
    //
    // @return 数据内容
@@ -551,6 +1283,33 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setMarketerLinkId(long value){
       _marketerLinkId = value;
+   }
+
+   //============================================================
+   // <T>判断理财师名称的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isMarketerLabelChanged(){
+      return !RString.equals(__marketerLabel, _marketerLabel);
+   }
+
+   //============================================================
+   // <T>获得理财师名称的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String marketerLabel(){
+      return _marketerLabel;
+   }
+
+   //============================================================
+   // <T>设置理财师名称的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setMarketerLabel(String value){
+      _marketerLabel = value;
    }
 
    //============================================================
@@ -1309,10 +2068,56 @@ public class FStatisticsFinancialCustomerUnit
             return Long.toString(_departmentId);
          case "department_link_id":
             return Long.toString(_departmentLinkId);
+         case "department_label":
+            return _departmentLabel;
+         case "department_level1_id":
+            return Long.toString(_departmentLevel1Id);
+         case "department_level1_link_id":
+            return Long.toString(_departmentLevel1LinkId);
+         case "department_level1_label":
+            return _departmentLevel1Label;
+         case "department_level2_id":
+            return Long.toString(_departmentLevel2Id);
+         case "department_level2_link_id":
+            return Long.toString(_departmentLevel2LinkId);
+         case "department_level2_label":
+            return _departmentLevel2Label;
+         case "department_level3_id":
+            return Long.toString(_departmentLevel3Id);
+         case "department_level3_link_id":
+            return Long.toString(_departmentLevel3LinkId);
+         case "department_level3_label":
+            return _departmentLevel3Label;
+         case "department_level4_id":
+            return Long.toString(_departmentLevel4Id);
+         case "department_level4_link_id":
+            return Long.toString(_departmentLevel4LinkId);
+         case "department_level4_label":
+            return _departmentLevel4Label;
+         case "department_level5_id":
+            return Long.toString(_departmentLevel5Id);
+         case "department_level5_link_id":
+            return Long.toString(_departmentLevel5LinkId);
+         case "department_level5_label":
+            return _departmentLevel5Label;
+         case "department_level6_id":
+            return Long.toString(_departmentLevel6Id);
+         case "department_level6_link_id":
+            return Long.toString(_departmentLevel6LinkId);
+         case "department_level6_label":
+            return _departmentLevel6Label;
+         case "department_level7_id":
+            return Long.toString(_departmentLevel7Id);
+         case "department_level7_link_id":
+            return Long.toString(_departmentLevel7LinkId);
+         case "department_level7_label":
+            return _departmentLevel7Label;
          case "marketer_id":
             return Long.toString(_marketerId);
          case "marketer_link_id":
             return Long.toString(_marketerLinkId);
+         case "marketer_label":
+            return _marketerLabel;
          case "label":
             return _label;
          case "card":
@@ -1408,11 +2213,80 @@ public class FStatisticsFinancialCustomerUnit
          case "department_link_id":
             _departmentLinkId = RLong.parse(value);
             break;
+         case "department_label":
+            _departmentLabel = value;
+            break;
+         case "department_level1_id":
+            _departmentLevel1Id = RLong.parse(value);
+            break;
+         case "department_level1_link_id":
+            _departmentLevel1LinkId = RLong.parse(value);
+            break;
+         case "department_level1_label":
+            _departmentLevel1Label = value;
+            break;
+         case "department_level2_id":
+            _departmentLevel2Id = RLong.parse(value);
+            break;
+         case "department_level2_link_id":
+            _departmentLevel2LinkId = RLong.parse(value);
+            break;
+         case "department_level2_label":
+            _departmentLevel2Label = value;
+            break;
+         case "department_level3_id":
+            _departmentLevel3Id = RLong.parse(value);
+            break;
+         case "department_level3_link_id":
+            _departmentLevel3LinkId = RLong.parse(value);
+            break;
+         case "department_level3_label":
+            _departmentLevel3Label = value;
+            break;
+         case "department_level4_id":
+            _departmentLevel4Id = RLong.parse(value);
+            break;
+         case "department_level4_link_id":
+            _departmentLevel4LinkId = RLong.parse(value);
+            break;
+         case "department_level4_label":
+            _departmentLevel4Label = value;
+            break;
+         case "department_level5_id":
+            _departmentLevel5Id = RLong.parse(value);
+            break;
+         case "department_level5_link_id":
+            _departmentLevel5LinkId = RLong.parse(value);
+            break;
+         case "department_level5_label":
+            _departmentLevel5Label = value;
+            break;
+         case "department_level6_id":
+            _departmentLevel6Id = RLong.parse(value);
+            break;
+         case "department_level6_link_id":
+            _departmentLevel6LinkId = RLong.parse(value);
+            break;
+         case "department_level6_label":
+            _departmentLevel6Label = value;
+            break;
+         case "department_level7_id":
+            _departmentLevel7Id = RLong.parse(value);
+            break;
+         case "department_level7_link_id":
+            _departmentLevel7LinkId = RLong.parse(value);
+            break;
+         case "department_level7_label":
+            _departmentLevel7Label = value;
+            break;
          case "marketer_id":
             _marketerId = RLong.parse(value);
             break;
          case "marketer_link_id":
             _marketerLinkId = RLong.parse(value);
+            break;
+         case "marketer_label":
+            _marketerLabel = value;
             break;
          case "label":
             _label = value;
@@ -1546,6 +2420,94 @@ public class FStatisticsFinancialCustomerUnit
                __departmentLinkId = RLong.parse(value);
                _departmentLinkId = __departmentLinkId;
                break;
+            case "department_label":
+               __departmentLabel = value;
+               _departmentLabel = __departmentLabel;
+               break;
+            case "department_level1_id":
+               __departmentLevel1Id = RLong.parse(value);
+               _departmentLevel1Id = __departmentLevel1Id;
+               break;
+            case "department_level1_link_id":
+               __departmentLevel1LinkId = RLong.parse(value);
+               _departmentLevel1LinkId = __departmentLevel1LinkId;
+               break;
+            case "department_level1_label":
+               __departmentLevel1Label = value;
+               _departmentLevel1Label = __departmentLevel1Label;
+               break;
+            case "department_level2_id":
+               __departmentLevel2Id = RLong.parse(value);
+               _departmentLevel2Id = __departmentLevel2Id;
+               break;
+            case "department_level2_link_id":
+               __departmentLevel2LinkId = RLong.parse(value);
+               _departmentLevel2LinkId = __departmentLevel2LinkId;
+               break;
+            case "department_level2_label":
+               __departmentLevel2Label = value;
+               _departmentLevel2Label = __departmentLevel2Label;
+               break;
+            case "department_level3_id":
+               __departmentLevel3Id = RLong.parse(value);
+               _departmentLevel3Id = __departmentLevel3Id;
+               break;
+            case "department_level3_link_id":
+               __departmentLevel3LinkId = RLong.parse(value);
+               _departmentLevel3LinkId = __departmentLevel3LinkId;
+               break;
+            case "department_level3_label":
+               __departmentLevel3Label = value;
+               _departmentLevel3Label = __departmentLevel3Label;
+               break;
+            case "department_level4_id":
+               __departmentLevel4Id = RLong.parse(value);
+               _departmentLevel4Id = __departmentLevel4Id;
+               break;
+            case "department_level4_link_id":
+               __departmentLevel4LinkId = RLong.parse(value);
+               _departmentLevel4LinkId = __departmentLevel4LinkId;
+               break;
+            case "department_level4_label":
+               __departmentLevel4Label = value;
+               _departmentLevel4Label = __departmentLevel4Label;
+               break;
+            case "department_level5_id":
+               __departmentLevel5Id = RLong.parse(value);
+               _departmentLevel5Id = __departmentLevel5Id;
+               break;
+            case "department_level5_link_id":
+               __departmentLevel5LinkId = RLong.parse(value);
+               _departmentLevel5LinkId = __departmentLevel5LinkId;
+               break;
+            case "department_level5_label":
+               __departmentLevel5Label = value;
+               _departmentLevel5Label = __departmentLevel5Label;
+               break;
+            case "department_level6_id":
+               __departmentLevel6Id = RLong.parse(value);
+               _departmentLevel6Id = __departmentLevel6Id;
+               break;
+            case "department_level6_link_id":
+               __departmentLevel6LinkId = RLong.parse(value);
+               _departmentLevel6LinkId = __departmentLevel6LinkId;
+               break;
+            case "department_level6_label":
+               __departmentLevel6Label = value;
+               _departmentLevel6Label = __departmentLevel6Label;
+               break;
+            case "department_level7_id":
+               __departmentLevel7Id = RLong.parse(value);
+               _departmentLevel7Id = __departmentLevel7Id;
+               break;
+            case "department_level7_link_id":
+               __departmentLevel7LinkId = RLong.parse(value);
+               _departmentLevel7LinkId = __departmentLevel7LinkId;
+               break;
+            case "department_level7_label":
+               __departmentLevel7Label = value;
+               _departmentLevel7Label = __departmentLevel7Label;
+               break;
             case "marketer_id":
                __marketerId = RLong.parse(value);
                _marketerId = __marketerId;
@@ -1553,6 +2515,10 @@ public class FStatisticsFinancialCustomerUnit
             case "marketer_link_id":
                __marketerLinkId = RLong.parse(value);
                _marketerLinkId = __marketerLinkId;
+               break;
+            case "marketer_label":
+               __marketerLabel = value;
+               _marketerLabel = __marketerLabel;
                break;
             case "label":
                __label = value;
@@ -1683,8 +2649,31 @@ public class FStatisticsFinancialCustomerUnit
       row.set("dataId", _dataId);
       row.set("departmentId", _departmentId);
       row.set("departmentLinkId", _departmentLinkId);
+      row.set("departmentLabel", _departmentLabel);
+      row.set("departmentLevel1Id", _departmentLevel1Id);
+      row.set("departmentLevel1LinkId", _departmentLevel1LinkId);
+      row.set("departmentLevel1Label", _departmentLevel1Label);
+      row.set("departmentLevel2Id", _departmentLevel2Id);
+      row.set("departmentLevel2LinkId", _departmentLevel2LinkId);
+      row.set("departmentLevel2Label", _departmentLevel2Label);
+      row.set("departmentLevel3Id", _departmentLevel3Id);
+      row.set("departmentLevel3LinkId", _departmentLevel3LinkId);
+      row.set("departmentLevel3Label", _departmentLevel3Label);
+      row.set("departmentLevel4Id", _departmentLevel4Id);
+      row.set("departmentLevel4LinkId", _departmentLevel4LinkId);
+      row.set("departmentLevel4Label", _departmentLevel4Label);
+      row.set("departmentLevel5Id", _departmentLevel5Id);
+      row.set("departmentLevel5LinkId", _departmentLevel5LinkId);
+      row.set("departmentLevel5Label", _departmentLevel5Label);
+      row.set("departmentLevel6Id", _departmentLevel6Id);
+      row.set("departmentLevel6LinkId", _departmentLevel6LinkId);
+      row.set("departmentLevel6Label", _departmentLevel6Label);
+      row.set("departmentLevel7Id", _departmentLevel7Id);
+      row.set("departmentLevel7LinkId", _departmentLevel7LinkId);
+      row.set("departmentLevel7Label", _departmentLevel7Label);
       row.set("marketerId", _marketerId);
       row.set("marketerLinkId", _marketerLinkId);
+      row.set("marketerLabel", _marketerLabel);
       row.set("label", _label);
       row.set("card", _card);
       row.set("cardArea", _cardArea);
@@ -1731,8 +2720,31 @@ public class FStatisticsFinancialCustomerUnit
       map.put("dataId", RLong.toString(_dataId));
       map.put("departmentId", RLong.toString(_departmentId));
       map.put("departmentLinkId", RLong.toString(_departmentLinkId));
+      map.put("departmentLabel", _departmentLabel);
+      map.put("departmentLevel1Id", RLong.toString(_departmentLevel1Id));
+      map.put("departmentLevel1LinkId", RLong.toString(_departmentLevel1LinkId));
+      map.put("departmentLevel1Label", _departmentLevel1Label);
+      map.put("departmentLevel2Id", RLong.toString(_departmentLevel2Id));
+      map.put("departmentLevel2LinkId", RLong.toString(_departmentLevel2LinkId));
+      map.put("departmentLevel2Label", _departmentLevel2Label);
+      map.put("departmentLevel3Id", RLong.toString(_departmentLevel3Id));
+      map.put("departmentLevel3LinkId", RLong.toString(_departmentLevel3LinkId));
+      map.put("departmentLevel3Label", _departmentLevel3Label);
+      map.put("departmentLevel4Id", RLong.toString(_departmentLevel4Id));
+      map.put("departmentLevel4LinkId", RLong.toString(_departmentLevel4LinkId));
+      map.put("departmentLevel4Label", _departmentLevel4Label);
+      map.put("departmentLevel5Id", RLong.toString(_departmentLevel5Id));
+      map.put("departmentLevel5LinkId", RLong.toString(_departmentLevel5LinkId));
+      map.put("departmentLevel5Label", _departmentLevel5Label);
+      map.put("departmentLevel6Id", RLong.toString(_departmentLevel6Id));
+      map.put("departmentLevel6LinkId", RLong.toString(_departmentLevel6LinkId));
+      map.put("departmentLevel6Label", _departmentLevel6Label);
+      map.put("departmentLevel7Id", RLong.toString(_departmentLevel7Id));
+      map.put("departmentLevel7LinkId", RLong.toString(_departmentLevel7LinkId));
+      map.put("departmentLevel7Label", _departmentLevel7Label);
       map.put("marketerId", RLong.toString(_marketerId));
       map.put("marketerLinkId", RLong.toString(_marketerLinkId));
+      map.put("marketerLabel", _marketerLabel);
       map.put("label", _label);
       map.put("card", _card);
       map.put("cardArea", _cardArea);
@@ -1779,8 +2791,31 @@ public class FStatisticsFinancialCustomerUnit
       _dataId = input.readInt64();
       _departmentId = input.readInt64();
       _departmentLinkId = input.readInt64();
+      _departmentLabel = input.readString();
+      _departmentLevel1Id = input.readInt64();
+      _departmentLevel1LinkId = input.readInt64();
+      _departmentLevel1Label = input.readString();
+      _departmentLevel2Id = input.readInt64();
+      _departmentLevel2LinkId = input.readInt64();
+      _departmentLevel2Label = input.readString();
+      _departmentLevel3Id = input.readInt64();
+      _departmentLevel3LinkId = input.readInt64();
+      _departmentLevel3Label = input.readString();
+      _departmentLevel4Id = input.readInt64();
+      _departmentLevel4LinkId = input.readInt64();
+      _departmentLevel4Label = input.readString();
+      _departmentLevel5Id = input.readInt64();
+      _departmentLevel5LinkId = input.readInt64();
+      _departmentLevel5Label = input.readString();
+      _departmentLevel6Id = input.readInt64();
+      _departmentLevel6LinkId = input.readInt64();
+      _departmentLevel6Label = input.readString();
+      _departmentLevel7Id = input.readInt64();
+      _departmentLevel7LinkId = input.readInt64();
+      _departmentLevel7Label = input.readString();
       _marketerId = input.readInt64();
       _marketerLinkId = input.readInt64();
+      _marketerLabel = input.readString();
       _label = input.readString();
       _card = input.readString();
       _cardArea = input.readString();
@@ -1822,8 +2857,31 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt64(_dataId);
       output.writeInt64(_departmentId);
       output.writeInt64(_departmentLinkId);
+      output.writeString(_departmentLabel);
+      output.writeInt64(_departmentLevel1Id);
+      output.writeInt64(_departmentLevel1LinkId);
+      output.writeString(_departmentLevel1Label);
+      output.writeInt64(_departmentLevel2Id);
+      output.writeInt64(_departmentLevel2LinkId);
+      output.writeString(_departmentLevel2Label);
+      output.writeInt64(_departmentLevel3Id);
+      output.writeInt64(_departmentLevel3LinkId);
+      output.writeString(_departmentLevel3Label);
+      output.writeInt64(_departmentLevel4Id);
+      output.writeInt64(_departmentLevel4LinkId);
+      output.writeString(_departmentLevel4Label);
+      output.writeInt64(_departmentLevel5Id);
+      output.writeInt64(_departmentLevel5LinkId);
+      output.writeString(_departmentLevel5Label);
+      output.writeInt64(_departmentLevel6Id);
+      output.writeInt64(_departmentLevel6LinkId);
+      output.writeString(_departmentLevel6Label);
+      output.writeInt64(_departmentLevel7Id);
+      output.writeInt64(_departmentLevel7LinkId);
+      output.writeString(_departmentLevel7Label);
       output.writeInt64(_marketerId);
       output.writeInt64(_marketerLinkId);
+      output.writeString(_marketerLabel);
       output.writeString(_label);
       output.writeString(_card);
       output.writeString(_cardArea);
@@ -1867,8 +2925,31 @@ public class FStatisticsFinancialCustomerUnit
       unit.setDataId(_dataId);
       unit.setDepartmentId(_departmentId);
       unit.setDepartmentLinkId(_departmentLinkId);
+      unit.setDepartmentLabel(_departmentLabel);
+      unit.setDepartmentLevel1Id(_departmentLevel1Id);
+      unit.setDepartmentLevel1LinkId(_departmentLevel1LinkId);
+      unit.setDepartmentLevel1Label(_departmentLevel1Label);
+      unit.setDepartmentLevel2Id(_departmentLevel2Id);
+      unit.setDepartmentLevel2LinkId(_departmentLevel2LinkId);
+      unit.setDepartmentLevel2Label(_departmentLevel2Label);
+      unit.setDepartmentLevel3Id(_departmentLevel3Id);
+      unit.setDepartmentLevel3LinkId(_departmentLevel3LinkId);
+      unit.setDepartmentLevel3Label(_departmentLevel3Label);
+      unit.setDepartmentLevel4Id(_departmentLevel4Id);
+      unit.setDepartmentLevel4LinkId(_departmentLevel4LinkId);
+      unit.setDepartmentLevel4Label(_departmentLevel4Label);
+      unit.setDepartmentLevel5Id(_departmentLevel5Id);
+      unit.setDepartmentLevel5LinkId(_departmentLevel5LinkId);
+      unit.setDepartmentLevel5Label(_departmentLevel5Label);
+      unit.setDepartmentLevel6Id(_departmentLevel6Id);
+      unit.setDepartmentLevel6LinkId(_departmentLevel6LinkId);
+      unit.setDepartmentLevel6Label(_departmentLevel6Label);
+      unit.setDepartmentLevel7Id(_departmentLevel7Id);
+      unit.setDepartmentLevel7LinkId(_departmentLevel7LinkId);
+      unit.setDepartmentLevel7Label(_departmentLevel7Label);
       unit.setMarketerId(_marketerId);
       unit.setMarketerLinkId(_marketerLinkId);
+      unit.setMarketerLabel(_marketerLabel);
       unit.setLabel(_label);
       unit.setCard(_card);
       unit.setCardArea(_cardArea);

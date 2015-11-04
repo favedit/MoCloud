@@ -15,4 +15,13 @@ WHERE id > {begin_id}
    AND id <= {end_id}
 ]]></Resource>
 
+<Resource name='sql.marketer.department'><![CDATA[
+SELECT
+   dept_id,
+   rank
+FROM lzh_fmanager_maping
+WHERE uid={id}
+ORDER BY add_time DESC
+]]></Resource>
+
 </Config>

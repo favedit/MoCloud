@@ -8,6 +8,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialCustomerPhaseUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
 import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
+import org.mo.com.data.FSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.data.logic.FLogicContext;
@@ -19,9 +20,6 @@ import org.mo.data.logic.FLogicDataset;
 public class FStatisticsCustomerCalculater
       extends FStatisticsPeriodCalculater
 {
-   // 合计间隔(1小时)
-   protected long _recordSpan = 1000 * 60 * 60 * 24;
-
    //============================================================
    // <T>构造金融客户统计计算器。</T>
    //============================================================
@@ -46,7 +44,8 @@ public class FStatisticsCustomerCalculater
       FLogicDataset<FStatisticsFinancialDynamicUnit> dynamicDataset = dynamicLogic.fetch("CUSTOMER_ACTION_DATE > STR_TO_DATE('" + beginDate + "','%Y%m%d%H%i%s') AND CUSTOMER_ACTION_DATE <= STR_TO_DATE('" + endDate + "','%Y%m%d%H%i%s')",
             "CUSTOMER_ACTION_DATE");
       for(FStatisticsFinancialDynamicUnit dynamicUnit : dynamicDataset){
-         long recordId = dynamicUnit.ouid();
+         long departmentId = dynamicUnit.departmentId();
+         long marketerId = dynamicUnit.marketerId();
          long customerId = dynamicUnit.customerId();
          String customerLabel = dynamicUnit.customerLabel();
          String customerCard = dynamicUnit.customerCard();
@@ -105,7 +104,12 @@ public class FStatisticsCustomerCalculater
          // 插入用户数据
          TDateTime spanDate = new TDateTime();
          spanDate.parse(customerActionDate.format("YYYYMMDD"), "YYYYMMDD");
-         FStatisticsFinancialCustomerPhaseUnit phaseUnit = phaseLogic.search("CUSTOMER_ID=" + customerId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
+         FSql customerSql = new FSql("RECORD_DATE={record_date} AND DEPARTMENT_ID={department_id} AND MARKETER_ID={marketer_id} AND CUSTOMER_ID={customer_id}");
+         customerSql.bindDateTime("record_date", spanDate, "YYYYMMDD");
+         customerSql.bindLong("department_id", departmentId);
+         customerSql.bindLong("marketer_id", marketerId);
+         customerSql.bindLong("customer_id", customerId);
+         FStatisticsFinancialCustomerPhaseUnit phaseUnit = phaseLogic.search(customerSql);
          boolean phaseExist = (phaseUnit != null);
          if(!phaseExist){
             phaseUnit = phaseLogic.doPrepare();
@@ -115,6 +119,36 @@ public class FStatisticsCustomerCalculater
             phaseUnit.recordDay().parse(spanDate.format("YYYYMMDD000000"));
             phaseUnit.recordHour().parse(spanDate.format("YYYYMMDDHH240000"));
             phaseUnit.recordDate().assign(spanDate);
+            // 设置部门信息
+            phaseUnit.setDepartmentId(dynamicUnit.departmentId());
+            phaseUnit.setDepartmentLinkId(dynamicUnit.departmentLinkId());
+            phaseUnit.setDepartmentLabel(dynamicUnit.departmentLabel());
+            phaseUnit.setDepartmentLevel1Id(dynamicUnit.departmentLevel1Id());
+            phaseUnit.setDepartmentLevel1LinkId(dynamicUnit.departmentLevel1LinkId());
+            phaseUnit.setDepartmentLevel1Label(dynamicUnit.departmentLevel1Label());
+            phaseUnit.setDepartmentLevel2Id(dynamicUnit.departmentLevel2Id());
+            phaseUnit.setDepartmentLevel2LinkId(dynamicUnit.departmentLevel2LinkId());
+            phaseUnit.setDepartmentLevel2Label(dynamicUnit.departmentLevel2Label());
+            phaseUnit.setDepartmentLevel3Id(dynamicUnit.departmentLevel3Id());
+            phaseUnit.setDepartmentLevel3LinkId(dynamicUnit.departmentLevel3LinkId());
+            phaseUnit.setDepartmentLevel3Label(dynamicUnit.departmentLevel3Label());
+            phaseUnit.setDepartmentLevel4Id(dynamicUnit.departmentLevel4Id());
+            phaseUnit.setDepartmentLevel4LinkId(dynamicUnit.departmentLevel4LinkId());
+            phaseUnit.setDepartmentLevel4Label(dynamicUnit.departmentLevel4Label());
+            phaseUnit.setDepartmentLevel5Id(dynamicUnit.departmentLevel5Id());
+            phaseUnit.setDepartmentLevel5LinkId(dynamicUnit.departmentLevel5LinkId());
+            phaseUnit.setDepartmentLevel5Label(dynamicUnit.departmentLevel5Label());
+            phaseUnit.setDepartmentLevel6Id(dynamicUnit.departmentLevel6Id());
+            phaseUnit.setDepartmentLevel6LinkId(dynamicUnit.departmentLevel6LinkId());
+            phaseUnit.setDepartmentLevel6Label(dynamicUnit.departmentLevel6Label());
+            phaseUnit.setDepartmentLevel7Id(dynamicUnit.departmentLevel7Id());
+            phaseUnit.setDepartmentLevel7LinkId(dynamicUnit.departmentLevel7LinkId());
+            phaseUnit.setDepartmentLevel7Label(dynamicUnit.departmentLevel7Label());
+            // 设置理财师信息
+            phaseUnit.setMarketerId(dynamicUnit.marketerId());
+            phaseUnit.setMarketerLinkId(dynamicUnit.marketerLinkId());
+            phaseUnit.setMarketerLabel(dynamicUnit.marketerLabel());
+            // 设置客户信息
             phaseUnit.setCustomerId(customerId);
             phaseUnit.setCustomerLabel(customerLabel);
             phaseUnit.setCustomerCard(customerCard);
@@ -123,8 +157,6 @@ public class FStatisticsCustomerCalculater
             phaseUnit.setCustomerGender(customerGender);
             phaseUnit.setCustomerPhone(customerPhone);
          }
-         phaseUnit.setLinkId(recordId);
-         phaseUnit.linkDate().assign(dynamicUnit.updateDate());
          // 设置数据
          phaseUnit.customerActionDate().assign(dynamicUnit.customerActionDate());
          if(customerActionCd == EGcFinancialCustomerAction.Investment){

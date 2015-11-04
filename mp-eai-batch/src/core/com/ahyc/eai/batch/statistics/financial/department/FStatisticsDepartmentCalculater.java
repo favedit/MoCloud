@@ -23,9 +23,6 @@ import org.mo.data.logic.FLogicDataset;
 public class FStatisticsDepartmentCalculater
       extends FStatisticsPeriodCalculater
 {
-   // 合计间隔(1小时)
-   protected long _recordSpan = 1000 * 60 * 60;
-
    //============================================================
    // <T>构造金融部门统计计算器。</T>
    //============================================================
@@ -165,8 +162,8 @@ public class FStatisticsDepartmentCalculater
          }
          //............................................................
          // 插入用户数据
-         TDateTime spanDate = new TDateTime(customerActionDate.get());
-         spanDate.truncate(_recordSpan);
+         TDateTime spanDate = new TDateTime();
+         spanDate.parse(customerActionDate.format("YYYYMMDDHH24"), "YYYYMMDDHH24");
          FStatisticsFinancialDepartmentPhaseUnit phaseUnit = phaseLogic.search("DEPARTMENT_ID=" + departmentId + " AND RECORD_DATE=STR_TO_DATE('" + spanDate.format() + "','%Y%m%d%H%i%s')");
          boolean phaseExist = (phaseUnit != null);
          if(!phaseExist){
@@ -177,10 +174,31 @@ public class FStatisticsDepartmentCalculater
             phaseUnit.recordDay().parse(spanDate.format("YYYYMMDD000000"));
             phaseUnit.recordHour().parse(spanDate.format("YYYYMMDDHH240000"));
             phaseUnit.recordDate().assign(spanDate);
+            // 设置部门信息
             phaseUnit.setDepartmentId(dynamicUnit.departmentId());
+            phaseUnit.setDepartmentLinkId(dynamicUnit.departmentLinkId());
             phaseUnit.setDepartmentLabel(dynamicUnit.departmentLabel());
-            phaseUnit.setDepartmentId(departmentId);
-            phaseUnit.setDepartmentLabel(departmentLabel);
+            phaseUnit.setDepartmentLevel1Id(dynamicUnit.departmentLevel1Id());
+            phaseUnit.setDepartmentLevel1LinkId(dynamicUnit.departmentLevel1LinkId());
+            phaseUnit.setDepartmentLevel1Label(dynamicUnit.departmentLevel1Label());
+            phaseUnit.setDepartmentLevel2Id(dynamicUnit.departmentLevel2Id());
+            phaseUnit.setDepartmentLevel2LinkId(dynamicUnit.departmentLevel2LinkId());
+            phaseUnit.setDepartmentLevel2Label(dynamicUnit.departmentLevel2Label());
+            phaseUnit.setDepartmentLevel3Id(dynamicUnit.departmentLevel3Id());
+            phaseUnit.setDepartmentLevel3LinkId(dynamicUnit.departmentLevel3LinkId());
+            phaseUnit.setDepartmentLevel3Label(dynamicUnit.departmentLevel3Label());
+            phaseUnit.setDepartmentLevel4Id(dynamicUnit.departmentLevel4Id());
+            phaseUnit.setDepartmentLevel4LinkId(dynamicUnit.departmentLevel4LinkId());
+            phaseUnit.setDepartmentLevel4Label(dynamicUnit.departmentLevel4Label());
+            phaseUnit.setDepartmentLevel5Id(dynamicUnit.departmentLevel5Id());
+            phaseUnit.setDepartmentLevel5LinkId(dynamicUnit.departmentLevel5LinkId());
+            phaseUnit.setDepartmentLevel5Label(dynamicUnit.departmentLevel5Label());
+            phaseUnit.setDepartmentLevel6Id(dynamicUnit.departmentLevel6Id());
+            phaseUnit.setDepartmentLevel6LinkId(dynamicUnit.departmentLevel6LinkId());
+            phaseUnit.setDepartmentLevel6Label(dynamicUnit.departmentLevel6Label());
+            phaseUnit.setDepartmentLevel7Id(dynamicUnit.departmentLevel7Id());
+            phaseUnit.setDepartmentLevel7LinkId(dynamicUnit.departmentLevel7LinkId());
+            phaseUnit.setDepartmentLevel7Label(dynamicUnit.departmentLevel7Label());
          }
          phaseUnit.setLinkId(recordId);
          phaseUnit.linkDate().assign(dynamicUnit.updateDate());

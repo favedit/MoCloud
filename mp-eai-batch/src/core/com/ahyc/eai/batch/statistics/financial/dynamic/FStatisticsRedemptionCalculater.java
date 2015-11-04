@@ -75,24 +75,32 @@ public class FStatisticsRedemptionCalculater
             // 查找理财师编号
             long recommentId = sourceConnection.executeLong("select recommend_id from lzh_members where id=" + customerId);
             // 查找理财师信息：理财师编号/部门编号
-            long managerId = 0;
-            long departmentId = 0;
+            long managerLinkId = 0;
+            long departmentLinkId = 0;
             if(recommentId != 0){
                FRow managerInfo = sourceConnection.find("select uid,real_name,rank,belong_dept from lzh_fmanager where uid=" + recommentId);
                if(managerInfo != null){
-                  managerId = managerInfo.getLong("uid");
-                  departmentId = managerInfo.getLong("belong_dept");
+                  managerLinkId = managerInfo.getLong("uid");
+                  if(managerLinkId != 0){
+                     // 查找部门
+                     FSql departmentSql = _resource.findString(FSql.class, "sql.marketer.department");
+                     departmentSql.bindLong("id", managerLinkId);
+                     FRow departmentRow = sourceConnection.find(departmentSql);
+                     if(departmentRow != null){
+                        departmentLinkId = departmentRow.getLong("dept_id");
+                     }
+                  }
                }
             }
             // 查找部门信息
             FStatisticsFinancialDepartmentUnit departmentInfo = null;
-            if(departmentId > 0){
-               departmentInfo = _departmentConsole.syncByLinkId(logicContext, departmentId);
+            if(departmentLinkId > 0){
+               departmentInfo = _departmentConsole.syncByLinkId(logicContext, departmentLinkId);
             }
             // 查找理财师信息
             FStatisticsFinancialMarketerUnit marketerInfo = null;
-            if(managerId > 0){
-               marketerInfo = _marketerConsole.syncByLinkId(logicContext, managerId);
+            if(managerLinkId > 0){
+               marketerInfo = _marketerConsole.syncByLinkId(logicContext, managerLinkId);
             }
             // 查找客户信息
             FStatisticsFinancialCustomerUnit customerInfo = null;
@@ -126,7 +134,27 @@ public class FStatisticsRedemptionCalculater
                dynamicUnit.setDepartmentId(departmentInfo.ouid());
                dynamicUnit.setDepartmentLinkId(departmentInfo.linkId());
                dynamicUnit.setDepartmentLabel(departmentInfo.label());
-               dynamicUnit.setDepartmentLabelPath(departmentInfo.labelPath());
+               dynamicUnit.setDepartmentLevel1Id(departmentInfo.level1Id());
+               dynamicUnit.setDepartmentLevel1LinkId(departmentInfo.level1LinkId());
+               dynamicUnit.setDepartmentLevel1Label(departmentInfo.level1Label());
+               dynamicUnit.setDepartmentLevel2Id(departmentInfo.level2Id());
+               dynamicUnit.setDepartmentLevel2LinkId(departmentInfo.level2LinkId());
+               dynamicUnit.setDepartmentLevel2Label(departmentInfo.level2Label());
+               dynamicUnit.setDepartmentLevel3Id(departmentInfo.level3Id());
+               dynamicUnit.setDepartmentLevel3LinkId(departmentInfo.level3LinkId());
+               dynamicUnit.setDepartmentLevel3Label(departmentInfo.level3Label());
+               dynamicUnit.setDepartmentLevel4Id(departmentInfo.level4Id());
+               dynamicUnit.setDepartmentLevel4LinkId(departmentInfo.level4LinkId());
+               dynamicUnit.setDepartmentLevel4Label(departmentInfo.level4Label());
+               dynamicUnit.setDepartmentLevel5Id(departmentInfo.level5Id());
+               dynamicUnit.setDepartmentLevel5LinkId(departmentInfo.level5LinkId());
+               dynamicUnit.setDepartmentLevel5Label(departmentInfo.level5Label());
+               dynamicUnit.setDepartmentLevel6Id(departmentInfo.level6Id());
+               dynamicUnit.setDepartmentLevel6LinkId(departmentInfo.level6LinkId());
+               dynamicUnit.setDepartmentLevel6Label(departmentInfo.level6Label());
+               dynamicUnit.setDepartmentLevel7Id(departmentInfo.level7Id());
+               dynamicUnit.setDepartmentLevel7LinkId(departmentInfo.level7LinkId());
+               dynamicUnit.setDepartmentLevel7Label(departmentInfo.level7Label());
             }
             if(marketerInfo != null){
                dynamicUnit.setMarketerId(marketerInfo.ouid());
