@@ -20,7 +20,7 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>业绩趋势处理接口。</T>
+// <T>号令接口。</T>
 //============================================================
 public class FCockpitNoticeServlet
       extends FAbstractStatisticsServlet
@@ -38,7 +38,7 @@ public class FCockpitNoticeServlet
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
 
    //============================================================
-   // <T>业绩趋势列表</T>
+   // <T>号令列表</T>
    // @param context 环境
    // @param logicContext 逻辑环境
    // @param request 请求
@@ -50,10 +50,10 @@ public class FCockpitNoticeServlet
                         IWebServletRequest request,
                         IWebServletResponse response){
       _logger.debug(this, "fetch", "the method named fetch from FCockpitTrendServlet is beginning... ");
-      //       检查参数
-      //      if(!checkParameters(context, request, response)){
-      //         return EResult.Failure;
-      //      }
+      //检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
       //............................................................
       // 获得当前时间
       TDateTime currentDate = RDateTime.currentDateTime();

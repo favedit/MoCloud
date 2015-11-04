@@ -25,4 +25,14 @@ public interface ISalesToolsConsole
    FLogicDataset<FDataLogicSalestoolsUnit> select(int pageNum,
                                                   int pageSize,
                                                   ILogicContext logicContext);
+
+   // ============================================================
+   // <T>标记销售工具已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   boolean markRead(String noticeGuid,
+                    ILogicContext logicContext);
 }

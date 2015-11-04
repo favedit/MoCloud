@@ -3,9 +3,7 @@ package com.ahyc.eai.service.cockpit.warning;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -20,12 +18,10 @@ import org.junit.Test;
 
 public class TestFCockpitWarningServlet
 {
-   private InputStream content;
-
    @Test
    public void testFetch() throws ParseException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://10.13.0.16:8020/eai.cockpit.notice.wv";
+      String url = "http://10.13.0.16:8020/eai.cockpit.instrumentpanel.wv";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       //      listPram.add(new BasicNameValuePair("begin", "33"));
@@ -41,36 +37,17 @@ public class TestFCockpitWarningServlet
       InputStream in = entity.getContent();
       int a = -1;
       ByteArrayOutputStream out = new ByteArrayOutputStream();
-
+      int i = 0;
       while((a = in.read()) != -1){
          out.write(a);
+         i++;
       }
-      System.out.println(out.toString("UTF-8"));
+      System.out.println("-------------------->" + i);
+      System.out.println(new String(out.toByteArray(), "utf-8"));
    }
 
    @Test
    public void test(){
-      ArrayList<Double[]> parent = new ArrayList<Double[]>();
-      Double[] child0 = new Double[31];
-      Double[] child1 = new Double[31];
-      Double[] child2 = new Double[31];
-      Double[] child3 = new Double[31];
-      Double[] child4 = new Double[31];
-      Double[] child5 = new Double[31];
-      parent.add(child0);
-      parent.add(child1);
-      parent.add(child2);
-      parent.add(child3);
-      parent.add(child4);
-      parent.add(child5);
-      for(Double[] doubles : parent){
-         for(int i = 0; i < doubles.length; i++){
-            doubles[i] = Double.parseDouble(new DecimalFormat("#").format(Math.random() * 100000));
-         }
-      }
-      int count = parent.size();
-      for(Double[] doubles : parent){
-         Arrays.toString(doubles);
-      }
+      System.out.println(11 & 0xff);
    }
 }

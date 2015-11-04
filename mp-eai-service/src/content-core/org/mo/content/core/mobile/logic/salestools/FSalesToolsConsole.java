@@ -1,7 +1,5 @@
 package org.mo.content.core.mobile.logic.salestools;
 
-import org.mo.content.service.city.info.TMobileService;
-
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsLogic;
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.common.EGcDisplay;
@@ -10,6 +8,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.service.city.info.TMobileService;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -68,6 +67,26 @@ public class FSalesToolsConsole
       FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
       FLogicDataset<FDataLogicSalestoolsUnit> moduleList = logic.fetch(whereSql.toString(), orderBy, pageSize, pageNum - 1);
       return moduleList;
+   }
+
+   // ============================================================
+   // <T>标记销售工具已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public boolean markRead(String noticeGuid,
+                           ILogicContext logicContext){
+      FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
+      FDataLogicSalestoolsUnit unit = logic.findByGuid(noticeGuid);
+      if(unit != null){
+         unit.setViewCount(unit.viewCount() + 1);
+         logic.doUpdate(unit);
+         return true;
+      }
+      return false;
    }
 
 }

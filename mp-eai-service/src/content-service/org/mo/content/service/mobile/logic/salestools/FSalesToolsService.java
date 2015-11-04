@@ -14,6 +14,7 @@ import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -176,10 +177,34 @@ public class FSalesToolsService
             }else{
                xruntime.createNode("update_date").setText("0");
             }
+            int viewCount = salesToolsUnit.viewCount();
+            xruntime.createNode("read_count").setText(viewCount + "");
             // 如果不是
          }
 
       }
       return EResult.Success;
+   }
+
+   // ============================================================
+   // <T>标记销售工具已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public EResult markRead(IWebContext context,
+                           IWebInput input,
+                           IWebOutput output,
+                           ILogicContext logicContext,
+                           IWebSession sessionContext){
+      //      String sessionCode = context.head("mo-session-id");
+      String guid = context.parameter("salestools_id");
+      boolean flag = _salesToolsConsole.markRead(guid, logicContext);
+      if(flag){
+         return EResult.Success;
+      }
+      return EResult.Failure;
    }
 }

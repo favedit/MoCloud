@@ -7,7 +7,7 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>理财师信息处理接口。</T>
+// <T>e租宝财富端本月业绩接口。</T>
 //============================================================
 public interface ICockpitPerformanceServlet
 {

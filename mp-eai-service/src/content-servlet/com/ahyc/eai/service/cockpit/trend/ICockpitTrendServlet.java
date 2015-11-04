@@ -7,13 +7,13 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>理财师信息处理接口。</T>
+// <T>业绩趋势接口。</T>
 //============================================================
 public interface ICockpitTrendServlet
 {
 
    //============================================================
-   // <T>阈值预警列表</T>
+   // <T>业绩趋势列表</T>
    //
    // @param context 环境
    // @param logicContext 逻辑环境

@@ -11,7 +11,7 @@ import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>阈值预警处理。</T>
+// <T>实时数据处理。</T>
 //============================================================
 public class FCockpitTrueTimeDataServlet
       extends FAbstractStatisticsServlet
@@ -25,7 +25,7 @@ public class FCockpitTrueTimeDataServlet
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
 
    //============================================================
-   // <T>阈值预警列表</T>
+   // <T>实时数据</T>
    // @param context 环境
    // @param logicContext 逻辑环境
    // @param request 请求

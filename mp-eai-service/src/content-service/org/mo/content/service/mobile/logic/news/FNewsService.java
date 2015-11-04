@@ -240,4 +240,16 @@ public class FNewsService
       }
       return EResult.Success;
    }
+
+   @Override
+   public EResult find(IWebContext context,
+                       IWebInput input,
+                       IWebOutput output,
+                       ILogicContext logicContext,
+                       IWebSession sessionContext){
+      String guid = input.config().findNode("guid").text();
+      FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
+      return EResult.Success;
+   }
+
 }

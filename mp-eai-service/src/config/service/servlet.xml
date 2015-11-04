@@ -205,4 +205,16 @@
          class='com.ahyc.eai.service.cockpit.truetimedata.FCockpitTrueTimeDataServlet'
          scope='global'>
    </Component>
+   
+   <!-- ============================================================ -->
+   <!-- 仪表盘                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.instrumentpanel'
+         face='com.ahyc.eai.service.cockpit.instrumentpanel.ICockpitPanelServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.instrumentpanel.ICockpitPanelServlet'
+         class='com.ahyc.eai.service.cockpit.instrumentpanel.FCockpitPanelServlet'
+         scope='global'>
+   </Component>
 </Config>

@@ -14,6 +14,7 @@ import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
 import org.mo.web.protocol.context.IWebInput;
 import org.mo.web.protocol.context.IWebOutput;
@@ -181,11 +182,33 @@ public class FTrueTimeDataService
             }else{
                xruntime.createNode("update_date").setText("0");
             }
-
-            // 如果不是
+            int viewCount = newsUnit.viewCount();
+            xruntime.createNode("read_count").setText(viewCount + "");
          }
 
       }
       return EResult.Success;
+   }
+
+   // ============================================================
+   // <T>标记实时数据已读</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public EResult markRead(IWebContext context,
+                           IWebInput input,
+                           IWebOutput output,
+                           ILogicContext logicContext,
+                           IWebSession sessionContext){
+      //      String sessionCode = context.head("mo-session-id");
+      String guid = context.parameter("truetime_id");
+      boolean flag = _trueTimeDataConsole.markRead(guid, logicContext);
+      if(flag){
+         return EResult.Success;
+      }
+      return EResult.Failure;
    }
 }
