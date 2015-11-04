@@ -7,8 +7,11 @@
    </HEAD>
    <script>
       function submitForm() {
-         progress(); 
-         if (!isValid()) return;
+         progress();
+         if (!isValid()){
+            closeProgress();
+            return;
+         }
          $("#module").submit();
          closeProgress();
       }

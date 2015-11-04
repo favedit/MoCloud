@@ -24,9 +24,12 @@
       });
 
       function submitForm() {
-         if (!isValid()) return;
-         if (!confirmpwd()) return;
          progress();
+         if (!isValid()){
+            closeProgress();
+            return;
+         }
+         if (!confirmpwd()){loseProgress(); return;}
          var url = "/manage/user/User.wa?do=insert&date=" + new Date().valueOf();
          var data = {
             "passport": $('#passport').val(),

@@ -7,8 +7,11 @@
    </HEAD>
    <script>
       function submitForm() {
-         if (!isValid()) return;
-         progress(); 
+         progress();
+         if (!isValid()){
+            closeProgress();
+            return;
+         }
          var number=$("#number").val();
          if(number>100){
             alert("版本号小于100!");

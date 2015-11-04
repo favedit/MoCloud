@@ -8,9 +8,11 @@
 </HEAD>
 <script>
     function submitForm() {
-       if (!isValid())
-          return;
        progress();
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
        var file = $("#iconUrl").val();
        if(""!=file){
           if(!/.(gif|jpg|jpeg|png|gif|jpg|png)$/.test(file)){

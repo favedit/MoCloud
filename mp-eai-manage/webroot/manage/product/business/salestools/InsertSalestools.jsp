@@ -8,9 +8,11 @@
 </HEAD>
 <script>
     function submitForm() {
-       if (!isValid())
-          return;
        progress();
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
        
        var linkCd = $("#linkCd").combobox("getValue");
        if(linkCd>1){

@@ -8,9 +8,11 @@
 </HEAD>
 <script>
     function submitForm() {
-       if (!isValid())
-           return;
-       progress(); 
+       progress();
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
        $("#config").submit();
        closeProgress();
     }

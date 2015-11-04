@@ -8,11 +8,13 @@
 </HEAD>
 <script>
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
-        $("#config").submit();
-        closeProgress();
+       progress();
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
+       $("#config").submit();
+       closeProgress();
     }
     $(function() {
         $('#countryId').combobox('clear');

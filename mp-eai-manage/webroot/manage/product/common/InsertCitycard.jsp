@@ -7,9 +7,11 @@
 </HEAD>
 <script>
    function submitForm() {
-      if (!isValid())
-         return;
       progress();
+      if (!isValid()){
+         closeProgress();
+         return;
+      }
       $("#cityId").val($('#city').combobox("getValue"));
       $("#config").submit();
       closeProgress();
