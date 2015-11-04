@@ -53,7 +53,13 @@
     KindEditor.ready(function(K) {
        editor=K.create('#kindeditor_view', {
            uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
-           items : kindeditor_items,
+           items:['preview', 'code','|', 'justifyleft', 'justifycenter', 'justifyright',
+              'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'subscript',
+              'superscript','|', 'fullscreen', 'formatblock', 'fontname', 'fontsize','|',
+              'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'lineheight',
+              'removeformat','|', 'image', 'multiimage', 'flash', 'media', 'table','/', 'hr',
+              'emoticons', 'baidumap', 'pagebreak', 'link', 'unlink','|', 'about'
+           ],
            resizeType : 1,
            allowFileManager : true,
            afterCreate : function() {
