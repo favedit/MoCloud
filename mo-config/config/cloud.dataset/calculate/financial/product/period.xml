@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="5049408c-c951-4324-a0bb-90faeceb8ad5" name="calculate.financial.product.period" label="M#12cn17产品期数关系表" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="MyISAM" data_group="calculate" data_factory="Calculate.Financial.Product.Period" data_name="CL_FIN_PRODUCT_PERIOD" data_alias="CL_FIN_PDT_PRD" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldString _uuid="6201a970-4f3c-4206-b2b8-ed8a47347642" name="product_code" label="M#12cn14产品名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PRODUCT_CODE" data_size="3040" />
+  <FieldInteger _uuid="28a43181-e301-4aa7-9b38-571a1791be0e" name="product_issue" label="M#12cn14期次编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PRODUCT_ISSUE" />
+  <FieldTemplate _uuid="ebe23ac4-104a-43dc-ae8d-2873386f75cf" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
