@@ -1726,7 +1726,47 @@ ALTER TABLE DT_FIN_MARKETER
    ADD CONSTRAINT DT_FIN_MKT_UK_GID UNIQUE ( GUID ); 
    
 -- ------------------------------------------------------------
+-- Create table [Data.Financial.Tender]
+-- 20151104 sunhr
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_FIN_TENDER`;
+CREATE TABLE `DT_FIN_TENDER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `LINK_ID`                       BIGINT, 
+   `PRODUCT_ID`                    INTEGER, 
+   `LABEL`                         VARCHAR(800), 
+   `BORROW_MONEY`                  DOUBLE, 
+   `INVESTMENT_BEGIN_DATE`         DATETIME, 
+   `INVESTMENT_END_DATE`           DATETIME, 
+   `INVESTMENT_COUNT`              INTEGER, 
+   `INVESTMENT_USER_COUNT`         INTEGER, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `REDEMPTION_BEGIN_DATE`         DATETIME, 
+   `REDEMPTION_END_DATE`           DATETIME, 
+   `REDEMPTION_COUNT`              INTEGER, 
+   `REDEMPTION_USER_COUNT`         INTEGER, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `NETINVESTMENT_TOTAL`           DOUBLE, 
+   `NETINVESTMENT`                 FLOAT, 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_FIN_TENDER 
+   ADD CONSTRAINT DT_FIN_TDR_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_FIN_TENDER ADD CONSTRAINT DT_FIN_TDR_FK_PRODUCT 
+      FOREIGN KEY (`PRODUCT_ID`) REFERENCES DT_FIN_PRODUCT(`OUID`); 
+	  
+-- ------------------------------------------------------------
 -- Create table [Data.Financial.Customer.Tender]
+-- 20151104 sunhr 客户产品投资表
 -- ------------------------------------------------------------
 DROP TABLE IF EXISTS `DT_FIN_CUSTOMER_TENDER`;
 CREATE TABLE `DT_FIN_CUSTOMER_TENDER` 
@@ -1757,40 +1797,6 @@ ALTER TABLE DT_FIN_CUSTOMER_TENDER ADD CONSTRAINT DT_FIN_CST_TDR_FK_CUSTOMER
 
 ALTER TABLE DT_FIN_CUSTOMER_TENDER ADD CONSTRAINT DT_FIN_CST_TDR_FK_TENDER 
       FOREIGN KEY (`TENDER_ID`) REFERENCES DT_FIN_TENDER(`OUID`); 
-
--- ------------------------------------------------------------
--- Create table [Data.Financial.Tender]
--- ------------------------------------------------------------
-DROP TABLE IF EXISTS `DT_FIN_TENDER`;
-CREATE TABLE `DT_FIN_TENDER` 
-( 
-   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
-   `GUID`                          VARCHAR(40) NOT NULL, 
-   `CUSTOMER_ID`                   BIGINT, 
-   `TENDER_ID`                     BIGINT, 
-   `INVESTMENT`                    FLOAT, 
-   `INVESTMENT_DATE`               DATETIME, 
-   `REDEMPTION`                    FLOAT, 
-   `REDEMPTION_DATE`               DATETIME, 
-   `NETINVESTMENT`                 FLOAT, 
-   `INTEREST`                      FLOAT, 
-   `NOTE`                          VARCHAR(2000), 
-   `CREATE_USER_ID`                BIGINT, 
-   `CREATE_DATE`                   DATETIME, 
-   `UPDATE_USER_ID`                BIGINT, 
-   `UPDATE_DATE`                   DATETIME 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
-
-ALTER TABLE DT_FIN_TENDER 
-   ADD CONSTRAINT DT_FIN_TDR_UK_GID UNIQUE ( GUID ); 
-
-ALTER TABLE DT_FIN_TENDER ADD CONSTRAINT DT_FIN_TDR_FK_CUSTOMER 
-      FOREIGN KEY (`CUSTOMER_ID`) REFERENCES DT_FIN_CUSTOMER(`OUID`); 
-
-ALTER TABLE DT_FIN_TENDER ADD CONSTRAINT DT_FIN_TDR_FK_TENDER 
-      FOREIGN KEY (`TENDER_ID`) REFERENCES DT_FIN_TENDER(`OUID`); 
-
 
 
 -- ------------------------------------------------------------

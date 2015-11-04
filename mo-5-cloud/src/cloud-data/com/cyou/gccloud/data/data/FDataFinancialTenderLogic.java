@@ -42,32 +42,56 @@ public class FDataFinancialTenderLogic
    // 字段对象唯一标识的定义。
    public final static SLogicFieldInfo GUID = new SLogicFieldInfo("GUID");
 
-   // 字段客户编号的定义。
-   public final static SLogicFieldInfo CUSTOMER_ID = new SLogicFieldInfo("CUSTOMER_ID");
+   // 字段期次编号的定义。
+   public final static SLogicFieldInfo LINK_ID = new SLogicFieldInfo("LINK_ID");
 
    // 字段产品编号的定义。
    public final static SLogicFieldInfo PRODUCT_ID = new SLogicFieldInfo("PRODUCT_ID");
 
-   // 字段投资额的定义。
-   public final static SLogicFieldInfo INVESTMENT = new SLogicFieldInfo("INVESTMENT");
+   // 字段名称的定义。
+   public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
-   // 字段投资时间的定义。
-   public final static SLogicFieldInfo INVESTMENT_DATE = new SLogicFieldInfo("INVESTMENT_DATE");
+   // 字段预借钱数的定义。
+   public final static SLogicFieldInfo BORROW_MONEY = new SLogicFieldInfo("BORROW_MONEY");
 
-   // 字段赎回额的定义。
-   public final static SLogicFieldInfo REDEMPTION = new SLogicFieldInfo("REDEMPTION");
+   // 字段投资开始日期的定义。
+   public final static SLogicFieldInfo INVESTMENT_BEGIN_DATE = new SLogicFieldInfo("INVESTMENT_BEGIN_DATE");
 
-   // 字段赎回时间的定义。
-   public final static SLogicFieldInfo REDEMPTION_DATE = new SLogicFieldInfo("REDEMPTION_DATE");
+   // 字段投资结束日期的定义。
+   public final static SLogicFieldInfo INVESTMENT_END_DATE = new SLogicFieldInfo("INVESTMENT_END_DATE");
+
+   // 字段投资次数的定义。
+   public final static SLogicFieldInfo INVESTMENT_COUNT = new SLogicFieldInfo("INVESTMENT_COUNT");
+
+   // 字段投资用户数的定义。
+   public final static SLogicFieldInfo INVESTMENT_USER_COUNT = new SLogicFieldInfo("INVESTMENT_USER_COUNT");
+
+   // 字段投资总额的定义。
+   public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
+
+   // 字段赎回开时日期的定义。
+   public final static SLogicFieldInfo REDEMPTION_BEGIN_DATE = new SLogicFieldInfo("REDEMPTION_BEGIN_DATE");
+
+   // 字段赎回结束日期的定义。
+   public final static SLogicFieldInfo REDEMPTION_END_DATE = new SLogicFieldInfo("REDEMPTION_END_DATE");
+
+   // 字段赎回次数的定义。
+   public final static SLogicFieldInfo REDEMPTION_COUNT = new SLogicFieldInfo("REDEMPTION_COUNT");
+
+   // 字段赎回用户数的定义。
+   public final static SLogicFieldInfo REDEMPTION_USER_COUNT = new SLogicFieldInfo("REDEMPTION_USER_COUNT");
+
+   // 字段赎回总额的定义。
+   public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
+
+   // 字段利息总额的定义。
+   public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
+
+   // 字段净投总额的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
 
    // 字段净投额的定义。
    public final static SLogicFieldInfo NETINVESTMENT = new SLogicFieldInfo("NETINVESTMENT");
-
-   // 字段利息额的定义。
-   public final static SLogicFieldInfo INTEREST = new SLogicFieldInfo("INTEREST");
-
-   // 字段备注的定义。
-   public final static SLogicFieldInfo NOTE = new SLogicFieldInfo("NOTE");
 
    // 字段创建用户标识的定义。
    public final static SLogicFieldInfo CREATE_USER_ID = new SLogicFieldInfo("CREATE_USER_ID");
@@ -82,7 +106,7 @@ public class FDataFinancialTenderLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CUSTOMER_ID`,`PRODUCT_ID`,`INVESTMENT`,`INVESTMENT_DATE`,`REDEMPTION`,`REDEMPTION_DATE`,`NETINVESTMENT`,`INTEREST`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`PRODUCT_ID`,`LABEL`,`BORROW_MONEY`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`INVESTMENT_COUNT`,`INVESTMENT_USER_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_BEGIN_DATE`,`REDEMPTION_END_DATE`,`REDEMPTION_COUNT`,`REDEMPTION_USER_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`NETINVESTMENT`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融投标信息逻辑单元。</T>
@@ -678,15 +702,23 @@ public class FDataFinancialTenderLogic
       }
       cmd.append("`OVLD`");
       cmd.append(",`GUID`");
-      cmd.append(",`CUSTOMER_ID`");
+      cmd.append(",`LINK_ID`");
       cmd.append(",`PRODUCT_ID`");
-      cmd.append(",`INVESTMENT`");
-      cmd.append(",`INVESTMENT_DATE`");
-      cmd.append(",`REDEMPTION`");
-      cmd.append(",`REDEMPTION_DATE`");
+      cmd.append(",`LABEL`");
+      cmd.append(",`BORROW_MONEY`");
+      cmd.append(",`INVESTMENT_BEGIN_DATE`");
+      cmd.append(",`INVESTMENT_END_DATE`");
+      cmd.append(",`INVESTMENT_COUNT`");
+      cmd.append(",`INVESTMENT_USER_COUNT`");
+      cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`REDEMPTION_BEGIN_DATE`");
+      cmd.append(",`REDEMPTION_END_DATE`");
+      cmd.append(",`REDEMPTION_COUNT`");
+      cmd.append(",`REDEMPTION_USER_COUNT`");
+      cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`INTEREST_TOTAL`");
+      cmd.append(",`NETINVESTMENT_TOTAL`");
       cmd.append(",`NETINVESTMENT`");
-      cmd.append(",`INTEREST`");
-      cmd.append(",`NOTE`");
       cmd.append(",`CREATE_USER_ID`");
       cmd.append(",`CREATE_DATE`");
       cmd.append(",`UPDATE_USER_ID`");
@@ -706,48 +738,87 @@ public class FDataFinancialTenderLogic
       cmd.append(guid);
       cmd.append('\'');
       cmd.append(',');
-      cmd.append(unit.customerId());
+      long linkId = unit.linkId();
+      if(linkId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(linkId);
+      }
       cmd.append(',');
       cmd.append(unit.productId());
       cmd.append(',');
-      cmd.append(unit.investment());
-      cmd.append(',');
-      TDateTime investmentDate = unit.investmentDate();
-      if(investmentDate == null){
+      String label = unit.label();
+      if(RString.isEmpty(label)){
          cmd.append("NULL");
-      }else if(investmentDate.isEmpty()){
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      cmd.append(unit.borrowMoney());
+      cmd.append(',');
+      TDateTime investmentBeginDate = unit.investmentBeginDate();
+      if(investmentBeginDate == null){
+         cmd.append("NULL");
+      }else if(investmentBeginDate.isEmpty()){
          cmd.append("NULL");
       }else{
          cmd.append("STR_TO_DATE('");
-         cmd.append(investmentDate.format());
+         cmd.append(investmentBeginDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
-      cmd.append(unit.redemption());
-      cmd.append(',');
-      TDateTime redemptionDate = unit.redemptionDate();
-      if(redemptionDate == null){
+      TDateTime investmentEndDate = unit.investmentEndDate();
+      if(investmentEndDate == null){
          cmd.append("NULL");
-      }else if(redemptionDate.isEmpty()){
+      }else if(investmentEndDate.isEmpty()){
          cmd.append("NULL");
       }else{
          cmd.append("STR_TO_DATE('");
-         cmd.append(redemptionDate.format());
+         cmd.append(investmentEndDate.format());
          cmd.append("','%Y%m%d%H%i%s')");
       }
+      cmd.append(',');
+      cmd.append(unit.investmentCount());
+      cmd.append(',');
+      cmd.append(unit.investmentUserCount());
+      cmd.append(',');
+      cmd.append(unit.investmentTotal());
+      cmd.append(',');
+      TDateTime redemptionBeginDate = unit.redemptionBeginDate();
+      if(redemptionBeginDate == null){
+         cmd.append("NULL");
+      }else if(redemptionBeginDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionBeginDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      TDateTime redemptionEndDate = unit.redemptionEndDate();
+      if(redemptionEndDate == null){
+         cmd.append("NULL");
+      }else if(redemptionEndDate.isEmpty()){
+         cmd.append("NULL");
+      }else{
+         cmd.append("STR_TO_DATE('");
+         cmd.append(redemptionEndDate.format());
+         cmd.append("','%Y%m%d%H%i%s')");
+      }
+      cmd.append(',');
+      cmd.append(unit.redemptionCount());
+      cmd.append(',');
+      cmd.append(unit.redemptionUserCount());
+      cmd.append(',');
+      cmd.append(unit.redemptionTotal());
+      cmd.append(',');
+      cmd.append(unit.interestTotal());
+      cmd.append(',');
+      cmd.append(unit.netinvestmentTotal());
       cmd.append(',');
       cmd.append(unit.netinvestment());
-      cmd.append(',');
-      cmd.append(unit.interest());
-      cmd.append(',');
-      String note = unit.note();
-      if(RString.isEmpty(note)){
-         cmd.append("NULL");
-      }else{
-         cmd.append('\'');
-         cmd.append(RSql.formatValue(note));
-         cmd.append('\'');
-      }
       // 设置更新信息
       cmd.append("," + unit.createUserId());
       if(unit.createDate().isEmpty()){
@@ -822,66 +893,121 @@ public class FDataFinancialTenderLogic
       cmd.append(_name);
       cmd.append(" SET OVLD=");
       cmd.append(unit.ovld());
-      if(unit.isCustomerIdChanged()){
-         cmd.append(",`CUSTOMER_ID`=");
-         cmd.append(unit.customerId());
+      if(unit.isLinkIdChanged()){
+         cmd.append(",`LINK_ID`=");
+         long linkId = unit.linkId();
+         if(linkId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(linkId);
+         }
       }
       if(unit.isProductIdChanged()){
          cmd.append(",`PRODUCT_ID`=");
          cmd.append(unit.productId());
       }
-      if(unit.isInvestmentChanged()){
-         cmd.append(",`INVESTMENT`=");
-         cmd.append(unit.investment());
-      }
-      if(unit.isInvestmentDateChanged()){
-         cmd.append(",`INVESTMENT_DATE`=");
-         TDateTime investmentDate = unit.investmentDate();
-         if(investmentDate == null){
+      if(unit.isLabelChanged()){
+         cmd.append(",`LABEL`=");
+         String label = unit.label();
+         if(RString.isEmpty(label)){
             cmd.append("NULL");
-         }else if(investmentDate.isEmpty()){
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isBorrowMoneyChanged()){
+         cmd.append(",`BORROW_MONEY`=");
+         cmd.append(unit.borrowMoney());
+      }
+      if(unit.isInvestmentBeginDateChanged()){
+         cmd.append(",`INVESTMENT_BEGIN_DATE`=");
+         TDateTime investmentBeginDate = unit.investmentBeginDate();
+         if(investmentBeginDate == null){
+            cmd.append("NULL");
+         }else if(investmentBeginDate.isEmpty()){
             cmd.append("NULL");
          }else{
             cmd.append("STR_TO_DATE('");
-            cmd.append(investmentDate.format());
+            cmd.append(investmentBeginDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
-      if(unit.isRedemptionChanged()){
-         cmd.append(",`REDEMPTION`=");
-         cmd.append(unit.redemption());
-      }
-      if(unit.isRedemptionDateChanged()){
-         cmd.append(",`REDEMPTION_DATE`=");
-         TDateTime redemptionDate = unit.redemptionDate();
-         if(redemptionDate == null){
+      if(unit.isInvestmentEndDateChanged()){
+         cmd.append(",`INVESTMENT_END_DATE`=");
+         TDateTime investmentEndDate = unit.investmentEndDate();
+         if(investmentEndDate == null){
             cmd.append("NULL");
-         }else if(redemptionDate.isEmpty()){
+         }else if(investmentEndDate.isEmpty()){
             cmd.append("NULL");
          }else{
             cmd.append("STR_TO_DATE('");
-            cmd.append(redemptionDate.format());
+            cmd.append(investmentEndDate.format());
             cmd.append("','%Y%m%d%H%i%s')");
          }
+      }
+      if(unit.isInvestmentCountChanged()){
+         cmd.append(",`INVESTMENT_COUNT`=");
+         cmd.append(unit.investmentCount());
+      }
+      if(unit.isInvestmentUserCountChanged()){
+         cmd.append(",`INVESTMENT_USER_COUNT`=");
+         cmd.append(unit.investmentUserCount());
+      }
+      if(unit.isInvestmentTotalChanged()){
+         cmd.append(",`INVESTMENT_TOTAL`=");
+         cmd.append(unit.investmentTotal());
+      }
+      if(unit.isRedemptionBeginDateChanged()){
+         cmd.append(",`REDEMPTION_BEGIN_DATE`=");
+         TDateTime redemptionBeginDate = unit.redemptionBeginDate();
+         if(redemptionBeginDate == null){
+            cmd.append("NULL");
+         }else if(redemptionBeginDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionBeginDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRedemptionEndDateChanged()){
+         cmd.append(",`REDEMPTION_END_DATE`=");
+         TDateTime redemptionEndDate = unit.redemptionEndDate();
+         if(redemptionEndDate == null){
+            cmd.append("NULL");
+         }else if(redemptionEndDate.isEmpty()){
+            cmd.append("NULL");
+         }else{
+            cmd.append("STR_TO_DATE('");
+            cmd.append(redemptionEndDate.format());
+            cmd.append("','%Y%m%d%H%i%s')");
+         }
+      }
+      if(unit.isRedemptionCountChanged()){
+         cmd.append(",`REDEMPTION_COUNT`=");
+         cmd.append(unit.redemptionCount());
+      }
+      if(unit.isRedemptionUserCountChanged()){
+         cmd.append(",`REDEMPTION_USER_COUNT`=");
+         cmd.append(unit.redemptionUserCount());
+      }
+      if(unit.isRedemptionTotalChanged()){
+         cmd.append(",`REDEMPTION_TOTAL`=");
+         cmd.append(unit.redemptionTotal());
+      }
+      if(unit.isInterestTotalChanged()){
+         cmd.append(",`INTEREST_TOTAL`=");
+         cmd.append(unit.interestTotal());
+      }
+      if(unit.isNetinvestmentTotalChanged()){
+         cmd.append(",`NETINVESTMENT_TOTAL`=");
+         cmd.append(unit.netinvestmentTotal());
       }
       if(unit.isNetinvestmentChanged()){
          cmd.append(",`NETINVESTMENT`=");
          cmd.append(unit.netinvestment());
-      }
-      if(unit.isInterestChanged()){
-         cmd.append(",`INTEREST`=");
-         cmd.append(unit.interest());
-      }
-      if(unit.isNoteChanged()){
-         cmd.append(",`NOTE`=");
-         String note = unit.note();
-         if(RString.isEmpty(note)){
-            cmd.append("NULL");
-         }else{
-            cmd.append('\'');
-            cmd.append(RSql.formatValue(note));
-            cmd.append('\'');
-         }
       }
       cmd.append(",UPDATE_USER_ID=" + unit.updateUserId() + ",UPDATE_DATE=NOW()");
       cmd.append(" WHERE OUID=");

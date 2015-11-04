@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DataStore _uuid="2265d696-71cb-4e28-af71-f3bb47608a6e" name="data.financial.tender" label="M#12cn16金融投标信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Tender" data_name="DT_FIN_TENDER" data_alias="DT_FIN_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
-  <FieldInteger _uuid="fe9381e2-8b66-4ba3-b24e-ed64ab98b5b5" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_alias="CUSTOMER" data_refer="data.financial.customer" />
-  <FieldInteger _uuid="6027bd62-2340-40b5-bc9f-1de5b346b308" name="product_id" label="M#12cn14产品编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PRODUCT_ID" data_alias="PRODUCT" data_refer="data.financial.tender" />
-  <FieldFloat _uuid="aab6f7dc-d576-4b35-9334-aa0ca34d9599" name="investment" label="M#12cn13投资额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT" />
-  <FieldDateTime _uuid="b3f70d2b-3d8f-40f5-849f-2cb36cf55a67" name="investment_date" label="M#12cn14投资时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_DATE" />
-  <FieldFloat _uuid="b1f07e99-19d4-4e4f-b7f7-d162305523b1" name="redemption" label="M#12cn13赎回额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION" />
-  <FieldDateTime _uuid="2645e8bb-a4ec-4d46-bb37-77df15387faf" name="redemption_date" label="M#12cn14赎回时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_DATE" />
-  <FieldFloat _uuid="63a62354-9bca-436f-9b52-f0a1d1ef79aa" name="netinvestment" label="M#12cn13净投额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
-  <FieldFloat _uuid="d34b97df-b2c1-43d6-be2b-239d8e0c4983" name="interest" label="M#12cn13利息额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST" />
-  <FieldString _uuid="3ed47c14-494a-454a-8797-c6bda702c9dc" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
-  <FieldTemplate _uuid="8c8175ff-c526-4b7b-8bfa-a8dc33961a64" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+<DataStore _uuid="1f633803-722a-48f1-b0a8-387e64a14740" name="data.financial.tender" label="M#12cn16金融投标信息" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Tender" data_name="DT_FIN_TENDER" data_alias="DT_FIN_TDR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="932527c5-9bb4-4600-9813-5c4f31aa25a1" name="link_id" label="M#12cn14期次编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LINK_ID" />
+  <FieldInteger _uuid="fcadf6a5-9888-41ed-bc1f-1ba64f17ce17" name="product_id" label="M#12cn14产品编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PRODUCT_ID" data_alias="PRODUCT" data_refer="data.financial.product" />
+  <FieldString _uuid="d85da8d1-3b40-4b0d-b829-fef058f6c335" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="800" />
+  <FieldDouble _uuid="85067541-ef35-4b8e-a158-6106abdb9df2" name="borrow_money" label="M#12cn14预借钱数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MONEY" />
+  <FieldDateTime _uuid="4a2d8bb4-59fe-4e1d-beb5-ba4b58a4406e" name="investment_begin_date" label="M#12cn16投资开始日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_BEGIN_DATE" />
+  <FieldDateTime _uuid="7f4ab655-2566-40dc-841e-6256926ae3f8" name="investment_end_date" label="M#12cn16投资结束日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_END_DATE" />
+  <FieldInteger _uuid="acf6830a-feb3-4289-a137-704da8cfda3e" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
+  <FieldInteger _uuid="e67212d5-e63b-4952-980d-5493fdc1ffe6" name="investment_user_count" label="M#12cn15投资用户数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_USER_COUNT" />
+  <FieldDouble _uuid="c305f73e-d38a-49a5-a05f-3c5fc4880a60" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldDateTime _uuid="adf8cee4-d880-4aaa-bddc-2214e7f8a67e" name="redemption_begin_date" label="M#12cn16赎回开时日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_BEGIN_DATE" />
+  <FieldDateTime _uuid="33a06301-1d7f-48c0-885a-641777c7299f" name="redemption_end_date" label="M#12cn16赎回结束日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_END_DATE" />
+  <FieldInteger _uuid="7f4fc907-c997-4cd8-b41d-0411f7765e3d" name="redemption_count" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_COUNT" />
+  <FieldInteger _uuid="e0c43210-d0ff-4ed5-aae3-dbebd96797c3" name="redemption_user_count" label="M#12cn15赎回用户数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_USER_COUNT" />
+  <FieldDouble _uuid="ac037d0b-8650-48cc-a850-c3952b3870e6" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="f9ee9be8-f2cb-4ce9-b050-eb95ed075679" name="interest_total" label="M#12cn14利息总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldDouble _uuid="09231033-3de1-4195-8e90-efb55c8eaf99" name="netinvestment_total" label="M#12cn14净投总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldFloat _uuid="47864173-7a7e-4402-a566-1440f323462e" name="netinvestment" label="M#12cn13净投额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
+  <FieldTemplate _uuid="2221e93b-8147-44da-9561-2e473a37e1a7" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

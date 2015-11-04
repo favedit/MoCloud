@@ -141,7 +141,6 @@ public class FAchievementsService
       if(marketer == null){
          return EResult.Failure;
       }
-
       for(int i = 0; i < 8; i++){
          FXmlNode month = output.config().createNode("products");
          month.createNode("product_name", "e租财富");
