@@ -9,9 +9,11 @@
 </HEAD>
 <script>
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
+       progress();
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
         var url = "/manage/product/financial/department/Department.wa?do=update&date="
                 + new Date().valueOf();
         var investmentDate = $('#investmentDate').datebox('getValue');

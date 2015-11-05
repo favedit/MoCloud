@@ -6,6 +6,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialTenderUnit;
 
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.com.data.FSql;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
 import org.mo.data.logic.FLogicDataset;
@@ -35,12 +36,52 @@ public class FCalculateTenderConsole
    @Override
    public void insertBatchLinkIdandBorrowModel(ILogicContext logicContext){
       FStatisticsFinancialTenderLogic logic = logicContext.findLogic(FStatisticsFinancialTenderLogic.class);
+      //取出所有数据
       FLogicDataset<FStatisticsFinancialTenderUnit> list = logic.fetchAll();
       FCalculateFinancialProductPeriodUnit unit = this.doPrepare(logicContext);
       for(FStatisticsFinancialTenderUnit oldUnit : list){
-         unit.setProductCode(RString.parse(oldUnit.linkId()));
-         unit.setProductIssue(RInteger.parse(oldUnit.borrowModel()));
-         this.doInsert(logicContext, unit);
+         Long linkId = oldUnit.linkId();
+         String borrowModel = oldUnit.borrowModel();
+         String linkid = RString.parse(linkId);
+         if(RString.isNotEmpty(linkid)||RString.isNotEmpty(borrowModel)){
+            //判断不存在数据
+            if(isNotExistByProductCodeandIssue(logicContext, linkid, borrowModel)){
+               unit.setProductCode(linkid);
+               unit.setProductIssue(RInteger.parse(borrowModel));
+               //插入数据
+               this.doInsert(logicContext, unit);
+            }
+         }
       }
+   }
+   // ============================================================
+   // <T>根据条件判断是否存在重复数据</T>
+   //
+   // @param context 网络环境
+   // @param productCode 产品名称
+   // @param productIssue 期次编号
+   // @return 页面
+   // ============================================================
+   public boolean isNotExistByProductCodeandIssue(ILogicContext logicContext,
+                                                  String productCode,
+                                                  String productIssue){
+      FSql where = new FSql();
+      if(!RString.isEmpty(productCode)){
+         where.append(FCalculateFinancialProductPeriodLogic.PRODUCT_CODE + " = {productCode}");
+         where.bind("productCode", productCode);
+      }else{
+         where.append(FCalculateFinancialProductPeriodLogic.PRODUCT_CODE + " is null ");
+      }
+      if(!RString.isEmpty(productIssue)){
+         where.append(" and ");
+         where.append(FCalculateFinancialProductPeriodLogic.PRODUCT_ISSUE + " = {productIssue}");
+         where.bind("productIssue", productIssue);
+      }else{
+         where.append(" and ");
+         where.append(FCalculateFinancialProductPeriodLogic.PRODUCT_ISSUE + " is null ");
+      }
+      FCalculateFinancialProductPeriodLogic logic = logicContext.findLogic(FCalculateFinancialProductPeriodLogic.class);
+      FCalculateFinancialProductPeriodUnit unit = logic.search(where);
+      return unit==null?true:false;
    }
 }

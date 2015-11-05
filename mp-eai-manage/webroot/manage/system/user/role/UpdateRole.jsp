@@ -74,7 +74,11 @@
       }
 
       function submitForm() {
-         if (!isValid()) return;
+         progress();
+         if (!isValid()){
+            closeProgress();
+            return;
+         }
          var rows = $('#module').datagrid('getRows');
          var resourceResult = [];
          if (rows.length != 0) {
@@ -87,6 +91,7 @@
             $("#moduleIds").val(resourceResult);
          }
          $("#role").submit();
+         closeProgress();
       }
    </script>
 

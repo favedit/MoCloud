@@ -29,7 +29,10 @@
             closeProgress();
             return;
          }
-         if (!confirmpwd()){loseProgress(); return;}
+         if (!confirmpwd()){
+            closeProgress(); 
+            return;
+         }
          var url = "/manage/user/User.wa?do=insert&date=" + new Date().valueOf();
          var data = {
             "passport": $('#passport').val(),

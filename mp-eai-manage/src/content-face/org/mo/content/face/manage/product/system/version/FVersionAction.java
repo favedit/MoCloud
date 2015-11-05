@@ -2,7 +2,6 @@ package org.mo.content.face.manage.product.system.version;
 
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import com.cyou.gccloud.define.enums.core.EGcResourceStatus;
-import com.cyou.gccloud.define.enums.core.EGcVersionForce;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
@@ -190,7 +189,7 @@ public class FVersionAction
       }
       long id = context.parameterAsLong("id");
       FDataSystemVersionUnit unit = _versionConsole.find(logicContext, id);
-      if(RString.equals(unit.statusCd(),2)){
+      if(RString.equals(unit.statusCd(),EGcResourceStatus.Publish)){
          basePage.setJson("noUpdate");
       }else{
          basePage.setJson("yesUpdate");
@@ -299,6 +298,7 @@ public class FVersionAction
                                FDataSystemVersionUnit unit) {
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setLabel(context.parameter("label"));
+      unit.setCode(context.parameter("code"));
       String note = context.parameter("note");
       note = note.replaceAll("<br>", "\r\n");
       unit.setNote(note);
@@ -316,43 +316,5 @@ public class FVersionAction
       TDateTime endDate = new TDateTime();
       endDate.parse(endDateStr, "YYYY-MM-DD");
       unit.setEndDate(endDate);
-   }
-
-   // ============================================================
-   // <T>抽取数据库字段枚举赋值的公共方法</T>
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @param page 容器
-   // @return void
-   // ============================================================
-   public void setUnitVersionLabel(FDataVersionInfo info, 
-                                   FDataSystemVersionUnit unit) {
-      if (RString.equals(EGcResourceStatus.Unknown, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.UnknownLabel);
-      }
-      if (RString.equals(EGcResourceStatus.Apply, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.ApplyLabel);
-      }
-      if (RString.equals(EGcResourceStatus.Publish, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.PublishLabel);
-      }
-      if (RString.equals(EGcResourceStatus.CheckFail, unit.statusCd())) {
-         info.setStatusCdStr(EGcResourceStatus.CheckFailLabel);
-      }
-      if (RString.equals(EGcVersionForce.Unknown, unit.statusCd())) {
-         info.setForceCdStr(EGcVersionForce.UnknownLabel);
-      }
-      if (RString.equals(EGcVersionForce.Optional, unit.statusCd())) {
-         info.setForceCdStr(EGcVersionForce.OptionalLabel);
-      }
-      if (RString.equals(EGcVersionForce.Auto, unit.statusCd())) {
-         info.setForceCdStr(EGcVersionForce.AutoLabel);
-      }
-      if (RString.equals(EGcVersionForce.Force, unit.statusCd())) {
-         info.setForceCdStr(EGcVersionForce.ForceLabel);
-      }
-      if (RString.equals(EGcVersionForce.NoUpdate, unit.statusCd())) {
-         info.setForceCdStr(EGcVersionForce.NoUpdateLabel);
-      }
    }
 }

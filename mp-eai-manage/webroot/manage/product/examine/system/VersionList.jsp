@@ -83,15 +83,15 @@
    <thead>
       <tr>
          <th data-options="field:'ck',checkbox:true">全选</th>
-         <th data-options="field:'ouid',halign:'center',align:'right'" width="40px">编号</th>
-         <th data-options="field:'applicationLabel',halign:'center',align:'left',sortable:true" width="80px">应用</th>
-         <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">版本标题</th>
-         <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="120px">版本名称</th>
-         <th data-options="field:'number',halign:'center',align:'left',sortable:true" width="60px">版本号</th>
-         <th data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true" width="80px">更新状态</th>
-         <th data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true" width="80px">版本状态</th>
-         <th data-options="field:'downloadUrl',halign:'center',align:'left',sortable:true" width="100px">下载地址</th>
-         <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="400px">更新内容</th>
+         <th data-options="field:'ouid',halign:'center',align:'right'" width="50px">编号</th>
+         <th data-options="field:'applicationLabel',halign:'center',align:'left',sortable:true" width="180px">应用</th>
+         <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="180px">版本标题</th>
+         <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="180px">版本名称</th>
+         <th data-options="field:'number',halign:'center',align:'left',sortable:true" width="160px">版本号</th>
+         <th data-options="field:'forceCdStr',halign:'center',align:'left',sortable:true" width="55px">更新状态</th>
+         <th data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true" width="55px">版本状态</th>
+         <th data-options="field:'downloadUrl',halign:'center',align:'left',sortable:true" width="200px">下载地址</th>
+         <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="500px">更新内容</th>
          <th data-options="field:'operation',halign:'center',align:'center',formatter:downloadButton" width="100px">下载</th>
       </tr>
    </thead>

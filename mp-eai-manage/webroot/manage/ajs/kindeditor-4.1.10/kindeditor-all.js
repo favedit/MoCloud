@@ -254,7 +254,7 @@ K.options = {
    minHeight : 100,
    minChangeSize : 50,
    zIndex : 811213,
-   items:['preview', 'code','|', 'justifyleft', 'justifycenter', 'justifyright',
+   items:['source', '|','preview', 'code','|', 'justifyleft', 'justifycenter', 'justifyright',
       'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'subscript',
       'superscript','|', 'fullscreen', 'formatblock', 'fontname', 'fontsize','|',
       'forecolor', 'hilitecolor','/', 'bold', 'italic', 'underline', 'lineheight',

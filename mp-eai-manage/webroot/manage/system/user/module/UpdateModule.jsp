@@ -15,8 +15,11 @@
       });
 
       function submitForm() {
-         if (!isValid()) return;
-         progress(); 
+         progress();
+         if (!isValid()){
+            closeProgress();
+            return;
+         }
          $("#module").submit();
          closeProgress();
       }

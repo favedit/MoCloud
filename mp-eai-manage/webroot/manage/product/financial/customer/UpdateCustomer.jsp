@@ -9,9 +9,11 @@
 </HEAD>
 <script>
     function submitForm() {
-        if (!isValid())
-            return;
-        progress();
+       progress();
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
         var url = "/manage/product/financial/customer/Customer.wa?do=update&date="
                 + new Date().valueOf();
         var data = {

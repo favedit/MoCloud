@@ -39,10 +39,11 @@
        });
     });
     function submitForm() {
-       if (!isValid())
-          return;
        progress();
-       
+       if (!isValid()){
+          closeProgress();
+          return;
+       }
        var linkCd = $("#linkCd").combobox("getValue");
        if(linkCd>1){
           var linkUrl = $("#linkUrl").val();
@@ -75,11 +76,11 @@
     KindEditor.ready(function(K) {
        editor=K.create('#kindeditor_view', {
            uploadJson : '/manage/ajs/kindeditor-4.1.10/jsp/upload_json.jsp',
-           items:['preview', 'code','|', 'justifyleft', 'justifycenter', 'justifyright',
+           items:['source', '|','preview', 'code','|', 'justifyleft', 'justifycenter', 'justifyright',
               'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'subscript',
               'superscript','|', 'formatblock', 'fontname', 'fontsize','|','forecolor',
               'hilitecolor', 'bold', 'italic', 'underline', 'lineheight','removeformat','|',
-              'image', 'multiimage', 'flash', 'media', 'table', 'fullscreen','/', 'hr',
+              'image', 'multiimage', 'flash', 'fullscreen','/','media','table', 'hr',
               'emoticons', 'baidumap', 'pagebreak', 'link', 'unlink','|', 'about'
            ],
            resizeType : 1,

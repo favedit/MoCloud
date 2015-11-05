@@ -9,9 +9,11 @@
 </HEAD>
 <script>
     function submitForm() {
-       if (!isValid())
+       progress();
+       if (!isValid()){
+          closeProgress();
           return;
-      progress(); 
+       } 
       $("#areaId").val($('#area').combobox("getValue"));
       $("#countryId").val($('#country').combobox("getValue"));
       $("#config").submit();

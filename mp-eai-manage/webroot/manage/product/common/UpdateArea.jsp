@@ -27,9 +27,11 @@
        });
     })
     function submitForm() {
-      if (!isValid())
+      progress();
+      if (!isValid()){
+         closeProgress();
          return;
-      progress(); 
+      }
       $("#countryId").val($('#country').combobox("getValue"));
       $("#config").submit();
       closeProgress();

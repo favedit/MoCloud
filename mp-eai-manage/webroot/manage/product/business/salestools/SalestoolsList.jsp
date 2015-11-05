@@ -13,6 +13,7 @@
       height:100%;
    }
    #cond_id{
+      width:495px;
       float:right;
       margin-right:10px;
    }
@@ -165,19 +166,19 @@
   </div>
   <div id="cond_id">
     <span>状态:</span>
-    <select style="width:108px;height:20px" id="statusCd" class="easyui-combobox" name="statusCd" data-options="editable:false">
+    <select style="width:17%;height:20px" id="statusCd" class="easyui-combobox" name="statusCd" data-options="editable:false">
       <option value="1">申请</option>
       <option value="2">发布</option>
       <option value="3">审核未通过</option>
     </select>
     <input id="flag" type="hidden"/>
     <span>是否显示:</span>
-    <select  style="width:108px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="editable:false">
+    <select  style="width:17%;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="editable:false">
       <option value="1">展示</option>
       <option value="2">非展示</option>
     </select>
     <span>标题:</span>
-      <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
+      <input id="label" name="label" class="easyui-validatebox textbox" style="width:25%;" />
       <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>
   </div>
  </div>

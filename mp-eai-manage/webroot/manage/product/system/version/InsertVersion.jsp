@@ -90,7 +90,17 @@
                      </div>
                   </td>
                </tr>
-
+               <tr>
+                  <td width="69" height="33" colspan="1">
+                     <div align="left">版本号名</div>
+                  </td>
+                  <td colspan="3">
+                     <div align="left">
+                        <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true,validType:'length[0,40]'" />
+                        <span style="color:red;">&nbsp;&nbsp;建议版本号名少于40个字符</span>
+                     </div>
+                  </td>
+               </tr>
                <tr>
                   <td height="30">
                      <div align="left">更新类型</div>
