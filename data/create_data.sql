@@ -461,8 +461,8 @@ ALTER TABLE DT_PSN_USER_SIGNING
 
 ALTER TABLE DT_PSN_USER_SIGNING ADD CONSTRAINT DT_PSN_USR_SIG_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
-	  
-	  
+
+
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.News]
 -- AnjoyTian 20151103
