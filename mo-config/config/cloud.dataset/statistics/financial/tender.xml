@@ -6,12 +6,14 @@
   <FieldString _uuid="d616749d-98cb-40ef-81b4-fdb94faf13ba" name="label" label="M#12cn12标题" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="800" />
   <FieldDateTime _uuid="550a1d50-07c2-44aa-9744-d4e0c8a74f15" name="begin_date" label="M#12cn14开始日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BEGIN_DATE" />
   <FieldDateTime _uuid="cb6b9a84-1ddf-4bd1-8334-17c6e602aefc" name="end_date" label="M#12cn14结束日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="END_DATE" />
+  <FieldInteger _uuid="3f916dc3-55f9-4a1d-bcaa-5efd7063355f" name="borrow_status" label="M#12cn14预借状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_STATUS" />
   <FieldString _uuid="3ae5a923-2992-4a4f-97e0-d38f8dd8e65b" name="borrow_model" label="M#12cn14借款类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MODEL" data_size="20" />
   <FieldInteger _uuid="e065eba2-adb2-46c9-aec1-aa6e58274757" name="borrow_duration" label="M#12cn14借款期限" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_DURATION" />
   <FieldDouble _uuid="ee2b3f14-00b1-4183-b3ec-776416fcca0c" name="borrow_money" label="M#12cn14借款金额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_MONEY" />
   <FieldDouble _uuid="c6a4f124-cd9f-4de6-af75-8f0eeec05eee" name="borrow_inerest" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST" />
   <FieldFloat _uuid="0fc0219f-dad9-48f0-bd7b-b7ab65874ac9" name="borrow_inerest_rate" label="M#12cn14借款利率" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INEREST_RATE" />
   <FieldString _uuid="c30f82e0-0547-4706-80d9-797b1bbb100c" name="borrow_info" label="M#12cn14借款信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BORROW_INFO" data_size="2000" />
+  <FieldInteger _uuid="0722d714-a497-41a8-a342-4897f40d7c4f" name="recommend_cd" label="M#12cn14推荐类型" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECOMMEND_CD" />
   <FieldContent _uuid="18d8630f-dce6-476e-98d7-4c6924828dc8" name="project_info" label="M#12cn14项目信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PROJECT_INFO" />
   <FieldContent _uuid="13f74f4e-f380-4d4c-a058-67e6b6808a6a" name="company_info" label="M#12cn14企业信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="COMPANY_INFO" />
   <FieldContent _uuid="23b3ac46-bfc7-4413-b75f-c03dae68d33e" name="safeguard_info" label="M#12cn14保障信息" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SAFEGUARD_INFO" />

@@ -495,7 +495,6 @@ ALTER TABLE DT_PSN_USER_NEWS ADD CONSTRAINT DT_PSN_USR_NWS_FK_USR
 
 ALTER TABLE DT_PSN_USER_NEWS ADD CONSTRAINT DT_PSN_USR_NWS_FK_NEWS 
       FOREIGN KEY (`NEWS_ID`) REFERENCES DT_LGC_NEWS(`OUID`);  
-	  
 
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.SalesTools]

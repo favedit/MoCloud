@@ -25,6 +25,19 @@ public interface IStatisticsCustomerServlet
                    IWebServletResponse response);
 
    //============================================================
+   // <T>获得投资产品数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   EResult tender(IWebContext context,
+                  ILogicContext logicContext,
+                  IWebServletRequest request,
+                  IWebServletResponse response);
+
+   //============================================================
    // <T>获得实时趋势数据。</T>
    //
    // @param context 环境

@@ -17,6 +17,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RDouble;
@@ -29,6 +30,7 @@ import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -56,7 +58,28 @@ public class FStatisticsCustomerServlet
    protected IFinancialConsole _financialConsole;
 
    //============================================================
-   // <T>逻辑处理。</T>
+   // <T>获得投资类型集合。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @return 投资类型集合
+   //============================================================
+   public FDictionary<Double> fetchModels(ILogicContext logicContext){
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      FSql sql = _resource.findString(FSql.class, "sql.dynamic.tender.model");
+      FDictionary<Double> models = new FDictionary<Double>(Double.class);
+      FDataset dataset = connection.fetchDataset(sql);
+      for(FRow row : dataset){
+         String tenderModel = row.get("tender_model");
+         double investmentTotal = row.getDouble("investment_total");
+         if(!RString.isEmpty(tenderModel)){
+            models.set(tenderModel, new Double(investmentTotal));
+         }
+      }
+      return models;
+   }
+
+   //============================================================
+   // <T>获得实时动态数据。</T>
    //
    // @param context 环境
    // @param logicContext 逻辑环境
@@ -126,6 +149,16 @@ public class FStatisticsCustomerServlet
          stream.writeString(RString.right(row.get("customer_phone"), 4));
          stream.writeDouble(RDouble.roundHalf(row.getDouble("investment_total"), 2));
       }
+      //............................................................
+      // 输出投资人数
+      FSql countSql = _resource.findString(FSql.class, "sql.dynamic.investment.count");
+      FRow countRow = connection.find(countSql);
+      stream.writeInt32(countRow.getInt("investment_1w"));
+      stream.writeInt32(countRow.getInt("investment_10w"));
+      stream.writeInt32(countRow.getInt("investment_50w"));
+      stream.writeInt32(countRow.getInt("investment_100w"));
+      stream.writeInt32(countRow.getInt("investment_500w"));
+      stream.writeInt32(countRow.getInt("investment_1000w"));
       //............................................................
       // 输出即时数据[倒序获得，正序写入]
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);
@@ -200,6 +233,82 @@ public class FStatisticsCustomerServlet
       // 发送数据
       int dataLength = stream.length();
       _logger.debug(this, "process", "Send marketer customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      return sendStream(context, request, response, stream);
+   }
+
+   //============================================================
+   // <T>获得投资产品数据。</T>
+   //
+   // @param context 环境
+   // @param logicContext 逻辑环境
+   // @param request 请求
+   // @param response 应答
+   //============================================================
+   @Override
+   public EResult tender(IWebContext context,
+                         ILogicContext logicContext,
+                         IWebServletRequest request,
+                         IWebServletResponse response){
+      // 检查参数
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      //............................................................
+      TDateTime currentDateTime = RDateTime.currentDateTime();
+      currentDateTime.truncateMinute();
+      // 从缓冲中查找数据
+      String cacheCode = "info|" + currentDateTime.format();
+      //............................................................
+      // 设置输出流
+      FByteStream stream = createStream(context);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      ISqlConnection connectionEzubo = logicContext.activeConnection(EEaiDataConnection.EZUBAO);
+      //............................................................
+      // 获得模式数据
+      FDictionary<Double> models = fetchModels(logicContext);
+      //............................................................
+      // 输出排行数据
+      FSql infoSql = _resource.findString(FSql.class, "sql.dynamic.tender");
+      FDataset infoDataset = connectionEzubo.fetchDataset(infoSql);
+      int infoCount = infoDataset.count();
+      stream.writeInt32(infoCount);
+      for(FRow row : infoDataset){
+         long tenderLinkId = row.getLong("id");
+         String tenderCode = row.get("borrow_model");
+         double investmentTotal = 0;
+         // 获得项目信息
+         String tenderLabel = null;
+         float tenderRate = 0;
+         FFinancialTenderModel tenderModel = _financialConsole.findTenderModel(tenderCode);
+         if(tenderModel != null){
+            tenderLabel = tenderModel.label();
+            tenderRate = tenderModel.rate();
+         }
+         Double investmentTotalValue = models.get(tenderCode, null);
+         if(investmentTotalValue != null){
+            investmentTotal = investmentTotalValue.doubleValue();
+         }
+         // 获得项目当日投资
+         FSql daySql = _resource.findString(FSql.class, "sql.tender.tender.day");
+         daySql.bindLong("link_id", tenderLinkId);
+         daySql.bindDateTime("date", currentDateTime, "YYYYMMDD");
+         double investmentDay = connection.executeDouble(daySql);
+         // 写入行数据
+         stream.writeString(tenderCode);
+         stream.writeString(tenderLabel);
+         stream.writeFloat(tenderRate);
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("has_borrow"), 2));
+         stream.writeDouble(RDouble.roundHalf(row.getDouble("borrow_money"), 2));
+         stream.writeDouble(RDouble.roundHalf(investmentDay, 2));
+         stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
+      }
+      //............................................................
+      // 保存数据到缓冲中
+      updateCacheStream(cacheCode, stream);
+      //............................................................
+      // 发送数据
+      int dataLength = stream.length();
+      _logger.debug(this, "process", "Send statistics tender info. (date={1}, count={2}, data_length={3})", currentDateTime.format(), infoCount, dataLength);
       return sendStream(context, request, response, stream);
    }
 

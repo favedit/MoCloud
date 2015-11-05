@@ -12,6 +12,17 @@ FROM ST_FIN_PHASE
 WHERE RECORD_DAY = {date}
 </Resource>
 
+<Resource name='sql.dynamic.investment.count'><![CDATA[
+SELECT 
+   COUNT(CASE WHEN INVESTMENT_TOTAL >= 10000 AND INVESTMENT_TOTAL < 100000   THEN 1 END) AS INVESTMENT_1W, 
+   COUNT(CASE WHEN INVESTMENT_TOTAL >= 100000 AND INVESTMENT_TOTAL < 500000   THEN 1 END) AS INVESTMENT_10W, 
+   COUNT(CASE WHEN INVESTMENT_TOTAL >= 500000 AND INVESTMENT_TOTAL < 1000000  THEN 1 END) AS INVESTMENT_50W, 
+   COUNT(CASE WHEN INVESTMENT_TOTAL >= 1000000 AND INVESTMENT_TOTAL < 5000000  THEN 1 END) AS INVESTMENT_100W, 
+   COUNT(CASE WHEN INVESTMENT_TOTAL >= 5000000 AND INVESTMENT_TOTAL < 10000000 THEN 1 END) AS INVESTMENT_500W,
+   COUNT(CASE WHEN INVESTMENT_TOTAL >= 10000000 THEN 1 END) AS INVESTMENT_1000W
+FROM ST_FIN_CUSTOMER
+]]></Resource>
+
 <Resource name='sql.dynamic.rank'>
 SELECT * FROM (
    SELECT
@@ -26,6 +37,72 @@ SELECT * FROM (
 ) t
 ORDER BY INVESTMENT_TOTAL DESC
 LIMIT 3
+</Resource>
+
+<Resource name='sql.dynamic.tender.model'>
+SELECT
+   BORROW_MODEL TENDER_MODEL,
+   SUM(INVESTMENT_TOTAL) INVESTMENT_TOTAL
+FROM ST_FIN_TENDER
+GROUP BY BORROW_MODEL
+</Resource>
+
+<Resource name='sql.tender.tender.day'>
+SELECT
+   SUM(INVESTMENT)
+FROM ST_FIN_TENDER_PHASE
+WHERE TENDER_LINK_ID = {link_id}
+   AND RECORD_DAY = {date}
+</Resource>
+
+<Resource name='sql.dynamic.tender'>
+SELECT
+   `id`, 
+   `borrow_name`, 
+   `borrow_type`, 
+   `borrow_startmoney`, 
+   `deadline`, 
+   `borrow_model`,
+   `borrow_min`,
+   `reward_type`,
+   `borrow_times`,
+   `borrow_status`,
+   `borrow_money`,
+   `borrow_use`,
+   `repayment_type`,
+   `borrow_interest_rate`,
+   `borrow_duration`,
+   `collect_time`,
+   `add_time`,
+   `province`,
+   `has_borrow`,
+   `has_vouch`,
+   `city`,
+   `area`,
+   `reward_type`,
+   `reward_num`,
+   `password`,
+   `start_time`,
+   `is_tuijian`,
+   `deadline`,
+   `danbao`,
+   `borrow_info`,
+   `borrow_number`,
+   `baoli_number`,
+   `finance_lease`,
+   `leasetime`,
+   `borrow_people`,
+   `risk_control`
+FROM lzh_borrow_info
+WHERE borrow_status in (2, 4, 6, 7)
+   AND is_tuijian in (0, 1)
+   AND id not in (530, 566, 579, 746)
+   AND borrow_model in ('newdetaildh', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang')
+ORDER BY
+   borrow_status ASC,
+   field(borrow_model, 'newdetaildh', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang'),
+   id DESC
+LIMIT 6;
 </Resource>
 
 </Config>

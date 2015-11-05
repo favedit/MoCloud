@@ -60,6 +60,9 @@ public class FStatisticsFinancialTenderLogic
    // 字段结束日期的定义。
    public final static SLogicFieldInfo END_DATE = new SLogicFieldInfo("END_DATE");
 
+   // 字段预借状态的定义。
+   public final static SLogicFieldInfo BORROW_STATUS = new SLogicFieldInfo("BORROW_STATUS");
+
    // 字段借款类型的定义。
    public final static SLogicFieldInfo BORROW_MODEL = new SLogicFieldInfo("BORROW_MODEL");
 
@@ -77,6 +80,9 @@ public class FStatisticsFinancialTenderLogic
 
    // 字段借款信息的定义。
    public final static SLogicFieldInfo BORROW_INFO = new SLogicFieldInfo("BORROW_INFO");
+
+   // 字段推荐类型的定义。
+   public final static SLogicFieldInfo RECOMMEND_CD = new SLogicFieldInfo("RECOMMEND_CD");
 
    // 字段项目信息的定义。
    public final static SLogicFieldInfo PROJECT_INFO = new SLogicFieldInfo("PROJECT_INFO");
@@ -139,7 +145,7 @@ public class FStatisticsFinancialTenderLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BEGIN_DATE`,`END_DATE`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`INVESTMENT_COUNT`,`INVESTMENT_USER_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_BEGIN_DATE`,`REDEMPTION_END_DATE`,`REDEMPTION_COUNT`,`REDEMPTION_USER_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`GROUP_NUMBER`,`LABEL`,`BEGIN_DATE`,`END_DATE`,`BORROW_STATUS`,`BORROW_MODEL`,`BORROW_DURATION`,`BORROW_MONEY`,`BORROW_INEREST`,`BORROW_INEREST_RATE`,`BORROW_INFO`,`RECOMMEND_CD`,`PROJECT_INFO`,`COMPANY_INFO`,`SAFEGUARD_INFO`,`MORTGAGE_INFO`,`INVESTMENT_BEGIN_DATE`,`INVESTMENT_END_DATE`,`INVESTMENT_COUNT`,`INVESTMENT_USER_COUNT`,`INVESTMENT_TOTAL`,`REDEMPTION_BEGIN_DATE`,`REDEMPTION_END_DATE`,`REDEMPTION_COUNT`,`REDEMPTION_USER_COUNT`,`REDEMPTION_TOTAL`,`INTEREST_TOTAL`,`NETINVESTMENT_TOTAL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造动态投标表逻辑单元。</T>
@@ -741,12 +747,14 @@ public class FStatisticsFinancialTenderLogic
       cmd.append(",`LABEL`");
       cmd.append(",`BEGIN_DATE`");
       cmd.append(",`END_DATE`");
+      cmd.append(",`BORROW_STATUS`");
       cmd.append(",`BORROW_MODEL`");
       cmd.append(",`BORROW_DURATION`");
       cmd.append(",`BORROW_MONEY`");
       cmd.append(",`BORROW_INEREST`");
       cmd.append(",`BORROW_INEREST_RATE`");
       cmd.append(",`BORROW_INFO`");
+      cmd.append(",`RECOMMEND_CD`");
       cmd.append(",`PROJECT_INFO`");
       cmd.append(",`COMPANY_INFO`");
       cmd.append(",`SAFEGUARD_INFO`");
@@ -833,6 +841,8 @@ public class FStatisticsFinancialTenderLogic
          cmd.append("','%Y%m%d%H%i%s')");
       }
       cmd.append(',');
+      cmd.append(unit.borrowStatus());
+      cmd.append(',');
       String borrowModel = unit.borrowModel();
       if(RString.isEmpty(borrowModel)){
          cmd.append("NULL");
@@ -858,6 +868,8 @@ public class FStatisticsFinancialTenderLogic
          cmd.append(RSql.formatValue(borrowInfo));
          cmd.append('\'');
       }
+      cmd.append(',');
+      cmd.append(unit.recommendCd());
       cmd.append(',');
       String projectInfo = unit.projectInfo();
       if(RString.isEmpty(projectInfo)){
@@ -1091,6 +1103,10 @@ public class FStatisticsFinancialTenderLogic
             cmd.append("','%Y%m%d%H%i%s')");
          }
       }
+      if(unit.isBorrowStatusChanged()){
+         cmd.append(",`BORROW_STATUS`=");
+         cmd.append(unit.borrowStatus());
+      }
       if(unit.isBorrowModelChanged()){
          cmd.append(",`BORROW_MODEL`=");
          String borrowModel = unit.borrowModel();
@@ -1128,6 +1144,10 @@ public class FStatisticsFinancialTenderLogic
             cmd.append(RSql.formatValue(borrowInfo));
             cmd.append('\'');
          }
+      }
+      if(unit.isRecommendCdChanged()){
+         cmd.append(",`RECOMMEND_CD`=");
+         cmd.append(unit.recommendCd());
       }
       if(unit.isProjectInfoChanged()){
          cmd.append(",`PROJECT_INFO`=");

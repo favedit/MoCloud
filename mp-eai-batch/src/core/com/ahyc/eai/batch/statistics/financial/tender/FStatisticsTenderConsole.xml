@@ -5,12 +5,14 @@
 <Resource name='sql.tender'>
 SELECT
    borrow_name,
+   borrow_status,
    borrow_model,
    borrow_duration,
    borrow_money,
    borrow_interest,
    borrow_interest_rate,
    borrow_info,
+   is_tuijian,
    FROM_UNIXTIME(`add_time`,'%Y%m%d%H%i%s') as borrow_date,
    DATE_FORMAT(`start_time`,'%Y%m%d%H%i%s') as begin_date,
    xm1,

@@ -77,6 +77,12 @@ public class FStatisticsFinancialTenderUnit
    // 字段结束日期的定义。
    protected TDateTime _endDate = new TDateTime();
 
+   // 存储字段预借状态的定义。
+   private int __borrowStatus;
+
+   // 字段预借状态的定义。
+   protected int _borrowStatus;
+
    // 存储字段借款类型的定义。
    private String __borrowModel;
 
@@ -112,6 +118,12 @@ public class FStatisticsFinancialTenderUnit
 
    // 字段借款信息的定义。
    protected String _borrowInfo;
+
+   // 存储字段推荐类型的定义。
+   private int __recommendCd;
+
+   // 字段推荐类型的定义。
+   protected int _recommendCd;
 
    // 存储字段项目信息的定义。
    private String __projectInfo;
@@ -483,6 +495,33 @@ public class FStatisticsFinancialTenderUnit
    }
 
    //============================================================
+   // <T>判断预借状态的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isBorrowStatusChanged(){
+      return __borrowStatus != _borrowStatus;
+   }
+
+   //============================================================
+   // <T>获得预借状态的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int borrowStatus(){
+      return _borrowStatus;
+   }
+
+   //============================================================
+   // <T>设置预借状态的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setBorrowStatus(int value){
+      _borrowStatus = value;
+   }
+
+   //============================================================
    // <T>判断借款类型的数据是否改变。</T>
    //
    // @return 数据内容
@@ -642,6 +681,33 @@ public class FStatisticsFinancialTenderUnit
    //============================================================
    public void setBorrowInfo(String value){
       _borrowInfo = value;
+   }
+
+   //============================================================
+   // <T>判断推荐类型的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRecommendCdChanged(){
+      return __recommendCd != _recommendCd;
+   }
+
+   //============================================================
+   // <T>获得推荐类型的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int recommendCd(){
+      return _recommendCd;
+   }
+
+   //============================================================
+   // <T>设置推荐类型的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRecommendCd(int value){
+      _recommendCd = value;
    }
 
    //============================================================
@@ -1211,6 +1277,8 @@ public class FStatisticsFinancialTenderUnit
             return _beginDate.toString();
          case "end_date":
             return _endDate.toString();
+         case "borrow_status":
+            return RInteger.toString(_borrowStatus);
          case "borrow_model":
             return _borrowModel;
          case "borrow_duration":
@@ -1223,6 +1291,8 @@ public class FStatisticsFinancialTenderUnit
             return RFloat.toString(_borrowInerestRate);
          case "borrow_info":
             return _borrowInfo;
+         case "recommend_cd":
+            return RInteger.toString(_recommendCd);
          case "project_info":
             return _projectInfo;
          case "company_info":
@@ -1304,6 +1374,9 @@ public class FStatisticsFinancialTenderUnit
          case "end_date":
             _endDate.parse(value);
             break;
+         case "borrow_status":
+            _borrowStatus = RInteger.parse(value);
+            break;
          case "borrow_model":
             _borrowModel = value;
             break;
@@ -1321,6 +1394,9 @@ public class FStatisticsFinancialTenderUnit
             break;
          case "borrow_info":
             _borrowInfo = value;
+            break;
+         case "recommend_cd":
+            _recommendCd = RInteger.parse(value);
             break;
          case "project_info":
             _projectInfo = value;
@@ -1433,6 +1509,10 @@ public class FStatisticsFinancialTenderUnit
                __endDate.parse(value);
                _endDate.assign(__endDate);
                break;
+            case "borrow_status":
+               __borrowStatus = RInteger.parse(value);
+               _borrowStatus = __borrowStatus;
+               break;
             case "borrow_model":
                __borrowModel = value;
                _borrowModel = __borrowModel;
@@ -1456,6 +1536,10 @@ public class FStatisticsFinancialTenderUnit
             case "borrow_info":
                __borrowInfo = value;
                _borrowInfo = __borrowInfo;
+               break;
+            case "recommend_cd":
+               __recommendCd = RInteger.parse(value);
+               _recommendCd = __recommendCd;
                break;
             case "project_info":
                __projectInfo = value;
@@ -1558,12 +1642,14 @@ public class FStatisticsFinancialTenderUnit
       row.set("label", _label);
       row.set("beginDate", _beginDate);
       row.set("endDate", _endDate);
+      row.set("borrowStatus", _borrowStatus);
       row.set("borrowModel", _borrowModel);
       row.set("borrowDuration", _borrowDuration);
       row.set("borrowMoney", _borrowMoney);
       row.set("borrowInerest", _borrowInerest);
       row.set("borrowInerestRate", _borrowInerestRate);
       row.set("borrowInfo", _borrowInfo);
+      row.set("recommendCd", _recommendCd);
       row.set("projectInfo", _projectInfo);
       row.set("companyInfo", _companyInfo);
       row.set("safeguardInfo", _safeguardInfo);
@@ -1603,12 +1689,14 @@ public class FStatisticsFinancialTenderUnit
       map.put("label", _label);
       map.put("beginDate", _beginDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("endDate", _endDate.format("YYYY-MM-DD HH24:MI:SS"));
+      map.put("borrowStatus", RInteger.toString(_borrowStatus));
       map.put("borrowModel", _borrowModel);
       map.put("borrowDuration", RInteger.toString(_borrowDuration));
       map.put("borrowMoney", RDouble.toString(_borrowMoney));
       map.put("borrowInerest", RDouble.toString(_borrowInerest));
       map.put("borrowInerestRate", RFloat.toString(_borrowInerestRate));
       map.put("borrowInfo", _borrowInfo);
+      map.put("recommendCd", RInteger.toString(_recommendCd));
       map.put("projectInfo", _projectInfo);
       map.put("companyInfo", _companyInfo);
       map.put("safeguardInfo", _safeguardInfo);
@@ -1648,9 +1736,11 @@ public class FStatisticsFinancialTenderUnit
       _label = input.readString();
       _beginDate.set(input.readInt64());
       _endDate.set(input.readInt64());
+      _borrowStatus = input.readInt32();
       _borrowModel = input.readString();
       _borrowDuration = input.readInt32();
       _borrowInfo = input.readString();
+      _recommendCd = input.readInt32();
       _projectInfo = input.readString();
       _companyInfo = input.readString();
       _safeguardInfo = input.readString();
@@ -1686,9 +1776,11 @@ public class FStatisticsFinancialTenderUnit
       output.writeString(_label);
       output.writeInt64(_beginDate.get());
       output.writeInt64(_endDate.get());
+      output.writeInt32(_borrowStatus);
       output.writeString(_borrowModel);
       output.writeInt32(_borrowDuration);
       output.writeString(_borrowInfo);
+      output.writeInt32(_recommendCd);
       output.writeString(_projectInfo);
       output.writeString(_companyInfo);
       output.writeString(_safeguardInfo);
@@ -1726,12 +1818,14 @@ public class FStatisticsFinancialTenderUnit
       unit.setLabel(_label);
       unit.beginDate().assign(_beginDate);
       unit.endDate().assign(_endDate);
+      unit.setBorrowStatus(_borrowStatus);
       unit.setBorrowModel(_borrowModel);
       unit.setBorrowDuration(_borrowDuration);
       unit.setBorrowMoney(_borrowMoney);
       unit.setBorrowInerest(_borrowInerest);
       unit.setBorrowInerestRate(_borrowInerestRate);
       unit.setBorrowInfo(_borrowInfo);
+      unit.setRecommendCd(_recommendCd);
       unit.setProjectInfo(_projectInfo);
       unit.setCompanyInfo(_companyInfo);
       unit.setSafeguardInfo(_safeguardInfo);

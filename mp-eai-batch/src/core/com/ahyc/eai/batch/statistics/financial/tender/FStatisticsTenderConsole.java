@@ -68,11 +68,13 @@ public class FStatisticsTenderConsole
                unit.setGroupNumber(RInteger.parse(groupNumber));
             }
             unit.setLabel(row.get("borrow_name"));
+            unit.setBorrowStatus(row.getInt("borrow_status"));
             unit.setBorrowModel(row.get("borrow_model"));
             unit.setBorrowDuration(row.getInt("borrow_duration"));
             unit.setBorrowMoney(row.getDouble("borrow_money"));
             unit.setBorrowInerest(row.getDouble("borrow_interest"));
             unit.setBorrowInerestRate(row.getFloat("borrow_interest_rate"));
+            unit.setRecommendCd(row.getInt("is_tuijian"));
             unit.setBorrowInfo(row.get("borrow_info"));
             unit.setProjectInfo(row.get("xm1"));
             unit.setCompanyInfo(row.get("xm2"));
