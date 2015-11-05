@@ -15,7 +15,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <img src="<%=basePath%>/salestools/groupinfo/images/5.png">
    </header>
    <div class="main">
-      
       <div class="area">
           <h3>集团简介</h3>
           <div class="p10 area-container " >

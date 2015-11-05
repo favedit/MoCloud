@@ -66,8 +66,14 @@ a:link {
   clear: both;
   visibility: hidden;
 }
+.hide {
+  display: none;
+}
 .h50 {
   height: 50px;
+}
+.p0 {
+  padding: 0px!important;
 }
 .pf {
   position: fixed;
@@ -92,14 +98,20 @@ a:link {
 }
 .area {
   margin: 10px;
-  padding: 10px;
-  background: #fff;
-  border: 1px #dfdfdf solid;
 }
 .area h3 {
-  font-size: 15px;
-  color: #005bac;
+  color: #fff;
+  font-size: 20px!important;
+  padding-top: 8px;
   padding-bottom: 8px;
+  background: #5fa5d8;
+  padding-left: 10px!important;
+}
+.area-container {
+  background: #fff;
+  border: 1px #dfdfdf solid;
+  border-top: none;
+  padding: 10px;
 }
 .area img {
   width: 100%;

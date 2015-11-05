@@ -89,11 +89,8 @@ public class FVersionService
        * sessionStr = sessionNode.text();
        */
       String applicationStr = inputApplicationNode.text();
-      _logger.debug(this, "****************************------------------------------------->show parameters", "appos={1},sessionCode={2}", applicationStr, sessionStr);
       String versionStr = "";
-      System.out.println("****************************---------------->" + sessionContext.getClass().getName());
       // 输出信息
-
       HashMap<String, Object> hashMap = _versionConsole.connect(context, versionStr, applicationStr, logicContext, sessionContext);
       FDataSystemVersionUnit lastVersionUnit = (FDataSystemVersionUnit)hashMap.get("lastVersion");
       // String app_os = (String)hashMap.get("app_os");

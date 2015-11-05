@@ -1,7 +1,5 @@
 package org.mo.content.core.mobile;
 
-import org.mo.content.service.city.info.TMobileService;
-
 import com.cyou.gccloud.data.data.FDataSystemApplicationLogic;
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
 import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
@@ -14,6 +12,7 @@ import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.service.city.info.TMobileService;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
@@ -53,7 +52,7 @@ public class FVersionConsole
                                           String applicationStr,
                                           ILogicContext logicContext,
                                           IWebSession sessionContext){
-      _logger.debug(this, "************************FVersionConsole_connect", "versionStr={1},applicationStr={2}", versionStr, applicationStr);
+      _logger.debug(this, "connect", "connect begin (versionStr={1},applicationStr={2})", versionStr, applicationStr);
       HashMap<String, Object> map = new HashMap<String, Object>();
       FDataSystemApplicationLogic applicationLogic = logicContext.findLogic(FDataSystemApplicationLogic.class);
       //根据applicationStr找见对应应用的id
@@ -86,7 +85,7 @@ public class FVersionConsole
             FDataSystemVersionUnit lastVersionUnit = lastVersionUnits.first();
             map.put("lastVersion", lastVersionUnit);
             //获取版本id
-            _logger.debug(this, "************************getLastVersion", "version_code={1},version_label={2}", lastVersionUnit.code(), lastVersionUnit.label());
+            _logger.debug(this, "connect", "connect finish.version_code={1},version_label={2}", lastVersionUnit.code(), lastVersionUnit.label());
          }
 
       }
@@ -107,7 +106,7 @@ public class FVersionConsole
                              ILogicContext logicContext,
                              IWebSession sessionContext,
                              IWebSessionConsole _sessionConsole){
-      _logger.debug(this, "************************FVersionConsole_disconnect", "sessionCode={1},sessionContext={2}", sessionCode, sessionContext);
+      _logger.debug(this, "disconnect", "disconnect begin.sessionCode={1},sessionContext={2}", sessionCode, sessionContext);
       // 清空session
       FGcWebSession session = (FGcWebSession)sessionContext;
       EResult result = _sessionConsole.close(session);

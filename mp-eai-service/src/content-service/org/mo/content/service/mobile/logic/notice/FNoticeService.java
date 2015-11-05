@@ -93,7 +93,7 @@ public class FNoticeService
                          IWebOutput output,
                          ILogicContext logicContext,
                          IWebSession sessionContext){
-      _logger.debug(this, "select", "select from FNoticeService is beginning. ");
+      _logger.debug(this, "select", "select begin .");
       int pageNum = 1, pageSize = 10;
       String pageSizeStr = input.config().findNode("pagesize").text();
       String pageNumStr = input.config().findNode("pagenumber").text();

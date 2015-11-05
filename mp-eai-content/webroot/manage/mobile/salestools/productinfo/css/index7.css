@@ -69,6 +69,9 @@ a:link {
 .h50 {
   height: 50px;
 }
+.p0 {
+  padding: 0px!important;
+}
 .pf {
   position: fixed;
 }
@@ -78,8 +81,14 @@ a:link {
 .pr {
   position: relative;
 }
+.hide {
+  display: none;
+}
 .pt10 {
   padding-top: 10px;
+}
+.p10 {
+  padding: 10px;
 }
 .pb10 {
   padding-top: 10px;
@@ -92,26 +101,47 @@ a:link {
 }
 .area {
   margin: 10px;
-  padding: 10px;
+}
+.area-container {
   background: #fff;
   border: 1px #dfdfdf solid;
+  border-top: none;
+  padding: 10px;
+  padding-top: 0px;
+}
+.area-container h5 {
+  font-size: 16px;
+  text-indent: 0px;
+  color: #676767;
+  padding-top: 10px;
+}
+.area-container h5 span {
+  font-style: italic;
+  text-align: center;
+  display: inline-block;
+  color: #0864a5;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  background: url(../images/icon.png) no-repeat 6px 8px;
+  background-size: 50%;
 }
 .area h3 {
-  font-size: 15px;
-  color: #005bac;
+  color: #fff;
+  font-size: 20px!important;
+  padding-top: 8px;
   padding-bottom: 8px;
+  background: #5fa5d8;
+  padding-left: 10px!important;
 }
 .area img {
   width: 100%;
-  padding-bottom: 10px;
+  padding-top: 10px;
 }
 .area p {
   text-indent: 2em;
-  padding-bottom: 5px;
-}
-.area span {
-  padding-bottom: 10px;
-  display: block;
+  padding-top: 10px;
+  font-size: 16px;
 }
 .area a {
   padding-left: 10px;

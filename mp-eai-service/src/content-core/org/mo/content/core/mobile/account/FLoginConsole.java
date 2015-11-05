@@ -1,7 +1,5 @@
 package org.mo.content.core.mobile.account;
 
-import org.mo.content.service.city.info.TMobileService;
-
 import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryLogic;
@@ -30,6 +28,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.http.FHttpConnection;
+import org.mo.content.service.city.info.TMobileService;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
@@ -84,7 +83,7 @@ public class FLoginConsole
                                     String password,
                                     ILogicContext logicContext,
                                     IWebSession sessionContext){
-      _logger.debug(null, "oaLogin************************------------>", "OA login. (_oaLoginUrl={1})", _oaLoginUrl);
+      _logger.debug(this, "login", "login begin. (_oaLoginUrl={1})", _oaLoginUrl);
       int statusCd = EGcAuthorityResult.OaHostInvalid;
       if(_oaLoginEnable){
          // OA用户检测
@@ -152,7 +151,7 @@ public class FLoginConsole
             message = "密码长度小于6位。";
             break;
       }
-      _logger.info(this, "login", "User login. (passport={1}, message={1})", passport, logggerMessage);
+      _logger.info(this, "login", "user login. (passport={1}, message={1})", passport, logggerMessage);
       // 如果登录成功,同步数据
       FDataPersonUserUnit backUser = null;
       if((statusCd == EGcAuthorityResult.OaSuccess)){
@@ -372,7 +371,6 @@ public class FLoginConsole
       String sql = "SELECT DATE_FORMAT(MAX(SINGN_DATE) ,'%Y-%m-%d %H:%i:%s') AS LAST_SIGN_DATE FROM DT_PSN_USER_SIGNING WHERE `USER_ID`=" + user_id;
       FRow rowData = signingLogic.connection().find(sql);
       String Last_sign_date = rowData.get("last_sign_date");
-      _logger.debug(this, "getUserInfo", "----------------------------*****>Last_sign_date={1}", Last_sign_date);
       userInfo.setLast_sign_date(Last_sign_date);
       return userInfo;
    }

@@ -43,7 +43,7 @@ public class FTrueTimeDataConsole
    @Override
    public FDataLogicTruetimeUnit getNewsByGuid(String guid,
                                                ILogicContext logicContext){
-      _logger.debug(this, "getNewsByGuid", "getNewsByGuid start guid={1}", guid);
+      _logger.debug(this, "getNewsByGuid", "getNewsByGuid begin. (guid={1})", guid);
       FDataLogicTruetimeLogic logic = logicContext.findLogic(FDataLogicTruetimeLogic.class);
       return logic.findByGuid(guid);
    }

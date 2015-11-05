@@ -58,11 +58,10 @@ public class FTrueTimeDataAction
                             ILogicContext logicContext,
                             FTrueTimeDataPage page,
                             FBasePage basePage){
-      _logger.debug(this, "GetContent", "getContent begin.");
+      _logger.debug(this, "getContent", "getContent begin.");
       String guid = context.parameter("guid");
       FDataLogicTruetimeUnit salesUnit = _trueTimeDataConsole.getNewsByGuid(guid, logicContext);
       if(salesUnit != null){
-         _logger.debug(this, "GetContent", "getContent find unit fnish.(salesUnit={1})", salesUnit.ouid());
          FSql whereFSql = new FSql();
          whereFSql.append(FDataLogicTruetimeLogic.OUID);
          whereFSql.append("=");
@@ -75,7 +74,6 @@ public class FTrueTimeDataAction
          page.setUserLabel(userLabel);
          page.setUnit(salesUnit);
       }else{
-         _logger.debug(this, "GetContent", "getContent find unit is null.");
          page.setUnit(new FDataLogicTruetimeUnit());
          page.setUserLabel("");
       }

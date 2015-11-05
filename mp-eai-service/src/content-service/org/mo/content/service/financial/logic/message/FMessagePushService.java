@@ -73,12 +73,11 @@ public class FMessagePushService
                           IWebInput input,
                           IWebOutput output,
                           ILogicContext logicContext){
-      _logger.debug(this, "pushSMS ", "The Method pushSMS From FMessagePushService  is beginning. ");
+      _logger.debug(this, "pushSMS ", "pushSMS begin. ");
       FXmlNode linkIdNode = input.config().findNode("linkid");
       FXmlNode loginDateNode = input.config().findNode("logindate");
       String linkIdStr = linkIdNode.text();
       String loginDateStr = loginDateNode.text();
-      _logger.debug(this, "pushSMS", "-----------------------linkIdStr={1},loginDateStr={2}", linkIdStr, loginDateStr);
       String linkId = "12";
       String dateTimeStr = new TDateTime(RDateTime.currentDateTime()).toString();
       if(RString.isEmpty(linkIdStr)){

@@ -77,7 +77,7 @@ public class FSalesToolsService
                         IWebInput input,
                         IWebOutput output,
                         ILogicContext logicContext){
-      _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
+      _logger.debug(this, "query", "query begin. ");
 
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
@@ -126,7 +126,7 @@ public class FSalesToolsService
                          IWebInput input,
                          IWebOutput output,
                          ILogicContext logicContext){
-      _logger.debug(this, "FSalesToolsService_select", "FSalesToolsService_select begin. ");
+      _logger.debug(this, "select", "select begin. ");
       int pageNum = 0, pageSize = 10;
       String pageSizeStr = input.config().findNode("pagesize").text();
       String pageNumStr = input.config().findNode("pagenumber").text();

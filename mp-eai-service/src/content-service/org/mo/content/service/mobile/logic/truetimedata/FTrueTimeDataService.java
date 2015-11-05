@@ -77,7 +77,7 @@ public class FTrueTimeDataService
                         IWebInput input,
                         IWebOutput output,
                         ILogicContext logicContext){
-      _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
+      _logger.debug(this, "query", "query begin. ");
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
       FDataLogicTruetimeUnit newsUnit = _trueTimeDataConsole.getNewsByGuid(guid, logicContext);
@@ -127,7 +127,6 @@ public class FTrueTimeDataService
       _logger.debug(this, "FNewsService_select", "FNewsService_select begin. ");
 
       // FXmlNode inputNode = input.config();
-      // System.out.println("***************************************************---->"
       // + );
       int pageNum = 0, pageSize = 10;
       String pageSizeStr = input.config().findNode("pagesize").text();
@@ -140,8 +139,8 @@ public class FTrueTimeDataService
       }
       FLogicDataset<FDataLogicTruetimeUnit> newsUnits = _trueTimeDataConsole.select(pageNum, pageSize, logicContext);
       output.config().createNode("page_number").setText(pageNumStr);
-      FXmlNode list = output.config().createNode("truetime_list");
       if(newsUnits != null && newsUnits.count() > 0){
+         FXmlNode list = output.config().createNode("truetime_list");
          for(Iterator<FDataLogicTruetimeUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
             FDataLogicTruetimeUnit newsUnit = iterator.next();
             FXmlNode xruntime = list.createNode("truetime_info");

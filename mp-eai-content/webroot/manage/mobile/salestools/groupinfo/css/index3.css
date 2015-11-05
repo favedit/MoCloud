@@ -6,7 +6,7 @@ html {
   -webkit-font-smoothing: antialiased;
   font-family: sans-serif;
   font-size: 62.5%;
-  /*10 ÷ 16 × 100% = 62.5%*/
+  /*10 รท 16 ร— 100% = 62.5%*/
 }
 body {
   background-color: #f4f4f1;

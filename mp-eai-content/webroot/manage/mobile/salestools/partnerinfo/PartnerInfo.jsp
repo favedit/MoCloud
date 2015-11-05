@@ -14,16 +14,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <img src="<%=basePath%>/salestools/partnerinfo/images/2-0.jpg" style="width:100%;">
     <div class="area">
       <h3>全作伙伴与成功招案例</h3>
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-1.jpg" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-2.jpg" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-3.jpg" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-4.png" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-5.png" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-6.png" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-7.png" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-8.png" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-9.png" >
-      <img src="<%=basePath%>/salestools/partnerinfo/images/2-10.png" >
+        <div class="p10 area-container " >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-1.jpg" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-2.jpg" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-3.jpg" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-4.png" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-5.png" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-6.png" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-7.png" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-8.png" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-9.png" >
+          <img src="<%=basePath%>/salestools/partnerinfo/images/2-10.png" >
+       </div>
     </div>
   </div> 
   <script type="text/javascript">

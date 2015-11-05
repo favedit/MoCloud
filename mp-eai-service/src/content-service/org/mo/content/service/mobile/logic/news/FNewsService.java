@@ -78,7 +78,7 @@ public class FNewsService
                         IWebInput input,
                         IWebOutput output,
                         ILogicContext logicContext){
-      _logger.debug(this, "FNewsService_query", "FNewsService_query begin. ");
+      _logger.debug(this, "query", "query begin. ");
       // 获得guid参数
       String guid = input.config().findNode("guid").text();
       FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
@@ -125,11 +125,7 @@ public class FNewsService
                          IWebInput input,
                          IWebOutput output,
                          ILogicContext logicContext){
-      _logger.debug(this, "FNewsService_select", "FNewsService_select begin. ");
-
-      // FXmlNode inputNode = input.config();
-      // System.out.println("***************************************************---->"
-      // + );
+      _logger.debug(this, "select", "select begin. ");
       int pageNum = 0, pageSize = 10;
       String sessionCode = context.head("mo-session-id");
       String pageSizeStr = input.config().findNode("pagesize").text();
@@ -149,8 +145,8 @@ public class FNewsService
       }
       FLogicDataset<FDataLogicNewsUnit> newsUnits = _newsConsole.select(pageNum, pageSize, logicContext);
       output.config().createNode("page_number").setText(pageNumStr);
-      FXmlNode list = output.config().createNode("news_list");
       if(newsUnits != null && newsUnits.count() > 0){
+         FXmlNode list = output.config().createNode("news_list");
          for(Iterator<FDataLogicNewsUnit> iterator = newsUnits.iterator(); iterator.hasNext();){
             FDataLogicNewsUnit newsUnit = iterator.next();
             FXmlNode xruntime = list.createNode("news_info");

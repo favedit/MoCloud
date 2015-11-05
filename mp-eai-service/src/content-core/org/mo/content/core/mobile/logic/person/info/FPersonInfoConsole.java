@@ -1,7 +1,5 @@
 package org.mo.content.core.mobile.logic.person.info;
 
-import org.mo.content.service.city.info.TMobileService;
-
 import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
@@ -14,6 +12,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.lang.FObject;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.service.city.info.TMobileService;
 import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.FLogicDataset;
@@ -76,7 +75,6 @@ public class FPersonInfoConsole
       String sql = "SELECT DATE_FORMAT(MAX(SINGN_DATE) ,'%Y-%m-%d %H:%i:%s') AS LAST_SIGN_DATE FROM DT_PSN_USER_SIGNING WHERE `USER_ID`=" + user_id;
       FRow rowData = signingLogic.connection().find(sql);
       String Last_sign_date = rowData.get("last_sign_date");
-      _logger.debug(this, "getUserInfo", "----------------------------*****>Last_sign_date={1}", Last_sign_date);
       userInfo.setLast_sign_date(Last_sign_date);
       return userInfo;
    }

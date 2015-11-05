@@ -43,7 +43,7 @@ public class FSalesToolsConsole
    @Override
    public FDataLogicSalestoolsUnit getNewsByGuid(String guid,
                                                  ILogicContext logicContext){
-      _logger.debug(this, "getNewsByGuid", "getNewsByGuid start guid={1}", guid);
+      _logger.debug(this, "getNewsByGuid", "getNewsByGuid begin guid={1}", guid);
       FDataLogicSalestoolsLogic logic = logicContext.findLogic(FDataLogicSalestoolsLogic.class);
       return logic.findByGuid(guid);
    }

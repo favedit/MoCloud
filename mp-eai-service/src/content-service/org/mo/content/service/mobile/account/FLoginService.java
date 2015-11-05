@@ -119,7 +119,6 @@ public class FLoginService
 
          icon_url.setText("http://test.eai.ezubo.com/images/userdefault.png");
          company.setText("智慧企业推进中心");
-         // last_sign_date.setText("20150910102023");
          status_cd.setText(user.statusCd());
          String userLabel = user.label();
          if(userLabel != null && (!"".equals(userLabel))){
@@ -191,11 +190,7 @@ public class FLoginService
          status_cd.setText(EGcAuthorityResult.Unknown);
          return EResult.Failure;
       }
-      // sessionCode不可以重复!!
       FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
-      // FGcSessionInfo sessionInfo =
-      // _sessionConsole.findBySessionCode(log`icContext, "eai",
-      // "mobile_android", sessionCode);
       if(sessionInfo == null){
          // session已经失效
          output.config().createNode("session_status").setText(0);
@@ -206,8 +201,6 @@ public class FLoginService
       FXmlNode icon_url = output.config().createNode("user_icon");
       FXmlNode company = output.config().createNode("company");
       company.setText("智慧企业推进中心");
-      // last_sign_date.setText("20150910102023");
-      // 返回上一次的打卡时间和用户的个人信息
       FDataPersonUserInfo userInfo = _loginConsole.getUserInfo(sessionInfo.userId(), logicContext);
       String last_sign_date2 = userInfo.last_sign_date();
       if(last_sign_date2 != null && (!"".equals(last_sign_date2))){
@@ -265,10 +258,6 @@ public class FLoginService
       FGcWebSession session = (FGcWebSession)sessionContext;
       session.setId(sessionCode);
       FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
-      // FGcSessionInfo sessionInfo =
-      // _sessionConsole.findBySessionCode(logicContext, "eai",
-      // "mobile_android", sessionCode);
-      // 如果没找到,意味着已经注销
       if(sessionInfo == null){
          return EResult.Success;
       }
