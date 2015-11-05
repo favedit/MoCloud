@@ -68,27 +68,15 @@ public class FVersionConsole
          map.put("app_os", applications.first().code());
       }
       FDataSystemVersionLogic versionLogic = logicContext.findLogic(FDataSystemVersionLogic.class);
-      double lastVersionCode = versionLogic.connection().executeDouble("SELECT MAX(NUMBER) AS LASTVERSION FROM `DT_SYS_VERSION` WHERE `APPLICATION_ID`=" + applicationOuid + " AND `STATUS_CD`=" + EGcResourceStatus.Publish);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataSystemVersionLogic.APPLICATION_ID + "=" + applicationOuid + " AND " + FDataSystemVersionLogic.STATUS_CD + "=" + EGcResourceStatus.Publish + " ORDER BY " + FDataSystemVersionLogic.NUMBER + " DESC" + " LIMIT 1");
+      FDataSystemVersionUnit versionUnit = versionLogic.search(whereSql);
       //如果是0,,意味着没有找到对应的app
-      if(lastVersionCode != 0){
-         //拿出来最新的version
-         FSql where = new FSql();
-         where.append(FDataSystemVersionLogic.APPLICATION_ID);
-         where.append("=");
-         where.append(applicationOuid);
-         where.append(" AND ");
-         where.append(FDataSystemVersionLogic.NUMBER);
-         where.append("=");
-         where.append(lastVersionCode);
-         FLogicDataset<FDataSystemVersionUnit> lastVersionUnits = versionLogic.fetch(where);
-         if(lastVersionUnits != null && lastVersionUnits.count() > 0){
-            FDataSystemVersionUnit lastVersionUnit = lastVersionUnits.first();
-            map.put("lastVersion", lastVersionUnit);
-            //获取版本id
-            _logger.debug(this, "connect", "connect finish.version_code={1},version_label={2}", lastVersionUnit.code(), lastVersionUnit.label());
-         }
-
+      if(versionUnit != null){
+         map.put("lastVersion", versionUnit);
+         //获取版本id
       }
+
       return map;
    }
 
