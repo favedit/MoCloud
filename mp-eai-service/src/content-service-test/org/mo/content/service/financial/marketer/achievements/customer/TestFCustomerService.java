@@ -17,17 +17,17 @@ import org.junit.Test;
 public class TestFCustomerService
 {
    @Test
-   public void fetchCount() throws ClientProtocolException, IOException{
+   public void fetch() throws ClientProtocolException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
       String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.customer.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("session_code", "77BEFC569B9E4CE5A65B34B8C1E893331"));
+      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
       //      listPram.add(new BasicNameValuePair("login_date", new TDateTime(new Date()).toString()));// 20151019103636时间戳
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
       //      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
-      listPram.add(new BasicNameValuePair("action", "fetchCount"));
+      listPram.add(new BasicNameValuePair("action", "fetch"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       System.out.println(url + "?" + EntityUtils.toString(post.getEntity()));
@@ -41,12 +41,79 @@ public class TestFCustomerService
    }
 
    @Test
+   public void fetchByName() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.customer.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
+      listPram.add(new BasicNameValuePair("action", "fetchByName"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      System.out.println(url + "?" + EntityUtils.toString(post.getEntity()));
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
+
+   }
+
+   @Test
+   public void findInfo() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.customer.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
+      listPram.add(new BasicNameValuePair("action", "findInfo"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      System.out.println(url + "?" + EntityUtils.toString(post.getEntity()));
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
+
+   }
+
+   @Test
+   public void fetchProducts() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.customer.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
+      //      listPram.add(new BasicNameValuePair("login_date", new TDateTime(new Date()).toString()));// 20151019103636时间戳
+      // listPram.add(new BasicNameValuePair("mo-session-id",
+      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
+      //      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
+      listPram.add(new BasicNameValuePair("action", "fetchProducts"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      System.out.println(url + "?" + EntityUtils.toString(post.getEntity()));
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
+
+   }
+
+   @Test
    public void fetchActions() throws ClientProtocolException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
       String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.customer.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("session_code", "77BEFC569B9E4CE5A65B34B8C1E89333"));
+      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
       //      listPram.add(new BasicNameValuePair("login_date", new TDateTime(new Date()).toString()));// 20151019103636时间戳
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));

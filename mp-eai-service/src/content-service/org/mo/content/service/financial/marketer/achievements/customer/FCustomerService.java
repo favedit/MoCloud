@@ -67,20 +67,25 @@ public class FCustomerService
                         IWebOutput output,
                         ILogicContext logicContext){
       String session_code = context.parameter("session_code");
+      int pageSize = 10;
+      int pageNumber = 0;
       _logger.debug(this, "Fetch", "Fetch achievements customer list begin. (session={1})", session_code);
       // 获取session验证,获取理财师
       FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
       if(marketer == null){
          return EResult.Failure;
       }
+      FXmlNode customerList = output.config().createNode("customer_list");
       for(int i = 0; i < 8; i++){
-         FXmlNode month = output.config().createNode("CustomerList");
-         month.createNode("picture", "e租财富");
-         month.createNode("name", "12");
-         month.createNode("investment_total", "20000050");
-         month.createNode("product_occupancy", "12");
+         FXmlNode customer = customerList.createNode();
+         customer.createNode("picture", "e租财富");
+         customer.createNode("name", "12");
+         customer.createNode("investment_total", "20000050");
+         customer.createNode("redemption_total", "2000000");
+         customer.createNode("netinvestment_total", "1000000");
+         customer.createNode("last_login_date", "2015-11-05");
       }
-      return null;
+      return EResult.Success;
    }
 
    // ============================================================
@@ -98,8 +103,26 @@ public class FCustomerService
                               IWebInput input,
                               IWebOutput output,
                               ILogicContext logicContext){
-      // TODO Auto-generated method stub
-      return null;
+      String session_code = context.parameter("session_code");
+      String name = context.parameter("name");
+      _logger.debug(this, "FetchByName", "FetchByName achievements fetch customer by name begin. (session={1})", session_code);
+      // 获取session验证,获取理财师
+      FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
+      if(marketer == null){
+         return EResult.Failure;
+      }
+
+      FXmlNode customerList = output.config().createNode("customer_list");
+      for(int i = 0; i < 4; i++){
+         FXmlNode customer = customerList.createNode();
+         customer.createNode("picture", "图片");
+         customer.createNode("name", "张三");
+         customer.createNode("investment_total", "20000050");
+         customer.createNode("redemption_total", "2000000");
+         customer.createNode("netinvestment_total", "1000000");
+         customer.createNode("last_login_date", "2015-11-05");
+      }
+      return EResult.Success;
    }
 
    // ============================================================
@@ -117,8 +140,23 @@ public class FCustomerService
                            IWebInput input,
                            IWebOutput output,
                            ILogicContext logicContext){
-      // TODO Auto-generated method stub
-      return null;
+      String session_code = context.parameter("session_code");
+      String guid = context.parameter("guid");
+      _logger.debug(this, "FindInfo", "FindInfo achievements find customer info begin. (session={1})", session_code);
+      // 获取session验证,获取理财师
+      FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
+      if(marketer == null){
+         return EResult.Failure;
+      }
+      output.config().createNode("picture", "图片");
+      output.config().createNode("name", "张三");
+      output.config().createNode("gender", "男");
+      output.config().createNode("investment_total", "20000050");
+      output.config().createNode("investment_count", "10");
+      output.config().createNode("redemption_total", "2000000");
+      output.config().createNode("redemption_count", "20");
+      output.config().createNode("netinvestment_total", "1000000");
+      return EResult.Success;
    }
 
    // ============================================================
@@ -136,8 +174,25 @@ public class FCustomerService
                                 IWebInput input,
                                 IWebOutput output,
                                 ILogicContext logicContext){
-      // TODO Auto-generated method stub
-      return null;
+      String session_code = context.parameter("session_code");
+      String guid = context.parameter("guid");
+      _logger.debug(this, "FetchProducts", "FetchProducts achievements fetch customer product investment begin. (session={1})", session_code);
+      // 获取session验证,获取理财师
+      FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
+      if(marketer == null){
+         return EResult.Failure;
+      }
+      FXmlNode customerList = output.config().createNode("product_list");
+      for(int i = 0; i < 4; i++){
+         FXmlNode customer = customerList.createNode();
+         customer.createNode("name", "e租财富");
+         customer.createNode("rate", "14.6");
+         customer.createNode("investment_total", "100000");
+         customer.createNode("redemption_total", "500000");
+         customer.createNode("netinvestment_total", "500000");
+         customer.createNode("last_login_date", "2015-11-05");
+      }
+      return EResult.Success;
    }
 
    // ============================================================
@@ -155,8 +210,21 @@ public class FCustomerService
                                IWebInput input,
                                IWebOutput output,
                                ILogicContext logicContext){
-      // TODO Auto-generated method stub
-      return null;
+      String session_code = context.parameter("session_code");
+      String guid = context.parameter("guid");
+      _logger.debug(this, "FetchActions", "FetchActions achievements fetch customer actions begin. (session={1})", session_code);
+      // 获取session验证,获取理财师
+      FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
+      if(marketer == null){
+         return EResult.Failure;
+      }
+      FXmlNode customerList = output.config().createNode("action_list");
+      for(int i = 0; i < 4; i++){
+         FXmlNode customer = customerList.createNode();
+         customer.createNode("date", "2015-11-20 12:20:11");
+         customer.createNode("content", "赎回金额100000");
+      }
+      return EResult.Success;
    }
 
    // ============================================================
