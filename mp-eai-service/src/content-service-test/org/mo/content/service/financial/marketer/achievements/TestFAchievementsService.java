@@ -17,8 +17,10 @@ import org.mo.com.lang.RUuid;
 
 public class TestFAchievementsService
 {
+
    @Test
    public void month() throws ClientProtocolException, IOException{
+
       CloseableHttpClient httpclient = HttpClients.createDefault();
       String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.wsp";
       HttpPost post = new HttpPost(url);

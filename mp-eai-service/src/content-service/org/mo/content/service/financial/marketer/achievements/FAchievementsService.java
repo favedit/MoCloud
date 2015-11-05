@@ -1,17 +1,22 @@
 package org.mo.content.service.financial.marketer.achievements;
 
+import com.cyou.gccloud.data.data.FDataFinancialCustomerTenderUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.cloud.core.message.FGcErrorMessage;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.financial.customer.tender.IDataCustomerTenderConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
@@ -36,6 +41,10 @@ public class FAchievementsService
    // 理财师控制器
    @ALink
    protected IDataMarketerConsole _marketerConsole;
+
+   // 客户投资产品控制器
+   @ALink
+   protected IDataCustomerTenderConsole _customerTenderConsole;
 
    // ============================================================
    // <T>默认逻辑。</T>
@@ -67,6 +76,7 @@ public class FAchievementsService
                         IWebOutput output,
                         ILogicContext logicContext){
       String session_code = context.parameter("session_code");
+
       _logger.debug(this, "Month", "Marketer achievements first30 days begin. (session={1})", session_code);
       // 获取session验证,获取理财师
       FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
@@ -81,14 +91,38 @@ public class FAchievementsService
       achievementsTotal.createNode("redemption_count", RString.parse(marketer.customerRedemptionCount()));
       achievementsTotal.createNode("netinvestment_total", RString.parse(marketer.customerNetinvestmentTotal()));
       // 获取前30天的投资情况
+
       FXmlNode achievementsForMonth = output.config().createNode("achievements_first30_days");
       int first30Days = 31;
+      String time = null;
+      TDateTime nowTime = null;
+      double investmentDay = 0;
+      double redemptionDay = 0;
+      double netinvestmentDay = 0;
       for(int i = 1; i < first30Days; i++){
+         investmentDay = 0;
+         redemptionDay = 0;
+         netinvestmentDay = 0;
+         nowTime = new TDateTime(RDateTime.currentDateTime());
+         nowTime.addDay(-(first30Days - i));
+         time = nowTime.format("yyyy-mm-dd");
+         //获取 指定日期的数据
+         FLogicDataset<FDataFinancialCustomerTenderUnit> customerInvestmentDay = _customerTenderConsole.fetchByDay(logicContext, time);
+         if(customerInvestmentDay != null){
+            for(FDataFinancialCustomerTenderUnit unit : customerInvestmentDay){
+               if(unit != null){
+                  investmentDay += unit.investment();
+                  redemptionDay += unit.redemption();
+                  netinvestmentDay += unit.netinvestment();
+               }
+            }
+         }
+
          FXmlNode month = achievementsForMonth.createNode("day" + i);
-         month.createNode("date", "2015-10-20");
-         month.createNode("investment_day", "123.00");
-         month.createNode("redemption_day", "123.23");
-         month.createNode("netinvestment_day", "123.25");
+         month.createNode("date", time);
+         month.createNode("investment_day", RString.parse(investmentDay));
+         month.createNode("redemption_day", RString.parse(redemptionDay));
+         month.createNode("netinvestment_day", RString.parse(netinvestmentDay));
       }
       return EResult.Success;
    }
