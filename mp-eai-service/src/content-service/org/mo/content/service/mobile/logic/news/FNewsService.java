@@ -233,23 +233,13 @@ public class FNewsService
       if(RString.isNotEmpty(sessionCode)){
          FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
          long userId = sessionInfo.userId();
-         String isSuccess = _newsConsole.markRead(newsGuid, userId, logicContext, sessionContext);
-         if("failure".equals(isSuccess)){
+         int isSuccess = _newsConsole.markRead(newsGuid, userId, logicContext, sessionContext);
+         if(isSuccess == -1){
             return EResult.Failure;
+         }else{
+            output.config().createNode("read_count").setText(isSuccess + "");
          }
       }
       return EResult.Success;
    }
-
-   @Override
-   public EResult find(IWebContext context,
-                       IWebInput input,
-                       IWebOutput output,
-                       ILogicContext logicContext,
-                       IWebSession sessionContext){
-      String guid = input.config().findNode("guid").text();
-      FDataLogicNewsUnit newsUnit = _newsConsole.getNewsByGuid(guid, logicContext);
-      return EResult.Success;
-   }
-
 }

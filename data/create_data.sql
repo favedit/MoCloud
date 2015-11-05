@@ -495,6 +495,73 @@ ALTER TABLE DT_PSN_USER_NEWS ADD CONSTRAINT DT_PSN_USR_NWS_FK_USR
 
 ALTER TABLE DT_PSN_USER_NEWS ADD CONSTRAINT DT_PSN_USR_NWS_FK_NEWS 
       FOREIGN KEY (`NEWS_ID`) REFERENCES DT_LGC_NEWS(`OUID`);  
+	  
+
+-- ------------------------------------------------------------
+-- Create table [Data.Person.User.SalesTools]
+-- AnjoyTian 20151104
+-- ------------------------------------------------------------ 
+DROP TABLE IF EXISTS `DT_PSN_USER_SALESTOOLS`; 
+CREATE TABLE `DT_PSN_USER_SALESTOOLS` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `SALESTOOLS_ID`                 BIGINT, 
+   `ACTIVE_CD`                     INTEGER, 
+   `ACTIVE_DATE`                   DATETIME, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MYISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_PSN_USER_SALESTOOLS 
+   ADD CONSTRAINT DT_PSN_USR_SAT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER_SALESTOOLS 
+   ADD CONSTRAINT DT_PSN_USR_SAT_UK_SATS UNIQUE ( USER_ID, SALESTOOLS_ID ); 
+
+ALTER TABLE DT_PSN_USER_SALESTOOLS ADD CONSTRAINT DT_PSN_USR_SAT_FK_USR 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+
+ALTER TABLE DT_PSN_USER_SALESTOOLS ADD CONSTRAINT DT_PSN_USR_SAT_FK_SAL 
+      FOREIGN KEY (`SALESTOOLS_ID`) REFERENCES DT_LGC_SALESTOOLS(`OUID`);
+	  
+-- ------------------------------------------------------------
+-- Create table [Data.Person.User.TrueTimeData]
+-- AnjoyTian 20151104
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_PSN_USER_TRUETIME`; 
+CREATE TABLE `DT_PSN_USER_TRUETIME` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `USER_ID`                       BIGINT, 
+   `TRUETIME_ID`                   BIGINT, 
+   `ACTIVE_CD`                     INTEGER, 
+   `ACTIVE_DATE`                   DATETIME, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=MYISAM DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_PSN_USER_TRUETIME 
+   ADD CONSTRAINT DT_PSN_USR_TRT_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_PSN_USER_TRUETIME 
+   ADD CONSTRAINT DT_PSN_USR_TRT_UK_TIME UNIQUE ( USER_ID, TRUETIME_ID ); 
+
+ALTER TABLE DT_PSN_USER_TRUETIME ADD CONSTRAINT DT_PSN_USR_TRT_FK_USR 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
+
+ALTER TABLE DT_PSN_USER_TRUETIME ADD CONSTRAINT DT_PSN_USR_TRT_FK_TIME 
+      FOREIGN KEY (`TRUETIME_ID`) REFERENCES DT_LGC_TRUETIME(`OUID`); 
 
 -- ------------------------------------------------------------
 -- Create table [Data.Control.Module]

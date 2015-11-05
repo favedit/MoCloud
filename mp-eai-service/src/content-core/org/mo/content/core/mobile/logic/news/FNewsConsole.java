@@ -83,10 +83,10 @@ public class FNewsConsole
    // @return 处理结果
    // ============================================================
    @Override
-   public String markRead(String guid,
-                          long userId,
-                          ILogicContext logicContext,
-                          IWebSession sessionContext){
+   public int markRead(String guid,
+                       long userId,
+                       ILogicContext logicContext,
+                       IWebSession sessionContext){
       FDataPersonUserNewsLogic personUserLogic = logicContext.findLogic(FDataPersonUserNewsLogic.class);
       FDataLogicNewsLogic logic = logicContext.findLogic(FDataLogicNewsLogic.class);
       FDataLogicNewsUnit newsUnit = logic.findByGuid(guid);
@@ -115,10 +115,12 @@ public class FNewsConsole
       }
       if(flag){
          // 同时更新通知的view_count字段,,累加阅读次数
-         newsUnit.setViewCount(newsUnit.viewCount() + 1);
+         int count = newsUnit.viewCount() + 1;
+         newsUnit.setViewCount(count);
          logic.doUpdate(newsUnit);
+         return count;
       }
-      return "Success";
+      return -1;
    }
 
    // ============================================================
@@ -148,5 +150,19 @@ public class FNewsConsole
          return false;
       }
       return true;
+   }
+
+   // ============================================================
+   // <T>通过guid获取记录</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   @Override
+   public FDataLogicNewsUnit find(String noticeGuid,
+                                  ILogicContext logicContext){
+      return logicContext.findLogic(FDataLogicNewsLogic.class).findByGuid(noticeGuid);
+
    }
 }

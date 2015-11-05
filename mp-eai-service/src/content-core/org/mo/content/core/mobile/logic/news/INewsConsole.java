@@ -35,10 +35,10 @@ public interface INewsConsole
    // @param output 输出配置
    // @return 处理结果
    // ============================================================
-   String markRead(String noticeGuid,
-                   long userId,
-                   ILogicContext logicContext,
-                   IWebSession sessionContext);
+   int markRead(String noticeGuid,
+                long userId,
+                ILogicContext logicContext,
+                IWebSession sessionContext);
 
    // ============================================================
    // <T>标记新闻是否已读</T>
@@ -50,5 +50,15 @@ public interface INewsConsole
    boolean isRead(String noticeGuid,
                   long userId,
                   ILogicContext logicContext);
+
+   // ============================================================
+   // <T>通过guid获取记录</T>
+   // @param context 页面环境
+   // @param input 输入配置
+   // @param output 输出配置
+   // @return 处理结果
+   // ============================================================
+   FDataLogicNewsUnit find(String noticeGuid,
+                           ILogicContext logicContext);
 
 }

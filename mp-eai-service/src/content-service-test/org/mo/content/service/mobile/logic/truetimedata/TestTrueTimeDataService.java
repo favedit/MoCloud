@@ -92,7 +92,7 @@ public class TestTrueTimeDataService
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       listPram.add(new BasicNameValuePair("action", "markRead"));
-      listPram.add(new BasicNameValuePair("truetime_id", "FE3814B38EAs5477BAF6900FB927324B2"));
+      listPram.add(new BasicNameValuePair("truetime_id", "FE3814B38EA5477BAF6900FB927324B2"));
       post.setHeader("mo-session-id", "beb7e325a2aa41d499b4d0dd81cb80b5");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);

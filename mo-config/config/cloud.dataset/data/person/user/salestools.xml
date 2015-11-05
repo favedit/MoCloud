@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="f7314353-09d1-422f-bed7-b756ae284062" name="data.person.user.salestools" label="M#12cn18人员销售工具访问" is_valid="Y" note="M#" data_engine="MyISAM" data_group="data" data_factory="Data.Person.User.SalesTools" data_name="DT_PSN_USER_SALESTOOLS" data_alias="DT_PSN_USR_SAT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+  <FieldRecordId _uuid="6a803e2d-9d00-4697-8a02-b70d732ca1b1" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" data_uniques="SATS" />
+  <FieldRecordId _uuid="d0abf784-340b-4a0f-9025-ccc271b7eb7b" name="salestools_id" label="M#12cn16销售工具编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="SALESTOOLS_ID" data_alias="SAL" data_refer="data.logic.salestools" data_uniques="SATS" />
+  <FieldInteger _uuid="4e02567d-9f1e-41b5-b240-e4d5a1aff33b" name="active_cd" label="M#12cn14是否激活" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
+  <FieldDateTime _uuid="f3aba31e-0610-4fa2-ad79-55a0342b2289" name="active_date" label="M#12cn14阅读时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_DATE" />
+  <FieldString _uuid="11949a35-eb73-4c61-a718-d4db6c1d8cd9" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="ffb21723-e9fe-4862-9fc7-571825c8d663" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
+</DataStore>

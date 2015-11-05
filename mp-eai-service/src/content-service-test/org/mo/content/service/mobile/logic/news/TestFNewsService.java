@@ -87,7 +87,7 @@ public class TestFNewsService
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       listPram.add(new BasicNameValuePair("action", "markRead"));
-      listPram.add(new BasicNameValuePair("news_id", "7C4E37BC77E8439E89EB7EFABCE72449"));
+      listPram.add(new BasicNameValuePair("news_id", "A0F3806781C74AFF8F0099C7CDA88E6A"));
       post.setHeader("mo-session-id", "beb7e325a2aa41d499b4d0dd81cb80b5");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);

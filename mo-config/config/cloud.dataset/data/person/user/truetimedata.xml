@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="c15f566d-3591-4ce5-a671-44ab997e1357" name="data.person.user.truetimedata" label="M#12cn18人员实时数据访问" is_valid="Y" note="M#" data_engine="MyISAM" data_group="data" data_factory="Data.Person.User.TrueTimeData" data_name="DT_PSN_USER_TRUETIME" data_alias="DT_PSN_USR_TRT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.logger" data_type="D">
+  <FieldRecordId _uuid="0600b88e-5774-4fa8-a962-0954f20e48f0" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USR" data_refer="data.person.user" data_uniques="TIME" />
+  <FieldRecordId _uuid="c65df7fe-b68e-417e-94de-d95552ccf7a6" name="truetime_id" label="M#12cn16实时数据编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TRUETIME_ID" data_alias="TIME" data_refer="data.logic.truetime" data_uniques="TIME" />
+  <FieldInteger _uuid="b7169370-d02a-4541-836b-6ff93a698218" name="active_cd" label="M#12cn14是否激活" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_CD" />
+  <FieldDateTime _uuid="7fdd4f24-c716-4594-9b38-9a2355e28538" name="active_date" label="M#12cn14阅读时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTIVE_DATE" />
+  <FieldString _uuid="c22bdae9-201d-4bc3-b3e7-faeec89f462f" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="8f68e096-bb82-49c7-a18e-ea376fc66073" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.logger.track" />
+</DataStore>

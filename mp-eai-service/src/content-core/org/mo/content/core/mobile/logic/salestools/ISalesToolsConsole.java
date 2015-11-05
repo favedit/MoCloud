@@ -3,6 +3,7 @@ package org.mo.content.core.mobile.logic.salestools;
 import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.web.core.session.IWebSession;
 
 //============================================================
 //<T>新闻服务接口。</T>
@@ -33,6 +34,8 @@ public interface ISalesToolsConsole
    // @param output 输出配置
    // @return 处理结果
    // ============================================================
-   boolean markRead(String noticeGuid,
-                    ILogicContext logicContext);
+   int markRead(String guid,
+                long userId,
+                ILogicContext logicContext,
+                IWebSession sessionContext);
 }

@@ -4,8 +4,11 @@ import com.cyou.gccloud.data.data.FDataLogicSalestoolsUnit;
 import com.cyou.gccloud.define.enums.core.EGcLink;
 import java.util.Iterator;
 import org.mo.cloud.core.storage.IGcStorageConsole;
+import org.mo.cloud.logic.data.system.FGcSessionInfo;
+import org.mo.cloud.logic.data.system.IGcSessionConsole;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FObject;
+import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
@@ -42,6 +45,10 @@ public class FSalesToolsService
    // Storage服务器
    @ALink
    protected IGcStorageConsole _storageConsole;
+
+   // GcSession会话控制台
+   @ALink
+   protected IGcSessionConsole _sessionConsole;
 
    // ============================================================
    // <T>默认逻辑。</T>
@@ -199,12 +206,18 @@ public class FSalesToolsService
                            IWebOutput output,
                            ILogicContext logicContext,
                            IWebSession sessionContext){
-      //      String sessionCode = context.head("mo-session-id");
+      String sessionCode = context.head("mo-session-id");
       String guid = context.parameter("salestools_id");
-      boolean flag = _salesToolsConsole.markRead(guid, logicContext);
-      if(flag){
-         return EResult.Success;
+      if(RString.isNotEmpty(sessionCode)){
+         FGcSessionInfo sessionInfo = _sessionConsole.findBySessionCode(logicContext, sessionCode);
+         long userId = sessionInfo.userId();
+         int isSuccess = _salesToolsConsole.markRead(guid, userId, logicContext, sessionContext);
+         if(isSuccess == -1){
+            return EResult.Failure;
+         }else{
+            output.config().createNode("read_count").setText(isSuccess + "");
+         }
       }
-      return EResult.Failure;
+      return EResult.Success;
    }
 }
