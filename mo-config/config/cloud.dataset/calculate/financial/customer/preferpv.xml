@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="29201605-dab0-4b2b-b51e-ee5bf7462683" name="calculate.financial.customer.preferpv" label="M#12cn18客户关注时间偏好" is_valid="Y" note="M#" access_insert="Y" access_update="Y" access_delete="Y" data_engine="MyISAM" data_group="calculate" data_factory="Calculate.Financial.Customer.Preferpv" data_name="CL_FIN_CUSTOMER_PREFER_PV" data_alias="CL_FIN_CST_PRF_PV" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store">
+  <FieldRecordId _uuid="9a7bb76c-1cc6-47e1-9099-1b3ccca3dfee" name="member_id" label="M#12cn14成员编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="MEMBER_ID" />
+  <FieldString _uuid="7aa25e17-32a6-47dc-861e-5fb296821ea5" name="product_code" label="M#12cn14产品代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PRODUCT_CODE" data_size="30" />
+  <FieldString _uuid="48a7f12d-8165-44bc-adc0-775aef4229e1" name="time_section" label="M#12cn13时间段" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TIME_SECTION" data_size="30" />
+  <FieldInteger _uuid="088c904f-f16d-4179-b7b8-032a7c2244d7" name="pv" label="M#12cn13浏览量" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PV" />
+  <FieldTemplate _uuid="17c516f3-106a-4235-812b-997ea513353f" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

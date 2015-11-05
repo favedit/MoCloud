@@ -74,14 +74,14 @@ public class FAchievementsService
          return EResult.Failure;
       }
       // 获取投资总额、赎回总额、净投总额
-      FXmlNode achievementsTotal = output.config().createNode("AchievementsTotal");
+      FXmlNode achievementsTotal = output.config().createNode("achievements_total");
       achievementsTotal.createNode("investment_total", RString.parse(marketer.customerInvestmentTotal()));
       achievementsTotal.createNode("investment_count", RString.parse(marketer.customerInvestmentCount()));
       achievementsTotal.createNode("redemption_total", RString.parse(marketer.customerRedemptionTotal()));
       achievementsTotal.createNode("redemption_count", RString.parse(marketer.customerRedemptionCount()));
       achievementsTotal.createNode("netinvestment_total", RString.parse(marketer.customerNetinvestmentTotal()));
       // 获取前30天的投资情况
-      FXmlNode achievementsForMonth = output.config().createNode("AchievementsFirst30Days");
+      FXmlNode achievementsForMonth = output.config().createNode("achievements_first30_days");
       int first30Days = 31;
       for(int i = 1; i < first30Days; i++){
          FXmlNode month = achievementsForMonth.createNode("day" + i);
@@ -109,17 +109,16 @@ public class FAchievementsService
                              IWebOutput output,
                              ILogicContext logicContext){
       String session_code = context.parameter("session_code");
-      _logger.debug(this, "Month", "Marketer achievements first30 days begin. (session={1})", session_code);
+      _logger.debug(this, "FetchCount", "Marketer achievements fetch count begin. (session={1})", session_code);
       // 获取session验证,获取理财师
       FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
       if(marketer == null){
          return EResult.Failure;
       }
       // 获取客户总数
-      FXmlNode achievementsTotal = output.config().createNode("CountTotal");
-      achievementsTotal.createNode("total", RString.parse(marketer.customerInvestmentTotal()));
+      output.config().createNode("count_total", RString.parse(marketer.customerInvestmentTotal()));
       // 获取前30天的投资情况
-      FXmlNode achievementsForMonth = output.config().createNode("First30Days");
+      FXmlNode achievementsForMonth = output.config().createNode("first30_days");
       int first30Days = 31;
       for(int i = 1; i < first30Days; i++){
          FXmlNode month = achievementsForMonth.createNode("day" + i);
@@ -145,13 +144,13 @@ public class FAchievementsService
                                IWebOutput output,
                                ILogicContext logicContext){
       String session_code = context.parameter("session_code");
-      _logger.debug(this, "Month", "Marketer achievements first30 days begin. (session={1})", session_code);
+      _logger.debug(this, "FetchActions", "Marketer achievements fetch actions begin. (session={1})", session_code);
       // 获取session验证,获取理财师
       FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
       if(marketer == null){
          return EResult.Failure;
       }
-      FXmlNode ActionList = output.config().createNode("ActionList");
+      FXmlNode ActionList = output.config().createNode("action_list");
       for(int i = 0; i < 5; i++){
          FXmlNode action = ActionList.createNode();
          action.createNode("customer_name", "张三" + i);
@@ -177,18 +176,19 @@ public class FAchievementsService
                                 IWebOutput output,
                                 ILogicContext logicContext){
       String session_code = context.parameter("session_code");
-      _logger.debug(this, "Month", "Marketer achievements fetch products begin. (session={1})", session_code);
+      _logger.debug(this, "FetchProducts", "Marketer achievements fetch products begin. (session={1})", session_code);
       // 获取session验证,获取理财师
       FDataFinancialMarketerUnit marketer = checkMarketerBySession(context, logicContext, session_code);
       if(marketer == null){
          return EResult.Failure;
       }
+      FXmlNode products = output.config().createNode("product_list");
       for(int i = 0; i < 8; i++){
-         FXmlNode month = output.config().createNode("products");
-         month.createNode("product_name", "e租财富");
-         month.createNode("product_rate", "12");
-         month.createNode("investment_total", "20000050");
-         month.createNode("product_occupancy", "12");
+         FXmlNode product = products.createNode();
+         product.createNode("product_name", "e租财富");
+         product.createNode("product_rate", "12");
+         product.createNode("investment_total", "20000050");
+         product.createNode("product_occupancy", "12");
       }
       return EResult.Success;
    }
@@ -206,14 +206,14 @@ public class FAchievementsService
       FGcSessionInfo sessionInfo = _gcSessionConsole.findBySessionCode(logicContext, "eai.mobile", "0", sessionCode);
       if(sessionInfo == null){// session不存在
          context.messages().push(new FGcErrorMessage(sessionCode, "session不存在", sessionCode));
-         _logger.debug(this, "Month", "Marketer achievements first30 days, session is not exists. (session_code={1})", sessionCode);
+         _logger.debug(this, "Achievements", "Marketer achievements check session, session is not exists. (session_code={1})", sessionCode);
          return null;
       }
       //获取理财师
       FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, sessionInfo.userId());
       if(marketer == null){// 当前用户不是理财师
-         context.messages().push(new FGcErrorMessage(RString.parse(sessionInfo.userId()), "当前用户还不是理财师不存在", RString.parse(sessionInfo.userId())));
-         _logger.debug(this, "Month", "Marketer achievements first30 days, this user is not marketer. (userId={1})", RString.parse(sessionInfo.userId()));
+         context.messages().push(new FGcErrorMessage(RString.parse(sessionInfo.userId()), "当前用户还不是理财师", RString.parse(sessionInfo.userId())));
+         _logger.debug(this, "Achievements", "Marketer achievements check marketer, this user is not marketer. (userId={1})", RString.parse(sessionInfo.userId()));
          return null;
       }
       return marketer;
