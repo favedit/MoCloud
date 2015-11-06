@@ -46,6 +46,8 @@ public class FNoticeConsole
       FDataPersonUserNoticeLogic logic = new FDataPersonUserNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, null, orderBy, pageSize, pageNum);
       for(FDataNoticeInfo info : unitlist){
+         info.setUserName(info.user().name());
+         info.setNoticeLabel(info.notice().label());
          info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
       }
       return unitlist;
@@ -67,7 +69,7 @@ public class FNoticeConsole
                                                                  String beginDateStr,
                                                                  String endDateStr,
                                                                  int activeCd,
-                                                                 Long noticeId,
+                                                                 String noticeLabel,
                                                                  int pageNum,
                                                                  int pageSize){
       if(0 > pageNum){
@@ -90,17 +92,19 @@ public class FNoticeConsole
          whereSql.append(FDataPersonUserNoticeLogic.CREATE_DATE + " <= '{endDateStr}'");
          whereSql.bind("endDateStr", RString.parse(endDateStr));
       }
-      if(!RString.isEmpty(noticeId + "") && noticeId > 0){
-         whereSql.append(" and ");
-         whereSql.append(FDataPersonUserNoticeLogic.NOTICE_ID + " = '{noticeId}'");
-         whereSql.bind("noticeId", RString.parse(noticeId));
-      }
       String orderBy = String.format("%s %s", FDataPersonUserNoticeLogic.UPDATE_DATE, "DESC");
+      FLogicDataset<FDataNoticeInfo> list =new FLogicDataset<>(FDataNoticeInfo.class);
       FDataPersonUserNoticeLogic logic = new FDataPersonUserNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
       for(FDataNoticeInfo info : unitlist){
-         info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
+         String label = info.notice().label();
+         if(!RString.isEmpty(label)&&label.contains(noticeLabel)){
+            info.setUserName(info.user().name());
+            info.setNoticeLabel(info.notice().label());
+            info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
+            list.push(info);
+         }
       }
-      return unitlist;
+      return list;
    }
 }

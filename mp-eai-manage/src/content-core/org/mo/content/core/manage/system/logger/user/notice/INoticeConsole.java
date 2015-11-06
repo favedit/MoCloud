@@ -39,7 +39,7 @@ public interface INoticeConsole
                                                           String beginDateStr,
                                                           String endDateStr,
                                                           int activeCd,
-                                                          Long noticeId,
+                                                          String noticeLabel,
                                                           int pageNum,
                                                           int pageSize);
 }

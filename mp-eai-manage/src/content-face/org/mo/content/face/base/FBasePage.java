@@ -1,5 +1,6 @@
 package org.mo.content.face.base;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import org.mo.com.lang.FObjectId;
@@ -135,6 +136,18 @@ public class FBasePage
       }
    }
 
+   public void toArrayJson(Object[] obj){
+      try{
+         JSONArray jo = JSONArray.fromObject(obj);
+         this._json = jo.toString();
+         //System.out.println(_json);
+      }catch(JSONException e){
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+         this._json = "{}";
+      }
+   }
+   
    public boolean userExists(){
       if(RString.isEmpty(userId())){
          return false;

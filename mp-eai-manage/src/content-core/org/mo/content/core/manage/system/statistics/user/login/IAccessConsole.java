@@ -43,4 +43,17 @@ public interface IAccessConsole
                                                                      String passport,
                                                                      int pageNum, 
                                                                      int pageSize);
+
+   // ============================================================
+   // <T>查询一天登录成功或失败的数量数据</T>
+   // @param logicContext 链接对象
+   // @param beginDateStr 开始时间
+   // @param endDateStr 结束时间
+   // @param logicMessage 操作信息
+   // @return 数据集合
+   // ============================================================
+   Integer getLoginCountByDateandMessage(ILogicContext logicContext, 
+                                         String startTimeStr, 
+                                         String endTimeStr, 
+                                         String logicMessage);
 }

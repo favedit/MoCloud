@@ -71,7 +71,7 @@
        var beginDate = $('#beginDate').datebox('getValue');
        var endDate = $('#endDate').datebox('getValue'); 
        var activeCd = $("#activeCd").combobox("getValue");
-       var noticeId = $("#noticeId").val();
+       var noticeLabel = $("#noticeLabel").val();
        var url = null;
        var data = null;
        if (page != null) {
@@ -79,7 +79,7 @@
              "page": page,
              "pageSize" : pageSize,
              "beginDate" :beginDate,
-             "noticeId" :noticeId,
+             "noticeLabel" :noticeLabel,
              "endDate" :endDate,
              "activeCd" :activeCd
           };
@@ -88,7 +88,7 @@
           data = {
                "beginDate" :beginDate,
                "endDate" :endDate,
-               "noticeId" :noticeId,
+               "noticeLabel" :noticeLabel,
                "activeCd" :activeCd
            };
           url = "/manage/system/logger/user/notice/Notice.wa?do=selectByDate&date=" + new Date().valueOf();
@@ -138,8 +138,8 @@
            <option value="1">激活</option>
            <option value="2">非激活</option>
         <select>
-      <span>日志公告id:</span>
-        <input id="noticeId" name="noticeId" class="easyui-validatebox textbox" style="width:150px;" />
+      <span>日志公告标题:</span>
+        <input id="noticeLabel" name="noticeLabel" class="easyui-validatebox textbox" style="width:150px;" />
         <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>
       </div>
    </div>
@@ -147,10 +147,10 @@
          data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false">
       <thead>
          <tr>
-            <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
-            <th data-options="field:'userId',halign:'center',align:'left',sortable:true" width="90px">用户id</th> 
-            <th data-options="field:'noticeId',halign:'center',align:'left',sortable:true" width="90px">日志公告id</th> 
-            <th data-options="field:'activeCdStr',halign:'center',align:'left',sortable:true" width="90px">是否激活</th> 
+            <th data-options="field:'ouid',halign:'center',align:'right'" width="55px">编号</th>
+            <th data-options="field:'userName',halign:'center',align:'left',sortable:true" width="190px">用户名称</th> 
+            <th data-options="field:'noticeLabel',halign:'center',align:'left',sortable:true" width="590px">日志公告标题</th> 
+            <th data-options="field:'activeCdStr',halign:'center',align:'left',sortable:true" width="100px">是否激活</th> 
             <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true" width="160px">更新时间</th>
             <th data-options="field:'createDate',halign:'center',align:'left',sortable:true" width="160px">创建时间</th>
          </tr>

@@ -17,11 +17,29 @@ public class FDataNoticeInfo
    protected String _endDateStr;
 
    protected String _activeCdStr;
+   //用户名
+   protected String _userName;
+   //公告标题
+   protected String _noticeLabel;
 
+   public String userName(){
+      return _userName;
+   }
+
+   public void setUserName(String _userName){
+      this._userName = _userName;
+   }
+   public String noticeLabel(){
+      return _activeCdStr;
+   }
+   
+   public void setNoticeLabel(String _noticeLabel){
+      this._noticeLabel = _noticeLabel;
+   }
    public String activeCdStr(){
       return _activeCdStr;
    }
-
+   
    public void setActiveCdStr(String _activeCdStr){
       this._activeCdStr = _activeCdStr;
    }
@@ -52,5 +70,7 @@ public class FDataNoticeInfo
       map.put("beginDateStr", _beginDateStr);
       map.put("endDateStr", _endDateStr);
       map.put("activeCdStr", _activeCdStr);
+      map.put("userName", _userName);
+      map.put("noticeLabel", _noticeLabel);
    }
 }

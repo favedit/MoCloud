@@ -97,4 +97,31 @@ public class FAccessConsole
       FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = logic.fetchClass(FLoggerPersonUserAccessUnit.class, whereSql.toString(), orderBy, pageSize, pageNum);
       return unitlist;
    }
+   
+   // ============================================================
+   // <T>查询一天登录成功或失败的数量数据</T>
+   // @param logicContext 链接对象
+   // @param beginDateStr 开始时间
+   // @param endDateStr 结束时间
+   // @param logicMessage 操作信息
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public Integer getLoginCountByDateandMessage(ILogicContext logicContext, 
+                                                String startTimeStr, 
+                                                String endTimeStr, 
+                                                String logicMessage){
+      FSql whereSql = new FSql();
+      whereSql.append(FLoggerPersonUserAccessLogic.CREATE_DATE + " >= '{startTimeStr}'");
+      whereSql.bind("startTimeStr", RString.parse(startTimeStr));
+      whereSql.append(" and ");
+      whereSql.append(FLoggerPersonUserAccessLogic.CREATE_DATE + " <= '{endTimeStr}'");
+      whereSql.bind("endTimeStr", RString.parse(endTimeStr));
+      whereSql.append(" and ");
+      whereSql.append(FLoggerPersonUserAccessLogic.LOGIC_MESSAGE + " LIKE '%{logicMessage}%'");
+      whereSql.bind("logicMessage", RString.parse(logicMessage));
+      FLoggerPersonUserAccessLogic logic = new FLoggerPersonUserAccessLogic(logicContext);
+      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = logic.fetchClass(FLoggerPersonUserAccessUnit.class, whereSql.toString());
+      return unitlist.count();
+   }
 }

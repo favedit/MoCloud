@@ -2,10 +2,14 @@ package org.mo.content.face.manage.system.statistics.user.login;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
 
+import java.util.Arrays;
+
 import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.RInteger;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.content.core.manage.system.statistics.user.login.FDataAccessVo;
 import org.mo.content.core.manage.system.statistics.user.login.IAccessConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
@@ -128,21 +132,22 @@ public class FAccessAction
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      TDateTime beginDate = new TDateTime(RDateTime.currentDateTime());
-      beginDate.addDay(-1);
-      String beginDateStr = beginDate.formatDate();
-      TDateTime endDate = new TDateTime(RDateTime.currentDateTime());
-      endDate.addDay(-30);
-      String endDateStr = endDate.formatDate();
-      String logicMessage = context.parameter("logicMessage");
-      String passport = context.parameter("passport");
-//      FLogicDataset<FLoggerPersonUserAccessUnit> unitlist = _accessConsole.selectByDateandMessage(logicContext, beginDateStr, endDateStr, logicMessage,passport, accessPage.pageCurrent() - 1, pageSize);
-      FLogicDataset<FLoggerPersonUserAccessUnit> list = new FLogicDataset<FLoggerPersonUserAccessUnit>(FLoggerPersonUserAccessUnit.class);
-      for(FLoggerPersonUserAccessUnit unit : list){
-         unit.setGuid("123456789");
+      
+      Integer date[] = new Integer[30];//日期数组
+      Integer success[] = new Integer[30];//登录成功数量
+      Integer fail[] = new Integer[30];//登录失败数量
+      TDateTime day = new TDateTime(RDateTime.currentDateTime());//当前日期
+      for(int k=0;k<30;k++){
+         day.addDay(k);
+         date[k]=RInteger.parse(day.formatDate());
+         _logger.debug(this, "===================================selectByDay"+date[k], "selectByDay finish. (unitListCount={1})", basePage.json());
+         success[k]=_accessConsole.getLoginCountByDateandMessage(logicContext, day.formatDate()+"000000", day.formatDate()+"235959", "登录成功");
+         fail[k]=_accessConsole.getLoginCountByDateandMessage(logicContext, day.formatDate()+"000000", day.formatDate()+"235959", "登录失败");
       }
-      basePage.setJson(list.toJsonListString());
-      _logger.debug(this, "selectByDay", "selectByDay finish. (unitListCount={1})", list.count());
+      
+      String json = "{\"login\": [{\"name\": \"登录成功\",\"data\":"+ Arrays.toString(success)+"},{\"name\": \"登录失败\",\"data\":"+ Arrays.toString(fail)+"}],\"date\":"+ Arrays.toString(date)+"}";
+      basePage.setJson(json);
+      _logger.debug(this, "selectByDay", "selectByDay finish. (unitListCount={1})", basePage.json());
       return "/manage/common/ajax";
    }
 }

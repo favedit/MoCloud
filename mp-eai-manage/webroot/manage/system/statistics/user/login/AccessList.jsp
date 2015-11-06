@@ -24,7 +24,7 @@
 
 <script>
 $(function() {
-   doSubmit(null,null);
+   //doSubmit(null,null);
    var pager = $('#access').datagrid().datagrid('getPager');
    pager.pagination({
       pageSize: 20,
@@ -129,62 +129,80 @@ function hCharts(){
       type: "POST",
       url: url,
       success: function(msg) {
-         closeProgress();
-         $('#container').highcharts({
-            title: {
-                text: '用户登录月曲线图',
-                x: -20 //center
-            },
-            subtitle: {
-                text: '',
-                x: -20
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yAxis: {
-                title: {
-                    text: '次'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                valueSuffix: '次'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: [{
-                name: '成功',
-                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-            }, {
-                name: '失败',
-                data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-            }]
-         });
-      },
-      fail: function() {
-         closeProgress();
-         alert("error");
-      }
-   });
+        var json = toJsonObject(msg);
+        
+        var successName = json.login[0].name;
+        var success = json.login[0].data;
+        
+        var failName = json.login[1].name;
+        var fail = json.login[1].data;
+        
+        //声明 highcharts series数据对象
+        var hChartData = [{
+            name:'' ,
+            data: []
+        }, {
+            name: '',
+            data: []
+        }];
+        
+        hChartData[0].name=sucessName;
+        hChartData[1].name=failName;
+        //highcharts series 数组 push赋值
+        for(var j=0;j<12;j++){
+           hChartData[0].data.push(eval("("+success[j]+")"));
+           hChartData[1].data.push(eval("("+fail[j]+")"));
+        }
+        
+        $('#container').highcharts({
+           title: {
+               text: '用户登录月曲线图',
+               x: -20 //center
+           },
+           subtitle: {
+               text: '',
+               x: -20
+           },
+           xAxis: {
+               categories: [1,2,3,4,5,6,7,8,9,10,11,12]
+           },
+           yAxis: {
+               title: {
+                   text: '次'
+               },
+               plotLines: [{
+                   value: 0,
+                   width: 1,
+                   color: '#808080'
+               }]
+           },
+           tooltip: {
+               valueSuffix: '次'
+           },
+           legend: {
+               layout: 'vertical',
+               align: 'right',
+               verticalAlign: 'middle',
+               borderWidth: 0
+           },
+           series: hChartData
+        });
+        closeProgress();
+     },
+     fail: function() {
+        closeProgress();
+        alert("error");
+     }
+  });
 }
 </script>
 </HEAD>
 
 <body>
-<div id="loginView" style="width:100%;height:25%;">
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="loginView" style="width:100%;height:35%;">
+<div id="container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
 </div>
-<div id="manage_id" style="width:100%;height:75%;">
+<div id="manage_id" style="width:100%;height:65%;">
 <div id="cy_right">
    <div class="right_title">
       <span>用户日志</span>

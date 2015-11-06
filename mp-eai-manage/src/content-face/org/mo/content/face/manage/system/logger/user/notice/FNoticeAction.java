@@ -102,9 +102,9 @@ public class FNoticeAction
       String beginDateStr = context.parameter("beginDate");
       String endDateStr = context.parameter("endDate");
       Integer activeCd = context.parameterAsInteger("activeCd");
-      Long noticeId = context.parameterAsLong("noticeId");
+      String noticeLabel = context.parameter("noticeLabel");
       FLogicDataset<FDataNoticeInfo> unitlist = _noticeLoggerConsole.selectByDateandActiveCd(logicContext,beginDateStr,endDateStr
-            ,activeCd,noticeId,accessPage.pageCurrent() - 1, pageSize);
+            ,activeCd,noticeLabel,accessPage.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
       _logger.debug(this, "selectByDate", "selectByDate finish. (unitListCount={1})", unitlist.count());
       return "/manage/common/ajax";
