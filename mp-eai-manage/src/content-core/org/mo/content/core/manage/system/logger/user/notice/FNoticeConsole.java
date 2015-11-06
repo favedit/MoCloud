@@ -91,7 +91,7 @@ public class FNoticeConsole
       }
       FSql whereSql = new FSql();
       whereSql.append(" 1=1 ");
-      if(!RString.isEmpty(activeCd + "")){
+      if(activeCd !=0 ){
          whereSql.append(" and ");
          whereSql.append(FDataPersonUserNoticeLogic.ACTIVE_CD + " = '{activeCd}'");
          whereSql.bind("activeCd", RString.parse(activeCd));
@@ -113,17 +113,20 @@ public class FNoticeConsole
       FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, adminId);
       for(FDataNoticeInfo info : unitlist){
          String label = info.notice().label();
+         if(info.user()!=null){
+            info.setUserName(info.user().label());
+         }else{
+            info.setUserName(unit.label());
+         }
+         info.setNoticeLabel(info.notice().label());
+         info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
          if(!RString.isEmpty(noticeLabel)&&!RString.isEmpty(label)&&label.contains(noticeLabel)){
-            if(info.user()!=null){
-               info.setUserName(info.user().label());
-            }else{
-               info.setUserName(unit.label());
-            }
-            info.setNoticeLabel(info.notice().label());
-            info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
             list.push(info);
          }
       }
-      return list;
+      if(!RString.isEmpty(noticeLabel)){
+         return list;
+      }
+      return unitlist;
    }
 }

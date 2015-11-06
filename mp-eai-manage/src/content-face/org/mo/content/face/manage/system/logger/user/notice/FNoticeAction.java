@@ -65,7 +65,7 @@ public class FNoticeAction
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      String adminId = context.parameter("adminId");
+      String adminId = basePage.userId();
       FLogicDataset<FDataNoticeInfo> unitlist = _noticeLoggerConsole.select(logicContext,adminId, page.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitlist.count());
@@ -104,7 +104,7 @@ public class FNoticeAction
       String endDateStr = context.parameter("endDate");
       Integer activeCd = context.parameterAsInteger("activeCd");
       String noticeLabel = context.parameter("noticeLabel");
-      String adminId = context.parameter("adminId");
+      String adminId = basePage.userId();
       FLogicDataset<FDataNoticeInfo> unitlist = _noticeLoggerConsole.selectByDateandActiveCd(logicContext,adminId,beginDateStr,endDateStr
             ,activeCd,noticeLabel,accessPage.pageCurrent() - 1, pageSize);
       basePage.setJson(unitlist.toJsonListString());
