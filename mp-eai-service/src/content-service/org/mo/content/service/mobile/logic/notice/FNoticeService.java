@@ -153,7 +153,11 @@ public class FNoticeService
                NumberFormat numberFormat = NumberFormat.getInstance();
                numberFormat.setMaximumFractionDigits(0);
                numberFormat.setRoundingMode(RoundingMode.HALF_UP);
-               String result = numberFormat.format(unit.viewCount() / (float)userCount.count() * 100);
+               //               String result = numberFormat.format(unit.viewCount() / (float)userCount.count() * 100);
+               String result = numberFormat.format(unit.viewCount() / (float)30 * 100);
+               if(Integer.parseInt(result) > 100){
+                  result = "100";
+               }
                percentNode.setText(result);
             }
             if(unit.content() != null && (!"".equals(unit.content()))){

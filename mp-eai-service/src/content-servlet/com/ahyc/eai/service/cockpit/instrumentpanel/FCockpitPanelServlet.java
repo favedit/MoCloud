@@ -62,6 +62,7 @@ public class FCockpitPanelServlet
       stream.writeInt32(50);//集团当月入职离职情况
       stream.writeInt32(60);//理财师人均业绩百分比
       stream.writeInt32(70);//集团收支状况百分比
+      stream.writeInt32(20);//业绩完成度百分比
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);

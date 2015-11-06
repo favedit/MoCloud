@@ -1,44 +1,40 @@
-package com.ahyc.eai.service.cockpit.wisdom;
+package com.ahyc.eai.service.cockpit.projectmanage;
 
+import com.ahyc.eai.core.cockpit.projectmanage.IProjectManageConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.mo.com.encoding.RMd5;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-// <T>智慧柯南接口.</T>
+// <T>驾驶舱业绩处理。</T>
 //============================================================
-public class FCockpitWisdomServlet
+public class FCockpitProjectManageServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitWisdomServlet
+         ICockpitProjectManageServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitWisdomServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitProjectManageServlet.class);
 
    // 资源访问接口
-   //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
+   //   private static IResource _resource = RResource.find(FCockpitProjectManageServlet.class);
+
+   // 金融控制台
+   @ALink
+   protected IProjectManageConsole _projectManageConsole;
 
    //============================================================
-   // <T>智慧柯南列表</T>
+   // <T>获得统计动态数据。</T>
+   //
    // @param context 环境
    // @param logicContext 逻辑环境
    // @param request 请求
@@ -49,8 +45,7 @@ public class FCockpitWisdomServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named fetch from FCockpitTrendServlet is beginning... ");
-      //检查参数
+      // 检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
       }
@@ -65,43 +60,18 @@ public class FCockpitWisdomServlet
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
-      int uid = 3;
-      String pwd = "d1e5ab7f41f7d25ce64" + uid + "e2036af314e26";
-      String token = RMd5.encode(pwd).toLowerCase();
-      CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://project.eai.ezubo.com/Api/get_projects?uid=+" + uid + "&token=" + token;
-      HttpGet get = new HttpGet(url);
-      try{
-         CloseableHttpResponse responseResult = httpclient.execute(get);
-         HttpEntity entity = responseResult.getEntity();
-         if(entity != null){
-            String responseContent = EntityUtils.toString(entity);
-            String result = new String(responseContent.getBytes("utf-8"));
-            //            System.out.println(result);
-         }
-      }catch(ClientProtocolException e){
-         e.printStackTrace();
-      }catch(ParseException e){
-         e.printStackTrace();
-      }catch(UnsupportedEncodingException e){
-         e.printStackTrace();
-      }catch(IOException e){
-         e.printStackTrace();
-      }
       // 设置输出流
       FByteStream stream = createStream(context);
-      FByteStream dataStream = createStream(context);
-      //写入数据
-      stream.write(dataStream.memory(), 0, dataStream.position());
-      int count = 5;
-      stream.writeInt32(5);
+      _projectManageConsole.fetch();
+      //      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      // 写入数据
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send data notice dynamic. (count={1}, data_length={2})", count, dataLength);
+      _logger.debug(this, "process", "Send dynamic. (date={1}, data_length={2})", currentDate.format(), dataLength);
       return sendStream(context, request, response, stream);
    }
 }

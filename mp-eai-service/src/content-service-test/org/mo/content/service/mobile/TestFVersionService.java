@@ -15,85 +15,85 @@ import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.mo.com.lang.RString;
 
-public class TestFVersionService {
-    @Test
-    public void testConnect() throws ClientProtocolException, IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        String url = "http://10.13.0.16:8020/eai.mobile.wsp";
-        // String url = "http://eai.ezubo.com:8089/eai.mobile.wsp";
-        HttpPost post = new HttpPost(url);
-        List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-        listPram.add(new BasicNameValuePair("version_number", "1.0"));
-        listPram.add(new BasicNameValuePair("app_key",
-                "0E144A4C9CA64FAB854FF2DE8B589312"));
-        // listPram.add(new BasicNameValuePair("mo-session-id",
-        // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "18E0612D9BCD48D9A53F08A2EEE7ADC9");
-        listPram.add(new BasicNameValuePair("action", "connect"));
-        listPram.add(new BasicNameValuePair("format_cd", "json"));
-        post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
-        System.out.println(EntityUtils.toString(post.getEntity()));
-        CloseableHttpResponse response = httpclient.execute(post);
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            String responseContent = EntityUtils.toString(entity);
-            String result = new String(responseContent.getBytes("utf-8"));
-            System.out.println(result);
-        }
+public class TestFVersionService
+{
+   @Test
+   public void testConnect() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.16:8020/eai.mobile.wsp";
+      // String url = "http://eai.ezubo.com:8089/eai.mobile.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("version_number", "1.0"));
+      listPram.add(new BasicNameValuePair("app_key", "0E144A4C9CA64FAB854FF2DE8B589312"));
+      // listPram.add(new BasicNameValuePair("mo-session-id",
+      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
+      post.setHeader("mo-session-id", "2D071B11F87242A7A0A81FB795924761");
+      listPram.add(new BasicNameValuePair("action", "connect"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      System.out.println(EntityUtils.toString(post.getEntity()));
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
 
-    }
+   }
 
-    @Test
-    public void testDisconnect() throws ClientProtocolException, IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        String url = "http://10.13.0.100:8020/eai.mobile.wsp";
-        HttpPost post = new HttpPost(url);
-        List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-        listPram.add(new BasicNameValuePair("version_number", "4"));
-        listPram.add(new BasicNameValuePair("app_os", "android"));
-        // listPram.add(new BasicNameValuePair("mo-session-id",
-        // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "4649AD3AF9BFBBAE690C5DF6C0AF202C");
-        listPram.add(new BasicNameValuePair("action", "disconnect"));
-        listPram.add(new BasicNameValuePair("format_cd", "json"));
-        post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
-        CloseableHttpResponse response = httpclient.execute(post);
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            String responseContent = EntityUtils.toString(entity);
-            String result = new String(responseContent.getBytes("utf-8"));
-            System.out.println(result);
-        }
+   @Test
+   public void testDisconnect() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.100:8020/eai.mobile.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("version_number", "4"));
+      listPram.add(new BasicNameValuePair("app_os", "android"));
+      // listPram.add(new BasicNameValuePair("mo-session-id",
+      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
+      post.setHeader("mo-session-id", "4649AD3AF9BFBBAE690C5DF6C0AF202C");
+      listPram.add(new BasicNameValuePair("action", "disconnect"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
 
-    }
+   }
 
-    @Test
-    public void testGetMarketer() throws ClientProtocolException, IOException {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        String url = "http://10.13.0.100:8020/eai.financial.marketer.wsp";
-        HttpPost post = new HttpPost(url);
-        List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-        listPram.add(new BasicNameValuePair("version_number", "4"));
-        listPram.add(new BasicNameValuePair("app_os", "android"));
-        // listPram.add(new BasicNameValuePair("mo-session-id",
-        // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
-        post.setHeader("mo-session-id", "4649AD3AF9BFBBAE690C5DF6C0AF202C");
-        listPram.add(new BasicNameValuePair("action", "disconnect"));
-        listPram.add(new BasicNameValuePair("format_cd", "json"));
-        post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
-        CloseableHttpResponse response = httpclient.execute(post);
-        HttpEntity entity = response.getEntity();
-        if (entity != null) {
-            String responseContent = EntityUtils.toString(entity);
-            String result = new String(responseContent.getBytes("utf-8"));
-            System.out.println(result);
-        }
+   @Test
+   public void testGetMarketer() throws ClientProtocolException, IOException{
+      CloseableHttpClient httpclient = HttpClients.createDefault();
+      String url = "http://10.13.0.100:8020/eai.financial.marketer.wsp";
+      HttpPost post = new HttpPost(url);
+      List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
+      listPram.add(new BasicNameValuePair("version_number", "4"));
+      listPram.add(new BasicNameValuePair("app_os", "android"));
+      // listPram.add(new BasicNameValuePair("mo-session-id",
+      // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
+      post.setHeader("mo-session-id", "4649AD3AF9BFBBAE690C5DF6C0AF202C");
+      listPram.add(new BasicNameValuePair("action", "disconnect"));
+      listPram.add(new BasicNameValuePair("format_cd", "json"));
+      post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
+      CloseableHttpResponse response = httpclient.execute(post);
+      HttpEntity entity = response.getEntity();
+      if(entity != null){
+         String responseContent = EntityUtils.toString(entity);
+         String result = new String(responseContent.getBytes("utf-8"));
+         System.out.println(result);
+      }
 
-    }
+   }
 
-    @Test
-    public void testSpace() {
-        System.out.println(RString.isNotEmpty(RString.trimSplit("    ", ' ')));
-    }
+   @Test
+   public void testSpace(){
+      System.out.println(RString.isNotEmpty(RString.trimSplit("    ", ' ')));
+   }
 
 }

@@ -178,11 +178,11 @@ public class FSalesToolsService
                xruntime.createNode("icon_url").setText("0");
             }
 
-            String updateDate = salesToolsUnit.updateDate() + "";
+            String updateDate = salesToolsUnit.recordDate().format("yyyy/mm/dd");
             if(updateDate != null && (!"".equals(updateDate))){
-               xruntime.createNode("update_date").setText(updateDate);
+               xruntime.createNode("publish_date").setText(updateDate);
             }else{
-               xruntime.createNode("update_date").setText("0");
+               xruntime.createNode("publish_date").setText("0");
             }
             int viewCount = salesToolsUnit.viewCount();
             xruntime.createNode("read_count").setText(viewCount + "");

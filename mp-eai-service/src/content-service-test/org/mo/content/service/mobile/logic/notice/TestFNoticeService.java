@@ -29,7 +29,7 @@ public class TestFNoticeService
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       listPram.add(new BasicNameValuePair("page_number", "1"));
       listPram.add(new BasicNameValuePair("action", "select"));
-      post.setHeader("mo-session-id", "E5FE0E21551B43C29DBE01E331A07B52");
+      post.setHeader("mo-session-id", "F3E16D8F5A819C9A129C54B07B4B4837");
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       CloseableHttpResponse response = httpclient.execute(post);
       HttpEntity entity = response.getEntity();

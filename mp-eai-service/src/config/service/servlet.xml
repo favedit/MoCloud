@@ -217,4 +217,16 @@
          class='com.ahyc.eai.service.cockpit.instrumentpanel.FCockpitPanelServlet'
          scope='global'>
    </Component>
+   
+   <!-- ============================================================ -->
+   <!-- 项目管理                                          -->
+   <!-- ============================================================ -->
+   <WebServlet
+         name='eai.cockpit.projectmanage'
+         face='com.ahyc.eai.service.cockpit.projectmanage.ICockpitProjectManageServlet' />
+   <Component
+         face='com.ahyc.eai.service.cockpit.projectmanage.ICockpitProjectManageServlet'
+         class='com.ahyc.eai.service.cockpit.projectmanage.FCockpitProjectManageServlet'
+         scope='global'>
+   </Component>
 </Config>
