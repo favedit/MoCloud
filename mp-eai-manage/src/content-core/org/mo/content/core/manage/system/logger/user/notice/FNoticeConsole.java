@@ -2,10 +2,13 @@ package org.mo.content.core.manage.system.logger.user.notice;
 
 import com.cyou.gccloud.data.data.FDataPersonUserNoticeLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserNoticeUnit;
+import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.lang.RString;
+import org.mo.content.core.manage.system.user.IUserConsole;
+import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -19,6 +22,10 @@ public class FNoticeConsole
 {
    // 每页条数
    static final int _pageSize = 20;
+   
+   // 用户控制台
+   @ALink
+   protected IUserConsole _userConsole;
 
    // ============================================================
    // <T>构造公告日志控制台。</T>
@@ -37,6 +44,7 @@ public class FNoticeConsole
    // ============================================================
    @Override
    public FLogicDataset<FDataNoticeInfo> select(ILogicContext logicContext,
+                                                String adminId,
                                                 int pageNum,
                                                 int pageSize){
       if(0 > pageNum){
@@ -45,8 +53,13 @@ public class FNoticeConsole
       String orderBy = String.format("%s %s", FDataPersonUserNoticeLogic.UPDATE_DATE, "DESC");
       FDataPersonUserNoticeLogic logic = new FDataPersonUserNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, null, orderBy, pageSize, pageNum);
+      FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, adminId);//system
       for(FDataNoticeInfo info : unitlist){
-         info.setUserName(info.user().name());
+         if(info.user()!=null){
+            info.setUserName(info.user().label());
+         }else{
+            info.setUserName(unit.label());
+         }
          info.setNoticeLabel(info.notice().label());
          info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
       }
@@ -66,6 +79,7 @@ public class FNoticeConsole
    // ============================================================
    @Override
    public FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext,
+                                                                 String adminId,
                                                                  String beginDateStr,
                                                                  String endDateStr,
                                                                  int activeCd,
@@ -96,10 +110,15 @@ public class FNoticeConsole
       FLogicDataset<FDataNoticeInfo> list =new FLogicDataset<>(FDataNoticeInfo.class);
       FDataPersonUserNoticeLogic logic = new FDataPersonUserNoticeLogic(logicContext);
       FLogicDataset<FDataNoticeInfo> unitlist = logic.fetchClass(FDataNoticeInfo.class, whereSql.toString(), orderBy, pageSize, pageNum);
+      FDataPersonUserUnit unit = _userConsole.findByGuid(logicContext, adminId);
       for(FDataNoticeInfo info : unitlist){
          String label = info.notice().label();
-         if(!RString.isEmpty(label)&&label.contains(noticeLabel)){
-            info.setUserName(info.user().name());
+         if(!RString.isEmpty(noticeLabel)&&!RString.isEmpty(label)&&label.contains(noticeLabel)){
+            if(info.user()!=null){
+               info.setUserName(info.user().label());
+            }else{
+               info.setUserName(unit.label());
+            }
             info.setNoticeLabel(info.notice().label());
             info.setActiveCdStr(EGcActive.formatLabel(info.activeCd()));
             list.push(info);

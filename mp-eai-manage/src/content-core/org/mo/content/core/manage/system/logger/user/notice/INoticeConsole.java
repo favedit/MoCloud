@@ -21,6 +21,7 @@ public interface INoticeConsole
    // @return 数据集合
    // ============================================================
    FLogicDataset<FDataNoticeInfo> select(ILogicContext logicContext,
+                                         String adminId,
                                          int pageNum,
                                          int pageSize);
 
@@ -36,6 +37,7 @@ public interface INoticeConsole
    // @return 数据集合
    // ============================================================
    FLogicDataset<FDataNoticeInfo> selectByDateandActiveCd(ILogicContext logicContext,
+                                                          String adminId,
                                                           String beginDateStr,
                                                           String endDateStr,
                                                           int activeCd,
