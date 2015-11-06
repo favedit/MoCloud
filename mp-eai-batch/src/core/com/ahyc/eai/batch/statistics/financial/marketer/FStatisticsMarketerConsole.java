@@ -8,6 +8,7 @@ import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMarketerUnit;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberLogic;
 import com.cyou.gccloud.data.statistics.FStatisticsFinancialMemberUnit;
+import com.cyou.gccloud.define.enums.core.EGcEmploy;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
 import org.mo.com.data.FSql;
@@ -101,7 +102,15 @@ public class FStatisticsMarketerConsole
       unit.setCardArea(memberUnit.cardArea());
       unit.setCardBirth(memberUnit.cardBirth());
       unit.setCardGender(memberUnit.cardGender());
-      unit.setStatusCd(row.getInt("status"));
+      if(row.getInt("status") == 0){//在职
+         unit.setStatusCd(EGcEmploy.Incumbency);
+      }else if(row.getInt("status") == 1){//离职
+         unit.setStatusCd(EGcEmploy.Leave);
+      }else if(row.getInt("status") == 2){//待定
+         unit.setStatusCd(EGcEmploy.Undetermined);
+      }else{
+         unit.setStatusCd(EGcEmploy.Unknown);
+      }
       unit.registerDate().assign(memberUnit.registerDate());
       unit.enterDate().parse(row.get("add_date"));
       // 获得部门标签

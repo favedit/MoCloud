@@ -136,4 +136,10 @@
     <Item _uuid="79ac4de1-a376-49af-957d-dcd1816e1054" name="Content" label="内容" is_valid="Y" note="M#" />
     <Item _uuid="26fd1a4b-4ed8-4935-b5f5-3f56c11311ed" name="Link" label="外链" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="cb2dc759-9cf0-42d6-8df8-b7afe1d15778" name="GcEmploy" label="是否雇佣" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="e3e8d174-7dff-4d46-a1f3-a7f3baa88122" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="28c9fad1-e5a1-48c9-bedd-cce524aad58e" name="Incumbency" label="在职" is_valid="Y" note="M#" />
+    <Item _uuid="e8b3757e-260b-44dd-bf76-e80d3be28148" name="Leave" label="离职" is_valid="Y" note="M#" />
+    <Item _uuid="6a4bf59b-98da-4249-9c7f-b72749b8718c" name="Undetermined" label="待定" is_valid="Y" note="M#" />
+  </Enum>
 </Group>
