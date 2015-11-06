@@ -2,6 +2,7 @@ package org.mo.content.core.financial.marketer.customer;
 
 import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
 //============================================================
@@ -22,4 +23,15 @@ public interface IDataMarketerCustomerConsole
    FDataFinancialMarketerCustomerUnit findBeenSet(ILogicContext logicContext,
                                                   long marketerId,
                                                   long customerId);
+
+   //============================================================
+   // <T>查询理财师下产品的客户</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param marketerId 产品编号
+   // @return 插入结果
+   //============================================================
+   FLogicDataset<FDataFinancialMarketerCustomerInfo> selectByMarkterId(ILogicContext logicContext,
+                                                                       long marketerId);
+
 }

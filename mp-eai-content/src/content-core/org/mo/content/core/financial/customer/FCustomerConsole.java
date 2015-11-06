@@ -1,9 +1,13 @@
 package org.mo.content.core.financial.customer;
 
+import com.cyou.gccloud.data.data.FDataCommonCityUnit;
 import com.cyou.gccloud.data.data.FDataFinancialCustomerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
-import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
+import com.cyou.gccloud.define.enums.core.EGcPersonBusiness;
+import com.cyou.gccloud.define.enums.core.EGcPersonEducation;
+import com.cyou.gccloud.define.enums.core.EGcPersonGender;
+import com.cyou.gccloud.define.enums.core.EGcPersonMarry;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
@@ -13,6 +17,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.content.core.financial.marketer.customer.IDataMarketerCustomerConsole;
 import org.mo.content.core.financial.member.IDataMemberConsole;
+import org.mo.content.core.product.common.ICityConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -26,23 +31,27 @@ public class FCustomerConsole
          ICustomerConsole
 {
    // 每页条数
-   static final int _pageSize = 12;
-
+   static final int                       _pageSize = 12;
+                                                    
    // 成员控制器
    @ALink
-   protected IDataMemberConsole _memberConsole;
-
+   protected IDataMemberConsole           _memberConsole;
+                                          
    // 理财师客户控制器
    @ALink
    protected IDataMarketerCustomerConsole _marketerCustomerConsole;
-
+                                          
+   // 城市控制器
+   @ALink
+   protected ICityConsole                 _cityConsole;
+                                          
    //============================================================
    // <T>构造设备控制台。</T>
    //============================================================
    public FCustomerConsole(){
       super(FDataFinancialCustomerLogic.class, FDataFinancialCustomerUnit.class);
    }
-
+   
    // ============================================================
    // <T>获取理财师的客户</T>
    //
@@ -68,18 +77,27 @@ public class FCustomerConsole
          if(member != null){
             info.setLabel(member.label());
             info.setPhone(member.phone());
+            info.setEMAIL(member.email());
             info.setLastLogin(member.lastLoginDate());
             info.setAge(nowDate.year() - member.birthday().year());
-         }
-         // 获取当前理财师客户的短信设置是什么状态
-         FDataFinancialMarketerCustomerUnit mcustomer = _marketerCustomerConsole.findBeenSet(logicContext, marketerId, info.ouid());
-         if(mcustomer != null){
-            info.setStatusSMS(mcustomer.smsContactCd());
+            //学历
+            info.setEducation(EGcPersonEducation.formatLabel(member.educationCd()));
+            //婚否
+            info.setMarray(EGcPersonMarry.formatLabel(member.marryCd()));
+            //性别
+            info.setGenderLabel(EGcPersonGender.formatLabel(member.genderCd()));
+            //城市
+            FDataCommonCityUnit city = _cityConsole.find(logicContext, member.cityId());
+            if(city != null){
+               info.setCityLabel(city.label());
+            }
+            //职业
+            info.setBusiness(EGcPersonBusiness.formatLabel(member.businessCd()));
          }
       }
       return unitList;
    }
-
+   
    // ============================================================
    // <T>获取总页数</T>
    //
@@ -103,9 +121,9 @@ public class FCustomerConsole
       }
       return pageTotal;
    }
-
+   
    // ============================================================
-   // <T>获取客户</T>
+   // <T>获取客户信息</T>
    //
    // @param logicContext 链接对象
    // @param  objectId 对象编号
@@ -120,16 +138,60 @@ public class FCustomerConsole
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
       FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
       FDataFinancialCustomerInfo info = logic.find(FDataFinancialCustomerInfo.class, objectId);
+      FDataCommonCityUnit city = null;
       // 获取客户的一些基本信息,客户的主键和成员的主键一样
       FDataFinancialMemberUnit member = _memberConsole.find(logicContext, info.ouid());
       if(member != null){
+         city = null;
          info.setLabel(member.label());
          info.setPhone(member.phone());
+         info.setEMAIL(member.email());
          info.setLastLogin(member.lastLoginDate());
          info.setAge(nowDate.year() - member.birthday().year());
+         //学历
+         info.setEducation(EGcPersonEducation.formatLabel(member.educationCd()));
+         //婚否
+         info.setMarray(EGcPersonMarry.formatLabel(member.marryCd()));
+         //性别
+         info.setGenderLabel(EGcPersonGender.formatLabel(member.genderCd()));
+         //城市
+         city = _cityConsole.find(logicContext, member.cityId());
+         if(city != null){
+            info.setCityLabel(city.label());
+         }
+         //职业
+         info.setBusiness(EGcPersonBusiness.formatLabel(member.businessCd()));
       }
-      // 获取客户的产品关注度
-
       return info;
+   }
+   
+   // ============================================================
+   // <T>获取理财师的客户</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @param  pageNum 页码
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataFinancialCustomerInfo> selectByMarketerId(ILogicContext logicContext,
+                                                                       long marketerId,
+                                                                       int pageNum){
+      if(marketerId == 0){
+         throw new FFatalError("selectByMarketerId,marketerId is null");
+      }
+      FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataFinancialCustomerLogic.MARKETER_ID, "={marketerId}");
+      whereSql.bind("marketerId", RString.parse(marketerId));
+      FLogicDataset<FDataFinancialCustomerInfo> unitList = logic.fetchClass(FDataFinancialCustomerInfo.class, whereSql, _pageSize, pageNum);
+      for(FDataFinancialCustomerInfo info : unitList){
+         // 客户的主键和成员的主键一样
+         FDataFinancialMemberUnit member = _memberConsole.find(logicContext, info.ouid());
+         if(member != null){
+            info.setLabel(member.label());
+         }
+      }
+      return unitList;
    }
 }

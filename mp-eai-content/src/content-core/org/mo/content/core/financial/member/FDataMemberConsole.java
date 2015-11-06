@@ -221,4 +221,25 @@ public class FDataMemberConsole
       }
       return member;
    }
+
+   // ============================================================
+   // <T>获取对象</T>
+   //
+   // @param logicContext 链接对象
+   // @param  guid 用户唯一码
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FDataFinancialMemberInfo findInfoByCustomerId(ILogicContext logicContext,
+                                                        long customerId,
+                                                        String guid){
+      FDataFinancialMemberLogic logic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FDataFinancialMemberInfo member = logic.findByGuid(FDataFinancialMemberInfo.class, guid);
+      //获取城市
+      FDataCommonCityUnit city = _cityConsole.find(logicContext, member.cityId());
+      if(city != null){
+         member.setCityLabel(city.label());
+      }
+      return member;
+   }
 }

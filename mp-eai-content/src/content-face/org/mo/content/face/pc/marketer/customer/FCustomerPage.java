@@ -2,6 +2,7 @@ package org.mo.content.face.pc.marketer.customer;
 
 import org.mo.com.lang.FObjectId;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
+import org.mo.content.core.financial.marketer.customer.FDataFinancialMarketerCustomerInfo;
 import org.mo.data.logic.FLogicDataset;
 
 //============================================================
@@ -18,6 +19,9 @@ public class FCustomerPage
 
    // 客户集合
    protected FLogicDataset<FDataFinancialCustomerInfo> _customerList;
+
+   // 理财师客户关系集合
+   protected FLogicDataset<FDataFinancialMarketerCustomerInfo> _maketerCustomerList;
 
    // 客户信息
    protected FDataFinancialCustomerInfo _customerInfo;
@@ -74,6 +78,14 @@ public class FCustomerPage
 
    public void setPageCurrent(int _pageCurrent){
       this._pageCurrent = _pageCurrent;
+   }
+
+   public FLogicDataset<FDataFinancialMarketerCustomerInfo> maketerCustomerList(){
+      return _maketerCustomerList;
+   }
+
+   public void setMaketerCustomerList(FLogicDataset<FDataFinancialMarketerCustomerInfo> _maketerCustomerList){
+      this._maketerCustomerList = _maketerCustomerList;
    }
 
 }

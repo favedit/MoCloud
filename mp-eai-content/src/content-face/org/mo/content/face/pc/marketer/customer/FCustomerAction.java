@@ -1,6 +1,5 @@
 package org.mo.content.face.pc.marketer.customer;
 
-import com.cyou.gccloud.data.cache.FCacheSystemValidationUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerCustomerUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
@@ -8,7 +7,6 @@ import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
 import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
@@ -25,8 +23,8 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <P>金融成员信息。</P>
 //
-// @author sunhr
-// @version 150921
+// @author hyw
+// @version 
 //============================================================
 public class FCustomerAction
       implements
@@ -55,10 +53,6 @@ public class FCustomerAction
    @ALink
    protected IDataMarketerCustomerConsole _marketerCustomerConsole;
 
-   // 理财师客户控制器
-   @ALink
-   protected IValidationConsole _validationConsole;
-
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -72,10 +66,6 @@ public class FCustomerAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FCustomerPage page){
-      System.out.println("------------------------------");
-      FCacheSystemValidationUnit unit = _validationConsole.find(logicContext, 1);
-      System.out.println(unit.passport() + "--------------------");
-
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
@@ -84,11 +74,12 @@ public class FCustomerAction
          FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
          if(marketer == null){
             _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
-            return "/apl/message/NotMarketer";
+            return "/apl/message/LogicFatal";
          }
          marketerId = marketer.ouid();
          page.setLabel(user.label());
       }
+
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
@@ -175,5 +166,77 @@ public class FCustomerAction
       FDataFinancialCustomerInfo customerInfo = _customerConsole.findInfo(logicContext, customer);
       page.setCustomerInfo(customerInfo);
       return "/pc/marketer/customer/CustomerInfo";
+   }
+
+   //============================================================
+   // <T>获取客户信息。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话
+   // @param logicContext 逻辑环境
+   // @param page 页面容器
+   //============================================================
+   @Override
+   public String selectByCustomerId(IWebContext context,
+                                    IWebSession sessionContext,
+                                    ILogicContext logicContext,
+                                    FCustomerPage page){
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "selectByCustomerId", "selectByCustomerId* begin.(session={1})", session.id());
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      long marketerId = 0;
+      if(user != null){
+         FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+         if(marketer == null){
+            _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
+            return "/apl/message/LogicFatal";
+         }
+         marketerId = marketer.ouid();
+         page.setLabel(user.label());
+      }
+      if(null != context.parameter("page")){
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      }else{
+         page.setPageCurrent(0);
+      }
+      //分页处理
+      int pageTotal = _customerConsole.getPageCount(logicContext, marketerId);
+      page.setPageTotal(pageTotal);
+      // 第0页
+      if(page.pageCurrent() == 0){
+         page.setPageCurrent(1);
+      }
+      // 最后一页
+      if(pageTotal < page.pageCurrent()){
+         page.setPageCurrent(pageTotal);
+      }
+      // 获取所有客户
+      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.selectByMarketerId(logicContext, marketerId, page.pageCurrent() - 1);
+      //FLogicDataset<FDataFinancialCustomerInfo> customerList2 = _customerConsole.selectByMarketerId(logicContext, marketerId);
+      long customerId = context.parameterAsLong("customerId");
+      if(0 == customerId){
+         customerId = customerList.first().ouid();
+      }
+      FDataFinancialCustomerInfo customerInfo = _customerConsole.findInfo(logicContext, customerId);
+      //      else{
+      //         customerInfo = _customerConsole.findInfo(logicContext, customerId);
+      //         int index = 0;
+      //         String flag = context.parameter("flag");
+      //         if(flag.equals("true") || flag == "true"){
+      //            index = customerList2.indexOf(customerInfo);
+      //            if(index + 1 < customerList2.count()){
+      //               customerInfo = customerList2.get(index + 1);
+      //            }
+      //         }else if(flag.equals("false") || flag == "false"){
+      //            index = customerList2.indexOf(customerInfo);
+      //            if(index - 1 >= 0){
+      //               customerInfo = customerList2.get(index - 1);
+      //            }
+      //         }
+      //      }
+      page.setCustomerInfo(customerInfo);
+      page.setCustomerList(customerList);
+      return "/pc/marketer/customer/Customer";
    }
 }

@@ -86,4 +86,5 @@ public interface IDataMarketerMemberConsole
    FDataFinancialMarketerMemberInfo findFollowedByMarketerAndMember(ILogicContext logicContext,
                                                                     long marketerId,
                                                                     long memberId);
+
 }

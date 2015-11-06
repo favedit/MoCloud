@@ -6,6 +6,8 @@
                   <table  border="0" cellpadding="2" cellspacing="0">
                      <tr class="title">
                         <td colspan="7" rowspan="0" align="center" valign="center">我的客户</td>
+                        <a href="/pc/marketer/product/customer/CustomerTender.wa">我的业绩</a>
+                        <a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=">我的客户</a>
                      </tr>
                       <tr class="main-title">
                            <td>姓名</td>

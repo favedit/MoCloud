@@ -41,4 +41,15 @@ public interface ICustomerConsole
    // ============================================================
    int getPageCount(ILogicContext logicContext,
                     long marketerId);
+
+   // ============================================================
+   // <T>获取理财师的客户</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataFinancialCustomerInfo> selectByMarketerId(ILogicContext logicContext,
+                                                                long marketerId,
+                                                                int pageNum);
 }

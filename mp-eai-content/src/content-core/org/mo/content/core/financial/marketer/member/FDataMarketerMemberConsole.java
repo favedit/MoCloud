@@ -316,4 +316,5 @@ public class FDataMarketerMemberConsole
       FLogicDataset<FDataFinancialMarketerMemberInfo> list = logic.fetchClass(FDataFinancialMarketerMemberInfo.class, whereSql);
       return list;
    }
+
 }

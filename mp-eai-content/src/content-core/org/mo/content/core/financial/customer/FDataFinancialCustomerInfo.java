@@ -22,6 +22,83 @@ public class FDataFinancialCustomerInfo
    // 短信设置状态
    protected int _statusSMS;
 
+   // 城市名称
+   protected String _cityLabel;
+
+   // 姓别
+   protected String _genderLabel;
+
+   // 邮箱
+   protected String _EMAIL;
+
+   //职业
+   protected String _business;
+
+   //婚否
+   protected String _marray;
+
+   //学历
+   protected String _education;
+
+   //收入
+   protected String _inCome;
+
+   public String inCome(){
+      return _inCome;
+   }
+
+   public void setInCome(String _inCome){
+      this._inCome = _inCome;
+   }
+
+   public String education(){
+      return _education;
+   }
+
+   public void setEducation(String _education){
+      this._education = _education;
+   }
+
+   public String marray(){
+      return _marray;
+   }
+
+   public String business(){
+      return _business;
+   }
+
+   public void setBusiness(String _business){
+      this._business = _business;
+   }
+
+   public void setMarray(String _marray){
+      this._marray = _marray;
+   }
+
+   public String EMAIL(){
+      return _EMAIL;
+   }
+
+   public void setEMAIL(String _eMAIL){
+      _EMAIL = _eMAIL;
+   }
+
+   public String cityLabel(){
+      return _cityLabel;
+   }
+
+   public void setCityLabel(String _cityLabel){
+      this._cityLabel = _cityLabel;
+   }
+
+   public String genderLabel(){
+      return _genderLabel;
+   }
+
+   public void setGenderLabel(String _genderLabel){
+      this._genderLabel = _genderLabel;
+   }
+
    public int statusSMS(){
       return _statusSMS;
    }

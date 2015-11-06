@@ -1,54 +1,54 @@
 <%@ include file='/apl/public.inc' %>
-   <jh:define source="&page.member" alias="member"></jh:define>
+   <jh:define source="&page.customerInfo" alias="customerInfo"></jh:define>
    <%@ include file='head.jsp' %>
       <link rel="stylesheet" type="text/css" href="css/LeisureUser.css">
       
             <div class="imag-container">
                <div class="details">
-                  <p class="title"><a href="/pc/marketer/customer/Customer.wa"><<返回已关注用户列表</a></p>
+                  <p class="title"><a href="/pc/marketer/customer/Customer.wa">返回已关注用户列表</a></p>
                   <div class="details-l">
                      <h4>
-                         <b style="width:22%"><jh:write source="&member.label" /></b>
-                         <i style="width:20%"><jh:write source="&member.phone" /></i>
-                         <i style="width:12%"><jh:write source="&member.age" /></i>
-                         <i class="setupthes" style=""><a class="btn removes" data-id="<jh:write source="&member.guid" />"  href="javascript:;" onclick="setManagement();" >解除关系</a>
+                         <b style="width:22%"><jh:write source="&customerInfo.label" /></b>
+                         <i style="width:20%"><jh:write source="&customerInfo.phone" /></i>
+                         <i style="width:12%"><jh:write source="&customerInfo.age" /></i>
+                         <i class="setupthes" style=""><a class="btn removes" data-id="<jh:write source="&customerInfo.guid" />"  href="javascript:;" onclick="setManagement();" >解除关系</a>
                            <a class="btn " onclick="setPrompts(1500);" href="javascript:;">短信设置</a>
                          </i>
                       </h4>
                      <p>性别：
-                        <jh:write source="&member.genderLabel" />
+                        <jh:write source="&customerInfo.genderLabel" />
                      </p>
                      <p>客户评分：
-                        <jh:write source="&member.recommendScore" />
+                        <jh:write source="&customerInfo.recommendScore" />
                      </p>
                      <p>最高学历：
-                        <jh:write source="&member.educationLabel" />
+                        <jh:write source="&customerInfo.educationLabel" />
                      </p>
                      <p>月收入：
-                        <jh:write source="&member.incomeLabel" />
+                        <jh:write source="&customerInfo.incomeLabel" />
                      </p>
                      <p>职业：
-                        <jh:write source="&member.businessLabel" />
+                        <jh:write source="&customerInfo.businessLabel" />
                      </p>
                      <p>城市：
-                        <jh:write source="&member.cityLabel" />
+                        <jh:write source="&customerInfo.cityLabel" />
                      </p>
                      <p>邮箱：
-                        <jh:write source="&member.email" />
+                        <jh:write source="&customerInfo.email" />
                      </p>
                      <p>推荐人：
-                        <jh:write source="&member.recommendMarketerUserId" />
+                        <jh:write source="&customerInfo.recommendMarketerUserId" />
                      </p>
                   </div>
                   <div class="details-r">
                      <h4>用户动态</h4>
                      <p>注册时间：
-                        <jh:date source="&member.registerDate" format="yyyy-MM-dd hh:mm:ss" />
+                        <jh:date source="&customerInfo.registerDate" format="yyyy-MM-dd hh:mm:ss" />
                      </p>
                      <p>最近登录时间：
-                        <jh:date source="&member.lastLoginDate" format="yyyy-MM-dd hh:mm:ss" />
+                        <jh:date source="&customerInfo.lastLoginDate" format="yyyy-MM-dd hh:mm:ss" />
                      </p>
-                     <p>联络周期倒计时：<i class="yellow"><jh:write source="&member.remainingDays" /></i>天</p>
+                     <p>联络周期倒计时：<i class="yellow"><jh:write source="&customerInfo.remainingDays" /></i>天</p>
                   </div>
                </div>
             </div>

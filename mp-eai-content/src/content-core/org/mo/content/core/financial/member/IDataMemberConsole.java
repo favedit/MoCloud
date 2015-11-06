@@ -53,4 +53,16 @@ public interface IDataMemberConsole
    FDataFinancialMemberInfo findInfoByGuid(ILogicContext logicContext,
                                            long marketerId,
                                            String guid);
+
+   // ============================================================
+   // <T>获取对象</T>
+   //
+   // @param logicContext 链接对象
+   // @param  guid 用户唯一码
+   // @return 数据对象
+   // ============================================================
+   FDataFinancialMemberInfo findInfoByCustomerId(ILogicContext logicContext,
+                                                 long customerId,
+                                                 String guid);
+
 }

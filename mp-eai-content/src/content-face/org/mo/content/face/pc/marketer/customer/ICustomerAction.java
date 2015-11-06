@@ -9,8 +9,8 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <P>金融用户接口。</P>
 //
-// @author sunhr
-// @version 150921
+// @author hyw
+// @version 
 //============================================================
 public interface ICustomerAction
 {
@@ -56,4 +56,18 @@ public interface ICustomerAction
                        IWebSession sessionContext,
                        ILogicContext logicContext,
                        @AContainer(name = "page", fill = true) FCustomerPage page);
+
+   //============================================================
+   // <T>获取客户信息。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话
+   // @param logicContext 逻辑环境
+   // @param page 页面容器
+   //============================================================
+   //   @AWebAuthority("eai.marketer.member.recommend")
+   String selectByCustomerId(IWebContext context,
+                             IWebSession sessionContext,
+                             ILogicContext logicContext,
+                             @AContainer(name = "page", fill = true) FCustomerPage page);
 }

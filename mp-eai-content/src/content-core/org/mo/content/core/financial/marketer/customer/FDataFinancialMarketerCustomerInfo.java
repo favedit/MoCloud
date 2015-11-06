@@ -27,8 +27,20 @@ public class FDataFinancialMarketerCustomerInfo
    // 剩余天数
    protected int _remainingDays;
 
+   // 产品编号
+   protected long _productId;
+
+   //成员图片
    public int remainingDays(){
       return _remainingDays;
+   }
+
+   public long productId(){
+      return _productId;
+   }
+
+   public void setProductId(long _productId){
+      this._productId = _productId;
    }
 
    public void setRemainingDays(int _remainingDays){
