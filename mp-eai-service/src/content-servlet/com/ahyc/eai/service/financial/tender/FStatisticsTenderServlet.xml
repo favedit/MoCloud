@@ -60,10 +60,10 @@ FROM lzh_borrow_info
 WHERE borrow_status in (2, 4, 6, 7)
    AND is_tuijian in (0, 1)
    AND id not in (530, 566, 579, 746)
-   AND borrow_model in ('newdetaildh', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang')
+   AND borrow_model in ('ewealth1', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang1')
 ORDER BY
    borrow_status ASC,
-   field(borrow_model, 'newdetaildh', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang'),
+   field(borrow_model, 'ewealth1', 'newdetailzy', 'newnianxiang', 'newyuexiang', 'newsuying', 'newsuxiang1'),
    id DESC
 LIMIT 6;
 </Resource>
