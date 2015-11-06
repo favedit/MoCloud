@@ -13,6 +13,8 @@ import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.financial.customer.FDataCustomerInfo;
+import org.mo.content.core.financial.customer.IDataCustomerConsole;
 import org.mo.content.core.financial.customer.tender.IDataCustomerTenderConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
 import org.mo.core.aop.face.ALink;
@@ -45,6 +47,10 @@ public class FAchievementsService
    // 客户投资产品控制器
    @ALink
    protected IDataCustomerTenderConsole _customerTenderConsole;
+
+   // 理财师客户投资控制器
+   @ALink
+   protected IDataCustomerConsole _customerConsole;
 
    // ============================================================
    // <T>默认逻辑。</T>
@@ -154,10 +160,15 @@ public class FAchievementsService
       // 获取前30天的投资情况
       FXmlNode achievementsForMonth = output.config().createNode("first30_days");
       int first30Days = 31;
+      String time = null;
+      TDateTime nowTime = null;
+      int count = 0;
       for(int i = 1; i < first30Days; i++){
-         FXmlNode month = achievementsForMonth.createNode("day" + i);
-         month.createNode("date", "2015-10-20");
-         month.createNode("count", "2");
+         count = 0;
+         nowTime = new TDateTime(RDateTime.currentDateTime());
+         nowTime.addDay(-(first30Days - i));
+         time = nowTime.format("yyyy-mm-dd");
+
       }
       return EResult.Success;
    }
@@ -216,13 +227,22 @@ public class FAchievementsService
       if(marketer == null){
          return EResult.Failure;
       }
+
       FXmlNode products = output.config().createNode("product_list");
-      for(int i = 0; i < 8; i++){
+      FLogicDataset<FDataCustomerInfo> mcList = _customerConsole.fetchInvestmentByMarketerId(logicContext, marketer.ouid());
+      double occupancy = 0;
+      double occupancy_total = 0;
+      for(FDataCustomerInfo unit : mcList){
+         occupancy_total += unit.investmentTotal();
+
+      }
+      for(FDataCustomerInfo unit : mcList){
+         occupancy = unit.investmentTotal() / (occupancy_total * 100);
          FXmlNode product = products.createNode();
-         product.createNode("product_name", "e租财富");
-         product.createNode("product_rate", "12");
-         product.createNode("investment_total", "20000050");
-         product.createNode("product_occupancy", "12");
+         product.createNode("product_name", unit.label());
+         product.createNode("product_rate", RString.parse(unit.rate()));
+         product.createNode("investment_total", RString.parse(unit.investmentTotal()));
+         product.createNode("product_occupancy", RString.parse(occupancy));
       }
       return EResult.Success;
    }

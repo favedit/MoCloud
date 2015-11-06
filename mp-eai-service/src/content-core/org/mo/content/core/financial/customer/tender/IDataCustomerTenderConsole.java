@@ -22,4 +22,14 @@ public interface IDataCustomerTenderConsole
    FLogicDataset<FDataFinancialCustomerTenderUnit> fetchByDay(ILogicContext logicContext,
                                                               String date);
 
+   // ============================================================
+   // <T>获取指定客户的投资记录</T>
+   //
+   // @param logicContext 链接对象
+   // @param date 日期
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCustomerTenderInfo> fetchByCustomerId(ILogicContext logicContext,
+                                                            long customerId);
+
 }

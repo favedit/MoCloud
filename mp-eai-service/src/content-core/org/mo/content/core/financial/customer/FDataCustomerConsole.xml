@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.customre.tender.sum'>
+SELECT 
+    product.LABEL as label, product.RATE as rate ,SUM(cus_tender.INVESTMENT) AS investment_total
+FROM
+    DT_FIN_CUSTOMER cus
+    LEFT JOIN DT_FIN_CUSTOMER_TENDER cus_tender ON cus.OUID = cus_tender.CUSTOMER_ID
+    LEFT JOIN DT_FIN_TENDER tender ON cus_tender.TENDER_ID = tender.OUID
+    LEFT JOIN DT_FIN_PRODUCT product ON tender.PRODUCT_ID = product.OUID
+WHERE
+    cus.MARKETER_ID = {marketer_id}
+GROUP BY
+    product.LABEL
+</Resource>
+
+</Config>

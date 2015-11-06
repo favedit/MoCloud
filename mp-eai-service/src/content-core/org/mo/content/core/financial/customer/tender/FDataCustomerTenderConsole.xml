@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.customre.tender.sum'>
+SELECT 
+   CUSTOMER_ID,
+   TENDER_ID,
+   SUM(INVESTMENT) investment_total,
+   SUM(REDEMPTION) redemption_total,
+   SUM(NETINVESTMENT) netinvestment_total,
+   SUM(INTEREST) interest_total 
+ FROM DT_FIN_CUSTOMER_TENDER 
+ WHERE CUSTOMER_ID = 2 
+ GROUP BY TENDER_ID
+</Resource>
+
+</Config>
