@@ -15,7 +15,7 @@ public interface INoticeConsole
    // ============================================================
    // <T>获得分页数据列表</T>
    // @param logicContext 链接对象
-   // @param unit 查询条件
+   // @param adminId 当前登录id
    // @param pageNum 页码
    // @param pageSize 页大小
    // @return 数据集合
@@ -28,7 +28,7 @@ public interface INoticeConsole
    // ============================================================
    // <T>根据时间段和操作信息查询数据</T>
    // @param logicContext 链接对象
-   // @param unit 查询条件
+   // @param adminId 当前登录id
    // @param pageNum 页码
    // @param pageSize 页大小
    // @param beginDateStr 开始时间

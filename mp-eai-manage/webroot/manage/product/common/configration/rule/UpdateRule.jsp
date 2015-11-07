@@ -46,7 +46,7 @@
 <body bgcolor="#198bc9">
  <div id="cy_right" style="width:100%">
   <div class="right_title" style="width:100%">
-   <span>修改应用信息</span>
+   <span>修改规则配置信息</span>
   </div>
   <div class="btn_bar">
    <div class="nav_btn">
@@ -65,7 +65,7 @@
     <table border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">规则状态:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">规&nbsp;则&nbsp;状&nbsp;态:</div></td>
      <td colspan="3"><div align="left">
        <input id="ruleCdStr" name="ruleCdStr" class="easyui-validatebox textbox"
         style="width:280px;height:20px;" readonly="readonly"
@@ -77,7 +77,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">权重百分比:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">权重百分比:</div></td>
      <td colspan="3"><div align="left">
        <input id="percentage" name="percentage" class="easyui-validatebox textbox"
         style="width:280px;height:18px;"
@@ -85,7 +85,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">分&nbsp;&nbsp;&nbsp;&nbsp;数:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数:</div></td>
      <td colspan="3"><div align="left">
        <input id="scorePoint" name="scorePoint" class="easyui-validatebox textbox"
         style="width:280px;height:18px;"
@@ -93,7 +93,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">参数1:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">参&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数1:</div></td>
      <td colspan="3"><div align="left">
        <input id="parameters1" name="parameters1" class="easyui-validatebox textbox"
         style="width:280px;height:18px;"
@@ -101,7 +101,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">参数2:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">参&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数2:</div></td>
      <td colspan="3"><div align="left">
        <input id="parameters2" name="parameters2" class="easyui-validatebox textbox"
         style="width:280px;height:18px;"
@@ -109,7 +109,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">参数3:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">参&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数3:</div></td>
      <td colspan="3"><div align="left">
        <input id="parameters3" name="parameters3" class="easyui-validatebox textbox"
         style="width:280px;height:18px;"
@@ -117,7 +117,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">参数4:</div></td>
+     <td width="80" height="33" colspan="1"><div align="left">参&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数4:</div></td>
      <td colspan="3"><div align="left">
        <input id="parameters4" name="parameters4" class="easyui-validatebox textbox"
         style="width:280px;height:18px;"
@@ -125,7 +125,7 @@
       </div></td>
     </tr>
     <tr>
-      <td width="30" height="30" align="left" colspan="1">备注</td>
+      <td width="80" height="30" align="left" colspan="1">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</td>
       <td height="30" align="left"  colspan="3">
          <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" 
          style="height:100px;width:400px" value="<jh:write source='&unit.note'/>"/>

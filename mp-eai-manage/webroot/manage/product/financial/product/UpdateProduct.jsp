@@ -67,7 +67,7 @@
    <table width="810" height="200" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="86" height="38"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+     <td width="86" height="38"><div align="left">英&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;称:</div></td>
      <td><div align="left">
        <input id="code" name="code" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
@@ -82,7 +82,7 @@
        <img width="114" height="114" src="<jh:write source='&unit.makeUrl'/>"></div></td>
      </tr>
      <tr>
-     <td width="86" height="38"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td width="86" height="38"><div align="left">中&nbsp;&nbsp;文&nbsp;&nbsp;标&nbsp;&nbsp;&nbsp;签:</div></td>
      <td><input id="label" name="label"
       class="easyui-validatebox textbox notnull" style="width:380px;height:20px"
       data-options="required:true,validType:'length[0,40]'"
@@ -90,7 +90,7 @@
      <td>&nbsp;</td>
     </tr>
     <tr>
-     <td width="86" height="38"><div align="left">收益率:</div></td>
+     <td width="86" height="38"><div align="left">收&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;益&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;率:</div></td>
      <td><div align="left">
        <input id="rate" name="rate"
         class="easyui-validatebox textbox notnull"
@@ -101,7 +101,7 @@
      <td>&nbsp;</td>
      </tr>
      <tr>
-     <td width="86" height="38"><div align="left">投资期限:</div></td>
+     <td width="86" height="38"><div align="left">投&nbsp;&nbsp;资&nbsp;&nbsp;期&nbsp;&nbsp;&nbsp;限:</div></td>
      <td><div align="left">
        <input id="horizonCount" name="horizonCount"
         class="easyui-validatebox textbox notnull"
@@ -123,7 +123,7 @@
      <td>&nbsp;</td>
      </tr>
      <tr>
-     <td width="86" height="38"><div align="left">关闭期:</div></td>
+     <td width="86" height="38"><div align="left">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</div></td>
      <td><div align="left">
        <input id="horizonClosed"
         name="horizonClosed"
@@ -134,7 +134,7 @@
      <td></td>
     </tr>
     <tr>
-     <td width="86" height="38"><div align="left">等待期:</div></td>
+     <td width="86" height="38"><div align="left">等&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</div></td>
      <td><div align="left">
        <input id="horizonWait"
         name="horizonWait"
@@ -145,7 +145,7 @@
      <td>&nbsp;</td>
      </tr>
      <tr>
-     <td width="86" height="38"><div align="left">业绩:</div></td>
+     <td width="86" height="38"><div align="left">业&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绩:</div></td>
      <td><div align="left">
        <input id="factor"
         name="factor"
@@ -156,7 +156,7 @@
      <td><div align="left"></div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.makeUrl'/>" >
@@ -164,7 +164,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="86" height="38"><div align="left">备注:</div></td>
+     <td width="86" height="38"><div align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</div></td>
      <td colspan="2"><div align="left">
        <input id="note" name="note" class="easyui-textbox"
         data-options="multiline:true" style="height:100px;width:700px" value="<jh:write source='&unit.note'/>" />

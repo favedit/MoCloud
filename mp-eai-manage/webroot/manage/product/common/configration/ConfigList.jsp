@@ -23,7 +23,7 @@
       var url = "/manage/product/common/configration/Configration.wa?do=select&date=" + new Date().valueOf();
       var data = null;
       var code = $.trim($('#code').val()).replaceAll("'", "");
-      if (code == "代码") code = null;
+      if (code == "英文名称") code = null;
       if (page != null) {
          url = "/manage/product/common/configration/Configration.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
          data = {
@@ -78,20 +78,22 @@
             <a href="/manage/product/common/configration/Configration.wa?do=insertBefore" class="add_btn"></a>
          </div>
          <div class="nav_search">
-            <input id="code" name="" type="text" onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';" onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}" style="color:#ccc" value="代码">
+            <input id="code" name="" type="text" onfocus="if(this.value=='英文名称'){this.value='';}this.style.color='#000000';" 
+            onblur="if(this.value=='') {this.value='英文名称';this.style.color='#ccc';}" style="color:#ccc" value="英文名称">
             <a onClick="doSubmit(0)" href="#" class="sear_btn"></a>
          </div>
       </div>
    </div>
-   <table id="config" class="easyui-datagrid" fit='true' style="align:true" data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,rownumbers: true,striped: true">
+   <table id="config" class="easyui-datagrid" fit='true' style="align:true" 
+   data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:true,remoteSort:false,multiSort:false,rownumbers: true,striped: true">
       <thead>
          <tr>
             <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
-            <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="200px">代码</th>
-            <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="100px">名称</th>
+            <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="300px">英文名称</th>
+            <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="300px">中文名称</th>
             <th data-options="field:'dataTypeCd',halign:'center',align:'right',sortable:true" width="100px">数据类型</th>
-            <th data-options="field:'dataValue',halign:'center',align:'right',sortable:true" width="100px">值</th>
-            <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px">备注</th>
+            <th data-options="field:'dataValue',halign:'center',align:'right',sortable:true" width="200px">值</th>
+            <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="300px">备注</th>
             <th data-options="field:'updateDate',halign:'center',align:'left'" width="140px">更新时间</th>
             <th data-options="field:'operation',halign:'center',align:'center',formatter:insert_editAndDelButton" width="140px">操作</th>
          </tr>

@@ -99,7 +99,7 @@
    <table width="710" height="492" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="38" height="33"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+     <td width="38" height="33"><div align="left">英文名称:</div></td>
      <td width="109"><div align="left">
        <input id="name" name="name" class="easyui-validatebox textbox"
         style="width:80px;height:20px;"
@@ -110,7 +110,7 @@
         id="ouid" name="ouid" style="display:none"
         value="<jh:write source='&unit.ouid'/>" />
       </div></td>
-     <td width="38"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td width="38"><div align="left">中文名称:</div></td>
      <td width="120"><div align="left">
        <input id="label" name="label" class="easyui-validatebox textbox"
         style="width:80px;height:20px"

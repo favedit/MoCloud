@@ -24,7 +24,7 @@
                 + new Date().valueOf();
         var data = null;
         var label = $.trim($('#label').val()).replaceAll("'", "");
-        if (label == "标签") label = null;
+        if (label == "中文名称") label = null;
         if (page != null) {
             url = "/manage/product/common/City.wa?do=select&page=" + page + "&date="
                     + new Date().valueOf();
@@ -85,9 +85,9 @@
    </div>
    <div class="nav_search">
     <input id="label" name="label" type="text"
-     onfocus="if(this.value=='标签'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='标签';this.style.color='#ccc';}"
-     style="color: #ccc" value="标签"> <a onClick="doSubmit(0)"
+     onfocus="if(this.value=='中文名称'){this.value='';}this.style.color='#000000';"
+     onblur="if(this.value=='') {this.value='中文名称';this.style.color='#ccc';}"
+     style="color: #ccc" value="中文名称"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>
    </div>
   </div>
@@ -101,16 +101,16 @@
      width="60px">编号</th>
     <th
      data-options="field:'countryLabel',halign:'center',align:'center',sortable:true"
-     width="200px">所属国家</th>
+     width="190px">所属国家</th>
     <th
      data-options="field:'areaLabel',halign:'center',align:'center',sortable:true"
-     width="190px">所属区域</th>
+     width="180px">所属区域</th>
     <th
      data-options="field:'provinceLabel',halign:'center',align:'center',sortable:true"
-     width="190px">所属省份</th>
+     width="180px">所属省份</th>
     <th
      data-options="field:'label',halign:'center',align:'center',sortable:true"
-     width="200px">标签</th>
+     width="200px">中文名称</th>
     <th
      data-options="field:'displayOrder',halign:'center',align:'center',sortable:true"
      width="60px">排序</th>
@@ -128,7 +128,7 @@
      width="100px">纬度</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="60px">代码</th>
+     width="80px">英文名称简写</th>
     <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
      width="200px">图标地址</th>

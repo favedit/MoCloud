@@ -152,7 +152,7 @@
       <input id="flag" type="hidden"/>
     <span>结束时间:</span>
       <input id="endDate" style="width:150px" name="endDate" class="easyui-datebox" data-options="editable:false"></input>
-    <span>名称:</span>
+    <span>英文名称:</span>
       <input id="name" name="name" class="easyui-validatebox textbox" style="width:150px;" />
       <a href="javascript:void(0);" id="search_id" onClick="submitForm()" class="sear_btn"></a>
     </div>
@@ -169,10 +169,10 @@
      width="60px">用户id</th>
     <th
      data-options="field:'name',halign:'center',align:'left',sortable:true"
-     width="60px">名称</th>
+     width="60px">英文名称</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="60px">标签</th>
+     width="60px">中文名称</th>
     <th data-options="field:'statusCd',halign:'center',align:'left',sortable:true"
      width="40px">状态</th>
     <th

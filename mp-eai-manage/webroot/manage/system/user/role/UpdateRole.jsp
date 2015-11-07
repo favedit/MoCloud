@@ -56,8 +56,6 @@
          });
       }
 
-
-
       function isChecked(value, row, index) {
          console.log(row.viewValidCd);
          if (row.viewValidCd == '1') {
@@ -113,7 +111,7 @@
          <form id="role" action="/manage/system/user/role/Role.wa?do=update" method="post" align="center">
             <table width="900" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
                <tr>
-                  <td width="47" align="left">代码</td>
+                  <td width="47" align="left">英文名称:</td>
                   <td width="400" align="left" colspan="2">
                      <input id="code" name="code" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,80]'" style="width:400px" value="<jh:write source='&role.code' />" />
                      <input name="roleId" style="display:none;" value="<jh:write source='&role.ouid' />" />
@@ -123,25 +121,25 @@
                   </td>
                </tr>
                <tr>
-                  <td align="left">角色名称</td>
+                  <td align="left">角色名称:</td>
                   <td align="left" colspan="2">
                      <input id="label" name="label" class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[1,50]'" style="width:400px" value="<jh:write source='&role.label' />" />
                   </td>
                </tr>
                <tr>
-                  <td align="left">备注</td>
+                  <td align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</td>
                   <td align="left" colspan="2">
                      <input id="note" name="note" class="textbox" style="width:400px" value="<jh:write source='&role.note' />" />
                   </td>
                </tr>
                <tr>
-                  <td align="left">模块</td>
+                  <td align="left">模&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;块:</td>
                   <td colspan="2" align="left">
                      <table id="module" class="easyui-datagrid" style="width:700px;align:true" data-options="collapsible:true,remoteSort:false,multiSort:false">
                         <thead>
                            <tr>
                               <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
-                              <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="400px">代码</th>
+                              <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="400px">英文名称</th>
                               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="150px">模块名称</th>
                               <th data-options="field:'viewValidCd',align:'center',formatter:isChecked" width="60px">查看权限</th>
                            </tr>

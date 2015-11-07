@@ -100,31 +100,31 @@
       <div class="easyui-panel" fit='true' data-options="border:false">
          <table width="718" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
             <tr>
-               <td align="left" width="48">帐号</td>
+               <td align="left" width="48">帐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
                <td align="left" width="660">
                   <input id="passport" name="passport" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[1,16]'" value="" />
                   <input id="adminId" name="adminId" style="display:none" value="<jh:write source='&basePage.userId'/>" />
                </td>
             </tr>
             <tr>
-               <td align="left">密码</td>
+               <td align="left">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</td>
                <td align="left">
                   <input id="pwd1" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[6,20]'" type="password" name="pwd1" />
                </td>
             </tr>
             <tr>
-               <td align="left">确认密码</td>
+               <td align="left">确认密码:</td>
                <td align="left">
                   <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[6,20]'" type="password" name="password" /> </td>
             </tr>
             <tr>
-               <td align="left">真实名称</td>
+               <td align="left">真实名称:</td>
                <td align="left">
                   <input id="label" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true,validType:'length[1,16]'" name="label" value="" />
                </td>
             </tr>
             <tr>
-               <td width="66" height="30" align="left">角色</td>
+               <td width="66" height="30" align="left">角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色:</td>
                <td height="30" colspan="7" align="left">
                   <select class="easyui-combobox" id="role" name="role" style="width:400px;" data-options="valueField:'ouid',textField:'label',editable:false" />
                </td>

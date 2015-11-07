@@ -158,7 +158,7 @@
       </div></td>
     </tr>
     <tr>
-      <td  height="38" width="74"><div align="left">排序:</div></td>
+      <td  height="38" width="74"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
       <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
         data-options="required:true,validType:'length[0,11]'"  value="<jh:write source='&unit.displayOrder'/>"/></td>

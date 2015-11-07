@@ -80,10 +80,10 @@
             <tr>
                <th data-options="field:'ouid',halign:'center',align:'right'" width="60px">编号</th>
                <th data-options="field:'guid',halign:'center',align:'right',hidden:'true'" width="60px">编号</th>
-               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="200px">帐号</th>
-               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="200px">名称</th>
+               <th data-options="field:'passport',halign:'center',align:'left',sortable:true" width="300px">帐号</th>
+               <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="300px">用户</th>
                <th data-options="field:'contactPhone',halign:'center',align:'left',sortable:true" width="100px">手机号码</th>
-               <th data-options="field:'idCard',halign:'center',align:'left',sortable:true" width="160px">证件号码</th>
+               <th data-options="field:'idCard',halign:'center',align:'left',sortable:true" width="260px">证件号码</th>
                <th data-options="field:'roleLabel',halign:'center',align:'left',sortable:true" width="160px">角色状态</th>
                <th data-options="field:'createDate',halign:'center',align:'left',sortable:true" width="140px">创建时间</th>
                <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true" width="140px">修改时间</th>

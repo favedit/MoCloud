@@ -107,25 +107,25 @@
    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">所属国家:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;&nbsp;属&nbsp;&nbsp;国&nbsp;&nbsp;家:</div></td>
      <td><div align="left">
        <input class="easyui-combobox" style="width:380px;" id="countryId" name="countryId" data-options="valueField:'ouid',textField:'name',editable:false"/>
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属区域:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;&nbsp;属&nbsp;&nbsp;区&nbsp;&nbsp;域:</div></td>
      <td><div align="left">
        <div style="width:380px;" onclick="getCountry()"><input class="easyui-combobox" style="width:380px;" id="areaId" name="areaId" data-options="valueField:'ouid',textField:'label',editable:false"/></div>
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属省份:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;&nbsp;属&nbsp;&nbsp;省&nbsp;&nbsp;份:</div></td>
      <td><div align="left">
        <div style="width:380px;" onclick="getArea()"><input class="easyui-combobox" style="width:380px;" id="provinceId" name="provinceId" data-options="valueField:'ouid',textField:'label',editable:false"/></div>
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td width="78" height="33"><div align="left">中&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;称:</div></td>
      <td><div align="left">
        <input id="label" name="label" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -135,7 +135,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
+     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
      <td><div align="left">
        <input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -143,7 +143,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
+     <td width="78" height="33"><div align="left">英文名称简写:</div></td>
      <td><div align="left">
        <input id="code" name="code" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -151,7 +151,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">级&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</div></td>
+     <td width="78" height="33"><div align="left">级&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</div></td>
      <td><div align="left">
        <input id="level" name="level" class="easyui-validatebox textbox"
         style="width:380px;height:20px;"
@@ -159,7 +159,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">城市区号:</div></td>
+     <td width="78" height="33"><div align="left">城&nbsp;&nbsp;市&nbsp;&nbsp;区&nbsp;&nbsp;号:</div></td>
      <td><div align="left">
        <input id="cityCode" name="cityCode" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -167,7 +167,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">经&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度:</div></td>
+     <td width="78" height="33"><div align="left">经&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度:</div></td>
      <td><div align="left">
        <input id="locationLongitude" name="locationLongitude" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -175,7 +175,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">纬&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度:</div></td>
+     <td width="78" height="33"><div align="left">纬&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;度:</div></td>
      <td><div align="left">
        <input id="locationLatitude" name="locationLatitude" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -183,7 +183,7 @@
       </div></td>
     </tr>
     <tr>
-      <td width="78" height="30" align="left">备注</td>
+      <td width="78" height="30" align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</td>
       <td height="30" align="left">
          <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:600px" />
       </td>

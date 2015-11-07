@@ -20,7 +20,7 @@ function moduleSubmit(page){
    var url = "/manage/system/user/module/Module.wa?do=selectDataByPage&date="+new Date().valueOf();
    var data = null;
    var code = $.trim($('#code').val()).replaceAll("'", "");
-   if(code == "代码") code = null;
+   if(code == "英文名称") code = null;
    if(page != null){
       url = "/manage/system/user/module/Module.wa?do=selectDataByPage&page="+page+"&date="+new Date().valueOf();
       data ={"code":code,"page":page};
@@ -76,8 +76,8 @@ function edit(id){
         <a href="/manage/system/user/module/Module.wa?do=insertPrepare" class="add_btn"></a>
         </div>
         <div class="nav_search">
-            <input id="code" name="" type="text" onfocus="if(this.value=='代码'){this.value='';}this.style.color='#000000';" 
-                   onblur="if(this.value=='') {this.value='代码';this.style.color='#ccc';}" style="color:#ccc" value="代码">
+            <input id="code" name="" type="text" onfocus="if(this.value=='英文名称'){this.value='';}this.style.color='#000000';" 
+                   onblur="if(this.value=='') {this.value='英文名称';this.style.color='#ccc';}" style="color:#ccc" value="英文名称">
             <a onClick="moduleSubmit(0)" href="#" class="sear_btn"></a>
         </div>
   </div>  
@@ -88,8 +88,8 @@ data-options="toolbar:'#cy_right',pagination:true,collapsible:true,singleSelect:
    <thead>
          <tr>
                <th data-options="field:'ouid',halign:'center',align:'right'" width="60px" >编号</th>
-                  <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="300px" >代码</th>
-                  <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="200px" >模块名称</th>
+                  <th data-options="field:'code',halign:'center',align:'left',sortable:true" width="400px" >英文名称</th>
+                  <th data-options="field:'label',halign:'center',align:'left',sortable:true" width="300px" >模块名称</th>
                   <th data-options="field:'note',halign:'center',align:'left',sortable:true" width="200px" >备注</th>
                   <th data-options="field:'createDate',halign:'center',sortable:true" width="140px" >创建时间</th>
                   <th data-options="field:'make',halign:'center',align:'right',formatter:insert_editAndDelButton" width="150px">操作</th>

@@ -23,7 +23,7 @@
                 + new Date().valueOf();
         var data = null;
         var name = $.trim($('#name').val()).replaceAll("'", "");
-        if (name == "名称") name = null;
+        if (name == "英文名称") name = null;
         if (page != null) {
             url = "/manage/product/common/Country.wa?do=select&page="
                     + page + "&date=" + new Date().valueOf();
@@ -85,9 +85,9 @@
    </div>
    <div class="nav_search">
     <input id="name" name="name" type="text"
-     onfocus="if(this.value=='名称'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='名称';this.style.color='#ccc';}"
-     style="color: #ccc" value="名称"> <a onClick="doSubmit(0)"
+     onfocus="if(this.value=='英文名称'){this.value='';}this.style.color='#000000';"
+     onblur="if(this.value=='') {this.value='英文名称';this.style.color='#ccc';}"
+     style="color: #ccc" value="英文名称"> <a onClick="doSubmit(0)"
      href="#" class="sear_btn"></a>
    </div>
   </div>
@@ -100,10 +100,10 @@
      width="60px">编号</th>
     <th
      data-options="field:'name',halign:'center',align:'left',sortable:true"
-     width="200px" >名称</th>
+     width="200px" >英文名称</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="200px">标签</th>
+     width="200px">中文名称</th>
      <th
      data-options="field:'displayCode',halign:'center',align:'left',sortable:true"
      width="100px">排序</th>
@@ -112,7 +112,7 @@
      width="100px">区号</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="100px">代码</th>
+     width="100px">英文名称简写</th>
     <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
      width="200px">图标地址</th>

@@ -105,16 +105,16 @@
   <thead>
    <tr>
     <th data-options="field:'ouid',halign:'center',align:'right'"
-     width="40px">编号</th>
+     width="55px">编号</th>
      <th
      data-options="field:'makeUrl',halign:'center',align:'left',formatter:showPhoto"
      width="55px">图片</th>
      <th
      data-options="field:'code',halign:'center',align:'center',sortable:true"
-     width="120px" >名称</th>
+     width="190px" >英文名称</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="130px">标签</th>
+     width="190px">中文名称</th>
      <th
      data-options="field:'rate',halign:'center',align:'left',sortable:true"
      width="100px">收益率</th>

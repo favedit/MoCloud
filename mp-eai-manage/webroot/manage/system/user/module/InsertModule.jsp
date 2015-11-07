@@ -34,7 +34,7 @@
          <form id="module" action="/manage/system/user/module/Module.wa?do=insert" method="post" align="center">
             <table width="705" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
                <tr>
-                  <td align="left">代码</td>
+                  <td align="left">英文名称:</td>
                   <td align="left" colspan="2">
                      <input name="adminId" style="display:none;" value="<jh:write source='&basePage.userId' />" />
                      <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:400px" data-options="required:true" validtype="length[1,80]" value="" />
@@ -42,13 +42,13 @@
                   </td>
                </tr>
                <tr>
-                  <td align="left">模块名称</td>
+                  <td align="left">模块名称:</td>
                   <td align="left" colspan="2">
                      <input id="label" name="label" class="easyui-validatebox textbox notnull" data-options="required:true" validtype="length[1,40]" style="width:400px" value="" />
                   </td>
                </tr>
                <tr>
-                  <td align="left">备注</td>
+                  <td align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</td>
                   <td align="left" colspan="2">
                      <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:500px" />
                   </td>

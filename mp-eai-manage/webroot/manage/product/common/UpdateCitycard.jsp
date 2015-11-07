@@ -136,7 +136,7 @@
    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">身份证:</div></td>
+     <td width="78" height="33"><div align="left">身&nbsp;&nbsp;份&nbsp;&nbsp;证:</div></td>
      <td><div align="left">
        <input id="cardCode" name="cardCode" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;" value="<jh:write source='&unit.cardCode'/>"

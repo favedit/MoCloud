@@ -31,31 +31,31 @@
             <font style="color:red;"><jh:write source='&page.result'/></font>
          <table width="718" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
             <tr>
-               <td align="left" width="48">代码</td>
+               <td align="left" width="48">英文名称:</td>
                <td align="left" width="660">
                   <input id="code" name="code" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,100]'"/>
                   <input id="adminId" name="adminId" style="display:none" value="<jh:write source='&basePage.userId'/>" />
                </td>
             </tr>
             <tr>
-               <td align="left">名称</td>
+               <td align="left">中文名称:</td>
                <td align="left">
                   <input id="label" name="label" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,100]'" />
                </td>
             </tr>
             <tr>
-               <td align="left">数据类型</td>
+               <td align="left">数据类型:</td>
                <td align="left">
                   <input id="dataType" name="dataType" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,20]'" /> </td>
             </tr>
             <tr>
-               <td align="left">数据</td>
+               <td align="left">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;据:</td>
                <td align="left">
                   <input id="dataValue" name="dataValue" class="easyui-validatebox textbox" style="width:400px" data-options="validType:'length[0,200]'" />
                </td>
             </tr>
             <tr>
-               <td width="66" height="30" align="left">备注</td>
+               <td width="66" height="30" align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:</td>
                <td height="30" colspan="7" align="left">
                   <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:500px" />
                </td>

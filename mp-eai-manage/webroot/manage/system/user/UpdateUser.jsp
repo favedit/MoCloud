@@ -102,7 +102,7 @@
       <div class="easyui-panel" fit='true' data-options="border:false">
          <table width="648" border="0" style="text-align:center; margin-left:10px; margin-top:10px; margin-bottom:10px">
             <tr>
-               <td align="left" width="66">帐号</td>
+               <td align="left" width="66">帐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</td>
                <td align="left" width="572">
                   <input id="passport" name="passport" readonly class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true" value="<jh:write source='&user.passport'/>" />
                   <input id="adminId" name="id" style="display:none" value="<jh:write source='&basePage.userId'/>" />
@@ -112,25 +112,25 @@
             </tr>
             <jh:notEquals source="oa" value="&basePage.temp">
                <tr>
-                  <td align="left">密码</td>
+                  <td align="left">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</td>
                   <td align="left">
                      <input id="pwd1" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,42]'" type="password" name="pwd1" value="<jh:write source='&user.password'/>" />
                   </td>
                </tr>
                <tr>
-                  <td align="left">确认密码</td>
+                  <td align="left">确认密码:</td>
                   <td align="left">
                      <input id="pwd2" class="easyui-validatebox textbox notnull" style="width:500px" data-options="required:true,validType:'length[6,42]'" type="password" name="pwd2" value="<jh:write source='&user.password'/>" /> </td>
                </tr>
                <tr>
-                  <td align="left">真实名称</td>
+                  <td align="left">真实名称:</td>
                   <td align="left">
                      <input id="label" class="easyui-validatebox textbox notnull" data-options="required:true" style="width:500px" name="label" value="<jh:write source='&user.label'/>" />
                   </td>
                </tr>
             </jh:notEquals>
             <tr>
-               <td width="66" height="30" align="left">角色</td>
+               <td width="66" height="30" align="left">角&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;色:</td>
                <td height="30" colspan="7" align="left">
                   <input id="oldRoleId" value="<jh:write source='&user.roleId'/>" style="display:none" />
                   <select class="easyui-combobox" id="role" name="role" style="width:500px;" data-options="valueField:'ouid',textField:'label',editable:false" />

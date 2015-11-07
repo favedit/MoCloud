@@ -93,10 +93,10 @@
      width="55px">编号</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="390px">标签</th>
+     width="390px">中文名称</th>
      <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="291px">代码</th>
+     width="291px">英文名称</th>
      <th
      data-options="field:'note',halign:'center',align:'left',sortable:true"
      width="590px">内容</th>

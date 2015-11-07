@@ -94,13 +94,13 @@
    <table width="810" height="646" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="74" height="38"><div align="left">资讯标题:</div></td>
+      <td width="74" height="38"><div align="left">资&nbsp;&nbsp;讯&nbsp;&nbsp;标&nbsp;&nbsp;题:</div></td>
       <td width="185"><input id="label" name="label" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
         data-options="required:true,validType:'length[0,200]'" /></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">是否展示:</div></td>
+     <td height="38"><div align="left">是&nbsp;&nbsp;否&nbsp;&nbsp;展&nbsp;&nbsp;示:</div></td>
      <td><div align="left">
       <select  style="width:380px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" style="width:200px;" data-options="editable:false">
              <option value="1">展示</option>
@@ -109,7 +109,7 @@
       </div></td>
     </tr>   
     <tr>
-     <td height="38"><div align="left">外链状态:</div></td>
+     <td height="38"><div align="left">外&nbsp;&nbsp;链&nbsp;&nbsp;状&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
        <select style="width:380px;height:20px" id="linkCd" class="easyui-combobox" name="linkCd" style="width:200px;" data-options="editable:false">
              <option value="1">内容</option>
@@ -118,7 +118,7 @@
       </div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td style="width:380px;"><div align="left">
      <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"/> 
      <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox">
@@ -126,13 +126,13 @@
      </div></td>
     </tr>
     <tr>
-      <td  height="38" width="74"><div align="left">排序:</div></td>
+      <td  height="38" width="74"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
       <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
         data-options="required:true,validType:'length[0,11]'" /></td>
     </tr>
     <tr>
-      <td  height="38" width="74"><div align="left">关键字:</div></td>
+      <td  height="38" width="74"><div align="left">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;键&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         data-options="validType:'length[0,800]'" /></td>
@@ -144,20 +144,20 @@
       </td>
     </tr>
     <tr>
-     <td height="38"><div align="left">外链地址:</div></td>
+     <td height="38"><div align="left">外&nbsp;&nbsp;链&nbsp;&nbsp;地&nbsp;&nbsp;址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
         style="width:380px;height:20px" data-options="validType:'length[0,800]'"/>
      </div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
+     <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td><div align="left">
       <textarea id="description" name="description" class="border_change" style="width:700px;height:100px"></textarea>
       </div></td>
     </tr>
     <tr>
-     <td><div align="left">资讯内容:</div></td>
+     <td><div align="left">资&nbsp;&nbsp;讯&nbsp;&nbsp;内&nbsp;&nbsp;容:</div></td>
      <td align="left">
         <textarea id="kindeditor_view" name="kindeditor_view" style="width:700px;height:300px"></textarea>
             <input style="display:none" id="content" name="content"/>

@@ -156,7 +156,7 @@
    <table width="790" height="666" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-      <td width="54" height="38"><div align="left">标题:</div></td>
+      <td width="54" height="38"><div align="left">销售工具标题:</div></td>
       <td style="width:380px;"><input id="label" name="label" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px" data-options="required:true,validType:'length[0,200]'" 
         value="<jh:write source='&unit.label'/>" />
@@ -171,7 +171,7 @@
        <img width="140" height="140" src="<jh:write source='&unit.makeUrl'/>"></div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">是否展示:</div></td>
+     <td height="38"><div align="left">是&nbsp;&nbsp;否&nbsp;&nbsp;展&nbsp;&nbsp;示:</div></td>
      <td style="width:380px;"><div align="left">
        <input type="hidden" id="oldDisplayCd" value="<jh:write source='&unit.displayCd'/>">
        <input style="width:380px;height:20px" id="displayCd" class="easyui-combobox" name="displayCd" data-options="valueField:'value',textField:'text',
@@ -180,7 +180,7 @@
       </div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">外链状态:</div></td>
+     <td height="38"><div align="left">外&nbsp;&nbsp;链&nbsp;&nbsp;状&nbsp;&nbsp;态:</div></td>
      <td><div align="left">
        <input type="hidden" id="oldLinkCd" value="<jh:write source='&unit.linkCd'/>">
        <input style="width:380px;height:20px" id="linkCd" class="easyui-combobox" name="linkCd" data-options="valueField:'value',textField:'text',
@@ -188,7 +188,7 @@
       </div></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
+     <td height="38"><div align="left">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片:</div></td>
      <td  colspan="2"><div align="left">
        <input type="file" name="iconUrl" id="iconUrl" style="display:none;" onchange="changfile(this.value)"> 
        <input style="width:280px;" name="oiconUr" readonly="readonly" type="text" id="oiconUr" class="easyui-validatebox textbox" value="<jh:write source='&unit.makeUrl'/>" >
@@ -196,19 +196,19 @@
       </div></td>
     </tr>
     <tr>
-      <td  height="38" width="74"><div align="left">排序:</div></td>
+      <td  height="38" width="74"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
       <td><input id="displayOrder" name="displayOrder" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px"
         data-options="required:true,validType:'length[0,11]'"  value="<jh:write source='&unit.displayOrder'/>"/></td>
     </tr>
     <tr>
-      <td height="38"><div align="left">关键字:</div></td>
+      <td height="38"><div align="left">关&nbsp;&nbsp;&nbsp;&nbsp;键&nbsp;&nbsp;&nbsp;&nbsp;字:</div></td>
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         data-options="validType:'length[0,800]'"   value="<jh:write source='&unit.keywords'/>"/></td>
     </tr>
     <tr>
-     <td height="38"><div align="left">外链地址:</div></td>
+     <td height="38"><div align="left">外&nbsp;&nbsp;链&nbsp;&nbsp;地&nbsp;&nbsp;址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
         style="width:380px;height:20px" data-options="validType:'length[0,800]'" value="<jh:write source='&unit.linkUrl'/>"/>
@@ -218,7 +218,7 @@
      </td>
     </tr>
     <tr>
-     <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
+     <td height="38"><div align="left">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述:</div></td>
      <td colspan="2"><div align="left">
       <textarea id="description" name="description" class="border_change" style="width:700px;height:100px"><jh:write source='&unit.description' format='text'/></textarea>
       </div></td>

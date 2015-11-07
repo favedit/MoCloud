@@ -98,7 +98,7 @@
             <table border="0" align="left" cellpadding="0" cellspacing="0" style=" margin-left:10px">
                <tr>
                   <td width="70" height="33">
-                     <div align="left">应用</div>
+                     <div align="left">应&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用:</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -111,7 +111,7 @@
 
                <tr>
                   <td width="70" height="33">
-                     <div align="left">版本标题</div>
+                     <div align="left">中文名称:</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -124,7 +124,7 @@
                </tr>
                <tr>
                   <td width="70" height="33">
-                     <div align="left">版本号</div>
+                     <div align="left">版&nbsp;本&nbsp;号:</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -134,18 +134,17 @@
                </tr>
                <tr>
                   <td width="70" height="33" colspan="1">
-                     <div align="left">版本号名</div>
+                     <div align="left">英文名称:</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
                         <input id="code" name="code" class="easyui-validatebox textbox notnull" style="width:200px;height:18px;" data-options="required:true,validType:'length[0,40]'" value="<jh:write source='&unit.code'/>"/>
-                        <span style="color:red;">&nbsp;&nbsp;建议版本号名少于40个字符</span>
                      </div>
                   </td>
                </tr>
                <tr>
                   <td height="30">
-                     <div align="left">更新类型</div>
+                     <div align="left">更新类型:</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -157,7 +156,7 @@
 
                <tr>
                   <td width="70" height="33">
-                     <div align="left">开始时间</div>
+                     <div align="left">开始时间:</div>
                   </td>
                   <td width="230">
                      <div align="left">
@@ -165,7 +164,7 @@
                      </div>
                   </td>
                   <td width="70" height="33">
-                     <div align="left">结束时间</div>
+                     <div align="left">结束时间:</div>
                   </td>
                   <td width="208">
                      <div align="left">
@@ -175,7 +174,7 @@
                </tr>
                <tr>
                   <td width="70" height="33" colspan="1">
-                     <div align="left">下载地址</div>
+                     <div align="left">下载地址:</div>
                   </td>
                   <td colspan="3">
                      <div align="left">
@@ -184,7 +183,7 @@
                   </td>
                </tr>
                <tr>
-                  <td width="70" height="30" align="left">更新内容</td>
+                  <td width="70" height="30" align="left">更新内容:</td>
                   <td height="30" align="left" colspan="3">
                      <textarea id="note" name="note" class="border_change" style="width:500px;height:100px"><jh:write source='&unit.note' format='text'/></textarea>
                   </td>

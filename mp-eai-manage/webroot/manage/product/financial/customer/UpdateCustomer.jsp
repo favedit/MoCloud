@@ -236,7 +236,7 @@
         data-options="validType:'length[0,100]'"
         value="<jh:write source='&unit.interestTotal'/>" />
       </div></td>
-     <td><div align="left">:</div></td>
+     <td><div align="left"></div></td>
      <td><div align="left"></div></td>
     </tr>
     <tr>

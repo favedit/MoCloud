@@ -99,25 +99,25 @@
      width="200px">规则状态</th>
      <th
      data-options="field:'percentage',halign:'center',align:'left',sortable:true"
-     width="90px">权重百分比</th>
+     width="100px">权重百分比</th>
      <th
      data-options="field:'scorePoint',halign:'center',align:'left',sortable:true"
-     width="60px">分数</th>
+     width="100px">分数</th>
     <th
      data-options="field:'parameters1',halign:'center',align:'left',sortable:true"
-     width="60px">参数1</th>
+     width="100px">参数1</th>
      <th
      data-options="field:'parameters2',halign:'center',align:'left',sortable:true"
-     width="60px">参数2</th>
+     width="100px">参数2</th>
      <th
      data-options="field:'parameters3',halign:'center',align:'left',sortable:true"
-     width="60px">参数3</th>
+     width="100px">参数3</th>
      <th
      data-options="field:'parameters4',halign:'center',align:'left',sortable:true"
-     width="60px">参数4</th>
+     width="100px">参数4</th>
      <th 
      data-options="field:'note',halign:'center',align:'left'"
-     width="140px">备注</th>
+     width="200px">备注</th>
      <th 
      data-options="field:'updateDate',halign:'center',align:'left'"
      width="140px">更新日期</th>    

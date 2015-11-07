@@ -37,7 +37,7 @@ public class FNoticeConsole
    // ============================================================
    // <T>获得分页数据列表</T>
    // @param logicContext 链接对象
-   // @param unit 查询条件
+   // @param adminId 当前登录id
    // @param pageNum 页码
    // @param pageSize 页大小
    // @return 数据集合
@@ -71,6 +71,7 @@ public class FNoticeConsole
    // @param logicContext 链接对象
    // @param unit 查询条件
    // @param pageNum 页码
+   // @param adminId 当前登录id
    // @param pageSize 页大小
    // @param beginDateStr 开始时间
    // @param endDateStr 结束时间

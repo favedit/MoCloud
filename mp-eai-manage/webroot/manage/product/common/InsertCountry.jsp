@@ -39,7 +39,7 @@
    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+     <td width="78" height="33"><div align="left">英&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;称:</div></td>
      <td><div align="left">
        <input id="name" name="name" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -49,28 +49,28 @@
       </div></td>
     </tr>
     <tr>
-     <td width="30" height="33" colspan="1"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td width="30" height="33" colspan="1"><div align="left">中&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;称:</div></td>
      <td colspan="3"><div align="left">
        <input id="label" name="label" style="width:380px;height:20px;"
         class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,80]'" /> 
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
+     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
      <td><div align="left">
        <input id="displayCode" name="displayCode" style="width:380px;height:20px;" 
         class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,11]'" /> 
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</div></td>
+     <td width="78" height="33"><div align="left">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</div></td>
      <td><div align="left">
        <input id="phoneCode" name="phoneCode" style="width:380px;height:20px;" 
         class="easyui-validatebox textbox notnull" data-options="required:true,validType:'length[0,7]'" /> 
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
+     <td width="78" height="33"><div align="left">英文名称简写:</div></td>
      <td><div align="left">
        <input id="code" name="code" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -78,7 +78,7 @@
       </div></td>
     </tr>
     <tr>
-      <td width="78" height="30" align="left">备注</td>
+      <td width="78" height="30" align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</td>
       <td height="30" align="left">
          <input id="note" name="note" class="easyui-textbox" data-options="multiline:true" style="height:100px;width:600px" />
       </td>

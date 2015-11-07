@@ -63,7 +63,7 @@
    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+     <td width="78" height="33"><div align="left">英&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;称:</div></td>
      <td><div align="left">
        <input id="name" name="name"  value="<jh:write source='&unit.name'/>"  class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"
@@ -74,7 +74,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td width="78" height="33"><div align="left">中&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;称:</div></td>
      <td><div align="left">
        <input id="label" name="label" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.label'/>"
         style="width:380px;height:20px;"
@@ -82,7 +82,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
+     <td width="78" height="33"><div align="left">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序:</div></td>
      <td><div align="left">
        <input id="displayCode" name="displayCode" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.displayCode'/>"
         style="width:380px;height:20px;"
@@ -90,7 +90,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</div></td>
+     <td width="78" height="33"><div align="left">区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:</div></td>
      <td><div align="left">
        <input id="phoneCode" name="phoneCode" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.phoneCode'/>"
         style="width:380px;height:20px;"
@@ -98,7 +98,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">代&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:</div></td>
+     <td width="78" height="33"><div align="left">英文名称简写:</div></td>
      <td><div align="left">
        <input id="code" name="code" class="easyui-validatebox textbox notnull"  value="<jh:write source='&unit.code'/>"
         style="width:380px;height:20px;"
@@ -106,7 +106,7 @@
       </div></td>
     </tr>
     <tr>
-      <td width="78" height="30" align="left">备注</td>
+      <td width="78" height="30" align="left">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</td>
       <td height="30" align="left">
          <input id="note" name="note" class="easyui-textbox"  value="<jh:write source='&unit.note'/>" data-options="multiline:true" style="height:100px;width:600px" />
       </td>

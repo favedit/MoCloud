@@ -195,7 +195,7 @@
      width="55px">编号</th>
     <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="590px">标题</th>
+     width="590px">公告标题</th>
     <th
      data-options="field:'userName',halign:'center',align:'left',sortable:true"
      width="180px">用户</th>

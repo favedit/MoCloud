@@ -24,7 +24,7 @@
 
 <script>
 $(function() {
-   //doSubmit(null,null);
+   doSubmit(null,null);
    var pager = $('#access').datagrid().datagrid('getPager');
    pager.pagination({
       pageSize: 20,
@@ -130,11 +130,17 @@ function hCharts(){
       url: url,
       success: function(msg) {
         var json = toJsonObject(msg);
-        
+        //曲线图标题
+        var text = json.text;
+        //曲线x轴时间
+        var date = json.date;
+        //曲线名称1
         var successName = json.login[0].name;
+        //曲线1数据
         var success = json.login[0].data;
-        
+        //曲线名称2
         var failName = json.login[1].name;
+        //曲线2数据
         var fail = json.login[1].data;
         
         //声明 highcharts series数据对象
@@ -145,18 +151,17 @@ function hCharts(){
             name: '',
             data: []
         }];
-        
-        hChartData[0].name=sucessName;
+        hChartData[0].name=successName;
         hChartData[1].name=failName;
         //highcharts series 数组 push赋值
-        for(var j=0;j<12;j++){
+        for(var j=0;j<30;j++){
            hChartData[0].data.push(eval("("+success[j]+")"));
            hChartData[1].data.push(eval("("+fail[j]+")"));
         }
         
         $('#container').highcharts({
            title: {
-               text: '用户登录月曲线图',
+               text: text,
                x: -20 //center
            },
            subtitle: {
@@ -164,16 +169,16 @@ function hCharts(){
                x: -20
            },
            xAxis: {
-               categories: [1,2,3,4,5,6,7,8,9,10,11,12]
+               categories: date
            },
            yAxis: {
                title: {
-                   text: '次'
+                   text: '次(登陆分布)'
                },
                plotLines: [{
                    value: 0,
                    width: 1,
-                   color: '#808080'
+                   color: 'black'
                }]
            },
            tooltip: {

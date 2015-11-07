@@ -194,7 +194,7 @@
      width="55px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="471px">标题</th>
+     width="471px">销售工具标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
      width="70px">状态</th>

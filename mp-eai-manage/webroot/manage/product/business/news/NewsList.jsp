@@ -221,7 +221,7 @@
      width="55px">图片</th>
      <th
      data-options="field:'label',halign:'center',align:'left',sortable:true"
-     width="510px">标题</th>
+     width="510px">资讯标题</th>
      <th
      data-options="field:'statusCdStr',halign:'center',align:'left',sortable:true"
      width="80px">状态</th>
