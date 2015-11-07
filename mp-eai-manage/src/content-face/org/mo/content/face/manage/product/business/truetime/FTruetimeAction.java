@@ -7,6 +7,7 @@ import org.mo.cloud.core.storage.SGcStorage;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.manage.product.business.truetime.FDataTruetimeInfo;
@@ -201,6 +202,7 @@ public class FTruetimeAction
       info.setLinkCd(unit.linkCd());
       info.setLinkUrl(unit.linkUrl());
       info.setLabel(unit.label());
+      info.setRecordDate(unit.recordDate());
       info.setDisplayOrder(unit.displayOrder());
       if (unit.content().trim().length() > 0) {
          info.setContent(_storageConsole.makeEdit(unit.content()));
@@ -314,6 +316,10 @@ public class FTruetimeAction
       unit.setLabel(context.parameter("label"));
       unit.setLinkUrl(context.parameter("linkUrl"));
       unit.setStatusCd(EGcResourceStatus.Apply);
+      String recordDateStr = context.parameter("recordDate");
+      TDateTime recordDate = new TDateTime();
+      recordDate.parse(recordDateStr, "YYYY-MM-DD HH24:MI:SS");
+      unit.setRecordDate(recordDate);
    }
 
    // ============================================================

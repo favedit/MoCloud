@@ -30,6 +30,13 @@
        $('#linkCd').combobox("select", $('#oldLinkCd').val());
        var conte = $("#conte").val();
        $("#kindeditor_view").val(conte);
+       var oriBeginDate = $("#oriRecordDate").html();
+       oriBeginDate = replaceNbsp(oriBeginDate);
+       $('#recordDate').datetimebox({
+          value: oriBeginDate,
+          required: false,
+          showSeconds: true
+       });
     });
     function submitForm() {
        progress();
@@ -206,6 +213,13 @@
       <td><input id="keywords" name="keywords" class="easyui-validatebox textbox"
         style="width:380px;height:20px"
         data-options="validType:'length[0,800]'"   value="<jh:write source='&unit.keywords'/>"/></td>
+    </tr>
+    <tr>
+      <td width="84" align="left" height="38">原始发布时间:</td>
+      <td align="left">
+         <input class="easyui-datetimebox" name="recordDate" id="recordDate" data-options="showSeconds:true,editable:false" style="width:180px" value="">
+         <span id="oriRecordDate" style="display:none"><jh:date source='&unit.recordDate' format="YYYY-MM-DD HH24:MI:SS"/></span>
+      </td><td></td>
     </tr>
     <tr>
      <td height="38"><div align="left">外&nbsp;&nbsp;链&nbsp;&nbsp;地&nbsp;&nbsp;址:</div></td>

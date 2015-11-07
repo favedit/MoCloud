@@ -129,12 +129,9 @@
      <th
      data-options="field:'keywords',halign:'center',align:'left',sortable:true"
      width="371px">关键字</th>
-     <th 
-     data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
-     width="132px">更新时间</th>
-     <th 
-     data-options="field:'createDate',halign:'center',align:'left',sortable:true"
-     width="132px">创建时间</th>
+     <th
+     data-options="field:'recordDate',halign:'center',align:'left',sortable:true"
+     width="140px">原始发布时间</th>
      <th
      data-options="field:'operation',halign:'center',align:'center',formatter:insert_BrowserButton"
      width="88px">操作</th>

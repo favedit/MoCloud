@@ -67,7 +67,7 @@ public class FTruetimeConsole
          whereSql.append(FDataLogicTruetimeLogic.LABEL + " LIKE '%{label}%'");
          whereSql.bind("label", RString.parse(unit.label()));
       }
-      String orderBy = String.format("%s %s, %s %s", FDataLogicTruetimeLogic.DISPLAY_ORDER, "DESC", FDataLogicTruetimeLogic.CREATE_DATE, "DESC");
+      String orderBy = String.format("%s %s, %s %s", FDataLogicTruetimeLogic.DISPLAY_ORDER, "DESC", FDataLogicTruetimeLogic.RECORD_DATE, "DESC");
       FDataLogicTruetimeLogic logic = logicContext.findLogic(FDataLogicTruetimeLogic.class);
       FLogicDataset<FDataTruetimeInfo> moduleList = logic.fetchClass(FDataTruetimeInfo.class, null, whereSql.toString(), orderBy, pageSize, pageNum);
       for(FDataTruetimeInfo info : moduleList){

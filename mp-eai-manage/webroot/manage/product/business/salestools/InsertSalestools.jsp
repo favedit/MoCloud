@@ -138,6 +138,12 @@
         data-options="validType:'length[0,800]'" /></td>
     </tr>
     <tr>
+      <td align="left" height="38">原始发布时间:</td>
+      <td align="left">
+         <input class="easyui-datetimebox" id="recordDate" name="recordDate" data-options="showSeconds:true,editable:false" style="width:180px">
+      </td>
+    </tr>
+    <tr>
      <td height="38"><div align="left">外&nbsp;&nbsp;链&nbsp;&nbsp;地&nbsp;&nbsp;址:</div></td>
      <td><div align="left">
          <input id="linkUrl" name="linkUrl" class="easyui-validatebox textbox"
