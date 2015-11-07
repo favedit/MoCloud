@@ -136,7 +136,7 @@
    <table width="850" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="78" height="33"><div align="left">身&nbsp;&nbsp;份&nbsp;&nbsp;证:</div></td>
+     <td width="78" height="33"><div align="left">身份证前6位:</div></td>
      <td><div align="left">
        <input id="cardCode" name="cardCode" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;" value="<jh:write source='&unit.cardCode'/>"
@@ -148,28 +148,28 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属国家:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;属&nbsp;国&nbsp;家:</div></td>
      <td><div align="left">
        <input class="easyui-combobox" style="width:380px;" id="country" name="country" data-options="valueField:'ouid',textField:'name',editable:false"/>
        <input name="countryId" id="countryId" type="hidden" value="<jh:write source='&unit.countryId'/>">
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属区域:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;属&nbsp;区&nbsp;域:</div></td>
      <td><div align="left">
        <div onclick="getCountry(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="area" name="area" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="areaId" id="areaId" type="hidden" value="<jh:write source='&unit.areaId'/>">
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属省份:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;属&nbsp;省&nbsp;份:</div></td>
      <td><div align="left">
        <div onclick="getArea(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="province" name="province" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="provinceId" id="provinceId" type="hidden" value="<jh:write source='&unit.provinceId'/>">
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">所属城市:</div></td>
+     <td width="78" height="33"><div align="left">所&nbsp;属&nbsp;城&nbsp;市:</div></td>
      <td><div align="left">
        <div onclick="getProvince(1)" style="width:380px;"><input class="easyui-combobox" style="width:380px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></div>
        <input name="cityId" id="cityId" type="hidden" value="<jh:write source='&unit.cityId'/>">

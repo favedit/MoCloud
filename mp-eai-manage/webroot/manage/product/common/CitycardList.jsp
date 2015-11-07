@@ -104,7 +104,7 @@
      width="300px">城市</th>
     <th
      data-options="field:'cardCode',halign:'center',align:'center',sortable:true"
-     width="100px">身份证</th>
+     width="100px">身份证前6位</th>
     <th data-options="field:'updateDate',halign:'center',align:'left',sortable:true"
      width="140px">更新时间</th>
     <th

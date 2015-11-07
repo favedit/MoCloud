@@ -143,7 +143,7 @@
       </div></td>
     </tr>
     <tr>
-     <td width="78" height="33"><div align="left">英文名称简写:</div></td>
+     <td width="78" height="33"><div align="left">身份证前4位:</div></td>
      <td><div align="left">
        <input id="code" name="code" class="easyui-validatebox textbox notnull"
         style="width:380px;height:20px;"

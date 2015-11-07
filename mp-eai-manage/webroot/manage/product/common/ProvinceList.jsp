@@ -115,7 +115,7 @@
      width="100px">排序</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="100px">英文名称简写</th>
+     width="100px">身份证前2位</th>
    <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
      width="200px">图标地址</th>

@@ -128,7 +128,7 @@
      width="100px">纬度</th>
     <th
      data-options="field:'code',halign:'center',align:'left',sortable:true"
-     width="80px">英文名称简写</th>
+     width="80px">身份证前4位</th>
     <th
      data-options="field:'iconUrl',halign:'center',align:'left',sortable:true"
      width="200px">图标地址</th>
