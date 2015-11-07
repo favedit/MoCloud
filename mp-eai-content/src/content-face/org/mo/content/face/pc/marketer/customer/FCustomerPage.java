@@ -1,8 +1,8 @@
 package org.mo.content.face.pc.marketer.customer;
 
-import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.com.lang.FObjectId;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
+import org.mo.content.core.financial.marketer.customer.FDataFinancialMarketerCustomerInfo;
 import org.mo.data.logic.FLogicDataset;
 
 //============================================================
@@ -17,64 +17,20 @@ public class FCustomerPage
    // 总页数
    protected int _pageTotal;
 
-   //偏移量
-   protected int offset;
-
-   public int getOffset(){
-      return offset;
-   }
-
-   public void setOffset(int offset){
-      this.offset = offset;
-   }
-
-   public int getPagesize(){
-      return pagesize;
-   }
-
-   public void setPagesize(int pagesize){
-      this.pagesize = pagesize;
-   }
-
-   //页显示行数
-   protected int pagesize = 10;
-
    // 客户集合
    protected FLogicDataset<FDataFinancialCustomerInfo> _customerList;
+
+   // 理财师客户关系集合
+   protected FLogicDataset<FDataFinancialMarketerCustomerInfo> _maketerCustomerList;
 
    // 客户信息
    protected FDataFinancialCustomerInfo _customerInfo;
 
-   // 理财师
-   protected FDataFinancialMarketerUnit marketer;
-
-   // 名称
+   //名称
    protected String _label;
 
    // 消息
    protected String _message;
-
-   //关键
-   protected String keyword;
-
-   //总记录行数
-   protected int rowCount;
-
-   public int getRowCount(){
-      return rowCount;
-   }
-
-   public void setRowCount(int rowCount){
-      this.rowCount = rowCount;
-   }
-
-   public String getKeyword(){
-      return keyword;
-   }
-
-   public void setKeyword(String keyword){
-      this.keyword = keyword;
-   }
 
    public FDataFinancialCustomerInfo customerInfo(){
       return _customerInfo;
@@ -124,12 +80,12 @@ public class FCustomerPage
       this._pageCurrent = _pageCurrent;
    }
 
-   public FDataFinancialMarketerUnit getMarketer(){
-      return marketer;
+   public FLogicDataset<FDataFinancialMarketerCustomerInfo> maketerCustomerList(){
+      return _maketerCustomerList;
    }
 
-   public void setMarketer(FDataFinancialMarketerUnit marketer){
-      this.marketer = marketer;
+   public void setMaketerCustomerList(FLogicDataset<FDataFinancialMarketerCustomerInfo> _maketerCustomerList){
+      this._maketerCustomerList = _maketerCustomerList;
    }
 
 }

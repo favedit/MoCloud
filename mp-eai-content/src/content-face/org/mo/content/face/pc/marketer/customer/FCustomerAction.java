@@ -7,7 +7,6 @@ import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.web.FGcWebSession;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.cache.system.IValidationConsole;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
 import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
@@ -24,78 +23,70 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <P>金融成员信息。</P>
 //
-// @author sunhr
-// @version 150921
+// @author hyw
+// @version 
 //============================================================
 public class FCustomerAction
       implements
          ICustomerAction
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCustomerAction.class);
-
-   // session控制台
+   private static ILogger                 _logger = RLogger.find(FCustomerAction.class);
+                                                  
+   //session控制台
    @ALink
-   protected IWebSessionConsole _sessionConsole;
-
-   // 用户控制台
+   protected IWebSessionConsole           _sessionConsole;
+                                          
+   //用户控制台
    @ALink
-   protected IUserConsole _userConsole;
-
-   // 理财师信息控制器
+   protected IUserConsole                 _userConsole;
+                                          
+   //理财师信息控制器
    @ALink
-   protected IDataMarketerConsole _marketerConsole;
-
+   protected IDataMarketerConsole         _marketerConsole;
+                                          
    // 客户信息控制器
    @ALink
-   protected ICustomerConsole _customerConsole;
-
+   protected ICustomerConsole             _customerConsole;
+                                          
    // 理财师客户控制器
    @ALink
    protected IDataMarketerCustomerConsole _marketerCustomerConsole;
-
-   // 理财师客户控制器
-   @ALink
-   protected IValidationConsole _validationConsole;
-
-   // ============================================================
+                                          
+   //============================================================
    // <T>默认逻辑处理。</T>
    //
    // @param context 页面环境
    // @param sessionContext 会话
    // @param logicContext 逻辑环境
    // @param page 页面容器
-   // ============================================================
+   //============================================================
    @Override
    public String construct(IWebContext context,
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FCustomerPage page){
-
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
       long marketerId = 0;
       if(user != null){
          FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
-
          if(marketer == null){
             _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
-            return "/apl/message/NotMarketer";
+            return "/apl/message/LogicFatal";
          }
          marketerId = marketer.ouid();
          page.setLabel(user.label());
-         page.setMarketer(marketer);
       }
-      int rowCount = _customerConsole.getRowCount(logicContext, marketerId);
-      page.setRowCount(rowCount);
+      
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
       }else{
          page.setPageCurrent(0);
       }
-      // 分页处理
+      //分页处理
       int pageTotal = _customerConsole.getPageCount(logicContext, marketerId);
       page.setPageTotal(pageTotal);
       // 第0页
@@ -111,72 +102,15 @@ public class FCustomerAction
       _logger.debug(this, "construct", "construct Select finish. (marketerMemberList = {1})", customerList);
       return "/pc/marketer/customer/CustomerList";
    }
-
-   // ============================================================
-   // <T>获取客户信息。</T>
-   //
-   // @param context 页面环境
-   // @param sessionContext 会话
-   // @param logicContext 逻辑环境
-   // @param page 页面容器
-   // ============================================================
-   @Override
-   public String search(IWebContext context,
-                        IWebSession sessionContext,
-                        ILogicContext logicContext,
-                        FBasePage basePage,
-                        FCustomerPage page){
-
-      FGcWebSession session = (FGcWebSession)sessionContext;
-      _logger.debug(this, "search", "search default begin.(session={1})", session.id());
-      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
-      long marketerId = 0;
-      if(user != null){
-         FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
-         if(marketer == null){
-            _logger.debug(this, "search", "search this user is not marketer.(user={1})", user.ouid());
-            return "/apl/message/NotMarketer";
-         }
-         marketerId = marketer.ouid();
-         page.setLabel(user.label());
-         page.setMarketer(marketer);
-      }
-      String keyword = context.parameter("keyword");
-      page.setKeyword(keyword);
-      int rowCount = _customerConsole.getRowCount(logicContext, marketerId);
-      page.setRowCount(rowCount);
-      if(null != context.parameter("page")){
-         String num = context.parameter("page");
-         page.setPageCurrent(Integer.parseInt(num));
-      }else{
-         page.setPageCurrent(0);
-      }
-      // 分页处理
-      int pageTotal = _customerConsole.getPageCount(logicContext, marketerId);
-      page.setPageTotal(pageTotal);
-      // 第0页
-      if(page.pageCurrent() == 0){
-         page.setPageCurrent(1);
-      }
-
-      // 最后一页
-      if(pageTotal < page.pageCurrent()){
-         page.setPageCurrent(pageTotal);
-      }
-      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.search(logicContext, context, marketerId, page.pageCurrent() - 1, 10);
-      page.setCustomerList(customerList);
-      _logger.debug(this, "search", "search Select finish. (marketerMemberList = {1})", customerList);
-      return "/pc/marketer/customer/CustomerList.wa?do=search";
-   }
-
-   // ============================================================
+   
+   //============================================================
    // <T>短信提醒设置。</T>
    //
    // @param context 页面环境
    // @param sessionContext 会话
    // @param logicContext 逻辑环境
    // @param page 页面容器
-   // ============================================================
+   //============================================================
    @Override
    public String settingsSMS(IWebContext context,
                              IWebSession sessionContext,
@@ -206,22 +140,22 @@ public class FCustomerAction
          mCustomer.setSmsContactCd(selected);
          mCustomer.setActiveCd(EGcActive.Active);
          _marketerCustomerConsole.doInsert(logicContext, mCustomer);
-      }else{// 如果存在，修改短信发送行为。
+      }else{//如果存在，修改短信发送行为。
          marketerCustomer.setSmsContactCd(selected);
          _marketerCustomerConsole.doUpdate(logicContext, marketerCustomer);
       }
       page.setMessage("true");
       return "/apl/ajax";
    }
-
-   // ============================================================
+   
+   //============================================================
    // <T>获取客户信息。</T>
    //
    // @param context 页面环境
    // @param sessionContext 会话
    // @param logicContext 逻辑环境
    // @param page 页面容器
-   // ============================================================
+   //============================================================
    @Override
    public String customerInfo(IWebContext context,
                               IWebSession sessionContext,
@@ -233,5 +167,95 @@ public class FCustomerAction
       page.setCustomerInfo(customerInfo);
       return "/pc/marketer/customer/CustomerInfo";
    }
-
+   
+   //============================================================
+   // <T>获取客户信息。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话
+   // @param logicContext 逻辑环境
+   // @param page 页面容器
+   //============================================================
+   @Override
+   public String selectByCustomerId(IWebContext context,
+                                    IWebSession sessionContext,
+                                    ILogicContext logicContext,
+                                    FCustomerPage page){
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "selectByCustomerId", "selectByCustomerId* begin.(session={1})", session.id());
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      long marketerId = 0;
+      if(user != null){
+         FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+         if(marketer == null){
+            _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
+            return "/apl/message/LogicFatal";
+         }
+         marketerId = marketer.ouid();
+         page.setLabel(user.label());
+      }
+      if(null != context.parameter("page")){
+         String num = context.parameter("page");
+         page.setPageCurrent(Integer.parseInt(num));
+      }else{
+         page.setPageCurrent(0);
+      }
+      //分页处理
+      int pageTotal = _customerConsole.getPageCount(logicContext, marketerId);
+      page.setPageTotal(pageTotal);
+      // 第0页
+      if(page.pageCurrent() == 0){
+         page.setPageCurrent(1);
+      }
+      // 最后一页
+      if(pageTotal < page.pageCurrent()){
+         page.setPageCurrent(pageTotal);
+      }
+      // 获取所有客户
+      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.selectByMarketerId(logicContext, marketerId, page.pageCurrent() - 1);
+      //FLogicDataset<FDataFinancialCustomerInfo> customerList2 = _customerConsole.selectByMarketerId(logicContext, marketerId);
+      long customerId = context.parameterAsLong("customerId");
+      if(0 == customerId){
+         customerId = customerList.first().ouid();
+      }
+      FDataFinancialCustomerInfo customerInfo = _customerConsole.findInfo(logicContext, marketerId, customerId);
+      //      else{
+      //         customerInfo = _customerConsole.findInfo(logicContext, customerId);
+      //         int index = 0;
+      //         String flag = context.parameter("flag");
+      //         if(flag.equals("true") || flag == "true"){
+      //            index = customerList2.indexOf(customerInfo);
+      //            if(index + 1 < customerList2.count()){
+      //               customerInfo = customerList2.get(index + 1);
+      //            }
+      //         }else if(flag.equals("false") || flag == "false"){
+      //            index = customerList2.indexOf(customerInfo);
+      //            if(index - 1 >= 0){
+      //               customerInfo = customerList2.get(index - 1);
+      //            }
+      //         }
+      //      }
+      page.setCustomerInfo(customerInfo);
+      page.setCustomerList(customerList);
+      return "/pc/marketer/customer/Customer";
+   }
+   
+   //============================================================
+   // <T>修改短息提醒类型。</T>
+   //
+   // @param context 页面环境
+   // @param sessionContext 会话
+   // @param logicContext 逻辑环境
+   // @param page 页面容器
+   //============================================================
+   //   @AWebAuthority("eai.marketer.member.recommend")
+   @Override
+   public String updataSms(IWebContext context,
+                           IWebSession sessionContext,
+                           ILogicContext logicContext,
+                           FCustomerPage page){
+      System.out.println("sds");
+      
+      return null;
+   }
 }

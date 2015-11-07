@@ -23,7 +23,7 @@ public interface IDataMarketerCustomerConsole
    FDataFinancialMarketerCustomerUnit findBeenSet(ILogicContext logicContext,
                                                   long marketerId,
                                                   long customerId);
-
+                                                  
    //============================================================
    // <T>查询理财师下产品的客户</T>
    //
@@ -33,5 +33,16 @@ public interface IDataMarketerCustomerConsole
    //============================================================
    FLogicDataset<FDataFinancialMarketerCustomerInfo> selectByMarkterId(ILogicContext logicContext,
                                                                        long marketerId);
-
+                                                                       
+   // ============================================================
+   // <T>获取已设置短信提醒的数据</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @param  customerId 客户编号
+   // @return 数据集合
+   // ============================================================
+   FLogicDataset<FDataFinancialMarketerCustomerInfo> findBeenSets(ILogicContext logicContext,
+                                                                  long marketerId,
+                                                                  long customerId);
 }

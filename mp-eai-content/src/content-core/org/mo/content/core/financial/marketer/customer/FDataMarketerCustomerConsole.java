@@ -20,18 +20,18 @@ public class FDataMarketerCustomerConsole
          IDataMarketerCustomerConsole
 {
    // 每页条数
-   static final int _pageSize = 12;
-
+   static final int           _pageSize = 12;
+                                        
    //客户信息控制台
    protected ICustomerConsole _customerConsole;
-
+                              
    //============================================================
    // <T>构造控制台。</T>
    //============================================================
    public FDataMarketerCustomerConsole(){
       super(FDataFinancialMarketerCustomerLogic.class, FDataFinancialMarketerCustomerUnit.class);
    }
-
+   
    // ============================================================
    // <T>获取已设置短信提醒的数据</T>
    //
@@ -67,7 +67,7 @@ public class FDataMarketerCustomerConsole
    // @param marketerId 产品编号
    // @return 插入结果
    //============================================================
-
+   
    @Override
    public FLogicDataset<FDataFinancialMarketerCustomerInfo> selectByMarkterId(ILogicContext logicContext,
                                                                               long marketerId){
@@ -77,5 +77,34 @@ public class FDataMarketerCustomerConsole
       whereSql.bind("marketerId", RString.parse(marketerId));
       FLogicDataset<FDataFinancialMarketerCustomerInfo> unitList = logic.fetchClass(FDataFinancialMarketerCustomerInfo.class, whereSql);
       return unitList;
+   }
+   
+   // ============================================================
+   // <T>获取已设置短信提醒的数据</T>
+   //
+   // @param logicContext 链接对象
+   // @param  marketerId 理财师编号
+   // @param  customerId 客户编号
+   // @return 数据集合
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataFinancialMarketerCustomerInfo> findBeenSets(ILogicContext logicContext,
+                                                                         long marketerId,
+                                                                         long customerId){
+      if(marketerId == 0 || customerId == 0){
+         throw new FFatalError("findBeenSet,marketerId or customerId is null");
+      }
+      FDataFinancialMarketerCustomerLogic logic = logicContext.findLogic(FDataFinancialMarketerCustomerLogic.class);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataFinancialMarketerCustomerLogic.MARKETER_ID, " = '{marketerId}'");
+      whereSql.bind("marketerId", RString.parse(marketerId));
+      whereSql.append(" AND ");
+      whereSql.append(FDataFinancialMarketerCustomerLogic.CUSTOMER_ID, " = '{customerId}'");
+      whereSql.bind("customerId", RString.parse(customerId));
+      whereSql.append(" AND ");
+      whereSql.append(FDataFinancialMarketerCustomerLogic.ACTIVE_CD, " = '{activeCd}'");
+      whereSql.bind("activeCd", RString.parse(EGcActive.Active));
+      FLogicDataset<FDataFinancialMarketerCustomerInfo> marketerCustomerList = logic.fetchClass(FDataFinancialMarketerCustomerInfo.class, whereSql);
+      return marketerCustomerList;
    }
 }

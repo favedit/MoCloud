@@ -39,7 +39,49 @@
                             赎回次数：<jh:write source="&customerInfo.redemptionCount" />次</p><p>
                             净投总额：<jh:write source="&customerInfo.netinvestment" />
                             利息总额：<jh:write source="&customerInfo.interestTotal" /></p>
+                            
+                            <p><input type="checkbox" value="1" id="contactOnline">上线提醒 
+                             <input type="checkbox" value="2" id="contactFollow">产品关注提醒</p><p>
+   <input type="checkbox"  value="3" id="contactPurchase">购买提醒 
+   <input type="checkbox"  value="4" id="contactRecharge">充值提醒</p>
+   <input type="button" value="确定" onclick="ensure()">
                   </div>
+                           <script type="text/javascript">
+                           var contactOnline= document.getElementById("contactOnline");
+                           var contactFollow= document.getElementById("contactFollow");
+                           var contactPurchase= document.getElementById("contactPurchase");
+                           var contactRecharge= document.getElementById("contactRecharge");
+                            if(<jh:write source="&customerInfo.contactOnline" />==1){
+                            	contactOnline.checked=true;
+                            } 
+                            if(<jh:write source="&customerInfo.contactFollow" />==2){
+                            	contactFollow.checked=true;
+                            }
+                           if(<jh:write source="&customerInfo.contactPurchase" />==3){
+                            	contactPurchase.checked=true;
+                            }
+                           if(<jh:write source="&customerInfo.contactRecharge" />==4){
+                            	  contactRecharge.checked=true;
+                            }
+                           function ensure(){
+                        	   alert($("#contactOnline").val())
+                           $.ajax({
+                        		type:"post",
+                        		url:"/pc/marketer/customer/Customer.wa?do=updataSms",
+                        	   data:{contactOnline:$("#contactOnline").val(),contactFollow:$("#contactFollow").val(),contactPurchase:$("#contactPurchase").val(),contactRecharge:$("#contactRecharge").val()},
+                        		dataType: "text",
+                        	   success:function(data){
+                        		   alert("sdds");
+                        	   }
+                        	   
+                        	   
+                           })
+                           
+                           
+                           }
+                           
+                            </script>
+
                       <div class="details-r">
                      <h4>用户</h4>
                      <table border="0" cellpadding="2" cellspacing="0">
@@ -49,7 +91,7 @@
          <tr class="trs">
             <td><jh:write source="&customer.ouid" /></td>
             <td>
-          <a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.ouid" />">
+          <a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.ouid" />&page=<jh:write source="&page.pageCurrent" />">
             <jh:write source="&customer.label" />
             </a>
             </td>
