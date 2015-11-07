@@ -25,6 +25,14 @@
 	<classpathentry kind="lib" path="lib/xom-1.2.10.jar"/>
 	<classpathentry kind="lib" path="lib/jasper.jar"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.5.2.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-cloud.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-common.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-content.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-core.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-eai-content.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-lib-lzma.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-logic.jar"/>
+	<classpathentry kind="lib" path="webroot/WEB-INF/lib/mo-web.jar"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-5-cloud"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/mo-6-content"/>
 	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
