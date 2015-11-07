@@ -149,7 +149,9 @@ public class FNoticeService
             if(userCount != null && userCount.count() > 0){
                FXmlNode percentNode = xruntime.createNode("percent");
                FXmlNode userCountNode = xruntime.createNode("user_count");
-               userCountNode.setText(userCount.count() + "");
+               int counts = userCount.count();
+               counts = 30;
+               userCountNode.setText(counts + "");
                NumberFormat numberFormat = NumberFormat.getInstance();
                numberFormat.setMaximumFractionDigits(0);
                numberFormat.setRoundingMode(RoundingMode.HALF_UP);

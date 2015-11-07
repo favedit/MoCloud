@@ -1,13 +1,10 @@
 package com.ahyc.eai.service.cockpit.projectmanage;
 
-import com.ahyc.eai.core.cockpit.projectmanage.FProjectManageModel;
-import com.ahyc.eai.core.cockpit.projectmanage.FProjectProgressModel;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -16,7 +13,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
-import org.mo.com.encoding.RMd5;
 
 public class TestFCockpitProjectManageServlet
 {
@@ -40,8 +36,8 @@ public class TestFCockpitProjectManageServlet
    public void testMD5() throws ClientProtocolException, IOException, NoSuchAlgorithmException{
       MessageDigest instance = MessageDigest.getInstance("MD5");
       int uid = 3;
-      String name = "d1e5ab7f41f7d25ce64" + uid + "e2036af314e26";
-      byte[] datas = instance.digest(name.getBytes("UTF-8"));
+      String name233 = "d1e5ab7f41f7d25ce64" + uid + "e2036af314e26";
+      byte[] datas = instance.digest(name233.getBytes("UTF-8"));
       StringBuffer buf = new StringBuffer();
       for(int i = 0; i < datas.length; i++){
          int val = (datas[i]) & 0xff;
@@ -51,15 +47,25 @@ public class TestFCockpitProjectManageServlet
          buf.append(Integer.toHexString(val));
       }
 
-      System.out.println(buf.toString() + "   ---" + buf.length());
-      String aaaString = RMd5.encode(name).toLowerCase();
+      String jsonStr = "[{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]},{\"name\": \"台账管理系统\",\"uname\": \"王丽娟\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]},{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]}]";
+      JSONArray jsonOutArray = JSONArray.fromObject(jsonStr);
+      //      int count = jsonOutArray.size();
+      for(int j = 0; j < jsonOutArray.size(); j++){
+         //获取数据
+         JSONObject fromObject = jsonOutArray.getJSONObject(j);
+         String name = fromObject.get("name").toString();
+         String uname = fromObject.get("uname").toString();
+         String priority = fromObject.get("priority").toString();
+         String status = fromObject.get("status").toString();
+         //输出数据
+         JSONArray jsonInArray = fromObject.getJSONArray("progress");
+         for(int i = 0; i < jsonInArray.size(); i++){
+            JSONObject jsonInObject = jsonInArray.getJSONObject(i);
+            String key = jsonInObject.get("key").toString();
+            String progress = jsonInObject.get("progress").toString();
+            System.out.println("name:" + name + " uname:" + uname + " priority:" + priority + " :status:" + status + " key:" + key + " progress:" + progress);
+         }
+      }
 
-      System.out.println("--->" + aaaString + "  " + aaaString.length());
-      String jsonStr = "[{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]},{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]},{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]}]";
-      //      JSONObject jsonObj = JSONObject.fromObject(jsonStr);
-
-      Map<String, Class> classMap = new HashMap<String, Class>();
-      classMap.put("progresses", FProjectProgressModel.class);
-      JSONArray.toArray(JSONArray.fromObject(jsonStr), FProjectManageModel.class, classMap);
    }
 }

@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.RDateTime;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.data.logic.ILogicContext;
@@ -44,8 +46,12 @@ public class FCockpitTrendServlet
          return EResult.Failure;
       }
       //............................................................
+      // 获得当前时间
+      TDateTime currentDate = RDateTime.currentDateTime();
+      //............................................................
+      //............................................................
       // 从缓冲中查找数据
-      String cacheCode = "fetch";
+      String cacheCode = "dynamic|" + currentDate.format("YYYYMMDDHH24MI");
       FByteStream cacheStream = findCacheStream(cacheCode);
       if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
@@ -54,6 +60,7 @@ public class FCockpitTrendServlet
       //      TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
+      FByteStream dataStream = createStream(context);
       //      ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
       ArrayList<Double[]> parent = new ArrayList<Double[]>();
@@ -75,44 +82,45 @@ public class FCockpitTrendServlet
          }
       }
       int count = parent.size();
-      stream.writeInt32(count);//本月加上月一共六条曲线
-      stream.writeString("current_investment");//当月投资
-      stream.writeInt32(child0.length);//投资天数
+      dataStream.writeInt32(count);//本月加上月一共六条曲线
+      dataStream.writeString("current_investment");//当月投资
+      dataStream.writeInt32(child0.length);//投资天数
       int c0 = child0.length;
       for(int i = 0; i < c0; i++){
-         stream.writeDouble(child0[i]);//每天投资额
+         dataStream.writeDouble(child0[i]);//每天投资额
       }
-      stream.writeString("current_redemption");//当月赎回
-      stream.writeInt32(child1.length);//赎回天数
+      dataStream.writeString("current_redemption");//当月赎回
+      dataStream.writeInt32(child1.length);//赎回天数
       int c1 = child1.length;
       for(int i = 0; i < c1; i++){
-         stream.writeDouble(child1[i]);//每天赎回额
+         dataStream.writeDouble(child1[i]);//每天赎回额
       }
-      stream.writeString("current_netinvestment");//当月净投
-      stream.writeInt32(child2.length);//净投天数
+      dataStream.writeString("current_netinvestment");//当月净投
+      dataStream.writeInt32(child2.length);//净投天数
       int c2 = child2.length;
       for(int i = 0; i < c2; i++){
-         stream.writeDouble(child2[i]);//每天净投额
+         dataStream.writeDouble(child2[i]);//每天净投额
       }
 
-      stream.writeString("last_investment");//上月投资
-      stream.writeInt32(child3.length);//投资天数
+      dataStream.writeString("last_investment");//上月投资
+      dataStream.writeInt32(child3.length);//投资天数
       int c3 = child3.length;
       for(int i = 0; i < c3; i++){
-         stream.writeDouble(child3[i]);//每天投资额
+         dataStream.writeDouble(child3[i]);//每天投资额
       }
-      stream.writeString("last_redemption");//上月赎回
-      stream.writeInt32(child4.length);//赎回天数
+      dataStream.writeString("last_redemption");//上月赎回
+      dataStream.writeInt32(child4.length);//赎回天数
       int c4 = child4.length;
       for(int i = 0; i < c4; i++){
-         stream.writeDouble(child4[i]);//每天赎回额
+         dataStream.writeDouble(child4[i]);//每天赎回额
       }
-      stream.writeString("last_netinvestment");//上月净投
-      stream.writeInt32(child5.length);//净投天数
+      dataStream.writeString("last_netinvestment");//上月净投
+      dataStream.writeInt32(child5.length);//净投天数
       int c5 = child5.length;
       for(int i = 0; i < c5; i++){
-         stream.writeDouble(child5[i]);//每天净投额
+         dataStream.writeDouble(child5[i]);//每天净投额
       }
+      stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);

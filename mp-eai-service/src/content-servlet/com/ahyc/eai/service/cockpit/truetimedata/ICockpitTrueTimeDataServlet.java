@@ -25,16 +25,4 @@ public interface ICockpitTrueTimeDataServlet
                  IWebServletRequest request,
                  IWebServletResponse response);
 
-   //============================================================
-   // <T>实时数据</T>
-   //
-   // @param context 环境
-   // @param logicContext 逻辑环境
-   // @param request 请求
-   // @param response 应答
-   //============================================================
-   EResult find(IWebContext context,
-                ILogicContext logicContext,
-                IWebServletRequest request,
-                IWebServletResponse response);
 }

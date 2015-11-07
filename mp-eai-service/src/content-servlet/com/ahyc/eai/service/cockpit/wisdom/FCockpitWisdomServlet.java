@@ -1,17 +1,6 @@
 package com.ahyc.eai.service.cockpit.wisdom;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import org.apache.http.HttpEntity;
-import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.mo.com.encoding.RMd5;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
@@ -65,29 +54,6 @@ public class FCockpitWisdomServlet
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
-      int uid = 3;
-      String pwd = "d1e5ab7f41f7d25ce64" + uid + "e2036af314e26";
-      String token = RMd5.encode(pwd).toLowerCase();
-      CloseableHttpClient httpclient = HttpClients.createDefault();
-      String url = "http://project.eai.ezubo.com/Api/get_projects?uid=+" + uid + "&token=" + token;
-      HttpGet get = new HttpGet(url);
-      try{
-         CloseableHttpResponse responseResult = httpclient.execute(get);
-         HttpEntity entity = responseResult.getEntity();
-         if(entity != null){
-            String responseContent = EntityUtils.toString(entity);
-            String result = new String(responseContent.getBytes("utf-8"));
-            //            System.out.println(result);
-         }
-      }catch(ClientProtocolException e){
-         e.printStackTrace();
-      }catch(ParseException e){
-         e.printStackTrace();
-      }catch(UnsupportedEncodingException e){
-         e.printStackTrace();
-      }catch(IOException e){
-         e.printStackTrace();
-      }
       // 设置输出流
       FByteStream stream = createStream(context);
       FByteStream dataStream = createStream(context);

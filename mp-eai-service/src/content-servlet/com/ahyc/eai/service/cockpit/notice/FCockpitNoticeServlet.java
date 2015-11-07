@@ -73,7 +73,8 @@ public class FCockpitNoticeServlet
       FLogicDataset<FDataPersonUserUnit> userUnits = _noticeConsole.getUserCount(logicContext);
       int userCount = -1;
       if(userUnits != null && userUnits.count() > 0){
-         userCount = userUnits.count();
+         //         userCount = userUnits.count();
+         userCount = 30;
       }
       NumberFormat numberFormat = NumberFormat.getInstance();
       numberFormat.setMaximumFractionDigits(0);
@@ -88,10 +89,10 @@ public class FCockpitNoticeServlet
          String percent = numberFormat.format(unit.viewCount() / (float)userCount * 100);
          _logger.debug(this, "fetch", "Send dynamic. (label={1},userLabel={2},publishDate={3},percent={4})", label, userLabel, publishDate, percent);
          //输出数据
-         dataStream.writeString(label);
-         dataStream.writeString(userLabel);
-         dataStream.writeString(publishDate);
-         dataStream.writeString(percent);
+         dataStream.writeString(label);//号令标题
+         dataStream.writeString(userLabel);//号令发布者
+         dataStream.writeString(publishDate);//发布日期
+         dataStream.writeString(percent);//阅读百分比
       }
       //写入数据
       stream.write(dataStream.memory(), 0, dataStream.position());

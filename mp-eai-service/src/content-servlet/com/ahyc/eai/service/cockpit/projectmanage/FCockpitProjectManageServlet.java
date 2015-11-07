@@ -2,6 +2,8 @@ package com.ahyc.eai.service.cockpit.projectmanage;
 
 import com.ahyc.eai.core.cockpit.projectmanage.IProjectManageConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
@@ -62,16 +64,47 @@ public class FCockpitProjectManageServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
-      _projectManageConsole.fetch();
-      //      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
-      // 写入数据
+      FByteStream dataStream = createStream(context);
+      //      try{
+      //         String jsonStr = _projectManageConsole.getJson("4");
+      //      }catch(ParseException e){
+      //         e.printStackTrace();
+      //      }catch(IOException e){
+      //         e.printStackTrace();
+      //      }
+      String jsonStr = "[{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]},{\"name\": \"台账管理系统\",\"uname\": \"王丽娟\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]},{\"name\": \"视频会议\",\"uname\": \"窦卫群\",\"priority\": \"0\",\"status\": 0,\"progress\": [{\"key\": \"时间进度\",\"start_v\": \"2015-11-01\",\"end_v\": \"2015-12-31\",\"cur_v\": \"2015-11-06\",\"type\": \"时间\",\"is_show\": 1,\"progress\": 9,\"value\": \"2015-12-31\"},{\"key\": \"项目进度\",\"start_v\": \"35\",\"end_v\": \"100\",\"cur_v\": \"61\",\"type\": \"百分比\",\"is_show\": \"1\",\"progress\": 40,\"value\": \"61%\"}]}]";
+      JSONArray jsonOutArray = JSONArray.fromObject(jsonStr);
+      int count = jsonOutArray.size();
+      dataStream.writeInt32(count);
+      for(int j = 0; j < jsonOutArray.size(); j++){
+         //获取数据
+         JSONObject fromObject = jsonOutArray.getJSONObject(j);
+         String name = fromObject.get("name").toString();
+         String uname = fromObject.get("uname").toString();
+         String priority = fromObject.get("priority").toString();
+         String status = fromObject.get("status").toString();
+         //输出数据
+         dataStream.writeString(name);//项目标题
+         dataStream.writeString(uname);//责任人
+         dataStream.writeString(priority);//优先级 0-低 1-中 2-高
+         dataStream.writeString(status);//状态指示灯 0-项目超前 1-项目正常 2-项目逾期
+         JSONArray jsonInArray = fromObject.getJSONArray("progress");
+         for(int i = 0; i < jsonInArray.size(); i++){
+            JSONObject jsonInObject = jsonInArray.getJSONObject(i);
+            String key = jsonInObject.get("key").toString();
+            String progress = jsonInObject.get("progress").toString();
+            dataStream.writeString(key);//进度标题 时间进度或项目进度
+            dataStream.writeString(progress);//进度百分比
+         }
+      }
+      stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send dynamic. (date={1}, data_length={2})", currentDate.format(), dataLength);
+      _logger.debug(this, "process", "Send dynamic. (date={1}, data_length={2},count={3})", currentDate.format(), dataLength, count);
       return sendStream(context, request, response, stream);
    }
 }

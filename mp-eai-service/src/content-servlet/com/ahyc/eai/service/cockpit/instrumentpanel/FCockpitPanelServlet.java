@@ -40,10 +40,9 @@ public class FCockpitPanelServlet
                         IWebServletResponse response){
       _logger.debug(this, "fetch", "the method named find from FCockpitWarningServlet is beginning... ");
       // 检查参数
-      //      if(!checkParameters(context, request, response)){
-      //         return EResult.Failure;
-      //      }
-      //      String warningGuid = context.parameter("guid");
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
       //............................................................
       // 获得当前时间
       TDateTime currentDate = RDateTime.currentDateTime();
@@ -57,12 +56,15 @@ public class FCockpitPanelServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
+      FByteStream dataStream = createStream(context);
       //      ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
-      stream.writeInt32(50);//集团当月入职离职情况
-      stream.writeInt32(60);//理财师人均业绩百分比
-      stream.writeInt32(70);//集团收支状况百分比
-      stream.writeInt32(20);//业绩完成度百分比
+      dataStream.writeString("50");//集团当月入职离职情况
+      dataStream.writeString("60");//理财师人均业绩百分比
+      dataStream.writeString("70");//集团收支状况百分比
+      dataStream.writeString("80");//业绩完成度百分比
+      //写入数据
+      stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);

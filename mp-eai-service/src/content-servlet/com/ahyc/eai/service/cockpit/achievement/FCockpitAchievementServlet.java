@@ -94,19 +94,19 @@ public class FCockpitAchievementServlet
          int customerCount = row.getInt("customer_count");
          int customerTotal = row.getInt("customer_total");
          // 输出数据
-         dataStream.writeString(label);
-         dataStream.writeDouble(RDouble.roundHalf(investmentAmount, 2));
-         dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));
-         dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));
-         dataStream.writeUint32(marketerCount);
-         dataStream.writeUint32(marketerTotal);
-         dataStream.writeUint32(customerCount);
-         dataStream.writeUint32(customerTotal);
+         dataStream.writeString(label);//部门名称
+         dataStream.writeDouble(RDouble.roundHalf(investmentAmount, 2));//部门总投资
+         dataStream.writeDouble(RDouble.roundHalf(redemptionAmount, 2));//部门赎回
+         dataStream.writeDouble(RDouble.roundHalf(netinvestmentAmount, 2));//净投
+         dataStream.writeUint32(marketerCount);//理财师总数
+         dataStream.writeUint32(marketerTotal);//理财师总额
+         dataStream.writeUint32(customerCount);//客户总数
+         dataStream.writeUint32(customerTotal);//客户总额
       }
       // 写入数据
-      stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));
-      stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));
-      stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));
+      stream.writeDouble(RDouble.roundHalf(investmentTotal, 2));//所有部门投资总额
+      stream.writeDouble(RDouble.roundHalf(redemptionTotal, 2));//所有部门赎回总额
+      stream.writeDouble(RDouble.roundHalf(investmentTotal - redemptionTotal, 2));//所有部门净投总额
       stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................
       // 保存数据到缓冲中

@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
-import org.mo.com.lang.FFatalError;
-import org.mo.com.lang.RString;
+import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -41,73 +40,60 @@ public class FCockpitWarningServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named fetch from FCockpitWarningServlet is beginning... ");
       // 检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;
       }
-      // 检查参数
-      String beginSource = context.parameter("begin");
-      String endSource = context.parameter("end");
-      if(RString.isEmpty(beginSource) || RString.isEmpty(endSource)){
-         throw new FFatalError("Parameter is invalid.");
-      }
-      if((beginSource.length() != 14) || (endSource.length() != 14)){
-         throw new FFatalError("Parameter length is invalid.");
-      }
-      // 限制查询范围最大10分钟
-      TDateTime beginDate = new TDateTime(beginSource);
-      TDateTime endDate = new TDateTime(endSource);
-      long span = endDate.get() - beginDate.get();
-      if((span < 0) && (span > 1000 * 600)){
-         throw new FFatalError("Parameter span is invalid.");
-      }
+      //............................................................
+      // 获得当前时间
+      TDateTime currentDate = RDateTime.currentDateTime();
       //............................................................
       // 从缓冲中查找数据
-      String cacheCode = "fetch|" + beginSource + "-" + endSource;
+      String cacheCode = "dynamic|" + currentDate.format("YYYYMMDDHH24MI");
       FByteStream cacheStream = findCacheStream(cacheCode);
       if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
-      //      TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
+      FByteStream dataStream = createStream(context);
       //      ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
       HashSet<ArrayList<String>> parent = new HashSet<ArrayList<String>>();
       ArrayList<String> child1 = new ArrayList<String>();
-      child1.add("guid");
+      //      child1.add("guid");
       child1.add("DA4B7F30C1C34A3CA231744C3BF1DD41");
-      child1.add("message");
+      //      child1.add("message");
       child1.add("北京第七分公司本月离职率已达10%");
       ArrayList<String> child2 = new ArrayList<String>();
-      child2.add("guid");
+      //      child2.add("guid");
       child2.add("DA4B7F30C1C34A3CA231744C3BF1DD42");
-      child2.add("message");
+      //      child2.add("message");
       child2.add("上海璟益本月任务还有60%没有完成.");
       ArrayList<String> child3 = new ArrayList<String>();
-      child3.add("guid");
+      //      child3.add("guid");
       child3.add("DA4B7F30C1C34A3CA231744C3BF1DD43");
-      child3.add("message");
+      //      child3.add("message");
       child3.add("10月28日e租宝赎回总额超过3亿元.");
       parent.add(child1);
       parent.add(child2);
       parent.add(child3);
       int count = parent.size();
-      stream.writeInt32(count);
+      dataStream.writeInt32(count);
       for(ArrayList<String> list : parent){
          for(String string : list){
-            stream.writeString(string);
+            dataStream.writeString(string);
          }
       }
+      stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
       //............................................................
       // 发送数据
       int dataLength = stream.length();
-      _logger.debug(this, "process", "Send statistics customer dynamic. (begin_date={1}, end_date={2}, count={3}, data_length={4})", beginDate.format(), endDate.format(), count, dataLength);
+      _logger.debug(this, "process", "Send statistics customer dynamic. (count={1}, data_length={2})", count, dataLength);
       return sendStream(context, request, response, stream);
    }
 
@@ -125,24 +111,27 @@ public class FCockpitWarningServlet
                        IWebServletResponse response){
       _logger.debug(this, "fetch", "the method named find from FCockpitWarningServlet is beginning... ");
       // 检查参数
-      //      if(!checkParameters(context, request, response)){
-      //         return EResult.Failure;
-      //      }
+      if(!checkParameters(context, request, response)){
+         return EResult.Failure;
+      }
+      //............................................................
+      // 获得当前时间
+      TDateTime currentDate = RDateTime.currentDateTime();
+      //............................................................
       //      String warningGuid = context.parameter("guid");
       //............................................................
       // 从缓冲中查找数据
-      String cacheCode = "find";
+      String cacheCode = "dynamic|" + currentDate.format("YYYYMMDDHH24MI");
       FByteStream cacheStream = findCacheStream(cacheCode);
       if(cacheStream != null){
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
-      //      TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
       //      ISqlConnection connection = logicContext.activeConnection("statistics");
       //............................................................
-      stream.writeString("本条阈值预警详情....");
+      stream.writeString("本条阈值预警详情是....");
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
