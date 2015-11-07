@@ -229,7 +229,7 @@ public class FAchievementsService
       }
 
       FXmlNode products = output.config().createNode("product_list");
-      FLogicDataset<FDataCustomerInfo> mcList = _customerConsole.fetchInvestmentByMarketerId(logicContext, marketer.ouid());
+      FLogicDataset<FDataCustomerInfo> mcList = _customerConsole.fetchProductInvestmentByMarketerId(logicContext, marketer.ouid());
       double occupancy = 0;
       double occupancy_total = 0;
       for(FDataCustomerInfo unit : mcList){
@@ -237,6 +237,10 @@ public class FAchievementsService
 
       }
       for(FDataCustomerInfo unit : mcList){
+         // 为空的话，直接抛弃本条数据。
+         if(RString.isEmpty(unit.label())){
+            continue;
+         }
          occupancy = (unit.investmentTotal() / occupancy_total) * 100;
          FXmlNode product = products.createNode();
          product.createNode("product_name", unit.label());

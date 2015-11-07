@@ -19,7 +19,7 @@ public interface IDataCustomerConsole
    // @param marketerId 日期
    // @return 数据对象
    // ============================================================
-   FLogicDataset<FDataCustomerInfo> fetchInvestmentByMarketerId(ILogicContext logicContext,
-                                                                long marketerId);
+   FLogicDataset<FDataCustomerInfo> fetchProductInvestmentByMarketerId(ILogicContext logicContext,
+                                                                       long marketerId);
 
 }

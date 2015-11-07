@@ -45,16 +45,16 @@ public class FDataCustomerConsole
    // @return 数据对象
    // ============================================================
    @Override
-   public FLogicDataset<FDataCustomerInfo> fetchInvestmentByMarketerId(ILogicContext logicContext,
-                                                                       long marketerId){
+   public FLogicDataset<FDataCustomerInfo> fetchProductInvestmentByMarketerId(ILogicContext logicContext,
+                                                                              long marketerId){
       if(marketerId == 0){
          throw new FFatalError("marketer id can not be empty!");
       }
       ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.DATA);
-      FSql sql = _resource.findString(FSql.class, "sql.customre.tender.sum");
-      sql.bindLong("marketer_id", 5);
+      FSql sql = _resource.findString(FSql.class, "sql.customer.product.sum");
+      sql.bindLong("marketer_id", marketerId);
       FLogicDataset<FDataCustomerInfo> customerTenderList = new FLogicDataset<>(FDataCustomerInfo.class);
-      _logger.debug(this, "process", "Send statistics tender info. (sql={1}, )", sql.toString());
+      _logger.debug(this, "FetchProductInvestmentByMarketerId", "FetchProductInvestmentByMarketerId create customer product sum sql finish. (sql={1}, )", sql.toString());
       FDataset dataset = connection.fetchDataset(sql);
       for(FRow row : dataset){
          FDataCustomerInfo info = new FDataCustomerInfo();
@@ -65,5 +65,4 @@ public class FDataCustomerConsole
       }
       return customerTenderList;
    }
-
 }

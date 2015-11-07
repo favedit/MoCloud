@@ -15,6 +15,15 @@ public class EGcResult
    // 枚举名称
    public final static String DefineName = "GcResult";
 
+   // 不存在
+   public final static int Inexistence = -1;
+
+   // 不存在字符串
+   public final static String InexistenceString = "Inexistence";
+
+   // 不存在标签
+   public final static String InexistenceLabel = "不存在";
+
    // 未知
    public final static int Unknown = 0;
 
@@ -90,6 +99,8 @@ public class EGcResult
    //============================================================
    public static String format(int value){
       switch(value){
+         case Inexistence:
+            return InexistenceString;
          case Unknown:
             return UnknownString;
          case Success:
@@ -113,6 +124,8 @@ public class EGcResult
    //============================================================
    public static String formatLabel(int value){
       switch(value){
+         case Inexistence:
+            return InexistenceLabel;
          case Unknown:
             return UnknownLabel;
          case Success:
@@ -136,6 +149,8 @@ public class EGcResult
    //============================================================
    public static int parse(String value){
       switch(value){
+         case InexistenceString:
+            return Inexistence;
          case UnknownString:
             return Unknown;
          case SuccessString:
