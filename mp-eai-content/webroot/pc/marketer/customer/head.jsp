@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/pc/marketer/recommend/js/common.js"></script>
 </head>
 <body>
-<FORM id="form" name='frmMain' method='post' action='Main.wa'>
+<FORM id="customerform" name='frmMain' method='post' action='Main.wa'>
 <TABLE id="table" style='height:100%;width:100%;' cellpadding='0' cellspacing='0'>
 <TR>
    <TD id="header"  colspan="2"  align="center" valign="center">

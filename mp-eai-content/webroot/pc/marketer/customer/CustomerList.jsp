@@ -1,34 +1,57 @@
 <%@ include file='/apl/public.inc' %>
 <%@ include file='/pc/marketer/customer/head.jsp' %>
 <link rel="stylesheet" type="text/css" href="/pc/marketer/customer/css/PotentialUsers.css">
+<script type="text/javascript" src="/pc/marketer/customer/js/potentialUsers.js"></script>
+<jh:define source="&page.marketer" alias="marketer"></jh:define>
+<jh:define source="&page.customerList" alias="customers"></jh:define>
  <div class="shadow-bg" onclick = "shutDown();"></div>
+ 
+ <div id="Content-Left">
+ <div id="Content-Up" style="background: #400000;"><a href="Customer.wa">我的客户</a></div>
+ 
+ <div id="Content-Down">我的业绩</div>
+ </div>
+ <div >
                <div class="imag-container focus">
                   <table  border="0" cellpadding="2" cellspacing="0">
-                     <tr class="title">
-                        <td colspan="7" rowspan="0" align="center" valign="center">我的客户</td>
-                        <a href="/pc/marketer/product/customer/CustomerTender.wa">我的业绩</a>
-                        <a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=">我的客户</a>
+                  <tr class="title">
+                        <td colspan="9"  align="center" valign="center">我的客户</td>
                      </tr>
+                  <tr class="title"><td colspan="9" ><span>客户数：<jh:write source="&page.rowCount"/></span>
+                  <span>投资总额：<jh:write source="&marketer.customerInvestmentTotal"/></span>
+                  <span>净投总额：<jh:write source="&marketer.customerNetinvestmentTotal"/></span>
+                  <span>赎回总额：<jh:write source="&marketer.customerRedemptionTotal"/></span>
+                  <span><input id="keyword" name="keyword" value="<jh:write source="&page.keyword"/>"/><input type="button" value="搜索" onclick="javascript:search();"/></span>
+                  </td>
+                  
+                  </tr>
+                     
                       <tr class="main-title">
                            <td>姓名</td>
+                           <td>性别</td>
                            <td>手机号</td>
-                           <td>最后登录时间</td>
                            <td>年龄</td>
-                           <td>总投资</td>
-                           <td>状态</td>
-                           <td width="30%">操作</td>
+                           <td>投资</td>
+                           <td>净投</td>
+                           <td>赎回</td>
+                           <td>关注度</td>
+                           <td>最后关注时间</td>
+                           
+                           <!--<td>操作</td>-->
                      </tr>
                      
                      <jh:loop alias="customer" source="&page.customerList">
                       <tr class="trs" href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id="  >
                            <td><jh:write source="&customer.label" /></td>
+                           <td><jh:write source="&customer.gender"/></td>
                            <td><jh:write source="&customer.phone" /></td>
-                           <td><jh:date source="&customer.lastLogin" format="yyyy-MM-dd hh:mm:ss" /></td>
                            <td><jh:write source="&customer.age" /></td>
                            <td align="right"><jh:write source="&customer.investmentTotal" /></td>
-                         <!--  <td class="pr"><a class="btn remove" data-id=""  href="javascript:;" onclick="setManagement();">短信提醒</a>
-                           </td>-->
-                         <td align="right"><jh:write source="&customer.statusSMS" /></td>
+                           <td><jh:write source="&customer.netinvestment"/></td>
+                           <td><jh:write source="&customer.redemptionTotal"/></td>
+                           <td><jh:write source="&customer.pv"/></td>
+                           <td><jh:date source="&customer.lastLogin" format="yyyy-MM-dd hh:mm:ss" /></td>
+                         <!--
                         <td class="pr" ><a class="btn btns" href="javascript:;">短信设置</a>
                               <div class="note-setupthe">
                                  <p>
@@ -45,6 +68,7 @@
                                  </p>
                               </div>
                            </td>
+                           -->
                      </tr>
                      </jh:loop>                    
                   </table>
@@ -68,6 +92,7 @@
                <li><a href="javascript:void(0);" onclick="pading(+1)">下一页</a></li>
                   </ul>
                </div>
+               </div>
             </TD>
          </TR>
          <TR>
@@ -77,7 +102,7 @@
                   </br>客服电话：010-65499299</p>
                </div>
             </TD>
-            <td class="td-container"></td>
+            <td class="td-container"><input type="hidden" id="page" name="page" value=""/></td>
          </TR>
       </TABLE>
    </FORM>
@@ -89,9 +114,21 @@
          $("#loading_img_div").show();
          var currentPage = <jh:write source="&page.pageCurrent" />;
          var page = currentPage+nubmer;
-         location.href="/pc/marketer/member/Followed.wa?page="+page;
+         $("#page").attr("value",page);
+         customerform.action="/pc/marketer/customer/Customer.wa?do=search";
+         customerform.submit();
+         
       }
-   doLoading();
+      function search()
+      {
+         var formParam = $('#customerform').serialize();
+         var datas = {keyword: $("#keyword").val()};
+         var url="/pc/marketer/customer/Customer.wa?do=search";
+         $("#page").attr("value",0);
+         customerform.action="/pc/marketer/customer/Customer.wa?do=search";
+         customerform.submit();
+      }
+   //doLoading();
    </script>
 </body>
 </html>

@@ -17,6 +17,7 @@
 	-o-background-size: cover;
 	background-size: cover;*/
 	background-size: 100% 100%;
+	float:left;
 }
 .imag-container table {
 	width: 100%;
@@ -119,5 +120,43 @@
 	animation-duration: 500ms;
 	display: none;
 }
-
-
+#Content{
+    height:650px;
+    /*此处对容器设置了高度，一般不建议对容器设置高度，一般使用overflow:auto;属性设置容器根据内容自适应高度，如果不指定高度或不设置自适应高度，容器将默认为1个字符高度，容器下方的布局元素（footer）设置margin-top:属性将无效*/
+    margin-top:20px;/*此处讲解margin的用法，设置content与上面header元素之间的距离*/
+    
+     
+}
+#Content-Left{
+    height:650px;
+    width:200px;
+    margin: 30px;/*设置元素跟其他元素的距离为20像素*/
+    float:left;/*设置浮动，实现多列效果，div+Css布局中很重要的*/
+   
+}
+#Content-Up{
+    height:100px;
+    width:100px;
+    margin:100px;	
+	 float:left;
+	 border:3px solid #8000ff;
+	 display: table-cell;
+	 text-align:center;
+	 vertical-align:middle;
+	 cursor:pointer;
+	 overflow:hidden;
+	 line-height:100px;
+}
+#Content-Down{
+	height:100px;
+   width:100px;
+   margin:100px; 
+   float:left;
+   border:4px solid #8000ff;
+   display: table-cell;
+   text-align:center;
+   vertical-align:middle;
+   cursor:pointer;
+   overflow:hidden;
+   line-height:100px;
+}
