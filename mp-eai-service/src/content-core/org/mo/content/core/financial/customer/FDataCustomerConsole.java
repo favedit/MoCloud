@@ -2,6 +2,8 @@ package org.mo.content.core.financial.customer;
 
 import com.cyou.gccloud.data.data.FDataFinancialCustomerLogic;
 import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
+import com.cyou.gccloud.data.data.FDataFinancialMemberLogic;
+import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -45,24 +47,53 @@ public class FDataCustomerConsole
    // @return 数据对象
    // ============================================================
    @Override
-   public FLogicDataset<FDataCustomerInfo> fetchProductInvestmentByMarketerId(ILogicContext logicContext,
-                                                                              long marketerId){
+   public FLogicDataset<FDataCustomerProductInfo> fetchProductInvestmentByMarketerId(ILogicContext logicContext,
+                                                                                     long marketerId){
       if(marketerId == 0){
          throw new FFatalError("marketer id can not be empty!");
       }
       ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.DATA);
       FSql sql = _resource.findString(FSql.class, "sql.customer.product.sum");
       sql.bindLong("marketer_id", marketerId);
-      FLogicDataset<FDataCustomerInfo> customerTenderList = new FLogicDataset<>(FDataCustomerInfo.class);
+      FLogicDataset<FDataCustomerProductInfo> customerTenderList = new FLogicDataset<>(FDataCustomerProductInfo.class);
       _logger.debug(this, "FetchProductInvestmentByMarketerId", "FetchProductInvestmentByMarketerId create customer product sum sql finish. (sql={1}, )", sql.toString());
       FDataset dataset = connection.fetchDataset(sql);
       for(FRow row : dataset){
-         FDataCustomerInfo info = new FDataCustomerInfo();
+         FDataCustomerProductInfo info = new FDataCustomerProductInfo();
          info.setLabel(row.get("label"));
          info.setRate(row.getDouble("rate"));
          info.setInvestmentTotal(row.getDouble("investment_total"));
          customerTenderList.push(info);
       }
       return customerTenderList;
+   }
+
+   // ============================================================
+   // <T>获取理财师的客户</T>
+   //
+   // @param logicContext 链接对象
+   // @param marketerId 日期
+   // @return 数据对象
+   // ============================================================
+   @Override
+   public FLogicDataset<FDataCustomerInfo> fetchByMarketerId(ILogicContext logicContext,
+                                                             long marketerId){
+      if(marketerId == 0){
+         throw new FFatalError("marketer id can not be empty!");
+      }
+      FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataFinancialCustomerLogic.MARKETER_ID, " = ");
+      whereSql.append(marketerId);
+      FLogicDataset<FDataCustomerInfo> customerList = logic.fetchClass(FDataCustomerInfo.class, whereSql);
+      for(FDataCustomerInfo info : customerList){
+         FDataFinancialMemberUnit member = memberLogic.find(info.ouid());
+         if(member != null){
+            info.setCustomerLabel(member.label());
+            info.setLastLoginDate(member.lastLoginDate());
+         }
+      }
+      return customerList;
    }
 }

@@ -13,7 +13,7 @@ import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
-import org.mo.content.core.financial.customer.FDataCustomerInfo;
+import org.mo.content.core.financial.customer.FDataCustomerProductInfo;
 import org.mo.content.core.financial.customer.IDataCustomerConsole;
 import org.mo.content.core.financial.customer.tender.IDataCustomerTenderConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
@@ -229,14 +229,14 @@ public class FAchievementsService
       }
 
       FXmlNode products = output.config().createNode("product_list");
-      FLogicDataset<FDataCustomerInfo> mcList = _customerConsole.fetchProductInvestmentByMarketerId(logicContext, marketer.ouid());
+      FLogicDataset<FDataCustomerProductInfo> mcList = _customerConsole.fetchProductInvestmentByMarketerId(logicContext, marketer.ouid());
       double occupancy = 0;
       double occupancy_total = 0;
-      for(FDataCustomerInfo unit : mcList){
+      for(FDataCustomerProductInfo unit : mcList){
          occupancy_total += unit.investmentTotal();
 
       }
-      for(FDataCustomerInfo unit : mcList){
+      for(FDataCustomerProductInfo unit : mcList){
          // 为空的话，直接抛弃本条数据。
          if(RString.isEmpty(unit.label())){
             continue;

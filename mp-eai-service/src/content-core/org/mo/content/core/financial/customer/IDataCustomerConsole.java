@@ -13,13 +13,23 @@ public interface IDataCustomerConsole
          IAbstractLogicUnitConsole<FDataFinancialCustomerUnit>
 {
    // ============================================================
+   // <T>获取理财师客户对产品的投资额</T>
+   //
+   // @param logicContext 链接对象
+   // @param marketerId 日期
+   // @return 数据对象
+   // ============================================================
+   FLogicDataset<FDataCustomerProductInfo> fetchProductInvestmentByMarketerId(ILogicContext logicContext,
+                                                                              long marketerId);
+
+   // ============================================================
    // <T>获取理财师的客户</T>
    //
    // @param logicContext 链接对象
    // @param marketerId 日期
    // @return 数据对象
    // ============================================================
-   FLogicDataset<FDataCustomerInfo> fetchProductInvestmentByMarketerId(ILogicContext logicContext,
-                                                                       long marketerId);
+   FLogicDataset<FDataCustomerInfo> fetchByMarketerId(ILogicContext logicContext,
+                                                      long marketerId);
 
 }

@@ -1,33 +1,34 @@
 package org.mo.content.core.financial.customer;
 
-import com.cyou.gccloud.data.data.FDataFinancialProductUnit;
+import com.cyou.gccloud.data.data.FDataFinancialCustomerUnit;
+import org.mo.com.lang.type.TDateTime;
 
 //============================================================
 // <T>投资模式。</T>
 //============================================================
 public class FDataCustomerInfo
-      extends FDataFinancialProductUnit
+      extends FDataFinancialCustomerUnit
 {
-   // 当前理财师下所有产品的投资额
-   private double _investmentAll;
+   // 客户名称
+   private String _customerLabel;
 
-   // 投资总额
-   private double _investmentTotal;
+   // 最后登录时间
+   private TDateTime _lastLoginDate;
 
-   public double investmentTotal(){
-      return _investmentTotal;
+   public String customerLabel(){
+      return _customerLabel;
    }
 
-   public void setInvestmentTotal(double _investmentTotal){
-      this._investmentTotal = _investmentTotal;
+   public void setCustomerLabel(String _customerLabel){
+      this._customerLabel = _customerLabel;
    }
 
-   public double get_investmentAll(){
-      return _investmentAll;
+   public TDateTime lastLoginDate(){
+      return _lastLoginDate;
    }
 
-   public void set_investmentAll(double _investmentAll){
-      this._investmentAll = _investmentAll;
+   public void setLastLoginDate(TDateTime _lastLoginDate){
+      this._lastLoginDate = _lastLoginDate;
    }
 
 }
