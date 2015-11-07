@@ -237,7 +237,7 @@ public class FAchievementsService
 
       }
       for(FDataCustomerInfo unit : mcList){
-         occupancy = unit.investmentTotal() / (occupancy_total * 100);
+         occupancy = (unit.investmentTotal() / occupancy_total) * 100;
          FXmlNode product = products.createNode();
          product.createNode("product_name", unit.label());
          product.createNode("product_rate", RString.parse(unit.rate()));
