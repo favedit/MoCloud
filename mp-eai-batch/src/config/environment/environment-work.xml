@@ -69,57 +69,7 @@
       <Initialize name='add'>
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>data3</Property>
-               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
-               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://115.28.136.134:3306/EAI_DATA</Property>
-               <Property name='passport'>eai_test</Property>
-               <Property name='encryptPassword'>96586417C7618F9D1E01C7FA199912DF4ED0742AB37A</Property>
-               <Property name='initConnectionNumber'>1</Property>
-               <Property name='maxConnectionNumber'>8</Property>
-               <Property name='activeTimeLimit'>60000</Property>
-               <Property name='connectionTimeLimit'>600000</Property>
-               <Property name='retryCount'>10</Property>
-               <Property name='retryDelay'>10</Property>
-               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
-               <Property name='testTime'>600000</Property>
-               <Property name='closeTimeLimit'>5000</Property>
-               <Initialize name='initializeMonitor'/>
-            </Component>
-         </Parameter>
-      </Initialize>
-      <!-- ============================================================ -->
-      <!-- 数据链接控制台                                               -->
-      <!-- ============================================================ -->
-      <Initialize name='add'>
-         <Parameter>
-            <Component class = 'org.mo.eng.data.FConnectionConsole'>
                <Property name='name'>data</Property>
-               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
-               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://121.42.136.88:3306/EAI_DATA</Property>
-               <Property name='passport'>eai_online</Property>
-               <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
-               <Property name='initConnectionNumber'>1</Property>
-               <Property name='maxConnectionNumber'>8</Property>
-               <Property name='activeTimeLimit'>60000</Property>
-               <Property name='connectionTimeLimit'>600000</Property>
-               <Property name='retryCount'>10</Property>
-               <Property name='retryDelay'>10</Property>
-               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
-               <Property name='testTime'>600000</Property>
-               <Property name='closeTimeLimit'>5000</Property>
-               <Initialize name='initializeMonitor'/>
-            </Component>
-         </Parameter>
-      </Initialize>
-      <!-- ============================================================ -->
-      <!-- 数据链接控制台                                               -->
-      <!-- ============================================================ -->
-      <Initialize name='add'>
-         <Parameter>
-            <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>develop.data</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
                <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_DATA</Property>
@@ -139,44 +89,19 @@
          </Parameter>
       </Initialize>
       <!-- ============================================================ -->
-      <!-- 数据链接控制台                                               -->
+      <!-- 计算链接控制台                                               -->
       <!-- ============================================================ -->
       <Initialize name='add'>
          <Parameter>
             <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>test.data</Property>
+               <Property name='name'>calculate</Property>
                <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
                <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://10.13.0.250:3306/TST_DATA</Property>
-               <Property name='passport'>cloud</Property>
-               <Property name='password'>cloud</Property>
+               <Property name='url'>jdbc:mysql://114.215.133.77:3306/hadoopdb</Property>
+               <Property name='passport'>root</Property>
+               <Property name='password'>ahyc@h5hadloop</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>16</Property>
-               <Property name='activeTimeLimit'>60000</Property>
-               <Property name='connectionTimeLimit'>600000</Property>
-               <Property name='retryCount'>10</Property>
-               <Property name='retryDelay'>10</Property>
-               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
-               <Property name='testTime'>600000</Property>
-               <Property name='closeTimeLimit'>5000</Property>
-               <Initialize name='initializeMonitor'/>
-            </Component>
-         </Parameter>
-      </Initialize>
-      <!-- ============================================================ -->
-      <!-- 数据链接控制台                                               -->
-      <!-- ============================================================ -->
-      <Initialize name='add'>
-         <Parameter>
-            <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>online.data</Property>
-               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
-               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://121.42.136.88:3306/EAI_DATA</Property>
-               <Property name='passport'>eai_online</Property>
-               <Property name='encryptPassword'>3C4A74AFF006FBD8454353E8A996B7F1281724E23A60</Property>
-               <Property name='initConnectionNumber'>1</Property>
-               <Property name='maxConnectionNumber'>8</Property>
                <Property name='activeTimeLimit'>60000</Property>
                <Property name='connectionTimeLimit'>600000</Property>
                <Property name='retryCount'>10</Property>
@@ -225,31 +150,6 @@
                <Property name='url'>jdbc:mysql://10.13.0.250:3306/EAI_LOGGER</Property>
                <Property name='passport'>cloud</Property>
                <Property name='password'>cloud</Property>
-               <Property name='initConnectionNumber'>1</Property>
-               <Property name='maxConnectionNumber'>16</Property>
-               <Property name='activeTimeLimit'>60000</Property>
-               <Property name='connectionTimeLimit'>600000</Property>
-               <Property name='retryCount'>10</Property>
-               <Property name='retryDelay'>10</Property>
-               <Property name='testSqlCmd'>SELECT 1 FROM DUAL</Property>
-               <Property name='testTime'>600000</Property>
-               <Property name='closeTimeLimit'>5000</Property>
-               <Initialize name='initializeMonitor'/>
-            </Component>
-         </Parameter>
-      </Initialize>
-      <!-- ============================================================ -->
-      <!-- 计算链接控制台                                               -->
-      <!-- ============================================================ -->
-      <Initialize name='add'>
-         <Parameter>
-            <Component class = 'org.mo.eng.data.FConnectionConsole'>
-               <Property name='name'>calculate</Property>
-               <Property name='driver_class'>org.mo.cloud.core.database.FLogicMysqlConnection</Property>
-               <Property name='driver_name'>com.mysql.jdbc.Driver</Property>
-               <Property name='url'>jdbc:mysql://114.215.133.77:3306/hadoopdb</Property>
-               <Property name='passport'>root</Property>
-               <Property name='password'>ahyc@h5hadloop</Property>
                <Property name='initConnectionNumber'>1</Property>
                <Property name='maxConnectionNumber'>16</Property>
                <Property name='activeTimeLimit'>60000</Property>

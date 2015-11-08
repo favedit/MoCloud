@@ -27,11 +27,13 @@
    <Define name='cloud.server.service.host'>http://service.eai.ezubo.com</Define>
    <!-- 日志服务器 -->
    <Define name='cloud.server.logger.enable'>Y</Define>
-   <Define name='cloud.server.logger.publish'>http://10.169.23.66:9099/eai.logger.publish.ws</Define>
+   <Define name='cloud.server.logger.publish'>http://10.169.23.66:9090/eai.logger.publish.ws</Define>
 
    <!-- 应用设定 -->
    <Include>${application.config}/application.xml</Include>
 
    <!-- 环境设定 -->
    <Include>${application.config}/environment/environment-online.xml</Include>
+   <Include>${application}/eai.config/environment.xml</Include>
+
 </Configuration>

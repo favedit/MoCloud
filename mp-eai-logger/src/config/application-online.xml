@@ -28,4 +28,6 @@
 
    <!-- 包含：环境设定 -->
    <Include>${application.config}/environment/environment-online.xml</Include>
+   <Include>${application}/eai.config/environment.xml</Include>
+
 </Configuration>

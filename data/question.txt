@@ -30,10 +30,11 @@ CREATE USER 'cloud'@'%' IDENTIFIED BY 'Iamcloud1503';
 CREATE USER 'cloud'@'localhost' IDENTIFIED BY 'Iamcloud1503';
 
 
-CREATE USER 'eai_online'@'localhost' IDENTIFIED BY 'kkU76KVc3eiUQViTI0SomA';
+CREATE USER 'eai_online'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON *.* TO 'eai_online'@'localhost';
 FLUSH PRIVILEGES;
 
+UPDATE mysql.user SET password=PASSWORD('') WHERE USER='';
 
 
 

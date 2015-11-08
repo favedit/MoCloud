@@ -25,5 +25,6 @@
 
    <!-- 包含：环境设定 -->
    <Include>${application.config}/environment/environment-publish.xml</Include>
+   <Include>${application}/eai.config/environment-publish.xml</Include>
 
 </Configuration>

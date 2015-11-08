@@ -23,4 +23,5 @@
 
    <!-- 包含：环境设定 -->
    <Include>${application.config}/environment/environment-test2.xml</Include>
+   <Include>${application}/eai.config/environment2.xml</Include>
 </Configuration>

@@ -462,7 +462,6 @@ ALTER TABLE DT_PSN_USER_SIGNING
 ALTER TABLE DT_PSN_USER_SIGNING ADD CONSTRAINT DT_PSN_USR_SIG_FK_USR 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
 
-
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.News]
 -- AnjoyTian 20151103
@@ -528,7 +527,7 @@ ALTER TABLE DT_PSN_USER_SALESTOOLS ADD CONSTRAINT DT_PSN_USR_SAT_FK_USR
 
 ALTER TABLE DT_PSN_USER_SALESTOOLS ADD CONSTRAINT DT_PSN_USR_SAT_FK_SAL 
       FOREIGN KEY (`SALESTOOLS_ID`) REFERENCES DT_LGC_SALESTOOLS(`OUID`);
-	  
+
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.TrueTimeData]
 -- AnjoyTian 20151104
@@ -816,8 +815,6 @@ ALTER TABLE DT_LGC_NOTICE
 
 ALTER TABLE DT_LGC_NOTICE ADD CONSTRAINT DT_LGC_NTC_FK_USER 
       FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 
- 
-
 
 -- ------------------------------------------------------------
 -- Create table [Data.Person.User.Notice]
