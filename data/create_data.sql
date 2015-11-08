@@ -1863,8 +1863,34 @@ ALTER TABLE DT_FIN_CUSTOMER_TENDER ADD CONSTRAINT DT_FIN_CST_TDR_FK_CUSTOMER
 
 ALTER TABLE DT_FIN_CUSTOMER_TENDER ADD CONSTRAINT DT_FIN_CST_TDR_FK_TENDER 
       FOREIGN KEY (`TENDER_ID`) REFERENCES DT_FIN_TENDER(`OUID`); 
+-- ------------------------------------------------------------
+-- Create table [Data.Financial.Customer.Action]
+-- 20151108 AnjoyTian 客户行为日志
+-- ------------------------------------------------------------	  
+DROP TABLE IF EXISTS `DT_FIN_CUSTOMER_ACTION`;
+CREATE TABLE `DT_FIN_CUSTOMER_ACTION` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CUSTOMER_ID`                   BIGINT, 
+   `CUSTOMER_LINK_ID`              BIGINT, 
+   `ACTION_CD`                     INTEGER, 
+   `RECORD_DATE`                   DATETIME, 
+   `CONTENT`                       VARCHAR(2000), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=INNODB DEFAULT CHARSET=utf8; 
 
+ALTER TABLE DT_FIN_CUSTOMER_ACTION 
+   ADD CONSTRAINT DT_FIN_CST_ACT_UK_GID UNIQUE ( GUID ); 
 
+ALTER TABLE DT_FIN_CUSTOMER_ACTION ADD CONSTRAINT DT_FIN_CST_ACT_FK_CUSTOMER 
+      FOREIGN KEY (`CUSTOMER_ID`) REFERENCES DT_FIN_CUSTOMER(`OUID`); 
+	  
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Marketer.Member]
 -- ------------------------------------------------------------

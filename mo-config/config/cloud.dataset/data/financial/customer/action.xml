@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="e5bccbfd-0eb6-4843-a237-57e51d29eb66" name="data.financial.customer.action" label="M#12cn18金融客户行为记录" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Financial.Customer.Action" data_name="DT_FIN_CUSTOMER_ACTION" data_alias="DT_FIN_CST_ACT" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldRecordId _uuid="95311b96-73a0-484d-a8c1-b617a01a7fcf" name="customer_id" label="M#12cn14客户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_ID" data_alias="CUSTOMER" data_refer="data.financial.customer" />
+  <FieldRecordId _uuid="603f3cc9-e344-4e89-b62c-85ad76ae528a" name="customer_link_id" label="M#12cn16客户关联编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CUSTOMER_LINK_ID" data_alias="LINK" />
+  <FieldInteger _uuid="0b91a959-d858-4e4d-9a74-fd7e7e3e2e78" name="action_cd" label="M#12cn16客户行为状态" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ACTION_CD" data_alias="ACT" />
+  <FieldDateTime _uuid="f8362b41-d597-49c3-a43b-a123f5d2cacf" name="record_date" label="M#12cn14记录日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RECORD_DATE" data_alias="REC" />
+  <FieldString _uuid="ce7034a1-7bb8-41ba-b120-4345a257778d" name="content" label="M#12cn14行为内容" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CONTENT" data_alias="CON" data_size="2000" />
+  <FieldString _uuid="c5422a3f-333c-40fa-82f9-7f45f5c6574f" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="d3f7ff5c-0dfb-4c2c-978d-243f80842426" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
