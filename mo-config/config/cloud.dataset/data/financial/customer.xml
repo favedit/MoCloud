@@ -11,10 +11,10 @@
   <FieldDateTime _uuid="32dd58ea-0d9c-40bf-97ce-79c5761b3d19" name="last_message_date" label="M#12cn19最后发送短信的时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LAST_MESSAGE_DATE" />
   <FieldDouble _uuid="e2f954ed-c06b-4022-9b59-debf6cdda84e" name="investment_total" label="M#12cn14投资总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
   <FieldInteger _uuid="2593c636-bd63-4069-b256-f9e71aa60d49" name="investment_count" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_COUNT" />
-  <FieldFloat _uuid="cec17914-d75e-4af8-b46b-e121c83547bb" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldDouble _uuid="29dbea7f-790d-4c48-8893-95212dc674a6" name="redemption_total" label="M#12cn14赎回总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
   <FieldInteger _uuid="e9dee007-3fd8-48cc-8912-259dbe2f7cc7" name="redemption_count" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_COUNT" />
-  <FieldFloat _uuid="e598dfc5-5825-4fe9-9948-884f0f31af22" name="netinvestment" label="M#12cn14净投总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
-  <FieldFloat _uuid="6a84b56d-ff9f-4cf0-ab5e-8e24949cb964" name="interest_total" label="M#12cn14利息总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
+  <FieldDouble _uuid="7e6b3be8-88e3-4185-8d4d-482ce222d133" name="netinvestment" label="M#12cn14净投总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT" />
+  <FieldDouble _uuid="0b1772a1-d6aa-49cd-a86e-f5b0adce7a0f" name="interest_total" label="M#12cn14利息总额" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldString _uuid="25d07462-4911-460e-b55f-fe81ec955d2a" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
   <FieldTemplate _uuid="2524c567-592b-4ef9-89ad-f16daa5e9529" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
 </DataStore>

@@ -1790,6 +1790,43 @@ ALTER TABLE DT_FIN_MARKETER
    ADD CONSTRAINT DT_FIN_MKT_UK_GID UNIQUE ( GUID ); 
    
 -- ------------------------------------------------------------
+-- Create table [Data.Financial.Customer]
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_FIN_CUSTOMER`;	  
+CREATE TABLE `DT_FIN_CUSTOMER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `MARKETER_ID`                   BIGINT, 
+   `MARKETER_LID`                  BIGINT, 
+   `LINK_ID`                       BIGINT, 
+   `STATISTICS_ID`                 INTEGER, 
+   `MARRY_CD`                      INTEGER, 
+   `EDUCATION_CD`                  INTEGER, 
+   `INCOME_CD`                     INTEGER, 
+   `BUSINESS_CD`                   INTEGER, 
+   `LAST_MESSAGE_DATE`             DATETIME, 
+   `INVESTMENT_TOTAL`              DOUBLE, 
+   `INVESTMENT_COUNT`              INTEGER, 
+   `REDEMPTION_TOTAL`              DOUBLE, 
+   `REDEMPTION_COUNT`              INTEGER, 
+   `NETINVESTMENT`                 DOUBLE, 
+   `INTEREST_TOTAL`                DOUBLE, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_FIN_CUSTOMER 
+   ADD CONSTRAINT DT_FIN_CST_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_FIN_CUSTOMER ADD CONSTRAINT DT_FIN_CST_FK_MKT 
+      FOREIGN KEY (`MARKETER_ID`) REFERENCES DT_FIN_MARKETER(`OUID`); 
+	  
+-- ------------------------------------------------------------
 -- Create table [Data.Financial.Tender]
 -- 20151104 sunhr
 -- ------------------------------------------------------------
@@ -1827,6 +1864,7 @@ ALTER TABLE DT_FIN_TENDER
 
 ALTER TABLE DT_FIN_TENDER ADD CONSTRAINT DT_FIN_TDR_FK_PRODUCT 
       FOREIGN KEY (`PRODUCT_ID`) REFERENCES DT_FIN_PRODUCT(`OUID`); 
+	  
 	  
 -- ------------------------------------------------------------
 -- Create table [Data.Financial.Customer.Tender]

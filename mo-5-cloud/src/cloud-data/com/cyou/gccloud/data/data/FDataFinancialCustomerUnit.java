@@ -7,7 +7,6 @@ import org.mo.com.io.IDataOutput;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RBoolean;
 import org.mo.com.lang.RDouble;
-import org.mo.com.lang.RFloat;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RLong;
 import org.mo.com.lang.RString;
@@ -108,10 +107,10 @@ public class FDataFinancialCustomerUnit
    protected int _investmentCount;
 
    // 存储字段赎回总额的定义。
-   private float __redemptionTotal;
+   private double __redemptionTotal;
 
    // 字段赎回总额的定义。
-   protected float _redemptionTotal;
+   protected double _redemptionTotal;
 
    // 存储字段赎回次数的定义。
    private int __redemptionCount;
@@ -120,16 +119,16 @@ public class FDataFinancialCustomerUnit
    protected int _redemptionCount;
 
    // 存储字段净投总额的定义。
-   private float __netinvestment;
+   private double __netinvestment;
 
    // 字段净投总额的定义。
-   protected float _netinvestment;
+   protected double _netinvestment;
 
    // 存储字段利息总额的定义。
-   private float __interestTotal;
+   private double __interestTotal;
 
    // 字段利息总额的定义。
-   protected float _interestTotal;
+   protected double _interestTotal;
 
    // 存储字段备注的定义。
    private String __note;
@@ -570,7 +569,7 @@ public class FDataFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public float redemptionTotal(){
+   public double redemptionTotal(){
       return _redemptionTotal;
    }
 
@@ -579,7 +578,7 @@ public class FDataFinancialCustomerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setRedemptionTotal(float value){
+   public void setRedemptionTotal(double value){
       _redemptionTotal = value;
    }
 
@@ -624,7 +623,7 @@ public class FDataFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public float netinvestment(){
+   public double netinvestment(){
       return _netinvestment;
    }
 
@@ -633,7 +632,7 @@ public class FDataFinancialCustomerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setNetinvestment(float value){
+   public void setNetinvestment(double value){
       _netinvestment = value;
    }
 
@@ -651,7 +650,7 @@ public class FDataFinancialCustomerUnit
    //
    // @return 数据内容
    //============================================================
-   public float interestTotal(){
+   public double interestTotal(){
       return _interestTotal;
    }
 
@@ -660,7 +659,7 @@ public class FDataFinancialCustomerUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setInterestTotal(float value){
+   public void setInterestTotal(double value){
       _interestTotal = value;
    }
 
@@ -837,13 +836,13 @@ public class FDataFinancialCustomerUnit
          case "investment_count":
             return RInteger.toString(_investmentCount);
          case "redemption_total":
-            return RFloat.toString(_redemptionTotal);
+            return RDouble.toString(_redemptionTotal);
          case "redemption_count":
             return RInteger.toString(_redemptionCount);
          case "netinvestment":
-            return RFloat.toString(_netinvestment);
+            return RDouble.toString(_netinvestment);
          case "interest_total":
-            return RFloat.toString(_interestTotal);
+            return RDouble.toString(_interestTotal);
          case "note":
             return _note;
          case "create_user_id":
@@ -911,16 +910,16 @@ public class FDataFinancialCustomerUnit
             _investmentCount = RInteger.parse(value);
             break;
          case "redemption_total":
-            _redemptionTotal = RFloat.parse(value);
+            _redemptionTotal = RDouble.parse(value);
             break;
          case "redemption_count":
             _redemptionCount = RInteger.parse(value);
             break;
          case "netinvestment":
-            _netinvestment = RFloat.parse(value);
+            _netinvestment = RDouble.parse(value);
             break;
          case "interest_total":
-            _interestTotal = RFloat.parse(value);
+            _interestTotal = RDouble.parse(value);
             break;
          case "note":
             _note = value;
@@ -1009,7 +1008,7 @@ public class FDataFinancialCustomerUnit
                _investmentCount = __investmentCount;
                break;
             case "redemption_total":
-               __redemptionTotal = RFloat.parse(value);
+               __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
                break;
             case "redemption_count":
@@ -1017,11 +1016,11 @@ public class FDataFinancialCustomerUnit
                _redemptionCount = __redemptionCount;
                break;
             case "netinvestment":
-               __netinvestment = RFloat.parse(value);
+               __netinvestment = RDouble.parse(value);
                _netinvestment = __netinvestment;
                break;
             case "interest_total":
-               __interestTotal = RFloat.parse(value);
+               __interestTotal = RDouble.parse(value);
                _interestTotal = __interestTotal;
                break;
             case "note":
@@ -1103,10 +1102,10 @@ public class FDataFinancialCustomerUnit
       map.put("lastMessageDate", _lastMessageDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
       map.put("investmentCount", RInteger.toString(_investmentCount));
-      map.put("redemptionTotal", RFloat.toString(_redemptionTotal));
+      map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
       map.put("redemptionCount", RInteger.toString(_redemptionCount));
-      map.put("netinvestment", RFloat.toString(_netinvestment));
-      map.put("interestTotal", RFloat.toString(_interestTotal));
+      map.put("netinvestment", RDouble.toString(_netinvestment));
+      map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("note", _note);
       map.put("createUserId", RLong.toString(_createUserId));
       map.put("createDate", _createDate.format("YYYY-MM-DD HH24:MI:SS"));
