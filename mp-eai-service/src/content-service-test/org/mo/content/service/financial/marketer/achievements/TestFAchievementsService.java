@@ -95,17 +95,17 @@ public class TestFAchievementsService
    }
 
    @Test
-   public void fetchActions() throws ClientProtocolException, IOException{
+   public void fetchBusinessActions() throws ClientProtocolException, IOException{
       CloseableHttpClient httpclient = HttpClients.createDefault();
       String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
+      listPram.add(new BasicNameValuePair("session_code", "82261B83B33AF526084FF9FDBAB64D51"));
       //      listPram.add(new BasicNameValuePair("login_date", new TDateTime(new Date()).toString()));// 20151019103636时间戳
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));
       //      post.setHeader("mo-session-id", "77BEFC569B9E4CE5A65B34B8C1E89333");
-      listPram.add(new BasicNameValuePair("action", "fetchActions"));
+      listPram.add(new BasicNameValuePair("action", "fetchBusinessActions"));
       listPram.add(new BasicNameValuePair("format_cd", "json"));
       post.setEntity(new UrlEncodedFormEntity(listPram, "UTF-8")); // 执行get请求
       System.out.println(url + "?" + EntityUtils.toString(post.getEntity()));

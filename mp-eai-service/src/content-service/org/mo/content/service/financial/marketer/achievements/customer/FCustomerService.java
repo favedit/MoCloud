@@ -10,8 +10,11 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.xml.FXmlNode;
+import org.mo.content.core.financial.customer.FDataCustomerInfo;
+import org.mo.content.core.financial.customer.IDataCustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
 import org.mo.core.aop.face.ALink;
+import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 import org.mo.web.core.session.IWebSession;
 import org.mo.web.protocol.context.IWebContext;
@@ -36,6 +39,10 @@ public class FCustomerService
    // 理财师控制器
    @ALink
    protected IDataMarketerConsole _marketerConsole;
+
+   // 理财师客户控制器
+   @ALink
+   protected IDataCustomerConsole _customerConsole;
 
    // ============================================================
    // <T>默认逻辑。</T>
@@ -75,15 +82,23 @@ public class FCustomerService
       if(marketer == null){
          return EResult.Failure;
       }
+      pageSize = context.parameterAsInteger("page_size");
+      pageNumber = context.parameterAsInteger("page_nubmer");
+      FLogicDataset<FDataCustomerInfo> MCList = _customerConsole.fetchByMarketerId(logicContext, marketer.ouid(), pageNumber, pageSize);
       FXmlNode customerList = output.config().createNode("customer_list");
-      for(int i = 0; i < 8; i++){
+      if(MCList.count() < 1){
+         customerList.setText("0");
+         return EResult.Success;
+      }
+      for(FDataCustomerInfo info : MCList){
          FXmlNode customer = customerList.createNode();
-         customer.createNode("picture", "e租财富");
-         customer.createNode("name", "12");
-         customer.createNode("investment_total", "20000050");
-         customer.createNode("redemption_total", "2000000");
-         customer.createNode("netinvestment_total", "1000000");
-         customer.createNode("last_login_date", "2015-11-05");
+         customer.createNode("picture", RString.isEmpty(info.iconUrl()) ? "0" : info.iconUrl());
+         customer.createNode("name", RString.isEmpty(info.label()) ? "0" : info.label());
+         customer.createNode("investment_total", RString.parse(info.investmentTotal()));
+         customer.createNode("redemption_total", RString.parse(info.redemptionTotal()));
+         customer.createNode("netinvestment_total", RString.parse(info.netinvestment()));
+         String lastLoginDate = RString.parse(info.lastLoginDate());
+         customer.createNode("last_login_date", RString.isEmpty(lastLoginDate) ? "0" : lastLoginDate);
       }
       return EResult.Success;
    }

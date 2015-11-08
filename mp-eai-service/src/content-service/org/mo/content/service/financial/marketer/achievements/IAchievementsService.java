@@ -69,7 +69,7 @@ public interface IAchievementsService
                              ILogicContext logicContext);
 
    // ============================================================
-   // <T>获取所有客户的行为</T>
+   // <T>获取所有客户的金融行为</T>
    // @param context 页面环境
    // @sessionContext 会话session上下文
    // @param input 输入配置
@@ -77,9 +77,9 @@ public interface IAchievementsService
    // @logicContext 逻辑上下文
    // @return 处理结果
    // ============================================================
-   public EResult fetchActions(IWebContext context,
-                               IWebSession sessionContext,
-                               IWebInput input,
-                               IWebOutput output,
-                               ILogicContext logicContext);
+   public EResult fetchBusinessActions(IWebContext context,
+                                       IWebSession sessionContext,
+                                       IWebInput input,
+                                       IWebOutput output,
+                                       ILogicContext logicContext);
 }

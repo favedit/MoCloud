@@ -2,6 +2,8 @@ package org.mo.content.service.financial.marketer.achievements;
 
 import com.cyou.gccloud.data.data.FDataFinancialCustomerTenderUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
+import com.cyou.gccloud.data.statistics.FStatisticsFinancialDynamicUnit;
+import com.cyou.gccloud.define.enums.financial.EGcFinancialCustomerAction;
 import org.mo.cloud.core.message.FGcErrorMessage;
 import org.mo.cloud.logic.data.system.FGcSessionInfo;
 import org.mo.cloud.logic.data.system.IGcSessionConsole;
@@ -17,6 +19,7 @@ import org.mo.content.core.financial.customer.FDataCustomerProductInfo;
 import org.mo.content.core.financial.customer.IDataCustomerConsole;
 import org.mo.content.core.financial.customer.tender.IDataCustomerTenderConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
+import org.mo.content.core.statistics.financial.dynamic.IStatisticsDynamicConsole;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
@@ -51,6 +54,10 @@ public class FAchievementsService
    // 理财师客户投资控制器
    @ALink
    protected IDataCustomerConsole _customerConsole;
+
+   // 客户业务动态控制器
+   @ALink
+   protected IStatisticsDynamicConsole _dynamicConsole;
 
    // ============================================================
    // <T>默认逻辑。</T>
@@ -123,7 +130,6 @@ public class FAchievementsService
                }
             }
          }
-
          FXmlNode month = achievementsForMonth.createNode("day" + i);
          month.createNode("date", time);
          month.createNode("investment_day", RString.parse(investmentDay));
@@ -174,7 +180,7 @@ public class FAchievementsService
    }
 
    // ============================================================
-   // <T>获取所有客户的行为</T>
+   // <T>获取所有客户的金融行为</T>
    // @param context 页面环境
    // @sessionContext 会话session上下文
    // @param input 输入配置
@@ -183,11 +189,11 @@ public class FAchievementsService
    // @return 处理结果
    // ============================================================
    @Override
-   public EResult fetchActions(IWebContext context,
-                               IWebSession sessionContext,
-                               IWebInput input,
-                               IWebOutput output,
-                               ILogicContext logicContext){
+   public EResult fetchBusinessActions(IWebContext context,
+                                       IWebSession sessionContext,
+                                       IWebInput input,
+                                       IWebOutput output,
+                                       ILogicContext logicContext){
       String session_code = context.parameter("session_code");
       _logger.debug(this, "FetchActions", "Marketer achievements fetch actions begin. (session={1})", session_code);
       // 获取session验证,获取理财师
@@ -195,12 +201,22 @@ public class FAchievementsService
       if(marketer == null){
          return EResult.Failure;
       }
+      FLogicDataset<FStatisticsFinancialDynamicUnit> dynmicList = _dynamicConsole.fetchByMarketerId(logicContext, marketer.statisticsId());
       FXmlNode ActionList = output.config().createNode("action_list");
-      for(int i = 0; i < 5; i++){
+      if(dynmicList.count() < 1){
+         ActionList.setText("0");
+         return EResult.Success;
+      }
+      for(FStatisticsFinancialDynamicUnit unit : dynmicList){
          FXmlNode action = ActionList.createNode();
-         action.createNode("customer_name", "张三" + i);
-         action.createNode("action_date", "2015-10-30");
-         action.createNode("action_content", "登录系统...");
+         action.createNode("customer_name", unit.customerLabel());
+         action.createNode("action_date", RString.parse(unit.customerActionDate()));
+         // 拼接内容
+         StringBuffer content = new StringBuffer();
+         content.append(EGcFinancialCustomerAction.formatLabel(unit.customerActionCd()));
+         content.append(unit.customerActionAmount());
+         content.append("元。");
+         action.createNode("action_content", content.toString());
       }
       return EResult.Success;
    }
@@ -230,6 +246,10 @@ public class FAchievementsService
 
       FXmlNode products = output.config().createNode("product_list");
       FLogicDataset<FDataCustomerProductInfo> mcList = _customerConsole.fetchProductInvestmentByMarketerId(logicContext, marketer.ouid());
+      if(mcList.count() < 1){
+         products.setText("0");
+         return EResult.Success;
+      }
       double occupancy = 0;
       double occupancy_total = 0;
       for(FDataCustomerProductInfo unit : mcList){

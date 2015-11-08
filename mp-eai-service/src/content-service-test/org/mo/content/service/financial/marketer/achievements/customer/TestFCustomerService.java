@@ -22,7 +22,7 @@ public class TestFCustomerService
       String url = "http://10.13.0.27:8020/eai.financial.marketer.achievements.customer.wsp";
       HttpPost post = new HttpPost(url);
       List<BasicNameValuePair> listPram = new ArrayList<BasicNameValuePair>();
-      listPram.add(new BasicNameValuePair("session_code", "beb7e325a2aa41d499b4d0dd81cb80b5"));
+      listPram.add(new BasicNameValuePair("session_code", "82261B83B33AF526084FF9FDBAB64D51"));
       //      listPram.add(new BasicNameValuePair("login_date", new TDateTime(new Date()).toString()));// 20151019103636时间戳
       // listPram.add(new BasicNameValuePair("mo-session-id",
       // "4649AD3AF9BFBBAE690C5DF6C0AF202C"));

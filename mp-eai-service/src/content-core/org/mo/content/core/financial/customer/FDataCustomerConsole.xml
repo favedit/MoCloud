@@ -1,19 +1,30 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 
 <Config>
-
+<!-- 获取理财师的客户产品投资情况 -->
 <Resource name='sql.customer.product.sum'><![CDATA[
 SELECT 
    product.LABEL as label, product.RATE as rate ,SUM(cus_tender.INVESTMENT) AS investment_total
 FROM
-   DT_FIN_CUSTOMER cus
-   LEFT JOIN DT_FIN_CUSTOMER_TENDER cus_tender ON cus.OUID = cus_tender.CUSTOMER_ID
+   DT_FIN_CUSTOMER cst
+   LEFT JOIN DT_FIN_CUSTOMER_TENDER cus_tender ON cst.OUID = cus_tender.CUSTOMER_ID
    LEFT JOIN DT_FIN_TENDER tender ON cus_tender.TENDER_ID = tender.OUID
    LEFT JOIN DT_FIN_PRODUCT product ON tender.PRODUCT_ID = product.OUID
 WHERE
-   cus.MARKETER_ID = {marketer_id}
+   cst.MARKETER_ID = {marketer_id}
 GROUP BY
    product.LABEL
+]]></Resource>
+
+<!-- 获取理财师的指定名称客户 -->
+<Resource name='sql.customer.label'><![CDATA[
+SELECT 
+   cst.*,
+   mmb.LABEL AS label,mmb.ICON_URL AS icon_url,mmb.LAST_LOGIN_DATE AS last_login_date
+FROM DT_FIN_CUSTOMER cst
+   LEFT JOIN DT_FIN_MEMBER mmb ON cst.OUID = mmb.OUID
+WHERE 
+   cst.MARKETER_ID = {marketer_id} AND mmb.LABEL LIKE '%{label}%'
 ]]></Resource>
 
 </Config>

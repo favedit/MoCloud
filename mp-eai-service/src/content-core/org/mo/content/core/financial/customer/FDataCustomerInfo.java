@@ -9,18 +9,29 @@ import org.mo.com.lang.type.TDateTime;
 public class FDataCustomerInfo
       extends FDataFinancialCustomerUnit
 {
+   // 客户图像
+   private String _iconUrl;
+
    // 客户名称
-   private String _customerLabel;
+   private String _label;
 
    // 最后登录时间
    private TDateTime _lastLoginDate;
 
-   public String customerLabel(){
-      return _customerLabel;
+   public String iconUrl(){
+      return _iconUrl;
    }
 
-   public void setCustomerLabel(String _customerLabel){
-      this._customerLabel = _customerLabel;
+   public void setIconUrl(String _iconUrl){
+      this._iconUrl = _iconUrl;
+   }
+
+   public String label(){
+      return _label;
+   }
+
+   public void setLabel(String _label){
+      this._label = _label;
    }
 
    public TDateTime lastLoginDate(){
