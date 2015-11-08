@@ -1,6 +1,5 @@
 package org.mo.content.core.mobile.logic.notice;
 
-import com.ahyc.eai.core.common.EDatabaseConnection;
 import com.cyou.gccloud.data.data.FDataLogicNoticeLogic;
 import com.cyou.gccloud.data.data.FDataLogicNoticeUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserLogic;
@@ -24,6 +23,7 @@ import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.session.IWebSession;
 
 //============================================================
@@ -171,7 +171,7 @@ public class FNoticeConsole
                                String content,
                                ILogicContext logicContext){
       FSql modelSql = _resource.findString(FSql.class, "sql.notice.publish");
-      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Data);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.DATA);
       FDataset fetchDataset = connection.fetchDataset(modelSql);
       int maxDisplayOrder = -1;
       for(Iterator<FRow> iterator = fetchDataset.iterator(); iterator.hasNext();){

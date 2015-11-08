@@ -1,6 +1,5 @@
 package com.ahyc.eai.service.financial.customer;
 
-import com.ahyc.eai.core.common.EDatabaseConnection;
 import com.ahyc.eai.core.financial.FFinancialTenderModel;
 import com.ahyc.eai.core.financial.IFinancialConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
@@ -27,6 +26,7 @@ import org.mo.com.resource.RResource;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -327,7 +327,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
-      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       // 输出排行数据
       FSql sql = _resource.findString(FSql.class, "sql.customer.province");
       sql.bindDateTime("begin_date", beginDate);
@@ -404,7 +404,7 @@ public class FStatisticsCustomerServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
-      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       // 输出排行数据
       FSql sql = _resource.findString(FSql.class, "sql.customer.province");
       sql.bindInteger("year", endDate.year());

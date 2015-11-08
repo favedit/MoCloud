@@ -10,6 +10,8 @@ import org.mo.com.lang.FObject;
 import org.mo.com.lang.IStringPair;
 import org.mo.com.lang.RInteger;
 import org.mo.com.lang.RString;
+import org.mo.com.logging.ILogger;
+import org.mo.com.logging.RLogger;
 import org.mo.com.net.EMime;
 import org.mo.content.core.system.ISystemInfoConsole;
 import org.mo.core.aop.face.ALink;
@@ -26,7 +28,7 @@ public class FAbstractStatisticsServlet
       extends FObject
 {
    // 日志输出接口
-   // private static ILogger _logger = RLogger.find(FAbstractStatisticsServlet.class);
+   private static ILogger _logger = RLogger.find(FAbstractStatisticsServlet.class);
 
    @ALink
    protected ISystemInfoConsole _infoConsole;
@@ -69,6 +71,7 @@ public class FAbstractStatisticsServlet
       String pack = parameters.joinValue("");
       int hash = RString.calculateHash(pack, token);
       if(parameterHash != hash){
+         _logger.warn(this, "checkParameters", "Calculate sign is invalid. (parameter_sign={1}, calculate_sign={2})", parameterHash, hash);
          // 校验错误
          FByteStream stream = new FByteStream();
          stream.write(new String("Sign is invalid.").getBytes());

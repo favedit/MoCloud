@@ -1,6 +1,5 @@
 package com.ahyc.eai.service.cockpit;
 
-import com.ahyc.eai.core.common.EDatabaseConnection;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -15,6 +14,7 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -55,7 +55,7 @@ public class FCockpitServlet
       // 获得数据
       FSql modelSql = _resource.findString(FSql.class, "sql.tender.model");
       modelSql.bindDateTime("date", currentDate, "YYYYMMDD");
-      ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Statistics);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       FDataset modelDataset = connection.fetchDataset(modelSql);
       //............................................................
       FByteStream stream = new FByteStream();

@@ -55,6 +55,9 @@ public class RDateTime
    // 默认时间补齐字符
    public final static char DEFAULT_FORMAT_CHAR = '0';
 
+   // 月份列表
+   public final static int[] MONTH_DAYS = new int[]{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
    /// 表示一天中的刻度数
    public final static long TicksPerDay = 86400000L;
 
@@ -72,6 +75,7 @@ public class RDateTime
 
    /// 当前所在时区的毫秒数
    public final static long TicksZone = 3600000L * (23 - Calendar.ZONE_OFFSET);
+
    //============================================================
    static{
       Calendar calendar = Calendar.getInstance();
@@ -153,6 +157,25 @@ public class RDateTime
       return new TDateTime(System.currentTimeMillis());
    }
 
+   //===========================================================
+   // <T>计算指定年月的天数。</T>
+   //
+   // @method
+   // @param year:Integer 年
+   // @param month:Integer 月
+   // @return Integer 天数
+   //===========================================================
+   public static int monthDays(int year,
+                               int month){
+      if((year <= 0) || (month <= 0)){
+         return 0;
+      }
+      if(month == 2){
+         return (((year % 4 == 0) || (year % 400 == 0)) && (year % 100 != 0)) ? 29 : 28;
+      }
+      return MONTH_DAYS[month];
+   }
+
    //============================================================
    // <T>分解字符串为默认格式的时间类型。</T>
    //
@@ -193,7 +216,7 @@ public class RDateTime
    public static Date parse(String value,
                             String format){
       // 参数检查
-      if((null == value) || (null == format)){
+      if((value == null) || (format == null)){
          return null;
       }
       char[] chars = format.toLowerCase().toCharArray();

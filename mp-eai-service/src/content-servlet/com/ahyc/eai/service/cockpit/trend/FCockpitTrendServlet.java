@@ -1,15 +1,21 @@
 package com.ahyc.eai.service.cockpit.trend;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
+import org.mo.com.collections.FDataset;
+import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
+import org.mo.com.lang.FDictionary;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -26,7 +32,7 @@ public class FCockpitTrendServlet
    private static ILogger _logger = RLogger.find(FCockpitTrendServlet.class);
 
    // 资源访问接口
-   //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
+   private static IResource _resource = RResource.find(FCockpitTrendServlet.class);
 
    //============================================================
    // <T>业绩趋势列表</T>
@@ -49,7 +55,6 @@ public class FCockpitTrendServlet
       // 获得当前时间
       TDateTime currentDate = RDateTime.currentDateTime();
       //............................................................
-      //............................................................
       // 从缓冲中查找数据
       String cacheCode = "dynamic|" + currentDate.format("YYYYMMDDHH24MI");
       FByteStream cacheStream = findCacheStream(cacheCode);
@@ -57,70 +62,65 @@ public class FCockpitTrendServlet
          return sendStream(context, request, response, cacheStream);
       }
       //............................................................
-      //      TDateTime currentDate = RDateTime.currentDateTime();
       // 设置输出流
       FByteStream stream = createStream(context);
-      FByteStream dataStream = createStream(context);
-      //      ISqlConnection connection = logicContext.activeConnection("statistics");
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
       //............................................................
-      ArrayList<Double[]> parent = new ArrayList<Double[]>();
-      Double[] child0 = new Double[31];
-      Double[] child1 = new Double[31];
-      Double[] child2 = new Double[31];
-      Double[] child3 = new Double[31];
-      Double[] child4 = new Double[31];
-      Double[] child5 = new Double[31];
-      parent.add(child0);
-      parent.add(child1);
-      parent.add(child2);
-      parent.add(child3);
-      parent.add(child4);
-      parent.add(child5);
-      for(Double[] doubles : parent){
-         for(int i = 0; i < doubles.length; i++){
-            doubles[i] = Double.parseDouble(new DecimalFormat("#").format(Math.random() * 100000));
+      TDateTime month2Date = new TDateTime(currentDate.format("YYYYMM01"), "YYYYMMDD");
+      int month2Days = month2Date.monthDay();
+      TDateTime month1Date = new TDateTime(month2Date);
+      month1Date.addMonth(-1);
+      int month1Days = month1Date.monthDay();
+      // 查询数据
+      FSql sql = _resource.findString(FSql.class, "sql.cockpit.trend");
+      sql.bindDateTime("month1", month1Date, "YYYYMM01");
+      sql.bindDateTime("month2", month2Date, "YYYYMM01");
+      FDataset dataset = connection.fetchDataset(sql);
+      // 生成字典
+      FDictionary<FRow> rows = new FDictionary<FRow>(FRow.class);
+      for(FRow row : dataset){
+         String code = RDateTime.format(row.get("record_day"), "YYYYMMDD");
+         rows.set(code, row);
+      }
+      // 输出数据
+      TDateTime currentMonth1 = new TDateTime(month1Date);
+      TDateTime currentMonth2 = new TDateTime(month2Date);
+      int count = 31;
+      stream.writeInt32(count);
+      for(int n = 0; n < count; n++){
+         // 写入上月数据
+         String month1Code = currentMonth1.format("YYYYMMDD");
+         stream.writeString(month1Code);
+         FRow row1 = rows.find(month1Code);
+         if((n < month1Days) && (row1 != null)){
+            double investmentAmount = row1.getDouble("investment_amount");
+            double redemptionAmount = row1.getDouble("redemption_amount");
+            stream.writeDouble(investmentAmount);
+            stream.writeDouble(redemptionAmount);
+            stream.writeDouble(investmentAmount - redemptionAmount);
+            currentMonth1.addDay(1);
+         }else{
+            stream.writeDouble(0);
+            stream.writeDouble(0);
+            stream.writeDouble(0);
+         }
+         // 写入当月数据
+         String month2Code = currentMonth2.format("YYYYMMDD");
+         stream.writeString(month2Code);
+         FRow row2 = rows.find(month2Code);
+         if((n < month2Days) && (row2 != null)){
+            double investmentAmount = row2.getDouble("investment_amount");
+            double redemptionAmount = row2.getDouble("redemption_amount");
+            stream.writeDouble(investmentAmount);
+            stream.writeDouble(redemptionAmount);
+            stream.writeDouble(investmentAmount - redemptionAmount);
+            currentMonth2.addDay(1);
+         }else{
+            stream.writeDouble(0);
+            stream.writeDouble(0);
+            stream.writeDouble(0);
          }
       }
-      int count = parent.size();
-      dataStream.writeInt32(count);//本月加上月一共六条曲线
-      dataStream.writeString("current_investment");//当月投资
-      dataStream.writeInt32(child0.length);//投资天数
-      int c0 = child0.length;
-      for(int i = 0; i < c0; i++){
-         dataStream.writeDouble(child0[i]);//每天投资额
-      }
-      dataStream.writeString("current_redemption");//当月赎回
-      dataStream.writeInt32(child1.length);//赎回天数
-      int c1 = child1.length;
-      for(int i = 0; i < c1; i++){
-         dataStream.writeDouble(child1[i]);//每天赎回额
-      }
-      dataStream.writeString("current_netinvestment");//当月净投
-      dataStream.writeInt32(child2.length);//净投天数
-      int c2 = child2.length;
-      for(int i = 0; i < c2; i++){
-         dataStream.writeDouble(child2[i]);//每天净投额
-      }
-
-      dataStream.writeString("last_investment");//上月投资
-      dataStream.writeInt32(child3.length);//投资天数
-      int c3 = child3.length;
-      for(int i = 0; i < c3; i++){
-         dataStream.writeDouble(child3[i]);//每天投资额
-      }
-      dataStream.writeString("last_redemption");//上月赎回
-      dataStream.writeInt32(child4.length);//赎回天数
-      int c4 = child4.length;
-      for(int i = 0; i < c4; i++){
-         dataStream.writeDouble(child4[i]);//每天赎回额
-      }
-      dataStream.writeString("last_netinvestment");//上月净投
-      dataStream.writeInt32(child5.length);//净投天数
-      int c5 = child5.length;
-      for(int i = 0; i < c5; i++){
-         dataStream.writeDouble(child5[i]);//每天净投额
-      }
-      stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);

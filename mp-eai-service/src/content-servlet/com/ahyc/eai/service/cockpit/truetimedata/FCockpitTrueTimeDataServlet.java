@@ -56,29 +56,26 @@ public class FCockpitTrueTimeDataServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
-      FByteStream dataStream = createStream(context);
       //............................................................
       //写入数据
       //      stream.writeString("investment_total");
-      dataStream.writeDouble(52079792378.0);//投资总额
+      stream.writeDouble(52079792378.0);//投资总额
       //      stream.writeString("current_investment");
-      dataStream.writeDouble(2079792378.0);//当月投资
+      stream.writeDouble(2079792378.0);//当月投资
       //      stream.writeString("employee_count");
-      dataStream.writeInt32(92800);//集团现有员工
+      stream.writeInt32(92800);//集团现有员工
       //      stream.writeString("marketer_count");
-      dataStream.writeInt32(70000);//现有理财师
+      stream.writeInt32(70000);//现有理财师
       //      stream.writeString("subsidiary_count");
-      dataStream.writeInt32(45);//现有子公司
+      stream.writeInt32(45);//现有子公司
       //      stream.writeString("wealth_count");
-      dataStream.writeInt32(250);//现有财富端分公司
+      stream.writeInt32(250);//现有财富端分公司
       //      stream.writeString("workplace_count");
-      dataStream.writeInt32(485);//分布职场数量
+      stream.writeInt32(485);//分布职场数量
       //      stream.writeString("thing_count");
-      dataStream.writeInt32(8);//待办事项
+      stream.writeInt32(8);//待办事项
       //      stream.writeString("unread_count");
-      dataStream.writeInt32(5);//消息通知
-      //写入数据
-      stream.write(dataStream.memory(), 0, dataStream.position());
+      stream.writeInt32(5);//消息通知
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);

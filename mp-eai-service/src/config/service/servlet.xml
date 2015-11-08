@@ -146,6 +146,7 @@
          class='com.ahyc.eai.service.cockpit.warning.FCockpitWarningServlet'
          scope='global'>
    </Component>
+
    <!-- ============================================================ -->
    <!-- e租宝财富端本月业绩                                            -->
    <!-- ============================================================ -->
@@ -198,24 +199,26 @@
    <!-- 实时数据                                          -->
    <!-- ============================================================ -->
    <WebServlet
-         name='eai.cockpit.truetimedata'
-         face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet' />
+         name  = 'eai.cockpit.truetimedata'
+         face  = 'com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet' />
+   
    <Component
-         face='com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet'
-         class='com.ahyc.eai.service.cockpit.truetimedata.FCockpitTrueTimeDataServlet'
-         scope='global'>
+         face  = 'com.ahyc.eai.service.cockpit.truetimedata.ICockpitTrueTimeDataServlet'
+         class = 'com.ahyc.eai.service.cockpit.truetimedata.FCockpitTrueTimeDataServlet'
+         scope = 'global'>
    </Component>
    
    <!-- ============================================================ -->
    <!-- 仪表盘                                          -->
    <!-- ============================================================ -->
    <WebServlet
-         name='eai.cockpit.instrumentpanel'
-         face='com.ahyc.eai.service.cockpit.instrumentpanel.ICockpitPanelServlet' />
+         name  = 'eai.cockpit.instrumentpanel'
+         face  = 'com.ahyc.eai.service.cockpit.instrumentpanel.ICockpitPanelServlet' />
+
    <Component
-         face='com.ahyc.eai.service.cockpit.instrumentpanel.ICockpitPanelServlet'
-         class='com.ahyc.eai.service.cockpit.instrumentpanel.FCockpitPanelServlet'
-         scope='global'>
+         face  = 'com.ahyc.eai.service.cockpit.instrumentpanel.ICockpitPanelServlet'
+         class = 'com.ahyc.eai.service.cockpit.instrumentpanel.FCockpitPanelServlet'
+         scope = 'global'>
    </Component>
    
    <!-- ============================================================ -->
@@ -224,6 +227,7 @@
    <WebServlet
          name='eai.cockpit.projectmanage'
          face='com.ahyc.eai.service.cockpit.projectmanage.ICockpitProjectManageServlet' />
+
    <Component
          face='com.ahyc.eai.service.cockpit.projectmanage.ICockpitProjectManageServlet'
          class='com.ahyc.eai.service.cockpit.projectmanage.FCockpitProjectManageServlet'
