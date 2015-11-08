@@ -1,4 +1,4 @@
-package com.ahyc.eai.service.cockpit.truetimedata;
+package com.ahyc.eai.service.cockpit.title;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import org.mo.com.io.FByteStream;
@@ -15,13 +15,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>实时数据处理。</T>
 //============================================================
-public class FCockpitTrueTimeDataServlet
+public class FCockpitTitleServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitTrueTimeDataServlet
+         ICockpitTitleServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitTrueTimeDataServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitTitleServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
@@ -38,7 +38,6 @@ public class FCockpitTrueTimeDataServlet
                         ILogicContext logicContext,
                         IWebServletRequest request,
                         IWebServletResponse response){
-      _logger.debug(this, "fetch", "the method named fetch from FCockpitTrueTimeDataServlet is beginning... ");
       //       检查参数
       if(!checkParameters(context, request, response)){
          return EResult.Failure;

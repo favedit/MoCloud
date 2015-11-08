@@ -1,6 +1,8 @@
-package com.ahyc.eai.service.cockpit.wisdom;
+package com.ahyc.eai.service.cockpit.forecast;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
+import java.util.ArrayList;
+import java.util.List;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
@@ -15,13 +17,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>智慧柯南接口.</T>
 //============================================================
-public class FCockpitWisdomServlet
+public class FCockpitForecastServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitWisdomServlet
+         ICockpitForecastServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitWisdomServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitForecastServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
@@ -57,55 +59,60 @@ public class FCockpitWisdomServlet
       // 设置输出流
       FByteStream stream = createStream(context);
       FByteStream dataStream = createStream(context);
-      Integer[] child0 = new Integer[12];//1-12月每月的投资赎回人数
-      Double[] child1 = new Double[12];//1-12月所有员工的每月月末投资
-      Integer[] child2 = new Integer[12];//1-12月每月固定时间投资赎回的人数
-      Integer[] child3 = new Integer[12];//1-12月每月理财师投资业绩与绩效业绩的百分比
-      Integer[] child4 = new Integer[12];//1-12月,分公司每月的人员流动性
-      for(int i = 0; i < child0.length; i++){
-         child0[i] = (int)(Math.random() * 100000);
+      List<ForecastUnit> lists = new ArrayList<ForecastUnit>();
+      ForecastUnit unit0 = new ForecastUnit();
+      unit0.setLabel("同一账号反复投资/赎回");
+      Double[] arr0 = new Double[12];
+      for(int i = 0; i < arr0.length; i++){
+         arr0[i] = Math.random() * 100;
       }
-      for(int i = 0; i < child1.length; i++){
-         child1[i] = (Math.random() * 100000);
-      }
-      for(int i = 0; i < child2.length; i++){
-         child2[i] = (int)(Math.random() * 100000);
-      }
-      for(int i = 0; i < child3.length; i++){
-         child3[i] = (int)(Math.random() * 100);
-      }
-      for(int i = 0; i < child4.length; i++){
-         child4[i] = (int)(Math.random() * 100);
-      }
-      int count = 5;
-      dataStream.writeInt32(count);//5条智慧标题
-      dataStream.writeString("同一账号反复投资/赎回");//第一条曲线的智慧标题
-      int c0 = child0.length;
-      for(int i = 0; i < c0; i++){
-         dataStream.writeInt32(child0[i]);//1-12月每月投资/赎回的人数
-      }
-      dataStream.writeString("所有员工的月末投资");//第二条曲线的智慧标题
-      int c1 = child1.length;
-      for(int i = 0; i < c1; i++){
-         dataStream.writeDouble(child1[i]);//1-12月每月投资/赎回的人数
-      }
-      dataStream.writeString("每月固定时间内投资/赎回");//第三条曲线的智慧标题
-      int c2 = child2.length;
-      dataStream.writeString("15 24:00");//每月15号的24点整
-      for(int i = 0; i < c2; i++){
-         dataStream.writeDouble(child2[i]);//1-12月每月固定时间投资赎回的人数
-      }
+      unit0.setMonths(arr0);
 
-      dataStream.writeString("理财师投资业绩/绩效业绩");//第四条曲线的智慧标题
-      int c3 = child3.length;
-      for(int i = 0; i < c3; i++){
-         dataStream.writeInt32(child3[i]);//1-12月每月理财师投资业绩与绩效业绩的百分比
+      ForecastUnit unit1 = new ForecastUnit();
+      unit1.setLabel("所有员工的月末投资");
+      Double[] arr1 = new Double[12];
+      for(int i = 0; i < arr1.length; i++){
+         arr1[i] = Math.random() * 10000;
       }
-      dataStream.writeString("分公司的人员流动性");//第五条曲线的智慧标题
-      int c4 = child4.length;
-      for(int i = 0; i < c4; i++){
-         dataStream.writeInt32(child4[i]);//1-12月,分公司每月的人员流动性
+      unit1.setMonths(arr1);
+
+      lists.add(unit0);
+      lists.add(unit1);
+      int count = lists.size();
+      dataStream.writeInt32(count);
+      for(ForecastUnit forecastUnit : lists){
+         dataStream.writeString(forecastUnit.getLabel());
+         Object[] months = forecastUnit.getMonths();
+         dataStream.writeInt32(months.length);
+         for(int i = 0; i < months.length; i++){
+            dataStream.writeDouble((double)months[i]);
+         }
       }
+      //      dataStream.writeInt32(arr0[i]);//1-12月每月投资/赎回的人数
+      //      dataStream.writeString("同一账号反复投资/赎回");//第一条曲线的智慧标题
+      //
+      //      dataStream.writeString("所有员工的月末投资");//第二条曲线的智慧标题
+      //      int c1 = child1.length;
+      //      for(int i = 0; i < c1; i++){
+      //         dataStream.writeDouble(child1[i]);//1-12月每月投资/赎回的人数
+      //      }
+      //      dataStream.writeString("每月固定时间内投资/赎回");//第三条曲线的智慧标题
+      //      int c2 = child2.length;
+      //      dataStream.writeString("15 24:00");//每月15号的24点整
+      //      for(int i = 0; i < c2; i++){
+      //         dataStream.writeDouble(child2[i]);//1-12月每月固定时间投资赎回的人数
+      //      }
+      //
+      //      dataStream.writeString("理财师投资业绩/绩效业绩");//第四条曲线的智慧标题
+      //      int c3 = child3.length;
+      //      for(int i = 0; i < c3; i++){
+      //         dataStream.writeInt32(child3[i]);//1-12月每月理财师投资业绩与绩效业绩的百分比
+      //      }
+      //      dataStream.writeString("分公司的人员流动性");//第五条曲线的智慧标题
+      //      int c4 = child4.length;
+      //      for(int i = 0; i < c4; i++){
+      //         dataStream.writeInt32(child4[i]);//1-12月,分公司每月的人员流动性
+      //      }
       //写入数据
       stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................

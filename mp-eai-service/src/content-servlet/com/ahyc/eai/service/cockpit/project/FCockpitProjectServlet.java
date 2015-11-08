@@ -1,4 +1,4 @@
-package com.ahyc.eai.service.cockpit.projectmanage;
+package com.ahyc.eai.service.cockpit.project;
 
 import com.ahyc.eai.core.cockpit.projectmanage.IProjectManageConsole;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
@@ -19,13 +19,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>驾驶舱业绩处理。</T>
 //============================================================
-public class FCockpitProjectManageServlet
+public class FCockpitProjectServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitProjectManageServlet
+         ICockpitProjectServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitProjectManageServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitProjectServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitProjectManageServlet.class);
@@ -81,21 +81,24 @@ public class FCockpitProjectManageServlet
          JSONObject fromObject = jsonOutArray.getJSONObject(j);
          String name = fromObject.get("name").toString();
          String uname = fromObject.get("uname").toString();
-         String priority = fromObject.get("priority").toString();
-         String status = fromObject.get("status").toString();
+         int priority = Integer.parseInt(fromObject.get("priority").toString());
+         int status = Integer.parseInt(fromObject.get("status").toString());
          //输出数据
          dataStream.writeString(name);//项目标题
          dataStream.writeString(uname);//责任人
-         dataStream.writeString(priority);//优先级 0-低 1-中 2-高
-         dataStream.writeString(status);//状态指示灯 0-项目超前 1-项目正常 2-项目逾期
+         dataStream.writeInt32(priority);//优先级 0-低 1-中 2-高
+         dataStream.writeInt32(status);//状态指示灯 0-项目超前 1-项目正常 2-项目逾期
          JSONArray jsonInArray = fromObject.getJSONArray("progress");
-         for(int i = 0; i < jsonInArray.size(); i++){
-            JSONObject jsonInObject = jsonInArray.getJSONObject(i);
-            String key = jsonInObject.get("key").toString();
-            String progress = jsonInObject.get("progress").toString();
-            dataStream.writeString(key);//进度标题 时间进度或项目进度
-            dataStream.writeString(progress);//进度百分比
-         }
+         JSONObject jsonInObject0 = jsonInArray.getJSONObject(0);
+         String timeKey = jsonInObject0.get("key").toString();
+         int timeProgress = Integer.parseInt(jsonInObject0.get("progress").toString());
+         JSONObject jsonInObject1 = jsonInArray.getJSONObject(1);
+         String proKey = jsonInObject1.get("key").toString();
+         int proProgress = Integer.parseInt(jsonInObject1.get("progress").toString());
+         dataStream.writeString(timeKey); //时间进度
+         dataStream.writeInt32(timeProgress);//时间进度百分比
+         dataStream.writeString(proKey); //项目进度
+         dataStream.writeInt32(proProgress);
       }
       stream.write(dataStream.memory(), 0, dataStream.position());
       //............................................................

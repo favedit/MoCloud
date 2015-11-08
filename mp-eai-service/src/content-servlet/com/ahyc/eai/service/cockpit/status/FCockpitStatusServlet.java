@@ -1,4 +1,4 @@
-package com.ahyc.eai.service.cockpit.instrumentpanel;
+package com.ahyc.eai.service.cockpit.status;
 
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
 import org.mo.com.io.FByteStream;
@@ -15,13 +15,13 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>仪表盘接口。</T>
 //============================================================
-public class FCockpitPanelServlet
+public class FCockpitStatusServlet
       extends FAbstractStatisticsServlet
       implements
-         ICockpitPanelServlet
+         ICockpitStatusServlet
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCockpitPanelServlet.class);
+   private static ILogger _logger = RLogger.find(FCockpitStatusServlet.class);
 
    // 资源访问接口
    //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);

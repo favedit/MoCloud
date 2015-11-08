@@ -1,4 +1,4 @@
-package com.ahyc.eai.service.cockpit.truetimedata;
+package com.ahyc.eai.service.cockpit.title;
 
 import org.mo.com.lang.EResult;
 import org.mo.data.logic.ILogicContext;
@@ -9,7 +9,7 @@ import org.mo.web.protocol.context.IWebContext;
 //============================================================
 // <T>实时数据接口。</T>
 //============================================================
-public interface ICockpitTrueTimeDataServlet
+public interface ICockpitTitleServlet
 {
 
    //============================================================

@@ -92,7 +92,7 @@ public class FCockpitNoticeServlet
          dataStream.writeString(label);//号令标题
          dataStream.writeString(userLabel);//号令发布者
          dataStream.writeString(publishDate);//发布日期
-         dataStream.writeString(percent);//阅读百分比
+         dataStream.writeInt32(Integer.parseInt(percent));//阅读百分比
       }
       //写入数据
       stream.write(dataStream.memory(), 0, dataStream.position());
