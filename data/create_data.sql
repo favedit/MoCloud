@@ -1927,3 +1927,68 @@ ALTER TABLE DT_FIN_MARKETER_CUSTOMER ADD CONSTRAINT DT_FIN_MKT_CST_FK_MKT
 
 ALTER TABLE DT_FIN_MARKETER_CUSTOMER ADD CONSTRAINT DT_FIN_MKT_CST_FK_CST 
       FOREIGN KEY (`CUSTOMER_ID`) REFERENCES DT_FIN_CUSTOMER(`OUID`); 
+
+-- ------------------------------------------------------------
+-- Create table [Data.Organization.Department]
+-- 20151108 sunhr
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_ORG_DEPARTMENT`;
+CREATE TABLE `DT_ORG_DEPARTMENT` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(8), 
+   `NAME`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `ICON_URL`                      VARCHAR(400), 
+   `VALID_CD`                      INTEGER, 
+   `PARENT_ID`                     BIGINT, 
+   `PATH_IDS`                      VARCHAR(1000), 
+   `PATH_LABELS`                   VARCHAR(2000), 
+   `USER_COUNT`                    INTEGER, 
+   `BUILD_DATE`                    DATETIME, 
+   `DESCRIPTION`                   VARCHAR(800), 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_ORG_DEPARTMENT 
+   ADD CONSTRAINT DT_COM_DEP_UK_GID UNIQUE ( GUID ); 
+-- ------------------------------------------------------------
+-- Create table [Data.Organization.Department.User]
+-- 20151108 sunhr
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS `DT_ORG_DEPARTMENT_USER`;
+CREATE TABLE `DT_ORG_DEPARTMENT_USER` 
+( 
+   `OUID`                          BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+   `OVLD`                          TINYINT NOT NULL DEFAULT TRUE, 
+   `GUID`                          VARCHAR(40) NOT NULL, 
+   `CODE`                          VARCHAR(8), 
+   `NAME`                          VARCHAR(80), 
+   `LABEL`                         VARCHAR(80), 
+   `DEPARTMENT_ID`                 INTEGER, 
+   `USER_ID`                       INTEGER, 
+   `STATUS_CD`                     BIGINT, 
+   `RELATION_CD`                   INTEGER, 
+   `ENTRY_DATE`                    DATETIME, 
+   `LEAVE_DATE`                    DATETIME, 
+   `NOTE`                          VARCHAR(2000), 
+   `CREATE_USER_ID`                BIGINT, 
+   `CREATE_DATE`                   DATETIME, 
+   `UPDATE_USER_ID`                BIGINT, 
+   `UPDATE_DATE`                   DATETIME 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE DT_ORG_DEPARTMENT_USER 
+   ADD CONSTRAINT DT_ORG_DEP_USR_UK_GID UNIQUE ( GUID ); 
+
+ALTER TABLE DT_ORG_DEPARTMENT_USER ADD CONSTRAINT DT_ORG_DEP_USR_FK_DEPARTMENT 
+      FOREIGN KEY (`DEPARTMENT_ID`) REFERENCES DT_ORG_DEPARTMENT(`OUID`); 
+
+ALTER TABLE DT_ORG_DEPARTMENT_USER ADD CONSTRAINT DT_ORG_DEP_USR_FK_USER 
+      FOREIGN KEY (`USER_ID`) REFERENCES DT_PSN_USER(`OUID`); 

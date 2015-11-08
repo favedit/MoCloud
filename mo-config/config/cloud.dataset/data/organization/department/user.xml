@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="7b95f8ba-317a-4c6e-b415-ecc8464d5d0f" name="data.organization.department.user" label="M#12cn15部门用户表" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Organization.Department.User" data_name="DT_ORG_DEPARTMENT_USER" data_alias="DT_ORG_DEP_USR" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="07fd082e-be0b-4d14-b87e-07fa58a6b33a" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="8" />
+  <FieldString _uuid="59b60965-e985-4d5c-97f3-b8c809bede51" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="80" />
+  <FieldString _uuid="a5adeb7e-1d62-4628-84a2-9de428338a8c" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldInteger _uuid="d36c7880-e07e-45d5-b5c9-da73670ae217" name="department_id" label="M#12cn14部门编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DEPARTMENT_ID" data_alias="DEPARTMENT" data_refer="data.organization.department" />
+  <FieldInteger _uuid="925c0612-954c-471f-85e9-2af62a34d3ef" name="user_id" label="M#12cn14用户编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_ID" data_alias="USER" data_refer="data.person.user" />
+  <FieldRecordId _uuid="9a625740-f1ae-46d8-9536-f652ef4e588d" name="status_cd" label="M#12cn14雇佣关系" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATUS_CD" />
+  <FieldInteger _uuid="87847838-c51d-4ff9-9d39-1609095d76a6" name="relation_cd" label="M#12cn14关联关系" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="RELATION_CD" />
+  <FieldDateTime _uuid="4e4d0274-8f97-40f2-a9d1-7cd7ae10e90c" name="entry_date" label="M#12cn14入职时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ENTRY_DATE" />
+  <FieldDateTime _uuid="38100613-6301-4c61-877f-4190226a071e" name="leave_date" label="M#12cn14离职时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LEAVE_DATE" />
+  <FieldString _uuid="89f89be5-8e87-4c65-ae5d-9888a5d7306b" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="51ca4644-56bb-4bf4-80fb-d892ce9cac34" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataStore _uuid="5e49f85e-0ea6-476b-83a9-5d86774ca6d0" name="data.organization.department" label="M#12cn14组织部门" is_valid="Y" note="M#" data_engine="InnoDB" data_group="data" data_factory="Data.Organization.Department" data_name="DT_ORG_DEPARTMENT" data_alias="DT_COM_DEP" data_logic="GM_ACCOUNT_DI" logic_insert="doInsert" logic_update="doUpdate" logic_delete="doDelete" parent_name="define.store" data_type="D">
+  <FieldString _uuid="e4653562-e3b0-42a8-ba6d-2c0fdc174c69" name="code" label="M#12cn12代码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CODE" data_size="8" />
+  <FieldString _uuid="b4bc3302-961f-4dbf-9f12-33488026d54a" name="name" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NAME" data_size="80" />
+  <FieldString _uuid="a3329026-6d87-4470-88b8-90a51543b1df" name="label" label="M#12cn12标签" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="80" />
+  <FieldString _uuid="e9988e85-a3e9-429e-8906-168399ee3d30" name="icon_url" label="M#12cn14图标地址" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
+  <FieldInteger _uuid="42016bcc-2c01-40b0-976f-2395477ae344" name="valid_cd" label="M#12cn14是否有效" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="VALID_CD" />
+  <FieldRecordId _uuid="ad8b0edf-e03b-4a67-9752-eb97fe378e45" name="parent_id" label="M#12cn13父编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PARENT_ID" />
+  <FieldString _uuid="73e2936c-e3e8-45e6-b3e7-ba61dc42968a" name="path_ids" label="M#12cn14当前路径" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PATH_IDS" data_size="1000" />
+  <FieldString _uuid="d80fb40d-57f1-485f-bff5-35de8c484ea2" name="path_labels" label="M#12cn18当前的所有父名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PATH_LABELS" data_size="2000" />
+  <FieldInteger _uuid="a91d285f-e58d-4b60-9f4d-595c8a2c098f" name="user_count" label="M#12cn13总人数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="USER_COUNT" />
+  <FieldDateTime _uuid="de34675c-4d03-42f6-8b84-104014a2df8f" name="build_date" label="M#12cn14创建时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BUILD_DATE" />
+  <FieldString _uuid="50e9dd1f-9db6-43b8-8cef-c80228c8277e" name="description" label="M#12cn12描述" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="DESCRIPTION" data_size="800" />
+  <FieldString _uuid="3cdee252-9d11-43ed-8475-65b2593e2113" name="note" label="M#12cn12备注" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NOTE" data_size="2000" />
+  <FieldTemplate _uuid="a659d76d-55e5-44d1-ba48-c5c755c64420" name="track" label="M#12cn14跟踪模板" is_valid="Y" note="M#" template_name="define.track" />
+</DataStore>
