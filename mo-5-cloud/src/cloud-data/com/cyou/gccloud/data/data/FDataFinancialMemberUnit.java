@@ -69,6 +69,12 @@ public class FDataFinancialMemberUnit
    // 字段名称的定义。
    protected String _label;
 
+   // 存储字段图像的定义。
+   private String __iconUrl;
+
+   // 字段图像的定义。
+   protected String _iconUrl;
+
    // 存储字段身份证号的定义。
    private String __card;
 
@@ -445,6 +451,33 @@ public class FDataFinancialMemberUnit
    //============================================================
    public void setLabel(String value){
       _label = value;
+   }
+
+   //============================================================
+   // <T>判断图像的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isIconUrlChanged(){
+      return !RString.equals(__iconUrl, _iconUrl);
+   }
+
+   //============================================================
+   // <T>获得图像的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public String iconUrl(){
+      return _iconUrl;
+   }
+
+   //============================================================
+   // <T>设置图像的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setIconUrl(String value){
+      _iconUrl = value;
    }
 
    //============================================================
@@ -1174,6 +1207,8 @@ public class FDataFinancialMemberUnit
             return _passport;
          case "label":
             return _label;
+         case "icon_url":
+            return _iconUrl;
          case "card":
             return _card;
          case "birthday":
@@ -1263,6 +1298,9 @@ public class FDataFinancialMemberUnit
             break;
          case "label":
             _label = value;
+            break;
+         case "icon_url":
+            _iconUrl = value;
             break;
          case "card":
             _card = value;
@@ -1389,6 +1427,10 @@ public class FDataFinancialMemberUnit
                __label = value;
                _label = __label;
                break;
+            case "icon_url":
+               __iconUrl = value;
+               _iconUrl = __iconUrl;
+               break;
             case "card":
                __card = value;
                _card = __card;
@@ -1513,6 +1555,7 @@ public class FDataFinancialMemberUnit
       row.set("statisticsId", _statisticsId);
       row.set("passport", _passport);
       row.set("label", _label);
+      row.set("iconUrl", _iconUrl);
       row.set("card", _card);
       row.set("birthday", _birthday);
       row.set("phone", _phone);
@@ -1557,6 +1600,7 @@ public class FDataFinancialMemberUnit
       map.put("statisticsId", RLong.toString(_statisticsId));
       map.put("passport", _passport);
       map.put("label", _label);
+      map.put("iconUrl", _iconUrl);
       map.put("card", _card);
       map.put("birthday", _birthday.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("phone", _phone);
@@ -1601,6 +1645,7 @@ public class FDataFinancialMemberUnit
       _statisticsId = input.readInt64();
       _passport = input.readString();
       _label = input.readString();
+      _iconUrl = input.readString();
       _card = input.readString();
       _birthday.set(input.readInt64());
       _phone = input.readString();
@@ -1645,6 +1690,7 @@ public class FDataFinancialMemberUnit
       output.writeInt64(_statisticsId);
       output.writeString(_passport);
       output.writeString(_label);
+      output.writeString(_iconUrl);
       output.writeString(_card);
       output.writeInt64(_birthday.get());
       output.writeString(_phone);
@@ -1691,6 +1737,7 @@ public class FDataFinancialMemberUnit
       unit.setStatisticsId(_statisticsId);
       unit.setPassport(_passport);
       unit.setLabel(_label);
+      unit.setIconUrl(_iconUrl);
       unit.setCard(_card);
       unit.birthday().assign(_birthday);
       unit.setPhone(_phone);

@@ -15,7 +15,7 @@ import org.mo.core.aop.face.ASourceMachine;
 import org.mo.data.logic.FLogicUnit;
 
 //============================================================
-// <T>共通国家表逻辑单元。</T>
+// <T>部门用户表逻辑单元。</T>
 //============================================================
 @ASourceMachine
 public class FDataOrganizationDepartmentUserUnit
@@ -124,7 +124,7 @@ public class FDataOrganizationDepartmentUserUnit
    protected TDateTime _updateDate = new TDateTime();
 
    //============================================================
-   // <T>构造共通国家表逻辑单元。</T>
+   // <T>构造部门用户表逻辑单元。</T>
    //============================================================
    public FDataOrganizationDepartmentUserUnit(){
    }

@@ -5,6 +5,7 @@
   <FieldRecordId _uuid="17a44c07-c475-4039-a290-11ec432c8735" name="statistics_id" label="M#12cn14统计编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="STATISTICS_ID" />
   <FieldString _uuid="59cd7c9a-cd32-4481-9577-f14f69484c6b" name="passport" label="M#12cn12账号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PASSPORT" data_size="60" />
   <FieldString _uuid="7ea924b7-3900-4209-8643-4bf6bfc2957b" name="label" label="M#12cn12名称" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="LABEL" data_size="40" />
+  <FieldString _uuid="a7d5b59b-cf4b-439d-96fe-1f5977a774d3" name="icon_url" label="M#12cn12图像" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="ICON_URL" data_size="400" />
   <FieldString _uuid="3187c309-b4ca-4db4-adbb-00f9d7b2ad93" name="card" label="M#12cn14身份证号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="CARD" data_size="20" />
   <FieldDateTime _uuid="f2b6bb3f-9f84-4c65-bca3-2cbb166003d6" name="birthday" label="M#12cn12生日" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="BIRTHDAY" />
   <FieldString _uuid="43e131c9-a85a-4393-b352-ed03f03bfac6" name="phone" label="M#12cn14电话号码" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PHONE" data_size="20" />

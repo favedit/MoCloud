@@ -57,6 +57,9 @@ public class FDataFinancialMemberLogic
    // 字段名称的定义。
    public final static SLogicFieldInfo LABEL = new SLogicFieldInfo("LABEL");
 
+   // 字段图像的定义。
+   public final static SLogicFieldInfo ICON_URL = new SLogicFieldInfo("ICON_URL");
+
    // 字段身份证号的定义。
    public final static SLogicFieldInfo CARD = new SLogicFieldInfo("CARD");
 
@@ -136,7 +139,7 @@ public class FDataFinancialMemberLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`STATISTICS_ID`,`PASSPORT`,`LABEL`,`CARD`,`BIRTHDAY`,`PHONE`,`EMAIL`,`GENDER_CD`,`MARRY_CD`,`EDUCATION_CD`,`BUSINESS_CD`,`INCOME_CD`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`CITY_ID`,`AREA_ID`,`ADDRESS`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_MARKETER_ID`,`RECOMMEND_MARKETER_USER_ID`,`RECOMMEND_BEGIN_DATE`,`RECOMMEND_END_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`USER_ID`,`LINK_ID`,`STATISTICS_ID`,`PASSPORT`,`LABEL`,`ICON_URL`,`CARD`,`BIRTHDAY`,`PHONE`,`EMAIL`,`GENDER_CD`,`MARRY_CD`,`EDUCATION_CD`,`BUSINESS_CD`,`INCOME_CD`,`PROVINCE_AREA_ID`,`PROVINCE_ID`,`CITY_ID`,`AREA_ID`,`ADDRESS`,`REGISTER_DATE`,`LAST_LOGIN_DATE`,`RECOMMEND_MARKETER_ID`,`RECOMMEND_MARKETER_USER_ID`,`RECOMMEND_BEGIN_DATE`,`RECOMMEND_END_DATE`,`RECOMMEND_SCORE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造金融成员信息逻辑单元。</T>
@@ -737,6 +740,7 @@ public class FDataFinancialMemberLogic
       cmd.append(",`STATISTICS_ID`");
       cmd.append(",`PASSPORT`");
       cmd.append(",`LABEL`");
+      cmd.append(",`ICON_URL`");
       cmd.append(",`CARD`");
       cmd.append(",`BIRTHDAY`");
       cmd.append(",`PHONE`");
@@ -814,6 +818,15 @@ public class FDataFinancialMemberLogic
       }else{
          cmd.append('\'');
          cmd.append(RSql.formatValue(label));
+         cmd.append('\'');
+      }
+      cmd.append(',');
+      String iconUrl = unit.iconUrl();
+      if(RString.isEmpty(iconUrl)){
+         cmd.append("NULL");
+      }else{
+         cmd.append('\'');
+         cmd.append(RSql.formatValue(iconUrl));
          cmd.append('\'');
       }
       cmd.append(',');
@@ -1090,6 +1103,17 @@ public class FDataFinancialMemberLogic
          }else{
             cmd.append('\'');
             cmd.append(RSql.formatValue(label));
+            cmd.append('\'');
+         }
+      }
+      if(unit.isIconUrlChanged()){
+         cmd.append(",`ICON_URL`=");
+         String iconUrl = unit.iconUrl();
+         if(RString.isEmpty(iconUrl)){
+            cmd.append("NULL");
+         }else{
+            cmd.append('\'');
+            cmd.append(RSql.formatValue(iconUrl));
             cmd.append('\'');
          }
       }

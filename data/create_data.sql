@@ -1690,6 +1690,7 @@ CREATE TABLE `DT_FIN_MEMBER`
    `STATISTICS_ID`                 BIGINT, 
    `PASSPORT`                      VARCHAR(60), 
    `LABEL`                         VARCHAR(40), 
+   `ICON_URL`                      VARCHAR(400), 
    `CARD`                          VARCHAR(20), 
    `BIRTHDAY`                      DATETIME, 
    `PHONE`                         VARCHAR(20), 
@@ -1716,7 +1717,7 @@ CREATE TABLE `DT_FIN_MEMBER`
    `CREATE_DATE`                   DATETIME, 
    `UPDATE_USER_ID`                BIGINT, 
    `UPDATE_DATE`                   DATETIME 
-) ENGINE=INNODB DEFAULT CHARSET=utf8; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
 
 ALTER TABLE DT_FIN_MEMBER 
    ADD CONSTRAINT DT_FIN_MBR_UK_GID UNIQUE ( GUID ); 

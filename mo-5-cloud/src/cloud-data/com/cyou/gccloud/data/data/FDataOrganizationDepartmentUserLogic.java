@@ -21,17 +21,17 @@ import org.mo.data.logic.SLogicFieldInfo;
 import org.mo.data.logic.SLogicTableInfo;
 
 //============================================================
-// <T>共通国家表逻辑。</T>
+// <T>部门用户表逻辑。</T>
 //============================================================
 @ASourceMachine
 public class FDataOrganizationDepartmentUserLogic
       extends FLogicTable
 {
-   // 共通国家表的定义。
+   // 部门用户表的定义。
    public final static SLogicConnectionInfo CONNECTION = new SLogicConnectionInfo("data");
 
-   // 共通国家表的定义。
-   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.organization.department.user", "DT_COM_COUNTRY");
+   // 部门用户表的定义。
+   public final static SLogicTableInfo TABLE = new SLogicTableInfo("data.organization.department.user", "DT_ORG_DEPARTMENT_USER");
 
    // 字段对象标识的定义。
    public final static SLogicFieldInfo OUID = new SLogicFieldInfo("OUID");
@@ -88,7 +88,7 @@ public class FDataOrganizationDepartmentUserLogic
    public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`CODE`,`NAME`,`LABEL`,`DEPARTMENT_ID`,`USER_ID`,`STATUS_CD`,`RELATION_CD`,`ENTRY_DATE`,`LEAVE_DATE`,`NOTE`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
-   // <T>构造共通国家表逻辑单元。</T>
+   // <T>构造部门用户表逻辑单元。</T>
    //============================================================
    public FDataOrganizationDepartmentUserLogic(){
       _name = TABLE.name();
@@ -96,7 +96,7 @@ public class FDataOrganizationDepartmentUserLogic
    }
 
    //============================================================
-   // <T>构造共通国家表逻辑单元。</T>
+   // <T>构造部门用户表逻辑单元。</T>
    //
    // @param context 逻辑环境
    //============================================================
