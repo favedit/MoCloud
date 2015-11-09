@@ -272,11 +272,11 @@ public class FIndexAction
                                 String password,
                                 String changePass,
                                 int from){
-      _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, changePass, from);
+      _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},changePass={2},from={3})", passport, changePass, from);
       password = RMd5.encode(password);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
-      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
+      FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
       long userId = 0;
       if(user == null){
          //获取角色
