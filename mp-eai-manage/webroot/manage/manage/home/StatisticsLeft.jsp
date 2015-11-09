@@ -42,7 +42,7 @@
             <li id="one" class="files">
                <a href="#">用户分析</a>
                <ul class="sub-menu">
-                  <jh:equals source="manage.system.statistics.user.login" value="&basePage.menuString"><li><a href="/manage/system/statistics/user/login/Access.wa" target="right">用户登录</a></li></jh:equals>
+                  <jh:equals source="manage.statistics.user.login" value="&basePage.menuString"><li><a href="/manage/statistics/user/login/Access.wa" target="right">用户登录</a></li></jh:equals>
                </ul>
             </li>
             <li id="two" class="files">

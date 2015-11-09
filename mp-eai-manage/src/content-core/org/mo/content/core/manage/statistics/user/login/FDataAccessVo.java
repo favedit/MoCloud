@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.system.statistics.user.login;
+package org.mo.content.core.manage.statistics.user.login;
 
 //============================================================
 //<T>用户登陆视图数据</T>

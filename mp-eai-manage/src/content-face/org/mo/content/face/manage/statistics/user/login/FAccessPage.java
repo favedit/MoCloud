@@ -1,7 +1,7 @@
-package org.mo.content.face.manage.system.statistics.user.login;
+package org.mo.content.face.manage.statistics.user.login;
 
 import org.mo.com.lang.FObjectId;
-import org.mo.content.core.manage.system.statistics.user.login.FDataAccessInfo;
+import org.mo.content.core.manage.statistics.user.login.FDataAccessInfo;
 
 //============================================================
 //<P>用户容器</P>

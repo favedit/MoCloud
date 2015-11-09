@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.system.statistics.user.login;
+package org.mo.content.face.manage.statistics.user.login;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;
 
@@ -9,7 +9,7 @@ import org.mo.com.lang.RInteger;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.system.statistics.user.login.IAccessConsole;
+import org.mo.content.core.manage.statistics.user.login.IAccessConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -48,7 +48,7 @@ public class FAccessAction
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/system/statistics/user/login/AccessList";
+      return "/manage/statistics/user/login/AccessList";
    }
 
    // ============================================================

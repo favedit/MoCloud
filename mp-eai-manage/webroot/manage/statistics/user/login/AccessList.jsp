@@ -24,6 +24,7 @@
 
 <script>
 $(function() {
+   progress();
    doSubmit(null,null);
    var pager = $('#access').datagrid().datagrid('getPager');
    pager.pagination({
@@ -42,25 +43,25 @@ $(function() {
 });
 
 function doSubmit(page,pageSize) {
-   progress();
+   //progress();
    $("#flag").val("");
    var url = null;
    var data = null;
    if (page != null) {
-      url = "/manage/system/statistics/user/login/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
+      url = "/manage/statistics/user/login/Access.wa?do=select&page=" + page + "&date=" + new Date().valueOf();
       data = {
          "page": page,
          "pageSize" : pageSize
       };
    } else {
-      url = "/manage/system/statistics/user/login/Access.wa?do=select&date=" + new Date().valueOf();
+      url = "/manage/statistics/user/login/Access.wa?do=select&date=" + new Date().valueOf();
    }
    $.ajax({
       type: "POST",
       url: url,
       data: data,
       success: function(msg) {
-         closeProgress();
+         //closeProgress();
          $('#access').datagrid('loadData', toJsonObject(msg));
       },
       fail: function() {
@@ -70,7 +71,7 @@ function doSubmit(page,pageSize) {
    });
 }
 function doSubmitByCondition(page,pageSize) {
-    progress();
+    //progress();
     var beginDate = $('#beginDate').datebox('getValue');
     var endDate = $('#endDate').datebox('getValue'); 
     var lm = $("#logicMessage").val();
@@ -86,7 +87,7 @@ function doSubmitByCondition(page,pageSize) {
           "passport" :passport,
           "logicMessage" :lm
        };
-       url = "/manage/system/statistics/user/login/Access.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
+       url = "/manage/statistics/user/login/Access.wa?do=selectByDate&page=" + page + "&date=" + new Date().valueOf();
     } else {
        data = {
             "beginDate" :beginDate,
@@ -94,14 +95,14 @@ function doSubmitByCondition(page,pageSize) {
             "passport" :passport,
             "logicMessage" :lm
         };
-       url = "/manage/system/statistics/user/login/Access.wa?do=selectByDate&date=" + new Date().valueOf();
+       url = "/manage/statistics/user/login/Access.wa?do=selectByDate&date=" + new Date().valueOf();
     }
     $.ajax({
        type: "POST",
        url: url,
        data: data,
        success: function(msg) {
-          closeProgress();
+          //closeProgress();
           $('#access').datagrid('loadData', toJsonObject(msg));
        },
        fail: function() {
@@ -123,8 +124,8 @@ document.onkeydown=function(){
 }
 //用户登录月曲线图
 function hCharts(){
-   progress();
-   var url = "/manage/system/statistics/user/login/Access.wa?do=selectByDay&date=" + new Date().valueOf();
+   //progress();
+   var url = "/manage/statistics/user/login/Access.wa?do=selectByDay&date=" + new Date().valueOf();
    $.ajax({
       type: "POST",
       url: url,

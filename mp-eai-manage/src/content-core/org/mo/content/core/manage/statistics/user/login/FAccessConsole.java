@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.system.statistics.user.login;
+package org.mo.content.core.manage.statistics.user.login;
 
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessLogic;
 import com.cyou.gccloud.data.logger.FLoggerPersonUserAccessUnit;

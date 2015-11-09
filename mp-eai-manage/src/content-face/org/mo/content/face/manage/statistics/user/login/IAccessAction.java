@@ -1,4 +1,4 @@
-package org.mo.content.face.manage.system.statistics.user.login;
+package org.mo.content.face.manage.statistics.user.login;
 
 import org.mo.content.face.base.FBasePage;
 import org.mo.data.logic.ILogicContext;
