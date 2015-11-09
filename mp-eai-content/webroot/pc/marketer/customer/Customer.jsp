@@ -51,31 +51,48 @@
                            var contactFollow= document.getElementById("contactFollow");
                            var contactPurchase= document.getElementById("contactPurchase");
                            var contactRecharge= document.getElementById("contactRecharge");
-                            if(<jh:write source="&customerInfo.contactOnline" />==1){
+                            if(<jh:write source="&customerInfo.contactOnline" />==contactOnline.value){
                             	contactOnline.checked=true;
                             } 
-                            if(<jh:write source="&customerInfo.contactFollow" />==2){
+                            if(<jh:write source="&customerInfo.contactFollow" />==contactFollow.value){
                             	contactFollow.checked=true;
                             }
-                           if(<jh:write source="&customerInfo.contactPurchase" />==3){
+                           if(<jh:write source="&customerInfo.contactPurchase" />==contactPurchase.value){
                             	contactPurchase.checked=true;
                             }
-                           if(<jh:write source="&customerInfo.contactRecharge" />==4){
+                           if(<jh:write source="&customerInfo.contactRecharge" />==contactRecharge.value){
                             	  contactRecharge.checked=true;
                             }
                            function ensure(){
-                        	   alert($("#contactOnline").val())
+                        	   if(contactOnline.checked==true){
+                        		   var contactOnlineVlaue= $("#contactOnline").val();
+                        	   }else{
+                        		       contactOnlineVlaue=0;
+                        	   }
+                        	   if(contactFollow.checked==true){
+                                   var contactFollowVlaue= $("#contactFollow").val();
+                                }else{
+                                	      contactFollowVlaue=0;
+                                } 
+                        	   if(contactPurchase.checked==true){
+                                   var contactPurchaseVlaue= $("#contactPurchase").val();
+                                }else{
+                                	      contactPurchaseVlaue=0;
+                                }
+                        	   if(contactRecharge.checked==true){
+                                   var contactRechargeVlaue= $("#contactRecharge").val();
+                                }else{
+                                	      contactRechargeVlaue=0;
+                                }
                            $.ajax({
-                        		type:"post",
+                        		type:"POST",
                         		url:"/pc/marketer/customer/Customer.wa?do=updataSms",
-                        	   data:{contactOnline:$("#contactOnline").val(),contactFollow:$("#contactFollow").val(),contactPurchase:$("#contactPurchase").val(),contactRecharge:$("#contactRecharge").val()},
+                        	   data:{customerId:<jh:write source="&customerInfo.ouid" />,contactOnline:contactOnlineVlaue,contactFollow:contactFollowVlaue,contactPurchase:contactPurchaseVlaue,contactRecharge:contactRechargeVlaue},
                         		dataType: "text",
                         	   success:function(data){
-                        		   alert("sdds");
+                        		   alert("修改成功");
                         	   }
-                        	   
-                        	   
-                           })
+                           }) 
                            
                            
                            }

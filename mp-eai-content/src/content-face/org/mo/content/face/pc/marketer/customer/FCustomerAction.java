@@ -5,11 +5,13 @@ import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import com.cyou.gccloud.data.data.FDataPersonUserUnit;
 import com.cyou.gccloud.define.enums.common.EGcActive;
 import org.mo.cloud.core.web.FGcWebSession;
+import org.mo.com.lang.EResult;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
 import org.mo.content.core.financial.customer.ICustomerConsole;
 import org.mo.content.core.financial.marketer.IDataMarketerConsole;
+import org.mo.content.core.financial.marketer.customer.FDataFinancialMarketerCustomerInfo;
 import org.mo.content.core.financial.marketer.customer.IDataMarketerCustomerConsole;
 import org.mo.content.core.manage.person.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
@@ -254,8 +256,81 @@ public class FCustomerAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FCustomerPage page){
-      System.out.println("sds");
+      System.out.println("===================================updataSms===========================================");
+      FGcWebSession session = (FGcWebSession)sessionContext;
+      _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
+      FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
+      long marketerId = 0;
+      if(user != null){
+         FDataFinancialMarketerUnit marketer = _marketerConsole.findByUserId(logicContext, user.ouid());
+         if(marketer == null){
+            _logger.debug(this, "construct", "construct this user is not marketer.(user={1})", user.ouid());
+            return "/apl/message/LogicFatal";
+         }
+         marketerId = marketer.ouid();
+         page.setLabel(user.label());
+      }
       
+      long customerId = context.parameterAsLong("customerId");
+      int contactOnline = context.parameterAsInteger("contactOnline");
+      int contactFollow = context.parameterAsInteger("contactFollow");
+      int contactPurchase = context.parameterAsInteger("contactPurchase");
+      int contactRecharge = context.parameterAsInteger("contactRecharge");
+      FLogicDataset<FDataFinancialMarketerCustomerInfo> marketerCustomerList = _marketerCustomerConsole.findBeenSets(logicContext, marketerId, customerId);
+      if(marketerCustomerList.count() > 0){
+         for(FDataFinancialMarketerCustomerInfo customerInfo : marketerCustomerList){
+            EResult doDelete = _marketerCustomerConsole.doDelete(logicContext, customerInfo);
+            _logger.debug(this, "updataSms", "updataSms delete ", doDelete);
+         }
+      }
+      
+      if(contactOnline == 1){
+         FDataFinancialMarketerCustomerUnit info = _marketerCustomerConsole.doPrepare(logicContext);
+         setMarketerAndCustomer(info, context, logicContext, marketerId, customerId);
+         info.setSmsContactCd(contactOnline);
+         EResult doInsert = _marketerCustomerConsole.doInsert(logicContext, info);
+         _logger.debug(this, "updataSms", "updataSms insert ", doInsert);
+      }
+      if(contactFollow == 2){
+         FDataFinancialMarketerCustomerUnit info = _marketerCustomerConsole.doPrepare(logicContext);
+         setMarketerAndCustomer(info, context, logicContext, marketerId, customerId);
+         info.setSmsContactCd(contactFollow);
+         EResult doInsert = _marketerCustomerConsole.doInsert(logicContext, info);
+         _logger.debug(this, "updataSms", "updataSms insert ", doInsert);
+      }
+      if(contactPurchase == 3){
+         FDataFinancialMarketerCustomerUnit info = _marketerCustomerConsole.doPrepare(logicContext);
+         setMarketerAndCustomer(info, context, logicContext, marketerId, customerId);
+         info.setSmsContactCd(contactPurchase);
+         EResult doInsert = _marketerCustomerConsole.doInsert(logicContext, info);
+         _logger.debug(this, "updataSms", "updataSms insert ", doInsert);
+      }
+      if(contactRecharge == 4){
+         FDataFinancialMarketerCustomerUnit info = _marketerCustomerConsole.doPrepare(logicContext);
+         setMarketerAndCustomer(info, context, logicContext, marketerId, customerId);
+         info.setSmsContactCd(contactRecharge);
+         EResult doInsert = _marketerCustomerConsole.doInsert(logicContext, info);
+         _logger.debug(this, "updataSms", "updataSms insert ", doInsert);
+      }
       return null;
+   }
+   
+   //============================================================
+   // <T>unit设置值。</T>
+   // @param context 页面环境
+   // @param logicContext 逻辑环境
+   //============================================================
+   //   @AWebAuthority("eai.marketer.member.recommend")
+   @Override
+   public void setMarketerAndCustomer(FDataFinancialMarketerCustomerUnit info,
+                                      IWebContext context,
+                                      ILogicContext logicContext,
+                                      long marketerId,
+                                      long customerId){
+      _logger.debug(this, "setMarketerAndCustomer", "setMarketerAndCustomer set ");
+      info.setCustomerId(customerId);
+      info.setMarketerId(marketerId);
+      info.setActiveCd(1);
+      info.setOvld(true);
    }
 }
