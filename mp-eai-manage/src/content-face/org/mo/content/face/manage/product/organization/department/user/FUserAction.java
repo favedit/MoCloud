@@ -1,11 +1,14 @@
-package org.mo.content.face.manage.product.common;
+package org.mo.content.face.manage.product.organization.department.user;
 
-import com.cyou.gccloud.data.data.FDataCommonCountryUnit;
+import com.cyou.gccloud.data.data.FDataOrganizationDepartmentUserUnit;
+
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.FFatalError;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
-import org.mo.content.core.manage.product.common.ICountryConsole;
+import org.mo.content.core.manage.product.organization.department.user.FDataUserInfo;
+import org.mo.content.core.manage.product.organization.department.user.IUserConsole;
 import org.mo.content.face.base.FBasePage;
 import org.mo.core.aop.face.ALink;
 import org.mo.data.logic.FLogicDataset;
@@ -13,21 +16,21 @@ import org.mo.data.logic.ILogicContext;
 import org.mo.web.protocol.context.IWebContext;
 
 //============================================================
-//<P>国家信息控制器</P>
-//@class FCountryAction
+//<P>部门用户控制器</P>
+//@class FUserAction
 //@version 1.0.0
 //============================================================
-public class FCountryAction 
+public class FUserAction 
       implements 
-         ICountryAction 
+         IUserAction 
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCountryAction.class);
+   private static ILogger _logger = RLogger.find(FUserAction.class);
 
-   // 国家控制台
+   // 部门用户控制台
    @ALink
-   protected ICountryConsole _countryConsole;
-
+   protected IUserConsole _userConsole;
+   
    // ============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -43,7 +46,8 @@ public class FCountryAction
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      return "/manage/product/common/CountryList";
+
+      return "/manage/product/organization/department/user/UserList";
    }
 
    // ============================================================
@@ -57,7 +61,7 @@ public class FCountryAction
    @Override
    public String select(IWebContext context, 
                         ILogicContext logicContext, 
-                        FCountryPage Page, 
+                        FUserPage Page, 
                         FBasePage basePage) {
       _logger.debug(this, "Select", "Select begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -69,17 +73,14 @@ public class FCountryAction
       } else {
          Page.setPageCurrent(0);
       }
-      FDataCommonCountryUnit unit = new FDataCommonCountryUnit();
-      String name = context.parameter("name");
-      if (null != name) {
-         unit.setName(name);
-      }
+      FDataUserInfo unit = new FDataUserInfo();
+      unit.setLabel(context.parameter("label"));
       String StrPageSize = context.parameter("pageSize");
       int pageSize = 20;
       if (null != StrPageSize) {
          pageSize = Integer.parseInt(StrPageSize);
       }
-      FLogicDataset<FDataCommonCountryUnit> unitList = _countryConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
+      FLogicDataset<FDataUserInfo> unitList = _userConsole.select(logicContext, unit, Page.pageCurrent() - 1, pageSize);
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
       return "/manage/common/ajax";
@@ -96,7 +97,7 @@ public class FCountryAction
    @Override
    public String insertBefore(IWebContext context, 
                               ILogicContext logicContext, 
-                              FCountryPage page, 
+                              FUserPage page, 
                               FBasePage basePage) {
 
       _logger.debug(this, "InsertBefore", "InsertBefore begin. (userId={1})", basePage.userId());
@@ -104,11 +105,11 @@ public class FCountryAction
          return "/manage/common/ConnectTimeout";
       }
       page.setResult("");
-      return "/manage/product/common/InsertCountry";
+      return "/manage/product/organization/department/user/InsertUser";
    }
 
    // ============================================================
-   // <T>增加之前</T>
+   // <T>增加</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
@@ -118,26 +119,21 @@ public class FCountryAction
    @Override
    public String insert(IWebContext context, 
                         ILogicContext logicContext, 
-                        FCountryPage page, 
+                        FUserPage page, 
                         FBasePage basePage) {
       _logger.debug(this, "Insert", "InsertBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
-      FDataCommonCountryUnit unit = _countryConsole.doPrepare(logicContext);
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
-      FDataCommonCountryUnit unitc = _countryConsole.findByName(logicContext, context.parameter("name"));
-      if (null != unitc) {
-         page.setResult("请重新增加!");
-         return "/manage/product/common/InsertCountry";
-      }
-      setCountryDate(context, unit);
-      EResult result = _countryConsole.doInsert(logicContext, unit);
+      FDataOrganizationDepartmentUserUnit unit = _userConsole.doPrepare(logicContext);
+      unit.setLabel(context.parameter("label"));
+      setProductData(context,logicContext,unit);
+      EResult result = _userConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          page.setResult("增加失败");
-         return "/manage/product/common/InsertCountry";
+         return "/manage/product/organization/department/user/InsertUser";
       }
-      return "/manage/product/common/CountryList";
+      return "/manage/product/organization/department/user/UserList";
    }
 
    // ============================================================
@@ -151,7 +147,7 @@ public class FCountryAction
    @Override
    public String updateBefore(IWebContext context, 
                               ILogicContext logicContext, 
-                              FCountryPage page, 
+                              FUserPage page, 
                               FBasePage basePage) {
       _logger.debug(this, "updateBefore", "updateBefore begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
@@ -159,10 +155,11 @@ public class FCountryAction
       }
       long id = context.parameterAsLong("id");
 
-      FDataCommonCountryUnit unit = _countryConsole.find(logicContext, id);
-      page.setUnit(unit);
+      FDataUserInfo info = _userConsole.findInfo(logicContext, id);
+      
+      page.setUnit(info);
       page.setResult("");
-      return "/manage/product/common/UpdateCountry";
+      return "/manage/product/organization/department/user/UpdateUser";
    }
 
    // ============================================================
@@ -176,19 +173,21 @@ public class FCountryAction
    @Override
    public String update(IWebContext context, 
                         ILogicContext logicContext, 
-                        FCountryPage Page, 
+                        FUserPage page, 
                         FBasePage basePage) {
 
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       _logger.debug(this, "Update", "Update Begin.(id={1})", basePage.userId());
-      FDataCommonCountryUnit unit = _countryConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
-//      unit.setOuid(Long.parseLong(context.parameter("ouid")));
-      unit.setCreateUserId(context.parameterAsLong("adminId"));
-      setCountryDate(context, unit);
-      _countryConsole.doUpdate(logicContext, unit);
-      return "/manage/common/ajax";
+      FDataOrganizationDepartmentUserUnit unit = _userConsole.find(logicContext, Long.parseLong(context.parameter("ouid")));
+      setProductData(context,logicContext,unit);
+      EResult result = _userConsole.doUpdate(logicContext, unit);
+      if (!result.equals(EResult.Success)) {
+         page.setResult("更新失败");
+         return "/manage/product/organization/department/user/UpdateUser";
+      }
+      return "/manage/product/organization/department/user/UserList";
    }
 
    // ============================================================
@@ -202,56 +201,49 @@ public class FCountryAction
    @Override
    public String delete(IWebContext context, 
                         ILogicContext logicContext, 
-                        FCountryPage Page, 
+                        FUserPage Page, 
                         FBasePage basePage) {
       _logger.debug(this, "Delete", "Delete begin. (userId={1})", basePage.userId());
       if (!basePage.userExists()) {
          return "/manage/common/ConnectTimeout";
       }
       long id = context.parameterAsLong("id");
-      FDataCommonCountryUnit unit = _countryConsole.find(logicContext, id);
+      FDataOrganizationDepartmentUserUnit unit = _userConsole.find(logicContext, id);
       if (unit == null) {
-         throw new FFatalError("id not exists.");
+         return "/manage/product/organization/department/user/UserList";
       }
-      EResult result = _countryConsole.doDelete(logicContext, unit);
+      EResult result = _userConsole.doDelete(logicContext, unit);
       if (!result.equals(EResult.Success)) {
          throw new FFatalError("Delete failure.");
       } else {
-         return "/manage/product/financial/customer/CustomerList";
+         return "/manage/product/organization/department/user/UserList";
       }
    }
-
    // ============================================================
-   // <T>抽取方法</T>
-   //
-   // @param context 网络环境
-   // @param logicContext 逻辑环境
-   // @return void
-   // ============================================================
-   public void setCountryDate(IWebContext context, 
-                              FDataCommonCountryUnit unit) {
-      unit.setCode(context.parameter("code"));
-      unit.setLabel(context.parameter("label"));
-      unit.setName(context.parameter("name"));
-      unit.setNote(context.parameter("note"));
-      unit.setDisplayCode(context.parameterAsInteger("displayCode"));
-      unit.setPhoneCode(context.parameter("phoneCode"));
-   }
-
-   // ============================================================
-   // <T>全查</T>
+   // <T>抽取公共方法</T>
    //
    // @param context 网络环境
    // @param logicContext 逻辑环境
    // @param page 容器
    // @return 页面
    // ============================================================
-   @Override
-   public String selectAll(IWebContext context, 
-                           ILogicContext logicContext, 
-                           FBasePage basePage) {
-      FLogicDataset<FDataCommonCountryUnit> countryList = _countryConsole.selectAll(logicContext);
-      basePage.setJson(countryList.toJsonString());
-      return "/manage/common/ajax";
+   public void setProductData(IWebContext context, 
+                              ILogicContext logicContext,
+                              FDataOrganizationDepartmentUserUnit unit){
+      unit.setCreateUserId(context.parameterAsLong("adminId"));
+      unit.setCode(context.parameter("code"));
+      unit.setName(context.parameter("name"));
+      unit.setRelationCd(context.parameterAsInteger("relationCd"));
+      unit.setStatusCd(context.parameterAsLong("statusCd"));
+      String note = context.parameter("note");
+      note = note.replaceAll("<br>", "\r\n");
+      unit.setNote(note);
+      String entryDateStr = context.parameter("entryDate");
+      TDateTime entryDate = new TDateTime();
+      entryDate.parse(entryDateStr, "YYYY-MM-DD");
+      String leaveDateStr = context.parameter("leaveDate");
+      TDateTime leaveDate = new TDateTime();
+      leaveDate.parse(leaveDateStr, "YYYY-MM-DD");
+      unit.setDepartmentId(context.parameterAsInteger("departmentId"));
    }
 }

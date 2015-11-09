@@ -13,7 +13,6 @@ import org.mo.data.logic.ILogicContext;
 //@class FProductConsole
 //@version 1.0.0
 //============================================================
-
 public class FProductConsole
       extends 
          FAbstractLogicUnitConsole<FDataFinancialProductLogic, FDataFinancialProductUnit>
@@ -114,7 +113,7 @@ public class FProductConsole
    public FDataProductInfo findInfo(ILogicContext logicContext,
                                     Long ouid){
       FSql whereSql = new FSql();
-      if(ouid!=null){
+      if(ouid!=0){
          whereSql.append(FDataFinancialProductLogic.OUID);
          whereSql.append(" = '{OUID}'");
          whereSql.bind("OUID", RString.parse(ouid));

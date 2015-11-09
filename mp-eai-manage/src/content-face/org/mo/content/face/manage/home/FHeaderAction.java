@@ -154,7 +154,8 @@ public class FHeaderAction
       if (roleCd == EGcPersonUserRole.Admin) {
          menuStrings.append("manage.system.user.module|manage.system.user.role|manage.product.common.country|manage.product.common.province|manage.product.common.city|manage.product.common.area|manage.product.financial.product|manage.system.user|manage.product.financial.department|manage.product.business.news|manage.product.financial.customer|manage.product.common.configration|");
          menuStrings.append("manage.product.common.configration.rule|manage.product.business.salestools|manage.product.examine.business|manage.product.examine.business.news|manage.product.system.application|manage.product.system.version|manage.product.financial.marketer|manage.product.device|manage.product.user.logger|manage.product.user.whitelists|manage.product.user.signing|");
-         menuStrings.append("manage.product.examine.system.version|manage.product.examine.business.salestools|manage.product.business.truetime|manage.product.examine.business.truetime|manage.product.common.citycard|manage.product.business.notice|manage.system.logger.user.notice|manage.product.examine.business.notice|manage.system.logger.user.access|manage.statistics.user.login");
+         menuStrings.append("manage.product.examine.system.version|manage.product.examine.business.salestools|manage.product.business.truetime|manage.product.examine.business.truetime|manage.product.common.citycard|manage.product.business.notice|manage.system.logger.user.notice|manage.product.examine.business.notice|manage.system.logger.user.access|manage.statistics.user.login|");
+         menuStrings.append("manage.product.organization.department|manage.product.organization.department.user");
          basePage.setMenuString(menuStrings.toString());
       } else {
          long roleId = basePage.roleId();

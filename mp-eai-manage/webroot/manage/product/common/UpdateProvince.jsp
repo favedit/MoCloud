@@ -37,7 +37,7 @@
              alert("error");
           }
        });
-    })
+    });
     function getCountry(flag){//获取区域
        $('#area').combobox('clear');
        var data = null;

@@ -38,6 +38,10 @@
             if (menu == '') {
                $("#seven").hide();
             }
+            menu = $.trim($("#eight").children(".sub-menu").html());
+            if (menu == '') {
+               $("#eight").hide();
+            }
          }
       </script>
    </head>
@@ -144,6 +148,16 @@
                   </jh:equals>
                   <jh:equals source="manage.product.examine.business.notice" value="&basePage.menuString">
                      <li><a href="/manage/product/examine/business/notice/Notice.wa" target="right">用户公告</a></li>
+                  </jh:equals>
+               </ul>
+         </li>
+         <li id="eight" class="common"><a href="#seven">组织管理</a>
+               <ul class="sub-menu">
+                  <jh:equals source="manage.product.organization.department" value="&basePage.menuString">
+                     <li><a href="/manage/product/organization/department/Department.wa" target="right">组织部门</a></li>
+                  </jh:equals>
+                  <jh:equals source="manage.product.organization.department.user" value="&basePage.menuString">
+                     <li><a href="/manage/product/organization/department/user/User.wa" target="right">部门用户</a></li>
                   </jh:equals>
                </ul>
          </li>

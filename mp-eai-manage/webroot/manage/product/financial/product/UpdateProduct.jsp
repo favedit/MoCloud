@@ -82,7 +82,7 @@
        <img width="114" height="114" src="<jh:write source='&unit.makeUrl'/>"></div></td>
      </tr>
      <tr>
-     <td width="86" height="38"><div align="left">中&nbsp;&nbsp;文&nbsp;&nbsp;标&nbsp;&nbsp;&nbsp;签:</div></td>
+     <td width="86" height="38"><div align="left">中&nbsp;&nbsp;文&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;称签:</div></td>
      <td><input id="label" name="label"
       class="easyui-validatebox textbox notnull" style="width:380px;height:20px"
       data-options="required:true,validType:'length[0,40]'"
