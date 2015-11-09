@@ -737,9 +737,19 @@ public class FDataOrganizationDepartmentUserLogic
          cmd.append('\'');
       }
       cmd.append(',');
-      cmd.append(unit.departmentId());
+      long departmentId = unit.departmentId();
+      if(departmentId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(departmentId);
+      }
       cmd.append(',');
-      cmd.append(unit.userId());
+      long userId = unit.userId();
+      if(userId == 0){
+         cmd.append("NULL");
+      }else{
+         cmd.append(userId);
+      }
       cmd.append(',');
       long statusCd = unit.statusCd();
       if(statusCd == 0){
@@ -889,11 +899,21 @@ public class FDataOrganizationDepartmentUserLogic
       }
       if(unit.isDepartmentIdChanged()){
          cmd.append(",`DEPARTMENT_ID`=");
-         cmd.append(unit.departmentId());
+         long departmentId = unit.departmentId();
+         if(departmentId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(departmentId);
+         }
       }
       if(unit.isUserIdChanged()){
          cmd.append(",`USER_ID`=");
-         cmd.append(unit.userId());
+         long userId = unit.userId();
+         if(userId == 0){
+            cmd.append("NULL");
+         }else{
+            cmd.append(userId);
+         }
       }
       if(unit.isStatusCdChanged()){
          cmd.append(",`STATUS_CD`=");

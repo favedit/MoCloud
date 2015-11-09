@@ -58,16 +58,16 @@ public class FDataOrganizationDepartmentUserUnit
    protected String _label;
 
    // 存储字段部门编号的定义。
-   private int __departmentId;
+   private long __departmentId;
 
    // 字段部门编号的定义。
-   protected int _departmentId;
+   protected long _departmentId;
 
    // 存储字段用户编号的定义。
-   private int __userId;
+   private long __userId;
 
    // 字段用户编号的定义。
-   protected int _userId;
+   protected long _userId;
 
    // 存储字段雇佣关系的定义。
    private long __statusCd;
@@ -305,7 +305,7 @@ public class FDataOrganizationDepartmentUserUnit
    //
    // @return 数据内容
    //============================================================
-   public int departmentId(){
+   public long departmentId(){
       return _departmentId;
    }
 
@@ -325,7 +325,7 @@ public class FDataOrganizationDepartmentUserUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setDepartmentId(int value){
+   public void setDepartmentId(long value){
       _departmentId = value;
    }
 
@@ -343,7 +343,7 @@ public class FDataOrganizationDepartmentUserUnit
    //
    // @return 数据内容
    //============================================================
-   public int userId(){
+   public long userId(){
       return _userId;
    }
 
@@ -363,7 +363,7 @@ public class FDataOrganizationDepartmentUserUnit
    //
    // @param value 数据内容
    //============================================================
-   public void setUserId(int value){
+   public void setUserId(long value){
       _userId = value;
    }
 
@@ -632,9 +632,9 @@ public class FDataOrganizationDepartmentUserUnit
          case "label":
             return _label;
          case "department_id":
-            return RInteger.toString(_departmentId);
+            return Long.toString(_departmentId);
          case "user_id":
-            return RInteger.toString(_userId);
+            return Long.toString(_userId);
          case "status_cd":
             return Long.toString(_statusCd);
          case "relation_cd":
@@ -686,10 +686,10 @@ public class FDataOrganizationDepartmentUserUnit
             _label = value;
             break;
          case "department_id":
-            _departmentId = RInteger.parse(value);
+            _departmentId = RLong.parse(value);
             break;
          case "user_id":
-            _userId = RInteger.parse(value);
+            _userId = RLong.parse(value);
             break;
          case "status_cd":
             _statusCd = RLong.parse(value);
@@ -758,11 +758,11 @@ public class FDataOrganizationDepartmentUserUnit
                _label = __label;
                break;
             case "department_id":
-               __departmentId = RInteger.parse(value);
+               __departmentId = RLong.parse(value);
                _departmentId = __departmentId;
                break;
             case "user_id":
-               __userId = RInteger.parse(value);
+               __userId = RLong.parse(value);
                _userId = __userId;
                break;
             case "status_cd":
@@ -846,8 +846,8 @@ public class FDataOrganizationDepartmentUserUnit
       map.put("code", _code);
       map.put("name", _name);
       map.put("label", _label);
-      map.put("departmentId", RInteger.toString(_departmentId));
-      map.put("userId", RInteger.toString(_userId));
+      map.put("departmentId", RLong.toString(_departmentId));
+      map.put("userId", RLong.toString(_userId));
       map.put("statusCd", RLong.toString(_statusCd));
       map.put("relationCd", RInteger.toString(_relationCd));
       map.put("entryDate", _entryDate.format("YYYY-MM-DD HH24:MI:SS"));
@@ -873,8 +873,8 @@ public class FDataOrganizationDepartmentUserUnit
       _code = input.readString();
       _name = input.readString();
       _label = input.readString();
-      _departmentId = input.readInt32();
-      _userId = input.readInt32();
+      _departmentId = input.readInt64();
+      _userId = input.readInt64();
       _statusCd = input.readInt64();
       _relationCd = input.readInt32();
       _entryDate.set(input.readInt64());
@@ -900,8 +900,8 @@ public class FDataOrganizationDepartmentUserUnit
       output.writeString(_code);
       output.writeString(_name);
       output.writeString(_label);
-      output.writeInt32(_departmentId);
-      output.writeInt32(_userId);
+      output.writeInt64(_departmentId);
+      output.writeInt64(_userId);
       output.writeInt64(_statusCd);
       output.writeInt32(_relationCd);
       output.writeInt64(_entryDate.get());
