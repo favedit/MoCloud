@@ -11,9 +11,6 @@
    <link rel="stylesheet" type="text/css" href="css/login.css">
    <script type="text/javascript" src="js/jquery.min.js"></script>
    <script type="text/javascript" src="/ajs/cookie.js"></script>
-   <style type="text/css">
-
-   </style>
 </head>
 <body>
    <table  cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" >

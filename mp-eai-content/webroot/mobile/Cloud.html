@@ -1,0 +1,111 @@
+<!DOCTYPE >
+<html>
+<head>
+   <title></title>
+   <meta name="viewport" charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+</head>
+<style type="text/css">
+	*{
+		margin:0px;
+		padding: 0px;
+	}
+	table{
+	  font-family: 'Microsoft YaHei', 'Hiragino Sans GB', Helvetica, Arial, 'Lucida Grande', sans-serif;
+	  background: url(images/bg.png);
+	  background-position: center top;
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
+    .list{
+        color: #fff;
+    }
+    .list p{
+        font-size: 0.85em;
+        padding-bottom: 2px;
+    }
+    .list h3{
+        padding-top: 5%;
+    }
+    .head{
+        text-align:right;
+        padding-right: 10px;
+        padding-top: 10px;
+    }
+    .imgw{
+        width: 70%;
+    }
+    .logo{
+        width: 40%;
+    }
+    .er{
+        width: 50%;
+        padding-top: 3%;
+    }
+    #table_box{
+        display: none;
+    }
+</style>
+<body>
+<table id="table_box" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%">
+ <tbody>
+    <tr>
+       <td height="40" class="head">
+         <img class="imgw" src="images/prompt.png"/>
+       </td>
+    </tr>
+    <tr align="center" valign="center">
+    	<td class="list">
+    		<img class="logo" src="images/logo.png"/>
+            <h3>智慧云</h3>
+    		 <p style="padding-top:3%">及时查看集团资讯</p>
+		     <p>实时接收上级指示</p>
+		     <p>快速了解业绩动态</p>
+		     <p>辅助客户投资分析</p>
+             <img class="er" src="images/er.png"/>	
+    	</td>
+    </tr>
+    <tr>
+       <td height="20" align="center" valign="center">
+       </td>
+    </tr>
+ </tbody>
+</table>
+</body>
+<script type="text/javascript"> 
+var browser={
+    versions:function(){
+        var u = navigator.userAgent, app = navigator.appVersion;
+        return {
+            trident: u.indexOf('Trident') > -1, //IE内核
+            presto: u.indexOf('Presto') > -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+            iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+            iPad: u.indexOf('iPad') > -1, //是否iPad
+            webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+            weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+            qq: u.match(/\sQQ/i) == " qq" //是否QQ
+        };
+    }(),
+    language:(navigator.browserLanguage || navigator.language).toLowerCase()
+}
+var url = "";
+	if(!browser.versions.weixin){
+		if(!browser.versions.iPhone){
+            url = "/mobile/Mobile.wa?do=getAndroid";
+		}else{
+            url = "/mobile/Mobile.wa?do=getIos";
+		}
+      location.href = url ;
+	}else{
+        document.getElementById("table_box").style.display = "block";
+	}
+</script> 
+</html>
