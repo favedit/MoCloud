@@ -171,11 +171,34 @@ public class FStatisticsInvestmentCalculater
                if(departmentInfo != null){
                   customerInfo.setDepartmentId(departmentInfo.ouid());
                   customerInfo.setDepartmentLinkId(departmentInfo.linkId());
+                  customerInfo.setDepartmentLabel(departmentInfo.label());
+                  customerInfo.setDepartmentLevel1Id(departmentInfo.level1Id());
+                  customerInfo.setDepartmentLevel1LinkId(departmentInfo.level1LinkId());
+                  customerInfo.setDepartmentLevel1Label(departmentInfo.level1Label());
+                  customerInfo.setDepartmentLevel2Id(departmentInfo.level2Id());
+                  customerInfo.setDepartmentLevel2LinkId(departmentInfo.level2LinkId());
+                  customerInfo.setDepartmentLevel2Label(departmentInfo.level2Label());
+                  customerInfo.setDepartmentLevel3Id(departmentInfo.level3Id());
+                  customerInfo.setDepartmentLevel3LinkId(departmentInfo.level3LinkId());
+                  customerInfo.setDepartmentLevel3Label(departmentInfo.level3Label());
+                  customerInfo.setDepartmentLevel4Id(departmentInfo.level4Id());
+                  customerInfo.setDepartmentLevel4LinkId(departmentInfo.level4LinkId());
+                  customerInfo.setDepartmentLevel4Label(departmentInfo.level4Label());
+                  customerInfo.setDepartmentLevel5Id(departmentInfo.level5Id());
+                  customerInfo.setDepartmentLevel5LinkId(departmentInfo.level5LinkId());
+                  customerInfo.setDepartmentLevel5Label(departmentInfo.level5Label());
+                  customerInfo.setDepartmentLevel6Id(departmentInfo.level6Id());
+                  customerInfo.setDepartmentLevel6LinkId(departmentInfo.level6LinkId());
+                  customerInfo.setDepartmentLevel6Label(departmentInfo.level6Label());
+                  customerInfo.setDepartmentLevel7Id(departmentInfo.level7Id());
+                  customerInfo.setDepartmentLevel7LinkId(departmentInfo.level7LinkId());
+                  customerInfo.setDepartmentLevel7Label(departmentInfo.level7Label());
                }
                // 更新理财师信息
                if(marketerInfo != null){
                   customerInfo.setMarketerId(marketerInfo.ouid());
                   customerInfo.setMarketerLinkId(marketerInfo.linkId());
+                  customerInfo.setMarketerLabel(marketerInfo.label());
                }
                // 更新产品信息
                long findTenderId = customerInfo.tenderId();

@@ -1,11 +1,10 @@
 package org.mo.cloud.logic.data.resource.material;
 
-import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
-
 import com.cyou.gccloud.data.data.FDataResourceMaterialBitmapLogic;
 import com.cyou.gccloud.data.data.FDataResourceMaterialLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
 import org.mo.cloud.logic.data.resource.FGcResourceInfo;
 import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import org.mo.com.data.RSql;

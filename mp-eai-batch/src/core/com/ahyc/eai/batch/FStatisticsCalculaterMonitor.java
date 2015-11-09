@@ -1,12 +1,13 @@
 package com.ahyc.eai.batch;
 
+import com.ahyc.eai.batch.statistics.financial.customer.FStatisticsCustomerCalculater;
 import com.ahyc.eai.batch.statistics.financial.customer.IStatisticsCustomerConsole;
+import com.ahyc.eai.batch.statistics.financial.department.FStatisticsDepartmentCalculater;
 import com.ahyc.eai.batch.statistics.financial.department.IStatisticsDepartmentConsole;
-import com.ahyc.eai.batch.statistics.financial.dynamic.FStatisticsDynamicCalculater;
-import com.ahyc.eai.batch.statistics.financial.dynamic.FStatisticsInvestmentCalculater;
-import com.ahyc.eai.batch.statistics.financial.dynamic.FStatisticsRedemptionCalculater;
+import com.ahyc.eai.batch.statistics.financial.marketer.FStatisticsMarketerCalculater;
 import com.ahyc.eai.batch.statistics.financial.marketer.IStatisticsMarketerConsole;
 import com.ahyc.eai.batch.statistics.financial.member.IStatisticsMemberConsole;
+import com.ahyc.eai.batch.statistics.financial.tender.FStatisticsTenderCalculater;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.core.aop.RAop;
@@ -17,11 +18,11 @@ import org.mo.eng.data.IDatabaseConsole;
 //============================================================
 // <T>统计监视器。</T>
 //============================================================
-public class FStatisticsMonitor
+public class FStatisticsCalculaterMonitor
       extends FAbstractMonitor
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FStatisticsMonitor.class);
+   private static ILogger _logger = RLogger.find(FStatisticsCalculaterMonitor.class);
 
    // 默认间隔
    protected long _defaultInterval = 1000 * 10;
@@ -32,8 +33,9 @@ public class FStatisticsMonitor
    //============================================================
    // <T>统计监视器。</T>
    //============================================================
-   public FStatisticsMonitor(IDatabaseConsole databaseConsole){
-      _name = "analysis.activity";
+   public FStatisticsCalculaterMonitor(IDatabaseConsole databaseConsole){
+      _groupName = "statistics.calculater";
+      _name = "analysis.calculater";
       _valid = true;
       _interval = _defaultInterval;
       _databaseConsole = databaseConsole;
@@ -57,18 +59,22 @@ public class FStatisticsMonitor
          IStatisticsDepartmentConsole departmentConsole = RAop.find(IStatisticsDepartmentConsole.class);
          departmentConsole.clear();
          //............................................................
-         // 计算投资
-         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
-         investmentCalculater.process(logicContext);
-         processCount += investmentCalculater.processCount();
-         // 计算赎回
-         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
-         redemptionCalculater.process(logicContext);
-         processCount += redemptionCalculater.processCount();
-         // 计算动态数据
-         FStatisticsDynamicCalculater dynamicCalculater = new FStatisticsDynamicCalculater();
-         dynamicCalculater.process(logicContext);
-         processCount += dynamicCalculater.processCount();
+         // 统计投标信息
+         FStatisticsTenderCalculater tenderCalculater = new FStatisticsTenderCalculater();
+         tenderCalculater.process(logicContext);
+         processCount += tenderCalculater.processCount();
+         // 统计客户信息
+         FStatisticsCustomerCalculater customerCalculater = new FStatisticsCustomerCalculater();
+         customerCalculater.process(logicContext);
+         processCount += customerCalculater.processCount();
+         // 统计理财师信息
+         FStatisticsMarketerCalculater marketerCalculater = new FStatisticsMarketerCalculater();
+         marketerCalculater.process(logicContext);
+         processCount += marketerCalculater.processCount();
+         // 统计部门信息
+         FStatisticsDepartmentCalculater departmentCalculater = new FStatisticsDepartmentCalculater();
+         departmentCalculater.process(logicContext);
+         processCount += departmentCalculater.processCount();
       }catch(Exception exception){
          _logger.error(null, "main", exception);
       }

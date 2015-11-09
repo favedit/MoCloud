@@ -61,7 +61,7 @@ public class FGcStorageMongoConsole
    //============================================================
    @Override
    public SGcMongoStorage find(String catalog,
-                          String guid){
+                               String guid){
       // 获得集合
       DBCollection collection = _database.getCollection(catalog);
       // 查找内容

@@ -2,10 +2,9 @@ package com.ahyc.eai.batch;
 
 import com.ahyc.eai.batch.statistics.financial.customer.IStatisticsCustomerConsole;
 import com.ahyc.eai.batch.statistics.financial.department.IStatisticsDepartmentConsole;
-import com.ahyc.eai.batch.statistics.financial.dynamic.FStatisticsDynamicCalculater;
-import com.ahyc.eai.batch.statistics.financial.dynamic.FStatisticsInvestmentCalculater;
-import com.ahyc.eai.batch.statistics.financial.dynamic.FStatisticsRedemptionCalculater;
+import com.ahyc.eai.batch.statistics.financial.marketer.FStatisticsMarketerSynchronizer;
 import com.ahyc.eai.batch.statistics.financial.marketer.IStatisticsMarketerConsole;
+import com.ahyc.eai.batch.statistics.financial.member.FStatisticsMemberSynchronizer;
 import com.ahyc.eai.batch.statistics.financial.member.IStatisticsMemberConsole;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -17,11 +16,11 @@ import org.mo.eng.data.IDatabaseConsole;
 //============================================================
 // <T>统计监视器。</T>
 //============================================================
-public class FStatisticsMonitor
+public class FStatisticsSynchronizerMonitor
       extends FAbstractMonitor
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FStatisticsMonitor.class);
+   private static ILogger _logger = RLogger.find(FStatisticsSynchronizerMonitor.class);
 
    // 默认间隔
    protected long _defaultInterval = 1000 * 10;
@@ -32,8 +31,9 @@ public class FStatisticsMonitor
    //============================================================
    // <T>统计监视器。</T>
    //============================================================
-   public FStatisticsMonitor(IDatabaseConsole databaseConsole){
-      _name = "analysis.activity";
+   public FStatisticsSynchronizerMonitor(IDatabaseConsole databaseConsole){
+      _groupName = "statistics.synchronizer";
+      _name = "analysis.synchronizer";
       _valid = true;
       _interval = _defaultInterval;
       _databaseConsole = databaseConsole;
@@ -57,18 +57,14 @@ public class FStatisticsMonitor
          IStatisticsDepartmentConsole departmentConsole = RAop.find(IStatisticsDepartmentConsole.class);
          departmentConsole.clear();
          //............................................................
-         // 计算投资
-         FStatisticsInvestmentCalculater investmentCalculater = new FStatisticsInvestmentCalculater();
-         investmentCalculater.process(logicContext);
-         processCount += investmentCalculater.processCount();
-         // 计算赎回
-         FStatisticsRedemptionCalculater redemptionCalculater = new FStatisticsRedemptionCalculater();
-         redemptionCalculater.process(logicContext);
-         processCount += redemptionCalculater.processCount();
-         // 计算动态数据
-         FStatisticsDynamicCalculater dynamicCalculater = new FStatisticsDynamicCalculater();
-         dynamicCalculater.process(logicContext);
-         processCount += dynamicCalculater.processCount();
+         // 同步用户
+         FStatisticsMemberSynchronizer memberSynchronizer = new FStatisticsMemberSynchronizer();
+         memberSynchronizer.process(logicContext);
+         processCount += memberSynchronizer.processCount();
+         // 同步理财师
+         FStatisticsMarketerSynchronizer marketerSynchronizer = new FStatisticsMarketerSynchronizer();
+         marketerSynchronizer.process(logicContext);
+         processCount += marketerSynchronizer.processCount();
       }catch(Exception exception){
          _logger.error(null, "main", exception);
       }

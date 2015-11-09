@@ -26,7 +26,7 @@ public class FStatisticsPoolConsole<T extends FLogicUnit>
    // <T>清空处理。</T>
    //============================================================
    @Override
-   public void clear(){
+   public synchronized void clear(){
       _pool.clear();
    }
 }

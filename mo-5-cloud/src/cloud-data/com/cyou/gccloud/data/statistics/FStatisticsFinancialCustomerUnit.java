@@ -304,6 +304,12 @@ public class FStatisticsFinancialCustomerUnit
    // 字段投资总计的定义。
    protected double _investmentTotal;
 
+   // 存储字段投资级别的定义。
+   private int __investmentLevelCd;
+
+   // 字段投资级别的定义。
+   protected int _investmentLevelCd;
+
    // 存储字段首次赎回时间的定义。
    private TDateTime __redemptionFirstDate = new TDateTime();
 
@@ -328,11 +334,23 @@ public class FStatisticsFinancialCustomerUnit
    // 字段赎回总计的定义。
    protected double _redemptionTotal;
 
+   // 存储字段赎回级别的定义。
+   private int __redemptionLevelCd;
+
+   // 字段赎回级别的定义。
+   protected int _redemptionLevelCd;
+
    // 存储字段净投总计的定义。
    private double __netinvestmentTotal;
 
    // 字段净投总计的定义。
    protected double _netinvestmentTotal;
+
+   // 存储字段净投级别的定义。
+   private int __netinvestmentLevelCd;
+
+   // 字段净投级别的定义。
+   protected int _netinvestmentLevelCd;
 
    // 存储字段利息总计的定义。
    private double __interestTotal;
@@ -1664,6 +1682,33 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
+   // <T>判断投资级别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isInvestmentLevelCdChanged(){
+      return __investmentLevelCd != _investmentLevelCd;
+   }
+
+   //============================================================
+   // <T>获得投资级别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int investmentLevelCd(){
+      return _investmentLevelCd;
+   }
+
+   //============================================================
+   // <T>设置投资级别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setInvestmentLevelCd(int value){
+      _investmentLevelCd = value;
+   }
+
+   //============================================================
    // <T>判断首次赎回时间的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1772,6 +1817,33 @@ public class FStatisticsFinancialCustomerUnit
    }
 
    //============================================================
+   // <T>判断赎回级别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isRedemptionLevelCdChanged(){
+      return __redemptionLevelCd != _redemptionLevelCd;
+   }
+
+   //============================================================
+   // <T>获得赎回级别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int redemptionLevelCd(){
+      return _redemptionLevelCd;
+   }
+
+   //============================================================
+   // <T>设置赎回级别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setRedemptionLevelCd(int value){
+      _redemptionLevelCd = value;
+   }
+
+   //============================================================
    // <T>判断净投总计的数据是否改变。</T>
    //
    // @return 数据内容
@@ -1796,6 +1868,33 @@ public class FStatisticsFinancialCustomerUnit
    //============================================================
    public void setNetinvestmentTotal(double value){
       _netinvestmentTotal = value;
+   }
+
+   //============================================================
+   // <T>判断净投级别的数据是否改变。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public boolean isNetinvestmentLevelCdChanged(){
+      return __netinvestmentLevelCd != _netinvestmentLevelCd;
+   }
+
+   //============================================================
+   // <T>获得净投级别的数据内容。</T>
+   //
+   // @return 数据内容
+   //============================================================
+   public int netinvestmentLevelCd(){
+      return _netinvestmentLevelCd;
+   }
+
+   //============================================================
+   // <T>设置净投级别的数据内容。</T>
+   //
+   // @param value 数据内容
+   //============================================================
+   public void setNetinvestmentLevelCd(int value){
+      _netinvestmentLevelCd = value;
    }
 
    //============================================================
@@ -2144,6 +2243,8 @@ public class FStatisticsFinancialCustomerUnit
             return RInteger.toString(_investmentNumber);
          case "investment_total":
             return RDouble.toString(_investmentTotal);
+         case "investment_level_cd":
+            return RInteger.toString(_investmentLevelCd);
          case "redemption_first_date":
             return _redemptionFirstDate.toString();
          case "redemption_last_date":
@@ -2152,8 +2253,12 @@ public class FStatisticsFinancialCustomerUnit
             return RInteger.toString(_redemptionNumber);
          case "redemption_total":
             return RDouble.toString(_redemptionTotal);
+         case "redemption_level_cd":
+            return RInteger.toString(_redemptionLevelCd);
          case "netinvestment_total":
             return RDouble.toString(_netinvestmentTotal);
+         case "netinvestment_level_cd":
+            return RInteger.toString(_netinvestmentLevelCd);
          case "interest_total":
             return RDouble.toString(_interestTotal);
          case "performance_total":
@@ -2327,6 +2432,9 @@ public class FStatisticsFinancialCustomerUnit
          case "investment_total":
             _investmentTotal = RDouble.parse(value);
             break;
+         case "investment_level_cd":
+            _investmentLevelCd = RInteger.parse(value);
+            break;
          case "redemption_first_date":
             _redemptionFirstDate.parse(value);
             break;
@@ -2339,8 +2447,14 @@ public class FStatisticsFinancialCustomerUnit
          case "redemption_total":
             _redemptionTotal = RDouble.parse(value);
             break;
+         case "redemption_level_cd":
+            _redemptionLevelCd = RInteger.parse(value);
+            break;
          case "netinvestment_total":
             _netinvestmentTotal = RDouble.parse(value);
+            break;
+         case "netinvestment_level_cd":
+            _netinvestmentLevelCd = RInteger.parse(value);
             break;
          case "interest_total":
             _interestTotal = RDouble.parse(value);
@@ -2572,6 +2686,10 @@ public class FStatisticsFinancialCustomerUnit
                __investmentTotal = RDouble.parse(value);
                _investmentTotal = __investmentTotal;
                break;
+            case "investment_level_cd":
+               __investmentLevelCd = RInteger.parse(value);
+               _investmentLevelCd = __investmentLevelCd;
+               break;
             case "redemption_first_date":
                __redemptionFirstDate.parse(value);
                _redemptionFirstDate.assign(__redemptionFirstDate);
@@ -2588,9 +2706,17 @@ public class FStatisticsFinancialCustomerUnit
                __redemptionTotal = RDouble.parse(value);
                _redemptionTotal = __redemptionTotal;
                break;
+            case "redemption_level_cd":
+               __redemptionLevelCd = RInteger.parse(value);
+               _redemptionLevelCd = __redemptionLevelCd;
+               break;
             case "netinvestment_total":
                __netinvestmentTotal = RDouble.parse(value);
                _netinvestmentTotal = __netinvestmentTotal;
+               break;
+            case "netinvestment_level_cd":
+               __netinvestmentLevelCd = RInteger.parse(value);
+               _netinvestmentLevelCd = __netinvestmentLevelCd;
                break;
             case "interest_total":
                __interestTotal = RDouble.parse(value);
@@ -2687,11 +2813,14 @@ public class FStatisticsFinancialCustomerUnit
       row.set("investmentLastDate", _investmentLastDate);
       row.set("investmentNumber", _investmentNumber);
       row.set("investmentTotal", _investmentTotal);
+      row.set("investmentLevelCd", _investmentLevelCd);
       row.set("redemptionFirstDate", _redemptionFirstDate);
       row.set("redemptionLastDate", _redemptionLastDate);
       row.set("redemptionNumber", _redemptionNumber);
       row.set("redemptionTotal", _redemptionTotal);
+      row.set("redemptionLevelCd", _redemptionLevelCd);
       row.set("netinvestmentTotal", _netinvestmentTotal);
+      row.set("netinvestmentLevelCd", _netinvestmentLevelCd);
       row.set("interestTotal", _interestTotal);
       row.set("performanceTotal", _performanceTotal);
       row.set("tenderId", _tenderId);
@@ -2758,11 +2887,14 @@ public class FStatisticsFinancialCustomerUnit
       map.put("investmentLastDate", _investmentLastDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("investmentNumber", RInteger.toString(_investmentNumber));
       map.put("investmentTotal", RDouble.toString(_investmentTotal));
+      map.put("investmentLevelCd", RInteger.toString(_investmentLevelCd));
       map.put("redemptionFirstDate", _redemptionFirstDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("redemptionLastDate", _redemptionLastDate.format("YYYY-MM-DD HH24:MI:SS"));
       map.put("redemptionNumber", RInteger.toString(_redemptionNumber));
       map.put("redemptionTotal", RDouble.toString(_redemptionTotal));
+      map.put("redemptionLevelCd", RInteger.toString(_redemptionLevelCd));
       map.put("netinvestmentTotal", RDouble.toString(_netinvestmentTotal));
+      map.put("netinvestmentLevelCd", RInteger.toString(_netinvestmentLevelCd));
       map.put("interestTotal", RDouble.toString(_interestTotal));
       map.put("performanceTotal", RDouble.toString(_performanceTotal));
       map.put("tenderId", RLong.toString(_tenderId));
@@ -2828,9 +2960,12 @@ public class FStatisticsFinancialCustomerUnit
       _investmentFirstDate.set(input.readInt64());
       _investmentLastDate.set(input.readInt64());
       _investmentNumber = input.readInt32();
+      _investmentLevelCd = input.readInt32();
       _redemptionFirstDate.set(input.readInt64());
       _redemptionLastDate.set(input.readInt64());
       _redemptionNumber = input.readInt32();
+      _redemptionLevelCd = input.readInt32();
+      _netinvestmentLevelCd = input.readInt32();
       _tenderId = input.readInt64();
       _tenderLinkId = input.readInt64();
       _tenderModel = input.readString();
@@ -2894,9 +3029,12 @@ public class FStatisticsFinancialCustomerUnit
       output.writeInt64(_investmentFirstDate.get());
       output.writeInt64(_investmentLastDate.get());
       output.writeInt32(_investmentNumber);
+      output.writeInt32(_investmentLevelCd);
       output.writeInt64(_redemptionFirstDate.get());
       output.writeInt64(_redemptionLastDate.get());
       output.writeInt32(_redemptionNumber);
+      output.writeInt32(_redemptionLevelCd);
+      output.writeInt32(_netinvestmentLevelCd);
       output.writeInt64(_tenderId);
       output.writeInt64(_tenderLinkId);
       output.writeString(_tenderModel);
@@ -2963,11 +3101,14 @@ public class FStatisticsFinancialCustomerUnit
       unit.investmentLastDate().assign(_investmentLastDate);
       unit.setInvestmentNumber(_investmentNumber);
       unit.setInvestmentTotal(_investmentTotal);
+      unit.setInvestmentLevelCd(_investmentLevelCd);
       unit.redemptionFirstDate().assign(_redemptionFirstDate);
       unit.redemptionLastDate().assign(_redemptionLastDate);
       unit.setRedemptionNumber(_redemptionNumber);
       unit.setRedemptionTotal(_redemptionTotal);
+      unit.setRedemptionLevelCd(_redemptionLevelCd);
       unit.setNetinvestmentTotal(_netinvestmentTotal);
+      unit.setNetinvestmentLevelCd(_netinvestmentLevelCd);
       unit.setInterestTotal(_interestTotal);
       unit.setPerformanceTotal(_performanceTotal);
       unit.setTenderId(_tenderId);

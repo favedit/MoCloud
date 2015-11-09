@@ -1,6 +1,7 @@
 package com.ahyc.eai.batch.statistics.financial.dynamic;
 
 import com.ahyc.eai.batch.common.FStatisticsPeriodCalculater;
+import com.ahyc.eai.batch.data.financial.common.RCustomerAmount;
 import com.ahyc.eai.batch.statistics.financial.customer.IStatisticsCustomerConsole;
 import com.ahyc.eai.batch.statistics.financial.department.IStatisticsDepartmentConsole;
 import com.ahyc.eai.batch.statistics.financial.marketer.IStatisticsMarketerConsole;
@@ -190,6 +191,7 @@ public class FStatisticsDynamicCalculater
                // 计算投资金额
                customerInvestmentTotal += customerActionAmount;
                customerUnit.setInvestmentTotal(customerInvestmentTotal);
+               customerUnit.setInvestmentLevelCd(RCustomerAmount.calculateAmountLevelCd(customerInvestmentTotal));
             }else if(customerActionCd == EGcFinancialCustomerAction.Redemption){
                // 设置赎回开始时间和结束时间
                if(customerUnit.redemptionFirstDate().isEmpty()){
@@ -204,12 +206,15 @@ public class FStatisticsDynamicCalculater
                // 计算赎回金额
                customerRedemptionTotal += customerActionAmount;
                customerUnit.setRedemptionTotal(customerRedemptionTotal);
+               customerUnit.setRedemptionLevelCd(RCustomerAmount.calculateAmountLevelCd(customerRedemptionTotal));
                customerInterestTotal += customerActionInterest;
                customerUnit.setInterestTotal(customerInterestTotal);
             }else{
                throw new FFatalError("Customer action invalid.");
             }
-            customerUnit.setNetinvestmentTotal(customerInvestmentTotal - customerRedemptionTotal);
+            double customerNetinvestmentTotal = customerInvestmentTotal - customerRedemptionTotal;
+            customerUnit.setNetinvestmentTotal(customerNetinvestmentTotal);
+            customerUnit.setNetinvestmentLevelCd(RCustomerAmount.calculateAmountLevelCd(customerNetinvestmentTotal));
             // 设置理财师
             if(marketerUnit != null){
                customerUnit.setMarketerId(marketerUnit.ouid());

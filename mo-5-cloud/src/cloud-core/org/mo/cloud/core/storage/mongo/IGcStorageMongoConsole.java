@@ -15,7 +15,7 @@ public interface IGcStorageMongoConsole
    // @return 处理结果
    //============================================================
    SGcMongoStorage find(String catalog,
-                   String guid);
+                        String guid);
 
    //============================================================
    // <T>保存一个存储信息。</T>

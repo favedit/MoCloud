@@ -39,7 +39,7 @@ public class SGcMongoStorage
    // @param guid 类型
    //============================================================
    public SGcMongoStorage(String catalog,
-                     String guid){
+                          String guid){
       _catalog = catalog;
       _guid = guid;
    }
@@ -52,8 +52,8 @@ public class SGcMongoStorage
    // @param type 类型
    //============================================================
    public SGcMongoStorage(String catalog,
-                     String guid,
-                     String type){
+                          String guid,
+                          String type){
       _catalog = catalog;
       _guid = guid;
       _type = type;

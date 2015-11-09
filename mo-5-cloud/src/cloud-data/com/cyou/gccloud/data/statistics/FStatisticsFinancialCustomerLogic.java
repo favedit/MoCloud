@@ -174,6 +174,9 @@ public class FStatisticsFinancialCustomerLogic
    // 字段投资总计的定义。
    public final static SLogicFieldInfo INVESTMENT_TOTAL = new SLogicFieldInfo("INVESTMENT_TOTAL");
 
+   // 字段投资级别的定义。
+   public final static SLogicFieldInfo INVESTMENT_LEVEL_CD = new SLogicFieldInfo("INVESTMENT_LEVEL_CD");
+
    // 字段首次赎回时间的定义。
    public final static SLogicFieldInfo REDEMPTION_FIRST_DATE = new SLogicFieldInfo("REDEMPTION_FIRST_DATE");
 
@@ -186,8 +189,14 @@ public class FStatisticsFinancialCustomerLogic
    // 字段赎回总计的定义。
    public final static SLogicFieldInfo REDEMPTION_TOTAL = new SLogicFieldInfo("REDEMPTION_TOTAL");
 
+   // 字段赎回级别的定义。
+   public final static SLogicFieldInfo REDEMPTION_LEVEL_CD = new SLogicFieldInfo("REDEMPTION_LEVEL_CD");
+
    // 字段净投总计的定义。
    public final static SLogicFieldInfo NETINVESTMENT_TOTAL = new SLogicFieldInfo("NETINVESTMENT_TOTAL");
+
+   // 字段净投级别的定义。
+   public final static SLogicFieldInfo NETINVESTMENT_LEVEL_CD = new SLogicFieldInfo("NETINVESTMENT_LEVEL_CD");
 
    // 字段利息总计的定义。
    public final static SLogicFieldInfo INTEREST_TOTAL = new SLogicFieldInfo("INTEREST_TOTAL");
@@ -217,7 +226,7 @@ public class FStatisticsFinancialCustomerLogic
    public final static SLogicFieldInfo UPDATE_DATE = new SLogicFieldInfo("UPDATE_DATE");
 
    // 字段集合的定义。
-   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LINK_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LINK_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LINK_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LINK_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LINK_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LINK_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LINK_ID`,`DEPARTMENT_LEVEL7_LABEL`,`MARKETER_ID`,`MARKETER_LINK_ID`,`MARKETER_LABEL`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`NETINVESTMENT_TOTAL`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
+   public final static String FIELDS = "`OUID`,`OVLD`,`GUID`,`LINK_ID`,`LINK_DATE`,`LINK_CD`,`DATA_ID`,`DEPARTMENT_ID`,`DEPARTMENT_LINK_ID`,`DEPARTMENT_LABEL`,`DEPARTMENT_LEVEL1_ID`,`DEPARTMENT_LEVEL1_LINK_ID`,`DEPARTMENT_LEVEL1_LABEL`,`DEPARTMENT_LEVEL2_ID`,`DEPARTMENT_LEVEL2_LINK_ID`,`DEPARTMENT_LEVEL2_LABEL`,`DEPARTMENT_LEVEL3_ID`,`DEPARTMENT_LEVEL3_LINK_ID`,`DEPARTMENT_LEVEL3_LABEL`,`DEPARTMENT_LEVEL4_ID`,`DEPARTMENT_LEVEL4_LINK_ID`,`DEPARTMENT_LEVEL4_LABEL`,`DEPARTMENT_LEVEL5_ID`,`DEPARTMENT_LEVEL5_LINK_ID`,`DEPARTMENT_LEVEL5_LABEL`,`DEPARTMENT_LEVEL6_ID`,`DEPARTMENT_LEVEL6_LINK_ID`,`DEPARTMENT_LEVEL6_LABEL`,`DEPARTMENT_LEVEL7_ID`,`DEPARTMENT_LEVEL7_LINK_ID`,`DEPARTMENT_LEVEL7_LABEL`,`MARKETER_ID`,`MARKETER_LINK_ID`,`MARKETER_LABEL`,`LABEL`,`CARD`,`CARD_AREA`,`CARD_BIRTH`,`CARD_GENDER`,`PHONE`,`PHONE_CITY_ID`,`PHONE_CITY_CODE`,`REGISTER_DATE`,`INVESTMENT_FIRST_DATE`,`INVESTMENT_LAST_DATE`,`INVESTMENT_NUMBER`,`INVESTMENT_TOTAL`,`INVESTMENT_LEVEL_CD`,`REDEMPTION_FIRST_DATE`,`REDEMPTION_LAST_DATE`,`REDEMPTION_NUMBER`,`REDEMPTION_TOTAL`,`REDEMPTION_LEVEL_CD`,`NETINVESTMENT_TOTAL`,`NETINVESTMENT_LEVEL_CD`,`INTEREST_TOTAL`,`PERFORMANCE_TOTAL`,`TENDER_ID`,`TENDER_LINK_ID`,`TENDER_MODEL`,`CREATE_USER_ID`,`CREATE_DATE`,`UPDATE_USER_ID`,`UPDATE_DATE`";
 
    //============================================================
    // <T>构造客户统计表逻辑单元。</T>
@@ -857,11 +866,14 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(",`INVESTMENT_LAST_DATE`");
       cmd.append(",`INVESTMENT_NUMBER`");
       cmd.append(",`INVESTMENT_TOTAL`");
+      cmd.append(",`INVESTMENT_LEVEL_CD`");
       cmd.append(",`REDEMPTION_FIRST_DATE`");
       cmd.append(",`REDEMPTION_LAST_DATE`");
       cmd.append(",`REDEMPTION_NUMBER`");
       cmd.append(",`REDEMPTION_TOTAL`");
+      cmd.append(",`REDEMPTION_LEVEL_CD`");
       cmd.append(",`NETINVESTMENT_TOTAL`");
+      cmd.append(",`NETINVESTMENT_LEVEL_CD`");
       cmd.append(",`INTEREST_TOTAL`");
       cmd.append(",`PERFORMANCE_TOTAL`");
       cmd.append(",`TENDER_ID`");
@@ -1220,6 +1232,8 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(',');
       cmd.append(unit.investmentTotal());
       cmd.append(',');
+      cmd.append(unit.investmentLevelCd());
+      cmd.append(',');
       TDateTime redemptionFirstDate = unit.redemptionFirstDate();
       if(redemptionFirstDate == null){
          cmd.append("NULL");
@@ -1246,7 +1260,11 @@ public class FStatisticsFinancialCustomerLogic
       cmd.append(',');
       cmd.append(unit.redemptionTotal());
       cmd.append(',');
+      cmd.append(unit.redemptionLevelCd());
+      cmd.append(',');
       cmd.append(unit.netinvestmentTotal());
+      cmd.append(',');
+      cmd.append(unit.netinvestmentLevelCd());
       cmd.append(',');
       cmd.append(unit.interestTotal());
       cmd.append(',');
@@ -1770,6 +1788,10 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append(",`INVESTMENT_TOTAL`=");
          cmd.append(unit.investmentTotal());
       }
+      if(unit.isInvestmentLevelCdChanged()){
+         cmd.append(",`INVESTMENT_LEVEL_CD`=");
+         cmd.append(unit.investmentLevelCd());
+      }
       if(unit.isRedemptionFirstDateChanged()){
          cmd.append(",`REDEMPTION_FIRST_DATE`=");
          TDateTime redemptionFirstDate = unit.redemptionFirstDate();
@@ -1804,9 +1826,17 @@ public class FStatisticsFinancialCustomerLogic
          cmd.append(",`REDEMPTION_TOTAL`=");
          cmd.append(unit.redemptionTotal());
       }
+      if(unit.isRedemptionLevelCdChanged()){
+         cmd.append(",`REDEMPTION_LEVEL_CD`=");
+         cmd.append(unit.redemptionLevelCd());
+      }
       if(unit.isNetinvestmentTotalChanged()){
          cmd.append(",`NETINVESTMENT_TOTAL`=");
          cmd.append(unit.netinvestmentTotal());
+      }
+      if(unit.isNetinvestmentLevelCdChanged()){
+         cmd.append(",`NETINVESTMENT_LEVEL_CD`=");
+         cmd.append(unit.netinvestmentLevelCd());
       }
       if(unit.isInterestTotalChanged()){
          cmd.append(",`INTEREST_TOTAL`=");

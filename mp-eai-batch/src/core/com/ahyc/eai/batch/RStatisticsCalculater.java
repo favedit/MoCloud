@@ -48,9 +48,10 @@ public class RStatisticsCalculater
       // 逻辑处理
       IDatabaseConsole databaseConsole = RAop.find(IDatabaseConsole.class);
       // 启动监视器
-      FStatisticsMonitor monitor = new FStatisticsMonitor(databaseConsole);
       IMonitorConsole monitorConsole = RAop.find(IMonitorConsole.class);
-      monitorConsole.start(monitor);
+      monitorConsole.start(new FStatisticsSynchronizerMonitor(databaseConsole));
+      monitorConsole.start(new FStatisticsCalculaterMonitor(databaseConsole));
+      monitorConsole.start(new FStatisticsMonitor(databaseConsole));
       monitorConsole.waitStop();
       // 结束处理
       RAop.release();

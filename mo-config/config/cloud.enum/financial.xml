@@ -29,4 +29,14 @@
     <Item _uuid="150d2a83-99f2-4894-8044-ee382d218b75" name="NSWithProduct" label="对产品不满意" is_valid="Y" note="M#" />
     <Item _uuid="70bc1191-f7bf-4c42-97e7-3aac0ae179d7" name="EndOfCycle" label="周期结束" is_valid="Y" note="M#" />
   </Enum>
+  <Enum _uuid="a2173d30-0099-473f-871c-910096b50515" name="GcFinancialAmountLevel" label="金融资金分级" is_valid="Y" note="M#" is_server_cpp="N" is_server_java="Y" is_client_cpp="N" is_client_as="N" is_client_cs="N" is_client_java="Y" is_count="N" enum_data_type_cd="Uint32" is_set="N" set_data_type_cd="Uint32" is_code="N">
+    <Item _uuid="dd5ceef3-a476-40d9-b293-e2e6004708c6" name="Unknown" label="未知" is_valid="Y" note="M#" />
+    <Item _uuid="fb64c3be-f211-42c9-bed9-a4f0cbc51dcf" name="Level1" label="小于1W" is_valid="Y" note="M#" />
+    <Item _uuid="b7703b84-5610-409d-af7a-7e0ac3962183" name="Level2" label="不小于1W并且小于10W" is_valid="Y" note="M#" />
+    <Item _uuid="2b78323b-85a0-4d91-86cd-479163f27ceb" name="Level3" label="不小于10W并且小于50W" is_valid="Y" note="M#" />
+    <Item _uuid="1140d790-e1ce-444d-b4f6-fcbf0dc3d9f9" name="Level4" label="不小于50W并且小于100W" is_valid="Y" note="M#" />
+    <Item _uuid="18810aca-e939-4bcc-9147-1ef14621a9db" name="Level5" label="不小于100W并且小于500W" is_valid="Y" note="M#" />
+    <Item _uuid="f23bc891-7ca0-46e4-922f-2e3c24314604" name="Level6" label="不小于500W并且小于1000W" is_valid="Y" note="M#" />
+    <Item _uuid="9da5a95b-8fd4-4a4f-bda3-09fb57baa0fd" name="Level7" label="不小于1000W" is_valid="Y" note="M#" />
+  </Enum>
 </Group>

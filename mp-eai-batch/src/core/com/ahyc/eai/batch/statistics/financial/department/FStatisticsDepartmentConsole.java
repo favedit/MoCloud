@@ -228,7 +228,7 @@ public class FStatisticsDepartmentConsole
    // <T>清空处理。</T>
    //============================================================
    @Override
-   public void clear(){
+   public synchronized void clear(){
       super.clear();
       _infos.clear();
    }

@@ -1,14 +1,13 @@
 package org.mo.cloud.logic.data.resource.model;
 
-import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
-import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
-
 import com.cyou.gccloud.data.data.FDataResourceModelAnimationLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelMeshLogic;
 import com.cyou.gccloud.data.data.FDataResourceModelSkeletonLogic;
 import com.cyou.gccloud.define.enums.core.EGcResource;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
+import org.mo.cloud.core.storage.mongo.EGcStorageMongoCatalog;
+import org.mo.cloud.core.storage.mongo.IGcStorageMongoConsole;
 import org.mo.cloud.logic.data.resource.FGcResourceInfo;
 import org.mo.cloud.logic.data.resource.IGcResourceConsole;
 import org.mo.cloud.logic.data.resource.model.animation.FGcResModelAnimationInfo;
