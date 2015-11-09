@@ -10,57 +10,21 @@
                 <div class="container-top">
                   <div class="product">
                     <ul>
+                     <jh:loop alias="product" source="&page.productList">
                       <li style="margin-left:0px;">
-                        <a>
+                        <a href="/pc/marketer/product/customer/CustomerTender.wa?productId=<jh:write source="&product.ouid" />">
                           <span class="icon1"></span>
-                          <b>e租财富</b>
-                          <p>净投：22100</p>
+                          <b>
+                            <jh:write source="&product.label" /></b>
+                          <p>净投：<jh:write source="&product.netInvestment_total" /></p>
                         </a>
                       </li>
-
-                       <li>
-                        <a>
-                        <span class="icon2"></span>
-                        <b>e租稳盈</b>
-                        <p>净投：221000</p>
-                        </a>
-                      </li>
-                      
-                       <li>
-                         <a>
-                        <span class="icon3"></span>
-                        <b>e租年享</b>
-                        <p>净投：2210000</p>
-                        </a>
-                      </li>
-                       <li>
-                        <a>
-                        <span class="icon4"></span>
-                        <b>e租年丰</b>
-                        <p>净投：2210000</p>
-                         </a>
-                      </li>
-
-                       <li>
-                         <a>
-                        <span class="icon5"></span>
-                        <b>e租富盈</b>
-                        <p>净投：221011000</p>
-                         </a>
-                      </li>
-
-                       <li style="margin-right:0px;">
-                         <a>
-                        <span class="icon6"></span>
-                        <b>e租富享</b>
-                        <p>净投：221000</p>
-                        </a>
-                      </li>
+                       </jh:loop>
                     </ul>
                   </div>                  
                   <ul class="total-number">
-                    <li><b>业绩：</b>545646465</li>
-                    <li><b>投资人数：</b>545646465</li>
+                    <li><b>业绩：</b><jh:write source="&page.Investment_total" /></li>
+                    <li><b>投资人数：</b><jh:write source="&page.customer_total" /></li>
                     <li><b>关注PV：</b>545646465</li>
                     <li><b>本期次：</b>54564</li>
                   </ul>
@@ -84,72 +48,33 @@
                                <td >上次拜访时间</td> 
                          </tr>
                          <!-- href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id=" -->
-                         <tr class="trs trigger"   href = "javascript;">
-                                <td><img src="images/re.png"/></td>
-                               <td>234</td>
-                               <td>234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                         </tr> 
-                          <tr class="trs trigger"   href = "javascript;">
-                                <td><img src="images/re.png"/></td>
-                               <td>234</td>
-                               <td>234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                         </tr>
-                         <tr class="trs trigger"   href = "javascript;">
+                          <jh:loop alias="customer" source="&page.customerTenderList">
+                         <tr class="trs trigger"   href = "/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.customerId" />">
+                               <td><a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.customerId" />">
+                                <jh:write source="&customer.memberLabel" /></a></td>
                                <td><img src="images/re.png"/></td>
-                               <td>234</td>
-                               <td>234234</td>
+                               <td><jh:write source="&customer.genderLabel" /></td>
+                               <td><jh:write source="&customer.memberPhone" /></td>
+                               <td><jh:write source="&customer.netinvestment" /></td>
                                <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                         </tr> 
-                         <tr class="trs trigger"   href = "javascript;">
-                                <td><img src="images/re.png"/></td>
-                               <td>234</td>
-                               <td>234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
+                               <td><jh:write source="&customer.memberLastLoginDate" /></td>
                                <td>234234234</td>
                          </tr> 
-                         <tr class="trs trigger"   href = "javascript;">
-                                <td><img src="images/re.png"/></td>
-                               <td>234</td>
-                               <td>234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                         </tr> 
-                         <tr class="trs trigger"   href = "javascript;">
-                                <td><img src="images/re.png"/></td>
-                               <td>234</td>
-                               <td>234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                               <td>234234234</td>
-                         </tr> 
+                         </jh:loop>
                       </table>
                        <ul class="pages">
                            <li><a href="javascript:void(0);" onclick="pading(-1)">上一页</a></li>
-                           <li>33/222</li>
+                             <li><jh:write source="&page.pageCurrent" />/<jh:write source="&page.pageTotal" /></li>
                            <li><a href="javascript:void(0);" onclick="pading(+1)">下一页</a></li>
                        </ul>
+                        <script type="text/javascript">
+                  function pading(num){
+                  var pageCurrent=<jh:write source="&page.pageCurrent" />;
+                  location.href="/pc/marketer/product/customer/CustomerTender.wa?productId=<jh:write source="&page.productId" />&page="+eval(pageCurrent+num);
+                  
+                  }
+                  
+                  </script>
                     </div>
                   
                </div>

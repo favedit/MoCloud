@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<Config>
+
+<Resource name='sql.product.model'>
+SELECT 
+  P.LABEL LABEL, P.ICON_URL ICON_URL, P.OUID OUID, SUM(CT.NETINVESTMENT) NETINVESTMENT_TOTAL 
+FROM 
+  DT_FIN_PRODUCT P, DT_FIN_TENDER T,DT_FIN_CUSTOMER_TENDER CT
+WHERE 
+   P.OUID = T.PRODUCT_ID AND T.OUID = CT.TENDER_ID 
+GROUP BY 
+   P.OUID
+
+</Resource>
+
+</Config>

@@ -143,7 +143,7 @@ public class FCustomerTenderAction
       FLogicDataset<FDataFinancialCustomerTenderInfo> customerTenderList = _customerTenderConsole.selectByProductIdAndMarkterId(logicContext, marketerId, productId, page.pageCurrent() - 1);
       page.setCustomerTenderList(customerTenderList);
       page.setProductId(productId);
-      return "/pc/marketer/product/CustomerList";
+      return "/pc/marketer/product/CustomerResultsList.jsp";
    }
    
    // ============================================================
