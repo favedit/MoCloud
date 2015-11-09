@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Content update_date="20150623152404">
   <Bar guid="F6E68BB974BB47C3B55161F5B2076588" name="eai.chart.LogoBar" label="驾驶舱实时数据" size="960,120">
-    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="200,6" size="420,35" align_cd="left" fore_font="bold 36px Microsoft YaHei" fore_color="#ffffff" back_font="bold 24px Microsoft YaHei"/>
-    <Label type="FEaiStatisticsLabel" name="currentInvestment" label="0" location="700,6" size="420,35" align_cd="left" fore_font="bold 36px Microsoft YaHei" fore_color="#ffffff" back_font="bold 24px Microsoft YaHei"/>
-    <Label name="thing" label="(5)" location="506,78" size="100,44" align_cd='left' fore_color="#ffffff" fore_font="bold 17px Microsoft YaHei" />
-	<Label name="unread" label="(6)" location="704,78" size="100,44" align_cd='left' fore_color="#ffffff" fore_font="bold 17px Microsoft YaHei" />
-	<Label name="date" label="2015/01/01" location="90,80" size="100,44" align_cd='left' fore_color="#ffffff" fore_font="bold 22px Microsoft YaHei"/>
-    <Label name="time" label="00:00" location="294,80" size="100,44" align_cd='left' fore_color="#ffffff" fore_font="bold 22px Microsoft YaHei" />
+    <Label type="FEaiStatisticsLabel" name="investmentTotal" label="0" location="154,4" size="420,35" align_cd="left" fore_font="bold 34px Microsoft YaHei" fore_color="#ffffff" back_font="bold 24px Microsoft YaHei"/>
+    <Label type="FEaiStatisticsLabel" name="currentInvestment" label="0" location="650,4" size="420,35" align_cd="left" fore_font="bold 34px Microsoft YaHei" fore_color="#ffffff" back_font="bold 24px Microsoft YaHei"/>
+    <Label name="thing" label="(0)" location="508,80" size="100,42" align_cd='left' fore_color="#ffffff" fore_font="bold 16px Microsoft YaHei" />
+	<Label name="unread" label="(0)" location="706,80" size="100,42" align_cd='left' fore_color="#ffffff" fore_font="bold 16px Microsoft YaHei" />
+	<Label name="date" label="2015/01/01" location="100,81" size="100,44" align_cd='left' fore_color="#ffffff" fore_font="bold 20px Microsoft YaHei"/>
+    <Label name="time" label="00:00" location="302,81" size="100,44" align_cd='left' fore_color="#ffffff" fore_font="bold 20px Microsoft YaHei" />
   </Bar>
 </Content>
