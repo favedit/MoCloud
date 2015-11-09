@@ -8,9 +8,8 @@
 <link rel="stylesheet" type="text/css" href="../../css/animate.css">
 <link rel="stylesheet" type="text/css" href="/pc/marketer/customer/css/common/head.css">
 <link rel="stylesheet" type="text/css" href="/pc/marketer/customer/css/common/common.css">
-
 <script type="text/javascript" src="../../js/jquery.min.js"></script>
-<script type="text/javascript" src="/pc/marketer/recommend/js/common.js"></script>
+<!-- <script type="text/javascript" src="/pc/marketer/recommend/js/common.js"></script> -->
 </head>
 <body>
 <FORM id="customerform" name='frmMain' method='post' action='Main.wa'>
@@ -41,8 +40,5 @@
    </TD>
 </TR>
 <TR>
-   <TD  width="100%" align="center" valign="center">
-      <ul class="users" id="users">
-         <!--<li class="binding"><a href="/pc/marketer/member/Followed.wa">已关注用户列表</a></li>-->
-         <li onclick="loginOut();"><a class="exit" href="javascript:;">退出</a></li>
-       </ul> 
+   
+      

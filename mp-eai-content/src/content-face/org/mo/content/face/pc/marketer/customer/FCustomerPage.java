@@ -1,5 +1,6 @@
 package org.mo.content.face.pc.marketer.customer;
 
+import com.cyou.gccloud.data.data.FDataFinancialMarketerUnit;
 import org.mo.com.lang.FObjectId;
 import org.mo.content.core.financial.customer.FDataFinancialCustomerInfo;
 import org.mo.content.core.financial.marketer.customer.FDataFinancialMarketerCustomerInfo;
@@ -31,6 +32,39 @@ public class FCustomerPage
 
    // 消息
    protected String _message;
+
+   //关键
+   protected String keyword;
+
+   // 理财师
+   protected FDataFinancialMarketerUnit marketer;
+
+   public FDataFinancialMarketerUnit getMarketer(){
+      return marketer;
+   }
+
+   public void setMarketer(FDataFinancialMarketerUnit marketer){
+      this.marketer = marketer;
+   }
+
+   public String getKeyword(){
+      return keyword;
+   }
+
+   public void setKeyword(String keyword){
+      this.keyword = keyword;
+   }
+
+   public int getRowCount(){
+      return rowCount;
+   }
+
+   public void setRowCount(int rowCount){
+      this.rowCount = rowCount;
+   }
+
+   //总记录行数
+   protected int rowCount;
 
    public FDataFinancialCustomerInfo customerInfo(){
       return _customerInfo;
