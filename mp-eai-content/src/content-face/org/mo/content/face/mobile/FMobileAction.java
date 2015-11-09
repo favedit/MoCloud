@@ -1,11 +1,8 @@
 package org.mo.content.face.mobile;
 
 import com.cyou.gccloud.data.data.FDataSystemApplicationUnit;
-import com.cyou.gccloud.data.data.FDataSystemVersionLogic;
 import com.cyou.gccloud.data.data.FDataSystemVersionUnit;
 import org.mo.cloud.core.storage.IGcStorageConsole;
-import org.mo.com.data.FSql;
-import org.mo.com.lang.RString;
 import org.mo.content.core.mobile.logic.news.INewsConsole;
 import org.mo.content.core.system.application.IApplicationConsole;
 import org.mo.content.core.system.version.IVersionConsole;
@@ -66,14 +63,9 @@ public class FMobileAction
                             FMobilePage Page,
                             FBasePage basePage){
       String appkey = "0E144A4C9CA64FAB854FF2DE8B589312";
-      FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
-
       FDataSystemApplicationUnit app = _applicationConsole.findByGuid(logicContext, appkey);
-
       FDataSystemVersionUnit version = _versionConsole.findMaxByAppId(logicContext, app.ouid());
-      System.out.println(version.downloadUrl() + "==============================================================number");
       Page.setDownloadUrl(version.downloadUrl());
-      //      System.out.println(unit.downloadUrl() + "==============================================================unit.downloadUrl()");
       return "/mobile/DownFile";
    }
 
@@ -89,14 +81,9 @@ public class FMobileAction
                         FMobilePage Page,
                         FBasePage basePage){
       String appkey = "58BEFC782B9E4CE5A65B34B8C1E89141";
-      FDataSystemVersionLogic logic = logicContext.findLogic(FDataSystemVersionLogic.class);
-      FSql whereSql = new FSql();
-      whereSql.append(FDataSystemVersionLogic.NUMBER, " = '{NUMBER}'");
-      //      System.out.println(_applicationConsole.getNumber(context, logicContext, Page, basePage, appkey) + "==============================================================number");
-      whereSql.bind("NUMBER", RString.parse(_applicationConsole.getNumber(context, logicContext, Page, basePage, appkey)));
-      FDataSystemVersionUnit unit = logic.search(FDataSystemVersionUnit.class, whereSql);
-      Page.setDownloadUrl(unit.downloadUrl());
-      //      System.out.println(unit.downloadUrl() + "==============================================================unit.downloadUrl()");
+      FDataSystemApplicationUnit app = _applicationConsole.findByGuid(logicContext, appkey);
+      FDataSystemVersionUnit version = _versionConsole.findMaxByAppId(logicContext, app.ouid());
+      Page.setDownloadUrl(version.downloadUrl());
       return "/mobile/DownFile";
    }
 
