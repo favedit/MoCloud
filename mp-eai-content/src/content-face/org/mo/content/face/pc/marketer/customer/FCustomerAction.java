@@ -100,7 +100,7 @@ public class FCustomerAction
       if(pageTotal < page.pageCurrent()){
          page.setPageCurrent(pageTotal);
       }
-      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.selectByMarketerId(logicContext, marketerId);
+      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.findPage(logicContext, context, marketerId, page.pageCurrent());
       page.setCustomerList(customerList);
       _logger.debug(this, "construct", "construct Select finish. (marketerMemberList = {1})", customerList);
       return "/pc/marketer/customer/CustomerList";
@@ -386,7 +386,7 @@ public class FCustomerAction
       if(pageTotal < page.pageCurrent()){
          page.setPageCurrent(pageTotal);
       }
-      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.search(logicContext, context, marketerId, page.pageCurrent() - 1, 10);
+      FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.search(logicContext, context, marketerId, page.pageCurrent());
       page.setCustomerList(customerList);
       _logger.debug(this, "search", "search Select finish. (marketerMemberList = {1})", customerList);
       return "/pc/marketer/customer/CustomerList.wa?do=search";

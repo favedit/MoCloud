@@ -76,13 +76,12 @@ public interface ICustomerConsole
    FLogicDataset<FDataFinancialCustomerInfo> search(ILogicContext logicContext,
                                                     IWebContext context,
                                                     long marketerId,
-                                                    int pageNum,
-                                                    int pageSize);
+                                                    int pageNum);
 
    FLogicDataset<FDataFinancialCustomerInfo> findPage(ILogicContext logicContext,
                                                       IWebContext context,
-                                                      int pageNum,
-                                                      int pageSize);
+                                                      long marketerId,
+                                                      int pageNo);
 
    // ============================================================
    // <T>获取总行数</T>

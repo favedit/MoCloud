@@ -2,7 +2,7 @@
 <%@ include file='/pc/marketer/customer/head.jsp' %>
 <jh:define source="&page.marketer" alias="marketer"></jh:define>
 <jh:define source="&page.customerList" alias="customers"></jh:define>
-<link rel="stylesheet" type="text/css" href="/pc/marketer/product/css/customerList.css">
+<link rel="stylesheet" type="text/css" href="/pc/marketer/customer/css/customerList.css">
             <TD  width="100%" align="center" valign="center" >
               <ul class="users" id="users">
                  <!--<li class="binding"><a href="/pc/marketer/member/Followed.wa">已关注用户列表</a></li>-->
@@ -36,7 +36,7 @@
                                <td>上次关注时间</td>
                          </tr>
                          <jh:loop alias="customer" source="&page.customerList">
-                         <tr class="trs trigger"   href = "/pc/marketer/recommend/Recommend.wa?do=memberInfo&id=<jh:write source="&customer.ouid"/>">
+                         <tr class="trs trigger"   href = "/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.ouid"/>">
                                <td><img src="images/re.png"/></td>
                                <td><jh:write source="&customer.label" /></td>
                                <td><jh:write source="&customer.genderLabel"/></td>
@@ -70,7 +70,7 @@
                   </br>客服电话：010-65499299</p>
                </div>
             </TD>
-            <td class="td-container"></td>
+            <td class="td-container"><input type="hidden" id="page" name="page" value="<jh:write source="&page.pageCurrent"/>"/></td>
          </TR>
       </TABLE>
    </FORM>
@@ -100,7 +100,7 @@
          var formParam = $('#customerform').serialize();
          var datas = {keyword: $("#keyword").val()};
          var url="/pc/marketer/customer/Customer.wa?do=search";
-         $("#page").attr("value",0);
+         //$("#page").attr("value",0);
          customerform.action="/pc/marketer/customer/Customer.wa?do=search";
          customerform.submit();
       }

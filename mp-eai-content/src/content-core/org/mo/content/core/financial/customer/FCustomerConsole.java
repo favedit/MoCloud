@@ -39,7 +39,7 @@ public class FCustomerConsole
          ICustomerConsole
 {
    // 每页条数
-   static final int _pageSize = 12;
+   static final int _pageSize = 3;
 
    // 成员控制器
    @ALink
@@ -121,7 +121,7 @@ public class FCustomerConsole
                            long marketerId){
       FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
       FSql sql = new FSql();
-      sql.append("SELECT COUNT(ouid) FROM DT_FIN_CUSTOMER WHERE ");
+      sql.append("SELECT COUNT(DT_FIN_CUSTOMER.`OUID`) FROM DT_FIN_CUSTOMER,DT_FIN_MEMBER WHERE DT_FIN_CUSTOMER.`OUID`=DT_FIN_MEMBER.`OUID` AND ");
       sql.append(FDataFinancialCustomerLogic.MARKETER_ID + " = {marketer_id}");
       sql.bind("marketer_id", RString.parse(marketerId));
       ISqlConnection conn = logic.connection();
@@ -278,8 +278,7 @@ public class FCustomerConsole
    public FLogicDataset<FDataFinancialCustomerInfo> search(ILogicContext logicContext,
                                                            IWebContext context,
                                                            long marketerId,
-                                                           int pageNum,
-                                                           int pageSize){
+                                                           int pageNum){
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
       String keyword = context.parameter("keyword");
       // FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
@@ -297,8 +296,10 @@ public class FCustomerConsole
       FSql rankSql = _resource.findString(FSql.class, "sql.dynamic.customer");
       rankSql.bindString("keyword", "%" + RString.parse(keyword) + "%");
       rankSql.bindLong("marketerid", marketerId);
-      rankSql.bindInteger("offset", pageNum * pageSize);
-      rankSql.bindInteger("pagesize", pageSize);
+      rankSql.bindInteger("offset", (pageNum - 1) * _pageSize);
+      rankSql.bindInteger("pagesize", _pageSize);
+      //System.out.println("pageNum===========" + pageNum);
+      //System.out.println("_pageSize===========" + _pageSize);
       FDataset rankDataset = connection.fetchDataset(rankSql);
 
       ISqlConnection conncalculate = logicContext.activeConnection("calculate");
@@ -377,9 +378,38 @@ public class FCustomerConsole
    @Override
    public FLogicDataset<FDataFinancialCustomerInfo> findPage(ILogicContext logicContext,
                                                              IWebContext context,
-                                                             int pageNum,
-                                                             int pageSize){
-      // TODO Auto-generated method stub
-      return null;
+                                                             long marketerId,
+                                                             int pageNo){
+      if(marketerId == 0){
+         throw new FFatalError("selectByMarketerId,marketerId is null");
+      }
+      TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
+      FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
+      FSql whereSql = new FSql();
+      whereSql.append(FDataFinancialCustomerLogic.MARKETER_ID, "={marketerId}");
+      whereSql.bind("marketerId", RString.parse(marketerId));
+      FLogicDataset<FDataFinancialCustomerInfo> unitList = logic.fetchClass(FDataFinancialCustomerInfo.class, whereSql, _pageSize, pageNo);
+
+      /**计算库取PV**/
+      ISqlConnection conncalculate = logicContext.activeConnection("calculate");
+      FSql pvSql = _resource.findString(FSql.class, "sql.customer.pv");
+      FRow pvrow = null;
+      for(FDataFinancialCustomerInfo info : unitList){
+         // 客户的主键和成员的主键一样
+         FDataFinancialMemberUnit member = _memberConsole.find(logicContext, info.ouid());
+         if(member != null){
+            info.setLabel(member.label());
+            info.setPhone(member.phone());
+            info.setEMAIL(member.email());
+            info.setLastLogin(member.lastLoginDate());
+            info.setAge(nowDate.year() - member.birthday().year());
+            //性别
+            info.setGenderLabel(EGcPersonGender.formatLabel(member.genderCd()));
+            pvSql.bindLong("memberid", info.ouid());
+            pvrow = conncalculate.find(pvSql);
+            info.setPv(pvrow.getInt("pv"));
+         }
+      }
+      return unitList;
    }
 }
