@@ -8,6 +8,7 @@ import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import org.mo.cloud.core.web.FGcWebSession;
+import org.mo.com.encoding.RMd5;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -124,7 +125,7 @@ public class FIndexAction
             //插入用户，权限绑定
             page.setUserType("host");
             String changePass = "white-host:" + hostAddress;
-            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, "", EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             basePage.setUrl("Main.wa");
             return "/apl/Redirector";
@@ -204,7 +205,9 @@ public class FIndexAction
       }
       long userId = 0;
       if((resultCd == EGcAuthorityResult.Success) || (resultCd == EGcAuthorityResult.OaSuccess)){
-         userId = synchronizeData(logicContext, sessionContext, page, changePass, passport, from);
+
+         userId = synchronizeData(logicContext, sessionContext, page, passport, password, changePass, from);
+
       }
       _logger.info(this, "login", "User login. (passport={1}, message={1})", passport, logggerMessage);
       // 增加日志
@@ -266,9 +269,11 @@ public class FIndexAction
                                 IWebSession sessionContext,
                                 FIndexPage page,
                                 String passport,
-                                String label,
+                                String password,
+                                String changePass,
                                 int from){
-      _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, label, from);
+      _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},label={2},from={3})", passport, changePass, from);
+      password = RMd5.encode(password);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, passport);
@@ -279,24 +284,44 @@ public class FIndexAction
          if(role != null){
             //同步OA用户
             FDataPersonUserUnit unit = _userConsole.doPrepare(logicContext);
-            unit.setLabel(label);
-            unit.setPassport(passport);
+            unit.setLabel(passport);
+            unit.setPassport(changePass);
+            unit.setPassword(password);
             unit.setRoleId(role.ouid());
             unit.setOvld(true);
             _userConsole.doInsert(logicContext, unit);
             userId = unit.ouid();
             session.setUserId(unit.ouid());
-            //同步用户状态
-            FDataPersonUserEntryUnit entryUnit = _entryConsole.doPrepare(logicContext);
-            entryUnit.setOvld(true);
-            entryUnit.setUserId(unit.ouid());
-            entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
-            entryUnit.setFromCd(from);
-            _entryConsole.doInsert(logicContext, entryUnit);
          }
       }else{
          userId = user.ouid();
          session.setUserId(user.ouid());
+         user.setLabel(passport);
+         user.setPassport(changePass);
+         user.setPassword(password);
+         user.setOvld(true);
+         _userConsole.doUpdate(logicContext, user);
+      }
+      // 用户来源同步
+      FDataPersonUserEntryUnit entryUnit = _entryConsole.findByUserId(logicContext, userId, from);
+      if(entryUnit == null){
+         //同步用户状态
+         entryUnit = _entryConsole.doPrepare(logicContext);
+         entryUnit.setOvld(true);
+         entryUnit.setUserId(userId);
+         entryUnit.setPassport(passport);
+         entryUnit.setPassword(password);
+         entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
+         entryUnit.setFromCd(from);
+         _entryConsole.doInsert(logicContext, entryUnit);
+      }else{
+         entryUnit.setOvld(true);
+         entryUnit.setUserId(userId);
+         entryUnit.setPassport(passport);
+         entryUnit.setPassword(password);
+         entryUnit.setStatusCd(EGcPersonUserStatus.Normal);
+         entryUnit.setFromCd(from);
+         _entryConsole.doUpdate(logicContext, entryUnit);
       }
       // 打开会话
       _sessionConsole.open(session);

@@ -53,4 +53,16 @@ public interface IDataPersonAccessAuthorityConsole
    //============================================================
    String oaLogin(String passport,
                   String password);
+
+   //============================================================
+   // <T>请求本系统服务器登录</T>
+   //
+   // @param url 接口链接
+   // @param passport 用户名
+   // @param password 密码
+   // @return 登录结果（0：验证成功，3：用户名或密码错误，99：系统异常）
+   //============================================================
+   boolean entryLogin(ILogicContext logicContext,
+                      String passport,
+                      String password);
 }

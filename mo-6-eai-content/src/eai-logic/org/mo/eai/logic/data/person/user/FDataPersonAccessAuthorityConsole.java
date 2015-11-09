@@ -1,6 +1,7 @@
 package org.mo.eai.logic.data.person.user;
 
 import com.cyou.gccloud.data.data.FDataPersonAccessAuthorityLogic;
+import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityAccess;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcAuthorityType;
@@ -16,6 +17,7 @@ import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.net.http.FHttpConnection;
+import org.mo.core.aop.face.ALink;
 import org.mo.core.aop.face.AProperty;
 import org.mo.data.logic.ILogicContext;
 
@@ -34,6 +36,9 @@ public class FDataPersonAccessAuthorityConsole
 
    @AProperty
    protected String _oaLoginUrl;
+
+   @ALink
+   protected IEntryConsole _endtryConsole;
 
    //============================================================
    // <T>构造数据人员访问授权信息控制台。</T>
@@ -83,6 +88,7 @@ public class FDataPersonAccessAuthorityConsole
    // @param password 密码
    // @return 登录结果（0：验证成功，1：签名不通过，2：参数不完整，3：用户名或密码错误，98：IP不在白名单中，99：系统异常）
    //============================================================
+   @Override
    public String oaLogin(String passport,
                          String password){
       //设置参数
@@ -136,8 +142,13 @@ public class FDataPersonAccessAuthorityConsole
          if(_oaLoginEnable){
             // OA用户检测
             String oaLoginResult = oaLogin(passport, password);
-
             _logger.debug(this, "doLogin", "OA login. (passport={1}, result={2})", passport, oaLoginResult);
+            // OA登录失败，从同步表中登录
+            if(!oaLoginResult.equals("0")){
+               if(entryLogin(logicContext, passport, password)){
+                  return EGcAuthorityResult.Success;
+               }
+            }
             // 0:验证成功，1:签名不通过，3:用户名或密码错误，98:IP不在白名单中
             if(oaLoginResult.equals("0")){
                if(password.length() < 6){
@@ -178,5 +189,29 @@ public class FDataPersonAccessAuthorityConsole
       }else{
          throw new FFatalError("Invalid type.");
       }
+   }
+
+   //============================================================
+   // <T>请求本系统服务器登录</T>
+   //
+   // @param url 接口链接
+   // @param passport 用户名
+   // @param password 密码
+   // @return 登录结果（0：验证成功，3：用户名或密码错误，99：系统异常）
+   //============================================================
+   @Override
+   public boolean entryLogin(ILogicContext logicContext,
+                             String passport,
+                             String password){
+      _logger.debug(this, "EntryLogin", "EntryLogin . (passport={1}, password={2})", passport, password);
+      FDataPersonUserEntryUnit entry = _endtryConsole.findByPassport(logicContext, passport);
+      if(entry == null){
+         return false;
+      }
+      password = RMd5.encode(password);
+      if(!password.equals(entry.password())){
+         return false;
+      }
+      return true;
    }
 }

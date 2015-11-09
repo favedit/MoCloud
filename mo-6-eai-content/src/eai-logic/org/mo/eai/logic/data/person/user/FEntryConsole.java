@@ -1,9 +1,10 @@
-package org.mo.content.core.manage.person.user;
+package org.mo.eai.logic.data.person.user;
 
 import com.cyou.gccloud.data.data.FDataPersonUserEntryLogic;
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.data.FSql;
+import org.mo.com.data.RSql;
 import org.mo.com.lang.FFatalError;
 import org.mo.data.logic.ILogicContext;
 
@@ -44,5 +45,20 @@ public class FEntryConsole
       whereSql.append(FDataPersonUserEntryLogic.FROM_CD, " = ", from);
       FDataPersonUserEntryUnit unit = search(logicContext, whereSql);
       return unit;
+   }
+
+   //============================================================
+   // <T>根据登录账号信息查找授权信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 登录账号
+   // @return 授权信息
+   //============================================================
+   @Override
+   public FDataPersonUserEntryUnit findByPassport(ILogicContext logicContext,
+                                                  String passport){
+      String whereSql = FDataPersonUserEntryLogic.PASSPORT + "='" + RSql.formatValue(passport) + "'";
+      FDataPersonUserEntryUnit entry = search(logicContext, whereSql);
+      return entry;
    }
 }

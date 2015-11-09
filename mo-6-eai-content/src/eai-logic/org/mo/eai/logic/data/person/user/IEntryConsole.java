@@ -1,4 +1,4 @@
-package org.mo.content.core.manage.person.user;
+package org.mo.eai.logic.data.person.user;
 
 import com.cyou.gccloud.data.data.FDataPersonUserEntryUnit;
 import org.mo.cloud.core.database.IAbstractLogicUnitConsole;
@@ -22,4 +22,14 @@ public interface IEntryConsole
    FDataPersonUserEntryUnit findByUserId(ILogicContext logicContext,
                                          long userId,
                                          int from);
+
+   //============================================================
+   // <T>根据登录账号信息查找授权信息。</T>
+   //
+   // @param logicContext 逻辑环境
+   // @param passport 登录账号
+   // @return 授权信息
+   //============================================================
+   FDataPersonUserEntryUnit findByPassport(ILogicContext logicContext,
+                                           String passport);
 }
