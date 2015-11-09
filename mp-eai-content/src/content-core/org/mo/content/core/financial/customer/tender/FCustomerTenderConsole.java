@@ -41,7 +41,7 @@ public class FCustomerTenderConsole
    private static ILogger                 _logger   = RLogger.find(FCustomerTenderConsole.class);
                                                     
    // 每页条数
-   public static final int                _pageSize = 12;
+   public static final int                _pageSize = 7;
                                                     
    // 成员控制器
    @ALink
@@ -226,7 +226,7 @@ public class FCustomerTenderConsole
       modelSql.bind("productId", RString.parse(productId));
       ISqlConnection connection = logicContext.activeConnection(EDatabaseConnection.Data);
       FDataset modelDataset = connection.fetchDataset(modelSql);
-      _logger.debug(this, "sum", "total select  '{customerId}' '{productId}'", modelDataset.count());
+      _logger.debug(this, "sum", "total select  '{marketerId}' '{productId}'", modelDataset.count());
       return modelDataset;
    }
    

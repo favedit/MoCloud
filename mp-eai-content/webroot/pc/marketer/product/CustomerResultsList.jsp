@@ -1,3 +1,4 @@
+<%@ include file='/apl/public.inc' %>
 <%@ include file='/pc/marketer/product/head.jsp' %>
 <link rel="stylesheet" type="text/css" href="/pc/marketer/product/css/resultsList.css">
             <TD  width="100%" align="center" valign="center" >
@@ -13,13 +14,12 @@
                      <jh:loop alias="product" source="&page.productList">
                       <li style="margin-left:0px;">
                         <a href="/pc/marketer/product/customer/CustomerTender.wa?productId=<jh:write source="&product.ouid" />">
-                          <span class="icon1"></span>
-                          <b>
-                            <jh:write source="&product.label" /></b>
+                          <span class="<jh:write source="&product.icon_url" />"></span>
+                          <b><jh:write source="&product.label" /></b>
                           <p>净投：<jh:write source="&product.netInvestment_total" /></p>
                         </a>
                       </li>
-                       </jh:loop>
+                       </jh:loop> 
                     </ul>
                   </div>                  
                   <ul class="total-number">
@@ -47,12 +47,11 @@
                                <td>上次关注时间</td>
                                <td >上次拜访时间</td> 
                          </tr>
-                         <!-- href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id=" -->
                           <jh:loop alias="customer" source="&page.customerTenderList">
-                         <tr class="trs trigger"   href = "/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.customerId" />">
+                         <tr class="trs trigger"   href = "">
                                <td><a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customer.customerId" />">
                                 <jh:write source="&customer.memberLabel" /></a></td>
-                               <td><img src="images/re.png"/></td>
+                               <td><img src="/images/userdefault.png"/></td>
                                <td><jh:write source="&customer.genderLabel" /></td>
                                <td><jh:write source="&customer.memberPhone" /></td>
                                <td><jh:write source="&customer.netinvestment" /></td>

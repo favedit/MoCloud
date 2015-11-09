@@ -81,7 +81,7 @@ public class FCustomerTenderAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            @AContainer(name = "basePage") FBasePage basePage,
-                           FCustomerTenderPage page){
+                           @AContainer(name = "page", fill = true) FCustomerTenderPage page){
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
@@ -143,7 +143,7 @@ public class FCustomerTenderAction
       FLogicDataset<FDataFinancialCustomerTenderInfo> customerTenderList = _customerTenderConsole.selectByProductIdAndMarkterId(logicContext, marketerId, productId, page.pageCurrent() - 1);
       page.setCustomerTenderList(customerTenderList);
       page.setProductId(productId);
-      return "/pc/marketer/product/CustomerResultsList.jsp";
+      return "/pc/marketer/product/CustomerResultsList";
    }
    
    // ============================================================
@@ -158,7 +158,7 @@ public class FCustomerTenderAction
    public String customerInfo(IWebContext context,
                               IWebSession sessionContext,
                               ILogicContext logicContext,
-                              FTenderPage page){
+                              @AContainer(name = "page", fill = true) FTenderPage page){
       // 根据客户获取客户的所有信息
       long customer = context.parameterAsLong("customer");
       FDataFinancialCustomerInfo customerInfo = _customerConsole.findInfo(logicContext, customer);
@@ -179,7 +179,7 @@ public class FCustomerTenderAction
    public String select(IWebContext context,
                         IWebSession sessionContext,
                         ILogicContext logicContext,
-                        FTenderPage page){
+                        @AContainer(name = "page", fill = true) FTenderPage page){
       return null;
    }
    
@@ -195,12 +195,12 @@ public class FCustomerTenderAction
    public String selectProduct(IWebContext context,
                                IWebSession sessionContext,
                                ILogicContext logicContext,
-                               FBasePage basePage){
+                               @AContainer(name = "basePage") FBasePage basePage){
       FDataFinancialProductUnit unit = new FDataFinancialProductUnit();
       FLogicDataset<FDataFinancialProductInfo> unitList = _productConsole.select(logicContext, unit);
       _logger.debug(this, "Select", "Select finish. (unitListCount={1})", unitList.count());
       basePage.setJson(unitList.toJsonListString());
-      return "/pc/marketer/product/CustomerList";
+      return "/pc/marketer/product/CustomerResultList";
    }
    
    // ============================================================
@@ -215,8 +215,8 @@ public class FCustomerTenderAction
    public String selectByMarketerIdAndProductId(IWebContext context,
                                                 IWebSession sessionContext,
                                                 ILogicContext logicContext,
-                                                FTenderPage page,
-                                                FBasePage basePage){
+                                                @AContainer(name = "page", fill = true) FTenderPage page,
+                                                @AContainer(name = "basePage") FBasePage basePage){
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());

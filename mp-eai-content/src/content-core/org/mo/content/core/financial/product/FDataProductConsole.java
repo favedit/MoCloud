@@ -12,7 +12,6 @@ import org.mo.com.logging.RLogger;
 import org.mo.com.resource.IResource;
 import org.mo.com.resource.RResource;
 import org.mo.content.core.common.EDatabaseConnection;
-import org.mo.content.core.financial.customer.tender.FCustomerTenderConsole;
 import org.mo.data.logic.FLogicDataset;
 import org.mo.data.logic.ILogicContext;
 
@@ -28,7 +27,7 @@ public class FDataProductConsole
    private static ILogger   _logger   = RLogger.find(FDataProductConsole.class);
                                       
    // 资源访问接口
-   private static IResource _resource = RResource.find(FCustomerTenderConsole.class);
+   private static IResource _resource = RResource.find(FDataProductConsole.class);
                                       
    //============================================================
    // <T>构造产品控制台。</T>
@@ -59,7 +58,7 @@ public class FDataProductConsole
          info.setIconUrl(modelRow.get("icon_url"));
          info.setLabel(modelRow.get("label"));
          info.setNetInvestment_total(modelRow.getFloat("netinvestment_total"));
-         info.setOuid(modelRow.getLong("customerid"));
+         info.setOuid(modelRow.getLong("ouid"));
          productInfoList.push(info);
       }
       _logger.debug(this, "product", "product select all", productInfoList.count());
