@@ -3,8 +3,8 @@
 <Configuration>
    <!-- 应用定义 -->
    <Define name='application'>${application}</Define>
-   <Define name='application.name'>mp-eai-batch</Define>
-   <Define name='application.root'>${application}</Define>
+   <Define name='application.name'>eai.batch</Define>
+   <Define name='application.root'>${application}/${application.name}</Define>
    <Define name='application.deploy'>${application.root}/deploy</Define>
    <Define name='application.web'>${application.root}/webroot</Define>
    <Define name='application.config'>${application.web}/WEB-INF/classes</Define>
@@ -23,6 +23,6 @@
 
    <!-- 包含：环境设定 -->
    <Include>${application.config}/environment/environment-online1.xml</Include>
-   <Include>${application}/eai.config/environment1.xml</Include>
+   <Include>${application}/eai.config/environment-batch1.xml</Include>
 
 </Configuration>

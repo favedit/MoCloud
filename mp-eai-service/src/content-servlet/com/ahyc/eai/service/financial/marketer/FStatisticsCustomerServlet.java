@@ -151,14 +151,20 @@ public class FStatisticsCustomerServlet
       }
       //............................................................
       // 输出投资人数
-      FSql countSql = _resource.findString(FSql.class, "sql.dynamic.investment.count");
-      FRow countRow = connection.find(countSql);
-      stream.writeInt32(countRow.getInt("investment_1w"));
-      stream.writeInt32(countRow.getInt("investment_10w"));
-      stream.writeInt32(countRow.getInt("investment_50w"));
-      stream.writeInt32(countRow.getInt("investment_100w"));
-      stream.writeInt32(countRow.getInt("investment_500w"));
-      stream.writeInt32(countRow.getInt("investment_1000w"));
+      // FSql countSql = _resource.findString(FSql.class, "sql.dynamic.investment.count");
+      // FRow countRow = connection.find(countSql);
+      // stream.writeInt32(countRow.getInt("investment_1w"));
+      // stream.writeInt32(countRow.getInt("investment_10w"));
+      // stream.writeInt32(countRow.getInt("investment_50w"));
+      // stream.writeInt32(countRow.getInt("investment_100w"));
+      // stream.writeInt32(countRow.getInt("investment_500w"));
+      // stream.writeInt32(countRow.getInt("investment_1000w"));
+      stream.writeInt32(0);
+      stream.writeInt32(0);
+      stream.writeInt32(0);
+      stream.writeInt32(0);
+      stream.writeInt32(0);
+      stream.writeInt32(0);
       //............................................................
       // 输出即时数据[倒序获得，正序写入]
       FStatisticsFinancialDynamicLogic dynamicLogic = logicContext.findLogic(FStatisticsFinancialDynamicLogic.class);

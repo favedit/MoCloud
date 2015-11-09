@@ -44,11 +44,14 @@
   <FieldDateTime _uuid="7ba63f9f-5c6a-4822-a0b5-61b0b5157dcf" name="investment_last_date" label="M#12cn16投资最后日期" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_LAST_DATE" />
   <FieldInteger _uuid="be09f4a5-c213-4c22-83b1-21aa672ecd7c" name="investment_number" label="M#12cn14投资次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_NUMBER" />
   <FieldDouble _uuid="f1b061f5-2ced-42f3-90fd-1cb443ad6c00" name="investment_total" label="M#12cn14投资总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_TOTAL" />
+  <FieldInteger _uuid="e2a5850a-721b-4d16-a767-1e0a9289d46d" name="investment_level_cd" label="M#12cn14投资级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INVESTMENT_LEVEL_CD" />
   <FieldDateTime _uuid="85c7bc9e-6426-42a1-b89c-3e37c800a8c6" name="redemption_first_date" label="M#12cn16首次赎回时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_FIRST_DATE" />
   <FieldDateTime _uuid="8983d5ae-6f10-4bcf-8e81-c85dcd5b1e8f" name="redemption_last_date" label="M#12cn16赎回最后时间" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_LAST_DATE" />
   <FieldInteger _uuid="383e995c-4c55-4322-8d57-9db6232f5b71" name="redemption_number" label="M#12cn14赎回次数" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_NUMBER" />
   <FieldDouble _uuid="16bc420d-2427-4140-9852-9ea37e00085c" name="redemption_total" label="M#12cn14赎回总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_TOTAL" />
+  <FieldInteger _uuid="c0673e66-6abd-4d48-ab51-e76307906bd4" name="redemption_level_cd" label="M#12cn14赎回级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="REDEMPTION_LEVEL_CD" />
   <FieldDouble _uuid="4b6d88b9-c240-49db-8b9e-2a5d8a9477ab" name="netinvestment_total" label="M#12cn14净投总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_TOTAL" />
+  <FieldInteger _uuid="5530a4d6-8265-43ab-9c22-72082b548102" name="netinvestment_level_cd" label="M#12cn14净投级别" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="NETINVESTMENT_LEVEL_CD" />
   <FieldDouble _uuid="2c3020ba-1434-4476-bff4-f16d67d6151f" name="interest_total" label="M#12cn14利息总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="INTEREST_TOTAL" />
   <FieldDouble _uuid="6a7b8c90-d5e4-403e-b441-7ab60e53fd98" name="performance_total" label="M#12cn14绩效总计" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="PERFORMANCE_TOTAL" />
   <FieldRecordId _uuid="3b8142d9-918a-4a54-8c8f-24160fe50f95" name="tender_id" label="M#12cn14投标编号" is_valid="Y" note="M#" is_null="Y" is_store="Y" is_abstract="N" data_name="TENDER_ID" />

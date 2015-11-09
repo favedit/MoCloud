@@ -40,10 +40,9 @@ public class RStatisticsCalculater
       }
       // 设置属性
       FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-      attributes.set("application", "/data/eai/eai.batch");
+      attributes.set("application", "/data/eai");
       // 加载配置
       RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-" + modeCd + ".xml");
-      //RAop.initialize("D:/Microbject/MoCloud/mp-eai-batch/src/config//application-work.xml");
       // 设置日志
       RLogger.setFlags(ELoggerLevel.NO_DEBUG.value());
       // 逻辑处理

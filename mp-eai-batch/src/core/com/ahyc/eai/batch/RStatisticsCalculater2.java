@@ -40,7 +40,7 @@ public class RStatisticsCalculater2
       }
       // 设置属性
       FAttributes attributes = RAop.configConsole().defineCollection().attributes();
-      attributes.set("application", "/data/eai/eai.batch");
+      attributes.set("application", "/data/eai");
       // 加载配置
       RAop.initialize("/data/eai/eai.batch/webroot/WEB-INF/classes/application-" + modeCd + "2.xml");
       // 设置日志
