@@ -23,6 +23,8 @@ CREATE DATABASE `EAI_STATISTICS1` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci'
 CREATE DATABASE `EAI_STATISTICS2` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 CREATE DATABASE `EAI_STATISTICS3` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
+CREATE DATABASE `CAL_STATISTICS` CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+
 创建用户：
 ============================================================
 CREATE USER 'cloud'@'%' IDENTIFIED BY 'cloud';
