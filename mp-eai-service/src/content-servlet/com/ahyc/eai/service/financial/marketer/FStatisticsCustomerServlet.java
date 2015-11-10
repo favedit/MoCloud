@@ -188,10 +188,10 @@ public class FStatisticsCustomerServlet
          TDateTime investmentDate = dynamicUnit.customerActionDate();
          double investmentAmount = dynamicUnit.customerActionAmount();
          // 查找用户信息
-         long customerId = dynamicUnit.customerId();
-         FStatisticsFinancialCustomerUnit customerUnit = customerLogic.find(customerId);
          boolean investmentFirst = false;
          int investmentNumber = 0;
+         long customerId = dynamicUnit.customerId();
+         FStatisticsFinancialCustomerUnit customerUnit = customerLogic.find(customerId);
          if(customerUnit != null){
             if(customerUnit.investmentFirstDate().equals(investmentDate)){
                investmentFirst = true;

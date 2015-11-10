@@ -1,13 +1,20 @@
 package com.ahyc.eai.service.cockpit.title;
 
+import com.ahyc.eai.service.cockpit.warning.FCockpitWarningServlet;
 import com.ahyc.eai.service.common.FAbstractStatisticsServlet;
+import org.mo.com.collections.FRow;
+import org.mo.com.data.FSql;
+import org.mo.com.data.ISqlConnection;
 import org.mo.com.io.FByteStream;
 import org.mo.com.lang.EResult;
 import org.mo.com.lang.RDateTime;
 import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
+import org.mo.com.resource.IResource;
+import org.mo.com.resource.RResource;
 import org.mo.data.logic.ILogicContext;
+import org.mo.eai.core.common.EEaiDataConnection;
 import org.mo.web.core.servlet.common.IWebServletRequest;
 import org.mo.web.core.servlet.common.IWebServletResponse;
 import org.mo.web.protocol.context.IWebContext;
@@ -24,7 +31,7 @@ public class FCockpitTitleServlet
    private static ILogger _logger = RLogger.find(FCockpitTitleServlet.class);
 
    // 资源访问接口
-   //   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
+   private static IResource _resource = RResource.find(FCockpitWarningServlet.class);
 
    //============================================================
    // <T>实时数据</T>
@@ -55,26 +62,32 @@ public class FCockpitTitleServlet
       //............................................................
       // 设置输出流
       FByteStream stream = createStream(context);
+      ISqlConnection connection = logicContext.activeConnection(EEaiDataConnection.STATISTICS);
+      // 输出当日合计数据
+      FSql sql = _resource.findString(FSql.class, "sql.title");
+      sql.bindString("month", currentDate.format("YYYYMM01"));
+      FRow row = connection.find(sql);
+      double investmentAmount = row.getDouble("investment_amount");
+      double investmentTotal = row.getDouble("investment_total");
       //............................................................
-      //写入数据
-      //      stream.writeString("investment_total");
-      stream.writeDouble(52079792378.0);//投资总额
-      //      stream.writeString("current_investment");
-      stream.writeDouble(2079792378.0);//当月投资
-      //      stream.writeString("employee_count");
-      stream.writeInt32(92800);//集团现有员工
-      //      stream.writeString("marketer_count");
-      stream.writeInt32(70000);//现有理财师
-      //      stream.writeString("subsidiary_count");
-      stream.writeInt32(45);//现有子公司
-      //      stream.writeString("wealth_count");
-      stream.writeInt32(250);//现有财富端分公司
-      //      stream.writeString("workplace_count");
-      stream.writeInt32(485);//分布职场数量
-      //      stream.writeString("thing_count");
-      stream.writeInt32(8);//待办事项
-      //      stream.writeString("unread_count");
-      stream.writeInt32(5);//消息通知
+      // 投资总额
+      stream.writeDouble(investmentTotal);
+      // 当月投资
+      stream.writeDouble(investmentAmount);
+      // 集团现有员工
+      stream.writeInt32(92800);
+      // 现有理财师
+      stream.writeInt32(70000);
+      // 现有子公司
+      stream.writeInt32(45);
+      // 现有财富端分公司
+      stream.writeInt32(250);
+      // 分布职场数量
+      stream.writeInt32(485);
+      // 待办事项
+      stream.writeInt32(8);
+      // 消息通知
+      stream.writeInt32(5);
       //............................................................
       // 保存数据到缓冲中
       updateCacheStream(cacheCode, stream);
