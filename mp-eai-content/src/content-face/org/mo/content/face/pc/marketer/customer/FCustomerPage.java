@@ -13,113 +13,135 @@ public class FCustomerPage
       extends FObjectId
 {
    // 当前页
-   protected int _pageCurrent;
-
+   protected int                                               _pageCurrent;
+                                                               
    // 总页数
-   protected int _pageTotal;
-
+   protected int                                               _pageTotal;
+                                                               
    // 客户集合
-   protected FLogicDataset<FDataFinancialCustomerInfo> _customerList;
-
+   protected FLogicDataset<FDataFinancialCustomerInfo>         _customerList;
+                                                               
    // 理财师客户关系集合
    protected FLogicDataset<FDataFinancialMarketerCustomerInfo> _maketerCustomerList;
-
+                                                               
    // 客户信息
-   protected FDataFinancialCustomerInfo _customerInfo;
-
+   protected FDataFinancialCustomerInfo                        _customerInfo;
+                                                               
    //名称
-   protected String _label;
-
+   protected String                                            _label;
+                                                               
    // 消息
-   protected String _message;
-
+   protected String                                            _message;
+                                                               
    //关键
-   protected String keyword;
-
+   protected String                                            keyword;
+                                                               
    // 理财师
-   protected FDataFinancialMarketerUnit marketer;
-
+   protected FDataFinancialMarketerUnit                        marketer;
+                                                               
+   // 最大索引
+   protected int                                               _maxIndex;
+                                                               
+   // 当前索引
+   protected int                                               _index;
+                                                               
+   public int maxIndex(){
+      return _maxIndex;
+   }
+   
+   public void setMaxIndex(int _maxIndex){
+      this._maxIndex = _maxIndex;
+   }
+   
+   public int index(){
+      return _index;
+   }
+   
+   public void setIndex(int _index){
+      this._index = _index;
+   }
+   
    public FDataFinancialMarketerUnit getMarketer(){
       return marketer;
    }
-
+   
    public void setMarketer(FDataFinancialMarketerUnit marketer){
       this.marketer = marketer;
    }
-
+   
    public String getKeyword(){
       return keyword;
    }
-
+   
    public void setKeyword(String keyword){
       this.keyword = keyword;
    }
-
+   
    public int getRowCount(){
       return rowCount;
    }
-
+   
    public void setRowCount(int rowCount){
       this.rowCount = rowCount;
    }
-
+   
    //总记录行数
    protected int rowCount;
-
+   
    public FDataFinancialCustomerInfo customerInfo(){
       return _customerInfo;
    }
-
+   
    public void setCustomerInfo(FDataFinancialCustomerInfo _customerInfo){
       this._customerInfo = _customerInfo;
    }
-
+   
    public String message(){
       return _message;
    }
-
+   
    public void setMessage(String _message){
       this._message = _message;
    }
-
+   
    public int pageTotal(){
       return _pageTotal;
    }
-
+   
    public void setPageTotal(int _pageTotal){
       this._pageTotal = _pageTotal;
    }
-
+   
    public String label(){
       return _label;
    }
-
+   
    public void setLabel(String _label){
       this._label = _label;
    }
-
+   
    public FLogicDataset<FDataFinancialCustomerInfo> customerList(){
       return _customerList;
    }
-
+   
    public void setCustomerList(FLogicDataset<FDataFinancialCustomerInfo> _customerList){
       this._customerList = _customerList;
    }
-
+   
    public int pageCurrent(){
       return _pageCurrent;
    }
-
+   
    public void setPageCurrent(int _pageCurrent){
       this._pageCurrent = _pageCurrent;
    }
-
+   
    public FLogicDataset<FDataFinancialMarketerCustomerInfo> maketerCustomerList(){
       return _maketerCustomerList;
    }
-
+   
    public void setMaketerCustomerList(FLogicDataset<FDataFinancialMarketerCustomerInfo> _maketerCustomerList){
       this._maketerCustomerList = _maketerCustomerList;
    }
-
+   
 }

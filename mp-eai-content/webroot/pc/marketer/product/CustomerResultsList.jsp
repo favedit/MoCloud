@@ -25,8 +25,8 @@
                   <ul class="total-number">
                     <li><b>业绩：</b><jh:write source="&page.Investment_total" /></li>
                     <li><b>投资人数：</b><jh:write source="&page.customer_total" /></li>
-                    <li><b>关注PV：</b>545646465</li>
-                    <li><b>本期次：</b>54564</li>
+                    <li><b>关注PV：</b></li>
+                    <li><b>本期次：</b></li>
                   </ul>
                 </div>
                     <div class="fl content-left" >
@@ -55,9 +55,9 @@
                                <td><jh:write source="&customer.genderLabel" /></td>
                                <td><jh:write source="&customer.memberPhone" /></td>
                                <td><jh:write source="&customer.netinvestment" /></td>
-                               <td>234234234</td>
-                               <td><jh:write source="&customer.memberLastLoginDate" /></td>
-                               <td>234234234</td>
+                               <td></td>
+                               <td><jh:date source="&customer.investmentDate" format="yyyy-MM-dd hh:mm:ss"/></td>
+                               <td><jh:date source="&customer.memberLastLoginDate" format="yyyy-MM-dd hh:mm:ss"/></td>
                          </tr> 
                          </jh:loop>
                       </table>

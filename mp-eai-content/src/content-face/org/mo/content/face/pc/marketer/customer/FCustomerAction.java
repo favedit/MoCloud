@@ -33,28 +33,28 @@ public class FCustomerAction
          ICustomerAction
 {
    // 日志输出接口
-   private static ILogger _logger = RLogger.find(FCustomerAction.class);
-
+   private static ILogger                 _logger = RLogger.find(FCustomerAction.class);
+                                                  
    //session控制台
    @ALink
-   protected IWebSessionConsole _sessionConsole;
-
+   protected IWebSessionConsole           _sessionConsole;
+                                          
    //用户控制台
    @ALink
-   protected IUserConsole _userConsole;
-
+   protected IUserConsole                 _userConsole;
+                                          
    //理财师信息控制器
    @ALink
-   protected IDataMarketerConsole _marketerConsole;
-
+   protected IDataMarketerConsole         _marketerConsole;
+                                          
    // 客户信息控制器
    @ALink
-   protected ICustomerConsole _customerConsole;
-
+   protected ICustomerConsole             _customerConsole;
+                                          
    // 理财师客户控制器
    @ALink
    protected IDataMarketerCustomerConsole _marketerCustomerConsole;
-
+                                          
    //============================================================
    // <T>默认逻辑处理。</T>
    //
@@ -82,7 +82,7 @@ public class FCustomerAction
          page.setLabel(user.label());
          page.setMarketer(marketer);
       }
-
+      
       if(null != context.parameter("page")){
          String num = context.parameter("page");
          page.setPageCurrent(Integer.parseInt(num));
@@ -105,7 +105,7 @@ public class FCustomerAction
       _logger.debug(this, "construct", "construct Select finish. (marketerMemberList = {1})", customerList);
       return "/pc/marketer/customer/CustomerList";
    }
-
+   
    //============================================================
    // <T>短信提醒设置。</T>
    //
@@ -150,7 +150,7 @@ public class FCustomerAction
       page.setMessage("true");
       return "/apl/ajax";
    }
-
+   
    //============================================================
    // <T>获取客户信息。</T>
    //
@@ -170,7 +170,7 @@ public class FCustomerAction
       page.setCustomerInfo(customerInfo);
       return "/pc/marketer/customer/CustomerInfo";
    }
-
+   
    //============================================================
    // <T>获取客户信息。</T>
    //
@@ -216,33 +216,44 @@ public class FCustomerAction
       }
       // 获取所有客户
       FLogicDataset<FDataFinancialCustomerInfo> customerList = _customerConsole.selectByMarketerId(logicContext, marketerId, page.pageCurrent() - 1);
-      //FLogicDataset<FDataFinancialCustomerInfo> customerList2 = _customerConsole.selectByMarketerId(logicContext, marketerId);
       long customerId = context.parameterAsLong("customerId");
       if(0 == customerId){
          customerId = customerList.first().ouid();
       }
       FDataFinancialCustomerInfo customerInfo = _customerConsole.findInfo(logicContext, marketerId, customerId);
-      //      else{
-      //         customerInfo = _customerConsole.findInfo(logicContext, customerId);
-      //         int index = 0;
-      //         String flag = context.parameter("flag");
-      //         if(flag.equals("true") || flag == "true"){
-      //            index = customerList2.indexOf(customerInfo);
-      //            if(index + 1 < customerList2.count()){
-      //               customerInfo = customerList2.get(index + 1);
-      //            }
-      //         }else if(flag.equals("false") || flag == "false"){
-      //            index = customerList2.indexOf(customerInfo);
-      //            if(index - 1 >= 0){
-      //               customerInfo = customerList2.get(index - 1);
-      //            }
-      //         }
-      //      }
+      String flag = context.parameter("flag");
+      int index = 0;
+      if(flag != null && !flag.equals("")){
+         if(flag.equals("true") || flag == "true"){
+            for(FDataFinancialCustomerInfo info : customerList){
+               if(info.ouid() == customerId){
+                  index = customerList.indexOf(info);
+                  if(index < customerList.count() - 1){
+                     customerInfo = _customerConsole.findInfo(logicContext, marketerId, customerList.get(index + 1).ouid());
+                  }
+                  
+               }
+            }
+         }else if(flag.equals("false") || flag == "false"){
+            for(FDataFinancialCustomerInfo info : customerList){
+               if(info.ouid() == customerId){
+                  index = customerList.indexOf(info);
+                  if(index > 0){
+                     customerInfo = _customerConsole.findInfo(logicContext, marketerId, customerList.get(index - 1).ouid());
+                  }
+                  
+               }
+            }
+         }
+      }
+      page.setMaxIndex(customerList.count() - 1);
+      page.setIndex(index);
       page.setCustomerInfo(customerInfo);
       page.setCustomerList(customerList);
       return "/pc/marketer/customer/Customer";
+      
    }
-
+   
    //============================================================
    // <T>修改短息提醒类型。</T>
    //
@@ -257,7 +268,6 @@ public class FCustomerAction
                            IWebSession sessionContext,
                            ILogicContext logicContext,
                            FCustomerPage page){
-      System.out.println("===================================updataSms===========================================");
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "construct", "construct default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
@@ -271,7 +281,7 @@ public class FCustomerAction
          marketerId = marketer.ouid();
          page.setLabel(user.label());
       }
-
+      
       long customerId = context.parameterAsLong("customerId");
       int contactOnline = context.parameterAsInteger("contactOnline");
       int contactFollow = context.parameterAsInteger("contactFollow");
@@ -334,7 +344,7 @@ public class FCustomerAction
       info.setActiveCd(1);
       info.setOvld(true);
    }
-
+   
    // ============================================================
    // <T>获取客户信息。</T>
    //
@@ -349,7 +359,7 @@ public class FCustomerAction
                         ILogicContext logicContext,
                         FBasePage basePage,
                         FCustomerPage page){
-
+                        
       FGcWebSession session = (FGcWebSession)sessionContext;
       _logger.debug(this, "search", "search default begin.(session={1})", session.id());
       FDataPersonUserUnit user = _userConsole.find(logicContext, session.userId());
@@ -381,7 +391,7 @@ public class FCustomerAction
       if(page.pageCurrent() == 0){
          page.setPageCurrent(1);
       }
-
+      
       // 最后一页
       if(pageTotal < page.pageCurrent()){
          page.setPageCurrent(pageTotal);

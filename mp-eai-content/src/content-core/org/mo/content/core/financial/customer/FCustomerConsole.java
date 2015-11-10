@@ -39,30 +39,30 @@ public class FCustomerConsole
          ICustomerConsole
 {
    // 每页条数
-   static final int _pageSize = 3;
-
+   static final int                       _pageSize = 8;
+                                                    
    // 成员控制器
    @ALink
-   protected IDataMemberConsole _memberConsole;
-
+   protected IDataMemberConsole           _memberConsole;
+                                          
    // 理财师客户控制器
    @ALink
    protected IDataMarketerCustomerConsole _marketerCustomerConsole;
-
+                                          
    // 城市控制器
    @ALink
-   protected ICityConsole _cityConsole;
-
+   protected ICityConsole                 _cityConsole;
+                                          
    // 资源访问接口
-   private static IResource _resource = RResource.find(FCustomerConsole.class);
-
+   private static IResource               _resource = RResource.find(FCustomerConsole.class);
+                                                    
    //============================================================
    // <T>构造设备控制台。</T>
    //============================================================
    public FCustomerConsole(){
       super(FDataFinancialCustomerLogic.class, FDataFinancialCustomerUnit.class);
    }
-
+   
    // ============================================================
    // <T>获取理财师的客户</T>
    //
@@ -108,7 +108,7 @@ public class FCustomerConsole
       }
       return unitList;
    }
-
+   
    // ============================================================
    // <T>获取总页数</T>
    //
@@ -132,7 +132,7 @@ public class FCustomerConsole
       }
       return pageTotal;
    }
-
+   
    // ============================================================
    // <T>获取客户信息</T>
    //
@@ -175,7 +175,7 @@ public class FCustomerConsole
       }
       return info;
    }
-
+   
    // ============================================================
    // <T>获取理财师的客户</T>
    //
@@ -205,7 +205,7 @@ public class FCustomerConsole
       }
       return unitList;
    }
-
+   
    // ============================================================
    // <T>获取客户</T>
    //
@@ -262,7 +262,7 @@ public class FCustomerConsole
       }
       return info;
    }
-
+   
    /**
     * 搜索获取客户
     * 
@@ -282,7 +282,7 @@ public class FCustomerConsole
       TDateTime nowDate = new TDateTime(RDateTime.currentDateTime());
       String keyword = context.parameter("keyword");
       // FDataFinancialMemberLogic memberLogic = logicContext.findLogic(FDataFinancialMemberLogic.class);
-
+      
       // 设置输出流
       // FByteStream stream = new FByteStream();
       FDataFinancialCustomerLogic logic = logicContext.findLogic(FDataFinancialCustomerLogic.class);
@@ -301,7 +301,7 @@ public class FCustomerConsole
       //System.out.println("pageNum===========" + pageNum);
       //System.out.println("_pageSize===========" + _pageSize);
       FDataset rankDataset = connection.fetchDataset(rankSql);
-
+      
       ISqlConnection conncalculate = logicContext.activeConnection("calculate");
       FSql pvSql = _resource.findString(FSql.class, "sql.customer.pv");
       Date lastdate = null;
@@ -322,10 +322,10 @@ public class FCustomerConsole
          pvSql.bindLong("memberid", row.getLong("ouid"));
          pvrow = conncalculate.find(pvSql);
          customerInfo.setPv(pvrow.getInt("pv"));
-
+         
          unitList.push(customerInfo);
       }
-
+      
       for(FDataFinancialCustomerInfo info : unitList){
          // 客户的主键和成员的主键一样
          FDataFinancialMemberUnit member = _memberConsole.find(logicContext, info.ouid());
@@ -342,10 +342,10 @@ public class FCustomerConsole
             info.setStatusSMS(mcustomer.smsContactCd());
          }
       }
-
+      
       return unitList;
    }
-
+   
    // ============================================================
    // <T>获取总行数</T>
    //
@@ -365,7 +365,7 @@ public class FCustomerConsole
       int count = conn.executeInteger(sql);
       return count;
    }
-
+   
    /**
     * 翻页获取客户信息
     *
@@ -389,7 +389,7 @@ public class FCustomerConsole
       whereSql.append(FDataFinancialCustomerLogic.MARKETER_ID, "={marketerId}");
       whereSql.bind("marketerId", RString.parse(marketerId));
       FLogicDataset<FDataFinancialCustomerInfo> unitList = logic.fetchClass(FDataFinancialCustomerInfo.class, whereSql, _pageSize, pageNo);
-
+      
       /**计算库取PV**/
       ISqlConnection conncalculate = logicContext.activeConnection("calculate");
       FSql pvSql = _resource.findString(FSql.class, "sql.customer.pv");

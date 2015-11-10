@@ -6,6 +6,7 @@ import com.cyou.gccloud.data.data.FDataFinancialCustomerTenderUnit;
 import com.cyou.gccloud.data.data.FDataFinancialMemberUnit;
 import com.cyou.gccloud.data.data.FDataFinancialTenderLogic;
 import com.cyou.gccloud.define.enums.core.EGcPersonGender;
+import java.util.Date;
 import org.mo.cloud.core.database.FAbstractLogicUnitConsole;
 import org.mo.com.collections.FDataset;
 import org.mo.com.collections.FRow;
@@ -13,6 +14,7 @@ import org.mo.com.data.FSql;
 import org.mo.com.data.ISqlConnection;
 import org.mo.com.lang.FFatalError;
 import org.mo.com.lang.RString;
+import org.mo.com.lang.type.TDateTime;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
 import org.mo.com.resource.IResource;
@@ -189,6 +191,8 @@ public class FCustomerTenderConsole
       FLogicDataset<FDataFinancialCustomerTenderInfo> customerTenderList = new FLogicDataset<>(FDataFinancialCustomerTenderInfo.class);
       FDataFinancialCustomerTenderInfo customerTender = null;
       FDataCommonCityUnit city = null;
+      Date lastdate = null;
+      Date investment_date = null;
       for(FRow modelRow : modelDataset){
          customerTender = new FDataFinancialCustomerTenderInfo();
          city = null;
@@ -199,6 +203,14 @@ public class FCustomerTenderConsole
          customerTender.setInvestment(modelRow.getFloat("investment"));
          customerTender.setRedemption(modelRow.getFloat("redemption"));
          customerTender.setNetinvestment(modelRow.getFloat("netinvestment"));
+         investment_date = modelRow.getDate("investment_date");
+         if(null != investment_date){
+            customerTender.setInvestmentDate(new TDateTime(investment_date));
+         }
+         lastdate = modelRow.getDate("lastdate");
+         if(null != lastdate){
+            customerTender.setMemberLastLoginDate(new TDateTime(lastdate));
+         }
          // 获取城市
          city = _cityConsole.find(logicContext, modelRow.getInt("city_id"));
          if(city != null){

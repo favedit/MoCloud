@@ -6,8 +6,29 @@
             <div class="imag-container">
                <div class="details">
                   <div class="details-l">
-                  <a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customerInfo.ouid" />&flag=false">上一个</a>   
-                  <a href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customerInfo.ouid" />&flag=true">下一个</a>
+                  <a onclick="tuenOver(-1)">上一个</a>   
+                  <a onclick="tuenOver(+1)">下一个</a>
+                  <script type="text/javascript">
+                  function tuenOver(num){
+                  var pageCurrent=<jh:write source="&page.pageCurrent" />;
+                  if(num == +1){
+                   if(<jh:write source="&page.maxIndex" />==<jh:write source="&page.index" />){
+                  location.href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&page="+eval(pageCurrent+num);
+                  }else{
+                  location.href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customerInfo.ouid" />&flag=true&page="+pageCurrent;
+                  } 
+                  //location.href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customerInfo.ouid" />&flag=true&page="+pageCurrent;
+                  }
+                  if(num == -1){
+                   if(<jh:write source="&page.index" /> == 0){
+                  location.href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&page="+eval(pageCurrent+num);
+                           }else{
+                           location.href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customerInfo.ouid" />&flag=false&page="+pageCurrent;
+                           } 
+                 // location.href="/pc/marketer/customer/Customer.wa?do=selectByCustomerId&customerId=<jh:write source="&customerInfo.ouid" />&flag=false&page="+pageCurrent;
+                  }
+                  }
+                  </script>
                      <h4>
                          <b style="width:22%"><jh:write source="&customerInfo.label" /></b>
                       </h4>
@@ -52,46 +73,46 @@
                            var contactPurchase= document.getElementById("contactPurchase");
                            var contactRecharge= document.getElementById("contactRecharge");
                             if(<jh:write source="&customerInfo.contactOnline" />==contactOnline.value){
-                            	contactOnline.checked=true;
+                            contactOnline.checked=true;
                             } 
                             if(<jh:write source="&customerInfo.contactFollow" />==contactFollow.value){
-                            	contactFollow.checked=true;
+                            contactFollow.checked=true;
                             }
                            if(<jh:write source="&customerInfo.contactPurchase" />==contactPurchase.value){
-                            	contactPurchase.checked=true;
+                            contactPurchase.checked=true;
                             }
                            if(<jh:write source="&customerInfo.contactRecharge" />==contactRecharge.value){
-                            	  contactRecharge.checked=true;
+                              contactRecharge.checked=true;
                             }
                            function ensure(){
-                        	   if(contactOnline.checked==true){
-                        		   var contactOnlineVlaue= $("#contactOnline").val();
-                        	   }else{
-                        		       contactOnlineVlaue=0;
-                        	   }
-                        	   if(contactFollow.checked==true){
+                           if(contactOnline.checked==true){
+                           var contactOnlineVlaue= $("#contactOnline").val();
+                           }else{
+                               contactOnlineVlaue=0;
+                           }
+                           if(contactFollow.checked==true){
                                    var contactFollowVlaue= $("#contactFollow").val();
                                 }else{
-                                	      contactFollowVlaue=0;
+                                      contactFollowVlaue=0;
                                 } 
-                        	   if(contactPurchase.checked==true){
+                           if(contactPurchase.checked==true){
                                    var contactPurchaseVlaue= $("#contactPurchase").val();
                                 }else{
-                                	      contactPurchaseVlaue=0;
+                                      contactPurchaseVlaue=0;
                                 }
-                        	   if(contactRecharge.checked==true){
+                           if(contactRecharge.checked==true){
                                    var contactRechargeVlaue= $("#contactRecharge").val();
                                 }else{
-                                	      contactRechargeVlaue=0;
+                                      contactRechargeVlaue=0;
                                 }
                            $.ajax({
-                        		type:"POST",
-                        		url:"/pc/marketer/customer/Customer.wa?do=updataSms",
-                        	   data:{customerId:<jh:write source="&customerInfo.ouid" />,contactOnline:contactOnlineVlaue,contactFollow:contactFollowVlaue,contactPurchase:contactPurchaseVlaue,contactRecharge:contactRechargeVlaue},
-                        		dataType: "text",
-                        	   success:function(data){
-                        		   alert("修改成功");
-                        	   }
+                        type:"POST",
+                        url:"/pc/marketer/customer/Customer.wa?do=updataSms",
+                           data:{customerId:<jh:write source="&customerInfo.ouid" />,contactOnline:contactOnlineVlaue,contactFollow:contactFollowVlaue,contactPurchase:contactPurchaseVlaue,contactRecharge:contactRechargeVlaue},
+                        dataType: "text",
+                           success:function(data){
+                           alert("修改成功");
+                           }
                            }) 
                            
                            
