@@ -12,20 +12,25 @@
                     <li><b>投资：</b>545646465</li>
                     <li><b>赎回：</b>545646465</li>
                     <li><b>净投：</b>545646465</li>
-                    <li><b>赎回比率：</b>50%</li>
                   </ul>
                   <ul class="total-people">
-                    <li><b>总投资人数：</b>545646465</li>
+                    <li><b>投资：</b>545646465</li>
                   </ul>
+
                 </div>
                     <div class="fl content-left" >
-                     <ul class="content-title">
-                        <li><a href="CustomerList1.jsp">我的客户</a></li>
-                        <li class="on"><a href="CustomerResults.jsp">我的业绩</a></li>
+                      <ul class="content-title">
+                        <li><a href="CustomerList.jsp">我的客户</a></li>
+                        <li><a href="CustomerResults.jsp">我的业绩</a></li>
                       </ul>
                     </div>
-                    <div class="fr content-right content-container">
+                    <div class="fr content-right">
+
                       <table  border="0" cellpadding="2" cellspacing="0">
+                        <!--  <tr class="title">
+                            <td colspan="7" rowspan="0" align="center" valign="center">我的客户</td>
+                         </tr> -->
+
                           <tr class="main-title" id="main-title">
                                <td>产品名称</td>
                                <td>业绩</td>
@@ -34,7 +39,8 @@
                                <td>业绩比率</td>
                                <td>关注PV</td>
                          </tr>
-                         <tr class="trs trigger"   href ="javascript;">
+                         <!-- href="/pc/marketer/recommend/Recommend.wa?do=memberInfo&id=" -->
+                         <tr class="trs trigger"   href = "javascript;">
                                <td><img src="images/1.png"/>e租财富</td>
                                <td>234</td>
                                <td>234234</td>
@@ -82,6 +88,11 @@
                                <td>234234234</td>
                                <td>234234234</td>
                          </tr> 
+<!-- e租财富e租稳盈e租年享
+e租年丰
+e租富盈
+e租富享 -->
+
                       </table>
                        <ul class="pages">
                            <li><a href="javascript:void(0);" onclick="pading(-1)">上一页</a></li>
@@ -106,16 +117,25 @@
       </TABLE>
    </FORM>
    <%@ include file='remove.jsp' %>
-<script type="text/javascript">
-  $(function(){
-    // hover 跳转
-    $(".content-container").on("click", ".trs", function() {
-        var url = $(this).attr("href");
-        alert(url);
-        // window.open(url, "_blank")
-        // location.href = url;
-      })
-  })
-</script>
+   <!--<script type="text/javascript" src="/pc/marketer/customer/js/existingUser.js"></script>-->
+<script>
+      // function pading(nubmer){
+      //    $(".loading").show();
+      //    $("#loading_img_div").show();
+      //    var currentPage = <jh:write source="&page.pageCurrent" />;
+      //    var page = currentPage+nubmer;
+      //    location.href="/pc/marketer/member/Followed.wa?page="+page;
+      // }
+   // doLoading();
+   // // 短信设置 提醒
+   // function onRadio( ts ){
+   //   if (window.event) { 
+   //      event.cancelBubble = true; 
+   //  }else{ 
+   //      event.stopPropagation(); 
+   //  } 
+   //   ts.find('input').prop("checked", true);
+   // } 
+   </script>
 </body>
 </html>
