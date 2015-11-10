@@ -58,7 +58,7 @@
       <div class="easyui-panel" fit='true'>
          <form id="form" method="post" action="/manage/product/user/whitelists/Access.wa?do=update">
             <div id="cy_right" style="width:100%">
-               <div class="right_title"> <span>增加用户</span> </div>
+               <div class="right_title"> <span>修改用户</span> </div>
                <div class="btn_bar">
                   <div class="nav_btn">
                      <a href="javascript:doSubmit();" class="sub_btn"></a>

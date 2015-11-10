@@ -52,8 +52,12 @@ public class FUserConsole
       for(FDataUserInfo info : moduleList){
          info.setStatusCdStr(EGcEmploy.formatLabel(RInteger.parse(info.statusCd())));
          info.setRelationCdStr(EGcRelation.formatLabel(info.relationCd()));
-         info.setUserName(info.user().name());
-         info.setDepartmentName(info.department().label());
+         if(info.user()!=null){
+            info.setUserName(info.user().name());
+         }
+         if(info.department()!=null){
+            info.setDepartmentName(info.department().label());
+         }
       }
       return moduleList;
    }
@@ -75,8 +79,6 @@ public class FUserConsole
       }
       FDataOrganizationDepartmentUserLogic logic = logicContext.findLogic(FDataOrganizationDepartmentUserLogic.class);
       FDataUserInfo unit = logic.fetchClass(FDataUserInfo.class, whereSql.toString()).first();
-      unit.setRelationCdStr(EGcRelation.formatLabel(unit.relationCd()));
-      unit.setStatusCdStr(EGcEmploy.formatLabel(RInteger.parse(unit.statusCd())));
       return unit;
    }
 }

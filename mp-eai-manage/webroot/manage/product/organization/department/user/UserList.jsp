@@ -125,9 +125,6 @@
      data-options="field:'departmentName',halign:'center',align:'left',sortable:true"
      width="100px">部门名称</th>
     <th
-     data-options="field:'userName',halign:'center',align:'left',sortable:true"
-     width="100px">用户</th>
-    <th
      data-options="field:'entryDate',halign:'center',align:'left',sortable:true"
      width="140px">入职时间</th>
     <th

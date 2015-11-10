@@ -4,6 +4,27 @@
 <link rel="stylesheet" href="/manage/acs/btn_title.css" type="text/css"
  media="screen" />
 <jsp:include page="/manage/common/jeui.jsp"></jsp:include>
+<style type="text/css">
+   #manage_id{
+      width:100%;
+      margin-top:-10px;
+      margin-left:-10px;
+      padding-bottom:-20px;
+      height:100%;
+   }
+   #cond_id{
+      float:right;
+      margin-right:10px;
+   }
+   #search_id{
+      float:right;
+      margin-bottom:6px;
+   }
+   #add_id{
+      float:left;
+      margin-bottom:6px;
+   }
+</style>
 <script>
    //显示更新成功
    $(function() {
@@ -158,14 +179,10 @@
        <input name="areaId" id="provinceId" type="hidden">
    <span>所属城市</span>
        <span onclick="getProvince()" style="width:140px;"><input class="easyui-combobox" style="width:140px;" id="city" name="city" data-options="valueField:'ouid',textField:'label',editable:false" /></span>
+   <span>部门名称:</span>
+      <input id="label" name="label" class="easyui-validatebox textbox" style="width:150px;" />
+      <a href="javascript:void(0);" id="search_id" onClick="doSubmit(0)" class="sear_btn"></a>
 </div>
-   <div class="nav_search">
-    <input id="label" name="label" type="text"
-     onfocus="if(this.value=='部门名称'){this.value='';}this.style.color='#000000';"
-     onblur="if(this.value=='') {this.value='部门名称';this.style.color='#ccc';}"
-     style="color:#ccc" value="部门名称"> <a onClick="doSubmit(0)"
-     href="#" class="sear_btn"></a>
-   </div>
   </div>
  </div>
  <table id="config" class="easyui-datagrid" fit='true'
@@ -197,7 +214,7 @@
      width="200px">详细地址</th>
     <th
      data-options="field:'locationLatitude',halign:'center',align:'left',sortable:true"
-     width="100px">位置维度</th>
+     width="100px">位置纬度</th>
     <th
      data-options="field:'locationLongitude',halign:'center',align:'left',sortable:true"
      width="100px">位置经度</th>

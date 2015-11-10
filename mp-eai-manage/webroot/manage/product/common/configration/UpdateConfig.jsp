@@ -41,7 +41,7 @@
    <body bgcolor="#198bc9">
       <div id="cy_right" style="width:100%">
          <div class="right_title" style="width:100%">
-            <span>增加配置信息</span>
+            <span>修改配置信息</span>
          </div>
          <div class="btn_bar">
             <div class="nav_btn">

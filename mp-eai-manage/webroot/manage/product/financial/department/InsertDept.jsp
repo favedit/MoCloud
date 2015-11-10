@@ -58,13 +58,13 @@
    <table width="710" height="551" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="56" height="38"><div align="left">级&nbsp;&nbsp;&nbsp;&nbsp;别:</div></td>
+     <td width="76" height="38"><div align="left">级&nbsp;&nbsp;&nbsp;&nbsp;别:</div></td>
      <td width="160"><div align="left">
        <input id="level" name="level" maxLength=5 type="text"
         class="easyui-numberbox" style="width:30px;height:20px"
         data-options="validType:'length[0,100]'" />
       </div></td>
-     <td width="56"><div align="left">是否删除:</div></td>
+     <td width="76"><div align="left">是否删除:</div></td>
      <td width="160"><div align="left">
        <select id="ovld" class="easyui-combobox" name="ovld"
         style="width:50px;">

@@ -107,7 +107,7 @@
    <table width="710" height="551" border="0" align="left"
     cellpadding="0" cellspacing="0" style=" margin-left:10px">
     <tr>
-     <td width="56" height="38"><div align="left">级&nbsp;&nbsp;&nbsp;&nbsp;别:</div></td>
+     <td width="76" height="38"><div align="left">级&nbsp;&nbsp;&nbsp;&nbsp;别:</div></td>
      <td width="160"><div align="left">
        <input id="level" name="level"
         value="<jh:write source='&unit.level'/>" maxLength=5 type="text"
@@ -116,7 +116,7 @@
         name="ouid" style="display:none"
         value="<jh:write source='&unit.ouid'/>">
       </div></td>
-     <td width="56"><div align="left">是否删除:</div></td>
+     <td width="76"><div align="left">是否删除:</div></td>
      <td width="160"><div align="left">
        <select id="ovld" class="easyui-combobox" name="ovld"
         style="width:50px;">
@@ -129,14 +129,14 @@
      <td width="222"><div align="left"></div></td>
     </tr>
     <tr>
-     <td height="20"><div align="left">名&nbsp;&nbsp;&nbsp;&nbsp;称:</div></td>
+     <td height="20"><div align="left">英文名称:</div></td>
      <td><div align="left">
        <input id="name" name="name" class="easyui-validatebox textbox"
         style="width:80px;height:20px;"
         data-options="validType:'length[0,100]'"
         value="<jh:write source='&unit.name'/>" />
       </div></td>
-     <td><div align="left">标&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+     <td><div align="left">中文名称;</div></td>
      <td><div align="left">
        <input id="label" name="label" class="easyui-validatebox textbox"
         style="width:80px;height:20px"

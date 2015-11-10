@@ -101,7 +101,7 @@
      <td colspan="3"><div align="left">
        <input type="hidden" id="oldStatusCd" value="<jh:write source='&unit.statusCd'/>">
        <input style="width:380px;height:20px" id="statusCd" class="easyui-combobox" name="statusCd" data-options="valueField:'value',textField:'text',
-       data:[{'value':'1','text':'在职'},{'value':'2','text':'离职'},{'value':'3','text':'待定'}],editable:false"/>
+       data:[{'value':'1','text':'在职'},{'value':'2','text':'离职'},{'value':'3','text':'待定'}],editable:false" value="<jh:write source='&unit.statusCd'/>"/>
       </div></td>
      <td>&nbsp;</td>
     </tr>
@@ -110,7 +110,7 @@
      <td colspan="3"><div align="left">
        <input type="hidden" id="oldRelationCd" value="<jh:write source='&unit.relationCd'/>">
        <input style="width:380px;height:20px" id="relationCd" class="easyui-combobox" name="relationCd" data-options="valueField:'value',textField:'text',
-       data:[{'value':'0','text':'未知'},{'value':'1','text':'负责人'}],editable:false"/>
+       data:[{'value':'0','text':'未知'},{'value':'1','text':'负责人'}],editable:false" value="<jh:write source='&unit.relationCd'/>"/>
       </div></td>
      <td>&nbsp;</td>
     </tr>

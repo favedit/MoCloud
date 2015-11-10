@@ -51,12 +51,13 @@
    }
 
    function del(id) {
-       return confirmx(
-               '确定删除?',
-               function() {
-                   location.href = "/manage/product/organization/department/Department.wa?do=delete&id="
-                           + id + "&date=" + new Date().valueOf();
-               });
+      alert("不可删除");
+       //return confirmx(
+            //   '确定删除?',
+             //  function() {
+             //      location.href = "/manage/product/organization/department/Department.wa?do=delete&id="
+             //              + id + "&date=" + new Date().valueOf();
+            //   });
    }
 
    //更新配置信息-AnjoyTian

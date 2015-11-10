@@ -126,7 +126,6 @@ public class FUserAction
          return "/manage/common/ConnectTimeout";
       }
       FDataOrganizationDepartmentUserUnit unit = _userConsole.doPrepare(logicContext);
-      unit.setLabel(context.parameter("label"));
       setProductData(context,logicContext,unit);
       EResult result = _userConsole.doInsert(logicContext, unit);
       if (!result.equals(EResult.Success)) {
@@ -230,6 +229,7 @@ public class FUserAction
    public void setProductData(IWebContext context, 
                               ILogicContext logicContext,
                               FDataOrganizationDepartmentUserUnit unit){
+      unit.setLabel(context.parameter("label"));
       unit.setCreateUserId(context.parameterAsLong("adminId"));
       unit.setCode(context.parameter("code"));
       unit.setName(context.parameter("name"));
@@ -241,9 +241,11 @@ public class FUserAction
       String entryDateStr = context.parameter("entryDate");
       TDateTime entryDate = new TDateTime();
       entryDate.parse(entryDateStr, "YYYY-MM-DD");
+      unit.setEntryDate(entryDate);
       String leaveDateStr = context.parameter("leaveDate");
       TDateTime leaveDate = new TDateTime();
       leaveDate.parse(leaveDateStr, "YYYY-MM-DD");
+      unit.setLeaveDate(leaveDate);
       unit.setDepartmentId(context.parameterAsInteger("departmentId"));
    }
 }
