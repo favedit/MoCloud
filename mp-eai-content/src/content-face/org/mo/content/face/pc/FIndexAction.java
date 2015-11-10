@@ -296,11 +296,11 @@ public class FIndexAction
       }else{
          userId = user.ouid();
          session.setUserId(user.ouid());
-         user.setLabel(passport);
-         user.setPassport(changePass);
-         user.setPassword(password);
-         user.setOvld(true);
-         _userConsole.doUpdate(logicContext, user);
+         //         user.setLabel(passport);
+         //         user.setPassport(changePass);
+         //         user.setPassword(password);
+         //         user.setOvld(true);
+         //         _userConsole.doUpdate(logicContext, user);
       }
       // 用户来源同步
       FDataPersonUserEntryUnit entryUnit = _entryConsole.findByUserId(logicContext, userId, from);
