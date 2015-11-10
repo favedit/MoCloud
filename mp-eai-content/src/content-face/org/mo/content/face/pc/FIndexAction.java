@@ -125,7 +125,7 @@ public class FIndexAction
             //插入用户，权限绑定
             page.setUserType("host");
             String changePass = "white-host:" + hostAddress;
-            synchronizeData(logicContext, sessionContext, page, changePass, "", hostAddress, EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, hostAddress, "", changePass, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             basePage.setUrl("Main.wa");
             return "/apl/Redirector";
