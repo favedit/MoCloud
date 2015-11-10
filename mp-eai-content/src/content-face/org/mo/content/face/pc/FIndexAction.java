@@ -8,7 +8,7 @@ import com.cyou.gccloud.define.enums.core.EGcAuthorityResult;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserFrom;
 import com.cyou.gccloud.define.enums.core.EGcPersonUserStatus;
 import org.mo.cloud.core.web.FGcWebSession;
-import org.mo.com.encoding.RMd5;
+import org.mo.com.encoding.RSha1;
 import org.mo.com.lang.RString;
 import org.mo.com.logging.ILogger;
 import org.mo.com.logging.RLogger;
@@ -125,7 +125,7 @@ public class FIndexAction
             //插入用户，权限绑定
             page.setUserType("host");
             String changePass = "white-host:" + hostAddress;
-            synchronizeData(logicContext, sessionContext, page, changePass, hostAddress, "", EGcPersonUserFrom.EaiHost);
+            synchronizeData(logicContext, sessionContext, page, changePass, "", hostAddress, EGcPersonUserFrom.EaiHost);
             // 设置服务主机
             basePage.setUrl("Main.wa");
             return "/apl/Redirector";
@@ -273,7 +273,7 @@ public class FIndexAction
                                 String changePass,
                                 int from){
       _logger.debug(this, "Index", "Index user synchronize begin.(passport={1},changePass={2},from={3})", passport, changePass, from);
-      password = RMd5.encode(password);
+      password = RSha1.encode(password);
       // 会话管理
       FGcWebSession session = (FGcWebSession)sessionContext;
       FDataPersonUserUnit user = _userConsole.findByPassport(logicContext, changePass);
